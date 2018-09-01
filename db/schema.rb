@@ -72,11 +72,12 @@ ActiveRecord::Schema.define(version: 20180830063843) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer "recipient_id"
+    t.integer "recipient_id", null: false
     t.integer "actor_id"
     t.datetime "read_at"
     t.integer "target_id"
     t.string "target_type"
+    t.string "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -97,6 +98,7 @@ ActiveRecord::Schema.define(version: 20180830063843) do
 
   create_table "tmis", force: :cascade do |t|
     t.integer "author_id", null: false
+    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_tmis_on_author_id"
@@ -111,6 +113,7 @@ ActiveRecord::Schema.define(version: 20180830063843) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.datetime "last_sign_in_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -3,18 +3,18 @@ class Answer < ApplicationRecord
     belongs_to :question
     has_many   :highlights
     has_many   :comments
-    # has_one    :notification
     has_many   :stars
 
-    # 답한 친구가 있을 때마다 노티를 보낸다.
-    # after_create :create_notifications
+    after_create :create_notifications
 
-    # private
+    private
 
-    # def create_notifications
-    #     friends = self.author.friends + self.author.inverse_friends
-    #     friends.each do |friend|
-    #         Notification.create(recipient: friend, actor: self.author, target: self)
-    #     end
-    # end
+    # send notifications to assigners
+    def create_notifications
+        assignment_hash = { question_id: self.question_id, assignee_id: self.author_id }
+        Assignment.where(assignment_hash).find_each do |assignment|
+            Notification.create(recipient: assignment.assigner, actor: self.author, target: self)
+            assignment.destroy
+        end
+    end
 end

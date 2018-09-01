@@ -18,9 +18,6 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, :through => :friendships, dependent: :destroy
 
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id", dependent: :destroy
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :user, dependent: :destroy
-
   # assignment
   has_many :received_assignments, :class_name => "Assignment", :foreign_key => "assignee_id", dependent: :destroy
   has_many :assigners, :through => :received_assignments, dependent: :destroy

@@ -8,6 +8,6 @@ class Assignment < ApplicationRecord
     private
 
     def create_notifications
-        Notification.create(recipient: self.assginee, actor: self.assigner, target: self)
+        Notification.create(recipient: self.assignee, actor: self.assigner, target: self)
     end
 end
