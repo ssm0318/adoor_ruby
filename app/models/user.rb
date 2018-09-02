@@ -1,8 +1,14 @@
 class User < ApplicationRecord
+  rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  after_create :add_default_role
+
+  # question
+  has_many :questions, dependent: :destroy
 
   # answer
   has_many :answers, dependent: :destroy
@@ -41,4 +47,10 @@ class User < ApplicationRecord
   has_many :stars, dependent: :destroy
 
   # reference: http://railscasts.com/episodes/163-self-referential-association
+
+  def add_default_role
+    if (self.id == 1)
+      self.add_role :admin
+    end
+  end
 end

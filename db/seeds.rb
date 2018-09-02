@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.create(email: "prism@snu.com", password: "prism-snu")
 User.create(email: "a@a.com", password: "aaaaaa")
 User.create(email: "b@b.com", password: "bbbbbb")
 User.create(email: "c@c.com", password: "cccccc")
@@ -13,15 +14,7 @@ User.create(email: "d@d.com", password: "dddddd")
 
 Question.create(content: "what is your name?")
 Question.create(content: "where are you from?")
-Question.create(content: "do you like butterflies?")
-
-Answer.create(author_id: 1, question_id: 1, content: "my name is A.")
-Answer.create(author_id: 2, question_id: 1, content: "my name is B.")
-Answer.create(author_id: 1, question_id: 2, content: "I am from Jeju.")
-Answer.create(author_id: 3, question_id: 2, content: "I am from Gunpo.")
-Answer.create(author_id: 1, question_id: 3, content: "No, never.")
-Answer.create(author_id: 2, question_id: 3, content: "Not really.")
-Answer.create(author_id: 3, question_id: 3, content: "Are you kidding me?")
+Question.create(content: "do you like butterflies?", author_id: 2) # test custom question notification
 
 FriendRequest.create(requester_id: 1, requestee_id: 2)
 FriendRequest.create(requester_id: 1, requestee_id: 3)
@@ -35,6 +28,14 @@ Assignment.create(question_id: 2, assigner_id: 1, assignee_id: 4)
 Assignment.create(question_id: 2, assigner_id: 2, assignee_id: 4)
 Assignment.create(question_id: 2, assigner_id: 1, assignee_id: 2)
 Assignment.create(question_id: 1, assigner_id: 2, assignee_id: 3)
+
+Answer.create(author_id: 3, question_id: 1, content: "my name is A.") # test assigner notification
+Answer.create(author_id: 2, question_id: 1, content: "my name is B.")
+Answer.create(author_id: 1, question_id: 2, content: "I am from Jeju.")
+Answer.create(author_id: 4, question_id: 2, content: "I am from Gunpo.") # test assigner notification
+Answer.create(author_id: 1, question_id: 3, content: "No, never.")
+Answer.create(author_id: 4, question_id: 3, content: "Not really.") 
+Answer.create(author_id: 3, question_id: 3, content: "Are you kidding me?")
 
 # Highlight?
 

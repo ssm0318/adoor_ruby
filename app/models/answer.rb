@@ -7,7 +7,7 @@ class Answer < ApplicationRecord
 
     after_create :create_notifications
 
-    private
+    private 
 
     # send notifications to assigners
     def create_notifications
