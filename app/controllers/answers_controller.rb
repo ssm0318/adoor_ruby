@@ -1,3 +1,0 @@
-class AnswersController < ApplicationController
-    
-end
