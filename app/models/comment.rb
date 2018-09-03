@@ -6,6 +6,7 @@ class Comment < ApplicationRecord
 
     private
 
+    # 댓글 달리면 글쓴이에게 보내지는 노티 생성.
     def create_notifications
         Notification.create(recipient: self.answer.author, actor: self.author, target: self)
     end

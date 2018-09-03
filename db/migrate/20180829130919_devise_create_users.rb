@@ -22,7 +22,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
       # t.datetime :current_sign_in_at
-      t.datetime :last_sign_in_at
+      t.datetime :last_sign_in_at  #  오랫동안 로그인하지 않았을 경우 이메일로 스팸을 해버리기 위해 추적함.
       # t.string   :current_sign_in_ip
       # t.string   :last_sign_in_ip
 

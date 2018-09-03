@@ -7,6 +7,7 @@ class Assignment < ApplicationRecord
 
     private
 
+    # assign하면 assign 받은 사람에게 보내지는 노티 생성.
     def create_notifications
         Notification.create(recipient: self.assignee, actor: self.assigner, target: self)
     end
