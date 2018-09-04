@@ -13,7 +13,7 @@ class Friendship < ApplicationRecord
     # 역 친구 관계를 만들어서 상대방도 나를 .friends 쿼리로 검색할 수 있게 한다.
     def create_inverse
         friendship_hash = { user: self.friend, friend: self.user }
-        # 이 코드는 왜 있는걸까? 기억이 나질 않는다...
+        # create_inverse가 recursive하게 call되지 않도록 확인해준다.
         if Friendship.where(friendship_hash).empty?
             Friendship.create(friendship_hash)
         end
