@@ -48,6 +48,8 @@ class User < ApplicationRecord
 
   # reference: http://railscasts.com/episodes/163-self-referential-association
 
+
+  private
   # 첫 유저만 admin role으로 등록되고 나머지는 newuser role로 등록됨. (Rolify 문서 참조)
   # 실제 서비스할 때(?) 1번 유저 admin으로 미리 등록하는거 잊지 말기 (혹은 모델 코드를 변경하거나)
   def add_default_role
