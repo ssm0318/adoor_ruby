@@ -54,7 +54,7 @@ class User < ApplicationRecord
   # 실제 서비스할 때(?) 1번 유저 admin으로 미리 등록하는거 잊지 말기 (혹은 모델 코드를 변경하거나)
   def add_default_role
     if (self.id == 1)
-      self.add_role :admin
+      self.add_role :admin 
     else
       self.add_role :newuser
     end
