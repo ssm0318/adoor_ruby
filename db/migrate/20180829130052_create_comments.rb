@@ -6,6 +6,7 @@ class CreateComments < ActiveRecord::Migration[5.1]
       t.belongs_to :answer,            null: false
       t.text       :content,           null: false
 
+      # TODO: re-comment model 만들기
       t.timestamps
     end
   end
