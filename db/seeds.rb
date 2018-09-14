@@ -20,6 +20,8 @@ Question.create(content: "rain")
 Question.create(content: "idol")
 Question.create(content: "eclipse")
 Question.create(content: "what is your favorite food?")
+Question.create(content: "how are you?")
+Question.create(content: "what did you do yesterday?")
 
 FriendRequest.create(requester_id: 1, requestee_id: 2)
 FriendRequest.create(requester_id: 1, requestee_id: 3)
