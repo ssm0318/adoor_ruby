@@ -5,9 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'time_difference'
+gem 'time_difference' 
 gem 'devise'
-gem 'pry-rails'
+gem 'pry-rails' 
 gem 'rails_db'
 gem 'rolify' #https://github.com/RolifyCommunity/rolify 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

@@ -39,13 +39,13 @@ Answer.create(author_id: 3, question_id: 3, content: "Are you kidding me?")
 
 # Highlight 모델을 어떻게?
 
-Comment.create(author_id: 2, answer_id: 1, content: "oh really?")
-Comment.create(author_id: 2, answer_id: 2, content: "nice.")
-Comment.create(author_id: 3, answer_id: 3, content: "awesome!")
-Comment.create(author_id: 3, answer_id: 4, content: "same.")
-Comment.create(author_id: 4, answer_id: 5, content: "be a butterfly")
-Comment.create(author_id: 4, answer_id: 6, content: "shinee is the best")
-Comment.create(author_id: 1, answer_id: 1, content: "this is a comment.")
+Comment.create(author_id: 2, recipient_id: 3, answer_id: 1, content: "oh really?")
+Comment.create(author_id: 2, recipient_id: 3, answer_id: 2, content: "nice.")
+Comment.create(author_id: 3, recipient_id: 1, answer_id: 3, content: "awesome!")
+Comment.create(author_id: 3, recipient_id: 2, answer_id: 4, content: "same.")
+Comment.create(author_id: 4, recipient_id: 3, answer_id: 5, content: "be a butterfly")
+Comment.create(author_id: 4, recipient_id: 2, answer_id: 6, content: "shinee is the best")
+Comment.create(author_id: 1, recipient_id: 2, answer_id: 1, content: "this is a comment.")
 
 Tmi.create(author_id: 1, content: "I want bingsu.")
 Tmi.create(author_id: 1, content: "writing TMIs")
