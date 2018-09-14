@@ -6,9 +6,19 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+
   </head>
 
   <body>
+    <!-- TODO: header and noti -->
+    <%= render 'layouts/navigation'%>
     <%= yield %>
+    <br>
+    <%= render 'layouts/notification', noties: noties %>
   </body>
 </html>

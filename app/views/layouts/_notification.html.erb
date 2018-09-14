@@ -1,0 +1,24 @@
+<button class="btn-noti"><%= link_to_if !user_signed_in?, 'Noti', user_session_path %></button>
+<!--TODO: alert page?-->
+<div id="noti" class="noti-content" style="display: none;">
+    <% if user_signed_in? %>
+        <% noties.each do |noti| %>
+            <% if noti.target_type == 'Friendship' %>
+                <div><%= link_to "#{User.find(noti.actor_id).email}님이 친구신청을 보냈습니다."%></div>
+            <% end %>
+            <% if noti.target_type == 'Answer' %>
+                <div><%= link_to "#{User.find(noti.actor_id).email}님의 선물이 도착했습니다."%></div>
+            <% end %>
+            <% if noti.target_type == 'Comment' %>
+                <div><%= link_to "#{User.find(noti.actor_id).email}님이 회원님의 답변에 댓글을 달았습니다."%></div>
+            <% end %>
+        <% end %>
+    <% end %>
+</div>
+
+
+<script>
+    $(".btn-noti").on('click', function() {
+	    $(".noti-content").toggle();
+    })
+</script>
