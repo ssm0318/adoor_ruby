@@ -1,1 +1,15 @@
 General Feed
+<% @questions.each do |question| %>
+  <% question.answers.each do |answer| %>
+    <div style="border: 1px solid black;">
+      <div><%= answer.author.email %></div>
+      <!--이거 답변자 이름 써놓는거 맞겠지..?!-->
+      <div><%= question.content %></div>
+      <div><%= answer.content %></div>
+      <div><%= answer.updated_at %></div>
+      <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
+    </div>
+  <% end %>
+<% end %>
+
+<!--더보기는 지금 구현하는 건 아닌 듯-->
