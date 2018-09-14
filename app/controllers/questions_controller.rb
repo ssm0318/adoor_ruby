@@ -3,4 +3,8 @@ class QuestionsController < ApplicationController
     def index
         render 'index'
     end
+
+    def question_feed
+        render 'question_feed'
+    end
 end
