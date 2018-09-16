@@ -5,36 +5,10 @@
             <%= question.content %>
             <button><%= link_to 'Write', new_answer_path %></button>
             <button class="btn-assign"><%= link_to_if !user_signed_in?, 'Assign', user_session_path %></button>
-            <div id="assignment" class="assignment-content" style="display: none;">
-                <% if user_signed_in? %>
-                    <% current_user.friends.each do |friend| %>
-                        <div>
-                            <%=friend.email %>
-                            <!--<%=friend.username %>-->
-                            <input type="checkbox"/>
-                            <!-- #TODO: user mailer -->
-                        </div>
-                    <% end %>
-                <% end %>
-            </div>
+            <%= render 'assignment'%>
         </li>
     <% end %>
 </div>
-
-
-<script>
-    $(document).ready(function() {
-        $(".btn-assign").on('click', function() {
-            if($(this).siblings(".assignment-content").is(':visible')){
-                $(".assignment-content").hide();
-            }
-            else {
-                $(".assignment-content").hide();
-                $(this).siblings(".assignment-content").show();
-            }
-        });      
-    });
-</script>
 
 <%= stylesheet_link_tag "application" %>
 

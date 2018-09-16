@@ -19,6 +19,10 @@
     margin-top: 200px;
 }
 
+.question li {
+    list-style: none;
+}
+
 /* Sidenav */
 
 .sidenav {
@@ -56,6 +60,7 @@
     font-size: 14px;
     color: #777777;
     padding: 8px 8px 8px 32px;
+    
 }
 
 .nav-el.nav-profile:hover {
@@ -77,5 +82,18 @@
     position: fixed;
     right: 5px;
     top: 40px;
+    padding: 10px;
+    border: 0.75px solid #bcbcbc;
+}
+
+/* Assignment */
+.assignment-content {
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    border: 0.75px solid #bcbcbc;
+    width: 200px;
+    margin-left: 55%;
+
 }
 
