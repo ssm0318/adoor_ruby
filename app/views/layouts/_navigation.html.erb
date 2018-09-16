@@ -1,24 +1,37 @@
 <button class="btn-sidenav">HAMBURGER</button>
-<div class="sidenav" style="display: none;">
+<div class="sidenav">
+      <button class="btn-exit">Exit</button>
       <% if user_signed_in? %>
-      <p><strong>User ID :</strong> <%= current_user.email %></p>
-      <p><%= link_to 'Log out', destroy_user_session_path, method: :delete, data: { confirm: '로그아웃 하시겠습니까?' } %></p>
+      <p class="nav-el nav-profile"><%= current_user.email %></p>
+      <%= link_to 'Log out', 
+            destroy_user_session_path, 
+            method: :delete, 
+            data: { confirm: '로그아웃 하시겠습니까?' },
+            class: "nav-el nav-log" %>
       <% end %>
       <% if !user_signed_in? %>
-      <p><%= link_to 'Log In', user_session_path %></p>
+      <%= link_to 'Log In', user_session_path, class: "nav-el nav-log" %>
       <% end %>
-      <div><%= link_to '오늘의 질문', root_path %></div>
-      <div><%= link_to '마이페이지', root_path %></div>
-      <div><%= link_to '친구목록', root_path %></div>
-      <div><%= link_to '익명피드', root_path %></div>
-      <div><%= link_to '질문별피드', root_path %></div>
+      <br>
+      <%= link_to '오늘의 질문', root_path, class: "nav-el" %>
+      <%= link_to '마이페이지', root_path, class: "nav-el" %>
+      <%= link_to '친구목록', root_path, class: "nav-el" %>
+      <%= link_to '익명피드', root_path, class: "nav-el" %>
+      <%= link_to '질문별피드', root_path, class: "nav-el" %>
+
 </div>
 
 
 <script>
     $(document).ready(function() {
       $(".btn-sidenav").on('click', function() {
-            $(".sidenav").toggle();
+            $(".sidenav").addClass('active');
       });
+
+      $(".btn-exit").on('click', function() {
+            $(".sidenav").removeClass('active');
+      });
+
+
     });  
 </script>

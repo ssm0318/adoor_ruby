@@ -1,4 +1,4 @@
-<div class=>
+<div class = "question"> 
 <h1>오늘의 질문</h1>
     <% @questions.each do |question| %>
         <li>
@@ -23,14 +23,18 @@
 
 
 <script>
-    $(".btn-assign").on('click', function() {
-        if($(this).siblings(".assignment-content").is(':visible')){
-            $(".assignment-content").hide();
-        }
-        else {
-            $(".assignment-content").hide();
-            $(this).siblings(".assignment-content").show();
-        }
+    $(document).ready(function() {
+        $(".btn-assign").on('click', function() {
+            if($(this).siblings(".assignment-content").is(':visible')){
+                $(".assignment-content").hide();
+            }
+            else {
+                $(".assignment-content").hide();
+                $(this).siblings(".assignment-content").show();
+            }
+        });      
     });
 </script>
+
+<%= stylesheet_link_tag "application" %>
 
