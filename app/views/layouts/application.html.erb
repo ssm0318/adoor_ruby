@@ -16,8 +16,8 @@
   <body>
     <!-- TODO: header and noti -->
     <%= render 'layouts/navigation'%>
+    <%= render 'layouts/notification', noties: noties %>
     <%= yield %>
     <br>
-    <%= render 'layouts/notification', noties: noties %>
   </body>
 </html>
