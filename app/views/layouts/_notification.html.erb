@@ -1,6 +1,6 @@
 <button class="btn-noti"><%= link_to_if !user_signed_in?, 'Noti', user_session_path %></button>
 <!--TODO: alert page?-->
-<div id="noti" class="noti-content" style="display: none;">
+<div class="noti-content" style="display: none;">
     <% if user_signed_in? %>
         <% noties.each do |noti| %>
             <% if noti.target_type == 'Friendship' %>

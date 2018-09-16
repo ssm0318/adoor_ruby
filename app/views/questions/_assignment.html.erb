@@ -1,0 +1,27 @@
+<div id="assignment" class="assignment-content" style="display: none;">
+    <% if user_signed_in? %>
+        <% current_user.friends.each do |friend| %>
+            <div>
+                <%=friend.email %>
+                <!--<%=friend.username %>-->
+                <input type="checkbox"/>
+                <!-- #TODO: user mailer -->
+            </div>
+        <% end %>
+    <% end %>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".btn-assign").on('click', function() {
+            if($(this).siblings(".assignment-content").is(':visible')){
+                $(".assignment-content").hide();
+            }
+            else {
+                $(".assignment-content").hide();
+                $(this).siblings(".assignment-content").show();
+            }
+        });      
+    });
+</script>
+
