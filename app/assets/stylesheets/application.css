@@ -44,7 +44,7 @@
 }
 
 .sidenav .nav-el {
-    padding: 8px 8px 8px 32px;
+    padding: 12px 12px;
     text-decoration: none;
     font-size: 20px;
     color: #777777;
@@ -56,11 +56,20 @@
     color: black;
 }
 
-.nav-el.nav-profile, .nav-el.nav-log {
+.nav-el.nav-profile{
     font-size: 14px;
     color: #777777;
-    padding: 8px 8px 8px 32px;
-    
+    padding: 0px;
+}
+
+.nav-el.nav-log {
+    border: 0.75px solid #bcbcbc;
+    border-radius: 20px;
+    width: 80px;
+    padding: 4px;
+    color: #777777;
+    font-size: 14px;
+    text-align: center;
 }
 
 .nav-el.nav-profile:hover {

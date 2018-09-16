@@ -1,5 +1,5 @@
 <button class="btn-sidenav">HAMBURGER</button>
-<div class="sidenav">
+<div class="sidenav" align="center">
       <button class="btn-exit">Exit</button>
       <% if user_signed_in? %>
       <p class="nav-el nav-profile"><%= current_user.email %></p>
@@ -12,6 +12,8 @@
       <% if !user_signed_in? %>
       <%= link_to 'Log In', user_session_path, class: "nav-el nav-log" %>
       <% end %>
+      <br>
+      <br>
       <br>
       <%= link_to '오늘의 질문', root_path, class: "nav-el" %>
       <%= link_to '마이페이지', root_path, class: "nav-el" %>
