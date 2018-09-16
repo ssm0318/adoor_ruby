@@ -35,12 +35,14 @@ ActiveRecord::Schema.define(version: 20180902160303) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "author_id", null: false
+    t.integer "recipient_id", null: false
     t.integer "answer_id", null: false
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["answer_id"], name: "index_comments_on_answer_id"
     t.index ["author_id"], name: "index_comments_on_author_id"
+    t.index ["recipient_id"], name: "index_comments_on_recipient_id"
   end
 
   create_table "friend_requests", force: :cascade do |t|
