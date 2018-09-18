@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   root 'questions#today'
   resources :answers
 
-  get '/questions/:id' => 'users#friends', as: :friends
+  get '/questions/:id' => 'questions#feed', as: :question_feed
   
 end
