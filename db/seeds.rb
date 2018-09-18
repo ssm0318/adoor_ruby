@@ -6,22 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(email: "prism@snu.com", password: "prism-snu")
-User.create(email: "a@a.com", password: "aaaaaa")
-User.create(email: "b@b.com", password: "bbbbbb")
-User.create(email: "c@c.com", password: "cccccc")
-User.create(email: "d@d.com", password: "dddddd")
+User.create(email: "prism@snu.com", password: "prism-snu", username: "PRISM")
+User.create(email: "a@a.com", password: "aaaaaa", username: "apple")
+User.create(email: "b@b.com", password: "bbbbbb", username: "banana")
+User.create(email: "c@c.com", password: "cccccc", username: "carrot")
+User.create(email: "d@d.com", password: "dddddd", username: "deer")
 
 Question.create(content: "what is your name?") # 디폴트로 admin이 생성한 것으로 되는지 확인
 Question.create(content: "where are you from?", author_id: 2)
 Question.create(content: "do you like butterflies?", author_id: 3)
-Question.create(content: "what is your hobby?")
-Question.create(content: "rain")
-Question.create(content: "idol")
-Question.create(content: "eclipse")
-Question.create(content: "what is your favorite food?")
-Question.create(content: "how are you?")
-Question.create(content: "what did you do yesterday?")
 
 FriendRequest.create(requester_id: 1, requestee_id: 2)
 FriendRequest.create(requester_id: 1, requestee_id: 3)
