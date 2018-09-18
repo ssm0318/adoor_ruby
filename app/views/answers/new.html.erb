@@ -1,2 +1,8 @@
+<h1>오늘의 질문</h1>
+<h3><%= @question.content %></h3>
 
+<%= form_for @answer do |f| %>
+    <%= f.text_field :content %>
+    <%= f.submit "저장" %>
+<% end %>
 
