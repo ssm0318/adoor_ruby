@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
     
-    def index
+    def today
         start_id = (Date.today-Date.parse("2018-01-01")).to_i % (Question.where(author_id: 1).count/5) * 5 + 1
 
         @questions = []
