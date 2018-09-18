@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
-  helper_method :noties, :str_noti
+  helper_method :noties
 
   def noties
     if user_signed_in?

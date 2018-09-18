@@ -3,14 +3,27 @@
 <div class="noti-content" style="display: none;">
     <% if user_signed_in? %>
         <% noties.each do |noti| %>
+            <% user = User.find(noti.actor_id).email %>
             <% if noti.target_type == 'Friendship' %>
-                <div><%= link_to "#{User.find(noti.actor_id).email}님이 친구신청을 보냈습니다."%></div>
+                <div><%= link_to "#{user}님과 친구가 되었습니다."%></div>
+            <% end %>
+            <% if noti.target_type == 'FriendRequest' %>
+                <div><%= link_to "#{user}님이 친구신청을 보냈습니다."%></div>
             <% end %>
             <% if noti.target_type == 'Answer' %>
-                <div><%= link_to "#{User.find(noti.actor_id).email}님의 선물이 도착했습니다."%></div>
+                <div><%= link_to "#{user}님의 선물이 도착했습니다."%></div>
+            <% end %>
+            <% if noti.target_type == 'Assignment' %>
+                <div><%= link_to "#{user}님이 회원님에게 새로운 질문을 assign했습니다."%></div>
+            <% end %>
+            <% if noti.target_type == 'Highlight' %>
+                <div><%= link_to "#{user}님이 회원님의 글을 highlight했습니다."%></div>
+            <% end %>
+            <% if noti.target_type == 'Star' %>
+                <div><%= link_to "#{user}님이 회원님의 글을 star했습니다."%></div>
             <% end %>
             <% if noti.target_type == 'Comment' %>
-                <div><%= link_to "#{User.find(noti.actor_id).email}님이 회원님의 답변에 댓글을 달았습니다."%></div>
+                <div><%= link_to "#{user}님이 회원님의 답변에 댓글을 달았습니다."%></div>
             <% end %>
         <% end %>
     <% end %>
