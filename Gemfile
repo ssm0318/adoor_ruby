@@ -7,6 +7,11 @@ end
 
 
 gem 'jquery-rails'
+gem 'time_difference' 
+gem 'devise'
+gem 'pry-rails' 
+gem 'rails_db'
+gem 'rolify' #https://github.com/RolifyCommunity/rolify 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
 # Use sqlite3 as the database for Active Record
