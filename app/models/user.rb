@@ -8,10 +8,10 @@ class User < ApplicationRecord
   after_create :add_default_role 
 
   # question
-  has_many :questions, dependent: :destroy
+  has_many :questions, dependent: :destroy, :foreign_key => "author_id"
 
   # answer
-  has_many :answers, dependent: :destroy
+  has_many :answers, dependent: :destroy, :foreign_key => "author_id"
 
   # friend requests
   has_many :received_requests, :class_name => "FriendRequest", :foreign_key => "requestee_id", dependent: :destroy
@@ -35,10 +35,10 @@ class User < ApplicationRecord
   has_many :highlights, dependent: :destroy
 
   # comment
-  has_many :comments, dependent: :destroy
+  has_many :comments, dependent: :destroy, :foreign_key => "author_id"
 
   # tmi
-  has_many :tmis, dependent: :destroy
+  has_many :tmis, dependent: :destroy, :foreign_key => "author_id"
 
   # notification
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
