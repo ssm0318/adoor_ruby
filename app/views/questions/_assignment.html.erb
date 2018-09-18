@@ -3,11 +3,9 @@
         <% current_user.friends.each do |friend| %>
                 <div>
                     <%=friend.email %>
-                    <% assign = Assignment.find_by(question_id: question.id, assigner_id: current_user.id, assignee_id: friend.id) %>
-                    <%if assign.nil? %>
+                    <%if Assignment.find_by(question_id: question.id, assigner_id: current_user.id, assignee_id: friend.id).nil? %>
                         <%= link_to 'Assign', "assignments/#{friend.id}/#{question.id}", method: :post %>
-                    <% end %>
-                    <% if !assign.nil? %>
+                    <% else %>
                         <%= link_to 'De-assign', "/assignments/#{assign.id}", method: :delete %>
                     <% end %>
                 </div>

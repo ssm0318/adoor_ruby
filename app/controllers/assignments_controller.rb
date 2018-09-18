@@ -14,6 +14,7 @@ class AssignmentsController < ApplicationController
 
         if i == User.find(user_id).answers.count
             Assignment.create(question_id: question_id, assigner_id: current_user.id, assignee_id: user_id)
+        else
         end
 
         redirect_to root_url
