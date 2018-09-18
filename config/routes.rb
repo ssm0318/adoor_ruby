@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   resources :answers
 
   get '/questions/:id' => 'questions#feed', as: :question_feed
+  post 'assignments/:user_id/:question_id' => 'assignments#create'
+  delete '/assignments/:id' => 'assignments#delete'
   
 end

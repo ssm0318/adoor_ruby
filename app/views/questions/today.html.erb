@@ -5,7 +5,9 @@
             <%= link_to "#{question.content}", question_feed_path(question.id) %>
             <button><%= link_to 'Write', new_answer_path %></button>
             <button class="btn-assign"><%= link_to_if !user_signed_in?, 'Assign', user_session_path %></button>
-            <%= render 'assignment'%>
+            <% if user_signed_in? %>
+                <%= render 'assignment', question: question %>
+            <% end %>
         </li>
     <% end %>
 </div>

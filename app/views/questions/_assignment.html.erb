@@ -1,12 +1,16 @@
 <div id="assignment" class="assignment-content" style="display: none;">
     <% if user_signed_in? %>
         <% current_user.friends.each do |friend| %>
-            <div>
-                <%=friend.email %>
-                <!--<%=friend.username %>-->
-                <input type="checkbox"/>
-                <!-- #TODO: user mailer -->
-            </div>
+                <div>
+                    <%=friend.email %>
+                    <% assign = Assignment.find_by(question_id: question.id, assigner_id: current_user.id, assignee_id: friend.id) %>
+                    <%if assign.nil? %>
+                        <%= link_to 'Assign', "assignments/#{friend.id}/#{question.id}", method: :post %>
+                    <% end %>
+                    <% if !assign.nil? %>
+                        <%= link_to 'De-assign', "/assignments/#{assign.id}", method: :delete %>
+                    <% end %>
+                </div>
         <% end %>
     <% end %>
 </div>
