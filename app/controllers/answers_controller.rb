@@ -12,7 +12,7 @@ class AnswersController < ApplicationController
         @answer = Answer.new(answer_params)
         @answer.save
 
-        redirect_to answer_path(:id => @answer.id)
+        redirect_to @answer
     end
 
     def show
