@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+    before_action :set_answer, only: [:show]
+
     def new
         #TODO Question params 받아오기
         @question = Question.find(1)
@@ -10,7 +12,7 @@ class AnswersController < ApplicationController
         @answer = Answer.new(answer_params)
         @answer.save
 
-        redirect_to @answer
+        redirect_to answer_path(:id => @answer.id)
     end
 
     def show
