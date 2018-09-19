@@ -9,6 +9,6 @@ class UsersController < ApplicationController
         puts '======================'
         puts user_email
         # redirect_to action: 'recover_password_confirm'
-        render 'recover_password'
+        render 'recover_password_confirm'
     end
 end
