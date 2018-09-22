@@ -1,0 +1,27 @@
+<%= form_for user, url: edit_user_profile_url(user) do |u| %>
+    <div>
+        <% u.hidden_field :id, :value => current_user.id %>
+
+        <div>
+            <%= u.label "Username: " %>
+            <%= u.text_field :username, :required => true %>
+        </div>
+
+        <div>
+            <%= u.label "Email: " %>
+            <%= u.text_field :email, :required => true %>
+        </div>
+
+        <div>
+            <%= u.label "Date of Birth: " %>
+            <%= u.date_field :date_of_birth %>
+        </div>
+
+        <div>
+            <%= u.label "Profile Picture" %>
+            <%= u.file_field :profile_pic %>
+        </div>
+
+        <%= u.submit "Submit" %>
+    </div>
+<% end %>

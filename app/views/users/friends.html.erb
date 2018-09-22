@@ -1,6 +1,17 @@
 
+<%= link_to "비밀번호 변경", edit_user_registration_path %>
+
 <% @friends.each do |friend| %>
     <div style="border: 1px black solid;">
         <%= friend.username %>
+        <%= image_tag friend.profile_pic.url, :size => "100x100" %>
+        <border>
+        <% friend.answers.each_with_index do |answer, i| %>
+            <% if i < 3 %>
+                <div style="border: 1px black solid; margin: 10px;">
+                    <%= answer.question.content %>
+                </div>
+            <% end %>
+        <% end %>
     </div>
 <% end %>

@@ -1,0 +1,24 @@
+<h1>My Page</h1>
+
+<div>
+    <p>Profile pic: 
+        <% if @user.profile_pic_file_name.nil? %>-
+        <% else %>
+            <%= link_to @user.profile_pic_file_name, @user.profile_pic.url(:original), download: @user.profile_pic.original_filename %>
+        <% end %>
+    </p>
+    <p>Id: <%= current_user.id %></p>
+    <p>email: <%= current_user.email %></p>
+    <p>username:
+        <% if @user.username.nil? %>-
+        <% else %>
+            <%= current_user.username %>
+        <% end %>
+    </p>
+    <p>date of birth: 
+        <% if @user.date_of_birth.nil? %>-
+        <% else %>
+            <%= current_user.date_of_birth %>
+        <% end %>
+    </p>
+</div>
