@@ -1,12 +1,9 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_user, only: [:show, :edit, :update, :destroy, :mypage]
+    before_action :set_user, only: [:show, :edit, :update, :destroy]
     
     def friends
         @friends = current_user.friends
-    end
-
-    def show
     end
 
     def edit
@@ -19,7 +16,6 @@ class UsersController < ApplicationController
     end
 
     def mypage
-        # check_user
     end
 
     private
