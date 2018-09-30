@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
         #     end
         #     i += 1
         # end 
-        @questions = Question.all
+        @questions = Question.where(selected_date: Date.today)
 
     end
 
