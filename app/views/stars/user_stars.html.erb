@@ -1,0 +1,35 @@
+<h1>User Answers Page - My Stars</h1>
+<%= render partial: "./user_answers_layout", locals: {user: @user} %>
+
+<div>
+    **나의 스타**
+    <% @stars.each do |s| %>
+        <div>
+            ----------------------------------<br/>
+            <% if s.target_type == "Question" %>
+                <% if s.target.author.has_role? :newuser %>  <%# 이거 작성자 넣을까 말까 %>
+                    Question made by <%= render partial: "./user_profile", locals: {user: s.target.author} %><br/>
+                    <%= s.target.created_at %><br/>
+                <% end %>
+                Question: <%= s.target.content %><br/>
+                <%= link_to "삭제하기", star_path(s.id),
+                                      method: :delete,
+                                      data: { confirm: '스타에서 제거하시겠습니까?'} %> <br/>
+                
+            <% else %>
+                <%= render partial: "./user_profile", locals: {user: s.target.author} %> <br/>
+                <%= s.target.created_at %><br/>
+                <%= s.target.question.content %> <br/>
+                <%= s.target.content %> <br/>
+                <%= link_to "전체 글 보기", answer_path(s.target.id) %><br/>
+                <%= link_to "삭제하기", star_path(s.id),
+                                      method: :delete,
+                                      data: { confirm: '스타에서 제거하시겠습니까?'} %> <br/>
+                
+            <% end %>
+            --------------------------------<br/>
+        </div>
+        
+    <% end %>
+</div>
+
