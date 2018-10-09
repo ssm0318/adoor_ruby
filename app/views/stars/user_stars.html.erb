@@ -17,8 +17,8 @@
             <% else %>
                 <%= render partial: "./user_profile", locals: {user: s.target.author} %> <br/>
                 <%= s.target.created_at %><br/>
-                <%= s.target.question.content %> <br/>
-                <%= s.target.content %> <br/>
+                Q. <%= s.target.question.content %> <br/>
+                A. <%= s.target.content %> <br/>
                 <%= link_to "전체 글 보기", answer_path(s.target.id) %><br/>
                 <%= link_to "삭제하기", star_path(s.id),
                                       method: :delete,

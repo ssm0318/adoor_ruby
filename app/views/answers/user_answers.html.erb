@@ -10,16 +10,23 @@
                 <%= link_to "삭제하기", answer_path(a.id),
                                       method: :delete,
                                       data: { confirm: '답변을 지우시겠습니까?'} %> 
-                <%#= link_to "숨기기", edit_answer_path(a.id) %> <br/>
+                <%# TODO: 공개범위 수정하는거 구현 %> 
+                <br/>
             <% end %>
             <%= a.created_at %><br/>
-            <%= a.question.content %> <br/>
-            <%= a.content %><br/>
+            Q: <%= a.question.content %>
+            <% if Star.where(user_id: current_user.id, target: a.question).empty? %>
+                <%= link_to "별표하기", stars_path(target_id: a.question.id, target_type: "Question"), method: :post %>
+            <% else %>
+                <%= link_to "별표 취소하기", star_path(a.question.id, target_type: "Question"), method: :delete %>
+            <% end %>
+            <br/>
+            A: <%= a.content %><br/>
             <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
             <% if Star.where(user_id: current_user.id, target: a).empty? %>
-                <%= link_to "별표하기", stars_path(target_id: a.id), method: :post %>
+                <%= link_to "별표하기", stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
             <% else %>
-                <%= link_to "별표 취소하기", star_path(a.id), method: :delete %>
+                <%= link_to "별표 취소하기", star_path(a.id, target_type: "Answer"), method: :delete %>
             <% end %>
         </div>
     <% end %>
