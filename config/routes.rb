@@ -13,4 +13,8 @@ Rails.application.routes.draw do
   get '/:id/highlights' => 'highlights#user_highlights', as: :user_highlights
   get '/:id/stars' => 'stars#user_stars', as: :user_stars
 
+  # friend request
+  post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend
+  post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request
+  
 end
