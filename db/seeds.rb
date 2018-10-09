@@ -38,6 +38,7 @@ Answer.create(author_id: 4, question_id: 3, content: "Not really.")
 Answer.create(author_id: 3, question_id: 3, content: "Are you kidding me?")
 
 # Highlight 모델을 어떻게?
+Highlight.create(user_id: 1, answer_id: 3, content: "너무 인상깊은 구절")
 
 Comment.create(author_id: 2, recipient_id: 3, answer_id: 1, content: "oh really?")
 Comment.create(author_id: 2, recipient_id: 3, answer_id: 2, content: "nice.")
