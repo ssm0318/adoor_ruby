@@ -28,6 +28,21 @@
             <% else %>
                 <%= link_to "별표 취소하기", star_path(a.id, target_type: "Answer"), method: :delete %>
             <% end %>
+            <div>
+                <% if current_user.id == @user.id %>
+                    <%= a.highlights.size %>개의 형광펜
+                    <%= Star.where(target_type: "Answer", target_id: a.id).size %>명이 별표함
+                    <%= a.comments.size %>개의 댓글
+                    <div>댓글 <br/>
+                        <% a.comments.each do |c| %>
+                            <%= render partial: "./user_profile", locals: {user: c.author} %>: 
+                            <%= c.content %>
+                            
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+            </div>
         </div>
     <% end %>
 </div>
