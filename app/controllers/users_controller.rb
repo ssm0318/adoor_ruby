@@ -40,6 +40,7 @@ class UsersController < ApplicationController
         else
             friend_request.destroy_all
         end
+        redirect_back fallback_location: user_answers_path(params[:id])
     end
 
     private
