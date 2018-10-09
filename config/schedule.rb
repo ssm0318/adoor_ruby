@@ -27,6 +27,6 @@
 # ENV['RAILS_ENV'] = "development"
 
 set :output, 'log/whenever.log'
-every :day, at: '0:05 am' do
+every :day, at: '0 am' do
     rails "today_question:update"
 end

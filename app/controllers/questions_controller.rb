@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
         #     end
         #     i += 1
         # end 
-        @questions = Question.where(selected_date: Date.today)
+        @questions = Question.where(selected_date: (Date.today - 1))
 
     end
 
