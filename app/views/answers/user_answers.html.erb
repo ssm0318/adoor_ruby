@@ -1,0 +1,28 @@
+<h1>User Answers Page</h1>
+<%= render partial: "./user_answers_layout", locals: {user: @user} %>
+<%#= TODO: 타인확인%>
+
+<%#= if current_user.id == user.id 가 들어가야 할 곳들은 "TODO: 본인확인", 
+if current_user.id != user.id 가 들어가야 할 곳들은 "TODO: 타인확인" 으로 표시해뒀음 %>
+
+<div>
+    **답변**
+    <% @answers.each do |a| %>
+        <div>
+            ----------------------------------<br/>
+            <%= render partial: "./user_profile", locals: {user: a.author} %><br/>
+            <%#= TODO: 본인확인%>
+                <%= link_to "수정하기", edit_answer_path(a.id) %>
+                <%= link_to "삭제하기", answer_path(a.id),
+                                      method: :delete,
+                                      data: { confirm: '답변을 지우시겠습니까?'} %> 
+                <%#= <%= link_to "숨기기", edit_answer_path(a.id) %> <br/>
+            <%= a.created_at %><br/>
+            <%= a.question.content %> <br/>
+            <%= a.content %><br/>
+            <%# TODO:
+            <%= link_to "내 스타에 저장", stars_path, method: :create%>
+            ----------------------------------<br/>
+        </div>
+    <% end %>
+</div>

@@ -1,0 +1,5 @@
+<%= form_for answer do |a| %>
+    <%= answer.question.content %> 에 대한 나의 답변 <br/>
+    <%= a.text_area :content %>
+    <%= a.submit "제출"%>
+<% end %>
