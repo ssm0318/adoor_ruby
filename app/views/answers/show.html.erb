@@ -1,3 +1,14 @@
-작성자: <%= render partial: "./user_profile", locals: { user: @answer.author } %><br/>
-Q: <%= @answer.question.content %> <br/>
-A: <%= @answer.content %><br/>
+<%= render partial: "./user_profile", locals: {user: @answer.author} %><br/>
+<% if current_user.id == @answer.author.id %>
+    <%= link_to "수정하기", edit_answer_path(@answer.id) %>
+    <%= link_to "삭제하기", answer_path(@answer.id),
+                            method: :delete,
+                            data: { confirm: '답변을 지우시겠습니까?'} %> 
+    <%# FIXME: %>
+    <%#= link_to "숨기기", edit_answer_path(a.id) %> <br/>
+<% end %>
+<%= @answer.created_at %><br/>
+<%= @answer.question.content %> <br/>
+<%= @answer.content %><br/>
+<%# TODO:
+<%= link_to "별표하기", stars_path, method: :create%>

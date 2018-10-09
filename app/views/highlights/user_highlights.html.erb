@@ -2,11 +2,9 @@
 <%= render partial: "./user_answers_layout", locals: {user: @user} %>
 
 <div>
-    **나의 하이라이트**
     <div>
         <% @highlights.each do |h|%>
-            <div>
-                --------------------------------<br/>
+            <div style='border: 1px solid black; margin: 5px;'>
                 <%= render partial: "./user_profile", locals: {user: h.answer.author} %><br/>
                 
                 <%= h.content %><br/>
@@ -14,7 +12,6 @@
                 <%= link_to "삭제하기", highlight_path(h.id),
                                       method: :delete,
                                       data: { confirm: '형광펜을 지우시겠습니까?'} %> <br/>
-                --------------------------------<br/>
             </div>
         <% end %>
     </div>
