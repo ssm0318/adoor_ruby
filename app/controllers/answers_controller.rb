@@ -1,11 +1,8 @@
 class AnswersController < ApplicationController
-    def index
-        @answers = Answer.all
-        render 'index'
-    end
+    before_action :authenticate_user!
+    before_action :set_answer, only: [:show, :edit, :update, :destroy]
 
     def show
-        set_answer
     end
 
     def user_answers
@@ -14,21 +11,17 @@ class AnswersController < ApplicationController
     end
 
     def edit
-        set_answer
     end
 
     def update
-        set_answer
         @answer.update(answer_params)
         redirect_to @answer
     end
 
     def destroy
-        set_answer
         @answer.destroy
 
-        # FIXME: current_user.id로 바꾸자
-        redirect_to user_answers_path(1)
+        redirect_to user_answers_path(current_user.id)
     end
 
 
