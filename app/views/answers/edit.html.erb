@@ -2,5 +2,4 @@
 <%= render 'form', answer: @answer %>
 <br/>
 
-<%# FIXME: current_user.id로 바꾸자 %>
-<%= link_to '내 페이지로', user_answers_path(1) %></p>
+<%= link_to '내 페이지로', user_answers_path(current_user.id) %></p>

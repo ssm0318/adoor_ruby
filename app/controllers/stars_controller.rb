@@ -1,4 +1,6 @@
 class StarsController < ApplicationController
+    before_action :authenticate_user!
+
     def create
         #@star = Star.create()
     end
@@ -11,8 +13,7 @@ class StarsController < ApplicationController
     def destroy
         star = Star.find(params[:id])
         star.destroy
-
-        # FIXME: current_user.id로 바꾸자
-        redirect_to user_stars_path(1)
+        
+        redirect_to user_stars_path(current_user.id)
     end
 end
