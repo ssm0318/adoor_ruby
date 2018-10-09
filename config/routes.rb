@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :highlights
   resources :stars
+  resources :comments
   
   # user answers, highlights, stars
   get '/:id' => 'answers#user_answers', as: :user_answers
@@ -16,5 +17,5 @@ Rails.application.routes.draw do
   # friend request
   post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend
   post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request
-  
+
 end
