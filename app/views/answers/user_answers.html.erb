@@ -15,8 +15,12 @@
             <%= a.created_at %><br/>
             <%= a.question.content %> <br/>
             <%= a.content %><br/>
-            <%# TODO:
-            <%= link_to "별표하기", stars_path, method: :create%>
+            <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
+            <% if Star.where(user_id: current_user.id, target: a).empty? %>
+                <%= link_to "별표하기", stars_path(target_id: a.id), method: :post %>
+            <% else %>
+                <%= link_to "별표 취소하기", star_path(a.id), method: :delete %>
+            <% end %>
         </div>
     <% end %>
 </div>
