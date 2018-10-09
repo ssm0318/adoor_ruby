@@ -24,3 +24,58 @@
 
 <%= stylesheet_link_tag "application" %>
 
+<script>
+    $(document).ready(function() {
+        $(".btn-assign").on('click', function() {
+            if($(this).siblings(".assignment-content").is(':visible')){
+                $(".assignment-content").hide();
+            }
+            else {
+                $(".assignment-content").hide();
+                $(this).siblings(".assignment-content").show();
+            }
+        });
+
+        $(".btn-do-assign").on('click', function() {
+
+            var thisButton = $(this);
+
+            if($(this).text()=='Assign') {
+                console.log("try assign");
+                const friendId = $(this).data("friend-id");
+                const questionId = $(this).data("question-id");
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "JSON",
+                    url: '/assignments/' + friendId + '/' + questionId,
+                    success: function(data) {
+                        if(data.assign_id != "-1") {
+                            console.log("success assign!");
+                            thisButton.text("Cancel");
+                            thisButton.data("assign-id", data.assign_id);
+                        }
+                        else {
+                            console.log("이미 답했음");
+                        }
+                    }
+                })
+            } else {
+                console.log("try cancel");
+                const assignId = $(this).data("assign-id");
+
+                $.ajax({
+                    type: "DELETE",
+                    dataType: "JSON",
+                    url: '/assignments/' + assignId,
+                    success: function(data) {
+                        console.log("success canceling!");
+                        thisButton.text("Assign");
+                    }
+                })
+            }
+
+        })      
+    });
+</script>
+
