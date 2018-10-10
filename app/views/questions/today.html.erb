@@ -27,6 +27,7 @@
 
 <script>
     $(document).ready(function() {
+        
         $(".btn-assign").on('click', function() {
             if($(this).siblings(".assignment-content").is(':visible')){
                 $(".assignment-content").hide();
@@ -36,6 +37,15 @@
                 $(this).siblings(".assignment-content").show();
             }
         });
+
+        $("html").on('click', function(event) {
+            var target = $(event.target)
+            if(!target.hasClass("btn-assign") &&
+             !target.hasClass("assignment-content") &&
+             !target.hasClass("btn-do-assign") ) {
+                  $(".assignment-content").hide();
+            }
+        }); 
 
         $(".btn-do-assign").on('click', function() {
 
@@ -79,7 +89,7 @@
                 })
             }
 
-        })      
+        })     
     });
 </script>
 
