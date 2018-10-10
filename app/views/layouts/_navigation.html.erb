@@ -25,6 +25,16 @@
 
 <script>
     $(document).ready(function() {
+
+      $("html").on('click', function(event) {
+            var target = $(event.target)
+            if(!target.hasClass("btn-sidenav") &&
+             !target.hasClass("sidenav") &&
+             !target.hasClass("nav-el") ) {
+                  $(".sidenav").removeClass('active');
+            }
+      })
+
       $(".btn-sidenav").on('click', function() {
             $(".sidenav").addClass('active');
       });
