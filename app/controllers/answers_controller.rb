@@ -16,16 +16,29 @@ class AnswersController < ApplicationController
     end
 
     def show
+        @answer = Answer.find(params[:id])
     end
 
     def edit
-        check_user
+        @answer = Answer.find(params[:id])
+        #TODO Question params 받아오기
+        @question = Question.find(1)
     end
 
     def update
+        @answer = Answer.find(params[:id])
+
+        if @answer.update(answer_params)
+          redirect_to @answer
+        else
+          render 'edit'
+        end
     end
 
     def destroy
+        @answer= Answer.find(params[:id])
+        @answer.destroy  
+
     end
 
     private
