@@ -4,10 +4,12 @@
     <% @questions.each do |question| %>
         <li class="question-el">
             <%= link_to "#{question.content}", "questions/#{question.id}" %>
-            <button><%= link_to 'Write', new_answer_path %></button>
-            <button class="btn-assign"><%= link_to_if !user_signed_in?, 'Assign', user_session_path %></button>
+            <%= image_tag "icons/write-icon.png", class: "btn-write", onclick:"window.location='/answers/new'"%>
             <% if user_signed_in? %>
+                <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
                 <%= render 'assignment', question: question %>
+            <% else %>
+                <%= image_tag "icons/assign-icon.png", class: "btn-assign", onclick:"window.location='/users/sign_in'"%>
             <% end %>
         </li>
     <% end %>
