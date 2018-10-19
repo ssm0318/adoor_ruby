@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+* {
+    font-family: 'Iropke Batang', serif;
+}
+
+// 헤더랑 컨테이너는 일단 여기다 함..!
+.prism-header {
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid black;
+}
+
+.prism-container {
+    margin: 0px 200px;
+}

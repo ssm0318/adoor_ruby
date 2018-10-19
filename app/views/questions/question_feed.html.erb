@@ -1,10 +1,18 @@
-Question Feed
+<h1>Question Feed</h1>
+<h2><%= @question.content %></h2>
 <% @question.answers.each do |answer| %>
-  <div style="border: 1px solid black;">
-    <div><%= answer.author.email %></div>
-    <div><%= answer.question.content %></div>
-    <div><%= answer.content %></div>
-    <div><%= answer.updated_at %></div>
+  <div class="prism-box">
+    <div class="prism-box__header">
+      <%= answer.author.username %>
+      <i class="material-icons">more_vert</i>
+    </div>
+    <div class="prism-box__content">
+      <div><%= answer.question.content %></div>
+      <div><%= answer.content %></div>
+    </div>
+    <div class="prism-box__footer">
+      <%= answer.updated_at.strftime("%m월 %d일") %>
+    </div>
   </div>
 <% end %>
 
