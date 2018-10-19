@@ -3,7 +3,7 @@
 
 <div>
     <% @answers.each do |a| %>
-        <div style='border: 1px solid black; margin: 5px;'>
+        <div class="prism-box">
             <%= render partial: "./user_profile", locals: {user: a.author} %><br/>
             <% if current_user.id == @user.id %>
                 <%= link_to "수정하기", edit_answer_path(a.id) %>
@@ -13,7 +13,7 @@
                 <%# TODO: 공개범위 수정하는거 구현 %> 
                 <br/>
             <% end %>
-            <%= a.created_at %><br/>
+            <%= a.created_at.strftime("%m월 %d일") %><br/>
             Q: <%= a.question.content %>
             <% if Star.where(user_id: current_user.id, target: a.question).empty? %>
                 <%= link_to "별표하기", stars_path(target_id: a.question.id, target_type: "Question"), method: :post %>
@@ -58,7 +58,7 @@
                                     <% end %>
                                 </div>
                                 <form data-answer_id="<%= a.id %>" data-recipient_id="<%= r %>">
-                                    <input type="text" class="input<%= a.id %>" name="content">
+                                    <input type="text" class="input<%= a.id %>_<%= r %>" name="content">
                                     <button>댓글 달기</button>
                                 </form>
                             </div>
@@ -81,7 +81,7 @@
                             <% end %>
                         <% end %>
                         <form data-answer_id="<%= a.id %>" data-recipient_id="<%= current_user.id %>">
-                            <input type="text" class="input<%= a.id %>" name="content ">
+                            <input type="text" class="input<%= a.id %>_<%= current_user.id %>" name="content">
                             <button>댓글 달기</button>
                         </form>
                     </div>
@@ -103,17 +103,22 @@
         const answer_id = $(this).data("answer_id")
         const recipient_id = $(this).data("recipient_id")
         $.ajax({
-
             url: "/answers/" + answer_id + "/comments",
             type: "POST",
             data: {
-                // answer_id: answer_id,
                 recipient_id: recipient_id,
-                content: $(".input" + answer_id).val()
+                content: $(".input" + answer_id + "_" + recipient_id).val()
             },
             dataType: "JSON",
             success: function(data) {
                 console.log("success")
+                console.log($(".input" + answer_id + "_" + recipient_id).attr("class"));
+                // $(this).siblings(".comment-block").append($(
+                //     '<div class="comment">
+                //         <img src="data.image_url" style="height:100px; width:auto;">:
+                //         data.content
+                //     </div>'
+                // ))
             }
         })
     })
