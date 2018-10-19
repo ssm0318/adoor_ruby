@@ -2,7 +2,7 @@
     <% if user_signed_in? %>
         <% current_user.friends.each do |friend| %>
                 <div>
-                    <%=friend.email %>
+                    <%=friend.username %>
                     <% assign = Assignment.find_by(question_id: question.id, assigner_id: current_user.id, assignee_id: friend.id) %>
                     <%if assign.nil? %>
                         <a  class="btn-do-assign" 

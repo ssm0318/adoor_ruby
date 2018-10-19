@@ -20,6 +20,17 @@
   <body>
     <!-- TODO: header and noti -->
     <%= render 'layouts/navigation'%>
+    <div class='login-btn'>
+      <% if user_signed_in? %>
+      <%= link_to 'Log out', 
+            destroy_user_session_path, 
+            method: :delete, 
+            class: "nav-el nav-log" %>
+      <% end %>
+      <% if !user_signed_in? %>
+      <%= link_to 'Log In', user_session_path, class: "nav-el nav-log" %>
+      <% end %>
+    </div>
     <%= render 'layouts/notification', noties: noties %>
     <%= yield %>
     <br>
