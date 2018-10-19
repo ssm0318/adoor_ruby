@@ -2,7 +2,7 @@
 <%= link_to "비밀번호 변경", edit_user_registration_path %>
 
 <% @friends.each do |friend| %>
-    <div style="border: 1px black solid;">
+    <div style="border: 1px black solid; cursor: pointer" onclick="window.location='/userpage/<%=friend.id%>';">
         <%= friend.username %>
         <% if friend.profile_pic_file_name.nil?%> 얘는 프로필 사진이 없음
         <% else %>
@@ -11,7 +11,7 @@
         <border>
         <% friend.answers.each_with_index do |answer, i| %>
             <% if i < 3 %>
-                <div style="border: 1px black solid; margin: 10px;">
+                <div>
                     <%= answer.question.content %>
                 </div>
             <% end %>

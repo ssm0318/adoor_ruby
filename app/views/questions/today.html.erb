@@ -5,7 +5,7 @@
         <li class="question-el">
             <%= link_to "#{question.content}", "questions/#{question.id}" %>
             <button><%= link_to 'Write', new_answer_path %></button>
-            <button class="btn-assign"><%= link_to_if !user_signed_in?, 'Assign', user_session_path %></button>
+            <button class="btn-do-assign"><%= link_to_if !user_signed_in?, 'Assign', user_session_path %></button>
             <% if user_signed_in? %>
                 <%= render 'assignment', question: question %>
             <% end %>
@@ -24,7 +24,6 @@
     <p class="message"></p>
 </div>
 
-<%= stylesheet_link_tag "application" %>
 
 
 
