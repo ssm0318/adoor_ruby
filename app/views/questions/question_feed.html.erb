@@ -1,5 +1,12 @@
 <h1>Question Feed</h1>
-<h2><%= @question.content %></h2>
+<h2>
+  <%= @question.content %>
+  <% if Star.where(user_id: current_user.id, target: @question).empty? %>
+    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: @question.id, target_type: "Question"), method: :post %>
+  <% else %>
+    <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(@question.id, target_type: "Question"), method: :delete %>
+  <% end %>
+</h2>
 <% @question.answers.each do |answer| %>
   <div class="prism-box">
     <div class="prism-box__header">

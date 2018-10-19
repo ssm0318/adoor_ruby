@@ -2,8 +2,8 @@
 @import 'variable.scss';
 
 .prism-box {
-    width: 1000px;
-    margin: 20px;
+    width: calc(100% - 20px);
+    margin: 20px 0px;
     border: 1.5px solid $prism-box-gray;
     border-radius: 10px;
     padding: 10px;
@@ -46,6 +46,10 @@
         vertical-align: bottom;
         width: 100%;
         // border-top: 1px dotted $prism-box-gray;
-        text-align: right;
+        text-align: left;
+
+        i {
+            float: right;
+        }
     }
 }
