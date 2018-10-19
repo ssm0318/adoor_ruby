@@ -69,11 +69,16 @@
 
 .topnav-log {
     float: right;
-    text-decoration: none;
-    color: #777777;
     display: block;
-    margin-right: 30px; 
-    margin-top: 5px;
+    margin: 5px 20px 0px 0px;
+    border: 0.75px solid #bcbcbc;
+    border-radius: 20px;
+    width: 80px;
+    padding: 4px;
+    color: #777777;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
 }
 
 .btn-noti {
@@ -88,13 +93,9 @@
 
 
 .prism-container {
-<<<<<<< HEAD
-    margin: 40px 200px 0px 200px;
-=======
     // margin: 40px 200px 0px 200px;
     // margin: 0px 200px;
     width: 60%;
     margin: 0 auto;
->>>>>>> 4a5d19052b1b7a5582dfb96633c5f8488ed31bb6
 }
 

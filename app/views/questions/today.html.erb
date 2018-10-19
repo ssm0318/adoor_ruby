@@ -2,16 +2,20 @@
 <h1 class = "today-question-title">오늘의 질문</h1>
     <br>
     <% @questions.each do |question| %>
-        <li class="question-el">
+        <div class="question-el" align="right">
+            <div class="question-content">
             <%= link_to "#{question.content}", "questions/#{question.id}" %>
-            <%= image_tag "icons/write-icon.png", class: "btn-write", onclick:"window.location='/answers/new'"%>
-            <% if user_signed_in? %>
-                <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
-                <%= render 'assignment', question: question %>
-            <% else %>
-                <%= image_tag "icons/assign-icon.png", class: "btn-assign", onclick:"window.location='/users/sign_in'"%>
-            <% end %>
-        </li>
+            </div>
+            <div class="question-btn">
+                <%= image_tag "icons/write-icon.png", class: "btn-write", onclick:"window.location='/answers/new'"%>
+                <% if user_signed_in? %>
+                    <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
+                    <%= render 'assignment', question: question %>
+                <% else %>
+                    <%= image_tag "icons/assign-icon.png", class: "btn-assign", onclick:"window.location='/users/sign_in'"%>
+                <% end %>
+            </div>
+        </div>
     <% end %>
 
     <br>
