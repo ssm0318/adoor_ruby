@@ -1,0 +1,4 @@
+<h1>this is show page</h1>
+<%= @answer.content %>
+<%= link_to '삭제', answer_path(@answer), method: :delete%>
+<a href='/answers/<%= @answer.id %>/edit'>Edit</a>
