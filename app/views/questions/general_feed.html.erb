@@ -1,4 +1,4 @@
-General Feed
+<h1>General Feed</h1>
 <% @questions.each do |question| %>
   <% question.answers.each do |answer| %>
     <div class="prism-box">
@@ -7,8 +7,8 @@ General Feed
         <i class="material-icons">more_vert</i>
       </div>
       <div class="prism-box__content">
-        <a href="/questions/<%=question.id%>"><%= question.content %></a>
-        <div><%= answer.content %></div>
+        <a href="/questions/<%=question.id%>"><%= question.content %></a> <br><br>
+        <%= answer.content %>
       </div>
       <div class="prism-box__footer">
         <%= answer.updated_at.strftime("%m월 %d일") %> <!-- 연도는 %Y -->
