@@ -7,8 +7,8 @@
       <i class="material-icons">more_vert</i>
     </div>
     <div class="prism-box__content">
-      <div><%= answer.question.content %></div>
-      <div><%= answer.content %></div>
+      <%= answer.question.content %> <br><br>
+      <%= answer.content %>
     </div>
     <div class="prism-box__footer">
       <%= answer.updated_at.strftime("%m월 %d일") %>

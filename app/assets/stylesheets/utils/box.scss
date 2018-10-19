@@ -6,11 +6,11 @@
     margin: 20px;
     border: 1.5px solid $prism-box-gray;
     border-radius: 10px;
-    padding: 15px;
+    padding: 10px;
 
     .prism-box__header {
         width: 100%;
-        border-bottom: 1px dashed $prism-box-gray;
+        // border-bottom: 1px dashed $prism-box-gray;
 
         i {
             float: right;
@@ -19,6 +19,8 @@
     }
 
     .prism-box__content {
+        text-align: center;
+
         a {
             color: black;
             text-decoration: none;
@@ -36,6 +38,7 @@
     .prism-box__footer {
         vertical-align: bottom;
         width: 100%;
-        border-top: 1px dotted $prism-box-gray;
+        // border-top: 1px dotted $prism-box-gray;
+        text-align: right;
     }
 }
