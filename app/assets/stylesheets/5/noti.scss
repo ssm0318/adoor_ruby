@@ -10,17 +10,16 @@
     top: 40px;
     padding: 0px;
     border: 0.75px solid #bcbcbc;
+    z-index: 1;
+    background-color: white;
 }
 
 .noti-el {
     padding: 16px;
+    text-decoration: none;
+    color: #777777;
 }
 
 .noti-el:hover {
     background-color: #e8e8e8;
-}
-
-.noti-el a {
-    text-decoration: none;
-    color: #777777;
 }
