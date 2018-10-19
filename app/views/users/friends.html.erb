@@ -4,9 +4,9 @@
 <% @friends.each do |friend| %>
     <div style="border: 1px black solid;">
         <%= friend.username %>
-        <% if friend.profile_pic_file_name.nil?%> 얘는 프로필 사진이 없음
+        <% if friend.image.blank?%> (프사 없음)
         <% else %>
-            <%= image_tag friend.profile_pic.url, :size => "100x100" %>
+            <%= image_tag friend.image.thumb.url %>
         <% end %>
         <border>
         <% friend.answers.each_with_index do |answer, i| %>

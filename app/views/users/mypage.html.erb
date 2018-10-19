@@ -2,12 +2,11 @@
 
 <div>
     <p>Profile pic: 
-        <% if current_user.profile_pic_file_name.nil? %>-
+        <% if current_user.image.blank? %> (프사 없음)
         <% else %>
-            <%= link_to current_user.profile_pic_file_name, current_user.profile_pic.url(:original), download: current_user.profile_pic.original_filename %>
+            <%= image_tag current_user.image.thumb.url  %>
         <% end %>
     </p>
-    <p>Id: <%= current_user.id %></p>
     <p>email: <%= current_user.email %></p>
     <p>username:
         <% if current_user.username.nil? %>-

@@ -1,6 +1,6 @@
-<% if user.profile_pic_file_name.nil? %>
-    (프사없음)
+<% if user.image.blank? %>
+    (프사 없음)
 <% else %>
-    <%= link_to user.profile_pic_file_name, user.profile_pic.url(:original), download: user.profile_pic.original_filename %>
+    <%= image_tag user.image.thumb.url %>
 <% end %>
 <%= link_to user.username, user_answers_path(user.id) %>

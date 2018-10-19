@@ -25,6 +25,9 @@ class UsersController < ApplicationController
 
     def update
         @user.update(user_params)
+        puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        puts user_params
+        puts @user.image
 
         redirect_to show_mypage_path
     end
@@ -63,7 +66,7 @@ class UsersController < ApplicationController
         end
 
         def user_params
-            params.require(:user).permit(:id, :email, :username, :profile_pic, :date_of_birth)
+            params.require(:user).permit(:id, :email, :username, :image, :date_of_birth)
         end
 
         def check_user
