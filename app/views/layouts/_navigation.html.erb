@@ -15,7 +15,11 @@
       <br>
       <br>
       <%= link_to '오늘의 질문', root_path, class: "nav-el" %>
-      <%= link_to '마이페이지', "/userpage/#{current_user.id}", class: "nav-el" %>
+      <% if user_signed_in? %>
+           <%= link_to '마이페이지', "/userpage/#{current_user.id}", class: "nav-el" %>
+      <% else %>
+           <%= link_to '마이페이지', user_session_path, class: "nav-el" %>
+      <% end %>
       <%= link_to '친구목록', '/users/friends', class: "nav-el" %>
       <%= link_to '익명피드', '/feeds', class: "nav-el" %>
       <%= link_to '질문별피드', '/questions', class: "nav-el" %>
