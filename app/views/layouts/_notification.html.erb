@@ -1,55 +1,35 @@
-<button class="btn-noti"><%= link_to_if !user_signed_in?, 'Noti', user_session_path %></button>
-<!--TODO: alert page?-->
+<% if user_signed_in? %>
+    <i class="material-icons btn-noti">notifications</i>
+<% end %>
 <div class="noti-content" style="display: none;">
     <% if user_signed_in? %>
         <% noties.each do |noti| %>
-            <% user = User.find(noti.actor_id).email %>
+            <% user = User.find(noti.actor_id)%>
+            <% username = user.username %>
             <% if noti.target_type == 'Friendship' %>
                 <!-- to friend user page -->
-                <div class="noti-el"><%= link_to "#{user}님과 친구가 되었습니다."%></div>
-            <% end %>
-            <% if noti.target_type == 'FriendRequest' %>
-                <!-- to friend user page -->
-                <div class="noti-el"><%= link_to "#{user}님이 친구신청을 보냈습니다."%></div>
+                <div class="noti-el" onclick="window.location='/userpage/<%=user.id%>';"><%=username%>님과 친구가 되었습니다.</div>
             <% end %>
             <% if noti.target_type == 'Answer' %>
                 <!-- to answer detail page -->
-                <div class="noti-el"><%= link_to "#{user}님의 선물이 도착했습니다."%></div>
+                <div class="noti-el" onclick="window.location='/answers/<%=noti.target_id%>';"><%=username%>님의 선물이 도착했습니다.</div>
             <% end %>
             <% if noti.target_type == 'Assignment' %>
                 <!-- to new answer page -->
-                <div class="noti-el"><%= link_to "#{user}님이 회원님에게 새로운 질문을 assign했습니다.", new_answer_path %></div>
+                <div class="noti-el" onclick="window.location=<%=new_answer_path%>"><%=username%>님이 회원님에게 새로운 질문을 assign했습니다.</div>
             <% end %>
             <% if noti.target_type == 'Highlight' %>
                 <!-- answer detail page -->
-                <div class="noti-el"><%= link_to "#{user}님이 회원님의 글을 highlight했습니다."%></div>
+                <div class="noti-el" onclick="window.location='/answers/<%=noti.target_id%>'"><%=username%>님이 회원님의 글을 highlight했습니다.</div>
             <% end %>
             <% if noti.target_type == 'Star' %>
                 <!-- answer detail page -->
-                <div class="noti-el"><%= link_to "#{user}님이 회원님의 글을 star했습니다."%></div>
+                <div class="noti-el" onclick="window.location='/answers/<%=noti.target_id%>'"><%=username%>님이 회원님의 글을 star했습니다.</div>
             <% end %>
             <% if noti.target_type == 'Comment' %>
                 <!-- answer detail page -->
-                <div class="noti-el"><%= link_to "#{user}님이 회원님의 답변에 댓글을 달았습니다."%></div>
+                <div class="noti-el" onclick="window.location='/answers/<%=noti.target_id%>'"><%=username%>님이 회원님의 답변에 댓글을 달았습니다.</div>
             <% end %>
         <% end %>
     <% end %>
 </div>
-
-
-<script>
-    $(document).ready(function() {
-        $(".btn-noti").on('click', function() {
-            $(".noti-content").toggle();
-        })
-
-        $("html").on('click', function(event) {
-            var target = $(event.target)
-            if(!target.hasClass("btn-noti") &&
-            !target.hasClass("noti-content") &&
-            !target.hasClass("noti-el")) {
-                $(".noti-content").hide();
-            }
-        });
-    }) 
-</script>

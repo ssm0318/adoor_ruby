@@ -3,7 +3,7 @@
 
 <div>
     <% @stars.each do |s| %>
-        <div style='border: 1px solid black; margin: 5px;'>
+        <div class="prism-box">
             <% if s.target_type == "Question" %>
                 <% if s.target.author.has_role? :newuser %>
                     Question made by <%= render partial: "./user_profile", locals: {user: s.target.author} %><br/>
