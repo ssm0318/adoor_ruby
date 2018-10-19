@@ -1,0 +1,18 @@
+<h1>User Answers Page - My Highlights</h1>
+<%= render partial: "./user_answers_layout", locals: {user: @user} %>
+
+<div>
+    <div>
+        <% @highlights.each do |h|%>
+            <div style='border: 1px solid black; margin: 5px;'>
+                <%= render partial: "./user_profile", locals: {user: h.answer.author} %><br/>
+                
+                ...<%= h.content %>...<br/>
+                <%= link_to "전체 글 보기", answer_path(h.answer.id) %><br/>
+                <%= link_to "삭제하기", highlight_path(h.id),
+                                      method: :delete,
+                                      data: { confirm: '형광펜을 지우시겠습니까?'} %> <br/>
+            </div>
+        <% end %>
+    </div>
+</div>

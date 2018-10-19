@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
-    before_action :set_answer, only: [:show]
+    before_action :authenticate_user!
+    before_action :set_answer, only: [:show, :edit, :update, :destroy]
 
     def new
         #TODO Question params 받아오기
@@ -16,18 +17,12 @@ class AnswersController < ApplicationController
     end
 
     def show
-        @answer = Answer.find(params[:id])
     end
 
     def edit
-        @answer = Answer.find(params[:id])
-        #TODO Question params 받아오기
-        @question = Question.find(1)
     end
 
     def update
-        @answer = Answer.find(params[:id])
-
         if @answer.update(answer_params)
           redirect_to @answer
         else
@@ -36,9 +31,18 @@ class AnswersController < ApplicationController
     end
 
     def destroy
-        @answer= Answer.find(params[:id])
-        @answer.destroy  
+        @answer.destroy
 
+        redirect_to user_answers_path(current_user.id)
+    end
+
+    def user_answers
+        @user = User.find(params[:id])
+        @answers = @user.answers
+    end
+
+    def create_comment
+        Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], answer_id: params[:id])
     end
 
     private
@@ -48,11 +52,5 @@ class AnswersController < ApplicationController
 
         def answer_params
             params.require(:answer).permit(:author_id, :question_id, :content)
-        end
-
-        def check_user
-            if answer.admin != current_user
-                redirect_to new_user_session_path
-            end
-        end
+        end  
 end
