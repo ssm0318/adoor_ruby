@@ -5,7 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  after_create :add_default_role 
+  after_create :add_default_role, :add_default_image
 
   mount_uploader :image, ImageUploader
   
@@ -60,5 +60,11 @@ class User < ApplicationRecord
     else
       self.add_role :newuser
     end
+  end
+
+  def add_default_image
+    random = rand(1..6)
+    self.image = Rails.root.join("app/assets/images/icons/profile" + random.to_s + ".png").open
+    self.save!
   end
 end

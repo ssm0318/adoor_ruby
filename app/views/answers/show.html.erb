@@ -1,24 +1,93 @@
 <%= render partial: "./user_profile", locals: {user: @answer.author} %><br/>
-<% if current_user.id == @answer.author.id %>
-    <%= link_to "수정하기", edit_answer_path(@answer.id) %>
-    <%= link_to "삭제하기", answer_path(@answer.id),
-                            method: :delete,
-                            data: { confirm: '답변을 지우시겠습니까?'} %> 
-    <%# TODO: 공개범위 수정하는거 구현 %>
-    <br/>
-<% end %>
-<%= @answer.created_at %><br/>
-Q. <%= @answer.question.content %> 
-<% if Star.where(user_id: current_user.id, target: @answer.question).empty? %>
-    <%= link_to "별표하기", stars_path(target_id: @answer.question.id, target_type: "Question"), method: :post %>
-<% else %>
-    <%= link_to "별표 취소하기", star_path(@answer.question.id, target_type: "Question"), method: :delete %>
-<% end %>
-<br/>
-A. <%= @answer.content %><br/>
-<%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
-<% if Star.where(user_id: current_user.id, target: @answer).empty? %>
-    <%= link_to "별표하기", stars_path(target_id: @answer.id, target_type: "Answer"), method: :post %>
-<% else %>
-    <%= link_to "별표 취소하기", star_path(@answer.id, target_type: "Answer"), method: :delete %>
-<% end %>
+<% @user = @answer.author %>
+<% a = @answer %>
+<div class="prism-box">
+    <div class="prism-box__header">
+        <%= render partial: "./user_profile", locals: {user: a.author} %><br/>
+        <% if current_user.id == @user.id %>
+            <%= link_to "수정하기", edit_answer_path(a.id) %>
+            <%= link_to "삭제하기", answer_path(a.id),
+                                method: :delete,
+                                data: { confirm: '답변을 지우시겠습니까?'} %> 
+            <%# TODO: 공개범위 수정하는거 구현 %> 
+            <br/>
+        <% end %>
+    </div>
+    <div class="prism-box__content">
+        Q: <%= a.question.content %>
+        <% if Star.where(user_id: current_user.id, target: a.question).empty? %>
+            <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.question.id, target_type: "Question"), method: :post %>
+        <% else %>
+            <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.question.id, target_type: "Question"), method: :delete %>
+        <% end %>
+        <br/>
+        A: <%= a.content %>
+        <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
+        <% if Star.where(user_id: current_user.id, target: a).empty? %>
+            <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
+        <% else %>
+            <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete %>
+        <% end %>
+        <div>
+            <% if current_user.id == @user.id %>
+                <%= a.highlights.size %>개의 형광펜
+                <%= Star.where(target_type: "Answer", target_id: a.id).size %>명이 별표함
+                <%= a.comments.size %>개의 댓글 <br/>
+                <div>
+                    댓글 <br/>
+                    <% recipients = [] %>
+                    <% a.comments.each do |c| %>
+                        <% recipients.push(c.recipient_id) %>
+                    <% end %>
+                    <% recipients.uniq! %>
+                    <% recipients.each do |r| %>
+                        <div>
+                            <div class="comment-block">
+                                <% a.comments.each do |c| %>
+                                    <div class="comment">
+                                        <% if c.recipient_id == r %>
+                                            <% if c.author_id == current_user.id %>
+                                                ㄴ<%= render partial: "./user_profile", locals: {user: c.author} %>: 
+                                                <%= c.content %> <br/>
+                                            <% else %>
+                                                <%= render partial: "./user_profile", locals: {user: c.author} %>: 
+                                                <%= c.content %> <br/>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+                            </div>
+                            <form action='/answers/<%= a.id %>/comments/<%= r %>' method='POST'>
+                                <input type='text' name='content' />
+                                <button>댓글 달기</button>
+                            </form>
+                        </div>
+                    <% end %>
+                </div>
+            <% else %>
+                <div>
+                    내가 쓴 댓글 <br/>
+                    
+                    <% a.comments.each do |c| %>
+                        <% if c.author.id == current_user.id %>
+                        <%= render partial: "./user_profile", locals: {user: c.author} %>: 
+                        <%= c.content %> <br/>
+                        
+                        <% elsif c.author.id == a.author.id %>
+                            ㄴ<%= render partial: "./user_profile", locals: {user: c.author} %>: 
+                            <%= c.content %> <br/>
+                        <% end %>
+                    <% end %>
+                    <form action='/answers/<%= a.id %>/comments/<%= current_user.id %>' method='POST'>
+                        <input type='text' name='content' />
+                        <button>댓글 달기</button>
+                    </form>
+                </div>
+            <% end %>
+            <div class="prism-box__footer">
+                <%= a.created_at.strftime("%m월 %d일") %>
+            </div>
+        </div>
+    
+    </div>
+</div>
