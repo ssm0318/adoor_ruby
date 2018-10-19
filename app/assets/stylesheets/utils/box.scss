@@ -11,7 +11,8 @@
     .prism-box__header {
         width: 100%;
         font-family: 'Nanum Gothic', sans-serif;
-        // border-bottom: 1px dashed $prism-box-gray;
+        font-size: 14px;
+        padding-bottom: 10px;
 
         i {
             float: right;
@@ -21,9 +22,14 @@
 
     .prism-box__content {
         text-align: center;
+        border-top: 1px dashed $prism-box-gray;
+        border-bottom: 1px dashed $prism-box-gray;
+        padding: 10px 0px;
+        line-height: 140%;
 
         a {
             color: black;
+            font-weight: bold;
             text-decoration: none;
             font-family: 'Nanum Myeongjo', serif;
 
@@ -45,11 +51,14 @@
         font-family: 'Nanum Gothic', sans-serif;
         vertical-align: bottom;
         width: 100%;
-        // border-top: 1px dotted $prism-box-gray;
         text-align: left;
+        font-size: 12px;
+        padding-top: 10px;
+        padding-bottom: 5px;
 
         i {
             float: right;
+            color: gold;
         }
     }
 }
