@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-    <i class="material-icons btn-noti">notifications</i>
+    <button class="btn-noti">notifications</button>
 <% end %>
 <div class="noti-content" style="display: none;">
     <% if user_signed_in? %>
@@ -16,7 +16,7 @@
             <% end %>
             <% if noti.target_type == 'Assignment' %>
                 <!-- to new answer page -->
-                <div class="noti-el" onclick="window.location=<%=new_answer_path%>"><%=username%>님이 회원님에게 새로운 질문을 assign했습니다.</div>
+                <div class="noti-el" onclick="window.location='/'"><%=username%>님이 회원님에게 새로운 질문을 assign했습니다.</div>
             <% end %>
             <% if noti.target_type == 'Highlight' %>
                 <!-- answer detail page -->
@@ -33,3 +33,20 @@
         <% end %>
     <% end %>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $(".btn-noti").on('click', function() {
+            $(".noti-content").toggle();
+        })
+
+        $("html").on('click', function(event) {
+            var target = $(event.target)
+            if(!target.hasClass("btn-noti") &&
+            !target.hasClass("noti-content") &&
+            !target.hasClass("noti-el")) {
+                $(".noti-content").hide();
+            }
+        });
+    })
+</script>

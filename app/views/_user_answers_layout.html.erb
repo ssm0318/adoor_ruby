@@ -1,6 +1,6 @@
 <%= render partial: "./user_profile", locals: {user: user} %>님의 페이지 <br/>
 <% if current_user.id == user.id %>
-    <%#= link_to "내 정보 수정하기", edit_user_profile_path(user.id) %> 
+    <%= link_to "내 정보 수정하기", edit_user_profile_path(user.id) %> 
 <% end %>
 
 <% if current_user.id != user.id %>

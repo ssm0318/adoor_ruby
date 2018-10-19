@@ -16,7 +16,7 @@
       <br>
       <%= link_to '오늘의 질문', root_path, class: "nav-el" %>
       <% if user_signed_in? %>
-           <%= link_to '마이페이지', "/userpage/#{current_user.id}", class: "nav-el" %>
+            <%= link_to '마이페이지', "/userpage/#{current_user.id}", class: "nav-el" %>
       <% else %>
             <%= link_to '마이페이지', user_session_path, class: "nav-el" %>
       <% end %>
