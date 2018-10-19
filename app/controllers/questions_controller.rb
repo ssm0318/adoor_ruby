@@ -1,4 +1,11 @@
 class QuestionsController < ApplicationController
+    
+    def today
+        
+        @questions = Question.where(selected_date: (Date.today))
+
+    end
+
     # before_action :authenticate_user!
     # general feed?
     def general_feed

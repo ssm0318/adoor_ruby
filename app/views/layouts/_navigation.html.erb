@@ -1,0 +1,49 @@
+<button class="btn-sidenav">HAMBURGER</button>
+<div class="sidenav" align="center">
+      <button class="btn-exit">Exit</button>
+      <% if user_signed_in? %>
+      <p class="nav-el nav-profile"><%= current_user.email %></p>
+      <!--TODO Logout button 누를 때 자꾸 css 작동이 되는데 안되게 해야돼-->
+      <%= link_to 'Log out', 
+            destroy_user_session_path, 
+            method: :delete, 
+            class: "nav-el nav-log" %>
+      <% end %>
+      <% if !user_signed_in? %>
+      <%= link_to 'Log In', user_session_path, class: "nav-el nav-log" %>
+      <% end %>
+      <br>
+      <br>
+      <br>
+      <%= link_to '오늘의 질문', root_path, class: "nav-el" %>
+      <%= link_to '마이페이지', root_path, class: "nav-el" %>
+      <%= link_to '친구목록', root_path, class: "nav-el" %>
+      <%= link_to '익명피드', root_path, class: "nav-el" %>
+      <%= link_to '질문별피드', root_path, class: "nav-el" %>
+
+</div>
+
+
+<script>
+    $(document).ready(function() {
+
+      $("html").on('click', function(event) {
+            var target = $(event.target)
+            if(!target.hasClass("btn-sidenav") &&
+             !target.hasClass("sidenav") &&
+             !target.hasClass("nav-el") ) {
+                  $(".sidenav").removeClass('active');
+            }
+      })
+
+      $(".btn-sidenav").on('click', function() {
+            $(".sidenav").addClass('active');
+      });
+
+      $(".btn-exit").on('click', function() {
+            $(".sidenav").removeClass('active');
+      });
+
+
+    });  
+</script>

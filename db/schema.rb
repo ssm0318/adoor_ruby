@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20180902160303) do
     t.integer "author_id", default: 1
     t.string "content", null: false
     t.boolean "official"
+    t.date "selected_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -126,6 +127,10 @@ ActiveRecord::Schema.define(version: 20180902160303) do
     t.string "username"
     t.date "date_of_birth"
     t.string "profile"
+    t.string "profile_pic_file_name"
+    t.string "profile_pic_content_type"
+    t.bigint "profile_pic_file_size"
+    t.datetime "profile_pic_updated_at"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

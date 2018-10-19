@@ -6,6 +6,7 @@ class CreateQuestions < ActiveRecord::Migration[5.1]
       t.integer    :author_id,          { default: 1 }  
       t.string     :content,            null: false 
       t.boolean    :official
+      t.date       :selected_date
       
       t.timestamps
     end
