@@ -1,4 +1,3 @@
-<h1>User Answers Page - My Stars</h1>
 <%= render partial: "./user_answers_layout", locals: {user: @user} %>
 
 <div>
@@ -7,7 +6,7 @@
             <% if s.target_type == "Question" %>
                 <% if s.target.author.has_role? :newuser %>
                     Question made by <%= render partial: "./user_profile", locals: {user: s.target.author} %><br/>
-                    <%= s.target.created_at %><br/>
+                    <%= s.target.created_at.strftime("%m월 %d일") %><br/>
                 <% end %>
                 Question: <%= s.target.content %><br/>
                 <%= link_to "삭제하기", star_path(s.id),
@@ -16,7 +15,7 @@
                 
             <% else %>
                 <%= render partial: "./user_profile", locals: {user: s.target.author} %> <br/>
-                <%= s.target.created_at %><br/>
+                <%= s.target.created_at.strftime("%m월 %d일") %><br/>
                 Q. <%= s.target.question.content %> <br/>
                 A. <%= s.target.content %> <br/>
                 <%= link_to "전체 글 보기", answer_path(s.target.id) %><br/>

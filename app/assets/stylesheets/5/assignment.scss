@@ -9,6 +9,13 @@
     font-size: 15px;
 }
 
-.btn-do-assign, .btn-assign {
+.btn-do-assign {
+    cursor: pointer;
+}
+
+.btn-assign, .btn-write {
+    width: 32px;
+    height: auto;
+    margin: 3px;
     cursor: pointer;
 }
