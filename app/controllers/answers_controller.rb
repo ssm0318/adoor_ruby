@@ -3,8 +3,7 @@ class AnswersController < ApplicationController
     before_action :set_answer, only: [:show, :edit, :update, :destroy]
 
     def new
-        #TODO Question params 받아오기
-        @question = Question.find(1)
+        @question = Question.find(params[:id])
         @answer = Answer.new
         render 'new'
     end
@@ -43,6 +42,8 @@ class AnswersController < ApplicationController
 
     def create_comment
         Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], answer_id: params[:id])
+        answer_author_id = Answer.find(params[:id]).author_id
+        redirect_back fallback_location: user_answers_path(answer_author_id)
     end
 
     private

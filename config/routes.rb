@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   get '/recover_password' => 'users#recover_password'
   post '/recover_password' => 'users#send_temporary_password'
 
-  resources :answers
+  resources :answers, except: :new
+  get '/answers/new/question/:id' => 'answers#new'
+
 
   resources :highlights
   resources :stars
@@ -26,7 +28,7 @@ Rails.application.routes.draw do
   post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request
 
   # comment
-  post 'answers/:id/comments' => 'answers#create_comment'
+  post '/answers/:id/comments/:recipient_id' => 'answers#create_comment'
   # root '/'
 
   get '/questions' => 'questions#index', as: :questions

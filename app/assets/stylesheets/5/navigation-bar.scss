@@ -16,7 +16,7 @@
     left: 0px;
 }
 
-.sidenav .nav-el {
+.sidenav .nav-el, .nav-el a {
     padding: 12px 12px;
     text-decoration: none;
     font-size: 20px;
@@ -24,6 +24,7 @@
     display: block;
     transition: 0.3s;
 }
+
 
 .sidenav .nav-el:hover {
     color: black;
