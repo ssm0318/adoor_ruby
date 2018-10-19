@@ -1,9 +1,9 @@
 class QuestionsController < ApplicationController
     # before_action :authenticate_user!
     # general feed?
-    def index
+    def general_feed
         @questions = Question.all
-        render 'index'
+        render 'general_feed'
     end
 
     def question_feed
