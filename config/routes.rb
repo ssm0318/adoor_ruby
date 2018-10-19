@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'questions#today'
   resources :answers
@@ -19,9 +18,9 @@ Rails.application.routes.draw do
   resources :stars
   
   # user answers, highlights, stars
-  get '/:id' => 'answers#user_answers', as: :user_answers
-  get '/:id/highlights' => 'highlights#user_highlights', as: :user_highlights
-  get '/:id/stars' => 'stars#user_stars', as: :user_stars
+  get '/userpage/:id' => 'answers#user_answers', as: :user_answers
+  get '/userpage/:id/highlights' => 'highlights#user_highlights', as: :user_highlights
+  get '/userpage/:id/stars' => 'stars#user_stars', as: :user_stars
 
   # friend request
   post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend
@@ -29,4 +28,14 @@ Rails.application.routes.draw do
 
   # comment
   post 'answers/:id/comments' => 'answers#create_comment'
+  # root '/'
+
+  get '/questions' => 'questions#index', as: :questions
+  get '/users/friends' => 'users#friends', as: :friends
+
+  get '/users/profile/:id/edit' => 'users#edit', as: :edit_user_profile
+  patch '/users/profile/:id/edit' => 'users#update', as: :update_user_profile
+  get '/mypage' => 'users#mypage', as: :show_mypage
+
+  devise_for :users
 end

@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+    before_action :authenticate_user!, except: [:index]
     
     def today
         
@@ -16,5 +17,9 @@ class QuestionsController < ApplicationController
     def question_feed
         @question = Question.find(params[:id])
         render 'question_feed'
+    end
+
+    def index
+        @questions = Question.all
     end
 end
