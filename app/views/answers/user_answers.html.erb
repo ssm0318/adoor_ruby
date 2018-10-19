@@ -3,6 +3,7 @@
 <div>
     <% @answers.each do |a| %>
         <div class="prism-box">
+
             <div class="prism-box__header">
                 <%= render partial: "./user_profile", locals: {user: a.author} %><br/>
                 <% if current_user.id == @user.id %>
@@ -14,6 +15,7 @@
                     <br/>
                 <% end %>
             </div>
+
             <div class="prism-box__content">
                 Q: <%= a.question.content %>
                 <% if Star.where(user_id: current_user.id, target: a.question).empty? %>
@@ -57,10 +59,10 @@
                     <input type="text" class="input<%= a.id %>" name="content ">
                     <button>댓글 달기</button>
                 </form>
-                </div>
-                <div class="prism-box__footer">
-                    <%= a.created_at.strftime("%m월 %d일") %>
-                </div>
+            </div>
+
+            <div class="prism-box__footer">
+                <%= a.created_at.strftime("%m월 %d일") %>
             </div>
         </div>
     <% end %>

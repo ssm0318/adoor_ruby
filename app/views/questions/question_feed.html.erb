@@ -1,4 +1,4 @@
-<h1>Question Feed</h1>
+<h1 style="color: mediumpurple;">Question Feed</h1>
 <h2>
   <%= @question.content %>
   <% if Star.where(user_id: current_user.id, target: @question).empty? %>
