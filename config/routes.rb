@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request
 
   # comment
-  post 'answers/:id/comments' => 'answers#create_comment'
+  post '/answers/:id/comments/:recipient_id' => 'answers#create_comment'
   # root '/'
 
   get '/questions' => 'questions#index', as: :questions

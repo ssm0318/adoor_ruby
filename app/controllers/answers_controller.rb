@@ -43,18 +43,8 @@ class AnswersController < ApplicationController
 
     def create_comment
         Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], answer_id: params[:id])
-        image = ""    # TODO: default로 넣고 싶다
-        if !current_user.image.blank?
-            image = current_user.image.url
-        end
-        puts "~~~~~~~~~~"
-        puts params[:content]
-        puts params[:id]
-        render json: {
-            author_id: current_user.id,
-            content: params[:content],
-            image_url: image
-        }
+        answer_author_id = Answer.find(params[:id]).author_id
+        redirect_back fallback_location: user_answers_path(answer_author_id)
     end
 
     private

@@ -57,8 +57,8 @@
                                         </div>
                                     <% end %>
                                 </div>
-                                <form data-answer_id="<%= a.id %>" data-recipient_id="<%= r %>">
-                                    <input type="text" class="input<%= a.id %>_<%= r %>" name="content">
+                                <form action='/answers/<%= a.id %>/comments/<%= r %>' method='POST'>
+                                    <input type='text' name='content' />
                                     <button>댓글 달기</button>
                                 </form>
                             </div>
@@ -80,8 +80,8 @@
                                 <%= c.content %> <br/>
                             <% end %>
                         <% end %>
-                        <form data-answer_id="<%= a.id %>" data-recipient_id="<%= current_user.id %>">
-                            <input type="text" class="input<%= a.id %>_<%= current_user.id %>" name="content">
+                        <form action='/answers/<%= a.id %>/comments/<%= current_user.id %>' method='POST'>
+                            <input type='text' name='content' />
                             <button>댓글 달기</button>
                         </form>
                     </div>
@@ -94,33 +94,3 @@
 </div>
 
 
-
-<script type="text/javascript">
-
-    $("form").submit(function(event){
-        event.preventDefault();
-        event.stopPropagation();
-        const answer_id = $(this).data("answer_id")
-        const recipient_id = $(this).data("recipient_id")
-        $.ajax({
-            url: "/answers/" + answer_id + "/comments",
-            type: "POST",
-            data: {
-                recipient_id: recipient_id,
-                content: $(".input" + answer_id + "_" + recipient_id).val()
-            },
-            dataType: "JSON",
-            success: function(data) {
-                console.log("success")
-                console.log($(".input" + answer_id + "_" + recipient_id).attr("class"));
-                // $(this).siblings(".comment-block").append($(
-                //     '<div class="comment">
-                //         <img src="data.image_url" style="height:100px; width:auto;">:
-                //         data.content
-                //     </div>'
-                // ))
-            }
-        })
-    })
-
-</script>
