@@ -38,6 +38,9 @@
                         <% a.comments.each do |c| %>
                             <%= render partial: "./user_profile", locals: {user: c.author} %>: 
                             <%= c.content %> <br/>
+                            <form data-answer_id="<%= a.id %>" data-recipient_id="<%= c.author.id %>">
+                            <input type="text" class="input<%= a.id %>" name="content">
+                            <button>댓글 달기</button>
                         <% end %>
                     </div>
                 <% else %>
