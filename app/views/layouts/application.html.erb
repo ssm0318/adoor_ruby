@@ -24,16 +24,18 @@
     <!-- TODO: header and noti -->
     <div class="prism-header">
       <%= render 'layouts/navigation'%>
+      <%=image_tag "logo/prism-logo.png", class:"logo"%>
+      <%= render 'layouts/notification', noties: noties %>
+      <div class="login-btn">
         <% if user_signed_in? %>
         <%= link_to 'Log out', 
               destroy_user_session_path, 
               method: :delete, 
-              class: "nav-el nav-log" %>
+              class: "topnav-log" %>
+        <% else %>
+        <%= link_to 'Log In', user_session_path, class: "topnav-log" %>
         <% end %>
-        <% if !user_signed_in? %>
-        <%= link_to 'Log In', user_session_path, class: "nav-el nav-log" %>
-        <% end %>
-      <%= render 'layouts/notification', noties: noties %>
+      </div>
     </div>
     <div class="prism-container">
       <%= yield %>

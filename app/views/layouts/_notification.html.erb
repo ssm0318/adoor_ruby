@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-    <button class="btn-noti">notifications</button>
+    <%=image_tag "icons/noti-default-icon.png", class:"btn-noti"%>
 <% end %>
 <div class="noti-content" style="display: none;">
     <% if user_signed_in? %>
