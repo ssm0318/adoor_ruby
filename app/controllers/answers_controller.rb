@@ -43,6 +43,15 @@ class AnswersController < ApplicationController
 
     def create_comment
         Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], answer_id: params[:id])
+        image = ""    # TODO: default로 넣고 싶다
+        if !current_user.image.blank?
+            image = current_user.image
+        end
+        render json: {
+            author_id: current_user.id,
+            content: params[:content],
+            image: image
+        }
     end
 
     private
