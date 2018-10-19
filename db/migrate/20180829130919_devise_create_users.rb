@@ -11,7 +11,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       ## Additional Fields
       t.string :username
       t.date   :date_of_birth
-      t.string :profile
+      #t.string :profile
       t.string :image
 
       ## Recoverable

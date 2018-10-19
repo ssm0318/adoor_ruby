@@ -1,6 +1,6 @@
 <% if user.image.blank? %>
     (프사 없음)
 <% else %>
-    <%= image_tag user.image.thumb.url %>
+    <%= image_tag user.image.url, :style => "height:100px; width:auto;" %>
 <% end %>
 <%= link_to user.username, user_answers_path(user.id) %>

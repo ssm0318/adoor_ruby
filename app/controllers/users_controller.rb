@@ -28,6 +28,8 @@ class UsersController < ApplicationController
         puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
         puts user_params
         puts @user.image
+        puts @user.errors.full_messages
+        puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
         redirect_to show_mypage_path
     end

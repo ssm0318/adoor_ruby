@@ -126,7 +126,6 @@ ActiveRecord::Schema.define(version: 20180902160303) do
     t.string "nickname"
     t.string "username"
     t.date "date_of_birth"
-    t.string "profile"
     t.string "image"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

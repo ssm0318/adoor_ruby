@@ -6,7 +6,7 @@
         <%= friend.username %>
         <% if friend.image.blank?%> (프사 없음)
         <% else %>
-            <%= image_tag friend.image.thumb.url %>
+            <%= image_tag friend.image.url, :style => "height:100px; width:auto;" %>
         <% end %>
         <border>
         <% friend.answers.each_with_index do |answer, i| %>
