@@ -69,11 +69,16 @@
 
 .topnav-log {
     float: right;
-    text-decoration: none;
-    color: #777777;
     display: block;
-    margin-right: 30px; 
-    margin-top: 5px;
+    margin: 5px 20px 0px 0px;
+    border: 0.75px solid #bcbcbc;
+    border-radius: 20px;
+    width: 80px;
+    padding: 4px;
+    color: #777777;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
 }
 
 .btn-noti {
