@@ -1,14 +1,15 @@
 <div class = "today-question-box"> 
-<h1 class = "today-question-title">오늘의 질문</h1>
+<h1 class = "today-question-title">새로운 답변</h1>
 
-<div class = "question-box">
-    <p class = "question-content"><%= @question.content %></p>
+<div class = "question p-box">
+    <p class = "question-content">
+        <%= @question.content %>
+    </p>
+    <%= form_for @answer do |f| %>
+        <%= f.hidden_field :author_id, :value => current_user.id %>
+        <%= f.hidden_field :question_id, :value => @question.id %>
+        <%= f.text_field :content, class: "new-answer-field" %>
+        <%= f.submit "저장" %>
+    <% end %>
 </div>
-
-<%= form_for @answer do |f| %>
-    <%= f.hidden_field :author_id, :value => current_user.id %>
-    <%= f.hidden_field :question_id, :value => @question.id %>
-    <%= f.text_field :content %>
-    <%= f.submit "저장" %>
-<% end %>
 

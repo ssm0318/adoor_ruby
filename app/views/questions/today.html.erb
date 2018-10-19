@@ -7,7 +7,7 @@
             <%= link_to "#{question.content}", "questions/#{question.id}" %>
             </div>
             <div class="question-btn">
-                <%= image_tag "icons/write-icon.png", class: "btn-write", onclick:"window.location='/answers/new'"%>
+                <%= image_tag "icons/write-icon.png", class: "btn-write", onclick:"window.location='/answers/new/question/#{question.id}'"%>
                 <% if user_signed_in? %>
                     <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
                     <%= render 'assignment', question: question %>

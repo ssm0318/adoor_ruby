@@ -36,32 +36,63 @@
                         <%= a.comments.size %>개의 댓글 <br/>
                         <div>
                             댓글 <br/>
+                            <% recipients = [] %>
                             <% a.comments.each do |c| %>
-                                <%= render partial: "./user_profile", locals: {user: c.author} %>: 
-                                <%= c.content %> <br/>
+                                <% recipients.push(c.recipient_id) %>
+                            <% end %>
+                            <% recipients.uniq! %>
+                            <% recipients.each do |r| %>
+                                <div>
+                                    <div class="comment-block">
+                                        <% a.comments.each do |c| %>
+                                            <div class="comment">
+                                                <% if c.recipient_id == r %>
+                                                    <% if c.author_id == current_user.id %>
+                                                        ㄴ<%= render partial: "./user_profile", locals: {user: c.author} %>: 
+                                                        <%= c.content %> <br/>
+                                                    <% else %>
+                                                        <%= render partial: "./user_profile", locals: {user: c.author} %>: 
+                                                        <%= c.content %> <br/>
+                                                    <% end %>
+                                                <% end %>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                    <form action='/answers/<%= a.id %>/comments/<%= r %>' method='POST'>
+                                        <input type='text' name='content' />
+                                        <button>댓글 달기</button>
+                                    </form>
+                                </div>
                             <% end %>
                         </div>
                     <% else %>
                         <div>
                             내가 쓴 댓글 <br/>
+                            
                             <% a.comments.each do |c| %>
                                 <% if c.author.id == current_user.id %>
-                                    <%= render partial: "./user_profile", locals: {user: c.author} %>: 
-                                    <%= c.content %> <br/>
-                                <% end %>
+                                <%= render partial: "./user_profile", locals: {user: c.author} %>: 
+                                <%= c.content %> <br/>
+                                
+                            <% elsif c.author.id == a.author.id %>
+                                ㄴ<%= render partial: "./user_profile", locals: {user: c.author} %>: 
+                                <%= c.content %> <br/>
                             <% end %>
-                        </div>
-                    <% end %>
-                </div>
-                <form data-answer_id="<%= a.id %>" data-recipient_id="<%= a.author.id %>">
-                    <input type="text" class="input<%= a.id %>" name="content ">
-                    <button>댓글 달기</button>
-                </form>
-                </div>
+                        <% end %>
+                        <form action='/answers/<%= a.id %>/comments/<%= current_user.id %>' method='POST'>
+                            <input type='text' name='content' />
+                            <button>댓글 달기</button>
+                        </form>
+                    </div>
+                <% end %>
                 <div class="prism-box__footer">
                     <%= a.created_at.strftime("%m월 %d일") %>
                 </div>
             </div>
+            
+            </div>
         </div>
     <% end %>
 </div>
+
+
