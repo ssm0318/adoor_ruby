@@ -10,6 +10,7 @@
 
     .prism-box__header {
         width: 100%;
+        font-family: 'Nanum Gothic', sans-serif;
         // border-bottom: 1px dashed $prism-box-gray;
 
         i {
@@ -24,6 +25,7 @@
         a {
             color: black;
             text-decoration: none;
+            font-family: 'Nanum Myeongjo', serif;
 
             &:hover {
                 text-shadow: 2px 2px gray;
@@ -33,9 +35,14 @@
                 color: black;
             }
         }
+
+        .answer {
+            font-family: 'Nanum Gothic', sans-serif;
+        }
     }
 
     .prism-box__footer {
+        font-family: 'Nanum Gothic', sans-serif;
         vertical-align: bottom;
         width: 100%;
         // border-top: 1px dotted $prism-box-gray;

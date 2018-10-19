@@ -8,7 +8,9 @@
       </div>
       <div class="prism-box__content">
         <a href="/questions/<%=question.id%>"><%= question.content %></a> <br><br>
-        <%= answer.content %>
+        <div class = "answer">
+          <%= answer.content %>
+        </div>
       </div>
       <div class="prism-box__footer">
         <%= answer.updated_at.strftime("%m월 %d일") %> <!-- 연도는 %Y -->
