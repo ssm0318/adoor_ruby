@@ -1,5 +1,5 @@
 <% @questions.each do |question| %>
     <div style="border: 1px black solid;">
-        <%= question.content %>
+        <%= link_to question.content, "/questions/#{question.id}" %>
     </div>
 <% end %>
