@@ -1,10 +1,5 @@
-<h1>this is edit page</h1>
+<h1>Edit Answer Page</h1>
+<%= render 'form', answer: @answer %>
+<br/>
 
-<h3><%= @question.content %></h3>
-
-<%= form_for @answer do |f| %>
-    <%= f.hidden_field :author_id, :value => current_user.id %>
-    <%= f.hidden_field :question_id, :value => @question.id %>
-    <%= f.text_field :content %>
-    <%= f.submit "수정완료" %>
-<% end %>
+<%= link_to '내 페이지로', user_answers_path(current_user.id) %></p>

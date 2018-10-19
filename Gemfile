@@ -7,6 +7,7 @@ end
 
 
 gem 'jquery-rails'
+gem "paperclip", "~> 6.1.0"
 gem 'time_difference' 
 gem 'devise'
 gem 'pry-rails' 
