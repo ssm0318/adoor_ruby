@@ -22,7 +22,6 @@
     <!-- TODO: header and noti -->
     <div class="prism-header">
       <%= render 'layouts/navigation'%>
-      <div class='login-btn'>
         <% if user_signed_in? %>
         <%= link_to 'Log out', 
               destroy_user_session_path, 
@@ -32,7 +31,6 @@
         <% if !user_signed_in? %>
         <%= link_to 'Log In', user_session_path, class: "nav-el nav-log" %>
         <% end %>
-      </div>
       <%= render 'layouts/notification', noties: noties %>
     </div>
     <div class="prism-container">
