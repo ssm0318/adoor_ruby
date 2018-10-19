@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   helper_method :noties
 
   def noties
@@ -7,17 +9,11 @@ class ApplicationController < ActionController::Base
       @noties = Notification.where(recipient_id: current_user.id)
     end
   end
-
-  # def str_noti (noti)
-  #   if noti.target_type == 'Friendship'
-  #     "#{User.find(noti.actor_id).email}님이 친구 신청을 보냈습니다."
-  #   end
-  #   if noti.target_type == 'Answer'
-  #     "#{User.find(noti.actor_id).email}님이 회원님이 assign한 질문에 답장했습니다."
-  #   end
-  # end
-
-  def index
+ 
+  protected
+ 
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :nickname])
   end
 end
 

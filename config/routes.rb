@@ -4,8 +4,13 @@ Rails.application.routes.draw do
   root 'questions#today'
   resources :answers
 
-  get '/questions/:id' => 'questions#feed', as: :question_feed
   post 'assignments/:user_id/:question_id' => 'assignments#create'
   delete '/assignments/:id' => 'assignments#delete'
   
+  get '/feeds' => 'questions#general_feed'
+  get '/questions/:id' => 'questions#question_feed'
+  # 이거 나중에 id 말고 content로 하는 게 더 보기 좋을 듯..! 
+  get '/recover_password' => 'users#recover_password'
+  post '/recover_password' => 'users#send_temporary_password'
+  resources :answers, except: [:index]
 end

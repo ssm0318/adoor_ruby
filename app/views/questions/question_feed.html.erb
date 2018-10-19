@@ -1,0 +1,12 @@
+Question Feed
+<% @question.answers.each do |answer| %>
+  <div style="border: 1px solid black;">
+    <div><%= answer.author.email %></div>
+    <div><%= answer.question.content %></div>
+    <div><%= answer.content %></div>
+    <div><%= answer.updated_at %></div>
+  </div>
+<% end %>
+
+<!--한 사람은 질문 하나에 답변 여러 개 할 수 있는 건가..?!
+일단은 하나만 있다고 가정하고 만듦-->

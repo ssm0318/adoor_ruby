@@ -1,8 +1,9 @@
 <div class = "question"> 
 <h1>오늘의 질문</h1>
+    <br>
     <% @questions.each do |question| %>
-        <li>
-            <%= link_to "#{question.content}", question_feed_path(question.id) %>
+        <li class="question-el">
+            <%= link_to "#{question.content}", "questions/#{question.id}" %>
             <button><%= link_to 'Write', new_answer_path %></button>
             <button class="btn-assign"><%= link_to_if !user_signed_in?, 'Assign', user_session_path %></button>
             <% if user_signed_in? %>

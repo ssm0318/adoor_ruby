@@ -1,0 +1,34 @@
+// 마틸다
+@import '1/answer-detail.scss';
+@import '1/new-answer.scss';
+@import '1/sign-in.scss';
+@import '1/sign-up.scss';
+
+// 잡동사니
+@import '2/general-feed.scss';
+@import '2/question-feed.scss';
+@import '2/recover-password-confirm.scss';
+@import '2/recover-password.scss';
+
+// 백산수
+@import '3/edit-password.scss';
+@import '3/edit-profile.scss';
+@import '3/friends-list.scss';
+@import '3/question-list.scss';
+
+// 율로몬
+@import '4/user-answers.scss';
+@import '4/user-highlights.scss';
+@import '4/user-stars.scss';
+
+// 이룰렁
+@import '5/index.scss';
+@import '5/navigation-bar.scss';
+@import '5/noti.scss';
+@import '5/assignment.scss';
+
+
+* {
+    font-family: 'Iropke Batang', serif;
+}
+
