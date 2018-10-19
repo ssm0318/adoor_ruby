@@ -14,9 +14,25 @@
  *= require_self
  */
 
-* {
-    font-family: 'Iropke Batang', serif;
+//나눔스퀘어 light font
+@font-face {
+    font-family: 'NanumSquareOTFLight';
+    src: url(app/assets/fonts/NanumSquareOTFLight.otf) format("opentype")
 }
+
+//나눔스퀘어 regular font
+@font-face {
+    font-family: 'NanumSquareOTFRegular';
+    src: url(app/assets/fonts/NanumSquareOTFRegular.otf) format("opentype")
+}
+
+//한둥근체 바탕
+@font-face {
+    font-family: 'WONBatangOTFR';
+    src: url(app/assets/fonts/WONBatangOTFR.otf) format("opentype")
+}
+
+//위의 세개 폰트들 로드 안됨ㅠㅠ
 
 // 헤더랑 컨테이너는 일단 여기다 함..!
 .prism-header {
@@ -75,3 +91,4 @@
     // margin: 40px 200px 0px 200px;
     margin: 0px 200px;
 }
+

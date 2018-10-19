@@ -1,9 +1,10 @@
-.question {
+.today-question-box {
     text-align: center;
     margin-top: 170px;
 }
 
-.question h1 {
+.today-question-title {
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 40px;
 }
 
@@ -14,6 +15,7 @@
 }
 
 .question-el a {
+    font-family: 'Nanum Myeongjo', serif;
     text-decoration: none;
     color: black;
 }
