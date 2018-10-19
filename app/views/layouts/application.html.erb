@@ -11,6 +11,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <script
       src="http://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -19,20 +20,21 @@
 
   <body>
     <!-- TODO: header and noti -->
-    <%= render 'layouts/navigation'%>
-    <div class='login-btn'>
-      <% if user_signed_in? %>
-      <%= link_to 'Log out', 
-            destroy_user_session_path, 
-            method: :delete, 
-            class: "nav-el nav-log" %>
-      <% end %>
-      <% if !user_signed_in? %>
-      <%= link_to 'Log In', user_session_path, class: "nav-el nav-log" %>
-      <% end %>
+    <div class="prism-header">
+      <%= render 'layouts/navigation'%>
+        <% if user_signed_in? %>
+        <%= link_to 'Log out', 
+              destroy_user_session_path, 
+              method: :delete, 
+              class: "nav-el nav-log" %>
+        <% end %>
+        <% if !user_signed_in? %>
+        <%= link_to 'Log In', user_session_path, class: "nav-el nav-log" %>
+        <% end %>
+      <%= render 'layouts/notification', noties: noties %>
     </div>
-    <%= render 'layouts/notification', noties: noties %>
-    <%= yield %>
-    <br>
+    <div class="prism-container">
+      <%= yield %>
+    </div>
   </body>
 </html>
