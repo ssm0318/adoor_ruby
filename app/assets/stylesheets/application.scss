@@ -20,11 +20,13 @@
 
 // 헤더랑 컨테이너는 일단 여기다 함..!
 .prism-header {
+    // position: fixed;
     width: 100%;
     height: 40px;
     border-bottom: 1px solid black;
 }
 
 .prism-container {
+    // margin: 40px 200px 0px 200px;
     margin: 0px 200px;
 }
