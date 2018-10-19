@@ -17,10 +17,14 @@
       <%= link_to '오늘의 질문', root_path, class: "nav-el" %>
       <% if user_signed_in? %>
 <<<<<<< HEAD
+<<<<<<< HEAD
            <%= link_to '마이페이지', "/userpage/#{current_user.id}", class: "nav-el" %>
 =======
             <%= link_to '마이페이지', "/userpage/#{current_user.id}", class: "nav-el" %>
 >>>>>>> 85cb4961f309bfe02a46802614682026294de58a
+=======
+            <%= link_to '마이페이지', "/userpage/#{current_user.id}", class: "nav-el" %>
+>>>>>>> db10ed48bbf9d5675afe5c5cf4239c0c0bcee7d1
       <% else %>
             <%= link_to '마이페이지', user_session_path, class: "nav-el" %>
       <% end %>
