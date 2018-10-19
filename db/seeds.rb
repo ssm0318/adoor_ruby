@@ -15,6 +15,15 @@ User.create(email: "d@d.com", password: "dddddd", username: "deer")
 Question.create(content: "what is your name?") # 디폴트로 admin이 생성한 것으로 되는지 확인
 Question.create(content: "where are you from?", author_id: 2)
 Question.create(content: "do you like butterflies?", author_id: 3)
+Question.create(content: "what is your name?2")
+Question.create(content: "what is your name?3")
+Question.create(content: "what is your name?4")
+Question.create(content: "what is your name?5")
+Question.create(content: "what is your name?6")
+Question.create(content: "what is your name?7")
+Question.create(content: "what is your name?8")
+Question.create(content: "what is your name?9")
+
 
 FriendRequest.create(requester_id: 1, requestee_id: 2)
 FriendRequest.create(requester_id: 1, requestee_id: 3)

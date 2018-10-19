@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+gem 'whenever', require: false
 gem 'jquery-rails'
 gem "paperclip", "~> 6.1.0"
 gem 'time_difference' 

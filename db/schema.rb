@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20180902160303) do
     t.integer "author_id", default: 1
     t.string "content", null: false
     t.boolean "official"
+    t.date "selected_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
