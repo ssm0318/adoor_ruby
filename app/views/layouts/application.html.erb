@@ -11,9 +11,22 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
   </head>
 
   <body>
+    <div>
+      <% if user_signed_in? %>
+        <%= current_user.username %>님, 안녕하세요.<br/>
+        <%= link_to "로그아웃", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "로그인", new_user_session_path%>
+      <% end %>
+    </div>
+
     <%= yield %>
   </body>
 </html>
