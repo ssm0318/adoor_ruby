@@ -7,9 +7,8 @@ class User < ApplicationRecord
 
   after_create :add_default_role 
 
-  has_attached_file :profile_pic
-  validates_attachment :profile_pic, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
-
+  mount_uploader :image, ImageUploader
+  
   # question
   has_many :questions, dependent: :destroy, :foreign_key => "author_id"
 

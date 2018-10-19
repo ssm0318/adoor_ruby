@@ -14,31 +14,78 @@
  *= require_self
  */
 
-* {
-    font-family: 'Iropke Batang', serif;
+//나눔스퀘어 light font
+@font-face {
+    font-family: 'NanumSquareOTFLight';
+    src: url(app/assets/fonts/NanumSquareOTFLight.otf) format("opentype")
 }
+
+//나눔스퀘어 regular font
+@font-face {
+    font-family: 'NanumSquareOTFRegular';
+    src: url(app/assets/fonts/NanumSquareOTFRegular.otf) format("opentype")
+}
+
+//한둥근체 바탕
+@font-face {
+    font-family: 'WONBatangOTFR';
+    src: url(app/assets/fonts/WONBatangOTFR.otf) format("opentype")
+}
+
+//위의 세개 폰트들 로드 안됨ㅠㅠ
 
 // 헤더랑 컨테이너는 일단 여기다 함..!
 .prism-header {
     // position: fixed;
     width: 100%;
     height: 40px;
-
-    // a.nav-el.nav-long {
-    //     float: right; // 안됨
-    // }
-    .prism-header__left-box {
-        display: inline-block;
-        left: 0px;
-        width: 100px;
-    }
-
-    .prism-header__right-box {
-        display: inline-block;
-        right: 0px;
-        width: 100px;
+    display: inline-block;
+    a.nav-el.nav-long {
+        right: 0px; // 안됨
     }
 }
+
+.logo {
+    float: left;
+    width: 90px;
+    height: auto;
+    display: block;
+}
+
+// .login-btn {
+//     position: fixed;
+//     right: 60px;
+//     top: 8px;
+// }
+
+.btn-sidenav {
+    float: left;
+    display: block;
+    width: 24px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.topnav-log {
+    float: right;
+    text-decoration: none;
+    color: #777777;
+    display: block;
+    margin-right: 30px; 
+    margin-top: 5px;
+}
+
+.btn-noti {
+    float: right;
+    width: 24px;
+    height: auto;
+    display: block;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
 
 .prism-container {
     // margin: 40px 200px 0px 200px;
@@ -46,3 +93,4 @@
     width: 60%;
     margin: 0 auto;
 }
+
