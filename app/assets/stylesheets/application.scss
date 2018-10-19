@@ -23,11 +23,53 @@
     // position: fixed;
     width: 100%;
     height: 40px;
-
+    display: inline-block;
     a.nav-el.nav-long {
         right: 0px; // 안됨
     }
 }
+
+.logo {
+    float: left;
+    width: 90px;
+    height: auto;
+    display: block;
+}
+
+// .login-btn {
+//     position: fixed;
+//     right: 60px;
+//     top: 8px;
+// }
+
+.btn-sidenav {
+    float: left;
+    display: block;
+    width: 24px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.topnav-log {
+    float: right;
+    text-decoration: none;
+    color: #777777;
+    display: block;
+    margin-right: 30px; 
+    margin-top: 5px;
+}
+
+.btn-noti {
+    float: right;
+    width: 24px;
+    height: auto;
+    display: block;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
 
 .prism-container {
     // margin: 40px 200px 0px 200px;
