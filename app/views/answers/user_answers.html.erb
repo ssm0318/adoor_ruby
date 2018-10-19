@@ -14,6 +14,11 @@
                     <%# TODO: 공개범위 수정하는거 구현 %> 
                     <br/>
                 <% end %>
+                <% if current_user.id == @user.id %>
+                        <%= a.highlights.size %>개의 형광펜
+                        <%= Star.where(target_type: "Answer", target_id: a.id).size %>명이 별표함
+                        <%= a.comments.size %>개의 댓글 <br/><br>
+                <% end %>
             </div>
 
             <div class="prism-box__content">
@@ -31,11 +36,15 @@
                 <% else %>
                     <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete %>
                 <% end %> <br><br>
+            </div>
+
+            <div class="prism-box__footer">
+                <%= a.created_at.strftime("%m월 %d일") %>
+            </div>
+
+            <div class="prism-box__footer">
                 <div>
                     <% if current_user.id == @user.id %>
-                        <%= a.highlights.size %>개의 형광펜
-                        <%= Star.where(target_type: "Answer", target_id: a.id).size %>명이 별표함
-                        <%= a.comments.size %>개의 댓글 <br/><br>
                         <div>
                             댓글 <br/>
                             <% a.comments.each do |c| %>
@@ -59,10 +68,6 @@
                     <input type="text" class="input<%= a.id %>" name="content ">
                     <button>댓글 달기</button>
                 </form>
-            </div>
-
-            <div class="prism-box__footer">
-                <%= a.created_at.strftime("%m월 %d일") %>
             </div>
         </div>
     <% end %>
