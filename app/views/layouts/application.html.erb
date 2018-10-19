@@ -21,6 +21,8 @@
   <body>
     <!-- TODO: header and noti -->
     <div class="prism-header">
+    <div class="prism-header__left-box"></div>
+    <div class="prism-header__right-box"></div>
       <%= render 'layouts/navigation'%>
         <% if user_signed_in? %>
         <%= link_to 'Log out', 

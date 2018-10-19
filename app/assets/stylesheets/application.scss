@@ -25,8 +25,19 @@
     height: 40px;
     border-bottom: 1px solid black;
 
-    a.nav-el.nav-long {
-        right: 0px; // 안됨
+    // a.nav-el.nav-long {
+    //     float: right; // 안됨
+    // }
+    .prism-header__left-box {
+        display: inline-block;
+        left: 0px;
+        width: 100px;
+    }
+
+    .prism-header__right-box {
+        display: inline-block;
+        right: 0px;
+        width: 100px;
     }
 }
 

@@ -12,6 +12,11 @@
       </div>
       <div class="prism-box__footer">
         <%= answer.updated_at.strftime("%m월 %d일") %> <!-- 연도는 %Y -->
+        <% if Star.where(user_id: current_user.id, target: answer).empty? %>
+          <%= link_to "별표하기", stars_path(target_id: answer.id, target_type: "Answer"), method: :post %>
+        <% else %>
+          <%= link_to "별표 취소하기", star_path(answer.id, target_type: "Answer"), method: :delete %>
+        <% end %>
       </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
     </div>
   <% end %>

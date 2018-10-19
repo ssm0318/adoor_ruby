@@ -39,6 +39,10 @@
         vertical-align: bottom;
         width: 100%;
         // border-top: 1px dotted $prism-box-gray;
-        text-align: right;
+        text-align: left;
+
+        i {
+            float: right;
+        }
     }
 }
