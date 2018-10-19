@@ -1,4 +1,3 @@
-<h1>User Answers Page</h1>
 <%= render partial: "./user_answers_layout", locals: {user: @user} %>
 
 <div>
@@ -16,17 +15,17 @@
             <%= a.created_at.strftime("%m월 %d일") %><br/>
             Q: <%= a.question.content %>
             <% if Star.where(user_id: current_user.id, target: a.question).empty? %>
-                <%= link_to "별표하기", stars_path(target_id: a.question.id, target_type: "Question"), method: :post %>
+                <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.question.id, target_type: "Question"), method: :post %>
             <% else %>
-                <%= link_to "별표 취소하기", star_path(a.question.id, target_type: "Question"), method: :delete %>
+                <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.question.id, target_type: "Question"), method: :delete %>
             <% end %>
             <br/>
-            A: <%= a.content %><br/>
+            A: <%= a.content %>
             <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
             <% if Star.where(user_id: current_user.id, target: a).empty? %>
-                <%= link_to "별표하기", stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
+                <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
             <% else %>
-                <%= link_to "별표 취소하기", star_path(a.id, target_type: "Answer"), method: :delete %>
+                <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete %>
             <% end %>
             <div>
                 <% if current_user.id == @user.id %>

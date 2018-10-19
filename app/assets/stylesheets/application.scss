@@ -23,7 +23,6 @@
     // position: fixed;
     width: 100%;
     height: 40px;
-    border-bottom: 1px solid black;
 
     // a.nav-el.nav-long {
     //     float: right; // 안됨
@@ -43,5 +42,7 @@
 
 .prism-container {
     // margin: 40px 200px 0px 200px;
-    margin: 0px 200px;
+    // margin: 0px 200px;
+    width: 60%;
+    margin: 0 auto;
 }

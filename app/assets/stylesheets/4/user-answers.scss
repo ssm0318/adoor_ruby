@@ -1,0 +1,11 @@
+.user-header {
+    .user-header__tab {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+
+        a {
+            text-decoration: none;
+        }
+    }
+}
