@@ -32,17 +32,55 @@
                 <% if current_user.id == @user.id %>
                     <%= a.highlights.size %>개의 형광펜
                     <%= Star.where(target_type: "Answer", target_id: a.id).size %>명이 별표함
-                    <%= a.comments.size %>개의 댓글
-                    <div>댓글 <br/>
+                    <%= a.comments.size %>개의 댓글 <br/>
+                    <div>
+                        댓글 <br/>
                         <% a.comments.each do |c| %>
                             <%= render partial: "./user_profile", locals: {user: c.author} %>: 
-                            <%= c.content %>
-                            
+                            <%= c.content %> <br/>
+                        <% end %>
+                    </div>
+                <% else %>
+                    <div>
+                        내가 쓴 댓글 <br/>
+                        <% a.comments.each do |c| %>
+                            <% if c.author.id == current_user.id %>
+                                <%= render partial: "./user_profile", locals: {user: c.author} %>: 
+                                <%= c.content %> <br/>
+                            <% end %>
                         <% end %>
                     </div>
                 <% end %>
             </div>
+            <form data-answer_id="<%= a.id %>" data-recipient_id="<%= a.author.id %>">
+                <input type="text" class="input<%= a.id %>" name="content ">
+                <button>댓글 달기</button>
+            </form>
             </div>
         </div>
     <% end %>
 </div>
+
+
+
+<script type="text/javascript">
+
+    $("form").submit(function(event){
+    const answer_id = $(this).data("answer_id")
+    const recipient_id = $(this).data("recipient_id")
+    $.ajax({
+        url: "/answers/" + answer_id + "/comments",
+        type: "POST",
+        data: {
+            // answer_id: answer_id,
+            recipient_id: recipient_id,
+            content: $(".input" + answer_id).val()
+        },
+        dataType: "JSON",
+        success: function(data) {
+        console.log("success")
+        return
+        }
+    })
+    })
+</script>

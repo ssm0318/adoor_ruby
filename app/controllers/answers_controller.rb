@@ -24,6 +24,9 @@ class AnswersController < ApplicationController
         redirect_to user_answers_path(current_user.id)
     end
 
+    def create_comment
+        Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], answer_id: params[:id])
+    end
 
     private
         # use answer_params in create and update
@@ -34,5 +37,4 @@ class AnswersController < ApplicationController
         def set_answer
             @answer = Answer.find(params[:id])
         end
-    
 end
