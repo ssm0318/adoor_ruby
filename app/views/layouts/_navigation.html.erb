@@ -2,14 +2,18 @@
 <div class="sidenav" align="center">
       <i class="material-icons btn-exit">highlight_off</i>
       <% if user_signed_in? %>
-      <p class="nav-el nav-profile"><%= link_to "#{current_user.username}", '/mypage' %></p>
-      <%= link_to 'Log out', 
-            destroy_user_session_path, 
-            method: :delete, 
-            class: "nav-el nav-log" %>
+            <p class="nav-el nav-profile">
+            <%= image_tag current_user.image.url, :style => "height:30px; width:30px; border-radius:15px;" %>
+            <br/>
+            <%= link_to current_user.username, show_mypage_path %>
+            </p>
+            <%= link_to 'Log out', 
+                  destroy_user_session_path, 
+                  method: :delete, 
+                  class: "nav-el nav-log" %>
       <% end %>
       <% if !user_signed_in? %>
-      <%= link_to 'Log In', user_session_path, class: "nav-el nav-log" %>
+            <%= link_to 'Log In', user_session_path, class: "nav-el nav-log" %>
       <% end %>
       <br>
       <br>
