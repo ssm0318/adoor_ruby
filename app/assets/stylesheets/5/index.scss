@@ -1,6 +1,6 @@
 .today-question-box {
-    text-align: center;
     margin-top: 170px;
+    width: 300px;
 }
 
 .today-question-title {
@@ -9,6 +9,7 @@
 }
 
 .question-el {
+    text-align: center;
     list-style: none;
     margin-top: 16px;
     font-size: 20px;
