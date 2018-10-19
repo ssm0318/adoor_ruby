@@ -9,7 +9,8 @@
         <%= f.hidden_field :author_id, :value => current_user.id %>
         <%= f.hidden_field :question_id, :value => @question.id %>
         <%= f.text_field :content, class: "new-answer-field" %>
-        <%= f.submit "저장" %>
+        <br><br>
+        <%= f.submit "저장하기", class: "answer-button"%>
     <% end %>
 </div>
 
