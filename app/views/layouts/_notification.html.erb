@@ -33,21 +33,3 @@
         <% end %>
     <% end %>
 </div>
-
-
-<script>
-    $(document).ready(function() {
-        $(".btn-noti").on('click', function() {
-            $(".noti-content").toggle();
-        })
-
-        $("html").on('click', function(event) {
-            var target = $(event.target)
-            if(!target.hasClass("btn-noti") &&
-            !target.hasClass("noti-content") &&
-            !target.hasClass("noti-el")) {
-                $(".noti-content").hide();
-            }
-        });
-    }) 
-</script>
