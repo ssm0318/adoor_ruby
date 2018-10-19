@@ -1,16 +1,18 @@
 <div class = "today-question-box"> 
 <h1 class = "today-question-title">새로운 답변</h1>
 
-<div class = "question p-box">
-    <p class = "question-content">
+<div class = "question-box">
+    <p class = "question">
         <%= @question.content %>
     </p>
-    <%= form_for @answer do |f| %>
-        <%= f.hidden_field :author_id, :value => current_user.id %>
-        <%= f.hidden_field :question_id, :value => @question.id %>
-        <%= f.text_field :content, class: "new-answer-field" %>
-        <br><br>
-        <%= f.submit "저장하기", class: "answer-button"%>
-    <% end %>
+    <div align = "center">
+        <%= form_for @answer do |f| %>
+            <%= f.hidden_field :author_id, :value => current_user.id %>
+            <%= f.hidden_field :question_id, :value => @question.id %>
+            <%= f.text_area :content, class: "new-answer-field" %>
+            <br><br>
+            <%= f.submit "저장하기", class: "answer-button"%>
+        <% end %>
+    </div>
 </div>
 
