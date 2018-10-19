@@ -28,12 +28,12 @@
                     <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
                 <% else %>
                     <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete %>
-                <% end %>
+                <% end %> <br><br>
                 <div>
                     <% if current_user.id == @user.id %>
                         <%= a.highlights.size %>개의 형광펜
                         <%= Star.where(target_type: "Answer", target_id: a.id).size %>명이 별표함
-                        <%= a.comments.size %>개의 댓글 <br/>
+                        <%= a.comments.size %>개의 댓글 <br/><br>
                         <div>
                             댓글 <br/>
                             <% a.comments.each do |c| %>
