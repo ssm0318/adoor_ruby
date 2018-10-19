@@ -16,7 +16,7 @@
             <% end %>
             <% if noti.target_type == 'Assignment' %>
                 <!-- to new answer page -->
-                <div class="noti-el" onclick="window.location='/'"><%=username%>님이 회원님에게 새로운 질문을 assign했습니다.</div>
+                <div class="noti-el" onclick="window.location='/answers/new/questions/<%=noti.target_id%>'"><%=username%>님이 회원님에게 새로운 질문을 assign했습니다.</div>
             <% end %>
             <% if noti.target_type == 'Highlight' %>
                 <!-- answer detail page -->

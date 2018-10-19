@@ -3,8 +3,7 @@ class AnswersController < ApplicationController
     before_action :set_answer, only: [:show, :edit, :update, :destroy]
 
     def new
-        #TODO Question params 받아오기
-        @question = Question.find(1)
+        @question = Question.find(params[:id])
         @answer = Answer.new
         render 'new'
     end
