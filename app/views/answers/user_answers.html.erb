@@ -22,15 +22,15 @@
             </div>
 
             <div class="prism-box__content">
-                Q: <%= a.question.content %>
+                <br><div class="question" style="font-size: 18px;"><%= a.question.content %></div>
                 
                 <br/>
-                A: <%= a.content %>
+                <div class="answer"><%= a.content %></div>
                 <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
                  <br><br>
             </div>
 
-            <div class="prism-box__footer">
+            <div class="prism-box__footer" style="padding-bottom: 10px;">
                 <%= a.created_at.strftime("%m월 %d일") %>
                 <% if Star.where(user_id: current_user.id, target: a.question).empty? %>
                     <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.question.id, target_type: "Question"), method: :post %>
@@ -97,9 +97,9 @@
                         </div>
                     <% end %>
                 </div>
-                <form data-answer_id="<%= a.id %>" data-recipient_id="<%= a.author.id %>">
-                    <input type="text" class="input<%= a.id %>" name="content ">
-                    <button>댓글 달기</button>
+                <form class="prism-form" data-answer_id="<%= a.id %>" data-recipient_id="<%= a.author.id %>">
+                    <input class="prism-form__input" type="text" class="input<%= a.id %>" name="content ">
+                    <button class="prism-form__button">댓글 달기</button>
                 </form>
             </div>
         </div>

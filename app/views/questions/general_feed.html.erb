@@ -7,9 +7,9 @@
         <%#= answer.author.username %>
         <i class="material-icons">more_vert</i>
       </div>
-      <div class="prism-box__content">
-        <a href="/questions/<%=question.id%>"><%= question.content %></a> <br><br>
-        <div class = "answer">
+      <div class="prism-box__content"><br>
+        <a href="/questions/<%=question.id%>" class="question" style="font-size: 18px; font-weight: normal;"><%= question.content %></a> <br><br>
+        <div class="answer">
           <%= answer.content %> <br><br>
         </div>
       </div>
