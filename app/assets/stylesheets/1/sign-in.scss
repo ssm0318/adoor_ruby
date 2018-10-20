@@ -1,0 +1,55 @@
+.sign-box {
+    margin-top: 170px;
+    width: 100%;
+}
+
+.sign-title {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.sign-content-box {
+    list-style: none;
+    margin-top: 16px;
+    font-size: 20px;
+}
+
+.form-inputs {
+    font-family: 'Nanum Gothic', serif;
+    font-size: 20px;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+
+.form-inputs input[type=email], .form-inputs input[type=password], .form-inputs input[type=text] {
+    font-family:  'Nanum Gothic', sans-serif;
+    margin-bottom: 15px;
+    width: 250px;
+    height: 25px;
+    border: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    box-shadow: 0 5px 5px -5px grey;
+    outline: none;
+    font-size: 16px;
+    color: #313131;
+}
+
+.form-input {
+    font-family:  'Nanum Gothic', sans-serif;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.sign-button {
+    background-color: #C08BEF;
+    border-radius: 30px;
+    width: 200px;
+    padding: 15px 20px 15px 20px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
