@@ -59,19 +59,23 @@
                                             <div class="comment">
                                                 <% if c.recipient_id == r %>
                                                     <% if c.author_id == current_user.id %>
-                                                        ㄴ<%= render partial: "./user_profile", locals: {user: c.author} %>: 
-                                                        <%= c.content %> <br/>
+                                                        ㄴ<%#= render partial: "./user_profile", locals: {user: c.author} %> 
+                                                        <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                                                        <%= link_to c.author.username, user_answers_path(c.author.id), style: "vertical-align: +6px;" %>
+                                                        <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
                                                     <% else %>
-                                                        <%= render partial: "./user_profile", locals: {user: c.author} %>: 
-                                                        <%= c.content %> <br/>
+                                                        <%#= render partial: "./user_profile", locals: {user: c.author} %>: 
+                                                        <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                                                        <%= link_to c.author.username, user_answers_path(c.author.id), style: "vertical-align: +6px;" %>
+                                                        <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
                                                     <% end %>
                                                 <% end %>
                                             </div>
                                         <% end %>
                                     </div>
-                                    <form action='/answers/<%= a.id %>/comments/<%= r %>' method='POST'>
-                                        <input type='text' name='content' />
-                                        <button>댓글 달기</button>
+                                    <form class="prism-form" action='/answers/<%= a.id %>/comments/<%= r %>' method='POST'>
+                                        <input class="prism-form__input" type='text' name='content' />
+                                        <button class="prism-form__button">댓글 달기</button>
                                     </form>
                                 </div>
                             <% end %>
@@ -92,13 +96,13 @@
                                     <span style="vertical-align: +6px;">: <%= c.content %></span> <br/>
                                 <% end %>
                             <% end %>
+                            <form action='/answers/<%= a.id %>/comments/<%= a.author.id %>' method='POST' class="prism-form" >
+                                <input class="prism-form__input" type="text" name="content">
+                                <button class="prism-form__button">댓글 달기</button>
+                            </form>
                         </div>
                     <% end %>
                 </div>
-                <form class="prism-form" data-answer_id="<%= a.id %>" data-recipient_id="<%= a.author.id %>">
-                    <input class="prism-form__input" type="text" class="input<%= a.id %>" name="content ">
-                    <button class="prism-form__button">댓글 달기</button>
-                </form>
             </div>
         </div>
     <% end %>
