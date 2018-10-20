@@ -32,6 +32,7 @@ FriendRequest.create(requester_id: 2, requestee_id: 4)
 Friendship.create(user_id: 1, friend_id: 4)
 Friendship.create(user_id: 4, friend_id: 3)
 Friendship.create(user_id: 3, friend_id: 2)
+Friendship.create(user_id: 3, friend_id: 1)
 
 Assignment.create(question_id: 2, assigner_id: 1, assignee_id: 4)
 Assignment.create(question_id: 2, assigner_id: 2, assignee_id: 4)
