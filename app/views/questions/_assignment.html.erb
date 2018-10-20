@@ -1,14 +1,16 @@
 <div id="assignment" class="assignment-content" style="display: none;">
     <% if user_signed_in? %>
         <% current_user.friends.each do |friend| %>
-                <div>
-                    <%=friend.username %>
+                <div class="assignment-content-el">
+                    <%= image_tag friend.image.url, :style => "height:40px; width:40px; border-radius:20px;", class: "assignee-image"%>
+                    <span class="assignment-content-el-name"><%=friend.username %></span>
                     <% assign = Assignment.find_by(question_id: question.id, assigner_id: current_user.id, assignee_id: friend.id) %>
                     <%if assign.nil? %>
                         <a  class="btn-do-assign" 
                             data-assign-id="-1"
                             data-friend-id="<%=friend.id%>" 
-                            data-question-id="<%=question.id%>">Assign</a>
+                            data-question-id="<%=question.id%>"
+                            style="background-color: #C08BEF; color: white;" >Assign</a>
                     <% else %>
                         <a  class="btn-do-assign" 
                             data-assign-id="<%=assign.id%>"

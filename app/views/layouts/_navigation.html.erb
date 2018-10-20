@@ -1,9 +1,9 @@
 <%=image_tag "icons/menu-icon.png", class: "btn-sidenav"%>
 <div class="sidenav" align="center">
-      <i class="material-icons btn-exit">highlight_off</i>
+      <button class="btn-exit">X</button>
       <% if user_signed_in? %>
             <p class="nav-el nav-profile">
-            <%= image_tag current_user.image.url, :style => "height:30px; width:30px; border-radius:15px;" %>
+            <%= image_tag current_user.image.url, :style => "height:60px; width:60px; border-radius:30px;" %>
             <br/>
             <%= link_to current_user.username, show_mypage_path %>
             </p>

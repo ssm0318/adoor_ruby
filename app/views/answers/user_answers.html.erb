@@ -20,16 +20,14 @@
                         <%= a.comments.size %> 개의 댓글 <br/><br>
                 <% end %>
             </div>
-
             <div class="prism-box__content">
                 <br><div class="question" style="font-size: 18px;"><%= a.question.content %></div>
                 
                 <br/>
                 <div class="answer"><%= a.content %></div>
                 <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
-                 <br><br>
+                <br><br>
             </div>
-
             <div class="prism-box__footer" style="padding-bottom: 10px;">
                 <%= a.created_at.strftime("%m월 %d일") %>
                 <% if Star.where(user_id: current_user.id, target: a.question).empty? %>
@@ -105,5 +103,3 @@
         </div>
     <% end %>
 </div>
-
-
