@@ -23,26 +23,28 @@
 
             <div class="prism-box__content">
                 Q: <%= a.question.content %>
+                
+                <br/>
+                A: <%= a.content %>
+                <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
+                 <br><br>
+            </div>
+
+            <div class="prism-box__footer">
+                <%= a.created_at.strftime("%m월 %d일") %>
                 <% if Star.where(user_id: current_user.id, target: a.question).empty? %>
                     <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.question.id, target_type: "Question"), method: :post %>
                 <% else %>
                     <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.question.id, target_type: "Question"), method: :delete %>
                 <% end %>
-                <br/>
-                A: <%= a.content %>
-                <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
                 <% if Star.where(user_id: current_user.id, target: a).empty? %>
                     <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
                 <% else %>
                     <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete %>
-                <% end %> <br><br>
+                <% end %>
             </div>
 
-            <div class="prism-box__footer">
-                <%= a.created_at.strftime("%m월 %d일") %>
-            </div>
-
-            <div class="prism-box__footer">
+            <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px dashed #d7dae0;">
                 <div>
                     <% if current_user.id == @user.id %>
                         <div>
@@ -78,14 +80,18 @@
                         </div>
                     <% else %>
                         <div>
-                            내가 쓴 댓글 <br/>
+                            내가 쓴 댓글 <br/><br>
                             <% a.comments.each do |c| %>
                                 <% if c.author.id == current_user.id %>
-                                    <%= render partial: "./user_profile", locals: {user: c.author} %>: 
-                                    <%= c.content %> <br/>
+                                    <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                                    <%= link_to c.author.username, user_answers_path(c.author.id), style: "vertical-align: +6px;" %>
+                                    <%#= render partial: "./user_profile", locals: {user: c.author} %> 
+                                    <span style="vertical-align: +6px;">: <%= c.content %></span> <br/>
                                 <% elsif c.author.id == a.author.id %>
-                                    ㄴ<%= render partial: "./user_profile", locals: {user: c.author} %>: 
-                                    <%= c.content %> <br/>
+                                    <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                                    <%= link_to c.author.username, user_answers_path(c.author.id), style: "vertical-align: +6px;" %>
+                                    ㄴ<%#= render partial: "./user_profile", locals: {user: c.author} %>
+                                    <span style="vertical-align: +6px;">: <%= c.content %></span> <br/>
                                 <% end %>
                             <% end %>
                         </div>

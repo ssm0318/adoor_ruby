@@ -30,6 +30,7 @@
     width: 90px;
     height: auto;
     display: block;
+    margin-left: 15px;
 }
 
 // .login-btn {
@@ -71,15 +72,18 @@
     margin-top: 5px;
 }
 
-
 .prism-container {
-    // margin: 40px 200px 0px 200px;
-    // margin: 0px 200px;
     width: 60%;
     margin: 0 auto;
+
+    .prism-title {
+        width: 100%;
+        text-align: center;
+    }// text-align: center;
 }
 
 a {
     text-decoration: none;
 }
+
 
