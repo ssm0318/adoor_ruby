@@ -21,10 +21,10 @@
     }
 
     .prism-box__content {
-        text-align: center;
+        // text-align: center;
         border-top: 1px dashed $prism-box-gray;
         border-bottom: 1px dashed $prism-box-gray;
-        padding: 10px 0px;
+        padding: 10px 40px;
         line-height: 140%;
 
         a {
