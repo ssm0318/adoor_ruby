@@ -1,4 +1,4 @@
-<h1>Question Feed</h1>
+<h1 style="color: mediumpurple;">Question Feed</h1>
 <h2>
   <%= @question.content %>
   <% if Star.where(user_id: current_user.id, target: @question).empty? %>
@@ -15,7 +15,7 @@
     </div>
     <div class="prism-box__content">
       <%= answer.question.content %> <br><br>
-      <%= answer.content %>
+      <%= answer.content %> <br><br>
     </div>
     <div class="prism-box__footer">
       <%= answer.updated_at.strftime("%m월 %d일") %>
