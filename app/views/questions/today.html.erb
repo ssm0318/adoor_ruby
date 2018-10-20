@@ -69,6 +69,8 @@
                         console.log("success assign!");
                         thisButton.text("Cancel");
                         thisButton.data("assign-id", data.assign_id);
+                        thisButton.css("background-color", "white");
+                        thisButton.css("color", "black");
                         $(".message").text(data.assigned_user+ "님을 assign하셨습니다.");
                     }
                     else {
@@ -88,6 +90,8 @@
                 success: function(data) {
                     console.log("success canceling!");
                     thisButton.text("Assign");
+                    thisButton.css("background-color", "#C08BEF");
+                    thisButton.css("color", "white");
                     $(".message").text(data.assigned_user+ "님을 assign 취소하셨습니다.");
                 }
             })
