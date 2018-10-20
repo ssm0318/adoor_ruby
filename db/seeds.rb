@@ -75,7 +75,10 @@ Answer.create(author_id: 5, question_id: 11, content: "세상에 저절로 되�
 ")
 
 # Highlight 모델을 어떻게?
-Highlight.create(user_id: 1, answer_id: 3, content: "너무 인상깊은 구절")
+Highlight.create(user_id: 2, answer_id: 3, content: "좋은 스피커를 사서")
+Highlight.create(user_id: 2, answer_id: 1, content: "시작하는건 되게 잘하는데 꾸준한게 없어서")
+Highlight.create(user_id: 3, answer_id: 6, content: "초를 꽂지 말자고")
+Highlight.create(user_id: 1, answer_id: 4, content: "높은 곳에서")
 
 Comment.create(author_id: 2, recipient_id: 2, answer_id: 1, content: "oh really?")
 Comment.create(author_id: 3, recipient_id: 3, answer_id: 3, content: "awesome!")
