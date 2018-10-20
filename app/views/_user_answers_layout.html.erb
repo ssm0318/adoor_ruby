@@ -1,8 +1,12 @@
-<div class="user-header">
-    <%= render partial: "./user_profile", locals: {user: user} %>님의 페이지 <br/>
+<div class="user-header prism-title">
+    <%= image_tag @user.image.url, :style => "height:50px; width:50px; border-radius:15px; margin-right: 5px;" %><br>
+    <%= link_to "#{@user.username}님의 페이지", user_answers_path(user.id), style: "vertical-align: +10px;" %><br>
+
     <% if current_user.id == user.id %>
         <%#= link_to "내 정보 수정하기", edit_user_profile_path(user.id) %> 
     <% end %>
+
+    <!-- 이 부분 나중에 친구 리스트로 옮기고 싶다 -->
     <% if current_user.id != user.id %>
         <% if !user.friends.include? current_user %>
             <%# view에서 record에 접근하는 게 정상인가.. 이거 어떻게 .recieved_requests이런거 이용해서 안될까! %>
@@ -17,6 +21,7 @@
             <%= link_to "친구 끊기", add_friend_path(user.id), method: :post %>
         <% end %>
     <% end %>
+    
     <hr>
     <div class="user-header__tab">
         <%= link_to "답변", user_answers_path(user.id) %>
