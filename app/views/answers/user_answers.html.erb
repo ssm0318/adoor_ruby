@@ -4,6 +4,7 @@
     <% if current_user.id == @user.id or @user.friends.include? current_user %>
         <% @answers.each do |a| %>
             <div class="prism-box">
+
                 <div class="prism-box__header">
                     <%= render partial: "./user_profile", locals: {user: a.author} %><br/>
                     <% if current_user.id == @user.id %>

@@ -1,35 +1,41 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
+<div class="sign-box">
+<h1 class="sign-title">비밀번호 변경</h1>
+<div class="profile-content-box" align="center">
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :email, required: true, autofocus: true, :label => false %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
     <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
                 required: false,
-                input_html: { autocomplete: "new-password" } %>
+                input_html: { autocomplete: "new-password" },
+                placeholder: "password",
+                :label => false %>
     <%= f.input :password_confirmation,
                 required: false,
-                input_html: { autocomplete: "new-password" } %>
+                input_html: { autocomplete: "new-password" },
+                placeholder: "password confirmation",
+                :label => false %>
     <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
                 required: true,
-                input_html: { autocomplete: "current-password" } %>
+                input_html: { autocomplete: "current-password" },
+                placeholder: "current password",
+                :label => false %>
   </div>
-
+<br/>
   <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+    <%= f.button :submit, "변경하기", class: "profile-button"%>
   </div>
 <% end %>
+<br/>
+<%= link_to "계정삭제", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
 
-<h3>Cancel my account</h3>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<%= link_to "돌아가기", :back %>
+</div>
+</div>
