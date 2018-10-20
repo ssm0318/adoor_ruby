@@ -10,7 +10,8 @@
 <% @question.answers.each do |answer| %>
   <div class="prism-box">
     <div class="prism-box__header">
-      <%= answer.author.username %>
+      <%= render partial: "./user_profile", locals: {user: answer.author} %>
+      <%#= answer.author.username %>
       <i class="material-icons">more_vert</i>
     </div>
     <div class="prism-box__content">
