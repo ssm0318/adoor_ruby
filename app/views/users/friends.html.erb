@@ -1,14 +1,19 @@
-<% @friends.each do |friend| %>
-    <div style="border: 1px black solid; cursor: pointer" onclick="window.location='/userpage/<%=friend.id%>';">
-        <%= friend.username %>
-        <%= image_tag friend.image.url, :style => "height:30px; width:30px; border-radius:15px;" %>
-        <border>
-        <% friend.answers.each_with_index do |answer, i| %>
-            <% if i < 3 %>
-                <div>
-                    <%= answer.question.content %>
-                </div>
+<div class="friend-list">
+    <% @friends.each do |friend| %>
+    <div class="friend-box">
+        <div class="friend-box-userpage" onclick="window.location='/userpage/<%=friend.id%>';">
+            <p><%= friend.username %></p>
+            <%= image_tag friend.image.url, :style => "height:70px; width:70px; border-radius:35px;", class:"friend-box-image" %>
+        </div>
+        <div class="friend-box-question">
+            <% friend.answers.each_with_index do |answer, i| %>
+                <% if i < 3 %>
+                    <div class="friend-box-question-el">
+                        <%= link_to answer.question.content, answer_path(answer.id) %>
+                    </div>
+                <% end %>
             <% end %>
-        <% end %>
+        </div>
     </div>
 <% end %>
+</div>
