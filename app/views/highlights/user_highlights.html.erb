@@ -1,6 +1,6 @@
-<%= render partial: "./user_answers_layout", locals: {user: @user} %>
 
-<div>
+<div class="inner-container">
+    <%= render partial: "./user_answers_layout", locals: {user: @user} %>
     <div>
         <% @highlights.each do |h|%>
             <div style='border: 1px solid black; margin: 5px;'>

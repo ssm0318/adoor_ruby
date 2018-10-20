@@ -1,6 +1,7 @@
-<%= render partial: "./user_answers_layout", locals: {user: @user} %>
 
-<div>
+
+<div class="inner-container">
+    <%= render partial: "./user_answers_layout", locals: {user: @user} %>
     <% @stars.each do |s| %>
         <div class="prism-box">
             <% if s.target_type == "Question" %>
