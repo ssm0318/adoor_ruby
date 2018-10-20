@@ -46,7 +46,7 @@
                 <div>
                     <% if current_user.id == @user.id %>
                         <div>
-                            댓글 <br/>
+                            댓글 <br/><br>
                             <% recipients = [] %>
                             <% a.comments.each do |c| %>
                                 <% recipients.push(c.recipient_id) %>
@@ -64,7 +64,7 @@
                                                         <%= link_to c.author.username, user_answers_path(c.author.id), style: "vertical-align: +6px;" %>
                                                         <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
                                                     <% else %>
-                                                        <%#= render partial: "./user_profile", locals: {user: c.author} %>: 
+                                                        <%#= render partial: "./user_profile", locals: {user: c.author} %>
                                                         <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
                                                         <%= link_to c.author.username, user_answers_path(c.author.id), style: "vertical-align: +6px;" %>
                                                         <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
