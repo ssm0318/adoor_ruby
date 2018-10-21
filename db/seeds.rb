@@ -79,6 +79,8 @@ Highlight.create(user_id: 2, answer_id: 3, content: "좋은 스피커를 사서"
 Highlight.create(user_id: 2, answer_id: 1, content: "시작하는건 되게 잘하는데 꾸준한게 없어서")
 Highlight.create(user_id: 3, answer_id: 6, content: "초를 꽂지 말자고")
 Highlight.create(user_id: 1, answer_id: 4, content: "높은 곳에서")
+Highlight.create(user_id: 3, answer_id: 14, content: "저절로, 습관대로 행동하고 생각하고 말하게 되는 순간이 무섭다.")
+Highlight.create(user_id: 3, answer_id: 12, content: "충분히 쉬고 시작할 수 있어서 좋다.")
 
 Comment.create(author_id: 2, recipient_id: 2, answer_id: 1, content: "oh really?")
 Comment.create(author_id: 3, recipient_id: 3, answer_id: 3, content: "awesome!")
