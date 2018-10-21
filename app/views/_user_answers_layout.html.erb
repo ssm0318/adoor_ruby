@@ -1,6 +1,6 @@
 <div class="user-header prism-title">
     <%= image_tag @user.image.url, :style => "height:50px; width:50px; border-radius:15px; margin-right: 5px;" %><br>
-    <%= link_to "#{@user.username}님의 페이지", user_answers_path(user.id), style: "vertical-align: +10px;" %><br>
+    <%= link_to "#{@user.username}", user_answers_path(user.id), style: "vertical-align: +10px; color: black;" %><br>
 
     <% if current_user.id == user.id %>
         <%#= link_to "내 정보 수정하기", edit_user_profile_path(user.id) %> 
