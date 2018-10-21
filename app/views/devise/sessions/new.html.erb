@@ -17,7 +17,8 @@
                       class: "form-input",
                       placeholder: "password",
                       :label => false %>
-          <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable?%>
+          <!--remember me. 디자인 적용을 못해서 뺌-->
+          <!--<%= f.input :remember_me, as: :boolean if devise_mapping.rememberable?%>-->
       </div>
 
       <br/>
@@ -26,7 +27,12 @@
         <%= f.button :submit, "Log in", class: "sign-button" %>
       </div>
     <% end %>
+      <a href="/users/sign_up">
+        <button class = "sign-up-button">Sign up</button>
+      </a>
   </div>
 </div>
 
-<%= render "devise/shared/links" %>
+
+<!--devise 내장 sign up/ forgot password link-->
+<!--<%= render "devise/shared/links" %>-->
