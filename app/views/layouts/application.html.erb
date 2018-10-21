@@ -23,7 +23,7 @@
 
   <body>
     <!-- TODO: header and noti -->
-    <% if current_page?(controller: 'questions', action: 'intro') %> <!-- 인트로 페이지일 때만 헤더, 컨테이너가 안 보이게 함 -->
+    <% if current_page?(controller: 'questions', action: 'intro') || current_page?(controller: 'sessions', action: 'new') %> <!-- 인트로 페이지일 때만 헤더, 컨테이너가 안 보이게 함 -->
       <%= yield %>
     <% else %>
       <div class="prism-header">
