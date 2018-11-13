@@ -9,7 +9,7 @@
     <% end %>
   </h2>
 </div>
-<% @question.answers.each do |answer| %>
+<% @question.answers.reverse_each do |answer| %>
   <div class="prism-box">
     <div class="prism-box__header">
       <%= render partial: "./user_profile", locals: {user: answer.author} %>

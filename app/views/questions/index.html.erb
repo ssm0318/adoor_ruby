@@ -1,6 +1,6 @@
 <h1 class = "today-question-title">질문 둘러보기</h1>
     <br>
-    <% @questions.each do |question| %>
+    <% @questions.reverse_each do |question| %>
         <div class="question-el" align="right">
             <div class="question-content">
             <%= link_to question.content, "questions/#{question.id}" %>
