@@ -1,8 +1,6 @@
-
-
 <div class="inner-container">
     <%= render partial: "./user_answers_layout", locals: {user: @user} %>
-    <% @stars.each do |s| %>
+    <% @stars.reverse_each do |s| %>
         <div class="prism-box">
             <% if s.target_type == "Question" %>
                 <% if s.target.author.has_role? :newuser %>

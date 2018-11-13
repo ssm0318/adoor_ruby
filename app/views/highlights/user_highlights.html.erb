@@ -2,7 +2,7 @@
 <div class="inner-container">
     <%= render partial: "./user_answers_layout", locals: {user: @user} %>
     <div>
-        <% @highlights.each do |h|%>
+        <% @highlights.reverse_each do |h|%>
             <div style='border: 1px solid black; margin: 5px;'>
                 <%= render partial: "./user_profile", locals: {user: h.answer.author} %><br/>
                 

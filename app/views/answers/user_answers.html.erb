@@ -2,7 +2,7 @@
 
 <div class="inner-container">
 <%= render partial: "./user_answers_layout", locals: {user: @user} %>
-    <% @answers.each do |a| %>
+    <% @answers.reverse_each do |a| %>
         <div class="prism-box">
 
             <div class="prism-box__header">

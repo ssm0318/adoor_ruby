@@ -3,7 +3,7 @@
 <% end %>
 <div class="noti-content" style="display: none;">
     <% if user_signed_in? %>
-        <% noties.each do |noti| %>
+        <% noties.reverse_each do |noti| %>
             <% user = User.find(noti.actor_id)%>
             <% username = user.username %>
             <% if noti.target_type == 'Friendship' %>
