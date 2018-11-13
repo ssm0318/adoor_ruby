@@ -16,19 +16,19 @@
             <% end %>
             <% if noti.target_type == 'Assignment' %>
                 <!-- to new answer page -->
-                <div class="noti-el" onclick="window.location='/answers/new/question/<%=noti.target_id%>'"><%=username%>님이 회원님에게 새로운 질문을 assign했습니다.</div>
+                <div class="noti-el" onclick="window.location='/answers/new/question/<%=Assignment.find(noti.target_id).question.id%>'"><%=username%>님이 회원님에게 새로운 질문을 assign했습니다.</div>
             <% end %>
             <% if noti.target_type == 'Highlight' %>
                 <!-- answer detail page -->
-                <div class="noti-el" onclick="window.location='/answers/<%=noti.target_id%>'"><%=username%>님이 회원님의 글을 highlight했습니다.</div>
+                <div class="noti-el" onclick="window.location='/answers/<%=Highlight.find(noti.target_id).answer.id%>'"><%=username%>님이 회원님의 글을 highlight했습니다.</div>
             <% end %>
             <% if noti.target_type == 'Star' %>
                 <!-- answer detail page -->
-                <div class="noti-el" onclick="window.location='/answers/<%=noti.target_id%>'"><%=username%>님이 회원님의 글을 star했습니다.</div>
+                <div class="noti-el" onclick="window.location='/answers/<%=Star.find(noti.target_id).answer.id%>'"><%=username%>님이 회원님의 글을 star했습니다.</div>
             <% end %>
             <% if noti.target_type == 'Comment' %>
                 <!-- answer detail page -->
-                <div class="noti-el" onclick="window.location='/answers/<%=noti.target_id%>'"><%=username%>님이 회원님의 답변에 댓글을 달았습니다.</div>
+                <div class="noti-el" onclick="window.location='/answers/<%=Comment.find(noti.target_id).answer.id%>'"><%=username%>님이 회원님의 답변에 댓글을 달았습니다.</div>
             <% end %>
         <% end %>
     <% end %>
