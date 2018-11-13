@@ -1,7 +1,10 @@
 <div id="assignment" class="assignment-content" style="display: none;">
     <% if user_signed_in? %>
-        <% current_user.friends.each do |friend| %>
-                <div class="assignment-content-el">
+        <div class="assignment-content-el">
+            <% if !current_user.friends.exists? %>
+                친구를 만들어보세요.
+            <% else%>
+                <% current_user.friends.each do |friend| %>
                     <%= image_tag friend.image.url, :style => "height:40px; width:40px; border-radius:20px;", class: "assignee-image"%>
                     <span class="assignment-content-el-name"><%=friend.username %></span>
                     <% assign = Assignment.find_by(question_id: question.id, assigner_id: current_user.id, assignee_id: friend.id) %>
@@ -17,8 +20,9 @@
                             data-friend-id="<%=friend.id%>" 
                             data-question-id="<%=question.id%>">Cancel</a>
                     <% end %>
-                </div>
-        <% end %>
+                <% end %>
+            <% end %>
+        </div>
     <% end %>
 </div>
 
