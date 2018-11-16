@@ -1,27 +1,24 @@
-<h1>My Page</h1>
+<div class="sign-box">
+<h1 class="sign-title">내 정보</h1>
 
-<div>
-    <p>Profile pic: 
-        <% if current_user.image.blank? %> (프사 없음)
-        <% else %>
-            <!-- TODO: crop image to fit size -->
-            <%= image_tag current_user.image.url, :style => "height:100px; width:auto;"  %>
-        <% end %>
-    </p>
-    <p>email: <%= current_user.email %></p>
-    <p>username:
+<div class="sign-content-box" align="center">
+    <%= image_tag current_user.image.url, :style => "height:50px; width:50px; border-radius:15px;" %>
+    <p><strong>이메일</strong> <%= current_user.email %></p>
+    <p><strong>사용자명</strong>
         <% if current_user.username.nil? %>-
         <% else %>
             <%= current_user.username %>
         <% end %>
     </p>
-    <p>date of birth: 
+    <p><strong>생년월일</strong>
         <% if current_user.date_of_birth.nil? %>-
         <% else %>
             <%= current_user.date_of_birth %>
         <% end %>
     </p>
 </div>
-
-<%= link_to "Edit My Profile", edit_user_profile_url(current_user.id) %>
-<%= link_to "Edit My Password", edit_user_registration_url(current_user.id) %>
+<br/>
+<div class="mypage-buttons" align="center">
+    <%= link_to "내 정보 수정", edit_user_profile_url(current_user.id), class: "profile-button" %>
+    <%= link_to "비밀번호 변경", edit_user_registration_path(current_user.id), class: "profile-button" %>
+</div>

@@ -1,20 +1,38 @@
-<h2>Log in</h2>
+<div class="sign-box">
+  <h1 class="sign-title">Log in</h1>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  <div class="sign-content-box" align="center">
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-inputs">
+          <%= f.input :email,
+                      required: false,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" },
+                      class: "form-input",
+                      placeholder: "email",
+                      :label => false %>
+          <%= f.input :password,
+                      required: false,
+                      input_html: { autocomplete: "current-password" },
+                      class: "form-input",
+                      placeholder: "password",
+                      :label => false %>
+          <!--remember me. 디자인 적용을 못해서 뺌-->
+          <!--<%= f.input :remember_me, as: :boolean if devise_mapping.rememberable?%>-->
+      </div>
+
+      <br/>
+      <br/>
+      <div class="form-actions">
+        <%= f.button :submit, "Log in", class: "sign-button" %>
+      </div>
+    <% end %>
+      <a href="/users/sign_up">
+        <button class = "sign-up-button">Sign up</button>
+      </a>
   </div>
+</div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+<!--devise 내장 sign up/ forgot password link-->
+<!--<%= render "devise/shared/links" %>-->

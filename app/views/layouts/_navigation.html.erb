@@ -1,15 +1,18 @@
 <%=image_tag "icons/menu-icon.png", class: "btn-sidenav"%>
 <div class="sidenav" align="center">
-      <i class="material-icons btn-exit">highlight_off</i>
+      <button class="btn-exit">X</button>
       <% if user_signed_in? %>
-      <p class="nav-el nav-profile"><%= link_to "#{current_user.username}", '/mypage' %></p>
-      <%= link_to 'Log out', 
-            destroy_user_session_path, 
-            method: :delete, 
-            class: "nav-el nav-log" %>
+            <p class="nav-el nav-profile">
+            <%= link_to image_tag(current_user.image.url, :style => "height:60px; width:60px; border-radius:30px;"), show_mypage_path %>
+            <%= link_to current_user.username, show_mypage_path %>
+            </p>
+            <%= link_to 'Log out', 
+                  destroy_user_session_path, 
+                  method: :delete, 
+                  class: "nav-el nav-log" %>
       <% end %>
       <% if !user_signed_in? %>
-      <%= link_to 'Log In', user_session_path, class: "nav-el nav-log" %>
+            <%= link_to 'Log In', user_session_path, class: "nav-el nav-log" %>
       <% end %>
       <br>
       <br>
@@ -22,7 +25,7 @@
       <% end %>
       <%= link_to '친구목록', '/users/friends', class: "nav-el" %>
       <%= link_to '익명피드', '/feeds', class: "nav-el" %>
-      <%= link_to '질문별피드', '/questions', class: "nav-el" %>
+      <%= link_to '질문 둘러보기', '/questions', class: "nav-el" %>
 
 </div>
 

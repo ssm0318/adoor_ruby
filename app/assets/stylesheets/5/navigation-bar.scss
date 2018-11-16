@@ -16,7 +16,7 @@
     left: 0px;
 }
 
-.sidenav .nav-el {
+.sidenav .nav-el, .nav-el a {
     padding: 12px 12px;
     text-decoration: none;
     font-size: 20px;
@@ -25,8 +25,9 @@
     transition: 0.3s;
 }
 
+
 .sidenav .nav-el:hover {
-    color: black;
+    color: #875EBC;
 }
 
 .nav-el.nav-profile{
@@ -51,4 +52,11 @@
 
 .btn-exit {
     margin-left: 180px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: #bcbcbc;
+    font-size: 20px;
+    cursor: pointer;
+
 }

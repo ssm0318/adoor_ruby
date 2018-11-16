@@ -4,8 +4,30 @@
     font-size: 20px;
 }
 
-.question-content {
+.question {
     font-family: 'Nanum Myeongjo', serif;
+    font-size: 35px;
     text-decoration: none;
+    text-align: center;
     color: black;
+}
+
+.new-answer-field{
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+    height: 200px;
+    padding : 50px 0px 50px 0px;
+}
+
+.answer-button {
+    background-color: #C08BEF;
+    border-radius: 30px;
+    width: 200px;
+    padding: 15px 20px 15px 20px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
 }

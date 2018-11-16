@@ -1,1 +1,25 @@
 // 폼 기본 형식 통일
+@import './variable.scss';
+
+.prism-form {
+    .prism-form__input {
+        width: 80%;
+        height: 25px;
+        border: 1.1px solid $prism-box-gray;
+        border-radius: 10px;
+        // border: 0px 5px;
+
+        &:focus {
+            outline: none;
+            fill: none;
+        }   
+    }
+
+    .prism-form__button {
+        border: 1.1px solid $prism-box-gray;
+        border-radius: 10px;
+        background-color: lavender;
+        font-size: 12px;
+    
+    }
+}
