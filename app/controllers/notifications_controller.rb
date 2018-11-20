@@ -1,11 +1,9 @@
-class AssignmentsController < ApplicationController
+class NotificationsController < ApplicationController
     before_action :authenticate_user!
     
-    def create
+    def read
         # puts '================='
         # puts "this is controller!"
-
-        #TODO : if not friends, return
         
         question_id = params[:question_id]
         user_id = params[:user_id]
@@ -40,19 +38,5 @@ class AssignmentsController < ApplicationController
             assigned_user: assigned_user.email
         }
 
-    end
-
-    def delete
-        assignment_id = params[:id]
-        assignment = Assignment.find(assignment_id)
-        assignment.destroy
-        noti = Notification.find_by(target: assignment)
-        noti.destroy
-
-        # flash[:success] = "#{User.find(assignment.assignee_id).email}님을 de-assign하셨습니다."
-
-        render json: {
-            assigned_user: assignment.assignee.email
-        }
     end
 end
