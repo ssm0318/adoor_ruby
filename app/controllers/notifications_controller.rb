@@ -2,41 +2,25 @@ class NotificationsController < ApplicationController
     before_action :authenticate_user!
     
     def read
-        # puts '================='
-        # puts "this is controller!"
+
+        noti = Notification.find(params[:id])
+
+        if noti.recipient_id != current_user.id
+            redirect_to root_path()
+        end
+
+        if noti.read_at == nil
+            noti.read_at = DateTime.now()
+            noti.save()
+        end
         
-        question_id = params[:question_id]
-        user_id = params[:user_id]
-        assigned_user = User.find(user_id)
-
-        i=0
-        assigned_user.answers.each do |answer|
-            puts answer.question.id
-            if answer.question.id.to_i == question_id.to_i
-                break
-            end
-            i += 1
-        end
-
-        # puts "i: #{i}"
-        # puts"useranswers: #{assigned_user.answers.count}"
-
-        if i == assigned_user.answers.count
-            Assignment.create(question_id: question_id, assigner_id: current_user.id, assignee_id: user_id)
-            new_assign_id = Assignment.find_by(question_id: question_id, assigner_id: current_user.id, assignee_id: user_id).id
-            # flash[:success] = "#{assigned_user.email}님을 assign하셨습니다."
-            # render json: {status: 'success', message: "#{assigned_user.email}님을 assign하셨습니다."}
+        if noti.target_type == 'Friendship'
+            redirect_to "/userpage/#{noti.actor_id}"
+        elsif noti.target_type == 'Assignment'
+            redirect_to "/answers/new/question/#{noti.target_id}"
         else
-            new_assign_id = "-1";
-            # render json: {status: 'failure', message: "#{assigned_user.email}님은 이미 질문에 답하셨습니다."}
-            # flash[:error] = "#{assigned_user.email}님은 이미 질문에 답하셨습니다."
+            redirect_to "/answers/#{noti.target_id}"
         end
-
-        # redirect_to root_url
-        render json: {
-            assign_id: new_assign_id,
-            assigned_user: assigned_user.email
-        }
 
     end
 end
