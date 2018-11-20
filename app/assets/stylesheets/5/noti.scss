@@ -26,6 +26,11 @@
     color: #777777;
 }
 
-.noti-el:hover {
-    background-color: #e8e8e8;
+// .noti-el:hover {
+//     background-color: #e8e8e8;
+// }
+
+.noti-el.unread {
+    background-color: #d9c9ed;
+    color: white;
 }
