@@ -32,6 +32,7 @@ FriendRequest.create(requester_id: 2, requestee_id: 4)
 Friendship.create(user_id: 1, friend_id: 4)
 Friendship.create(user_id: 4, friend_id: 3)
 Friendship.create(user_id: 3, friend_id: 2)
+Friendship.create(user_id: 3, friend_id: 1)
 
 Assignment.create(question_id: 2, assigner_id: 1, assignee_id: 4)
 Assignment.create(question_id: 2, assigner_id: 2, assignee_id: 4)
@@ -74,13 +75,20 @@ Answer.create(author_id: 5, question_id: 11, content: "세상에 저절로 되�
 ")
 
 # Highlight 모델을 어떻게?
-Highlight.create(user_id: 1, answer_id: 3, content: "너무 인상깊은 구절")
+Highlight.create(user_id: 2, answer_id: 3, content: "좋은 스피커를 사서")
+Highlight.create(user_id: 2, answer_id: 1, content: "시작하는건 되게 잘하는데 꾸준한게 없어서")
+Highlight.create(user_id: 3, answer_id: 6, content: "초를 꽂지 말자고")
+Highlight.create(user_id: 1, answer_id: 4, content: "높은 곳에서")
+Highlight.create(user_id: 3, answer_id: 14, content: "저절로, 습관대로 행동하고 생각하고 말하게 되는 순간이 무섭다.")
+Highlight.create(user_id: 3, answer_id: 12, content: "충분히 쉬고 시작할 수 있어서 좋다.")
+Highlight.create(user_id: 3, answer_id: 15, content: "세상에 저절로 되는 일은 없다.")
 
 Comment.create(author_id: 2, recipient_id: 2, answer_id: 1, content: "oh really?")
 Comment.create(author_id: 3, recipient_id: 3, answer_id: 3, content: "awesome!")
-Comment.create(author_id: 3, recipient_id: 4, answer_id: 4, content: "same.")
+Comment.create(author_id: 3, recipient_id: 3, answer_id: 4, content: "same.")
 Comment.create(author_id: 4, recipient_id: 4, answer_id: 5, content: "be a butterfly")
-Comment.create(author_id: 1, recipient_id: 1, answer_id: 1, content: "this is a comment.")
+Comment.create(author_id: 1, recipient_id: 1, answer_id: 1, content: "그랬구나~")
+Comment.create(author_id: 2, recipient_id: 2, answer_id: 5, content: "그런 일이 있었다니 몰랐네.")
 
 Tmi.create(author_id: 1, content: "I want bingsu.")
 Tmi.create(author_id: 1, content: "writing TMIs")

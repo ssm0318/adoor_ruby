@@ -24,7 +24,7 @@
     <!-- TODO: header and noti -->
     <div class="prism-header">
       <%= render 'layouts/navigation'%>
-      <%=image_tag "logo/prism-logo.png", class:"logo"%>
+      <%= link_to image_tag("logo/prism-logo.png", class:"logo"), root_path %>
       <%= render 'layouts/notification', noties: noties %>
       <div class="login-btn">
         <% if user_signed_in? %>

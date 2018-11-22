@@ -1,27 +1,29 @@
-<h1 style="color: mediumpurple;">General Feed</h1>
-<% @questions.each do |question| %>
-  <% question.answers.each do |answer| %>
-    <div class="prism-box">
-      <div class="prism-box__header">
-        <%= answer.author.username %>
-        <i class="material-icons">more_vert</i>
-      </div>
-      <div class="prism-box__content">
-        <a href="/questions/<%=question.id%>"><%= question.content %></a> <br><br>
-        <div class = "answer">
-          <%= answer.content %> <br><br>
+<div class="inner-container">
+  <div class="prism-title"><h1 style="color: mediumpurple;">General Feed</h1></div>
+  <% @questions.reverse_each do |question| %>
+    <% question.answers.reverse_each do |answer| %>
+      <div class="prism-box">
+        <div class="prism-box__header">
+          <%= render partial: "./user_profile", locals: {user: answer.author} %>
+          <%#= answer.author.username %>
+          <i class="material-icons">more_vert</i>
         </div>
+        <div class="prism-box__content"><br>
+          <a href="/questions/<%=question.id%>" class="question" style="font-size: 18px; font-weight: normal;"><%= question.content %></a> <br><br>
+          <div class="answer">
+            <%= answer.content %> <br><br>
+          </div>
+        </div>
+        <div class="prism-box__footer">
+          <%= answer.updated_at.strftime("%m월 %d일") %> <!-- 연도는 %Y -->
+          <% if Star.where(user_id: current_user.id, target: answer).empty? %>
+            <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: answer.id, target_type: "Answer"), method: :post %>
+          <% else %>
+            <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(answer.id, target_type: "Answer"), method: :delete %>
+          <% end %>
+        </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
       </div>
-      <div class="prism-box__footer">
-        <%= answer.updated_at.strftime("%m월 %d일") %> <!-- 연도는 %Y -->
-        <% if Star.where(user_id: current_user.id, target: answer).empty? %>
-          <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: answer.id, target_type: "Answer"), method: :post %>
-        <% else %>
-          <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(answer.id, target_type: "Answer"), method: :delete %>
-        <% end %>
-      </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
-    </div>
+    <% end %>
   <% end %>
-<% end %>
-
+</div>
 <!--더보기는 지금 구현하는 건 아닌 듯-->

@@ -1,20 +1,22 @@
-<h1 style="color: mediumpurple;">Question Feed</h1>
-<h2>
-  <%= @question.content %>
-  <% if Star.where(user_id: current_user.id, target: @question).empty? %>
-    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: @question.id, target_type: "Question"), method: :post %>
-  <% else %>
-    <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(@question.id, target_type: "Question"), method: :delete %>
-  <% end %>
-</h2>
-<% @question.answers.each do |answer| %>
+<div class="prism-title">
+  <h1 style="color: mediumpurple;">Question Feed</h1>
+  <h2>
+    <%= @question.content %>
+    <% if Star.where(user_id: current_user.id, target: @question).empty? %>
+      <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: @question.id, target_type: "Question"), method: :post %>
+    <% else %>
+      <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(@question.id, target_type: "Question"), method: :delete %>
+    <% end %>
+  </h2>
+</div>
+<% @question.answers.reverse_each do |answer| %>
   <div class="prism-box">
     <div class="prism-box__header">
-      <%= answer.author.username %>
+      <%= render partial: "./user_profile", locals: {user: answer.author} %>
       <i class="material-icons">more_vert</i>
     </div>
-    <div class="prism-box__content">
-      <%= answer.question.content %> <br><br>
+    <div class="prism-box__content answer">
+      <%#= answer.question.content %> <br>
       <%= answer.content %> <br><br>
     </div>
     <div class="prism-box__footer">

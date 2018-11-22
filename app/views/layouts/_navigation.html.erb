@@ -3,8 +3,7 @@
       <button class="btn-exit">X</button>
       <% if user_signed_in? %>
             <p class="nav-el nav-profile">
-            <%= image_tag current_user.image.url, :style => "height:60px; width:60px; border-radius:30px;" %>
-            <br/>
+            <%= link_to image_tag(current_user.image.url, :style => "height:60px; width:60px; border-radius:30px;"), show_mypage_path %>
             <%= link_to current_user.username, show_mypage_path %>
             </p>
             <%= link_to 'Log out', 
