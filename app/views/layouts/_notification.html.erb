@@ -6,6 +6,7 @@
         <% noties.reverse_each do |noti| %>
             <% user = User.find(noti.actor_id)%>
             <% username = user.username %>
+
             <% if noti.read_at != nil %>
                 <div class="noti-el" onclick="window.location='/notifications/<%=noti.id%>'">
             <% else %>
