@@ -19,22 +19,27 @@
                 <div class = "prism-box__content">
                     <br> 
                     <a href="/questions/<%=s.target.question.id%>" class="question"><%= s.target.question.content %></a> <br><br>
-                    <br>
+                    <br/>
                     <div class = "answer">
                         <%= s.target.content %>
                         <%= link_to "전체 글 보기", answer_path(s.target.id) %><br/>
                     </div>
                     <br>
+                    <div class = "date"><%= s.target.created_at.strftime("%m월 %d일") %></div>
                 </div>
                 <div class = "prism-box__footer" style="padding-bottom: 10px;">
-                    <%= s.target.created_at.strftime("%m월 %d일") %>
-                    <% if Star.where(user_id: current_user.id, target: s.target.id).empty? %>
-                        <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: s.target.id, tsarget_type: "Answer"), method: :post %>
-                    <% else %>
-                        <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(s.target.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'}%>
-                    <% end %>
+                    <% if current_user.id == @user.id %>
+                        <%= link_to "수정", edit_answer_path(s.target.id) %>
+                        <%= link_to "삭제", answer_path(s.target.id),
+                                            method: :delete,
+                                            data: { confirm: '답변을 지우시겠습니까?'} %>
+                <% end %>                 
+                <% if Star.where(user_id: current_user.id, target: s.target).empty? %>
+                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: s.target.id, target_type: "Answer"), method: :post %>
+                <% else %>
+                    <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(s.target.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
+                <% end %>
                 </div>
-
             </div>
         <% end %>
     <% end %>
