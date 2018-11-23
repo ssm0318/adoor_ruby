@@ -26,7 +26,7 @@ class NotificationsController < ApplicationController
             elsif noti.target_type == 'Stars'
                 redirect_to "/answers/#{Star.find(noti.target_id).answer_id}"
             elsif noti.target_type == 'FriendRequest'
-                redirect_to root_path()
+                redirect_to "/userpage/#{noti.actor_id}"
             end
         end
     end
