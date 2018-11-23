@@ -4,6 +4,7 @@ class Assignment < ApplicationRecord
     belongs_to :assignee, :class_name => "User"
 
     after_create :create_notifications
+    after_destroy :destroy_notifications
 
     private
 
@@ -11,4 +12,10 @@ class Assignment < ApplicationRecord
     def create_notifications
         Notification.create(recipient: self.assignee, actor: self.assigner, target: self)
     end
+
+    # assignment가 취소되면 해당되는 노티도 지워짐
+    def destroy_notifications
+        Notification.where(recipient: self.assignee, actor: self.assigner, target: self).destroy_all
+    end
 end
+  
