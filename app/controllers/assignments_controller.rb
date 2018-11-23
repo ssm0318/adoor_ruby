@@ -1,7 +1,11 @@
 class AssignmentsController < ApplicationController
+    before_action :authenticate_user!
+    
     def create
         # puts '================='
         # puts "this is controller!"
+
+        #TODO : if not friends, return
         
         question_id = params[:question_id]
         user_id = params[:user_id]
