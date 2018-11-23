@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   post '/assignments/:assignee_id/:question_id' => 'assignments#create'
   delete '/assignments/:assignee_id/:question_id' => 'assignments#delete'
+
+  get '/notifications/:id' => 'notifications#read'
   
   get '/feeds' => 'questions#general_feed'
   get '/questions/:id' => 'questions#question_feed'
