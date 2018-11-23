@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo|Noto+Sans+KR" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Nanum+Myeongjo|Noto+Sans+KR" rel="stylesheet">
+    <link href=“https://fonts.googleapis.com/css?family=Merriweather” rel=“stylesheet”>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -21,6 +22,7 @@
 
   <body>
     <!-- TODO: header and noti -->
+<<<<<<< HEAD
     <div class="prism-header">
       <%= render 'layouts/navigation'%>
       <%= link_to image_tag("logo/prism-logo.png", class:"logo"), root_path %>
@@ -37,7 +39,29 @@
       </div>
     </div>
     <div class="prism-container">
+=======
+    <% if current_page?(controller: 'questions', action: 'intro') || current_page?(controller: 'sessions', action: 'new') %> <!-- 인트로 페이지일 때만 헤더, 컨테이너가 안 보이게 함 -->
+>>>>>>> 3efdd53cb3e45fca8a6e0123495453a589a42f37
       <%= yield %>
-    </div>
+    <% else %>
+      <div class="prism-header">
+        <%= render 'layouts/navigation'%>
+        <%=image_tag "logo/prism-logo.png", class:"logo"%>
+        <%= render 'layouts/notification', noties: noties %>
+        <div class="login-btn">
+          <% if user_signed_in? %>
+          <%= link_to 'Log out', 
+                destroy_user_session_path, 
+                method: :delete, 
+                class: "topnav-log" %>
+          <% else %>
+          <%= link_to 'Log In', user_session_path, class: "topnav-log" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="prism-container">
+        <%= yield %>
+      </div>
+    <% end %>
   </body>
 </html>

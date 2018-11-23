@@ -98,10 +98,104 @@ a {
     font-family: "Nanum Gothic", serif;
 }
 
+<<<<<<< HEAD
 .username{
     color: black;
     vertical-align: +6px;
 }
+=======
+body {margin: 0px;}
+div.background {
+    // width: 100%;
+    background-image: url('intro.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100vw;
+    height: 100vh;
+
+    div.intro-container {
+        background-color: #3B2763;
+        opacity: 0.8;
+        width: 50vw;
+        height: 100vh;
+        float: right;
+        display: flex;
+        justify-content: center;
+
+        div.intro-box {
+            height: 100vh;
+            margin: 0 5vw;
+
+            div {
+                text-align: center;
+            }
+
+            div.prism {
+                color: white;
+                font-family: 'Merriweather', serif;
+                font-size: 100px;
+                font-weight: bold;
+                margin-top: 20vh;
+
+            }
+
+            div.beer {
+                font-size: 28px;
+                color: rgb(180, 180, 180);
+                margin-top: 5vh;
+                // font-family: "Nanum Gothic";
+            }
+
+            div.start-1 {
+                margin-top: 8vh;
+                margin-left: 25px;
+                background-color: white;
+                border-radius: 30px;
+                height: 60px;
+                width: 260px;
+                text-align: center;
+                // vertical-align: -100px;
+                a {
+                    // position: absolute;
+                    // top: 50%; left: 50px;
+                    position: relative;
+                    top: 25%;
+                    color: slateblue;
+                    font-size: 28px;
+                    font-family: "Nanum Gothic";
+                }
+            }
+
+            div.start-2 {
+                margin-top: 25px;
+                a {
+                    // display: inline-block;
+                    height: 40px;
+                    width: 116px;
+                    border-radius: 20px;
+                    font-family: "Nanum Gothic";
+                    position: relative;
+                    top: 50%;
+                    padding: 10px 30px;
+                    // position: absolute;
+                    // top: 50%; left: 50%;
+
+                    &:nth-child(1) {
+                        border: 1px solid white;
+                        margin-right: 7.5px;
+                        color: white;
+                    }
+                    &:nth-child(2) {
+                        background-color: rgb(180, 180, 180);
+                        margin-left: 7.5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+>>>>>>> 3efdd53cb3e45fca8a6e0123495453a589a42f37
 
 .inner-container {
     width: 70%;
