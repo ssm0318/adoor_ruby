@@ -1,5 +1,3 @@
-
-
 <div class="inner-container">
 <%= render partial: "./user_answers_layout", locals: {user: @user} %>
     <% if !@user.friends.include? current_user and @user.id != current_user.id %>
@@ -29,8 +27,8 @@
                     -->
                 </div>
                 <div class="prism-box__content">
-                    <br><div class="question" style="font-size: 18px;"><%= a.question.content %></div>
-                    
+                    <br>
+                    <div class="question" style="font-size: 18px;"><a href="/questions/<%=a.question.id%>" style=" font-weight: normal;"><%= a.question.content %></a></div>
                     <br/>
                     <div class="answer"><%= a.content %></div>
                     <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
