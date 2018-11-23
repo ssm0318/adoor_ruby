@@ -1,12 +1,23 @@
 .noti-content {
     position: fixed;
-    right: 5px;
+    right: 10px;
     top: 45px;
     padding: 0px;
     border: 0.75px solid #bcbcbc;
+    max-height: 250px;
+    overflow-y: scroll;
     z-index: 1;
     background-color: white;
     cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
 }
 
 .noti-el {
@@ -15,6 +26,11 @@
     color: #777777;
 }
 
-.noti-el:hover {
-    background-color: #e8e8e8;
+// .noti-el:hover {
+//     background-color: #e8e8e8;
+// }
+
+.noti-el.unread {
+    background-color: #d9c9ed;
+    color: white;
 }

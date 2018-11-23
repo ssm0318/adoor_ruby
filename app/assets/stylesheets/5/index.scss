@@ -12,24 +12,26 @@
 
 .question-el {
     font-size: 20px;
-}
-
-.question-el .question-content {
-    text-align: center;
-}
-
-.question-content {
-    margin-bottom: -30px;
+    display: flex; // postcss인가 젬 나중에 깔 것
+    justify-content: space-between;
     margin-top: 30px;
-    font-size: 22px;
-}
+    padding: 0px 10%;
 
-.question-el a {
-    font-family: 'Nanum Myeongjo', serif;
-    text-decoration: none;
-    color: black;
-}
+    a {
+        font-family: 'Nanum Myeongjo', serif;
+        text-decoration: none;
+        color: black;
+    }
 
-.question-btn {
-    margin-right: 100px;
+    .question-content {
+        // width: calc(100% - 84px);
+        width: 100%;
+        text-align: left;
+        word-break: keep-all;
+        font-size: 22px;
+    }
+
+    .question-btn {
+        min-width: 84px;
+    }
 }
