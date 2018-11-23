@@ -26,8 +26,8 @@
                 -->
             </div>
             <div class="prism-box__content">
-                <br><div class="question" style="font-size: 18px;"><%= a.question.content %></div>
-                
+                <br>
+                <a href="/questions/<%=a.question.id%>" class="question"><%= a.question.content %></a> <br><br>
                 <br/>
                 <div class="answer"><%= a.content %></div>
                 <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
@@ -45,7 +45,7 @@
                 <% if Star.where(user_id: current_user.id, target: a).empty? %>
                     <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
                 <% else %>
-                    <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete %>
+                    <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
                 <% end %>
             </div>
 
