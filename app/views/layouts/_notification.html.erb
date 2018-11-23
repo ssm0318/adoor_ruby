@@ -14,7 +14,7 @@
                 <div class="noti-el" onclick="window.location='/answers/<%=noti.target_id%>';"><%=username%>님의 선물이 도착했습니다.</div>
             <% elsif noti.target_type == 'Assignment' %>
                 <!-- to new answer page -->
-                <div class="noti-el" onclick="window.location='/answers/new/question/<%=noti.target_id%>'"><%=username%>님이 회원님에게 새로운 질문을 assign했습니다.</div>
+                <div class="noti-el" onclick="window.location='/answers/new/question/<%=Assignment.find(noti.target_id).question.id%>'"><%=username%>님이 회원님에게 새로운 질문을 assign했습니다.</div>
             <% elsif noti.target_type == 'Highlight' %>
                 <!-- answer detail page -->
                 <div class="noti-el" onclick="window.location='/answers/<%=noti.target_id%>'"><%=username%>님이 회원님의 글을 highlight했습니다.</div>

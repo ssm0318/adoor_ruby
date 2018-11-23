@@ -84,13 +84,16 @@
                 }
             })
         } else {
-            console.log("try cancel");
-            const assignId = $(this).data("assign-id");
+            console.log("try cancel?");
+            const friendId = $(this).data("friend-id");
+            const questionId = $(this).data("question-id");
+            console.log(friendId);
+            console.log(questionId);
 
             $.ajax({
                 type: "DELETE",
                 dataType: "JSON",
-                url: '/assignments/' + assignId,
+                url: '/assignments/' + friendId + '/' + questionId,
                 success: function(data) {
                     console.log("success canceling!");
                     thisButton.text("Assign");

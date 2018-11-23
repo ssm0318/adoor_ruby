@@ -4,7 +4,7 @@ class AssignmentsController < ApplicationController
         # puts "this is controller!"
         
         question_id = params[:question_id]
-        user_id = params[:user_id]
+        user_id = params[:assignee_id]
         assigned_user = User.find(user_id)
 
         i=0
@@ -35,20 +35,20 @@ class AssignmentsController < ApplicationController
             assign_id: new_assign_id,
             assigned_user: assigned_user.email
         }
-
+ 
     end
 
     def delete
-        assignment_id = params[:id]
-        assignment = Assignment.find(assignment_id)
-        assignment.destroy
-        noti = Notification.find_by(target: assignment)
-        noti.destroy
+        assignee_id = params[:assignee_id]
+        question_id = params[:question_id]
+        assigner_id = current_user.id
+        assignment = Assignment.where(question_id: question_id, assigner_id: assigner_id, assignee_id: assignee_id)
+        assignment.destroy_all
 
         # flash[:success] = "#{User.find(assignment.assignee_id).email}님을 de-assign하셨습니다."
 
         render json: {
-            assigned_user: assignment.assignee.email
+            assigned_user: User.find(assignee_id).email
         }
     end
 end
