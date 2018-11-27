@@ -22,7 +22,6 @@
 
   <body>
     <!-- TODO: header and noti -->
-<<<<<<< HEAD
     <div class="prism-header">
       <%= render 'layouts/navigation'%>
       <%= link_to image_tag("logo/prism-logo.png", class:"logo"), root_path %>
@@ -39,9 +38,7 @@
       </div>
     </div>
     <div class="prism-container">
-=======
     <% if current_page?(controller: 'questions', action: 'intro') || current_page?(controller: 'sessions', action: 'new') %> <!-- 인트로 페이지일 때만 헤더, 컨테이너가 안 보이게 함 -->
->>>>>>> 3efdd53cb3e45fca8a6e0123495453a589a42f37
       <%= yield %>
     <% else %>
       <div class="prism-header">
