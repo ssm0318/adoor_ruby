@@ -6,7 +6,7 @@
             <%= image_tag friend.image.url, :style => "height:70px; width:70px; border-radius:35px;", class:"friend-box-image" %>
         </div>
         <div class="friend-box-question">
-            <% friend.answers.each_with_index do |answer, i| %>
+            <% friend.answers.reverse.each_with_index do |answer, i| %>
                 <% if i < 3 %>
                     <div class="friend-box-question-el">
                         <%= link_to answer.question.content, answer_path(answer.id) %>
