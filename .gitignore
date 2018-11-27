@@ -25,3 +25,5 @@
 /public/system
 
 /public/uploads
+
+/config/secrets.yml

@@ -38,27 +38,7 @@
       </div>
     </div>
     <div class="prism-container">
-    <% if current_page?(controller: 'questions', action: 'intro') || current_page?(controller: 'sessions', action: 'new') %> <!-- 인트로 페이지일 때만 헤더, 컨테이너가 안 보이게 함 -->
-      <%= yield %>
-    <% else %>
-      <div class="prism-header">
-        <%= render 'layouts/navigation'%>
-        <%=image_tag "logo/prism-logo.png", class:"logo"%>
-        <%= render 'layouts/notification', noties: noties %>
-        <div class="login-btn">
-          <% if user_signed_in? %>
-          <%= link_to 'Log out', 
-                destroy_user_session_path, 
-                method: :delete, 
-                class: "topnav-log" %>
-          <% else %>
-          <%= link_to 'Log In', user_session_path, class: "topnav-log" %>
-          <% end %>
-        </div>
-      </div>
-      <div class="prism-container">
-        <%= yield %>
-      </div>
-    <% end %>
+    <%= yield %>
+    </div>
   </body>
 </html>
