@@ -5,6 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.delete_all
+Question.delete_all
+FriendRequest.delete_all
+Friendship.delete_all
+Assignment.delete_all
+Answer.delete_all
+Highlight.delete_all
+Comment.delete_all
+Tmi.delete_all
+Star.delete_all
 
 User.create(email: "prism@snu.com", password: "prism-snu", username: "백산수")
 User.create(email: "a@a.com", password: "aaaaaa", username: "마틸다")

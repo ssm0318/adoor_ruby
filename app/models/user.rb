@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   has_many :made_requests, :class_name => "FriendRequest", :foreign_key => "requester_id", dependent: :destroy
   has_many :requestees, through: :made_requests, dependent: :destroy
-
+ 
   # friendship
   has_many :friendships, dependent: :destroy
   has_many :friends, :through => :friendships, dependent: :destroy
