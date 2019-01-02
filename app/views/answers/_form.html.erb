@@ -1,5 +1,14 @@
-<%= form_for answer do |a| %>
-    <%= answer.question.content %> 에 대한 나의 답변 <br/>
-    <%= a.text_area :content %>
-    <%= a.submit "제출"%>
-<% end %>
+<div class = "question-box">
+    <p class = "question">
+        <%= answer.question.content %>
+    </p>
+    <div align = "center">
+        <%= form_for @answer do |f| %>
+            <%= f.hidden_field :author_id, :value => current_user.id %>
+            <%= f.hidden_field :question_id, :value => answer.question.id %>
+            <%= f.text_area :content, class: "new-answer-field",  autofocus: true, "data-enable-grammarly": "false" %>
+            <br><br>
+            <%= f.submit "저장하기", class: "answer-button"%>
+        <% end %>
+    </div>
+</div>
