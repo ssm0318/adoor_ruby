@@ -1,5 +1,9 @@
 <% if user_signed_in? %>
-    <%=image_tag "icons/noti-default-icon.png", class:"btn-noti"%>
+    <% if noties.unread.length != 0 %>
+        <%=image_tag "icons/noti-hovering-icon.png", class:"btn-noti"%>
+    <% else %>
+        <%=image_tag "icons/noti-default-icon.png", class:"btn-noti"%>
+    <% end %>
 <% end %>
 <div class="noti-content" style="display: none;">
     <% if user_signed_in? %>
