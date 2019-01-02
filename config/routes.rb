@@ -42,4 +42,7 @@ Rails.application.routes.draw do
   get '/mypage' => 'users#mypage', as: :show_mypage
 
   devise_for :users
+  # devise_for :users, controllers: {
+  #   sessions: 'users/sessions'
+  # }
 end
