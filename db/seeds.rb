@@ -28,11 +28,11 @@ Question.create(content: "죽기 전에 꼭 하고 싶은 일이 있다면?", au
 Question.create(content: "나이", author_id: 3)
 Question.create(content: "요즘 가장 진지했던 밤은?")
 Question.create(content: "깊이")
-Question.create(content: "오늘 당신의 하루는 어땠나요?", selected_date: Date.today())
-Question.create(content: "작년 이맘때보다 가장 많이 바뀐 것은 무엇인가?", selected_date: Date.today())
-Question.create(content: "내게 너무 과분했던 것은?", selected_date: Date.today())
-Question.create(content: "마지막으로 절정의 행복을 느꼈을 때는 언제인가?", selected_date: Date.today())
-Question.create(content: "새 학기의 시작은 만족스러운가?", selected_date: Date.today())
+Question.create(content: "오늘 당신의 하루는 어땠나요?")
+Question.create(content: "작년 이맘때보다 가장 많이 바뀐 것은 무엇인가?")
+Question.create(content: "내게 너무 과분했던 것은?")
+Question.create(content: "마지막으로 절정의 행복을 느꼈을 때는 언제인가?")
+Question.create(content: "새 학기의 시작은 만족스러운가?")
 Question.create(content: "저절로")
 
 #ratings 3 & 4 추가
