@@ -15,7 +15,6 @@
 # Comment.delete_all
 # Tmi.delete_all
 # Star.delete_all
-# .where(~~).first_or_create
 if User.where(email: "prism@snu.com").empty?
     User.create(email: "prism@snu.com", password: "prism-snu", username: "백산수")
 end
@@ -31,9 +30,7 @@ end
 if User.where(email: "d@d.com").empty?
     User.create(email: "d@d.com", password: "aaaaaa", username: "마틸다")
 end
-# u = User.find_or_create_by({ email: "prism@snu.com", password: "prism-snu", username: "백산수"} )
-# u.valid_password?("prism-snu")
-# # User.find_or_create_by(email: "a@a.com", password: "aaaaaa", username: "마틸다")
+# User.find_or_create_by(email: "a@a.com", password: "aaaaaa", username: "마틸다")
 # User.find_or_create_by(email: "b@b.com", password: "bbbbbb", username: "율로몬")
 # User.find_or_create_by(email: "c@c.com", password: "cccccc", username: "잡동사니")
 # User.find_or_create_by(email: "d@d.com", password: "dddddd", username: "이룰렁")
