@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'questions#today'
+  get 'intro' => 'questions#intro'
 
-  post 'assignments/:user_id/:question_id' => 'assignments#create'
-  delete '/assignments/:id' => 'assignments#delete'
+  post '/assignments/:assignee_id/:question_id' => 'assignments#create'
+  delete '/assignments/:assignee_id/:question_id' => 'assignments#delete'
+
+  get '/notifications/:id' => 'notifications#read'
   
   get '/feeds' => 'questions#general_feed'
   get '/questions/:id' => 'questions#question_feed'

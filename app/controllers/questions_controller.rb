@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-    before_action :authenticate_user!, except: [:index, :today]
+    before_action :authenticate_user!, except: [:index, :today, :intro]
     
     def today
         
@@ -21,5 +21,9 @@ class QuestionsController < ApplicationController
 
     def index
         @questions = Question.all
+    end
+
+    def intro
+        render 'intro'
     end
 end

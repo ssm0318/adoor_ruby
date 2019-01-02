@@ -17,4 +17,4 @@ class Question < ApplicationRecord
     #         Notification.create(recipient: self.author, actor: User.find(1), target: self, action: "custom question posted")
     #     end
     # end
-end
+end 

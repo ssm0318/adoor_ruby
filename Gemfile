@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem "rack", ">= 2.0.6"
 gem 'whenever', require: false
 gem 'jquery-rails'
 gem 'rubyzip', ">= 1.2.2"

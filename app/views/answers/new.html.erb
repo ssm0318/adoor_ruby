@@ -9,10 +9,35 @@
         <%= form_for @answer do |f| %>
             <%= f.hidden_field :author_id, :value => current_user.id %>
             <%= f.hidden_field :question_id, :value => @question.id %>
-            <%= f.text_area :content, class: "new-answer-field" %>
+            <%= f.text_area :content, class: "new-answer-field",  autofocus: true,"data-enable-grammarly": "false" %>
             <br><br>
             <%= f.submit "저장하기", class: "answer-button"%>
         <% end %>
     </div>
 </div>
 
+
+<script>
+    //주석된 코드는 너무 느리네..!!(수정)
+    // $(document).ready(function() {
+    //     $(".new-answer-field").on('keydown', function () {
+    //         if ($(this).outerHeight() > this.scrollHeight){
+    //             $(this).height(1)
+    //         }
+    //         while ($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))){
+    //             $(this).height($(this).height() + 1)
+    //         }
+    //     });
+    // })
+    var textarea = document.querySelector('textarea');
+
+    textarea.addEventListener('keydown', autosize);
+
+    function autosize(){
+        var el = this;
+        setTimeout(function(){
+            el.style.cssText = 'height:auto; padding:0';
+            el.style.cssText = 'height:' + (el.scrollHeight) + 'px';
+        },0);
+    }
+</script>
