@@ -5,7 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# User.delete_all
 # Question.delete_all
 # FriendRequest.delete_all
 # Friendship.delete_all
@@ -229,14 +228,20 @@ Question.find_or_create_by(content: "내가 잃을 수밖에 없는 것은?")
 Question.find_or_create_by(content: "완벽한 하루를 위해서는 무엇이 필요한가?")
 Question.find_or_create_by(content: "내 묘비에 남기고 싶은 말은?")
 
-FriendRequest.find_or_create_by(requester_id: 1, requestee_id: 2)
-FriendRequest.find_or_create_by(requester_id: 1, requestee_id: 3)
-FriendRequest.find_or_create_by(requester_id: 2, requestee_id: 4)
+# FriendRequest.find_or_create_by(requester_id: 1, requestee_id: 2)
+# FriendRequest.find_or_create_by(requester_id: 1, requestee_id: 3)
+# FriendRequest.find_or_create_by(requester_id: 2, requestee_id: 4)
 
+Friendship.find_or_create_by(user_id: 1, friend_id: 2)
+Friendship.find_or_create_by(user_id: 1, friend_id: 3)
 Friendship.find_or_create_by(user_id: 1, friend_id: 4)
-Friendship.find_or_create_by(user_id: 4, friend_id: 3)
-Friendship.find_or_create_by(user_id: 3, friend_id: 2)
-Friendship.find_or_create_by(user_id: 3, friend_id: 1)
+Friendship.find_or_create_by(user_id: 1, friend_id: 5)
+Friendship.find_or_create_by(user_id: 2, friend_id: 3)
+Friendship.find_or_create_by(user_id: 2, friend_id: 4)
+Friendship.find_or_create_by(user_id: 2, friend_id: 5)
+Friendship.find_or_create_by(user_id: 3, friend_id: 4)
+Friendship.find_or_create_by(user_id: 3, friend_id: 5)
+Friendship.find_or_create_by(user_id: 4, friend_id: 5)
 
 Assignment.find_or_create_by(question_id: 2, assigner_id: 1, assignee_id: 4)
 Assignment.find_or_create_by(question_id: 2, assigner_id: 2, assignee_id: 4)
