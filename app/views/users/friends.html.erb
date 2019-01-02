@@ -1,4 +1,10 @@
+<div>
+    친구 초대하기
+    <!-- FIXME: 이 부분은 deploy할 때 링크 꼭 바꿔줘야 함!! -->
+    링크: <%= "localhost:3000/invitation/#{current_user.id}/#{current_user.invitation_token}" %>
+</div> 
 <div class="friend-list">
+
     <% @friends.each do |friend| %>
     <div class="friend-box">
         <div class="friend-box-userpage" onclick="window.location='/userpage/<%=friend.id%>';">

@@ -47,7 +47,8 @@ class UsersController < ApplicationController
             friendship.destroy_all
             Friendship.where({user_id: params[:id], friend_id: current_user.id}).destroy_all
         end
-        redirect_back fallback_location: user_answers_path(params[:id])
+        #redirect_back fallback_location: user_answers_path(params[:id])
+        redirect_to user_answers_path(params[:id])
     end
 
     def friend_request
@@ -60,6 +61,13 @@ class UsersController < ApplicationController
             friend_request.destroy_all
         end
         redirect_back fallback_location: user_answers_path(params[:id])
+    end
+
+    def accept_invitation
+        @new_friend = User.find(params[:id])
+        if @new_friend.invitation_token == params[:invitation_token]
+            render 'accept_invitation'
+        end
     end
 
     private

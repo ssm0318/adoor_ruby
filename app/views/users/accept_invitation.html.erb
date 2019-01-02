@@ -1,0 +1,8 @@
+<% if current_user.friends.include? @new_friend %>
+    <%= @new_friend.username %>님과 이미 친구입니다!
+    <%= link_to "친구 페이지 가기", user_answers_path(@new_friend.id) %>
+<% else %>
+    <%= @new_friend.username %>님의 친구 요청을 수락하시겠습니까?
+    <%= link_to "친구수락", add_friend_path(@new_friend.id), method: :post %>
+    <%= link_to "거절", root_path %>
+<% end %>
