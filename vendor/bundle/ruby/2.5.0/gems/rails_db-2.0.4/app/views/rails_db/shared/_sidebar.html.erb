@@ -1,0 +1,14 @@
+<h3>Tables</h3>
+
+<input id='rails_db_tables_input' placeholder='... quick filter by table name'>
+
+<ul class="side-nav tables" id='rails_db_tables'>
+  <% rails_db_tables.each do |table| %>
+    <li>
+      <%= link_to table_data_path(table), remote: true, class: "sidebar_table sidebar_table_#{table}" do %>
+        <%= fa_icon 'table'%>
+        <%= table %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
