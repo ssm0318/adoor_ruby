@@ -26,24 +26,31 @@
         border-bottom: 1px dashed $prism-box-gray;
         padding: 10px 40px;
         line-height: 140%;
+        text-align: center;
+
+        .question {
+            font-family: "Nanum Myeongjo", sans-serif;
+            font-size: 18px;
+        }
 
         a {
             color: black;
-            font-weight: bold;
             text-decoration: none;
             font-family: 'Nanum Myeongjo', serif;
 
             &:hover {
-                text-shadow: 2px 2px gray;
+               color: mediumpurple;
             }
 
-            &:visited {
-                color: black;
-            }
         }
 
         .answer {
             font-family: 'Nanum Gothic', sans-serif;
+        }
+
+        .date {
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 12px;
         }
     }
 

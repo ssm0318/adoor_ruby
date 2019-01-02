@@ -1,5 +1,9 @@
-<h1>Edit Answer Page</h1>
-<%= render 'form', answer: @answer %>
+<div class = "today-question-box">
+    <h1 class="today-question-title">답변 수정하기</h1>
+        <%= render 'form', answer: @answer %>
 <br/>
 
 <%= link_to '내 페이지로', user_answers_path(current_user.id) %></p>
+
+</div>
+
