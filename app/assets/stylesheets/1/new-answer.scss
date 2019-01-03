@@ -39,3 +39,17 @@
     text-align: center;
     cursor: pointer;
 }
+
+.edit-answer-field{
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #C08BEF;
+    resize: none;
+    outline: none
+}
