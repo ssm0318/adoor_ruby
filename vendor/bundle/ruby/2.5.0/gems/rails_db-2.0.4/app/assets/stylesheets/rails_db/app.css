@@ -1,0 +1,90 @@
+footer {
+  padding: 0;
+}
+
+body {
+  height: auto;
+}
+
+.clear {
+  clear: both;
+}
+
+.sub-nav {
+  background: #f2f2f2;
+  padding: 10px 10px 10px 0;
+}
+
+table {
+  border-spacing: 2px;
+}
+
+table th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+table th, table td {
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+table td.text {
+  white-space: normal;
+}
+
+.scrollable {
+  overflow: auto;
+}
+.scrollable table {
+    min-width: 99%;
+  }
+
+.main_nav {
+  padding-top: 30px;
+}
+
+.panel.execute_panel {
+  padding-bottom: 5px;
+}
+
+.sql_history_items {
+  max-height: 450px;
+}
+
+.red {
+  color: red;
+}
+
+.yellow {
+  color: #ffba00;
+}
+
+.warning.label a {
+  color: white;
+}
+
+.expanded .collapse {
+  display: inline;
+}
+
+.expanded .expand {
+  display: none;
+}
+
+.collapsed .collapse {
+  display: none;
+}
+.collapsed .expand {
+    display: inline;
+}
+
+.sql_exp_col {
+  padding-top: 8px;
+  padding-left: 26px;
+}
+
+.panel.no_bottom_padding {
+  padding-bottom: 0;
+}

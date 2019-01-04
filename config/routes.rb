@@ -44,4 +44,7 @@ Rails.application.routes.draw do
   #get '/invitation' => 'users#'
   get '/invitation/:id/:invitation_token' => 'users#accept_invitation', as: :accept_invitation
   devise_for :users
+  # devise_for :users, controllers: {
+  #   sessions: 'users/sessions'
+  # }
 end

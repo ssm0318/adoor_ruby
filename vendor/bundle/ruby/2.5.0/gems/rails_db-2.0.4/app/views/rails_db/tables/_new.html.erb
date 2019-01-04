@@ -1,0 +1,17 @@
+<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+
+<h2 id="modalTitle">New</h2>
+
+<%= simple_form_for @record, as: 'record', url: table_create_path(@table, pk_id: @record[@table.primary_key]), remote: true, method: :post, html: {class: 'vertical_form'} do |form| %>
+    <div class='scrollable_form'>
+      <% @record.class.columns.each do |column| %>
+        <% name = column.name %>
+        <% next if [@table.primary_key, 'created_at', 'updated_at'].include?(column.name) %>
+        <%= form.input name, label: name %>
+      <% end %>
+    </div>
+    <%= form.submit 'SAVE', class: 'button small' %>
+    <a class='close' onclick="$('#system_modal').foundation('reveal', 'close');$">Close</a>
+<% end %>
+
+<span class="radius warning label">NOTE: Update will happen without any validations.</span>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= [yield(:title), 'Rails DB'].reject(&:blank?).join(' - ') %></title>
+  <%= stylesheet_link_tag    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" %>
+  <%= stylesheet_link_tag    "rails_db/application", media: "all" %>
+  <%= javascript_include_tag "rails_db/application" %>
+  <%= csrf_meta_tags %>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <%= display_flash_messages %>
+  <% if RailsDb.enabled %>
+    <%= render 'rails_db/shared/header' %>
+    <div class="row">
+      <div id='main_content' class="<%= main_content_classes %>">
+        <%= yield %>
+      </div>
+      <div id='sidebar' class="<%= sidebar_classes %>">
+        <%= render 'rails_db/shared/sidebar' %>
+      </div>
+    </div>
+    <footer class="row">
+      <%= render 'rails_db/shared/footer' %>
+    </footer>
+  <% else %>
+    <p>RailsDB is disabled. Please enable it in config/initializers/rails_db.rb</p>
+  <% end %>
+  <div id="system_modal" class="reveal-modal" data-reveal aria-labelledby="Dialog" aria-hidden="true" role="dialog"></div>
+</body>

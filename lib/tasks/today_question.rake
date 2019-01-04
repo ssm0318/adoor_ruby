@@ -3,7 +3,7 @@ namespace :today_question do
   task update: :environment do
     puts "#{Time.now} Updating daily questions..."
 
-    list = Question.where(author_id: 1)
+    list = Question.where(author_id: 1, selected_date: nil)
     numbers = (0..(list.count-1)).to_a.sample 5
 
     numbers.each do |number|

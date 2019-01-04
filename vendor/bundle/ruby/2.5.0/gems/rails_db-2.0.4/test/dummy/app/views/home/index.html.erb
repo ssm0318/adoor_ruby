@@ -1,0 +1,26 @@
+<h1>Rails DB - Dummy App</h1>
+
+<p><%= link_to 'Rails DB Console ->', '/rails/db' %></p>
+
+<h2>Data Table</h2>
+
+<h3>Table</h3>
+
+<%= rails_db_data_table 'accounts', footer: false,
+                                    columns: ['id', 'name', 'users_count'],
+                                    header: true,
+                                    limit: 10,
+                                    order_by: :users_count,
+                                    order: :desc %>
+
+<h3>SQL</h3>
+
+<%= rails_db_data_table_sql 'select id, name, age from users order by age desc limit 10',
+                            footer: false,
+                            header: true %>
+
+<h3>Stats</h3>
+
+<p>Users: <%= User.count %></p>
+<p>Customer: <%= Customer.count %></p>
+<p>Account: <%= Account.count %></p>
