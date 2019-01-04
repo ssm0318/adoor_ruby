@@ -29,7 +29,7 @@ class SearchController < ApplicationController
         tag = params[:tag]
         @results = []
         @results = Answer.all.search_tag(tag)
-        @results = @results.friends(current_user.id) | @results.mine(current_user.id)
+        @results = @results.where(author: current_user.friends) | @results.where(author: current_user)
 
         render 'friend_answer'
     end

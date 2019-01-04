@@ -7,8 +7,6 @@ class Answer < ApplicationRecord
     has_and_belongs_to_many :tags, dependent: :destroy
 
     scope :anonymous, -> (id) { where.not(author: User.find(id).friends).where.not(author: User.find(id)) }
-    scope :friends, -> (id) { where(author: User.find(id).friends)}
-    scope :mine, -> (id) { where(author: User.find(id))}
 
     scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
 
