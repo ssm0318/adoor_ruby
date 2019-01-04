@@ -74,15 +74,15 @@
     margin-top: 2px;
 }
 
-.prism-container {
+#prism-container {
     width: 60%;
     margin: 0 auto;
-
     .prism-title {
         width: 100%;
         text-align: center;
         color: mediumpurple;
     }// text-align: center;
+    padding-top: 60px;
 }
 
 a {

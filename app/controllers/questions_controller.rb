@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
     end
 
     def index
-        @questions = Question.all
+        @questions = Question.where.not(selected_date: nil) 
     end
 
     def intro
