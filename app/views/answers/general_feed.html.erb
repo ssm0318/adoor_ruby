@@ -22,9 +22,11 @@
         <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px dashed #d7dae0;">
               <div>
                 댓글 <br><br>
+                <%# 요거 이미지 바꿀것임 걍 임시임 놀라지 마셈 %>
                 <% author_icon_url = "icons/assign-icon.png" %>
+                <% comments = Comment.anonymous(answer.id) %>
                 <div class="author-comments">
-                    <% Comment.where(answer_id: answer.id, recipient_id: answer.author_id).each do |c| %>
+                    <% comments.where(recipient_id: answer.author_id).each do |c| %>
                         <div class="comment">
                             <%= image_tag author_icon_url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px; margin-bottom: 5px; "%>
                             <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
@@ -33,7 +35,7 @@
                 </div>
                 <div>
                   <div class="comment-block">
-                    <% answer.comments.where.not(recipient_id: answer.author_id).each do |c|%>
+                    <% comments.where.not(recipient_id: answer.author_id).each do |c|%>
                       <div class="comment">
                         <% if c.author_id == answer.author_id %>
                             ㄴ

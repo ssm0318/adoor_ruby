@@ -29,6 +29,12 @@ end
 if User.where(email: "d@d.com").empty?
     User.create(email: "d@d.com", password: "dddddd", username: "이룰렁")
 end
+if User.where(email: "e@e.com").empty?
+    User.create(email: "e@e.com", password: "eeeeee", username: "누구게")
+end
+if User.where(email: "f@f.com").empty?
+    User.create(email: "f@f.com", password: "ffffff", username: "메롱")
+end
 # User.find_or_create_by(email: "a@a.com", password: "aaaaaa", username: "마틸다")
 # User.find_or_create_by(email: "b@b.com", password: "bbbbbb", username: "율로몬")
 # User.find_or_create_by(email: "c@c.com", password: "cccccc", username: "잡동사니")
@@ -282,6 +288,15 @@ Answer.find_or_create_by(author_id: 2, question_id: 10, content: "만족스러�
 Answer.find_or_create_by(author_id: 1, question_id: 11, content: "저절로, 습관대로 행동하고 생각하고 말하게 되는 순간이 무섭다. 나는 나를 믿지 못한다.")
 Answer.find_or_create_by(author_id: 5, question_id: 11, content: "세상에 저절로 되는 일은 없다. \n뻔한 말이지만 기회는 준비된 사람한테만 오는거다. \n저절로 되기만을 바라고 그냥 기다리는건 양아치다.
 ")
+Answer.find_or_create_by(author_id: 6, question_id: 1, content: "마무으리!")
+Answer.find_or_create_by(author_id: 7, question_id: 1, content: "마무리 마유리")
+Answer.find_or_create_by(author_id: 6, question_id: 2, content: "뿡")
+Answer.find_or_create_by(author_id: 7, question_id: 2, content: "꺅")
+Answer.find_or_create_by(author_id: 6, question_id: 3, content: "스물다섯쨜")
+Answer.find_or_create_by(author_id: 7, question_id: 3, content: "존나 많아")
+Answer.find_or_create_by(author_id: 6, question_id: 4, content: "zinzi")
+Answer.find_or_create_by(author_id: 7, question_id: 4, content: "진지잡수세여")
+
 
 # Highlight 모델을 어떻게?
 Highlight.find_or_create_by(user_id: 2, answer_id: 3, content: "좋은 스피커를 사서")
@@ -298,6 +313,14 @@ Comment.find_or_create_by(author_id: 3, recipient_id: 3, answer_id: 4, content: 
 Comment.find_or_create_by(author_id: 4, recipient_id: 4, answer_id: 5, content: "be a butterfly")
 Comment.find_or_create_by(author_id: 1, recipient_id: 1, answer_id: 1, content: "그랬구나~")
 Comment.find_or_create_by(author_id: 2, recipient_id: 2, answer_id: 5, content: "그런 일이 있었다니 몰랐네.")
+Comment.find_or_create_by(author_id: 3, recipient_id: 3, answer_id: 16, content: "아하~")
+Comment.find_or_create_by(author_id: 7, recipient_id: 7, answer_id: 16, content: "오~")
+Comment.find_or_create_by(author_id: 3, recipient_id: 3, answer_id: 22, content: "아하~")
+Comment.find_or_create_by(author_id: 7, recipient_id: 7, answer_id: 22, content: "오~")
+Comment.find_or_create_by(author_id: 3, recipient_id: 3, answer_id: 17, content: "아하~")
+Comment.find_or_create_by(author_id: 6, recipient_id: 6, answer_id: 17, content: "오~")
+Comment.find_or_create_by(author_id: 3, recipient_id: 3, answer_id: 23, content: "아하~")
+Comment.find_or_create_by(author_id: 6, recipient_id: 6, answer_id: 23, content: "오~")
 
 Tmi.find_or_create_by(author_id: 1, content: "I want bingsu.")
 Tmi.find_or_create_by(author_id: 1, content: "writing TMIs")
