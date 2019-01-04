@@ -65,6 +65,10 @@ class UsersController < ApplicationController
 
     def accept_invitation
         @new_friend = User.find(params[:id])
+        @assigned_questions = []
+        #lakdjf;d.each do |question_id|
+        #@assigned_questions.push(Question.find(question_id))
+        #end
         if @new_friend.invitation_token == params[:invitation_token]
             render 'accept_invitation'
         end

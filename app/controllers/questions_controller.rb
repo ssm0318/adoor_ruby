@@ -26,4 +26,9 @@ class QuestionsController < ApplicationController
     def intro
         render 'intro'
     end
+
+    def invitation
+        @questions = Question.all
+        render 'invitation'
+    end
 end

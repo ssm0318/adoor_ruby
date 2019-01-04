@@ -4,7 +4,12 @@
 <% elsif current_user.id == @new_friend.id %>
     친구에게 초대 링크를 보내세요!
 <% else %>
-    <%= @new_friend.username %>님의 친구 요청을 수락하시겠습니까?
+    <%= @new_friend.username %>님이 질문을 보냈어요!
+    <% @assigned_questions.each do |q| %>
+        <%= q.content %>
+        답변하러 가기~~
+    <% end %>
+    <%= %>
     <%= link_to "친구수락", add_friend_path(@new_friend.id), method: :post %>
     <%= link_to "거절", root_path %>
 <% end %>

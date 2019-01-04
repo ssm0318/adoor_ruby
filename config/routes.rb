@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   patch '/users/profile/:id/edit' => 'users#update', as: :update_user_profile
   get '/mypage' => 'users#mypage', as: :show_mypage
 
+  #get '/invitation' => 'users#'
   get '/invitation/:id/:invitation_token' => 'users#accept_invitation', as: :accept_invitation
   devise_for :users
 end

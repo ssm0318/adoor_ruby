@@ -1,0 +1,23 @@
+친구에게 초대링크를 보내보세요. <br/>
+최대 3개의 질문과 함께 보낼 수 있어요! <br/>
+<% @questions.reverse_each do |question| %>
+    <div class="question-el" align="right">
+        <div class="question-content">
+        <%= link_to question.content, "questions/#{question.id}" %>
+        </div>
+        <div class="question-btn">
+            <%= image_tag "icons/write-icon.png", class: "btn-write", onclick:"window.location='/answers/new/question/#{question.id}'"%>
+            <% if user_signed_in? %>
+                <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
+                <%= render 'assignment', question: question %>
+            <% else %>
+                <%= image_tag "icons/assign-icon.png", class: "btn-assign", onclick:"window.location='/users/sign_in'"%>
+            <% end %>
+        </div>
+    </div>
+<% end %>
+<div>
+    친구 초대하기
+    <!-- FIXME: 이 부분은 deploy할 때 링크 꼭 바꿔줘야 함!! -->
+    링크: <%= "localhost:3000/invitation/#{current_user.id}/#{current_user.invitation_token}" %>
+</div> 
