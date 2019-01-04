@@ -13,7 +13,7 @@ class AnswersController < ApplicationController
         @answer.save
 
         input_tag = @answer.tag_string
-        input_tag = input_tag.gsub("\r\n", "\n")
+        input_tag = input_tag.gsub("\r\n", '\n')
         tag_array = input_tag.split('\n')
         tag_array.each do |tag|
             new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)

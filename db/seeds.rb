@@ -233,6 +233,7 @@ Question.find_or_create_by(content: "나를 불행하게 만드는 것은?")
 Question.find_or_create_by(content: "내가 잃을 수밖에 없는 것은?")
 Question.find_or_create_by(content: "완벽한 하루를 위해서는 무엇이 필요한가?")
 Question.find_or_create_by(content: "내 묘비에 남기고 싶은 말은?")
+Question.find_or_create_by(content: "내 묘비에 남기고 싶은 말은?", author_id: 6)
 
 # FriendRequest.find_or_create_by(requester_id: 1, requestee_id: 2)
 # FriendRequest.find_or_create_by(requester_id: 1, requestee_id: 3)
@@ -338,3 +339,33 @@ Star.find_or_create_by(user_id: 1, target: Question.find(2))
 Star.find_or_create_by(user_id: 1, target: Answer.find(1))
 Star.find_or_create_by(user_id: 3, target: Question.find(1))
 Star.find_or_create_by(user_id: 3, target: Answer.find(3))
+
+Question.first.tag_string = "닐리리야\n에헤라\n디야\n태그"
+Question.first.save
+Question.first.tags << Tag.create(author_id: 1, content: "닐리리야", target: Question.first)
+Question.first.tags << Tag.create(author_id: 1, content: "에헤라", target: Question.first)
+Question.first.tags << Tag.create(author_id: 1, content: "디야", target: Question.first)
+Question.first.tags << Tag.create(author_id: 1, content: "태그", target: Question.first)
+
+Question.last.tag_string = "뿌잉\n삉삉\n뀨\n뀨뀨꺄꺆ㄲ\n태그"
+Question.last.save
+Question.last.tags << Tag.create(author_id: 6, content: "뿌잉", target: Question.last)
+Question.last.tags << Tag.create(author_id: 6, content: "삉삉", target: Question.last)
+Question.last.tags << Tag.create(author_id: 6, content: "뀨", target: Question.last)
+Question.last.tags << Tag.create(author_id: 6, content: "뀨뀨꺄꺆ㄲ", target: Question.last)
+Question.last.tags << Tag.create(author_id: 6, content: "태그", target: Question.last)
+
+a = Answer.find(1)
+a.tag_string = "삽질왕 김삽질\n삽질왕 이삽질\n삽질왕 구삽질\n태그"
+a.save
+Answer.find(1).tags << Tag.create(author_id: 6, content: "삽질왕 김삽질", target: Answer.find(1))
+Answer.find(1).tags << Tag.create(author_id: 6, content: "삽질왕 이삽질", target: Answer.find(1))
+Answer.find(1).tags << Tag.create(author_id: 6, content: "삽질왕 구삽질", target: Answer.find(1))
+Answer.find(1).tags << Tag.create(author_id: 6, content: "태그", target: Answer.find(1))
+
+a = Answer.find(22)
+a.tag_string = "나는 태그다\n너는 태그냐\n와썹맨"
+a.save
+Answer.find(22).tags << Tag.create(author_id: 6, content: "나는 태그다", target: Answer.find(22))
+Answer.find(22).tags << Tag.create(author_id: 6, content: "너는 태그냐", target: Answer.find(22))
+Answer.find(22).tags << Tag.create(author_id: 6, content: "와썹맨", target: Answer.find(22))
