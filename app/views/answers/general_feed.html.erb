@@ -3,9 +3,8 @@
   <% @answers.reverse_each do |answer| %>
       <div class="prism-box">
         <div class="prism-box__header">
-          <%= render partial: "./user_profile", locals: {user: answer.author} %>
-          <%#= answer.author.username %>
-          <i class="material-icons">more_vert</i>
+          <%# <%= render partial: "./user_profile_general", locals: {user_id: answer.author_id, question_id: answer.question.id} %>
+          <%# <i class="material-icons">more_vert</i> %>
         </div>
         <div class="prism-box__content"><br>
           <a href="/questions/<%=answer.question.id%>" class="question" style="font-size: 18px;"><%= answer.question.content %></a> <br><br>
