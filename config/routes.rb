@@ -42,6 +42,13 @@ Rails.application.routes.draw do
   patch '/users/profile/:id/edit' => 'users#update', as: :update_user_profile
   get '/mypage' => 'users#mypage', as: :show_mypage
 
+  # search
+  get '/search/:tag/all' => 'search#all', as: :search_all
+  get '/search/:tag/admin_question' => 'search#admin_question', as: :search_admin_question
+  get '/search/:tag/custom_question' => 'search#custom_question', as: :search_custom_question
+  get '/search/:tag/friend_answer' => 'search#friend_answer', as: :search_friend_answer
+  get '/search/:tag/anonymous_answer' => 'search#anonymous_answer', as: :search_anonymous_answer
+
   devise_for :users
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions'

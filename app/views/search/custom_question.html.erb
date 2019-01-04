@@ -1,0 +1,5 @@
+<h1>검색 결과</h1>
+<% @results.each do |answer| %>
+    글쓴이: <%= answer.author.username %>
+    내용: <%= answer.content %>
+<% end %>
