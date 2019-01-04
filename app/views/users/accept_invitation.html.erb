@@ -9,7 +9,6 @@
         <%= q.content %>
         답변하러 가기~~
     <% end %>
-    <%= %>
-    <%= link_to "친구수락", add_friend_path(@new_friend.id), method: :post %>
-    <%= link_to "거절", root_path %>
+    <%= @new_friend.username %>님과 친구가 되어보세요!
+    <%= link_to "친구요청", friend_request_path(@new_friend.id), method: :post %>
 <% end %>
