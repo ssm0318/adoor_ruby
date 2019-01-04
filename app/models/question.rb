@@ -5,6 +5,8 @@ class Question < ApplicationRecord
     belongs_to :author, class_name: 'User'
     has_and_belongs_to_many :tags, dependent: :destroy
 
+    scope :search_tag, -> (tag) { joins(:tags).where("content LIKE ? ", "%#{tag}%") }
+
     # after_create :create_notifications
 
     # private
