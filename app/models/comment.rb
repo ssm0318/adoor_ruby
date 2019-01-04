@@ -5,7 +5,7 @@ class Comment < ApplicationRecord
     # 예: 댓글의 author과 recipient가 같을 수 있음.
     belongs_to :recipient, class_name: 'User'
 
-    scope :anonymous, -> (id) { where.not(author: Answer.find(id).author.friends).where.not(author: Answer.find(id).author).where(answer_id: id) }
+    scope :anonymous, -> (id) { where.not(recipient: Answer.find(id).author.friends).where(answer_id: id) }
 
     after_create :create_notifications
 

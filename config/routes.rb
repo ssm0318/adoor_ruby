@@ -42,11 +42,11 @@ Rails.application.routes.draw do
   get '/mypage' => 'users#mypage', as: :show_mypage
 
   # search
-  get '/search/:tag/all' => 'search#all', as: :search_all
-  get '/search/:tag/admin_question' => 'search#admin_question', as: :search_admin_question
-  get '/search/:tag/custom_question' => 'search#custom_question', as: :search_custom_question
-  get '/search/:tag/friend_answer' => 'search#friend_answer', as: :search_friend_answer
-  get '/search/:tag/anonymous_answer' => 'search#anonymous_answer', as: :search_anonymous_answer
+  get '/search/all' => 'search#all', as: :search_all
+  get '/search/admin_question' => 'search#admin_question', as: :search_admin_question
+  get '/search/custom_question' => 'search#custom_question', as: :search_custom_question
+  get '/search/friend_answer' => 'search#friend_answer', as: :search_friend_answer
+  get '/search/anonymous_answer' => 'search#anonymous_answer', as: :search_anonymous_answer
 
   devise_for :users
   # devise_for :users, controllers: {
