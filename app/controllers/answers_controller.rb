@@ -12,7 +12,7 @@ class AnswersController < ApplicationController
         @answer = Answer.new(answer_params)
         @answer.save
 
-        redirect_to @answer
+        redirect_to 'friend_feed'
     end
 
     def show
@@ -38,6 +38,23 @@ class AnswersController < ApplicationController
     def user_answers
         @user = User.find(params[:id])
         @answers = @user.answers
+    end
+
+    def general_feed
+        @answers = Answer.all
+        render 'general_feed'
+    end
+
+    def friend_feed
+        @answers = []
+        @answers.concat(current_user.answers)
+        
+        for friend in current_user.friends
+            @answers.concat(friend.answers)
+        end
+
+        @answers = @answers.sort_by(&:created_at)
+        render 'friend_feed'
     end
 
     def create_comment
