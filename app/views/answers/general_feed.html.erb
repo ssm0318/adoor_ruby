@@ -33,9 +33,17 @@
                         </div>
                     <% end %>
                 </div>
+                <% recipients = [] %>
+                <% comments.each do |c| %>
+                    <% if c.recipient_id != answer.author_id %>
+                        <% recipients.push(c.recipient_id) %>
+                    <% end %>
+                <% end %>
+                <% recipients.uniq! %>
+                <% recipients.each do |r| %>
                 <div>
                   <div class="comment-block">
-                    <% comments.where.not(recipient_id: answer.author_id).each do |c|%>
+                    <% comments.where(recipient_id: r).each do |c|%>
                       <div class="comment">
                         <% if c.author_id == answer.author_id %>
                             ㄴ
@@ -47,12 +55,13 @@
                         <% end %>
                       </div>
                     <% end %>
+                    </div>
                   </div>
+                  <% end %>
                   <form action='/answers/<%= answer.id %>/comments/<%= current_user.id %>' method='POST' class="prism-form" >
                       <input class="prism-form__input" type="text" name="content">
                       <button class="prism-form__button">댓글 달기</button>
                   </form>
-                </div>
               </div>
             </div>
       </div>
