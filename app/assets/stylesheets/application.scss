@@ -74,15 +74,15 @@
     margin-top: 2px;
 }
 
-.prism-container {
+#prism-container {
     width: 60%;
     margin: 0 auto;
-
     .prism-title {
         width: 100%;
         text-align: center;
         color: mediumpurple;
     }// text-align: center;
+    padding-top: 60px;
 }
 
 a {
@@ -96,13 +96,16 @@ a {
 
 .answer {
     font-family: "Nanum Gothic", serif;
+    white-space: pre-line;
 }
 
 .username{
     color: black;
     vertical-align: +6px;
 }
-body {margin: 0px;}
+body {margin: 0px; height: 100%; }
+
+html { height: 100%; overflow:auto; }
 
 div.background {
     // width: 100%;
