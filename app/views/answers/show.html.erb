@@ -28,6 +28,11 @@
         <div class="answer"><%= a.content %></div>
         <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
         <br>
+        태그:
+        <% if !a.tag_string.nil? %>
+            <%= a.tag_string.gsub("\r\n", "\n").split("\n").join(", ") %>
+        <% end %>
+        <br>
         <div class = "date"><%= a.created_at.strftime("%m월 %d일") %></div>
     </div>
     <div class="prism-box__footer" style="padding-bottom: 10px;">

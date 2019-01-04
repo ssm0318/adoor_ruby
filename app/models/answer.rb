@@ -4,6 +4,9 @@ class Answer < ApplicationRecord
     has_many   :highlights
     has_many   :comments
     has_many   :stars
+    has_and_belongs_to_many :tags, dependent: :destroy
+
+    scope :anonymous, -> (id) { where.not(author: User.find(id).friends).where.not(author: User.find(id)) }
 
     after_create :create_notifications
 

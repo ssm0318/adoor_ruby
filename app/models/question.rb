@@ -3,6 +3,7 @@ class Question < ApplicationRecord
     has_many   :assignments
     has_many   :stars
     belongs_to :author, class_name: 'User'
+    has_and_belongs_to_many :tags, dependent: :destroy
 
     # after_create :create_notifications
 

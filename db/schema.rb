@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180902160303) do
+ActiveRecord::Schema.define(version: 20190104072521) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "author_id", null: false
@@ -18,8 +18,16 @@ ActiveRecord::Schema.define(version: 20180902160303) do
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tag_string"
     t.index ["author_id"], name: "index_answers_on_author_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "answers_tags", id: false, force: :cascade do |t|
+    t.integer "answer_id", null: false
+    t.integer "tag_id", null: false
+    t.index ["answer_id", "tag_id"], name: "index_answers_tags_on_answer_id_and_tag_id"
+    t.index ["tag_id", "answer_id"], name: "index_answers_tags_on_tag_id_and_answer_id"
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -91,6 +99,14 @@ ActiveRecord::Schema.define(version: 20180902160303) do
     t.date "selected_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tag_string"
+  end
+
+  create_table "questions_tags", id: false, force: :cascade do |t|
+    t.integer "question_id", null: false
+    t.integer "tag_id", null: false
+    t.index ["question_id", "tag_id"], name: "index_questions_tags_on_question_id_and_tag_id"
+    t.index ["tag_id", "question_id"], name: "index_questions_tags_on_tag_id_and_question_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -106,6 +122,15 @@ ActiveRecord::Schema.define(version: 20180902160303) do
 
   create_table "stars", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "target_id"
+    t.string "target_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.integer "author_id"
+    t.string "content", null: false
     t.integer "target_id"
     t.string "target_type"
     t.datetime "created_at", null: false
