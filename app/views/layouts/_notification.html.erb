@@ -27,7 +27,11 @@
                 <% elsif noti.target_type == 'Star' %>
                     <%=username%>님이 회원님의 글을 star했습니다.
                 <% elsif noti.target_type == 'Comment' %>
-                    <%=username%>님이 회원님의 답변에 댓글을 달았습니다.
+                    <% if noti.action == 'comment' %>
+                        <%=username%>님이 회원님의 답변에 댓글을 달았습니다.
+                    <% elsif noti.action == 'recomment'%>
+                        <%=username%>님이 회원님의 댓글에 대댓글을 달았습니다.
+                    <% end %>
                 <% elsif noti.target_type == 'FriendRequest'%>
                     <%=username%>님이 친구신청을 보냈습니다.
                 <% end %>
