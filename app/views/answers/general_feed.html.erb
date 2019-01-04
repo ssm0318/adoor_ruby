@@ -3,7 +3,7 @@
   <% @answers.reverse_each do |answer| %>
       <div class="prism-box">
         <div class="prism-box__header">
-          <%= render partial: "./user_profile_general", locals: {user_id: answer.author_id, question_id: answer.question.id} %>
+          <%= render partial: "./user_profile_general", locals: {user_id: answer.author_id, answer_id: answer.id} %>
           <%# <i class="material-icons">more_vert</i> %>
         </div>
         <div class="prism-box__content"><br>
@@ -19,6 +19,40 @@
             <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(answer.id, target_type: "Answer"), method: :delete %>
           <% end %>
         </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
+        <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px dashed #d7dae0;">
+              <div>
+                댓글 <br><br>
+                <% author_icon_url = "icons/assign-icon.png" %>
+                <div class="author-comments">
+                    <% Comment.where(answer_id: answer.id, recipient_id: answer.author_id).each do |c| %>
+                        <div class="comment">
+                            <%= image_tag author_icon_url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px; margin-bottom: 5px; "%>
+                            <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
+                        </div>
+                    <% end %>
+                </div>
+                <div>
+                  <div class="comment-block">
+                    <% answer.comments.where.not(recipient_id: answer.author_id).each do |c|%>
+                      <div class="comment">
+                        <% if c.author_id == answer.author_id %>
+                            ㄴ
+                            <%= image_tag author_icon_url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px; margin-bottom: 5px; " %>
+                            <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
+                        <% else %>
+                            <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, answer_id: answer.id} %>
+                            <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <form action='/answers/<%= answer.id %>/comments/<%= current_user.id %>' method='POST' class="prism-form" >
+                      <input class="prism-form__input" type="text" name="content">
+                      <button class="prism-form__button">댓글 달기</button>
+                  </form>
+                </div>
+              </div>
+            </div>
       </div>
   <% end %>
 </div>
