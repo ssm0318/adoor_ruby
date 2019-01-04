@@ -68,7 +68,9 @@
                             <br><br>
                             <% recipients = [] %>
                             <% a.comments.each do |c| %>
-                                <% recipients.push(c.recipient_id) %>
+                                <% if c.recipient_id != @user.id %>
+                                    <% recipients.push(c.recipient_id) %>
+                                <% end %>
                             <% end %>
                             <% recipients.uniq! %>
                             <% recipients.each do |r| %>
@@ -94,6 +96,7 @@
                                         <button class="prism-form__button">댓글 달기</button>
                                     </form>
                                 </div>
+                                <br>
                             <% end %>
                         </div>
                     <% else %>
