@@ -1,0 +1,26 @@
+<div class="inner-container">
+  <div class="prism-title"><h1>Friend Feed</h1></div>
+  <% @answers.reverse_each do |answer| %>
+      <div class="prism-box">
+        <div class="prism-box__header">
+          <%= render partial: "./user_profile", locals: {user: answer.author} %>
+          <%#= answer.author.username %>
+          <i class="material-icons">more_vert</i>
+        </div>
+        <div class="prism-box__content"><br>
+          <a href="/questions/<%=answer.question.id%>" class="question" style="font-size: 18px;"><%= answer.question.content %></a> <br><br>
+          <div class="answer"><%= answer.content %> <br><br></div>
+          <div class = "date"><%= answer.updated_at.strftime("%m월 %d일") %></div><!-- 연도는 %Y -->
+          
+        </div>
+        <div class="prism-box__footer" style="padding-bottom: 10px;">
+          <% if Star.where(user_id: current_user.id, target: answer).empty? %>
+            <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: answer.id, target_type: "Answer"), method: :post %>
+          <% else %>
+            <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(answer.id, target_type: "Answer"), method: :delete %>
+          <% end %>
+        </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
+      </div>
+  <% end %>
+</div>
+<!--더보기는 지금 구현하는 건 아닌 듯-->
