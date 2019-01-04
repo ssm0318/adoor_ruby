@@ -3,23 +3,18 @@
   <head>
     <title>PRISM</title>
     <%= csrf_meta_tags %>
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo|Noto+Sans+KR" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Nanum+Myeongjo|Noto+Sans+KR" rel="stylesheet">
     <link href=“https://fonts.googleapis.com/css?family=Merriweather” rel=“stylesheet”>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
     <script
       src="http://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
   </head>
-
   <body>
     <!-- TODO: header and noti -->
     <div class="prism-header">
@@ -37,8 +32,49 @@
         <% end %>
       </div>
     </div>
-    <div id="prism-container">
+    <div class="prism-container">
     <%= yield %>
     </div>
   </body>
 </html>
+<!--
+<div class="highlight-popup" style="display: none;">
+    <div class="highlight-popup-el">
+        <% highlight = Highlight.find_by(user_id: current_user.id, content: ) %>
+    <div class="assignment-content-el">
+        <% assign = Assignment.find_by(question_id: question.id, assigner_id: current_user.id, assignee_id: friend.id) %>
+        <%if assign.nil? %>
+            <a  class="btn-do-assign" 
+                data-assign-id="-1"
+                data-friend-id="<%=friend.id%>" 
+                data-question-id="<%=question.id%>"
+                style="background-color: #C08BEF; color: white;" >Assign</a>
+        <% else %>
+            <a  class="btn-do-assign" 
+                data-assign-id="<%=assign.id%>"
+                data-friend-id="<%=friend.id%>" 
+                data-question-id="<%=question.id%>">Cancel</a>
+        <% end %>
+    </div>
+</div>
+-->
+<script>
+  $(document).ready(function() {
+    $(".answer").on('click', function() {
+      var text = "";
+      if (window.getSelection().toString()) {
+        text = window.getSelection().toString();
+        alert(text);
+      }
+      return text;
+    })
+  });
+  $("html").on('click', function(event) {
+    var target = $(event.target)
+    if(!target.hasClass("btn-assign") &&
+      !target.hasClass("assignment-content") &&
+      !target.hasClass("btn-d o-assign")) {
+        $(".assignment-content").hide();
+    }
+  }); 
+</script>
