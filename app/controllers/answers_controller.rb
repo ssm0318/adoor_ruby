@@ -12,7 +12,7 @@ class AnswersController < ApplicationController
         @answer = Answer.new(answer_params)
         @answer.save
 
-        redirect_to @answer
+        redirect_to 'friend_feed'
     end
 
     def show
@@ -47,11 +47,8 @@ class AnswersController < ApplicationController
 
     def friend_feed
         @answers = []
-        # for a in Answer.all
-        #     if a.author_id in current_user.friends
-        # end
-
         @answers.concat(current_user.answers)
+        
         for friend in current_user.friends
             @answers.concat(friend.answers)
         end
