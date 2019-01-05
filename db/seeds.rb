@@ -149,16 +149,18 @@ Star.find_or_create_by(user_id: 3, target: Question.find(1))
 Star.find_or_create_by(user_id: 3, target: Answer.find(3))
 
 # 어드민 질문 태그 검색 테스트용
-Question.first.tag_string = "닐리리야\n에헤라\n디야\n태그"
-Question.first.save
+q = Question.first
+q.tag_string = "닐리리야\n에헤라\n디야\n태그"
+q.save
 Question.first.tags << Tag.create(author_id: 1, content: "닐리리야", target: Question.first)
 Question.first.tags << Tag.create(author_id: 1, content: "에헤라", target: Question.first)
 Question.first.tags << Tag.create(author_id: 1, content: "디야", target: Question.first)
 Question.first.tags << Tag.create(author_id: 1, content: "태그", target: Question.first)
 
 # 커스텀 질문 태그 검색 테스트용
-Question.find(2).tag_string = "뿌잉\n삉삉\n뀨\n뀨뀨꺄꺆ㄲ\n태그"
-Question.find(2).save
+q = Question.find(2)
+q.tag_string = "뿌잉\n삉삉\n뀨\n뀨뀨꺄꺆ㄲ\n태그"
+q.save
 Question.find(2).tags << Tag.create(author_id: 6, content: "뿌잉", target: Question.find(2))
 Question.find(2).tags << Tag.create(author_id: 6, content: "삉삉", target: Question.find(2))
 Question.find(2).tags << Tag.create(author_id: 6, content: "뀨", target: Question.find(2))
