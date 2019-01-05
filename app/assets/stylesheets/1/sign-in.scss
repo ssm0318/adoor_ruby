@@ -8,14 +8,14 @@
     font-size: 40px;
     text-align: center;
     padding-bottom: 10px;
-    color: #875EBC;
+    color: #F48462;
 }
 
 .sign-content-box {
     list-style: none;
     margin-top: 16px;
     font-size: 20px;
-    font-family: 'Nanum Myeongjo', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .form-inputs {
@@ -46,22 +46,23 @@
     margin-bottom: 10px;
 }
 
-.sign-button {
-    background-color: #C08BEF;
+.orange-btn {
+    background-color: #F48462;
+    border-style: none;
     border-radius: 30px;
     width: 200px;
-    padding: 15px 20px 15px 20px;
+    height: 50px;
     color: white;
     font-size: 20px;
     text-align: center;
     margin-bottom: 10px;
 }
 
-.sign-up-button {
+.white-btn {
     background-color: white;
     border-radius: 30px;
     width: 200px;
-    padding: 15px 20px 15px 20px;
+    height: 50px;
     color: grey;
     font-size: 20px;
     text-align: center;
