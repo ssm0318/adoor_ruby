@@ -37,7 +37,7 @@
           <% if user_signed_in? %>
             <%= link_to 'Log out', destroy_user_session_path, 
                   method: :delete, class: "nav-el" %>
-            <%= link_to 'My page', user_session_path, class: "nav-el" %>
+            <%= link_to 'My page', "/userpage/#{current_user.id}", class: "nav-el" %>
           <% else %>
             <%= link_to 'Log In', user_session_path, class: "nav-el, log-in" %>
           <% end %>
