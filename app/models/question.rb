@@ -3,6 +3,9 @@ class Question < ApplicationRecord
     has_many   :assignments
     has_many   :stars
     belongs_to :author, class_name: 'User'
+    has_and_belongs_to_many :tags, dependent: :destroy
+
+    scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
 
     # after_create :create_notifications
 

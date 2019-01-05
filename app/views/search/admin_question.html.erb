@@ -1,0 +1,8 @@
+<h1>검색 결과</h1>
+<% @results.each do |question| %>
+    <div style="border: border 1px black;">
+        작성자: <%= question.author.username %><br>
+        내용: <%= question.content %><br>
+        태그: <%= question.tag_string %><br>
+    </div>
+<% end %>
