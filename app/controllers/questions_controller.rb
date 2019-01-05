@@ -3,9 +3,7 @@ class QuestionsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :today, :intro]
     
     def today
-        
         @questions = Question.where(selected_date: (Date.today))
-
     end
 
     # before_action :authenticate_user!
@@ -47,6 +45,8 @@ class QuestionsController < ApplicationController
         end
         # now the link looks like ".../invitation/:user_id/:qid1/:qid2/:qid3" (qid's are optional)
         render 'link_generation'
+    end
+
     def import_all
         @questions = Question.where(selected_date: (Date.today))
         csv = Roo::CSV.new('./lib/assets/questions.csv')
