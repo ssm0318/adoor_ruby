@@ -15,7 +15,7 @@
         <%= @new_friend.username %>님이 질문을 보냈어요!<br/><br/>
         <% @assigned_questions.each do |q| %>
             <%= q.content %>
-            <%= link_to "답변하기", new_answer_path(q.id) %>
+            <%= link_to "답변하기", new_answer_path(q.id) %><br>
         <% end %><br>
     <% else %>
     <% end %>
