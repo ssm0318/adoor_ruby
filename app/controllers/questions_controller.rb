@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+    require 'roo'
     before_action :authenticate_user!, except: [:index, :today, :intro]
     
     def today
@@ -25,5 +26,19 @@ class QuestionsController < ApplicationController
 
     def intro
         render 'intro'
+    end
+
+    def import_all
+        @questions = Question.where(selected_date: (Date.today))
+        csv = Roo::CSV.new('./lib/assets/questions.csv')
+        for i in 1..csv.last_row
+            
+
+        render 'today'
+    end
+
+    def import_new
+        @questions = Question.where(selected_date: (Date.today))
+        csv = Roo::CSV.new('./lib/assets/questions.csv')
     end
 end

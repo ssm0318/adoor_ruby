@@ -45,4 +45,8 @@ Rails.application.routes.draw do
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions'
   # }
+
+  # add question (admin only)
+  get '/admin/import_all_questions' => 'questions#import_all', as: :import_all_questions
+  get '/admin/import_new_questions' => 'questions#import_new', as: :import_new_questions
 end
