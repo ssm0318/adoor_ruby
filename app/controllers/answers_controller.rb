@@ -12,6 +12,14 @@ class AnswersController < ApplicationController
         @answer = Answer.new(answer_params)
         @answer.save
 
+        input_tag = @answer.tag_string
+        input_tag = input_tag.gsub("\r\n", '\n')
+        tag_array = input_tag.split('\n')
+        tag_array.each do |tag|
+            new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)
+            @answer.tags << new_tag
+        end
+       
         redirect_to @answer
     end
 
@@ -19,13 +27,23 @@ class AnswersController < ApplicationController
     end
 
     def edit
+        @question = @answer.question
     end
 
     def update
         if @answer.update(answer_params)
-          redirect_to @answer
+            @answer.tags.destroy_all
+            input_tag = @answer.tag_string
+            input_tag = input_tag.gsub("\r\n", "\n")
+            tag_array = input_tag.split("\n") 
+            tag_array.each do |tag|
+                new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)
+                @answer.tags << Tag.find(new_tag.id)
+            end
+
+            redirect_to @answer
         else
-          render 'edit'
+            render 'edit'
         end
     end
 
@@ -52,6 +70,6 @@ class AnswersController < ApplicationController
         end
 
         def answer_params
-            params.require(:answer).permit(:author_id, :question_id, :content)
+            params.require(:answer).permit(:author_id, :question_id, :content, :tag_string)
         end  
 end

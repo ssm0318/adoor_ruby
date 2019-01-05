@@ -1,7 +1,7 @@
 class Friendship < ApplicationRecord
     belongs_to :user
     belongs_to :friend, :class_name => "User"
-
+    
     after_create :create_notifications, :delete_request, :create_inverse
 
     private

@@ -16,7 +16,7 @@ class NotificationsController < ApplicationController
             if noti.target_type == 'Friendship'
                 redirect_to "/userpage/#{noti.actor_id}"
             elsif noti.target_type == 'Assignment'
-                redirect_to "/answers/new/question/#{Assignment.find(noti.target_id).question_id}"
+                redirect_to "/answers/question/#{Assignment.find(noti.target_id).question_id}/new"
             elsif noti.target_type == 'Answer'
                 redirect_to "/answers/#{noti.target_id}"
             elsif noti.target_type == 'Comment'
