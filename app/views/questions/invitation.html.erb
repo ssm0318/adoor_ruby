@@ -11,13 +11,15 @@
             </label>
         </div>
     <% end %>
-    <%= submit_tag "링크 생성하기", class: "link-generation-button" %>
+    <%= submit_tag "링크 생성하기", class: "link-generation-button" %><br>
+    생성된 링크를 친구에게 보내보세요. 친구가 링크로 접속하면 (회원가입 후) <%= current_user.username %>님에게 친구요청을 보낼 수 있어요.
 <% end %>
 
 
 
 <script>
 // FIXME: not working now
+// 최대 3개까지만 체크하게 하도록 하는 거!!
 $(document).ready(function() {
     $(input).on('change', function() {
         var maxAllowed = 3;

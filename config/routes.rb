@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   post '/recover_password' => 'users#send_temporary_password'
 
   resources :answers, except: :new
-  get '/answers/new/question/:id' => 'answers#new'
+  get '/answers/new/question/:id' => 'answers#new', as: :new_answer
 
 
   resources :highlights

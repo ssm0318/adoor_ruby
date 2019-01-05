@@ -41,6 +41,9 @@ class QuestionsController < ApplicationController
         assigned_questions.each do |q|
             @link += "/" + q.id.to_s
         end
+        if assigned_questions.empty?
+            @link += "/" + "empty"
+        end
         # now the link looks like ".../invitation/:user_id/:qid1/:qid2/:qid3" (qid's are optional)
         render 'link_generation'
     end
