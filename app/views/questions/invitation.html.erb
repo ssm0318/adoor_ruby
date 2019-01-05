@@ -1,30 +1,38 @@
 친구에게 초대링크를 보내보세요. <br/>
-최대 3개의 질문과 함께 보낼 수 있어요! <br/>
+최대 3개의 질문과 함께 보낼 수 있어요! <br/><br>
 <!-- TODO: 질문 검색창 만들기 -->
 
-<%= label_tag "질문을 선택하세요" %>
-<% @questions.reverse_each do |question| %>
-    <div class = "field">
-    
-        <div class="question-el" align="right">
-            <div>
-                <label><%= question.content %></label>
-                <input type="checkbox" name="isKorean" value="true">
-            </div>
+<%= form_tag(link_generation_path, method: :get) do %>
+    <% @questions.each do |question| %>
+        <div>
+            <label>
+                <%= check_box_tag "q[]", question.id %>
+                <%= question.content %>
+            </label>
         </div>
-    <%# <div class="question-content">
-        question.content
-
-    </div> %>
-    
-    </div>
+    <% end %>
+    <%= submit_tag "링크 생성하기", class: "link-generation-button" %>
 <% end %>
-<div>
-    친구 초대하기
-    <!-- FIXME: 이 부분은 deploy할 때 링크 꼭 바꿔줘야 함!! -->
-    링크: <%= "localhost:3000/invitation/#{current_user.id}/#{current_user.invitation_token}" %>
-</div> 
 
 
 
+<script>
+// FIXME: not working now
+$(document).ready(function() {
+    $(input).on('change', function() {
+        var maxAllowed = 3;
+        var cnt = $(input:checked).length;
+        if (cnt > maxAllowed) {
+            this.checked = false;
+            alert("질문은 3개까지만 동봉할 수 있어요!");
 
+        }
+    });
+});
+// $('.checkboxes').on('change', function() {
+//     if($(this).siblings(':checked').length > 3) {
+//         this.checked = false;
+//         alert("질문은 3개까지만 동봉할 수 있어요!");
+//     }
+// });
+</script>

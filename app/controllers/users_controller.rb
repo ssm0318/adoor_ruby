@@ -66,12 +66,24 @@ class UsersController < ApplicationController
     def accept_invitation
         @new_friend = User.find(params[:id])
         @assigned_questions = []
-        #lakdjf;d.each do |question_id|
-        #@assigned_questions.push(Question.find(question_id))
-        #end
-        if @new_friend.invitation_token == params[:invitation_token]
-            render 'accept_invitation'
+        @assigned_questions.push(Question.find(question_id1))
+        @assigned_questions.push(Question.find(question_id2))
+        @assigned_questions.push(Question.find(question_id2))
+
+        if current_user.friends.include? @new_friend
+            @assigned_questions.each do |q|
+                Assignment.create(question_id: q, assigner_id: @new_friend.id, assignee_id: current_user.id)
+            end
+        else
+            @assigned_questions.each do |q|
+                # assigner가 admin인 assignment 만들기
+                Assignment.create(question_id: q, assigner_id: 1, assignee_id: current_user.id)
+            end
         end
+
+        
+
+        render 'accept_invitation'
     end
 
     private

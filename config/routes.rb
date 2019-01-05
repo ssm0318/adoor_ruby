@@ -42,7 +42,8 @@ Rails.application.routes.draw do
   get '/mypage' => 'users#mypage', as: :show_mypage
 
   get '/invitation' => 'questions#invitation', as: :invitation
-  get '/invitation/:id/:invitation_token' => 'users#accept_invitation', as: :accept_invitation
+  get '/invitation/link' => 'questions#link_generation', as: :link_generation
+  get '/invitation/:id(/:question_id1(/:question_id2(/:question_id3)))' => 'users#accept_invitation', as: :accept_invitation
   devise_for :users
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions'

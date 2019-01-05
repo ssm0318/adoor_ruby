@@ -127,7 +127,6 @@ ActiveRecord::Schema.define(version: 20180902160303) do
     t.string "username"
     t.date "date_of_birth"
     t.string "image"
-    t.string "invitation_token"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
