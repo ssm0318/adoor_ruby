@@ -47,7 +47,8 @@ class UsersController < ApplicationController
             friendship.destroy_all
             Friendship.where({user_id: params[:id], friend_id: current_user.id}).destroy_all
         end
-        redirect_back fallback_location: user_answers_path(params[:id])
+        #redirect_back fallback_location: user_answers_path(params[:id])
+        redirect_to user_answers_path(params[:id])
     end
 
     def friend_request
@@ -60,6 +61,28 @@ class UsersController < ApplicationController
             friend_request.destroy_all
         end
         redirect_back fallback_location: user_answers_path(params[:id])
+    end
+
+    def accept_invitation
+        @new_friend = User.find(params[:id])
+        @assigned_questions = []
+        if params[:question_id1] != "empty"
+            @assigned_questions.push(Question.find(params[:question_id1])) # empty도 아니면서 question_id 가 하나도 없는 경우는 잘못된 링크이므로 이걸 걸러내기 위해
+            @assigned_questions.push(Question.find(params[:question_id2])) if params[:question_id2]
+            @assigned_questions.push(Question.find(params[:question_id3])) if params[:question_id3]
+
+            if current_user.friends.include? @new_friend
+                @assigned_questions.each do |q|
+                    Assignment.find_or_create_by(question_id: q.id, assigner_id: @new_friend.id, assignee_id: current_user.id)
+                end
+            else
+                @assigned_questions.each do |q|
+                    # assigner가 admin인 assignment 만들기
+                    Assignment.find_or_create_by(question_id: q.id, assigner_id: 1, assignee_id: current_user.id)
+                end
+            end
+        end
+        render 'accept_invitation'
     end
 
     private

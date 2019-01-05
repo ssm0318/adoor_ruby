@@ -14,9 +14,15 @@ Rails.application.routes.draw do
   get '/recover_password' => 'users#recover_password'
   post '/recover_password' => 'users#send_temporary_password'
 
+<<<<<<< HEAD
+  resources :answers, except: :new
+  get '/answers/new/question/:id' => 'answers#new', as: :new_answer
+
+=======
   resources :answers, except: [:new, :edit]
   get '/answers/new/question/:id' => 'answers#new', as: :new_answer
   get '/answers/edit/question/:id' => 'answers#edit', as: :edit_answer
+>>>>>>> master
 
   resources :highlights
   resources :stars
@@ -41,6 +47,11 @@ Rails.application.routes.draw do
   patch '/users/profile/:id/edit' => 'users#update', as: :update_user_profile
   get '/mypage' => 'users#mypage', as: :show_mypage
 
+<<<<<<< HEAD
+  get '/invitation' => 'questions#invitation', as: :invitation
+  get '/invitation/link' => 'questions#link_generation', as: :link_generation
+  get '/invitation/:id(/:question_id1(/:question_id2(/:question_id3)))' => 'users#accept_invitation', as: :accept_invitation
+=======
   # search
   get '/search/all' => 'search#all', as: :search_all
   get '/search/admin_question' => 'search#admin_question', as: :search_admin_question
@@ -49,6 +60,7 @@ Rails.application.routes.draw do
   get '/search/anonymous_answer' => 'search#anonymous_answer', as: :search_anonymous_answer
   get '/search/popular_tags' => 'search#popular_tags', as: :search_popular_tags
 
+>>>>>>> master
   devise_for :users
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions'
