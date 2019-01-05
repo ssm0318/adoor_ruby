@@ -42,4 +42,10 @@ class SearchController < ApplicationController
 
         render 'anonymous_answer'
     end
+
+    def popular_tags
+        @results = Tag.all.popular_tags(params[:num])
+    
+        render 'popular_tags'
+    end
 end
