@@ -2,18 +2,19 @@
     <%= @new_friend.username %>님과 이미 친구입니다!<br/>
     친구가 세 개의 질문을 보냈어요!<br/>
     <% @assigned_questions.each do |q| %>
-        <%= q.content %>
-        답변하러 가기~~
+        <%= q.content %><br/>
+        답변하러 가기~~<br/>
     <% end %>
     <%= link_to "친구 페이지 가기", user_answers_path(@new_friend.id) %>
 <% elsif current_user.id == @new_friend.id %>
     친구에게 초대 링크를 보내세요!
 <% else %>
-    <%= @new_friend.username %>님이 질문을 보냈어요!
+    <%= @new_friend.username %>님이 질문을 보냈어요!<br/>
     <% @assigned_questions.each do |q| %>
-        <%= q.content %>
-        답변하러 가기~~
+        <%= q.content %><br/>
+        답변하러 가기~~<br/>
     <% end %>
-    <%= @new_friend.username %>님과 친구가 되어보세요!
+    <%= @new_friend.username %>님과 친구가 되어보세요!<br/>
+    <!-- FIXME:친구요청 누르면, '친구요청이 보내졌습니다'라고 뜨고 '친구요청 취소'로 바뀌도록 -->
     <%= link_to "친구요청", friend_request_path(@new_friend.id), method: :post %>
 <% end %>

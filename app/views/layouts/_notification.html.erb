@@ -21,7 +21,11 @@
                 <% elsif noti.target_type == 'Answer' %>
                     <%=username%>님의 선물이 도착했습니다.
                 <% elsif noti.target_type == 'Assignment' %>
-                    <%=username%>님이 회원님에게 새로운 질문을 assign했습니다.
+                    <% if noti.action == 'initial-assign' %>
+                        회원님에게 질문이 도착했습니다.
+                    <% elsif noti.action == 'friend-assign'%>
+                        <%=username%>님으로부터 새로운 질문이 도착했습니다.
+                    <% end %>
                 <% elsif noti.target_type == 'Highlight' %>
                     <%=username%>님이 회원님의 글을 highlight했습니다.
                 <% elsif noti.target_type == 'Star' %>
