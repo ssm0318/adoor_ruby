@@ -5,6 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates_presence_of :username
+  validates_uniqueness_of :username, :case_sensitive => false
+
   after_create :add_default_role, :add_default_image
 
   mount_uploader :image, ImageUploader
