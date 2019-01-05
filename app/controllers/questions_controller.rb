@@ -32,7 +32,12 @@ class QuestionsController < ApplicationController
         @questions = Question.where(selected_date: (Date.today))
         csv = Roo::CSV.new('./lib/assets/questions.csv')
         for i in 1..csv.last_row
-            Question.create(author_id: 1, content: csv.cell(i, 1), tag_string: csv.cell(i, 6))
+            q = Question.create(author_id: 1, content: csv.cell(i, 1), tag_string: csv.cell(i, 6))
+            tag_array = q.tag_string.gsub("\r\n", '\n').split('\n')
+            tag_array.each do |tag|
+                new_tag = Tag.create(author_id: q.author.id, content: tag, target: q)
+                q.tags << new_tag
+            end
         end
         render 'today'
     end
@@ -43,7 +48,12 @@ class QuestionsController < ApplicationController
         start_idx = Question.where(author_id: 1).last.id
         
         for i in start_idx..csv.last_row
-            Question.create(author_id: 1, content: csv.cell(i, 1), tag_string: csv.cell(i, 2))
+            q = Question.create(author_id: 1, content: csv.cell(i, 1), tag_string: csv.cell(i, 2))
+            tag_array = q.tag_string.gsub("\r\n", '\n').split('\n')
+            tag_array.each do |tag|
+                new_tag = Tag.create(author_id: q.author.id, content: tag, target: q)
+                q.tags << new_tag
+            end
         end
         render 'today'
     end
