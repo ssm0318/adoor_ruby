@@ -61,9 +61,10 @@ class QuestionsController < ApplicationController
             end
             if i <= 5
                 q.selected_date = Date.today()
+                q.save
             end
         end
-        render 'today'
+        redirect_to action: "today"
     end
 
     def import_new
@@ -81,6 +82,6 @@ class QuestionsController < ApplicationController
                 end
             end
         end
-        render 'today'
+        redirect_to action: "today"
     end
 end
