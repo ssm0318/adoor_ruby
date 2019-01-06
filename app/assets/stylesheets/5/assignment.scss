@@ -2,34 +2,64 @@
     position: absolute;
     z-index: 1;
     background-color: white;
-    border: 0.75px solid #bcbcbc;
+    border: 0.5px solid #bcbcbc;
     width: 200px;
     margin-left: 100px;
     margin-top: -25px;
     font-size: 15px;
-}
+    padding: 5px 15px 5px 15px;
 
-.btn-do-assign {
-    cursor: pointer;
-    position: absolute;
-    margin-top: -30px;
-    right: 10px;
-    padding: 8px;
-    border: 0.75px solid #C08BEF;
-    border-radius: 20px;
-    color: #777777;
-    font-size: 14px;
-    text-align: center;
-    text-decoration: none;
-}
+    .assignment-content-el {
+        padding-bottom: 10px;
+        padding-top: 10px;
+        height: 30px;
+        display: relative;
 
+        .assignee {
+            float: left;
 
-.assignment-content-el {
-    float: left;
-    display: block;
-    height: 50px;
-    padding: 10px;
-    font-size: 16px;
+            .assignee-profile {
+                height: 30px;
+                width:30px; 
+                border-radius:20px;
+            }
+            .assignee-name {
+                font-family: "Nanum Gothic", sans-serif;
+                font-size: 13px;
+                position: relative;
+                top: -9px;
+                padding-left: 5px;
+                color: black;
+            
+            }
+        }
+        .assign-btn{
+            float: right;
+
+            .btn-do-assign {
+                text-align: center;
+                background-color: #F48462;
+                border-width: 2px;
+                border-style: solid;
+                border-color: white;
+                color: white;
+                display: block;
+                width: 70px;
+                height: 30px;
+                font-size: 13px;
+                text-align: center;
+                text-decoration: none;
+                font-family: 'Nanum Gothic', sans-serif;
+                border-radius: 30px;
+                cursor: pointer;
+                line-height: 30px;
+
+                span {
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
 }
 
 
