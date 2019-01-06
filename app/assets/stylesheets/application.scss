@@ -14,64 +14,67 @@
  *= require_self
  */
 
-// 헤더랑 컨테이너는 일단 여기다 함..!
-.prism-header {
-    // position: fixed;
+.adoor-header {
     width: 100%;
-    height: 40px;
     display: inline-block;
-    a.nav-el.nav-long {
-        right: 0px; // 안됨
+
+    .logo {
+        float: left;
+        width: 180px;
+        height: auto;
     }
-}
 
-.logo {
-    float: left;
-    width: 90px;
-    height: auto;
-    display: block;
-    margin-left: 15px;
-}
+    .nav {
+        padding-top: 25px;
 
-// .login-btn {
-//     position: fixed;
-//     right: 60px;
-//     top: 8px;
-// }
+        .nav-left{
+            float:left;
 
-.btn-sidenav {
-    float: left;
-    display: block;
-    width: 24px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 5px;
-    cursor: pointer;
+            .nav-el {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 15px;
+                color: #777777;
+                padding-left: 25px;
+                padding-right: 25px;
+    
+                &:hover {
+                    color: #F48462;
+                }
+            }
+        }
 
-}
+        .nav-right {
+            float: right;
+            margin-right: 25px;
+            
+            .nav-el {
+                display: inline-block;
+                font-family: 'Open Sans', sans-serif;
+                font-size: 15px;
+                color: #777777;
+                padding-left: 25px;
+                padding-right: 25px;
+                
+        
+                &:hover {
+                    color: #F48462;
+                }
+            }
 
-.topnav-log {
-    float: right;
-    display: block;
-    margin: 5px 20px 0px 0px;
-    border: 0.75px solid #bcbcbc;
-    border-radius: 20px;
-    width: 80px;
-    padding: 4px;
-    color: #777777;
-    font-size: 14px;
-    text-align: center;
-    text-decoration: none;
-}
+            .log-in {
+                color: #F48462;
+            }
 
-.btn-noti {
-    float: right;
-    width: 24px;
-    height: auto;
-    display: block;
-    cursor: pointer;
-    margin-right: 30px;
-    margin-top: 2px;
+            .btn-noti {
+                float: right;
+                width: 20px;
+                height: auto;
+                display: block;
+                cursor: pointer;
+            }
+        }
+    }
+    
 }
 
 #prism-container {
@@ -80,9 +83,11 @@
     .prism-title {
         width: 100%;
         text-align: center;
-        color: mediumpurple;
-    }// text-align: center;
-    padding-top: 60px;
+        color: #F48462;
+        &:hover {
+            color: #F48462;
+         }
+    }
 }
 
 a {
@@ -91,7 +96,6 @@ a {
 
 .question {
     font-family: "Nanum Myeongjo", sans-serif;
-
 }
 
 .answer {

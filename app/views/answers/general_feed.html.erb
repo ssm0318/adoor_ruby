@@ -9,7 +9,7 @@
           <i class="material-icons">more_vert</i>
         </div>
         <div class="prism-box__content"><br>
-          <a href="/questions/<%=question.id%>" class="question" style="font-size: 18px;"><%= question.content %></a> <br><br>
+          <a href="/questions/<%=answer.question.id%>" class="question" style="font-size: 18px;"><%= answer.question.content %></a> <br><br>
           <div class="answer"><%= answer.content %> <br><br></div>
           <div class = "date"><%= answer.updated_at.strftime("%m월 %d일") %></div><!-- 연도는 %Y -->
           
@@ -22,7 +22,6 @@
           <% end %>
         </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
       </div>
-    <% end %>
   <% end %>
 </div>
 <!--더보기는 지금 구현하는 건 아닌 듯-->

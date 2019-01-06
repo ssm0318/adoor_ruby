@@ -54,6 +54,23 @@ class AnswersController < ApplicationController
         @answers = @user.answers
     end
 
+    def general_feed
+        @answers = Answer.all
+        render 'general_feed'
+    end
+
+    def friend_feed
+        @answers = []
+        @answers.concat(current_user.answers)
+        
+        for friend in current_user.friends
+            @answers.concat(friend.answers)
+        end
+
+        @answers = @answers.sort_by(&:created_at)
+        render 'friend_feed'
+    end
+
     def create_comment
         Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], answer_id: params[:id])
         answer_author_id = Answer.find(params[:id]).author_id
