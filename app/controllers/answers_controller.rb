@@ -12,9 +12,7 @@ class AnswersController < ApplicationController
         @answer = Answer.new(answer_params)
         @answer.save
 
-        input_tag = @answer.tag_string
-        input_tag = input_tag.gsub("\r\n", "\n")
-        tag_array = input_tag.split('\n')
+        tag_array = @answer.tag_string.gsub("\r\n", '\n').split('\n')
         tag_array.each do |tag|
             new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)
             @answer.tags << new_tag
@@ -33,9 +31,7 @@ class AnswersController < ApplicationController
     def update
         if @answer.update(answer_params)
             @answer.tags.destroy_all
-            input_tag = @answer.tag_string
-            input_tag = input_tag.gsub("\r\n", "\n")
-            tag_array = input_tag.split("\n") 
+            tag_array = @answer.tag_string.gsub("\r\n", "\n").split("\n") 
             tag_array.each do |tag|
                 new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)
                 @answer.tags << Tag.find(new_tag.id)

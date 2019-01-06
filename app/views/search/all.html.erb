@@ -1,5 +1,8 @@
 <h1>검색 결과</h1>
-<% @results.each do |answer| %>
-    글쓴이: <%= answer.author.username %>
-    내용: <%= answer.content %>
+<% @results.each do |content| %>
+    <div style="border: 1px solid black;">
+        글쓴이: <%= content.author.username %><br>
+        내용: <%= content.content %><br>
+        태그: <%= content.tag_string %><br>
+    </div>
 <% end %>

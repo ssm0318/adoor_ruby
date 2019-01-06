@@ -1,0 +1,40 @@
+친구에게 초대링크를 보내보세요. <br/>
+최대 3개의 질문과 함께 보낼 수 있어요! <br/><br>
+<!-- TODO: 질문 검색창 만들기 -->
+
+<%= form_tag(link_generation_path, method: :get) do %>
+    <% @questions.each do |question| %>
+        <div>
+            <label>
+                <%= check_box_tag "q[]", question.id %>
+                <%= question.content %>
+            </label>
+        </div>
+    <% end %>
+    <%= submit_tag "링크 생성하기", class: "link-generation-button" %><br>
+    생성된 링크를 친구에게 보내보세요. 친구가 링크로 접속하면 (회원가입 후) <%= current_user.username %>님에게 친구요청을 보낼 수 있어요.
+<% end %>
+
+
+
+<script>
+// FIXME: not working now
+// 최대 3개까지만 체크하게 하도록 하는 거!!
+$(document).ready(function() {
+    $(input).on('change', function() {
+        var maxAllowed = 3;
+        var cnt = $(input:checked).length;
+        if (cnt > maxAllowed) {
+            this.checked = false;
+            alert("질문은 3개까지만 동봉할 수 있어요!");
+
+        }
+    });
+});
+// $('.checkboxes').on('change', function() {
+//     if($(this).siblings(':checked').length > 3) {
+//         this.checked = false;
+//         alert("질문은 3개까지만 동봉할 수 있어요!");
+//     }
+// });
+</script>

@@ -42,15 +42,25 @@ Rails.application.routes.draw do
   patch '/users/profile/:id/edit' => 'users#update', as: :update_user_profile
   get '/mypage' => 'users#mypage', as: :show_mypage
 
+  get '/invitation' => 'questions#invitation', as: :invitation
+  get '/invitation/link' => 'questions#link_generation', as: :link_generation
+  get '/invitation/:id(/:question_id1(/:question_id2(/:question_id3)))' => 'users#accept_invitation', as: :accept_invitation
+
   # search
   get '/search/all' => 'search#all', as: :search_all
   get '/search/admin_question' => 'search#admin_question', as: :search_admin_question
   get '/search/custom_question' => 'search#custom_question', as: :search_custom_question
   get '/search/friend_answer' => 'search#friend_answer', as: :search_friend_answer
   get '/search/anonymous_answer' => 'search#anonymous_answer', as: :search_anonymous_answer
+  get '/search/popular_tags' => 'search#popular_tags', as: :show_popular_tags
+  get '/search/popular_search' => 'search#popular_search', as: :show_popular_search
 
   devise_for :users
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions'
   # }
+
+  # add question (admin only)
+  get '/admin/import_all_questions' => 'questions#import_all', as: :import_all_questions
+  get '/admin/import_new_questions' => 'questions#import_new', as: :import_new_questions
 end
