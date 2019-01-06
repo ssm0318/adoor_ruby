@@ -1,12 +1,13 @@
 <div class="inner-container">
     <div class="prism-title"><h1>Question Feed</h1></div>
     <div class = "question">
-        <%= @question.content %>
-        <% if Star.where(user_id: current_user.id, target: @question).empty? %>
-        <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: @question.id, target_type: "Question"), method: :post %>
-        <% else %>
-        <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(@question.id, target_type: "Question"), method: :delete %>
-        <% end %>
+        <div class = "question-content"><%= @question.content %>
+            <% if Star.where(user_id: current_user.id, target: @question).empty? %>
+            <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: @question.id, target_type: "Question"), method: :post %>
+            <% else %>
+            <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(@question.id, target_type: "Question"), method: :delete %>
+            <% end %>
+        </div>
     </div>
 
     <% @question.answers.reverse_each do |a| %>

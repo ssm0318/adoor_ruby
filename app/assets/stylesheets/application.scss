@@ -205,11 +205,16 @@ div.background {
 
     //for each question feed
     .question {
-        position: relative;
-        font-family: 'Nanum Gothic', sans-serif;
-        text-decoration: none;
-        color: black;
-        font-size: 22px;
+        text-align: center;
+        
+        .question-content{
+            position: relative;
+            font-family: 'Nanum Gothic', sans-serif;
+            text-decoration: none;
+            color: black;
+            font-size: 22px;
+
+        }
 
         i {
             padding-left: 20px;
