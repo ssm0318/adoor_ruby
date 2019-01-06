@@ -77,10 +77,9 @@
     
 }
 
-.prism-container {
+#prism-container {
     width: 60%;
     margin: 0 auto;
-
     .prism-title {
         width: 100%;
         text-align: center;
@@ -108,7 +107,9 @@ a {
     color: black;
     vertical-align: +6px;
 }
-body {margin: 0px;}
+body {margin: 0px; height: 100%; }
+
+html { height: 100%; overflow:auto; }
 
 div.background {
     // width: 100%;

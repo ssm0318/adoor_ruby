@@ -1,21 +1,9 @@
-<div class = "today-question-box"> 
-<h1 class = "today-question-title">새로운 답변</h1>
+<html> 
+    <div class = "today-question-box"> 
+    <h1 class = "today-question-title">새로운 답변</h1>
 
-<div class = "question-box">
-    <p class = "question">
-        <%= @question.content %>
-    </p>
-    <div align = "center">
-        <%= form_for @answer do |f| %>
-            <%= f.hidden_field :author_id, :value => current_user.id %>
-            <%= f.hidden_field :question_id, :value => @question.id %>
-            <%= f.text_area :content, class: "new-answer-field",  autofocus: true,"data-enable-grammarly": "false" %>
-            <br><br>
-            <%= f.submit "저장하기", class: "answer-button"%>
-        <% end %>
-    </div>
-</div>
-
+    <%= render 'form', answer: @answer %>
+</html> 
 
 <script>
     //주석된 코드는 너무 느리네..!!(수정)
@@ -31,13 +19,31 @@
     // })
     var textarea = document.querySelector('textarea');
 
-    textarea.addEventListener('keydown', autosize);
+    textarea.addEventListener('keyup', autosize);
+    textarea.addEventListener('keyup', idontknow);
+
+    function idontknow() {
+        setTimeout(function(){
+            // window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+            window.scrollTo(0, document.getElementById('prism-container').scrollHeight)
+        }, 0);
+    }
 
     function autosize(){
         var el = this;
-        setTimeout(function(){
-            el.style.cssText = 'height:auto; padding:0';
-            el.style.cssText = 'height:' + (el.scrollHeight) + 'px';
-        },0);
+        // setTimeout(function(){
+        //     el.style.cssText = 'height:auto; padding:0';
+        //     el.style.cssText = 'height:' + (el.scrollHeight) + 'px';
+        // },0);
+        // el.style.cssText = 'height:auto; padding:30';
+        // el.style.cssText = 'height:' + (el.scrollHeight) + 'px';
+        el.style.height = 'auto';
+        el.style.height = el.scrollHeight + 'px';
+        // console.log(document.body.scrollHeight);
+        // console.log(el.scrollHeight);
+        // document.documentElement.scrollTop = document.body.scrollHeight;
+        // window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+        // console.log(document.documentElement.scrollHeight)
+        
     }
 </script>

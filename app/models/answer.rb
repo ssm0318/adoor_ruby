@@ -4,6 +4,11 @@ class Answer < ApplicationRecord
     has_many   :highlights
     has_many   :comments
     has_many   :stars
+    has_and_belongs_to_many :tags, dependent: :destroy
+
+    scope :anonymous, -> (id) { where.not(author: User.find(id).friends).where.not(author: User.find(id)) }
+
+    scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
 
     after_create :create_notifications
 

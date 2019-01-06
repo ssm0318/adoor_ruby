@@ -1,6 +1,7 @@
 <div class="inner-container">
   <div class="prism-title"><h1>General Feed</h1></div>
-  <% @answers.reverse_each do |answer| %>
+  <% @questions.reverse_each do |question| %>
+    <% question.answers.anonymous(current_user.id).reverse_each do |answer| %>
       <div class="prism-box">
         <div class="prism-box__header">
           <%= render partial: "./user_profile", locals: {user: answer.author} %>
