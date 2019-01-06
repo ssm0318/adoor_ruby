@@ -7,12 +7,12 @@
             <%= link_to "#{question.content}", "questions/#{question.id}" %>
             </div>
             <div class="question-btn">
-                <%= image_tag "icons/write-icon.png", class: "btn-write", onclick:"window.location='/answers/new/question/#{question.id}'"%>
+                <%= link_to image_tag("icons/write-icon.png", class: "btn-write"), new_answer_path(question.id) %>
                 <% if user_signed_in? %>
                     <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
-                    <%= render 'assignment', question: question %>
+                    <%= render 'questions/assignment', question: question %>
                 <% else %>
-                    <%= image_tag "icons/assign-icon.png", class: "btn-assign", onclick:"window.location='/users/sign_in'"%>
+                    <%= link_to image_tag("icons/assign-icon.png", class: "btn-assign"), new_user_session_path %>
                 <% end %>
             </div>
         </div>

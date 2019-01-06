@@ -77,7 +77,9 @@ class UsersController < ApplicationController
             @assigned_questions.push(Question.find(params[:question_id2])) if params[:question_id2]
             @assigned_questions.push(Question.find(params[:question_id3])) if params[:question_id3]
 
-            if current_user.friends.include? @new_friend
+            if !user_signed_in?
+            elsif current_user.id == @new_friend.id
+            elsif current_user.friends.include? @new_friend
                 @assigned_questions.each do |q|
                     Assignment.find_or_create_by(question_id: q.id, assigner_id: @new_friend.id, assignee_id: current_user.id)
                 end
