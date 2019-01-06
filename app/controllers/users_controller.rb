@@ -28,10 +28,16 @@ class UsersController < ApplicationController
         puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
         puts user_params
         puts @user.image
-        puts @user.errors.full_messages
+        puts @user.errors
+        puts @user.errors.full_messages[0]
         puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
-        redirect_to show_mypage_path
+        if !@user.errors.full_messages.empty?
+            @error = @user.errors.full_messages[0]
+            render 'edit'
+        else
+            redirect_to show_mypage_path
+        end
     end
 
     def mypage
