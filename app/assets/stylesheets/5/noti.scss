@@ -2,7 +2,7 @@
     position: fixed;
     right: 10px;
     top: 45px;
-    padding: 0px;
+    margin-top: 15px;
     border: 0.75px solid #bcbcbc;
     max-height: 250px;
     overflow-y: scroll;
@@ -31,6 +31,6 @@
 // }
 
 .noti-el.unread {
-    background-color: #d9c9ed;
+    background-color: #FAD4BC;
     color: white;
 }

@@ -8,7 +8,6 @@
             <div class="prism-box__header">
                 <%= render partial: "./user_profile", locals: {user: a.author} %><br/>
                     <%# TODO: 공개범위 수정하는거 구현 %> 
-                
                 <!--
                 <% if current_user.id == @user.id %>
                         <%= a.highlights.size %> 개의 형광펜
@@ -50,6 +49,7 @@
                 <% else %>
                     <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
                 <% end %>
+                <br>
             </div>
             <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px dashed #d7dae0;">
                 <div>
