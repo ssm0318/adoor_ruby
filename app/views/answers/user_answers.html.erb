@@ -28,7 +28,7 @@
                     <%= a.tag_string.gsub("\r\n", "\n").split("\n") %>
                 <% end %>
                 <br>
-                <div class = "date"><%= a.created_at.strftime("%m월 %d일") %></div>
+                <div class = "date"><%= a.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
                 <br>
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">

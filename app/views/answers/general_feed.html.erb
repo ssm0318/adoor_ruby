@@ -11,7 +11,7 @@
         <div class="prism-box__content"><br>
           <a href="/questions/<%=answer.question.id%>" class="question" style="font-size: 18px;"><%= answer.question.content %></a> <br><br>
           <div class="answer"><%= answer.content %> <br><br></div>
-          <div class = "date"><%= answer.updated_at.strftime("%m월 %d일") %></div><!-- 연도는 %Y -->
+          <div class = "date"><%= answer.updated_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div><!-- 연도는 %Y -->
           
         </div>
         <div class="prism-box__footer" style="padding-bottom: 10px;">

@@ -25,7 +25,7 @@
             <div class="answer"><%= a.content %></div>
             <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
             <br>
-            <div class = "date"><%= a.created_at.strftime("%m월 %d일") %></div>
+            <div class = "date"><%= a.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
         </div>
         <div class="prism-box__footer" style="padding-bottom: 10px;">
             <!--
@@ -54,6 +54,7 @@
             <br>
         </div>
     </div>
+    
     <div class="prism-box__content">
         <br>
         <a href="/questions/<%=a.question.id%>" class="question"><%= a.question.content %></a> <br><br>
@@ -65,7 +66,7 @@
             <%= a.tag_string.gsub("\r\n", "\n").split("\n").join(", ") %>
         <% end %>
         <br>
-        <div class = "date"><%= a.created_at.strftime("%m월 %d일") %></div>
+        <div class = "date"><%= a.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
     </div>
     <div class="prism-box__footer" style="padding-bottom: 10px;">
         <!--
