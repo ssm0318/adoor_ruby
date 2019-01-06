@@ -1,25 +1,6 @@
-<% if current_user.friends.include? @new_friend %>
-    <%= @new_friend.username %>님과 이미 친구입니다!<br/><br/>
-    <% if !@assigned_questions.empty? %>
-        친구가 질문을 보냈어요!<br/>
-        <% @assigned_questions.each do |q| %>
-            <%= q.content %>
-            <%= link_to "답변하기", new_answer_path(q.id) %><br/>
-        <% end %><br>
-    <% end %>
-    <%= link_to "친구 페이지 가기", user_answers_path(@new_friend.id) %>
-<% elsif current_user.id == @new_friend.id %>
-    친구에게 초대 링크를 보내세요!
-<% else %>
-    <% if !@assigned_questions.empty? %>
-        <%= @new_friend.username %>님이 질문을 보냈어요!<br/><br/>
-        <% @assigned_questions.each do |q| %>
-            <%= q.content %>
-            <%= link_to "답변하기", new_answer_path(q.id) %><br>
-        <% end %><br>
-    <% else %>
-    <% end %>
-    <%= @new_friend.username %>님과 친구가 되어보세요!<br/>
-    <!-- FIXME:친구요청 누르면, '친구요청이 보내졌습니다'라고 뜨고 '친구요청 취소'로 바뀌도록 -->
-    <%= link_to "친구요청", friend_request_path(@new_friend.id), method: :post %>
-<% end %>
+<%= render partial: "./questions_layout", locals: {title: "#{@new_friend.username}님이 보낸 질문", questions: @assigned_questions} %><br/>
+<%= @new_friend.username %>님과 친구가 되어보세요!<br/>
+<!-- FIXME:친구요청 누르면, '친구요청이 보내졌습니다'라고 뜨고 '친구요청 취소'로 바뀌도록 -->
+<%= link_to "친구요청", friend_request_path(@new_friend.id), method: :post %>
+
+
