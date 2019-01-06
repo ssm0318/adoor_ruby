@@ -59,6 +59,9 @@ class QuestionsController < ApplicationController
                     q.tags << new_tag
                 end
             end
+            if i <= 5
+                q.selected_date = Date.today()
+            end
         end
         render 'today'
     end
