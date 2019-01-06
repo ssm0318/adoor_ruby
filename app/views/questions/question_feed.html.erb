@@ -1,102 +1,63 @@
 <div class="inner-container">
-    <div class="prism-title">
-    <h1>Question Feed</h1></div>
-    <h2>
+    <div class="prism-title"><h1>Question Feed</h1></div>
+    <div class = "question">
         <%= @question.content %>
         <% if Star.where(user_id: current_user.id, target: @question).empty? %>
         <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: @question.id, target_type: "Question"), method: :post %>
         <% else %>
         <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(@question.id, target_type: "Question"), method: :delete %>
         <% end %>
-    </h2>
     </div>
+
     <% @question.answers.reverse_each do |a| %>
-
-
-
-    <div class="prism-box">
-
-        <div class="prism-box__header">
-            <%= render partial: "./user_profile", locals: {user: a.author} %><br/>
+        <div class="prism-box">
+            <div class="prism-box__header">
+                <%= render partial: "./user_profile", locals: {user: a.author} %><br/>
+            </div>
+            <div class="prism-box__content">
+                <br>
+                <a href="/questions/<%=a.question.id%>" class="question"><%= a.question.content %></a> <br><br>
+                <div class="answer"><%= a.content %></div>
+                <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
+                <br>
+                태그:
+                <% if !a.tag_string.nil? %>
+                    <%= a.tag_string.gsub("\r\n", "\n").split("\n") %>
+                <% end %>
+                <br>
+                <div class = "date"><%= a.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
+                <br>
+            </div>
+            <div class="prism-box__footer" style="padding-bottom: 10px;">
+                <!--
+                <% if Star.where(user_id: current_user.id, target: a.question).empty? %>
+                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.question.id, target_type: "Question"), method: :post %>
+                <% else %>
+                    <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.question.id, target_type: "Question"), method: :delete %>
+                <% end %>
+                <% if Star.where(user_id: current_user.id, target: a).empty? %>
+                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
+                <% else %>
+                    <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete %>
+                <% end %>
+                -->
+                <% if current_user.id == a.author.id %>
+                    <%= link_to "수정", edit_answer_path(a.id) %>
+                    <%= link_to "삭제", answer_path(a.id),
+                                        method: :delete,
+                                        data: { confirm: '답변을 지우시겠습니까?'} %>
+                <% end %>                 
+                <% if Star.where(user_id: current_user.id, target: a).empty? %>
+                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
+                <% else %>
+                    <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
+                <% end %>
+                <br>
+            </div>
         </div>
-        <div class="prism-box__content">
-            <br>
-            <a href="/questions/<%=a.question.id%>" class="question"><%= a.question.content %></a> <br><br>
-            <div class="answer"><%= a.content %></div>
-            <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
-            <br>
-            <div class = "date"><%= a.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
-        </div>
-        <div class="prism-box__footer" style="padding-bottom: 10px;">
-            <!--
-            <% if Star.where(user_id: current_user.id, target: a.question).empty? %>
-                <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.question.id, target_type: "Question"), method: :post %>
-            <% else %>
-                <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.question.id, target_type: "Question"), method: :delete %>
-            <% end %>
-            <% if Star.where(user_id: current_user.id, target: a).empty? %>
-                <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
-            <% else %>
-                <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete %>
-            <% end %>
-            -->
-            <% if current_user.id == a.author.id %>
-                <%= link_to "수정", edit_answer_path(a.id) %>
-                <%= link_to "삭제", answer_path(a.id),
-                                    method: :delete,
-                                    data: { confirm: '답변을 지우시겠습니까?'} %>
-            <% end %>                 
-            <% if Star.where(user_id: current_user.id, target: a).empty? %>
-                <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
-            <% else %>
-                <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
-            <% end %>
-            <br>
-        </div>
-    </div>
-    
-    <div class="prism-box__content">
-        <br>
-        <a href="/questions/<%=a.question.id%>" class="question"><%= a.question.content %></a> <br><br>
-        <div class="answer"><%= a.content %></div>
-        <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
-        <br>
-        태그:
-        <% if !a.tag_string.nil? %>
-            <%= a.tag_string.gsub("\r\n", "\n").split("\n").join(", ") %>
-        <% end %>
-        <br>
-        <div class = "date"><%= a.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
-    </div>
-    <div class="prism-box__footer" style="padding-bottom: 10px;">
-        <!--
-        <% if Star.where(user_id: current_user.id, target: a.question).empty? %>
-            <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.question.id, target_type: "Question"), method: :post %>
-        <% else %>
-            <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.question.id, target_type: "Question"), method: :delete %>
-        <% end %>
-        <% if Star.where(user_id: current_user.id, target: a).empty? %>
-            <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
-        <% else %>
-            <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete %>
-        <% end %>
-        -->
-        <% if current_user.id == a.author.id %>
-            <%= link_to "수정", edit_answer_path(a.id) %>
-            <%= link_to "삭제", answer_path(a.id),
-                                method: :delete,
-                                data: { confirm: '답변을 지우시겠습니까?'} %>
-        <% end %>                 
-        <% if Star.where(user_id: current_user.id, target: a).empty? %>
-            <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
-        <% else %>
-            <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
-        <% end %>
-        <br>
-    </div>
-  </div>
-<% end %>
+    <% end %>
 
-    <!--한 사람은 질문 하나에 답변 여러 개 할 수 있는 건가..?!
-    일단은 하나만 있다고 가정하고 만듦-->
+        <!--한 사람은 질문 하나에 답변 여러 개 할 수 있는 건가..?!
+        일단은 하나만 있다고 가정하고 만듦-->
+    </div>
 </div>
