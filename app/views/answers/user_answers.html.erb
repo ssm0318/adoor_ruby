@@ -20,7 +20,7 @@
                 <br>
                 <a href="/questions/<%=a.question.id%>" class="question"><%= a.question.content %></a> <br><br>
                 <div class="answer"><%= a.content %></div>
-                <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
+                <!--<%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>-->
                 <br>
                 태그:
                 <% if !a.tag_string.nil? %>
@@ -55,7 +55,7 @@
                 <div>
                     댓글 <br/><br>
                     <div class="author-comments">
-                        <% Comment.where(answer_id: a.id, recipient_id: @user.id).each do |c| %>
+                        <% Comment.where(target: Answer.find(a.id), recipient_id: @user.id).each do |c| %>
                             <div class="comment">
                                 <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
                                 <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
@@ -83,7 +83,7 @@
                         <% recipients.each do |r| %>
                             <div>
                                 <div class="comment-block">
-                                    <% Comment.where(answer_id: a.id, recipient_id: r).each do |c| %>
+                                    <% Comment.where(target: Answer.find(a.id), recipient_id: r).each do |c| %>
                                         <div class="comment">
                                             <% if c.author_id == @user.id %>
                                                 ㄴ
@@ -107,7 +107,7 @@
                         <% end %>
 
                     <% else %>
-                        <% Comment.where(answer_id: a.id, recipient_id: current_user.id).each do |c| %>
+                        <% Comment.where(target: Answer.find(a.id), recipient_id: current_user.id).each do |c| %>
                             <% if c.author.id == current_user.id %>
                                 <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
                                 <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>

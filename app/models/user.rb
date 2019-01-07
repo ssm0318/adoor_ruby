@@ -42,6 +42,9 @@ class User < ApplicationRecord
   # highlight
   has_many :highlights, dependent: :destroy
 
+  # highlight
+  has_many :likes, dependent: :destroy
+
   # comment
   has_many :comments, dependent: :destroy, :foreign_key => "author_id"
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190105130706) do
+ActiveRecord::Schema.define(version: 20190107111443) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "author_id", null: false
@@ -43,12 +43,12 @@ ActiveRecord::Schema.define(version: 20190105130706) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "author_id", null: false
-    t.integer "recipient_id", null: false
-    t.integer "answer_id", null: false
+    t.integer "recipient_id"
+    t.integer "target_id"
+    t.string "target_type"
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["answer_id"], name: "index_comments_on_answer_id"
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["recipient_id"], name: "index_comments_on_recipient_id"
   end
@@ -81,6 +81,14 @@ ActiveRecord::Schema.define(version: 20190105130706) do
     t.index ["user_id"], name: "index_highlights_on_user_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "target_id"
+    t.string "target_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.integer "recipient_id", null: false
     t.integer "actor_id"
@@ -92,19 +100,18 @@ ActiveRecord::Schema.define(version: 20190105130706) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
   create_table "posts", force: :cascade do |t|
     t.integer "author_id", null: false
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_posts_on_author_id"
-=======
+  end
+
   create_table "queries", force: :cascade do |t|
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
->>>>>>> b1b55d6b3f0c1f2cc1f04093193f7e56c5fd9482
   end
 
   create_table "questions", force: :cascade do |t|
