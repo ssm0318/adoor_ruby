@@ -45,7 +45,6 @@ Rails.application.routes.draw do
   get '/invitation' => 'questions#invitation', as: :invitation
   get '/invitation/link' => 'questions#link_generation', as: :link_generation
   get '/invitation/:id(/:question_id1(/:question_id2(/:question_id3)))' => 'users#accept_invitation', as: :accept_invitation
-
   # search
   get '/search/all' => 'search#all', as: :search_all
   get '/search/admin_question' => 'search#admin_question', as: :search_admin_question
