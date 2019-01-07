@@ -3,7 +3,7 @@
     z-index: 1;
     background-color: white;
     border: 0.5px solid #bcbcbc;
-    width: 200px;
+    width: 250px;
     margin-left: 100px;
     margin-top: -25px;
     font-size: 15px;
@@ -33,39 +33,35 @@
             
             }
         }
-        .assign-btn{
+
+        .btn-do-assign {
             float: right;
-
-            .btn-do-assign {
-                text-align: center;
-                background-color: #F48462;
-                border-width: 2px;
-                border-style: solid;
-                border-color: white;
-                color: white;
-                display: block;
-                width: 70px;
-                height: 30px;
-                font-size: 13px;
-                text-align: center;
-                text-decoration: none;
-                font-family: 'Nanum Gothic', sans-serif;
-                border-radius: 30px;
-                cursor: pointer;
-                line-height: 30px;
-
-                span {
-                    vertical-align: middle;
-                }
-            }
+            text-align: center;
+            display: block;
+            width: 70px;
+            height: 30px;
+            font-size: 13px;
+            text-align: center;
+            text-decoration: none;
+            font-family: 'Nanum Gothic', sans-serif;
+            border-radius: 30px;
+            cursor: pointer;
+            line-height: 30px;
+            border: 1px solid #F48462;
         }
     }
 }
-
 
 .btn-assign, .btn-write {
     width: 32px;
     height: auto;
     margin: 3px;
     cursor: pointer;
+}
+
+.message {
+    color: #F48462;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 13px;
+    text-align: center;
 }
