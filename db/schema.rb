@@ -131,6 +131,16 @@ ActiveRecord::Schema.define(version: 20190107141252) do
     t.index ["tag_id", "question_id"], name: "index_questions_tags_on_tag_id_and_question_id"
   end
 
+  create_table "replies", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.integer "comment_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_replies_on_author_id"
+    t.index ["comment_id"], name: "index_replies_on_comment_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"

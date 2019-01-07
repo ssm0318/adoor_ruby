@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
     def all
         query = params[:query]
-        Query.create(content: query)
+        Query.create(user: current_user, content: query)
         @results = []
         @results = Answer.all.search_tag(query) | Question.all.search_tag(query)
 
@@ -10,7 +10,7 @@ class SearchController < ApplicationController
 
     def admin_question
         query = params[:query]
-        Query.create(content: query)
+        Query.create(user: current_user, content: query)
         @results = []
         @results = Question.all.search_tag(query)
         @results = @results.where(author_id: 1)
@@ -20,7 +20,7 @@ class SearchController < ApplicationController
 
     def custom_question
         query = params[:query]
-        Query.create(content: query)
+        Query.create(user: current_user, content: query)
         @results = []
         @results = Question.all.search_tag(query)
         @results = @results.where.not(author_id: 1)
@@ -30,7 +30,7 @@ class SearchController < ApplicationController
 
     def friend_answer
         query = params[:query]
-        Query.create(content: query)
+        Query.create(user: current_user, content: query)
         @results = []
         @results = Answer.all.search_tag(query)
         @results = @results.where(author: current_user.friends) | @results.where(author: current_user)
@@ -40,7 +40,7 @@ class SearchController < ApplicationController
 
     def anonymous_answer
         query = params[:query]
-        Query.create(content: query)
+        Query.create(user: current_user, content: query)
         @results = []
         @results = Answer.all.search_tag(query)
         @results = @results.anonymous(current_user.id)

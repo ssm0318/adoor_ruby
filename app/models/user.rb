@@ -57,7 +57,8 @@ class User < ApplicationRecord
   # star
   has_many :stars, dependent: :destroy
 
-  # user search query
+  # query
+  has_many :queries, dependent: :destroy
   has_many :user_queries, dependent: :destroy
 
   # reference: http://railscasts.com/episodes/163-self-referential-association
