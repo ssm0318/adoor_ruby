@@ -48,6 +48,7 @@ Rails.application.routes.draw do
 
   # search
   get '/search/all' => 'search#all', as: :search_all
+  get '/search/json' => 'search#json'
   get '/search/admin_question' => 'search#admin_question', as: :search_admin_question
   get '/search/custom_question' => 'search#custom_question', as: :search_custom_question
   get '/search/friend_answer' => 'search#friend_answer', as: :search_friend_answer

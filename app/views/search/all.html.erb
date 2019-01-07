@@ -1,4 +1,4 @@
-<%= render 'search/search_header' %>
+<%= render 'search/search_header', searchpath: @searchpath, query: @query %>
 <% @results.each do |content| %>
     <div style="border: 1px solid black;">
         글쓴이: <%= content.author.username %><br>
