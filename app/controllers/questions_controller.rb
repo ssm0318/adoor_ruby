@@ -27,8 +27,7 @@ class QuestionsController < ApplicationController
     end
 
     def invitation
-        #TODO: 질문 선택 알고리즘 어떻게? 현재는 그냥 최근질문 5개
-        @questions = Question.last(5)
+        @questions = Question.popular_questions
         render 'invitation'
     end
 
