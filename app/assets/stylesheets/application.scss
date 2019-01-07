@@ -41,6 +41,10 @@
                     color: #F48462;
                 }
             }
+
+            .nav-el.active {
+                color: #F48462;;
+            }
         }
 
         .nav-right {
@@ -65,6 +69,7 @@
                 color: #F48462;
             }
             .btn-noti {
+                padding-top: 2px;
                 float: right;
                 width: 20px;
                 height: auto;
@@ -75,10 +80,11 @@
             .my-page-btn img {
                 float: right;
                 display: block;
-                width: 26px;
-                height: 26px;
+                width: 25px;
+                height: 25px;
                 border-radius:15px;
                 cursor: pointer;
+                margin-right: 20px;
             }
 
         }

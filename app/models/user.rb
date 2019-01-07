@@ -18,6 +18,9 @@ class User < ApplicationRecord
   # answer
   has_many :answers, dependent: :destroy, :foreign_key => "author_id"
 
+  # post
+  has_many :posts, dependent: :destroy, :foreign_key => "author_id"
+
   # friend requests
   has_many :received_requests, :class_name => "FriendRequest", :foreign_key => "requestee_id", dependent: :destroy
   has_many :requesters, through: :received_requests, dependent: :destroy
@@ -46,7 +49,7 @@ class User < ApplicationRecord
   has_many :tmis, dependent: :destroy, :foreign_key => "author_id"
 
   # notification
-  has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
+  has_many :notifications, foreign_key: :recipient_id, dependent: :destroy 
 
   # star
   has_many :stars, dependent: :destroy

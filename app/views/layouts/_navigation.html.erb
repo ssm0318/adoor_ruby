@@ -2,9 +2,10 @@
     <%= link_to image_tag("logo/final-long-logo.png", class:"logo"), root_path %>
     <div class = "nav">
     <div class = "nav-left">
-        <%= link_to '익명 피드', '/feeds', class: "nav-el" %>
-        <%= link_to '질문 둘러보기', '/questions', class: "nav-el" %>
-        <%= link_to '오늘의 질문', '/today', class: "nav-el" %>
+        <%= active_link_to '익명 피드', '/feeds', class: "nav-el" %>
+        <%= active_link_to '질문 둘러보기', '/questions', class: "nav-el" %>
+        <%= active_link_to '오늘의 질문', '/today', class: "nav-el" %>
+        <%= active_link_to '친구 초대', invitation_path, class: "nav-el" %>
     </div>
 
     <div class = "nav-right">
@@ -20,14 +21,3 @@
     </div>
     <%# <%= render 'layouts/searchbar' %>
 </div>
-
-<script>
-    $(document).ready(function() {
-
-      $(".nav-left .nav-el").on('click', function() {
-            console.log('hi')
-      });
-
-
-    });  
-</script>
