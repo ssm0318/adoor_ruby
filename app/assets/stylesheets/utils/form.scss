@@ -3,9 +3,11 @@
 
 .prism-form {
     .prism-form__input {
-        width: 80%;
+        width: calc(100% - 100px);
         height: 25px;
         padding-left: 10px;
+        padding-right: 10px;
+        margin-right: 3px;
         border: 1.1px solid $prism-box-gray;
         border-radius: 20px;
         margin-bottom: 10px;
