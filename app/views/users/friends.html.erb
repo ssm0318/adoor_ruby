@@ -10,7 +10,7 @@
                 <p><%= friend.username %></p>
                 <%= image_tag friend.image.url, :style => "height:70px; width:70px; border-radius:35px;", class:"friend-box-image" %>
             </div>
-            <div class="friend-box-question">
+            <!--<div class="friend-box-question">
                 <% friend.answers.each_with_index do |answer, i| %>
                     <% if i < 3 %>
                         <div class="friend-box-question-el">
@@ -18,7 +18,7 @@
                         </div>
                     <% end %>
                 <% end %>
-            </div>
+            </div>-->
         </div>
         <% end %>
     <% end %>
