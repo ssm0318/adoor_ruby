@@ -20,12 +20,12 @@ Rails.application.routes.draw do
   get '/answers/edit/question/:id' => 'answers#edit', as: :edit_answer
 
   resources :highlights
-  resources :stars
+  resources :drawers
   
-  # user answers, highlights, stars
+  # user answers, highlights, drawers
   get '/userpage/:id' => 'answers#user_answers', as: :user_answers
   get '/userpage/:id/highlights' => 'highlights#user_highlights', as: :user_highlights
-  get '/userpage/:id/stars' => 'stars#user_stars', as: :user_stars
+  get '/userpage/:id/drawers' => 'drawers#user_drawers', as: :user_drawers
 
   # friend request
   post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend

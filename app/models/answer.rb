@@ -4,7 +4,7 @@ class Answer < ApplicationRecord
     has_many   :highlights, dependent: :destroy
     has_many   :comments, dependent: :destroy, as: :target
     has_many   :likes, dependent: :destroy, as: :target
-    has_many   :stars, dependent: :destroy
+    has_many   :drawers, dependent: :destroy
     has_and_belongs_to_many :tags, dependent: :destroy
 
     scope :anonymous, -> (id) { where.not(author: User.find(id).friends).where.not(author: User.find(id)) }

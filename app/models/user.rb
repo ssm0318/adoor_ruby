@@ -54,8 +54,8 @@ class User < ApplicationRecord
   # notification
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy 
 
-  # star
-  has_many :stars, dependent: :destroy
+  # drawers
+  has_many :drawers, dependent: :destroy
 
   # query
   has_many :queries, dependent: :destroy

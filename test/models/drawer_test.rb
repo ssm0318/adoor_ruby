@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class StarsControllerTest < ActionDispatch::IntegrationTest
+class DrawerTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
