@@ -59,4 +59,12 @@ class SearchController < ApplicationController
 
         render 'popular_search'
     end
+
+    def user
+        query = params[:query]
+        UserQuery.create(user: current_user, content: query)
+        @users = User.where("username LIKE ? ", "%#{query}%")
+
+        render 'user'
+    end
 end

@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   get '/search/anonymous_answer' => 'search#anonymous_answer', as: :search_anonymous_answer
   get '/search/popular_tags' => 'search#popular_tags', as: :show_popular_tags
   get '/search/popular_search' => 'search#popular_search', as: :show_popular_search
+  get '/search/user' => 'search#user', as: :search_user
 
   devise_for :users
   # devise_for :users, controllers: {

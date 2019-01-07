@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190107111443) do
+ActiveRecord::Schema.define(version: 20190107141252) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "author_id", null: false
@@ -166,6 +166,14 @@ ActiveRecord::Schema.define(version: 20190107111443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_tmis_on_author_id"
+  end
+
+  create_table "user_queries", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_queries_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
