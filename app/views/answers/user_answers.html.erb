@@ -22,11 +22,11 @@
                 <a href="/questions/<%=a.question.id%>" class="question"><%= a.question.content %></a> <br><br>
                 <div class="answer"><%= a.content %></div>
                 <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
-                <br>
+                <!--<br>
                 태그:
                 <% if !a.tag_string.nil? %>
                     <%= a.tag_string.gsub("\r\n", "\n").split("\n") %>
-                <% end %>
+                <% end %>-->
                 <br>
                 <div class = "date"><%= a.created_at.strftime("%m월 %d일") %></div>
                 <br>

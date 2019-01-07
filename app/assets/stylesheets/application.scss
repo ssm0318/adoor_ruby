@@ -64,7 +64,6 @@
             .log-in {
                 color: #F48462;
             }
-
             .btn-noti {
                 float: right;
                 width: 20px;
@@ -72,6 +71,16 @@
                 display: block;
                 cursor: pointer;
             }
+
+            .my-page-btn img {
+                float: right;
+                display: block;
+                width: 26px;
+                height: 26px;
+                border-radius:15px;
+                cursor: pointer;
+            }
+
         }
     }
     

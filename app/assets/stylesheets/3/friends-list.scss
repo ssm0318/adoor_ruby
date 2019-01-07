@@ -2,7 +2,6 @@
     width: 270px;
     text-align: center;
     display: inline-block;
-    height: 300px;
     margin: 8px;
     background-color: white;
 }
@@ -18,9 +17,7 @@
 
 .friend-box-userpage {
     padding: 15px;
-    border-left: 0.75px solid #bcbcbc;
-    border-right: 0.75px solid #bcbcbc;
-    border-top: 0.75px solid #bcbcbc;
+    border: 0.75px solid #bcbcbc;
 }
 
 .friend-box-userpage p {

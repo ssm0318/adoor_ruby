@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'questions#today'
+  # root 'questions#today'
+  root 'answers#friend_feed'
   get 'intro' => 'questions#intro'
 
   post '/assignments/:assignee_id/:question_id' => 'assignments#create'
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
   
   get '/feeds' => 'answers#general_feed'
   get '/questions/:id' => 'questions#question_feed'
-  get '/friend_feeds' => 'answers#friend_feed'
+  get '/today' => 'questions#today'
   # 이거 나중에 id 말고 content로 하는 게 더 보기 좋을 듯..! 
   get '/recover_password' => 'users#recover_password'
   post '/recover_password' => 'users#send_temporary_password'
