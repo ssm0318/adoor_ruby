@@ -213,7 +213,13 @@ module Devise
       #   end
       #
       def after_sign_in_path_for(resource_or_scope)
+        # isInvitation = session.delete(:invitation)
+        # if isInvitation.starts_with?("localhost:3000/invitation")
+        #   puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`!!!!!!!`"
+        #   isInvitation
+        # else
         stored_location_for(resource_or_scope) || signed_in_root_path(resource_or_scope)
+        # end
       end
 
       # Method used by sessions controller to sign out a user. You can overwrite
