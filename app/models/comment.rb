@@ -1,7 +1,7 @@
 class Comment < ApplicationRecord
     belongs_to :target, polymorphic: true
     belongs_to :author, class_name: 'User'
-    has_many   :replies
+    has_many   :replies, dependent: :destroy
 
     after_create :create_notifications
 

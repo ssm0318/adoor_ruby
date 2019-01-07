@@ -1,0 +1,51 @@
+<div class="inner-container">
+    <%= render partial: "./user_answers_layout", locals: {user: @user} %>
+    <% @drawers.reverse_each do |d| %>
+        <% if d.target_type == "Question" %>
+            <div class = "prism-box">
+                <div class = "prism-box_question">
+                    <br> 
+                    <a href="/questions/<%=d.target.id%>" class="question"><%= d.target.content %></a>          
+                    <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(d.target.id, target_type: "Question"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
+                    <% if d.target.author.has_role? :newuser %>
+                        <div class = "prism-box__footer">
+                            Question made by <%= render partial: "./user_profile", locals: {user: d.target.author} %><br/>
+                            <div class = "date"> <%= d.target.created_at.strftime("%m월 %d일") %></div><br/>
+                        </div>
+                    <% end %>
+                </div>
+                <br>
+            </div>
+            
+        <% else %>
+            <div class = "prism-box">
+                <div class = "prism-box__header">
+                    <%= render partial: "./user_profile", locals: {user: d.target.author} %><br/>
+                </div>
+                <div class = "prism-box__content">
+                    <br> 
+                    <a href="/questions/<%=d.target.question.id%>" class="question"><%= d.target.question.content %></a> <br><br>
+                    <div class = "answer">
+                        <%= d.target.content %>
+                        <%= link_to "전체 글 보기", answer_path(d.target.id) %><br/>
+                    </div>
+                    <br>
+                    <div class = "date"><%= d.target.created_at.strftime("%m월 %d일") %></div>
+                </div>
+                <div class = "prism-box__footer" style="padding-bottom: 10px;">
+                    <% if current_user.id == @user.id %>
+                        <%= link_to "수정", edit_answer_path(d.target.id) %>
+                        <%= link_to "삭제", answer_path(d.target.id),
+                                            method: :delete,
+                                            data: { confirm: '답변을 지우시겠습니까?'} %>
+                <% end %>                 
+                <% if Drawer.where(user_id: current_user.id, target: d.target).empty? %>
+                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawers_path(target_id: s.target.id, target_type: "Answer"), method: :post %>
+                <% else %>
+                    <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(d.target.id, target_type: "Answer"), method: :delete, data: {confirm: '서랍장 보관을 취소하시겠습니까?'} %>
+                <% end %>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+</div>

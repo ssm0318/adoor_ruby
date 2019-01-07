@@ -24,8 +24,8 @@
                     <%=username%>님으로부터 새로운 질문이 도착했습니다.
                 <% elsif noti.target_type == 'Highlight' %>
                     <%=username%>님이 회원님의 글을 highlight했습니다.
-                <% elsif noti.target_type == 'Star' %>
-                    누군가가 회원님의 글을 star했습니다.
+                <% elsif noti.target_type == 'Drawer' %>
+                    누군가가 회원님의 글을 서랍장에 보관했습니다.
                 <% elsif noti.target_type == 'Comment' %>
                     <% if noti.action == 'comment' %>
                         <%=username%>님이 회원님의 답변에 댓글을 달았습니다.

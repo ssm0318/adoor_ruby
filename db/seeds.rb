@@ -13,7 +13,7 @@
 # Highlight.delete_all
 # Comment.delete_all
 # Tmi.delete_all
-# Star.delete_all
+# Drawer.delete_all
 if User.where(email: "prism@snu.com").empty?
     User.create(email: "prism@snu.com", password: "prism-snu", username: "백산수")
 end
@@ -194,11 +194,11 @@ Tmi.find_or_create_by(author_id: 3, content: "two lovely chihuahuas")
 Tmi.find_or_create_by(author_id: 3, content: "salmon sushi ftw")
 Tmi.find_or_create_by(author_id: 4, content: "406 sucks")
 
-Star.find_or_create_by(user_id: 1, target: Question.find(1))
-Star.find_or_create_by(user_id: 1, target: Question.find(2))
-Star.find_or_create_by(user_id: 1, target: Answer.find(1))
-Star.find_or_create_by(user_id: 3, target: Question.find(1))
-Star.find_or_create_by(user_id: 3, target: Answer.find(3))
+Drawer.find_or_create_by(user_id: 1, target: Question.find(1))
+Drawer.find_or_create_by(user_id: 1, target: Question.find(2))
+Drawer.find_or_create_by(user_id: 1, target: Answer.find(1))
+Drawer.find_or_create_by(user_id: 3, target: Question.find(1))
+Drawer.find_or_create_by(user_id: 3, target: Answer.find(3))
 
 # 어드민 질문 태그 검색 테스트용
 q = Question.first

@@ -54,8 +54,12 @@ class User < ApplicationRecord
   # notification
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy 
 
-  # star
-  has_many :stars, dependent: :destroy
+  # drawers
+  has_many :drawers, dependent: :destroy
+
+  # query
+  has_many :queries, dependent: :destroy
+  has_many :user_queries, dependent: :destroy
 
   # reference: http://railscasts.com/episodes/163-self-referential-association
   
