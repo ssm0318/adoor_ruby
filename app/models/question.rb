@@ -6,6 +6,7 @@ class Question < ApplicationRecord
     has_and_belongs_to_many :tags, dependent: :destroy
 
     scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
+    scope :popular_questions, -> { joins(:answers).group("answers.question_id").order("count(answers.question_id) desc").take(7) }
 
     # after_create :create_notifications
 

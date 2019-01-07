@@ -115,6 +115,13 @@ Answer.find_or_create_by(author_id: 6, question_id: 3, content: "스물다섯쨜
 Answer.find_or_create_by(author_id: 7, question_id: 3, content: "존나 많아")
 Answer.find_or_create_by(author_id: 6, question_id: 4, content: "zinzi")
 Answer.find_or_create_by(author_id: 7, question_id: 4, content: "진지잡수세여")
+Answer.find_or_create_by(author_id: 1, question_id: 12, content: "동산 위에 올라서서")
+Answer.find_or_create_by(author_id: 2, question_id: 12, content: "파란 하늘 바라보며")
+Answer.find_or_create_by(author_id: 3, question_id: 12, content: "천사 얼굴 선녀 얼굴")
+Answer.find_or_create_by(author_id: 4, question_id: 12, content: "마음 속에 그려봅니다")
+Answer.find_or_create_by(author_id: 5, question_id: 12, content: "하늘 끝까지 올라")
+Answer.find_or_create_by(author_id: 6, question_id: 12, content: "실바람을 끌어안고")
+Answer.find_or_create_by(author_id: 7, question_id: 12, content: "날개 달린 선녀들과")
 
 # Post
 Post.find_or_create_by(author_id: 1, content: "안녕하세오 포스트에오")
