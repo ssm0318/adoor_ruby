@@ -12,6 +12,12 @@ class AnswersController < ApplicationController
         @answer = Answer.new(answer_params)
         @answer.save
 
+        tag_array = @answer.tag_string.gsub("\r\n", '\n').split('\n')
+        tag_array.each do |tag|
+            new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)
+            @answer.tags << new_tag
+        end
+       
         redirect_to @answer
     end
 
@@ -19,13 +25,21 @@ class AnswersController < ApplicationController
     end
 
     def edit
+        @question = @answer.question
     end
 
     def update
         if @answer.update(answer_params)
-          redirect_to @answer
+            @answer.tags.destroy_all
+            tag_array = @answer.tag_string.gsub("\r\n", "\n").split("\n") 
+            tag_array.each do |tag|
+                new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)
+                @answer.tags << Tag.find(new_tag.id)
+            end
+
+            redirect_to @answer
         else
-          render 'edit'
+            render 'edit'
         end
     end
 
@@ -40,6 +54,23 @@ class AnswersController < ApplicationController
         @answers = @user.answers
     end
 
+    def general_feed
+        @answers = Answer.all
+        render 'general_feed'
+    end
+
+    def friend_feed
+        @answers = []
+        @answers.concat(current_user.answers)
+        
+        for friend in current_user.friends
+            @answers.concat(friend.answers)
+        end
+
+        @answers = @answers.sort_by(&:created_at)
+        render 'friend_feed'
+    end
+
     def create_comment
         Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], answer_id: params[:id])
         answer_author_id = Answer.find(params[:id]).author_id
@@ -52,6 +83,6 @@ class AnswersController < ApplicationController
         end
 
         def answer_params
-            params.require(:answer).permit(:author_id, :question_id, :content)
+            params.require(:answer).permit(:author_id, :question_id, :content, :tag_string)
         end  
 end

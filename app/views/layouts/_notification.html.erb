@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
     <% if noties.unread.length != 0 %>
-        <%=image_tag "icons/noti-hovering-icon.png", class:"btn-noti"%>
+        <%=image_tag "icons/noti-on-icon.png", class:"btn-noti"%>
     <% else %>
         <%=image_tag "icons/noti-default-icon.png", class:"btn-noti"%>
     <% end %>
@@ -21,11 +21,11 @@
                 <% elsif noti.target_type == 'Answer' %>
                     <%=username%>님의 선물이 도착했습니다.
                 <% elsif noti.target_type == 'Assignment' %>
-                    <%=username%>님이 회원님에게 새로운 질문을 assign했습니다.
+                    <%=username%>님으로부터 새로운 질문이 도착했습니다.
                 <% elsif noti.target_type == 'Highlight' %>
                     <%=username%>님이 회원님의 글을 highlight했습니다.
                 <% elsif noti.target_type == 'Star' %>
-                    <%=username%>님이 회원님의 글을 star했습니다.
+                    누군가가 회원님의 글을 star했습니다.
                 <% elsif noti.target_type == 'Comment' %>
                     <% if noti.action == 'comment' %>
                         <%=username%>님이 회원님의 답변에 댓글을 달았습니다.

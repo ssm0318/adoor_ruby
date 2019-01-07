@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user!, except: [:recover_password, :send_temporary_password]
+    before_action :authenticate_user!, except: [:recover_password, :send_temporary_password, :accept_invitation]
     before_action :set_user, only: [:show, :edit, :update, :destroy]
     
     def recover_password
@@ -28,10 +28,16 @@ class UsersController < ApplicationController
         puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
         puts user_params
         puts @user.image
-        puts @user.errors.full_messages
+        puts @user.errors
+        puts @user.errors.full_messages[0]
         puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
-        redirect_to show_mypage_path
+        if !@user.errors.full_messages.empty?
+            @error = @user.errors.full_messages[0]
+            render 'edit'
+        else
+            redirect_to show_mypage_path
+        end
     end
 
     def mypage
@@ -47,7 +53,8 @@ class UsersController < ApplicationController
             friendship.destroy_all
             Friendship.where({user_id: params[:id], friend_id: current_user.id}).destroy_all
         end
-        redirect_back fallback_location: user_answers_path(params[:id])
+        #redirect_back fallback_location: user_answers_path(params[:id])
+        redirect_to user_answers_path(params[:id])
     end
 
     def friend_request
@@ -60,6 +67,32 @@ class UsersController < ApplicationController
             friend_request.destroy_all
         end
         redirect_back fallback_location: user_answers_path(params[:id])
+    end
+
+    def accept_invitation
+        @new_friend = User.find(params[:id])
+        @assigned_questions = []
+        if params[:question_id1] != "empty"
+            @assigned_questions.push(Question.find(params[:question_id1])) # empty도 아니면서 question_id 가 하나도 없는 경우는 잘못된 링크이므로 이걸 걸러내기 위해
+            @assigned_questions.push(Question.find(params[:question_id2])) if params[:question_id2]
+            @assigned_questions.push(Question.find(params[:question_id3])) if params[:question_id3]
+
+            if !user_signed_in?
+                #session[:invitation] = request.referer
+            elsif current_user.id == @new_friend.id
+            elsif current_user.friends.include? @new_friend
+                @assigned_questions.each do |q|
+                    Assignment.find_or_create_by(question_id: q.id, assigner_id: @new_friend.id, assignee_id: current_user.id)
+                end
+            else
+                @assigned_questions.each do |q|
+                    # assigner가 admin인 assignment 만들기
+                    # 이 경우 noti는 생성이 안되지만, assignment는 생성됨. 즉, assignment 모아보는 페이지에서는 이 질문들이 보임!(그럴 예정)
+                    Assignment.find_or_create_by(question_id: q.id, assigner_id: 1, assignee_id: current_user.id)
+                end
+            end
+        end
+        render 'accept_invitation'
     end
 
     private

@@ -9,11 +9,16 @@ class ApplicationController < ActionController::Base
       @noties = Notification.where(recipient_id: current_user.id)
     end
   end
+
+  # in order to override the default behavior of devise 
+  # def after_sign_in_path_for(resource)
+  #   current_user_path
+  # end
  
   protected
  
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :nickname])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :username])
   end
 end
 

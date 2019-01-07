@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190107090908) do
+ActiveRecord::Schema.define(version: 20190105130706) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "author_id", null: false
@@ -92,12 +92,19 @@ ActiveRecord::Schema.define(version: 20190107090908) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
   create_table "posts", force: :cascade do |t|
     t.integer "author_id", null: false
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_posts_on_author_id"
+=======
+  create_table "queries", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+>>>>>>> b1b55d6b3f0c1f2cc1f04093193f7e56c5fd9482
   end
 
   create_table "questions", force: :cascade do |t|
@@ -157,7 +164,6 @@ ActiveRecord::Schema.define(version: 20190107090908) do
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "nickname"
     t.string "username"
     t.date "date_of_birth"
     t.string "image"

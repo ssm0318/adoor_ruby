@@ -1,19 +1,25 @@
+<div class="prism-title"><h1>Friend List</h1></div>
 <div class="friend-list">
-    <% @friends.each do |friend| %>
-    <div class="friend-box">
-        <div class="friend-box-userpage" onclick="window.location='/userpage/<%=friend.id%>';">
-            <p><%= friend.username %></p>
-            <%= image_tag friend.image.url, :style => "height:70px; width:70px; border-radius:35px;", class:"friend-box-image" %>
-        </div>
-        <div class="friend-box-question">
-            <% friend.answers.each_with_index do |answer, i| %>
-                <% if i < 3 %>
-                    <div class="friend-box-question-el">
-                        <%= link_to answer.question.content, answer_path(answer.id) %>
-                    </div>
+    <% if @friends.empty? %>
+        친구를 초대해보세요!<br> <!-- FIXME: 버그인가 왜 줄바꿈이 안되지 -->
+        <%= link_to "친구 초대하기", invitation_path %>
+    <% else %>
+        <% @friends.each do |friend| %>
+        <div class="friend-box">
+            <div class="friend-box-userpage" onclick="window.location='/userpage/<%=friend.id%>';">
+                <p><%= friend.username %></p>
+                <%= image_tag friend.image.url, :style => "height:70px; width:70px; border-radius:35px;", class:"friend-box-image" %>
+            </div>
+            <div class="friend-box-question">
+                <% friend.answers.each_with_index do |answer, i| %>
+                    <% if i < 3 %>
+                        <div class="friend-box-question-el">
+                            <%= link_to answer.question.content, answer_path(answer.id) %>
+                        </div>
+                    <% end %>
                 <% end %>
-            <% end %>
+            </div>
         </div>
-    </div>
-<% end %>
+        <% end %>
+    <% end %>
 </div>
