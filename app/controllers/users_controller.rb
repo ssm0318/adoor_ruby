@@ -78,6 +78,7 @@ class UsersController < ApplicationController
             @assigned_questions.push(Question.find(params[:question_id3])) if params[:question_id3]
 
             if !user_signed_in?
+                #session[:invitation] = request.referer
             elsif current_user.id == @new_friend.id
             elsif current_user.friends.include? @new_friend
                 @assigned_questions.each do |q|
@@ -86,6 +87,7 @@ class UsersController < ApplicationController
             else
                 @assigned_questions.each do |q|
                     # assigner가 admin인 assignment 만들기
+                    # 이 경우 noti는 생성이 안되지만, assignment는 생성됨. 즉, assignment 모아보는 페이지에서는 이 질문들이 보임!(그럴 예정)
                     Assignment.find_or_create_by(question_id: q.id, assigner_id: 1, assignee_id: current_user.id)
                 end
             end

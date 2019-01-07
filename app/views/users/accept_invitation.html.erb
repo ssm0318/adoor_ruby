@@ -3,8 +3,8 @@
 <% else %>
     <%= render partial: "./questions_layout", locals: {title: "#{@new_friend.username}님이 보낸 질문", questions: @assigned_questions} %><br/>
 <% end %>
-<% if !user_signed_in? || ((current_user.id != @new_friend.id) && (!current_user.friends.include? @new_friend)) %>
-    <%= @new_friend.username %>님과 친구가 되어보세요!<br/>
-    <!-- FIXME:친구요청 누르면, '친구요청이 보내졌습니다'라고 뜨고 '친구요청 취소'로 바뀌도록 -->
-    <%= link_to "친구요청", friend_request_path(@new_friend.id), method: :post %>
-<% end %>
+<%# if !user_signed_in? || ((current_user.id != @new_friend.id) && (!current_user.friends.include? @new_friend)) %>
+    <%#= @new_friend.username %><!--님과 친구가 되어보세요!<br/>-->
+    <!-- 친구요청 누르면, '친구요청이 보내졌습니다'라고 뜨고 '친구요청 취소'로 바뀌도록 -->
+    <%#= link_to "친구요청", friend_request_path(@new_friend.id), method: :post %>
+<%# end %>
