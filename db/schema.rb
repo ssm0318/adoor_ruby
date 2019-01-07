@@ -92,10 +92,19 @@ ActiveRecord::Schema.define(version: 20190105130706) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
+  create_table "posts", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_posts_on_author_id"
+=======
   create_table "queries", force: :cascade do |t|
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+>>>>>>> b1b55d6b3f0c1f2cc1f04093193f7e56c5fd9482
   end
 
   create_table "questions", force: :cascade do |t|
