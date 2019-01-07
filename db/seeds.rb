@@ -42,6 +42,16 @@ end
 
 Question.find_or_create_by(content: "마무리") # 디폴트로 admin이 생성한 것으로 되는지 확인
 Question.find_or_create_by(content: "꿈", author_id: 6)
+Question.find_or_create_by(content: "쿵따리") # 디폴트로 admin이 생성한 것으로 되는지 확인
+Question.find_or_create_by(content: "샤바라", author_id: 6)
+Question.find_or_create_by(content: "빠빠빠") # 디폴트로 admin이 생성한 것으로 되는지 확인
+Question.find_or_create_by(content: "탐사수", author_id: 6)
+Question.find_or_create_by(content: "삼다수") # 디폴트로 admin이 생성한 것으로 되는지 확인
+Question.find_or_create_by(content: "나띵북", author_id: 6)
+Question.find_or_create_by(content: "피카츄") # 디폴트로 admin이 생성한 것으로 되는지 확인
+Question.find_or_create_by(content: "라이츄", author_id: 6)
+Question.find_or_create_by(content: "파이리") # 디폴트로 admin이 생성한 것으로 되는지 확인
+Question.find_or_create_by(content: "꼬부기", author_id: 6)
 
 # FriendRequest.find_or_create_by(requester_id: 1, requestee_id: 2)
 # FriendRequest.find_or_create_by(requester_id: 1, requestee_id: 3)
@@ -106,6 +116,17 @@ Answer.find_or_create_by(author_id: 7, question_id: 3, content: "존나 많아")
 Answer.find_or_create_by(author_id: 6, question_id: 4, content: "zinzi")
 Answer.find_or_create_by(author_id: 7, question_id: 4, content: "진지잡수세여")
 
+# Post
+Post.find_or_create_by(author_id: 1, content: "안녕하세오 포스트에오")
+Post.find_or_create_by(author_id: 1, content: "뉸뉴냔ㄴ냔")
+Post.find_or_create_by(author_id: 1, content: "파란 하늘 파란 하늘 꿈이")
+Post.find_or_create_by(author_id: 1, content: "드리운 푸른 언덕에")
+Post.find_or_create_by(author_id: 1, content: "아기 염소 여럿이")
+Post.find_or_create_by(author_id: 1, content: "풀을 뜯고 놀아요")
+Post.find_or_create_by(author_id: 1, content: "해처럼 밝은 얼굴로")
+Post.find_or_create_by(author_id: 1, content: "10만원이 왔다갔다")
+Post.find_or_create_by(author_id: 1, content: "100만원이 왔다갔다")
+Post.find_or_create_by(author_id: 1, content: "1000만원이 왔다갔다")
 
 # Highlight 모델을 어떻게?
 Highlight.find_or_create_by(user_id: 2, answer_id: 3, content: "좋은 스피커를 사서")
@@ -116,20 +137,43 @@ Highlight.find_or_create_by(user_id: 3, answer_id: 14, content: "저절로, 습�
 Highlight.find_or_create_by(user_id: 3, answer_id: 12, content: "충분히 쉬고 시작할 수 있어서 좋다.")
 Highlight.find_or_create_by(user_id: 3, answer_id: 15, content: "세상에 저절로 되는 일은 없다.")
 
-Comment.find_or_create_by(author_id: 2, recipient_id: 2, answer_id: 1, content: "oh really?")
-Comment.find_or_create_by(author_id: 3, recipient_id: 3, answer_id: 3, content: "awesome!")
-Comment.find_or_create_by(author_id: 3, recipient_id: 3, answer_id: 4, content: "same.")
-Comment.find_or_create_by(author_id: 4, recipient_id: 4, answer_id: 5, content: "be a butterfly")
-Comment.find_or_create_by(author_id: 1, recipient_id: 1, answer_id: 1, content: "그랬구나~")
-Comment.find_or_create_by(author_id: 2, recipient_id: 2, answer_id: 5, content: "그런 일이 있었다니 몰랐네.")
-Comment.find_or_create_by(author_id: 3, recipient_id: 3, answer_id: 16, content: "아하~")
-Comment.find_or_create_by(author_id: 7, recipient_id: 7, answer_id: 16, content: "오~")
-Comment.find_or_create_by(author_id: 3, recipient_id: 3, answer_id: 22, content: "아하~")
-Comment.find_or_create_by(author_id: 7, recipient_id: 7, answer_id: 22, content: "오~")
-Comment.find_or_create_by(author_id: 3, recipient_id: 3, answer_id: 17, content: "아하~")
-Comment.find_or_create_by(author_id: 6, recipient_id: 6, answer_id: 17, content: "오~")
-Comment.find_or_create_by(author_id: 3, recipient_id: 3, answer_id: 23, content: "아하~")
-Comment.find_or_create_by(author_id: 6, recipient_id: 6, answer_id: 23, content: "오~")
+Comment.find_or_create_by(author_id: 2, recipient_id: 2, target: Answer.find(1), content: "oh really?")
+Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(3), content: "awesome!")
+Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(4), content: "same.")
+Comment.find_or_create_by(author_id: 4, recipient_id: 4, target: Answer.find(5), content: "be a butterfly")
+Comment.find_or_create_by(author_id: 1, recipient_id: 1, target: Answer.find(1), content: "그랬구나~")
+Comment.find_or_create_by(author_id: 2, recipient_id: 2, target: Answer.find(5), content: "그런 일이 있었다니 몰랐네.")
+Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(10), content: "아하~")
+Comment.find_or_create_by(author_id: 7, recipient_id: 7, target: Answer.find(16), content: "오~")
+Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(22), content: "아하~")
+Comment.find_or_create_by(author_id: 7, recipient_id: 7, target: Answer.find(22), content: "오~")
+Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(17), content: "아하~")
+Comment.find_or_create_by(author_id: 6, recipient_id: 6, target: Answer.find(17), content: "오~")
+Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(23), content: "아하~")
+Comment.find_or_create_by(author_id: 6, recipient_id: 6, target: Answer.find(23), content: "오~")
+Comment.find_or_create_by(author_id: 1, target: Answer.find(23), content: "오~")
+Comment.find_or_create_by(author_id: 6, target: Answer.find(23), content: "오~")
+Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Post.find(3), content: "아하~")
+Comment.find_or_create_by(author_id: 6, recipient_id: 6, target: Post.find(2), content: "오~")
+Comment.find_or_create_by(author_id: 1, target: Post.find(4), content: "오~")
+Comment.find_or_create_by(author_id: 6, target: Post.find(5), content: "예~")
+
+# Like 
+Like.find_or_create_by(user_id: 1, target: Answer.find(1))
+Like.find_or_create_by(user_id: 1, target: Answer.find(2))
+Like.find_or_create_by(user_id: 1, target: Answer.find(3))
+Like.find_or_create_by(user_id: 2, target: Answer.find(5))
+Like.find_or_create_by(user_id: 2, target: Answer.find(6))
+Like.find_or_create_by(user_id: 3, target: Answer.find(7))
+Like.find_or_create_by(user_id: 3, target: Answer.find(8))
+Like.find_or_create_by(user_id: 4, target: Answer.find(9))
+Like.find_or_create_by(user_id: 5, target: Answer.find(10))
+Like.find_or_create_by(user_id: 6, target: Answer.find(11))
+Like.find_or_create_by(user_id: 1, target: Post.find(1))
+Like.find_or_create_by(user_id: 2, target: Post.find(1))
+Like.find_or_create_by(user_id: 2, target: Post.find(2))
+Like.find_or_create_by(user_id: 3, target: Post.find(1))
+Like.find_or_create_by(user_id: 3, target: Post.find(8))
 
 Tmi.find_or_create_by(author_id: 1, content: "I want bingsu.")
 Tmi.find_or_create_by(author_id: 1, content: "writing TMIs")
