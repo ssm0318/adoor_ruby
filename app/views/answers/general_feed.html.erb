@@ -27,13 +27,23 @@
           <div class="anonymous-comments">
               <% Comment.where(target: Answer.find(answer.id), recipient_id: nil).each do |c|%>
                   <div class="comment">
-                      <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, answer_id: answer.id} %>
+                      <% if c.author_id != current_user.id %>
+                        <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, answer_id: answer.id} %>
+                      <% else %>
+                        <%= image_tag current_user.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                        <%= link_to current_user.username, user_answers_path(current_user.id), class: "username" %>
+                      <% end %>
                       <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
                   </div>
                   <% Reply.where(comment_id: c.id).each do |r|%>
                       <div class="reply">
                           ㄴ
-                          <%= image_tag r.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                          <% if r.author_id != current_user.id %>
+                            <%= render partial: "./user_profile_general", locals: {user_id: r.author_id, answer_id: answer.id} %>
+                          <% else %>
+                            <%= image_tag current_user.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                            <%= link_to current_user.username, user_answers_path(current_user.id), class: "username" %>
+                          <% end %>
                           <span style="vertical-align: +6px;">: <%= r.content %> <br/></span>
                       </div>
                   <% end %>

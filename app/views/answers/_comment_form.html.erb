@@ -82,13 +82,18 @@
                     <% Reply.where(comment_id: c.id).each do |r|%>
                         <div class="reply">
                             ㄴ
-                            <%= image_tag r.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                            <% if r.author_id != user.id %>
+                                <%= render partial: "./user_profile_general", locals: {user_id: r.author_id, answer_id: a.id} %>
+                            <% else %>
+                                <%= image_tag user.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                                <%= link_to user.username, user_answers_path(user.id), class: "username" %>
+                            <% end %>
                             <span style="vertical-align: +6px;">: <%= r.content %> <br/></span>
                         </div>
                     <% end %>
                     <%# TOOD: action 설정 %>
-                    <form class="prism-form" action='' method='POST'>
-                        ㄴ<input class="prism-form__input" type='text' name='reply' />
+                    <form class="prism-form" action='/answers/comment/<%= c.id %>/reply' method='POST'>
+                        ㄴ<input class="prism-form__input" type='text' name='content' />
                         <button class="prism-form__button">대댓글 달기</button>
                     </form>
                 <%end%>
@@ -106,7 +111,7 @@
                     <span style="vertical-align: +6px;">: <%= c.content %></span> <br/>
                 <% end %>
             <% end %>
-            <form action='/answers/<%= a.id %>/comments/<%= current_user.id %>' method='POST' class="prism-form" >
+            <form action='/answers/<%= a.id %>/comments/0' method='POST' class="prism-form" >
                 <input class="prism-form__input" type="text" name="content">
                 <button class="prism-form__button">댓글 달기</button>
             </form>
