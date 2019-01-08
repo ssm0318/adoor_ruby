@@ -1,0 +1,117 @@
+<div class="prism-box__footer" style="padding-bottom: 10px;">
+    <% if current_user.id == user.id %>
+        <%= link_to "수정", edit_answer_path(a.id) %>
+        <%= link_to "삭제", answer_path(a.id),
+                            method: :delete,
+                            data: { confirm: '답변을 지우시겠습니까?'} %>
+    <% end %>                 
+    <% if Drawer.where(user_id: current_user.id, target: a).empty? %>
+        <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: a.id, target_type: "Answer"), method: :post %>
+    <% else %>
+        <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '이 글을 서랍장에서 꺼내시겠습니까?'} %>
+    <% end %>
+    <br>
+</div>
+<div class="prism-box__footer" style="margin-top: 5px; border-top: 1px solid #d7dae0;">
+    <div>
+        댓글 <br/><br>
+        <div class="author-comments-div">
+            <div class="comments">
+                <% Comment.where(target: Answer.find(a.id), recipient_id: user.id).each do |c| %>
+                    <div class="comment">
+                        <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                        <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
+                        <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
+                    </div>
+                <% end %>
+            </div>
+            <% if current_user.id == user.id %>
+                <form class="prism-form comment" action='/answers/<%= a.id %>/comments/<%= user.id %>' method='POST'>
+                    <input class="prism-form__input" type='text' name='content' />
+                    <input type='submit' class="prism-form__button"><br>
+                    이 댓글은 전체 공개되는 댓글입니다
+                </form>
+                <br><br>
+            <% end %>
+        </div>
+
+        <% if current_user.id == user.id %>
+            <% recipients = [] %>
+            <% a.comments.each do |c| %>
+                <% if c.recipient_id!= nil && c.recipient_id != user.id %>
+                    <% recipients.push(c.recipient_id) %>
+                <% end %>
+            <% end %>
+            <% recipients.uniq! %>
+            <% recipients.each do |r| %>
+                <div class="comments-div">
+                    <div class="comments">
+                        <% Comment.where(target: Answer.find(a.id), recipient_id: r).each do |c| %>
+                            <div class="comment">
+                                <% if c.author_id == user.id %>
+                                    ㄴ
+                                <% end %>
+                                <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                                <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
+                                <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
+                            </div>
+                        <% end %>
+                    </div>
+                    <form class="prism-form friend-comment" action='/answers/<%= a.id %>/comments/<%= r %>' method='POST'>
+                        ㄴ<input class="prism-form__input" type='text' name='content' />
+                        <input type='submit' class="prism-form__button">
+                    </form>
+                </div>
+                <br>
+            <% end %>
+            <div class="anonymous-comments-div">
+                <% Comment.where(target: Answer.find(a.id), recipient_id: nil).each do |c|%>
+                    <div class="comment-replies-form">
+                        <div class="comment-replies">
+                            <div class="comment">
+                                <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, answer_id: a.id} %>
+                                <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
+                            </div>
+                            <% Reply.where(comment_id: c.id).each do |r|%>
+                                <div class="reply">
+                                    ㄴ
+                                    <% if r.author_id != user.id %>
+                                        <%= render partial: "./user_profile_general", locals: {user_id: r.author_id, answer_id: a.id} %>
+                                    <% else %>
+                                        <%= image_tag user.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                                        <%= link_to user.username, user_answers_path(user.id), class: "username" %>
+                                    <% end %>
+                                    <span style="vertical-align: +6px;">: <%= r.content %> <br/></span>
+                                </div>
+                            <% end %>
+                        </div>
+                        <%# TOOD: action 설정 %>
+                        <form class="prism-form reply" action='/answers/comment/<%= c.id %>/reply' method='POST'>
+                            ㄴ<input class="prism-form__input" type='text' name='content' />
+                            <input type='submit' class="prism-form__button">
+                        </form>
+                    </div>
+                <%end%>
+            </div>
+        <% else %>
+            <div class="comments-div">
+                <div class="comments">
+                    <% Comment.where(target: Answer.find(a.id), recipient_id: current_user.id).each do |c| %>
+                        <div class="comment">
+                            <% if c.author.id == user.id %>
+                                ㄴ
+                            <% end %>
+                            <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                            <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
+                            <span style="vertical-align: +6px;">: <%= c.content %></span> <br/>
+                        </div>
+                    <% end %>
+                </div>
+                <form action='/answers/<%= a.id %>/comments/<%= current_user.id %>' method='POST' class="prism-form comment" >
+                    <input class="prism-form__input" type="text" name="content">
+                    <input type='submit' class="prism-form__button">
+                </form>
+            </div>
+        <% end %>
+    </div>
+</div>

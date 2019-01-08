@@ -8,8 +8,10 @@
         padding-left: 10px;
         padding-right: 10px;
         margin-right: 3px;
-        border: 1.1px solid $prism-box-gray;
-        border-radius: 10px;
+        // border: 0.5px solid $prism-box-gray;
+        border: none;
+        background-color: #f9f9f9;
+        border-radius: 20px;
         margin-bottom: 10px;
 
         &:focus {
@@ -23,7 +25,10 @@
         height: 30px;
         border-color: #bcbcbc;
         border-radius: 20px;
+        // background-color: #FAD4BC;
+        border: 0.5px solid $prism-box-gray;
         font-size: 12px;
+        color: #aaaaaa;
     
     }
 }
