@@ -31,7 +31,7 @@
                 </div>
                 <div class = "prism-box__content">
                     <br> 
-                    <a href="/questions/<%=d.target.question.id%>" class="question"><%= d.target.question.content %></a> <br><br>
+                    <a href="/questions/<%=d.target.question.id%>" class="question"><%= d.target.question.content %></a> <br>
                     <div class = "answer">
                         <%= d.target.content %>
                         <%= link_to "전체 글 보기", answer_path(d.target.id) %><br/>
