@@ -6,14 +6,8 @@
                 <div class = "prism-box_question">
                     <br> 
                     <a href="/questions/<%=d.target.id%>" class="question"><%= d.target.content %></a>   
-
-                    <% if Drawer.where(user_id: current_user.id, target: @question).empty? %>
-                        <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(d.target.id, target_type: "Question"), method: :post %>
-                    <% else %>
-                        <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Question"), method: :delete, data: {confirm: '이 질문을 서랍장에서 꺼내시겠습니까?'} %>
-                    <% end %>
-
-                    <% if s.target.author.has_role? :newuser %>
+                    <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Question"), method: :delete, data: {confirm: '이 질문을 서랍장에서 꺼내시겠습니까?'} %>
+                    <% if d.target.author.has_role? :newuser %>
                         <br><br>
                         <div class = "prism-box__content">
                             <div class = "date">Question made by <%= render partial: "./user_profile", locals: {user: d.target.author} %><br/>
