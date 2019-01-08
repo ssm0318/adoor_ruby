@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates_presence_of :username
   validates_uniqueness_of :username, :case_sensitive => false
 
-  after_create :add_default_role, :add_default_image
+  after_create :add_default_role, :add_default_image, :add_default_channels
 
   mount_uploader :image, ImageUploader
   
@@ -87,4 +87,5 @@ class User < ApplicationRecord
     Channel.create(name: "일촌", user: self)
     Channel.create(name: "이촌", user: self)
     Channel.create(name: "삼촌", user: self)
+  end
 end
