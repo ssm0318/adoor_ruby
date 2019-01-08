@@ -1,29 +1,36 @@
 <div class="assignment-content" style="display: none;">
+    <div>
+        <p class="message"></p>
+    </div>
     <% if user_signed_in? %>
-            <% if !current_user.friends.exists? %>
-                친구를 만들어보세요.
-            <% else%>
-                <% current_user.friends.each do |friend| %>
+        <% if !current_user.friends.exists? %>
+            친구를 만들어보세요.
+        <% else %>
+            <% current_user.friends.each do |friend| %>
                 <div class="assignment-content-el">
-                    <%= image_tag friend.image.url, :style => "height:40px; width:40px; border-radius:20px;", class: "assignee-image"%>
-                    <span class="assignment-content-el-name"><%=friend.username %></span>
+                    <div class = "assignee">
+                        <%= image_tag friend.image.url,  :class => "assignee-profile"%>
+                        <span class = "assignee-name"><%= friend.username%></span>
+                    </div>
+                    
                     <% assign = Assignment.find_by(question_id: question.id, assigner_id: current_user.id, assignee_id: friend.id) %>
                     <%if assign.nil? %>
                         <a  class="btn-do-assign" 
                             data-assign-id="-1"
                             data-friend-id="<%=friend.id%>" 
                             data-question-id="<%=question.id%>"
-                            style="background-color: #C08BEF; color: white;" >Assign</a>
+                            style="background-color: #F48462; color: white;">질문하기</a>
                     <% else %>
                         <a  class="btn-do-assign" 
                             data-assign-id="<%=assign.id%>"
                             data-friend-id="<%=friend.id%>" 
-                            data-question-id="<%=question.id%>">Cancel</a>
+                            data-question-id="<%=question.id%>">질문취소</a>
                     <% end %>
                 </div>
-                <% end %>
             <% end %>
+        <% end %>
     <% end %>
 </div>
+
 
  

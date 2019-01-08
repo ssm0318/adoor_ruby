@@ -6,11 +6,12 @@
                 <div class = "prism-box_question">
                     <br> 
                     <a href="/questions/<%=d.target.id%>" class="question"><%= d.target.content %></a>          
-                    <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(d.target.id, target_type: "Question"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
-                    <% if d.target.author.has_role? :newuser %>
-                        <div class = "prism-box__footer">
-                            Question made by <%= render partial: "./user_profile", locals: {user: d.target.author} %><br/>
-                            <div class = "date"> <%= d.target.created_at.strftime("%m월 %d일") %></div><br/>
+                    <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(d.target.id, target_type: "Question"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
+                    <% if s.target.author.has_role? :newuser %>
+                        <br><br>
+                        <div class = "prism-box__content">
+                            <div class = "date">Question made by <%= render partial: "./user_profile", locals: {user: d.target.author} %><br/>
+                            <%= d.target.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %>
                         </div>
                     <% end %>
                 </div>
@@ -30,7 +31,7 @@
                         <%= link_to "전체 글 보기", answer_path(d.target.id) %><br/>
                     </div>
                     <br>
-                    <div class = "date"><%= d.target.created_at.strftime("%m월 %d일") %></div>
+                    <div class = "date"><%= s.target.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
                 </div>
                 <div class = "prism-box__footer" style="padding-bottom: 10px;">
                     <% if current_user.id == @user.id %>

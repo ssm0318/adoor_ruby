@@ -2,18 +2,18 @@
     list-style: none;
     margin-top: 16px;
     font-size: 20px;
+
+    .question {
+        font-family:  'Nanum Gothic', sans-serif;
+        font-weight: bold;
+        font-size: 35px;
+        text-decoration: none;
+        text-align: center;
+        color: black;
+    }
 }
 
-.question {
-    font-family:  'Nanum Gothic', sans-serif;
-    font-weight: bold;
-    font-size: 35px;
-    text-decoration: none;
-    text-align: center;
-    color: black;
-}
-
-.new-answer-field{
+.new-answer-field {
     font-family: 'Nanum Gothic', sans-serif;
     font-size: 30px;
     width: 100%;
@@ -22,6 +22,7 @@
     overflow: hidden;
     border: none;
     outline: none;
+    line-height: 45px;
     // border-bottom: 1px solid #C08BEF;
     resize: none;
 }
@@ -43,7 +44,7 @@
 }
 
 .edit-answer-field{
-    font-family: 'Nanum Myeongjo', serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 30px;
     text-align: center;
     width: 100%;
