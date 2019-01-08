@@ -77,8 +77,21 @@ class AnswersController < ApplicationController
     end
 
     def create_comment
-        Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], target: Answer.find(params[:id]))
+        id = params[:recipient_id]
+        if id == 0
+            Comment.create(content: params[:content], author_id: current_user.id, target: Answer.find(params[:id]))
+        else
+            Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], target: Answer.find(params[:id]))
+        end
+            
         answer_author_id = Answer.find(params[:id]).author_id
+        redirect_back fallback_location: user_answers_path(answer_author_id)
+    end
+
+    def create_reply
+        r = Reply.create(content: params[:content], author_id: current_user.id, comment_id: params[:id])
+        answer_author_id = r.comment.target.author_id
+        
         redirect_back fallback_location: user_answers_path(answer_author_id)
     end
 
