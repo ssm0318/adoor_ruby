@@ -22,30 +22,7 @@
   </head>
 
   <body>
-    <div class="adoor-header">
-      <%= link_to image_tag("logo/final-long-logo.png", class:"logo"), root_path %>
-      <div class = "nav">
-        <div class = "nav-left">
-          <%= link_to 'Today Questions', root_path, class: "nav-el" %>
-          <%= link_to 'General Feed', '/feeds', class: "nav-el" %>
-          <%= link_to 'Question Feed', '/questions', class: "nav-el" %>
-          <%= link_to 'Friend Feed', '/friend_feeds', class: "nav-el" %>
-          <%= link_to 'Friend List', '/users/friends', class: "nav-el" %>
-          <%= link_to 'Invite Friend', invitation_path, class: "nav-el" %>
-        </div>
-
-        <div class = "nav-right">
-          <% if user_signed_in? %>
-            <%= link_to 'Log out', destroy_user_session_path, 
-                  method: :delete, class: "nav-el" %>
-            <%= link_to 'My page', "/userpage/#{current_user.id}", class: "nav-el" %>
-          <% else %>
-            <%= link_to 'Log In', user_session_path, class: "nav-el, log-in" %>
-          <% end %>
-          <%= render 'layouts/notification', noties: noties %>
-        </div>
-      </div>
-    </div>
+    <%= render 'layouts/navigation' %>
     <div id="prism-container">
     <%= yield %>
     </div>

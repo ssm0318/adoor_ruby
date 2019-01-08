@@ -4,8 +4,21 @@ class SearchController < ApplicationController
         Query.create(user: current_user, content: query)
         @results = []
         @results = Answer.all.search_tag(query) | Question.all.search_tag(query)
+        @query = params[:query]
+        @searchpath = search_all_path
 
         render 'all'
+    end
+
+    def json
+        query = params[:query]
+        Query.create(content: query)
+        @results = []
+        @results = Answer.all.search_tag(query) | Question.all.search_tag(query)
+
+        render json: {
+            result: @results,
+        }
     end
 
     def admin_question

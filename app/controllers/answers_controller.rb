@@ -18,7 +18,7 @@ class AnswersController < ApplicationController
             @answer.tags << new_tag
         end
        
-        redirect_to @answer
+        redirect_to 'friend_feed'
     end
 
     def show
@@ -55,7 +55,7 @@ class AnswersController < ApplicationController
     end
 
     def general_feed
-        @answers = Answer.all
+        @answers = Answer.anonymous(current_user.id)
         render 'general_feed'
     end
 

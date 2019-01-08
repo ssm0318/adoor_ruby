@@ -1,0 +1,5 @@
+<% color = user_id + answer_id %>
+<% r = color * color *color % 256 %>
+<% g = (r * color) % 256 %>
+<% b = (g * color) % 256 %>
+<button style="height:20px; width:20px; border-radius:10px; margin-right: 5px; background-color: <%='rgb(' + r.to_s + ',' + g.to_s + ',' + b.to_s + ')' %>; margin-bottom: 5px; "></button>

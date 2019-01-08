@@ -41,6 +41,10 @@
                     color: #F48462;
                 }
             }
+
+            .nav-el.active {
+                color: #F48462;;
+            }
         }
 
         .nav-right {
@@ -64,14 +68,25 @@
             .log-in {
                 color: #F48462;
             }
-
             .btn-noti {
+                padding-top: 2px;
                 float: right;
                 width: 20px;
                 height: auto;
                 display: block;
                 cursor: pointer;
             }
+
+            .my-page-btn img {
+                float: right;
+                display: block;
+                width: 25px;
+                height: 25px;
+                border-radius:15px;
+                cursor: pointer;
+                margin-right: 20px;
+            }
+
         }
     }
     
@@ -103,9 +118,7 @@ a {
     color: black;
     vertical-align: +6px;
 }
-body {margin: 0px; height: 100%; }
-
-html { height: 100%; overflow:auto; }
+body {margin: 0px; background-color: #f9f9f9;}
 
 div.background {
     // width: 100%;
