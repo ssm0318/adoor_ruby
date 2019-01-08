@@ -5,9 +5,9 @@
   <% @answers.anonymous(current_user.id).reverse_each do |answer| %>
     <div class="prism-box">
       <div class="prism-box__header">
-        <%= render partial: "./user_profile", locals: {user: answer.author} %>
+        <%= render partial: "./user_profile_general", locals: {user_id: answer.author_id, answer_id: answer.id} %>
         <%#= answer.author.username %>
-        <i class="material-icons">more_vert</i>
+        <%# <i class="material-icons">more_vert</i> %>
       </div>
       <div class="prism-box__content"><br>
         <a href="/questions/<%=answer.question.id%>" class="question" style="font-size: 18px;"><%= answer.question.content %></a> <br><br>
@@ -21,6 +21,35 @@
           <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(answer.id, target_type: "Answer"), method: :delete %>
         <% end %>
       </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
+      <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px dashed #d7dae0;">
+        <div>
+          댓글 <br/><br>
+          <div class="anonymous-comments">
+              <% Comment.where(target: Answer.find(answer.id), recipient_id: nil).each do |c|%>
+                  <div class="comment">
+                      <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, answer_id: answer.id} %>
+                      <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
+                  </div>
+                  <% Reply.where(comment_id: c.id).each do |r|%>
+                      <div class="reply">
+                          ㄴ
+                          <%= image_tag r.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                          <span style="vertical-align: +6px;">: <%= r.content %> <br/></span>
+                      </div>
+                  <% end %>
+                  <form action='' method='POST' class="prism-form" >
+                      ㄴ<input class="prism-form__input" type="text" name="content">
+                      <button class="prism-form__button">댓글 달기</button>
+                  </form>
+                  <%# TOOD: action 설정 %>
+              <% end %>
+          </div>
+          <form action='/answers/<%= answer.id %>/comments/0' method='POST' class="prism-form" >
+              <input class="prism-form__input" type="text" name="content">
+              <button class="prism-form__button">댓글 달기</button>
+          </form>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
