@@ -12,7 +12,7 @@
                 <!--
                 <% if current_user.id == @user.id %>
                         <%= a.highlights.size %> 개의 형광펜
-                        <%= Star.where(target_type: "Answer", target_id: a.id).size %> 명이 별표함
+                        <%= Drawer.where(target_type: "Answer", target_id: a.id).size %> 명이 별표함
                         <%= a.comments.size %> 개의 댓글 <br/><br>
                 <% end %>
                 -->
@@ -33,10 +33,10 @@
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">
                 <!--
-                <% if Star.where(user_id: current_user.id, target: a.question).empty? %>
-                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.question.id, target_type: "Question"), method: :post %>
+                <% if Drawer.where(user_id: current_user.id, target: a.question).empty? %>
+                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawers_path(target_id: a.question.id, target_type: "Question"), method: :post %>
                 <% else %>
-                    <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.question.id, target_type: "Question"), method: :delete %>
+                    <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(a.question.id, target_type: "Question"), method: :delete %>
                 <% end %>
                 -->
                 <% if current_user.id == @user.id %>
@@ -45,10 +45,10 @@
                                         method: :delete,
                                         data: { confirm: '답변을 지우시겠습니까?'} %>
                 <% end %>                 
-                <% if Star.where(user_id: current_user.id, target: a).empty? %>
-                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: a.id, target_type: "Answer"), method: :post %>
+                <% if Drawer.where(user_id: current_user.id, target: a).empty? %>
+                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawers_path(target_id: a.id, target_type: "Answer"), method: :post %>
                 <% else %>
-                    <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
+                    <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
                 <% end %>
             </div>
             <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px dashed #d7dae0;">

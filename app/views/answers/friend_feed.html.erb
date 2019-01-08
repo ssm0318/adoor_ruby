@@ -14,10 +14,10 @@
           
         </div>
         <div class="prism-box__footer" style="padding-bottom: 10px;">
-          <% if Star.where(user_id: current_user.id, target: answer).empty? %>
-            <%= link_to "<i class='material-icons'>star_border</i>".html_safe, stars_path(target_id: answer.id, target_type: "Answer"), method: :post %>
+          <% if Drawer.where(user_id: current_user.id, target: answer).empty? %>
+            <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawers_path(target_id: answer.id, target_type: "Answer"), method: :post %>
           <% else %>
-            <%= link_to "<i class='material-icons'>star</i>".html_safe, star_path(answer.id, target_type: "Answer"), method: :delete %>
+            <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(answer.id, target_type: "Answer"), method: :delete %>
           <% end %>
         </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
       </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190107123507) do
+ActiveRecord::Schema.define(version: 20190107142904) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "author_id", null: false
@@ -51,6 +51,14 @@ ActiveRecord::Schema.define(version: 20190107123507) do
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["recipient_id"], name: "index_comments_on_recipient_id"
+  end
+
+  create_table "drawers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "target_id"
+    t.string "target_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friend_requests", force: :cascade do |t|
@@ -109,9 +117,11 @@ ActiveRecord::Schema.define(version: 20190107123507) do
   end
 
   create_table "queries", force: :cascade do |t|
+    t.integer "user_id"
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_queries_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -152,14 +162,6 @@ ActiveRecord::Schema.define(version: 20190107123507) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
-  create_table "stars", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "target_id"
-    t.string "target_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "tags", force: :cascade do |t|
     t.integer "author_id", null: false
     t.string "content", null: false
@@ -178,6 +180,14 @@ ActiveRecord::Schema.define(version: 20190107123507) do
     t.index ["author_id"], name: "index_tmis_on_author_id"
   end
 
+  create_table "user_queries", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_queries_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -192,6 +202,7 @@ ActiveRecord::Schema.define(version: 20190107123507) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

@@ -1,6 +1,6 @@
-class CreateQueries < ActiveRecord::Migration[5.1]
+class CreateUserQueries < ActiveRecord::Migration[5.1]
   def change
-    create_table :queries do |t|
+    create_table :user_queries do |t|
       t.belongs_to :user
       t.string     :content
 

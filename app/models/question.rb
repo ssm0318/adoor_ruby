@@ -1,11 +1,12 @@
 class Question < ApplicationRecord
-    has_many   :answers
-    has_many   :assignments
-    has_many   :stars
+    has_many   :answers, dependent: :destroy
+    has_many   :assignments, dependent: :destroy
+    has_many   :drawers, dependent: :destroy
     belongs_to :author, class_name: 'User'
     has_and_belongs_to_many :tags, dependent: :destroy
 
     scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
+    scope :popular_questions, -> { joins(:answers).group("answers.question_id").order("count(answers.question_id) desc").take(7) }
 
     # after_create :create_notifications
 
