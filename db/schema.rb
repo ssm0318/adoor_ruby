@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190107090908) do
+ActiveRecord::Schema.define(version: 20190107123507) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "author_id", null: false
@@ -43,12 +43,12 @@ ActiveRecord::Schema.define(version: 20190107090908) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "author_id", null: false
-    t.integer "recipient_id", null: false
-    t.integer "answer_id", null: false
+    t.integer "recipient_id"
+    t.integer "target_id"
+    t.string "target_type"
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["answer_id"], name: "index_comments_on_answer_id"
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["recipient_id"], name: "index_comments_on_recipient_id"
   end
@@ -79,6 +79,14 @@ ActiveRecord::Schema.define(version: 20190107090908) do
     t.datetime "updated_at", null: false
     t.index ["answer_id"], name: "index_highlights_on_answer_id"
     t.index ["user_id"], name: "index_highlights_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "target_id"
+    t.string "target_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -121,6 +129,16 @@ ActiveRecord::Schema.define(version: 20190107090908) do
     t.integer "tag_id", null: false
     t.index ["question_id", "tag_id"], name: "index_questions_tags_on_question_id_and_tag_id"
     t.index ["tag_id", "question_id"], name: "index_questions_tags_on_tag_id_and_question_id"
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.integer "comment_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_replies_on_author_id"
+    t.index ["comment_id"], name: "index_replies_on_comment_id"
   end
 
   create_table "roles", force: :cascade do |t|
