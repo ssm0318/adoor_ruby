@@ -9,7 +9,7 @@
         padding-right: 10px;
         margin-right: 3px;
         border: 1.1px solid $prism-box-gray;
-        border-radius: 20px;
+        border-radius: 10px;
         margin-bottom: 10px;
 
         &:focus {
@@ -21,9 +21,8 @@
     .prism-form__button {
         width: 70px;
         height: 30px;
-        border: none;
+        border-color: #F48462;
         border-radius: 20px;
-        background-color: #FAD4BC;
         font-size: 12px;
     
     }

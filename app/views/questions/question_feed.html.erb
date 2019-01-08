@@ -3,9 +3,9 @@
     <div class = "question">
         <div class = "question-content"><%= @question.content %>
             <% if Drawer.where(user_id: current_user.id, target: @question).empty? %>
-            <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawer_path(target_id: @question.id, target_type: "Question"), method: :post %>
+                <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: @question.id, target_type: "Answer"), method: :post %>
             <% else %>
-            <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(@question.id, target_type: "Question"), method: :delete %>
+                <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(@question.id, target_type: "Answer"), method: :delete, data: {confirm: '이 글을 서랍장에서 꺼내시겠습니까?'} %>
             <% end %>
         </div>
     </div>
@@ -48,11 +48,14 @@
                                         method: :delete,
                                         data: { confirm: '답변을 지우시겠습니까?'} %>
                 <% end %>                 
+
                 <% if Drawer.where(user_id: current_user.id, target: a).empty? %>
-                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawer_path(target_id: a.id, target_type: "Answer"), method: :post %>
+                    <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: a.id, target_type: "Answer"), method: :post %>
                 <% else %>
-                    <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
+                    <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '이 글을 서랍장에서 꺼내시겠습니까?'} %>
                 <% end %>
+
+                
                 <br>
 
             </div>
