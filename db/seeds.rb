@@ -14,6 +14,7 @@
 # Comment.delete_all
 # Tmi.delete_all
 # Drawer.delete_all
+# 1: 백산수, 2: 마틸다, 3:율로몬, 4: 잡동사니, 5: 이룰렁, 6: 누구게, 7: 메롱
 if User.where(email: "prism@snu.com").empty?
     User.create(email: "prism@snu.com", password: "prism-snu", username: "백산수")
 end
@@ -108,20 +109,20 @@ Answer.find_or_create_by(author_id: 1, question_id: 11, content: "저절로, 습
 Answer.find_or_create_by(author_id: 5, question_id: 11, content: "세상에 저절로 되는 일은 없다. \n뻔한 말이지만 기회는 준비된 사람한테만 오는거다. \n저절로 되기만을 바라고 그냥 기다리는건 양아치다.
 ")
 Answer.find_or_create_by(author_id: 6, question_id: 1, content: "마무으리!")
-Answer.find_or_create_by(author_id: 7, question_id: 1, content: "마무리 마유리")
-Answer.find_or_create_by(author_id: 6, question_id: 2, content: "뿡")
-Answer.find_or_create_by(author_id: 7, question_id: 2, content: "꺅")
+Answer.find_or_create_by(author_id: 7, question_id: 12, content: "날개 달린 선녀들과")
 Answer.find_or_create_by(author_id: 6, question_id: 3, content: "스물다섯쨜")
+Answer.find_or_create_by(author_id: 1, question_id: 12, content: "동산 위에 올라서서")
 Answer.find_or_create_by(author_id: 7, question_id: 3, content: "존나 많아")
 Answer.find_or_create_by(author_id: 6, question_id: 4, content: "zinzi")
+Answer.find_or_create_by(author_id: 5, question_id: 12, content: "하늘 끝까지 올라")
 Answer.find_or_create_by(author_id: 7, question_id: 4, content: "진지잡수세여")
-Answer.find_or_create_by(author_id: 1, question_id: 12, content: "동산 위에 올라서서")
 Answer.find_or_create_by(author_id: 2, question_id: 12, content: "파란 하늘 바라보며")
 Answer.find_or_create_by(author_id: 3, question_id: 12, content: "천사 얼굴 선녀 얼굴")
+Answer.find_or_create_by(author_id: 6, question_id: 2, content: "뿡")
+Answer.find_or_create_by(author_id: 7, question_id: 1, content: "마무리 마유리")
 Answer.find_or_create_by(author_id: 4, question_id: 12, content: "마음 속에 그려봅니다")
-Answer.find_or_create_by(author_id: 5, question_id: 12, content: "하늘 끝까지 올라")
 Answer.find_or_create_by(author_id: 6, question_id: 12, content: "실바람을 끌어안고")
-Answer.find_or_create_by(author_id: 7, question_id: 12, content: "날개 달린 선녀들과")
+Answer.find_or_create_by(author_id: 7, question_id: 2, content: "꺅")
 
 # Post
 Post.find_or_create_by(author_id: 1, content: "안녕하세오 포스트에오")
