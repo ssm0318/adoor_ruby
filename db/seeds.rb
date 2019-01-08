@@ -154,7 +154,7 @@ Comment.find_or_create_by(author_id: 2, recipient_id: 2, target: Answer.find(5),
 Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(10), content: "아하~")
 Comment.find_or_create_by(author_id: 7, recipient_id: 7, target: Answer.find(16), content: "오~")
 Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(22), content: "아하~")
-Comment.find_or_create_by(author_id: 7, recipient_id: 7, target: Answer.find(22), content: "오~")
+Comment.find_or_create_by(author_id: 7, recipient_id: nil, target: Answer.find(22), content: "오~")
 Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(17), content: "아하~")
 Comment.find_or_create_by(author_id: 6, recipient_id: 6, target: Answer.find(17), content: "오~")
 Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(23), content: "아하~")
@@ -173,6 +173,7 @@ Reply.find_or_create_by(author_id: 2, comment_id: 3, content: "뚱딴지")
 Reply.find_or_create_by(author_id: 3, comment_id: 1, content: "대탐험")
 Reply.find_or_create_by(author_id: 3, comment_id: 4, content: "보물찾기")
 Reply.find_or_create_by(author_id: 3, comment_id: 5, content: "진지잡수세요")
+Reply.find_or_create_by(author_id: 5, comment_id: 10, content: "답변 감사합니당")
 
 # Like 
 Like.find_or_create_by(user_id: 1, target: Answer.find(1))

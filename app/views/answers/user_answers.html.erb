@@ -75,7 +75,7 @@
                     <% if current_user.id == @user.id %>
                         <% recipients = [] %>
                         <% a.comments.each do |c| %>
-                            <% if c.recipient_id != @user.id %>
+                            <% if c.recipient_id!= nil && c.recipient_id != @user.id %>
                                 <% recipients.push(c.recipient_id) %>
                             <% end %>
                         <% end %>
@@ -105,7 +105,26 @@
                             </div>
                             <br>
                         <% end %>
-
+                        <div class="anonymous-comments">
+                            <% Comment.where(target: Answer.find(a.id), recipient_id: nil).each do |c|%>
+                                <div class="comment">
+                                    <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, answer_id: a.id} %>
+                                    <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
+                                </div>
+                                <% Reply.where(comment_id: c.id).each do |r|%>
+                                    <div class="reply">
+                                        ㄴ
+                                        <%= image_tag r.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
+                                        <span style="vertical-align: +6px;">: <%= r.content %> <br/></span>
+                                    </div>
+                                <% end %>
+                                <%# TOOD: action 설정 %>
+                                <form class="prism-form" action='' method='POST'>
+                                    ㄴ<input class="prism-form__input" type='text' name='reply' />
+                                    <button class="prism-form__button">대댓글 달기</button>
+                                </form>
+                            <%end%>
+                        </div>
                     <% else %>
                         <% Comment.where(target: Answer.find(a.id), recipient_id: current_user.id).each do |c| %>
                             <% if c.author.id == current_user.id %>
