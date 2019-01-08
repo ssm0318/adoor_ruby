@@ -37,7 +37,7 @@ class AssignmentsController < ApplicationController
         # redirect_to root_url
         render json: {
             assign_id: new_assign_id,
-            assigned_user: assigned_user.email
+            assigned_user: assigned_user
         }
  
     end
@@ -52,7 +52,7 @@ class AssignmentsController < ApplicationController
         # flash[:success] = "#{User.find(assignment.assignee_id).email}님을 de-assign하셨습니다."
 
         render json: {
-            assigned_user: User.find(assignee_id).email
+            assigned_user: User.find(assignee_id)
         }
     end
 end

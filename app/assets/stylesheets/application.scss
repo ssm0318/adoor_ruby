@@ -109,10 +109,6 @@ a {
     text-decoration: none;
 }
 
-.question {
-    font-family: "Nanum Myeongjo", sans-serif;
-}
-
 .answer {
     font-family: "Nanum Gothic", serif;
     white-space: pre-line;
@@ -219,4 +215,24 @@ div.background {
     width: 70%;
     margin-left: auto;
     margin-right: auto;
+
+    //for each question feed
+    .question {
+        text-align: center;
+        
+        .question-content{
+            position: relative;
+            font-family: 'Nanum Gothic', sans-serif;
+            text-decoration: none;
+            color: black;
+            font-size: 22px;
+
+        }
+
+        i {
+            padding-left: 20px;
+            position: absolute;
+            color: gold;
+        }
+    }
 }

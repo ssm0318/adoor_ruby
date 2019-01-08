@@ -2,8 +2,8 @@
     position: fixed;
     right: 10px;
     top: 45px;
-    padding: 0px;
-    border: 0.75px solid #bcbcbc;
+    margin-top: 15px;
+    border: 0.5px solid #bcbcbc;
     max-height: 250px;
     overflow-y: scroll;
     z-index: 1;
@@ -23,7 +23,9 @@
 .noti-el {
     padding: 16px;
     text-decoration: none;
-    color: #777777;
+    color: black;
+    font-family: "Nanum Gothic", sans-serif;
+    font-size: 13px;
 }
 
 // .noti-el:hover {
@@ -31,6 +33,8 @@
 // }
 
 .noti-el.unread {
-    background-color: #d9c9ed;
-    color: white;
+    background-color: #FAD4BC;
+    color: black;
+    font-family: "Nanum Gothic", sans-serif;
+    font-size: 13px;
 }

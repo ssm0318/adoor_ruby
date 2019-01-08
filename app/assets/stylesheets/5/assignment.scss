@@ -2,40 +2,66 @@
     position: absolute;
     z-index: 1;
     background-color: white;
-    border: 0.75px solid #bcbcbc;
-    width: 200px;
+    border: 0.5px solid #bcbcbc;
+    width: 250px;
     margin-left: 100px;
     margin-top: -25px;
     font-size: 15px;
+    padding: 5px 15px 5px 15px;
+
+    .assignment-content-el {
+        padding-bottom: 10px;
+        padding-top: 10px;
+        height: 30px;
+        display: relative;
+
+        .assignee {
+            float: left;
+
+            .assignee-profile {
+                height: 30px;
+                width:30px; 
+                border-radius:20px;
+            }
+            .assignee-name {
+                font-family: "Nanum Gothic", sans-serif;
+                font-size: 13px;
+                position: relative;
+                top: -9px;
+                padding-left: 5px;
+                color: black;
+            
+            }
+        }
+
+        .btn-do-assign {
+            float: right;
+            text-align: center;
+            display: block;
+            width: 70px;
+            height: 30px;
+            font-size: 13px;
+            text-align: center;
+            text-decoration: none;
+            font-family: 'Nanum Gothic', sans-serif;
+            border-radius: 30px;
+            cursor: pointer;
+            line-height: 30px;
+            border: 1px solid #F48462;
+        }
+    }
 }
-
-.btn-do-assign {
-    cursor: pointer;
-    position: absolute;
-    margin-top: -30px;
-    right: 10px;
-    padding: 8px;
-    border: 0.75px solid #C08BEF;
-    border-radius: 20px;
-    color: #777777;
-    font-size: 14px;
-    text-align: center;
-    text-decoration: none;
-}
-
-
-.assignment-content-el {
-    float: left;
-    display: block;
-    height: 50px;
-    padding: 10px;
-    font-size: 16px;
-}
-
 
 .btn-assign, .btn-write {
     width: 32px;
     height: auto;
     margin: 3px;
     cursor: pointer;
+}
+
+.message {
+    color: #F48462;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 13px;
+    text-align: center;
 }

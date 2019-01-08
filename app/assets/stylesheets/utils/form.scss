@@ -3,22 +3,27 @@
 
 .prism-form {
     .prism-form__input {
-        width: 80%;
+        width: calc(100% - 100px);
         height: 25px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-right: 3px;
         border: 1.1px solid $prism-box-gray;
-        border-radius: 10px;
-        // border: 0px 5px;
+        border-radius: 20px;
+        margin-bottom: 10px;
 
         &:focus {
             outline: none;
             fill: none;
-        }   
+        }
     }
 
     .prism-form__button {
-        border: 1.1px solid $prism-box-gray;
-        border-radius: 10px;
-        background-color: lavender;
+        width: 70px;
+        height: 30px;
+        border: none;
+        border-radius: 20px;
+        background-color: #FAD4BC;
         font-size: 12px;
     
     }
