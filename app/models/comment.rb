@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
 
     # 익명 댓글
     scope :anonymous, -> { where(recipient_id: nil) }
-
+    
     after_create :create_notifications
  
     private
@@ -23,7 +23,7 @@ class Comment < ApplicationRecord
             # 글쓴이가 다른사용자의 댓글에 대해 대댓글을 단 경우
             if self.author == self.target.author && self.recipient_id != self.target.author_id
                 Notification.create(recipient: User.find(self.recipient_id), actor: self.author, target: self, action: 'recomment')
-            # 다른사용자가 글쓴이의 답변에 댓글을 단 경우
+            # 다른사용자(친구)가 글쓴이의 답변에 댓글을 단 경우
             elsif self.author != self.target.author
                 Notification.create(recipient: self.target.author, actor: self.author, target: self, action: 'comment')
             end    
