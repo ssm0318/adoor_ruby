@@ -8,17 +8,19 @@ class AnswersController < ApplicationController
         render 'new'
     end
     
-    def create
+    def create 
         @answer = Answer.new(answer_params)
         @answer.save
 
-        tag_array = @answer.tag_string.gsub("\r\n", '\n').split('\n')
-        tag_array.each do |tag|
-            new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)
-            @answer.tags << new_tag
+        if !@answer.tag_string.nil?
+            tag_array = @answer.tag_string.gsub("\r\n", '\n').split('\n')
+            tag_array.each do |tag|
+                new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)
+                @answer.tags << new_tag
+            end
         end
        
-        redirect_to 'friend_feed'
+        redirect_to root_path
     end
 
     def show
@@ -31,10 +33,13 @@ class AnswersController < ApplicationController
     def update
         if @answer.update(answer_params)
             @answer.tags.destroy_all
-            tag_array = @answer.tag_string.gsub("\r\n", "\n").split("\n") 
-            tag_array.each do |tag|
-                new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)
-                @answer.tags << Tag.find(new_tag.id)
+
+            if !@answer.tag_string.nil?
+                tag_array = @answer.tag_string.gsub("\r\n", "\n").split("\n") 
+                tag_array.each do |tag|
+                    new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)
+                    @answer.tags << Tag.find(new_tag.id)
+                end
             end
 
             redirect_to @answer
@@ -44,7 +49,7 @@ class AnswersController < ApplicationController
     end
 
     def destroy
-        @answer.destroy
+        @answer.destroy 
 
         redirect_to user_answers_path(current_user.id)
     end

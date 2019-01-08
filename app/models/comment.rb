@@ -2,14 +2,13 @@ class Comment < ApplicationRecord
     belongs_to :target, polymorphic: true
     belongs_to :author, class_name: 'User'
     has_many   :replies, dependent: :destroy
+    has_many   :likes, dependent: :destroy, as: :target
 
     # 익명 댓글
     scope :anonymous, -> { where(recipient_id: nil) }
-    
-
 
     after_create :create_notifications
-
+ 
     private
 
     def create_notifications

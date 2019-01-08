@@ -62,7 +62,7 @@
                         <div>
                             댓글 <br/><br>
                             <div class="author-comments">
-                                <% Comment.where(answer_id: a.id, recipient_id: a.author.id).each do |c| %>
+                                <% Comment.where(target: Answer.find(a.id), recipient_id: a.author.id).each do |c| %>
                                     <div class="comment">
                                         <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
                                         <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
@@ -86,7 +86,7 @@
                             <% recipients.each do |r| %>
                                 <div>
                                     <div class="comment-block">
-                                        <% Comment.where(answer_id: a.id, recipient_id: r).each do |c| %>
+                                        <% Comment.where(target: Answer.find(a.id), recipient_id: r).each do |c| %>
                                             <div class="comment">
                                                 <% if c.author_id == a.author.id %>
                                                     ㄴ
@@ -113,7 +113,7 @@
                         <div>
                             댓글 <br><br>
                             <div class="author-comments">
-                                <% Comment.where(answer_id: a.id, recipient_id: a.author.id).each do |c| %>
+                                <% Comment.where(target: Answer.find(a.id), recipient_id: a.author.id).each do |c| %>
                                     <div class="comment">
                                         <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
                                         <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
@@ -122,7 +122,7 @@
                                 <% end %>
                             </div>
                             <br><br>
-                            <% Comment.where(answer_id: a.id, recipient_id: current_user.id).each do |c| %>
+                            <% Comment.where(target: Answer.find(a.id), recipient_id: current_user.id).each do |c| %>
                                 <% if c.author.id == current_user.id %>
                                     <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
                                     <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
