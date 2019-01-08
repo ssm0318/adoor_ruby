@@ -8,7 +8,9 @@
         padding-left: 10px;
         padding-right: 10px;
         margin-right: 3px;
-        border: 1.1px solid $prism-box-gray;
+        // border: 0.5px solid $prism-box-gray;
+        border: none;
+        background-color: #f9f9f9;
         border-radius: 20px;
         margin-bottom: 10px;
 
@@ -23,8 +25,10 @@
         height: 30px;
         border: none;
         border-radius: 20px;
-        background-color: #FAD4BC;
+        // background-color: #FAD4BC;
+        border: 0.5px solid $prism-box-gray;
         font-size: 12px;
+        color: #aaaaaa;
     
     }
 }

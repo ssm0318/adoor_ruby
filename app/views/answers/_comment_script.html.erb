@@ -1,0 +1,48 @@
+<script>
+    $(document).ready(function() {
+        $("form").submit( function(e) {
+
+            e.preventDefault();
+            e.stopPropagation();
+            var form = $(this)
+
+            $.ajax({
+                    type: "POST",
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function(data) {
+
+                        var html = `
+                            <img src='${data.imageurl}' 
+                                alt='' style='height:20px; width:20px; 
+                                border-radius:10px; margin-right: 2px;'>
+                            <a href='${data.path}' class='username'>
+                                ${data.username}
+                            </a>
+                            <span style='vertical-align: +6px;'>:
+                                ${data.content}<br/>
+                            </span>
+                            </div>
+                        `
+
+                        if(form.hasClass("comment")) {
+                            html = "<div class='comment'>" + html
+                        } else {
+                            html = "<div class='comment'>ㄴ" + html
+                        }
+
+                        if(form.hasClass("reply")) {
+                            form.parent().find(".comment-replies").append(html)
+                        } else {
+                            form.parent().find(".comments").append(html)
+                        }
+
+                        form.find(".prism-form__input").val('')
+                    },
+                    error: function(data) {
+                        console.log("error")
+                    }
+                })
+        })
+    })
+</script>
