@@ -61,6 +61,9 @@ class User < ApplicationRecord
   has_many :queries, dependent: :destroy
   has_many :user_queries, dependent: :destroy
 
+  # channel
+  has_many :channels, dependent: :destroy
+
   # reference: http://railscasts.com/episodes/163-self-referential-association
   
   private
@@ -79,4 +82,9 @@ class User < ApplicationRecord
     self.image = Rails.root.join("app/assets/images/icons/profile" + random.to_s + ".png").open
     self.save!
   end
+
+  def add_default_channels
+    Channel.create(name: "일촌", user: self)
+    Channel.create(name: "이촌", user: self)
+    Channel.create(name: "삼촌", user: self)
 end
