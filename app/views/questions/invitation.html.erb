@@ -1,40 +1,43 @@
-친구에게 초대링크를 보내보세요. <br/>
-최대 3개의 질문과 함께 보낼 수 있어요! <br/><br>
-<!-- TODO: 질문 검색창 만들기 -->
-
-<%= form_tag(link_generation_path, method: :get) do %>
-    <% @questions.each do |question| %>
-        <div>
-            <label>
-                <%= check_box_tag "q[]", question.id %>
-                <%= question.content %>
-            </label>
+<div class = "inner-container">
+    <div class = "prism-box">
+        <div class  = "prism-box__content">
+        <h1 class = "prism-title">친구 초대하기</h1>
+            <div class="answer">
+                친구에게 초대링크를 보내보세요.
+                최대 3개의 질문과 함께 보낼 수 있어요!
+                <!-- TODO: 질문 검색창 만들기 -->
+                <%= form_tag(link_generation_path, method: :get) do %>
+                    <% @questions.each do |question| %>
+                        <%= check_box_tag "q[]", question.id, false %>
+                        <label for="question.id"><%= question.content %></label>
+                    <% end %>
+                    <br> 
+                    <%= submit_tag "링크 생성하기", class: "link-generation-btn" %><br>
+                    
+                <% end %>
+            </div>
+            생성된 링크를 친구에게 보내보세요. <br>
+            친구가 링크로 접속하면 (회원가입 후) <%= current_user.username %>님에게 친구요청을 보낼 수 있어요.               
         </div>
-    <% end %> 
-    <%= submit_tag "링크 생성하기", class: "link-generation-button" %><br>
-    생성된 링크를 친구에게 보내보세요. 친구가 링크로 접속하면 (회원가입 후) <%= current_user.username %>님에게 친구요청을 보낼 수 있어요.
-<% end %>
+    </div>
+
+</div>
 
 
 
 <script>
-// FIXME: not working now
-// 최대 3개까지만 체크하게 하도록 하는 거!!
-$(document).ready(function() {
-    $(input).on('change', function() {
-        var maxAllowed = 3;
-        var cnt = $(input:checked).length;
-        if (cnt > maxAllowed) {
-            this.checked = false;
-            alert("질문은 3개까지만 동봉할 수 있어요!");
 
-        }
+$(document).ready(function() {
+
+    var limit = 3;
+    $('input[name="q[]"]').on('change', function(evt) {
+    if($(this).siblings(':checked').length >= limit) {
+        this.checked = false;
+        alert("질문은 3개까지만 선택할 수 있어요!");
+    }
     });
 });
-// $('.checkboxes').on('change', function() {
-//     if($(this).siblings(':checked').length > 3) {
-//         this.checked = false;
-//         alert("질문은 3개까지만 동봉할 수 있어요!");
-//     }
-// });
+
+
+
 </script>

@@ -20,11 +20,13 @@
                                   data: { confirm: '답변을 지우시겠습니까?'} 
                                   %>
           <% end %>
+
           <% if Drawer.where(user_id: current_user.id, target: answer).empty? %>
-            <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawers_path(target_id: answer.id, target_type: "Answer"), method: :post %>
+              <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: answer.id, target_type: "Answer"), method: :post %>
           <% else %>
-            <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(answer.id, target_type: "Answer"), method: :delete %>
+              <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(answer.id, target_type: "Answer"), method: :delete, data: {confirm: '이 글을 서랍장에서 꺼내시겠습니까?'} %>
           <% end %>
+          <br>
         </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
         <br>
       </div>

@@ -20,13 +20,17 @@
                 <br>
                 <a href="/questions/<%=a.question.id%>" class="question"><%= a.question.content %></a> <br><br>
                 <div class="answer"><%= a.content %></div>
-                <!--<%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>-->
                 <br>
+                <!--<%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>-->
+                <%
+=begin%>
                 태그:
                 <% if !a.tag_string.nil? %>
                     <%= a.tag_string.gsub("\r\n", "\n").split("\n") %>
                 <% end %>-->
-                <br>
+                <br> 
+<%
+=end%>
                 <div class = "date"><%= a.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
                 <br>
             </div>
@@ -45,9 +49,9 @@
                                         data: { confirm: '답변을 지우시겠습니까?' } %>
                 <% end %>                 
                 <% if Drawer.where(user_id: current_user.id, target: a).empty? %>
-                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawers_path(target_id: a.id, target_type: "Answer"), method: :post %>
+                    <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: a.id, target_type: "Answer"), method: :post %>
                 <% else %>
-                    <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
+                    <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '이 글을 서랍장에서 꺼내시겠습니까?'} %>
                 <% end %>
                 <br>
             </div>
