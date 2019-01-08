@@ -14,6 +14,7 @@
 # Comment.delete_all
 # Tmi.delete_all
 # Drawer.delete_all
+# 1: 백산수, 2: 마틸다, 3:율로몬, 4: 잡동사니, 5: 이룰렁, 6: 누구게, 7: 메롱
 if User.where(email: "prism@snu.com").empty?
     User.create(email: "prism@snu.com", password: "prism-snu", username: "백산수")
 end
