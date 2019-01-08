@@ -13,7 +13,7 @@
 # Highlight.delete_all
 # Comment.delete_all
 # Tmi.delete_all
-# Star.delete_all
+# Drawer.delete_all
 if User.where(email: "prism@snu.com").empty?
     User.create(email: "prism@snu.com", password: "prism-snu", username: "백산수")
 end
@@ -115,6 +115,13 @@ Answer.find_or_create_by(author_id: 6, question_id: 3, content: "스물다섯쨜
 Answer.find_or_create_by(author_id: 7, question_id: 3, content: "존나 많아")
 Answer.find_or_create_by(author_id: 6, question_id: 4, content: "zinzi")
 Answer.find_or_create_by(author_id: 7, question_id: 4, content: "진지잡수세여")
+Answer.find_or_create_by(author_id: 1, question_id: 12, content: "동산 위에 올라서서")
+Answer.find_or_create_by(author_id: 2, question_id: 12, content: "파란 하늘 바라보며")
+Answer.find_or_create_by(author_id: 3, question_id: 12, content: "천사 얼굴 선녀 얼굴")
+Answer.find_or_create_by(author_id: 4, question_id: 12, content: "마음 속에 그려봅니다")
+Answer.find_or_create_by(author_id: 5, question_id: 12, content: "하늘 끝까지 올라")
+Answer.find_or_create_by(author_id: 6, question_id: 12, content: "실바람을 끌어안고")
+Answer.find_or_create_by(author_id: 7, question_id: 12, content: "날개 달린 선녀들과")
 
 # Post
 Post.find_or_create_by(author_id: 1, content: "안녕하세오 포스트에오")
@@ -158,6 +165,14 @@ Comment.find_or_create_by(author_id: 6, recipient_id: 6, target: Post.find(2), c
 Comment.find_or_create_by(author_id: 1, target: Post.find(4), content: "오~")
 Comment.find_or_create_by(author_id: 6, target: Post.find(5), content: "예~")
 
+# Reply
+Reply.find_or_create_by(author_id: 1, comment_id: 1, content: "오호라")
+Reply.find_or_create_by(author_id: 2, comment_id: 2, content: "유후~")
+Reply.find_or_create_by(author_id: 2, comment_id: 3, content: "뚱딴지")
+Reply.find_or_create_by(author_id: 3, comment_id: 1, content: "대탐험")
+Reply.find_or_create_by(author_id: 3, comment_id: 4, content: "보물찾기")
+Reply.find_or_create_by(author_id: 3, comment_id: 5, content: "진지잡수세요")
+
 # Like 
 Like.find_or_create_by(user_id: 1, target: Answer.find(1))
 Like.find_or_create_by(user_id: 1, target: Answer.find(2))
@@ -186,11 +201,11 @@ Tmi.find_or_create_by(author_id: 3, content: "two lovely chihuahuas")
 Tmi.find_or_create_by(author_id: 3, content: "salmon sushi ftw")
 Tmi.find_or_create_by(author_id: 4, content: "406 sucks")
 
-Star.find_or_create_by(user_id: 1, target: Question.find(1))
-Star.find_or_create_by(user_id: 1, target: Question.find(2))
-Star.find_or_create_by(user_id: 1, target: Answer.find(1))
-Star.find_or_create_by(user_id: 3, target: Question.find(1))
-Star.find_or_create_by(user_id: 3, target: Answer.find(3))
+Drawer.find_or_create_by(user_id: 1, target: Question.find(1))
+Drawer.find_or_create_by(user_id: 1, target: Question.find(2))
+Drawer.find_or_create_by(user_id: 1, target: Answer.find(1))
+Drawer.find_or_create_by(user_id: 3, target: Question.find(1))
+Drawer.find_or_create_by(user_id: 3, target: Answer.find(3))
 
 # 어드민 질문 태그 검색 테스트용
 q = Question.first

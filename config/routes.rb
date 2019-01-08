@@ -20,12 +20,12 @@ Rails.application.routes.draw do
   get '/answers/edit/question/:id' => 'answers#edit', as: :edit_answer
 
   resources :highlights
-  resources :stars
+  resources :drawers
   
-  # user answers, highlights, stars
+  # user answers, highlights, drawers
   get '/userpage/:id' => 'answers#user_answers', as: :user_answers
   get '/userpage/:id/highlights' => 'highlights#user_highlights', as: :user_highlights
-  get '/userpage/:id/stars' => 'stars#user_stars', as: :user_stars
+  get '/userpage/:id/drawers' => 'drawers#user_drawers', as: :user_drawers
 
   # friend request
   post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend
@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   get '/search/anonymous_answer' => 'search#anonymous_answer', as: :search_anonymous_answer
   get '/search/popular_tags' => 'search#popular_tags', as: :show_popular_tags
   get '/search/popular_search' => 'search#popular_search', as: :show_popular_search
+  get '/search/user' => 'search#user', as: :search_user
 
   devise_for :users
   # devise_for :users, controllers: {

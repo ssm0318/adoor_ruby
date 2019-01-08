@@ -28,7 +28,7 @@
         <%= link_to "답변", user_answers_path(user.id) %>
         <% if current_user.id == user.id %>
             <%= link_to "형광펜", user_highlights_path(user.id) %>
-            <%= link_to "별", user_stars_path(user.id) %>
+            <%= link_to "별", user_drawers_path(user.id) %>
         <% end %>
     </div>
 </div>

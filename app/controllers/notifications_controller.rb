@@ -23,8 +23,8 @@ class NotificationsController < ApplicationController
                 redirect_to answer_path(Comment.find(noti.target_id).target_id)
             elsif noti.target_type == 'Highlight'
                 redirect_to answer_path(Highlight.find(noti.target_id).answer_id)
-            elsif noti.target_type == 'Stars'
-                redirect_to answer_path(Star.find(noti.target_id).target_id)
+            elsif noti.target_type == 'Drawers'
+                redirect_to answer_path(Drawer.find(noti.target_id).target_id)
             elsif noti.target_type == 'FriendRequest'
                 redirect_to user_answers_path(noti.actor_id)
             end

@@ -1,0 +1,6 @@
+<h1>유저 검색 결과</h1>
+
+<% @users.each do |user| %>
+    <%= link_to user.username, user_answers_path(user.id), class: "username" %>
+    <%= link_to image_tag(user.image.url, :style => "height:30px; width:30px; border-radius:15px; margin-right: 5px;"), user_answers_path(user.id) %>
+<% end %>
