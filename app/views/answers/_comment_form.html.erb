@@ -111,7 +111,7 @@
                     <span style="vertical-align: +6px;">: <%= c.content %></span> <br/>
                 <% end %>
             <% end %>
-            <form action='/answers/<%= a.id %>/comments/0' method='POST' class="prism-form" >
+            <form action='/answers/<%= a.id %>/comments/<%= current_user.id %>' method='POST' class="prism-form" >
                 <input class="prism-form__input" type="text" name="content">
                 <button class="prism-form__button">댓글 달기</button>
             </form>
