@@ -1,11 +1,4 @@
 <div class="prism-box__footer" style="padding-bottom: 10px;">
-    <!--
-    <% if Drawer.where(user_id: current_user.id, target: a.question).empty? %>
-        <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawers_path(target_id: a.question.id, target_type: "Question"), method: :post %>
-    <% else %>
-        <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(a.question.id, target_type: "Question"), method: :delete %>
-    <% end %>
-    -->
     <% if current_user.id == user.id %>
         <%= link_to "수정", edit_answer_path(a.id) %>
         <%= link_to "삭제", answer_path(a.id),
@@ -13,9 +6,9 @@
                             data: { confirm: '답변을 지우시겠습니까?'} %>
     <% end %>                 
     <% if Drawer.where(user_id: current_user.id, target: a).empty? %>
-        <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawers_path(target_id: a.id, target_type: "Answer"), method: :post %>
+        <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: a.id, target_type: "Answer"), method: :post %>
     <% else %>
-        <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
+        <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '이 글을 서랍장에서 꺼내시겠습니까?'} %>
     <% end %>
     <br>
 </div>

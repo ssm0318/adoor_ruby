@@ -1,4 +1,43 @@
-<div>
-    <!-- TODO: 자동 클립보드 복사 버튼 만들기 -->
-    링크: <%= @link %>
-</div>
+<div class = "inner-container">
+    <div class = "invitation-link-box">
+        <div class = "invitation-link-content">
+            <h1 class = "invitation-link-title">초대장</h1>
+            <br>
+            <br>
+            <input type="text" value= "<%= @link %>" id="myInput">
+
+            <div class="tooltip">
+                <button onclick="myFunction()" onmouseout="outFunc()">
+                <span class="tooltiptext" id="myTooltip">클립보드에 복사되었습니다</span>
+                링크 복사하기
+                </button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div>
+            생성된 링크를 친구에게 보내보세요. <br>
+            친구가 링크로 접속하면 (회원가입 후) <%= current_user.username %>님에게 친구요청을 보낼 수 있어요.
+        </div>
+    </div>
+
+
+<script>
+// 참고: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_copy_clipboard2
+function myFunction() {
+var copyText = document.getElementById("myInput");
+copyText.select();
+document.execCommand("copy");
+
+var tooltip = document.getElementById("myTooltip");
+tooltip.innerHTML = "클립보드에 복사되었습니다!";
+}
+
+function outFunc() {
+var tooltip = document.getElementById("myTooltip");
+tooltip.innerHTML = "클립보드에 복사하기";
+}
+
+</script>
+
+

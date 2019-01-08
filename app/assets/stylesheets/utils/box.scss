@@ -18,17 +18,15 @@
         text-decoration: none;
         font-family: 'Nanum Gothic', serif;
         font-size: 18px;
-
-        &:hover {
-           color: #F48462;
-        }
+        cursor: pointer;
+        font-weight: bold;
     }
 
-    i {
-        padding-left: 10px;
-        top: 15px;
-        color: gold;
-        position: absolute;
+    .btn-drawer {
+        width: 30px;
+        height: auto;
+        float: right;
+        padding-bottom: 10px;
     }
 
 }
@@ -67,15 +65,14 @@
             color: black;
             text-decoration: none;
             font-family: "Nanum Gothic", sans-serif;
-
-            &:hover {
-               color: #F48462;
-            }
+            cursor: pointer;
+            font-weight: bold;
 
         }
 
         .answer {
-            font-family: 'Nanum Gothic', sans-serif;
+            font-family: 'Nanum Gothic', sans-serif; 
+
         }
 
         .date {
@@ -94,10 +91,11 @@
         padding-bottom: 5px;
         position: relative;
 
-        i {
+        .btn-drawer {
+            width: 30px;
+            height: auto;
             float: right;
-            color: gold;
-            float: right;
+            padding-bottom: 10px;
         }
 
         a {
@@ -112,4 +110,18 @@
 
         }
     }
+}
+
+.link-generation-btn {
+
+    cursor: pointer;
+    background-color: #F48462;
+    color: white;
+    font-family: 'Nanum Gothic', sans-serif;
+    width: 180px;
+    height: 50px;
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+
 }
