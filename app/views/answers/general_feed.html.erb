@@ -37,7 +37,7 @@
                           <span style="vertical-align: +6px;">: <%= r.content %> <br/></span>
                       </div>
                   <% end %>
-                  <form action='' method='POST' class="prism-form" >
+                  <form action='/answers/comment/<%= c.id %>/reply' method='POST' class="prism-form" >
                       ㄴ<input class="prism-form__input" type="text" name="content">
                       <button class="prism-form__button">댓글 달기</button>
                   </form>

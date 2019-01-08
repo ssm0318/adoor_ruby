@@ -33,8 +33,8 @@ Rails.application.routes.draw do
   post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request
 
   # comment
-  post '/answers/:id/comments/:recipient_id' => 'answers#create_comment'
-  # root '/'
+  post '/answers/:id/comments/:recipient_id' => 'answers#create_comment', as: :new_comment
+  post '/answers/comment/:id/reply' => 'answers#create_reply', as: :new_reply
 
   get '/questions' => 'questions#index', as: :questions
   get '/users/friends' => 'users#friends', as: :friends
