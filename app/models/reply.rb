@@ -7,6 +7,9 @@ class Reply < ApplicationRecord
     private
 
     def create_notifications
-        Notification.create(recipient: self.comment.author, actor: self.author, target: self)
+        # 댓글 주인에게 노티
+        Notification.create(recipient: self.comment.author, actor: self.author, target: self, action: 'to_comment')
+        # 글 주인에게 노티
+        Notification.create(recipient: self.comment.target.author, actor: self.author, target: self, action: 'to_author')
     end
 end
