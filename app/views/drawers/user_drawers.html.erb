@@ -33,7 +33,7 @@
                         <%= link_to "전체 글 보기", answer_path(d.target.id) %><br/>
                     </div>
                     <br>
-                    <div class = "date"><%= time_tag d.target.created_at, class: "timeago" %></div>
+                    <div class = "date"><%= time_tag d.target.updated_at, class: "timeago" %></div>
                 </div>
                 <div class = "prism-box__footer" style="padding-bottom: 10px;">
                     <% if current_user.id == @user.id %>
