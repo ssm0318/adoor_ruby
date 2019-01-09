@@ -78,10 +78,10 @@ class AnswersController < ApplicationController
 
     def create_comment
         id = params[:recipient_id]
-        if id == 0
+        if id == '0'
             Comment.create(content: params[:content], author_id: current_user.id, target: Answer.find(params[:id]))
         else
-            Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], target: Answer.find(params[:id]))
+            c = Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], target: Answer.find(params[:id]))
         end
             
         answer_author_id = Answer.find(params[:id]).author_id
