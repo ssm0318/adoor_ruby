@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!, except: [:recover_password, :send_temporary_password, :accept_invitation]
     before_action :set_user, only: [:show, :edit, :update, :destroy]
-    before_action :check_user
+    before_action :check_user, only: [:edit]
     
     def recover_password
         render 'recover_password'
