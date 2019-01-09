@@ -22,19 +22,21 @@ Rails.application.routes.draw do
 
   resources :highlights
   resources :drawers
+  resources :likes
   
-  # user answers, highlights, drawers
+  # user answers, highlights, drawers, likes
   get '/userpage/:id' => 'answers#user_answers', as: :user_answers
   get '/userpage/:id/highlights' => 'highlights#user_highlights', as: :user_highlights
   get '/userpage/:id/drawers' => 'drawers#user_drawers', as: :user_drawers
+  get '/userpage/:id/likes' => 'likes#user_likes', as: :user_likes
 
   # friend request
   post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend
   post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request
 
   # comment
-  post '/answers/:id/comments/:recipient_id' => 'answers#create_comment'
-  # root '/'
+  post '/answers/:id/comments/:recipient_id' => 'answers#create_comment', as: :new_comment
+  post '/answers/comment/:id/reply' => 'answers#create_reply', as: :new_reply
 
   get '/questions' => 'questions#index', as: :questions
   get '/users/friends' => 'users#friends', as: :friends

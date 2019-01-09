@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   rolify
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   validates_presence_of :username
   validates_uniqueness_of :username, :case_sensitive => false
@@ -66,6 +66,12 @@ class User < ApplicationRecord
 
   # reference: http://railscasts.com/episodes/163-self-referential-association
   
+  # BETA: email confirmation 잠깐 해지해놓음!! 베타 이전에 이 부분 다시 주석처리해야 email confirmation 제대로 됨
+  protected
+  def confirmation_required?
+    false
+  end
+
   private
   # 첫 유저만 admin role으로 등록되고 나머지는 newuser role로 등록됨. (Rolify 문서 참조)
   # 실제 서비스할 때(?) 1번 유저 admin으로 미리 등록하는거 잊지 말기 (혹은 모델 코드를 변경하거나)

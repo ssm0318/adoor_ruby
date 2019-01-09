@@ -229,10 +229,18 @@ div.background {
 
         }
 
-        i {
-            padding-left: 20px;
-            position: absolute;
-            color: gold;
+        .btn-drawer {
+            width: 30px;
+            height: auto;
+            float: right;
+            padding-bottom: 10px;
+        }
+
+        .btn-like {
+            width: 26px;
+            height: auto;
+            float: right;
+            padding-top: 2px;
         }
     }
 }

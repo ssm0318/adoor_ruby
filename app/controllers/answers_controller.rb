@@ -77,9 +77,44 @@ class AnswersController < ApplicationController
     end
 
     def create_comment
-        Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], target: Answer.find(params[:id]))
-        answer_author_id = Answer.find(params[:id]).author_id
-        redirect_back fallback_location: user_answers_path(answer_author_id)
+        id = params[:recipient_id]
+        if id == '0'
+            c = Comment.create(content: params[:content], author_id: current_user.id, target: Answer.find(params[:id]))
+            render json: {
+                comment_id: c.id,
+                imageurl: current_user.image.url,
+                path: user_answers_path(current_user.id),
+                username: current_user.username,
+                content: params[:content],
+            }
+        else
+            Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], target: Answer.find(params[:id]))
+            render json: {
+                imageurl: current_user.image.url,
+                path: user_answers_path(current_user.id),
+                username: current_user.username,
+                content: params[:content],
+            }
+        end
+            
+        # answer_author_id = Answer.find(params[:id]).author_id
+        # redirect_back fallback_location: user_answers_path(answer_author_id)
+
+        # html_content: "<img src='#{current_user.image.url}' alt='' style='height:20px; width:20px; border-radius:10px; margin-right: 2px;'><a href='#{user_answers_path(current_user.id)}' class='username'>#{current_user.username}</a><span style='vertical-align: +6px;'>: #{params[:content]} <br/></span>"
+    end
+
+    def create_reply
+        r = Reply.create(content: params[:content], author_id: current_user.id, comment_id: params[:id])
+        answer_author_id = r.comment.target.author_id
+        
+        # redirect_back fallback_location: user_answers_path(answer_author_id)
+
+        render json: {
+            imageurl: current_user.image.url,
+            path: user_answers_path(current_user.id),
+            username: current_user.username,
+            content: params[:content],
+        }
     end
 
     private

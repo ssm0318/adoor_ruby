@@ -7,7 +7,7 @@
 <% end %>
 <div class="noti-content" style="display: none;">
     <% if user_signed_in? %>
-        <% noties.reverse_each do |noti| %>
+        <% noties.each do |noti| %>
             <% user = User.find(noti.actor_id)%>
             <% username = user.username %>
 
@@ -19,12 +19,12 @@
                 <% if noti.target_type == 'Friendship' %>
                     <%=username%>님과 친구가 되었습니다.
                 <% elsif noti.target_type == 'Answer' %>
-                    <%=username%>님이 질문을 요청했습니다.
+                    <%=username%>님이 당신이 보낸 질문에 답했습니다.
                 <% elsif noti.target_type == 'Assignment' %>
                     <%=username%>님으로부터 새로운 질문이 도착했습니다.
                 <% elsif noti.target_type == 'Highlight' %>
                     <%=username%>님이 회원님의 글을 highlight했습니다.
-                <% elsif noti.target_type == 'Star' %>
+                <% elsif noti.target_type == 'Drawer' %>
                     회원님의 글이 누군가의 서랍장에 담겼습니다.
                 <% elsif noti.target_type == 'Comment' %>
                     <% if noti.action == 'comment' %>
@@ -37,9 +37,17 @@
                 <% elsif noti.target_type == 'FriendRequest'%>
                     <%=username%>님이 친구요청을 보냈습니다.
                 <% elsif noti.target_type == 'Reply' %>
-                    누군가가 회원님의 댓글에 대댓글을 달았습니다.
+                    <% if noti.action == 'to_comment'%>
+                        누군가가 회원님의 댓글에 대댓글을 달았습니다.
+                    <% elsif noti.action == 'to_author'%>
+                        누군가가 회원님의 글에 대댓글을 달았습니다.
+                    <% end%>
                 <% elsif noti.target_type == 'Like' %>
-                    <%=username%>님이 당신의 글을 좋아했습니다.
+                    <% if noti.action == 'friend_like' %>
+                        <%=username%>님이 당신의 글을 좋아했습니다.
+                    <% elsif noti.action == 'anonymous_like'%>
+                        누군가가 당신의 글을 좋아했습니다.
+                    <% end%>
                 <% end %>
             </div> 
         <% end %>

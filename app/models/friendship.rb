@@ -8,7 +8,7 @@ class Friendship < ApplicationRecord
     private
 
     def create_notifications
-        Notification.create(recipient: self.friend, actor: self.user, target: self)
+        Notification.create(recipient: self.friend, actor: self.user, target: self, origin: self.user)
     end
 
     # 역 친구 관계를 만들어서 상대방도 나를 .friends 쿼리로 검색할 수 있게 한다.

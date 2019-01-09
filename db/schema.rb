@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20190108063635) do
+=======
+ActiveRecord::Schema.define(version: 20190108142103) do
+>>>>>>> master
 
   create_table "answers", force: :cascade do |t|
     t.integer "author_id", null: false
@@ -86,11 +90,13 @@ ActiveRecord::Schema.define(version: 20190108063635) do
 
   create_table "highlights", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "answer_id", null: false
+    t.integer "target_id_id"
+    t.integer "target_type_id"
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["answer_id"], name: "index_highlights_on_answer_id"
+    t.index ["target_id_id"], name: "index_highlights_on_target_id_id"
+    t.index ["target_type_id"], name: "index_highlights_on_target_type_id"
     t.index ["user_id"], name: "index_highlights_on_user_id"
   end
 
@@ -108,6 +114,8 @@ ActiveRecord::Schema.define(version: 20190108063635) do
     t.datetime "read_at"
     t.integer "target_id"
     t.string "target_type"
+    t.integer "origin_id"
+    t.string "origin_type"
     t.string "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -205,6 +213,10 @@ ActiveRecord::Schema.define(version: 20190108063635) do
     t.datetime "last_sign_in_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

@@ -3,130 +3,51 @@
     <% if !@user.friends.include? current_user and @user.id != current_user.id %>
         <%= @user.username %>님과 친구가 되어보세요.
     <% else %>
-    <% @answers.reverse_each do |a| %>
+    <% @answers.reverse_each do |answer| %>
         <div class="prism-box">
             <div class="prism-box__header">
-                <%= render partial: "./user_profile", locals: {user: a.author} %><br/>
+                <%= render partial: "./user_profile", locals: {user: answer.author} %><br/>
                     <%# TODO: 공개범위 수정하는거 구현 %> 
-                <!--
+                <%
+=begin%>
+ <!--
                 <% if current_user.id == @user.id %>
-                        <%= a.highlights.size %> 개의 형광펜
+                        <%#= Highlight.where(target_type: "Answer", target_id: a.id).size %> 개의 형광펜
                         <%= Drawer.where(target_type: "Answer", target_id: a.id).size %> 명이 별표함
                         <%= a.comments.size %> 개의 댓글 <br/><br>
                 <% end %>
-                -->
+                --> 
+<%
+=end%>
             </div>
             <div class="prism-box__content">
                 <br>
-                <a href="/questions/<%=a.question.id%>" class="question"><%= a.question.content %></a> <br><br>
-                <div class="answer"><%= a.content %></div>
-                <!--<%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>-->
+                <a href="/questions/<%=answer.question.id%>" class="question"><%= answer.question.content %></a> <br><br>
+                <div class="answer"><%= answer.content %></div>
                 <br>
+                <!--<%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>-->
+                <%
+=begin%>
                 태그:
                 <% if !a.tag_string.nil? %>
                     <%= a.tag_string.gsub("\r\n", "\n").split("\n") %>
                 <% end %>-->
-                <br>
-                <div class = "date"><%= a.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
+                <br> 
+<%
+=end%>
+                <div class = "date"><%= time_tag answer.created_at, class: "timeago" %></div>
                 <br>
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">
-                <!--
-                <% if Drawer.where(user_id: current_user.id, target: a.question).empty? %>
-                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawers_path(target_id: a.question.id, target_type: "Question"), method: :post %>
-                <% else %>
-                    <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(a.question.id, target_type: "Question"), method: :delete %>
-                <% end %>
-                -->
-                <% if current_user.id == @user.id %>
-                    <%= link_to "수정", edit_answer_path(a.id) %>
-                    <%= link_to "삭제", answer_path(a.id), 
-                                        method: :delete,  
-                                        data: { confirm: '답변을 지우시겠습니까?' } %>
-                <% end %>                 
-                <% if Drawer.where(user_id: current_user.id, target: a).empty? %>
-                    <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawers_path(target_id: a.id, target_type: "Answer"), method: :post %>
-                <% else %>
-                    <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '별을 삭제하시겠습니까?'} %>
-                <% end %>
+                <%= render 'authorized_answer', a: answer %>
+                <%= render 'like', a: answer %>
+                <%= render 'drawer', a: answer %>
                 <br>
             </div>
-            <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px dashed #d7dae0;">
-                <div>
-                    댓글 <br/><br>
-                    <div class="author-comments">
-                        <% Comment.where(target: Answer.find(a.id), recipient_id: @user.id).each do |c| %>
-                            <div class="comment">
-                                <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                                <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
-                                <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
-                            </div>
-                        <% end %>
-                        <% if current_user.id == @user.id %>
-                            <form class="prism-form" action='/answers/<%= a.id %>/comments/<%= @user.id %>' method='POST'>
-                                <input class="prism-form__input" type='text' name='content' />
-                                <button class="prism-form__button">댓글 달기</button><br>
-                                이 댓글은 전체 공개되는 댓글입니다
-                            </form>
-                        <% end %>
-                    </div>
-                    <br><br>
-
-                    <% if current_user.id == @user.id %>
-                        <% recipients = [] %>
-                        <% a.comments.each do |c| %>
-                            <% if c.recipient_id != @user.id %>
-                                <% recipients.push(c.recipient_id) %>
-                            <% end %>
-                        <% end %>
-                        <% recipients.uniq! %>
-                        <% recipients.each do |r| %>
-                            <div>
-                                <div class="comment-block">
-                                    <% Comment.where(target: Answer.find(a.id), recipient_id: r).each do |c| %>
-                                        <div class="comment">
-                                            <% if c.author_id == @user.id %>
-                                                ㄴ
-                                                <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                                                <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
-                                                <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
-                                            <% else %>
-                                                <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                                                <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
-                                                <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
-                                            <% end %>
-                                        </div>
-                                    <% end %>
-                                </div>
-                                <form class="prism-form" action='/answers/<%= a.id %>/comments/<%= r %>' method='POST'>
-                                    ㄴ<input class="prism-form__input" type='text' name='content' />
-                                    <button class="prism-form__button">댓글 달기</button>
-                                </form>
-                            </div>
-                            <br>
-                        <% end %>
-
-                    <% else %>
-                        <% Comment.where(target: Answer.find(a.id), recipient_id: current_user.id).each do |c| %>
-                            <% if c.author.id == current_user.id %>
-                                <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                                <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
-                                <span style="vertical-align: +6px;">: <%= c.content %></span> <br/>
-                            <% elsif c.author.id == @user.id %>
-                                ㄴ
-                                <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                                <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
-                                <span style="vertical-align: +6px;">: <%= c.content %></span> <br/>
-                            <% end %>
-                        <% end %>
-                        <form action='/answers/<%= a.id %>/comments/<%= current_user.id %>' method='POST' class="prism-form" >
-                            <input class="prism-form__input" type="text" name="content">
-                            <button class="prism-form__button">댓글 달기</button>
-                        </form>
-                    <% end %>
-                </div>
-            </div>
+            <%= render 'comment_form', user: @user, a: answer %>
         </div>
         <% end %>
     <% end %>
 </div>
+<%= render 'comment_script' %>
+<%= render 'layouts/timestamp' %>

@@ -5,23 +5,23 @@
   <% @answers.anonymous(current_user.id).reverse_each do |answer| %>
     <div class="prism-box">
       <div class="prism-box__header">
-        <%= render partial: "./user_profile", locals: {user: answer.author} %>
+        <%= render partial: "./user_profile_general", locals: {user_id: answer.author_id, answer_id: answer.id} %>
         <%#= answer.author.username %>
-        <i class="material-icons">more_vert</i>
       </div>
       <div class="prism-box__content"><br>
         <a href="/questions/<%=answer.question.id%>" class="question" style="font-size: 18px;"><%= answer.question.content %></a> <br><br>
         <div class="answer"><%= answer.content %> <br><br></div>
-        <div class = "date"><%= answer.updated_at.strftime("%m월 %d일") %></div><!-- 연도는 %Y -->
+        <div class = "date"><%= time_tag answer.updated_at, class: "timeago" %></div>
       </div>
       <div class="prism-box__footer" style="padding-bottom: 10px;">
-        <% if Drawer.where(user_id: current_user.id, target: answer).empty? %>
-          <%= link_to "<i class='material-icons'>star_border</i>".html_safe, drawers_path(target_id: answer.id, target_type: "Answer"), method: :post %>
-        <% else %>
-          <%= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(answer.id, target_type: "Answer"), method: :delete %>
-        <% end %>
+        <%= render 'like', a: answer %>
+        <%= render 'drawer', a: answer %>
+        <br>
       </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
+      <%= render 'comment_general_form', answer: answer %>
     </div>
   <% end %>
 </div>
 <!--더보기는 지금 구현하는 건 아닌 듯-->
+<%= render 'comment_general_script' %>
+<%= render 'layouts/timestamp' %>
