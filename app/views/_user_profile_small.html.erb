@@ -1,2 +1,2 @@
 <%= link_to image_tag(user.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;"), user_answers_path(user.id) %>
-<%= link_to user.username, user_answers_path(user.id), class: "username" %>
+<%= link_to user.username, user_answers_path(user.id), class: "username", :style => "font-size: 14px;"%>

@@ -1,0 +1,10 @@
+<div class = "comment-content">
+    <span>
+    <%= link_to image_tag(user.image.url, :class => "user-profile"), user_answers_path(user.id) %>
+    <%= link_to user.username, user_answers_path(user.id), class: "username" %>
+    <span class= "content"><%= c.content %> </span>
+
+    </span>
+    <%= render 'like', a: c, target_type: "Comment", like_btn_class: "btn-comment-like" %>
+
+</div>

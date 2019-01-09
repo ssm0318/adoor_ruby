@@ -5,7 +5,7 @@
             <div class="comments">
                 <% Comment.where(target: Answer.find(a.id), recipient_id: user.id).each do |c| %>
                     <div class="comment">
-                        <%= render partial: "./user_comment_profile", locals: {user: c.author} %>
+                        <%= render partial: "./user_profile_small", locals: {user: c.author} %>
                         <span style="vertical-align: +6px;">: <%= c.content %></span>
                         <span style="vertical-align: +6px;"><%= time_tag c.created_at, class: "timeago" %></span><br>
                     </div>
@@ -37,9 +37,15 @@
                                 <% if c.author_id == user.id %>
                                     ㄴ
                                 <% end %>
-                                <%= render partial: "./user_profile_small", locals: {user: c.author} %>
-                                <span style="vertical-align: +6px;">: <%= c.content %> <%= time_tag c.created_at, class: "timeago" %><br/></span>
+                                <%= render partial: "./user_comment", locals: {user: c.author, c: c} %>
+
                             </div>
+                            <div class = "comment-info">
+                                <span><%= time_tag c.created_at, class: "timeago" %></span>
+                                <span class = "comment-info-el">좋아요 <%= Like.where(target_type: "Comment", target_id: c.id).size %>개</span>
+                                <span> <%= render 'authorized_comment', c: c %></span>
+                            </div>
+                            <br>
                         <% end %>
                     </div>
                     <form class="prism-form friend-comment" action='/answers/<%= a.id %>/comments/<%= r %>' method='POST'>
@@ -63,7 +69,7 @@
                                     <% if r.author_id != user.id %>
                                         <%= render partial: "./user_profile_general", locals: {user_id: r.author_id, answer_id: a.id} %>
                                     <% else %>
-                                        <%= render partial: "./user_comment_profile", locals: {user: c.author} %>
+                                        <%= render partial: "./user_profile_small", locals: {user: c.author} %>
                                     <% end %>
                                     <span style="vertical-align: +6px;">: <%= r.content %> <%= time_tag r.created_at, class: "timeago" %><br/></span>
                                 </div>

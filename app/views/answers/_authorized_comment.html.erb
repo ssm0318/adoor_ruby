@@ -1,0 +1,10 @@
+<% if current_user.id == c.author.id %>
+    삭제
+    <%
+=begin%>
+ <%= link_to "삭제", comment_path(c.id),
+        method: :delete,
+        data: { confirm: '댓글을 지우시겠습니까?'} %> 
+<%
+=end%>
+<% end %>

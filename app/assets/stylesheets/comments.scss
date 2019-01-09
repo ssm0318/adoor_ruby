@@ -1,0 +1,46 @@
+.comment {
+    font-size: 14px;
+
+    
+    .btn-comment-like {
+        width: 20px;
+        height: auto;
+        float: right;
+    }
+    
+    .comment-content {
+        display:flex; 
+        justify-content: space-between; 
+        align-items:center;
+    
+        .user-profile {
+            height:20px; 
+            width:20px; 
+            border-radius:10px; 
+            margin-right: 2px;
+
+        }
+        
+        .username {
+            font-size: 14px;
+            font-weight: bold;
+
+        }
+        
+        .content {
+            vertical-align: 6px;
+
+        }
+    }
+}
+
+.comment-info {
+    padding-left: 25px;
+    font-size: 10px;
+    color: #777777;
+    display: inline-block;
+
+    span {
+        padding-right: 10px;
+    }
+}
