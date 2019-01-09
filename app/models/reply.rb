@@ -7,9 +7,10 @@ class Reply < ApplicationRecord
     private
 
     def create_notifications
+        origin = self.comment.target
         # 댓글 주인에게 노티
-        Notification.create(recipient: self.comment.author, actor: self.author, target: self, action: 'to_comment')
+        Notification.create(recipient: self.comment.author, actor: self.author, target: self, action: 'to_comment', origin: origin)
         # 글 주인에게 노티
-        Notification.create(recipient: self.comment.target.author, actor: self.author, target: self, action: 'to_author')
+        Notification.create(recipient: self.comment.target.author, actor: self.author, target: self, action: 'to_author', origin: origin)
     end
 end
