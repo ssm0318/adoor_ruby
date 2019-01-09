@@ -15,8 +15,12 @@ class Comment < ApplicationRecord
         # 익명 댓글인 경우
         if !self.recipient_id.present?
             if self.author != self.target.author
-                # 익명의 사람이 댓글을 단 경우
-                Notification.create(recipient: self.target.author, actor: self.author, target: self, action: 'anonymous_comment', origin: self.target)
+                noti_hash = {recipient: self.target.author, action: 'anonymous_comment', origin: self.target}
+                if Notification.where(noti_hash).unread.empty?
+                    Notification.create(recipient: self.target.author, actor: self.author, target: self, action: 'anonymous_comment', origin: self.target)
+                else
+                    Notification.where(noti_hash).first.target = self
+                end
             end
         # 친구 댓글인 경우
         else
