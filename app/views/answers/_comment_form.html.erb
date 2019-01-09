@@ -1,13 +1,14 @@
 <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px solid #d7dae0;">
     <div>
-        댓글 <br/><br>
+        댓글 <br><br>
         <div class="author-comments-div">
             <div class="comments">
                 <% Comment.where(target: Answer.find(a.id), recipient_id: user.id).each do |c| %>
                     <div class="comment">
                         <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
                         <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
-                        <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
+                        <span style="vertical-align: +6px;">: <%= c.content %></span>
+                        <span style="vertical-align: +6px;"><%= time_tag c.created_at, class: "timeago" %></span><br>
                     </div>
                 <% end %>
             </div>
@@ -101,3 +102,5 @@
         <% end %>
     </div>
 </div>
+
+<%= render 'layouts/timestamp' %>
