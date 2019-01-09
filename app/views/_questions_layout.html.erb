@@ -4,7 +4,7 @@
 <% questions.each do |question| %>
     <div class="question-el" align="right">
         <div class="question-content">
-        <%= link_to "#{question.content}", "questions/#{question.id}" %>
+        <%= link_to "#{question.content}", "questions/#{question.id}/friend" %>
         </div>
         <div class="question-btn">
             <%= link_to image_tag("icons/write-icon.png", class: "btn-write"), new_answer_path(question.id) %>
