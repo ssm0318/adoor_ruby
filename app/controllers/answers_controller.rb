@@ -1,6 +1,8 @@
 class AnswersController < ApplicationController
     before_action :authenticate_user!
     before_action :set_answer, only: [:show, :edit, :update, :destroy]
+    before_action :check_mine, only: [:edit, :update, :destroy]
+    before_action :check_friends, only: [:show]
 
     def new
         @question = Question.find(params[:id])
@@ -23,9 +25,7 @@ class AnswersController < ApplicationController
         redirect_to root_path
     end
 
-    def show
-        @anonymous = current_user.id != @answer.author_id && !(@answer.author.friends.include? current_user)
-        puts @anonymous
+    def show 
     end
 
     def edit
@@ -131,5 +131,17 @@ class AnswersController < ApplicationController
 
         def answer_params
             params.require(:answer).permit(:author_id, :question_id, :content, :tag_string)
-        end  
+        end 
+
+        def check_mine
+            if @answer.author_id != current_user.id
+                redirect_to root_url
+            end
+        end
+
+        def check_friends
+            if @answer.author.friends.where(id: current_user.id).empty?
+                redirect_to root_url
+            end
+        end
 end

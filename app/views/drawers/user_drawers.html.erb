@@ -41,11 +41,7 @@
                                             data: { confirm: '답변을 지우시겠습니까?'} %>
                 <% end %>                 
 
-                <% if Drawer.where(user_id: current_user.id, target: d.target).empty? %>
-                    <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: d.target.id, target_type: "Answer"), method: :post %>
-                <% else %>
-                    <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Answer"), method: :delete, data: {confirm: '이 글을 서랍장에서 꺼내시겠습니까?'} %>
-                <% end %>
+                <%= render 'answers/drawer', a: d.target %>
                 </div>
             </div>
         <% end %>
@@ -53,3 +49,46 @@
 </div>
 
 <%= render 'layouts/timestamp' %>
+<script>
+    $(document).ready(function() {
+        $(".btn-drawer").on('click', function(e) {
+
+            var drawer = $(this)
+
+            var method = (drawer.hasClass("do-drawer")) ? "POST" : "DELETE"
+
+            if(drawer.hasClass("do-drawer")) {
+                method = "POST"
+            }
+            else {
+                if(confirm("이 글을 서랍장에서 꺼내시겠습니까?")) {
+                    method = "DELETE"
+                }
+                else {
+                    return;
+                }
+            }
+
+
+            $.ajax({
+                type: method,
+                url: drawer.attr("data-url"),
+                success: function(data) {
+                    const src = drawer.attr('src')
+                    const url = drawer.attr('data-url')
+                    const changed_src = drawer.attr('data-changed-src')
+                    const changed_url = drawer.attr('data-changed-url')
+                    drawer.attr('src', changed_src)
+                    drawer.attr('data-url', changed_url)
+                    drawer.attr('data-changed-src', src)
+                    drawer.attr('data-changed-url', url)
+                    drawer.toggleClass("do-drawer")
+                    drawer.parent().parent().remove()
+                },
+                error: function(data) {
+                    console.log("error!")
+                }
+            })
+        })
+    })
+</script>
