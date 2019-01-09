@@ -9,7 +9,7 @@
         <div class="prism-box__content"><br>
           <a href="/questions/<%=answer.question.id%>" class="question" style="font-size: 18px;"><%= answer.question.content %></a> <br><br>
           <div class="answer"><%= answer.content %> <br><br></div>
-          <div class = "date"><%= answer.updated_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div><!-- 연도는 %Y -->
+          <div class = "date"><%= time_tag answer.updated_at, class: "timeago" %></div>
           <!--update 날짜와 posting 날짜 따로 구분? -->
         </div>
         <div class="prism-box__footer" style="padding-bottom: 10px;">
@@ -23,3 +23,4 @@
 </div>
 <!--더보기는 지금 구현하는 건 아닌 듯-->
 <%= render 'comment_script' %>
+<%= render 'layouts/timestamp' %>

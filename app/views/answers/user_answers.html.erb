@@ -31,7 +31,7 @@
                 <br> 
 <%
 =end%>
-                <div class = "date"><%= a.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
+                <div class = "date"><%= time_tag a.created_at, class: "timeago" %></div>
                 <br>
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">
@@ -45,3 +45,4 @@
     <% end %>
 </div>
 <%= render 'comment_script' %>
+<%= render 'layouts/timestamp' %>
