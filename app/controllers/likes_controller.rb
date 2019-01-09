@@ -19,4 +19,5 @@ class LikesController < ApplicationController
 
         # fallback_location은 그냥 임시
         redirect_back fallback_location: user_likes_path(current_user.id)
+    end
 end
