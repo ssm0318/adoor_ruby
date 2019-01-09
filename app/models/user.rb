@@ -85,4 +85,4 @@ class User < ApplicationRecord
     self.image = Rails.root.join("app/assets/images/icons/profile" + random.to_s + ".png").open
     self.save!
   end
-end
+end 
