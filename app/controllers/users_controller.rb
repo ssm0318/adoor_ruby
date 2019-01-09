@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!, except: [:recover_password, :send_temporary_password, :accept_invitation]
     before_action :set_user, only: [:show, :edit, :update, :destroy]
-    before_action :check_user, only: [:edit]
+    before_action :check_user, only: [:edit, :update]
     
     def recover_password
         render 'recover_password'
@@ -26,12 +26,6 @@ class UsersController < ApplicationController
 
     def update
         @user.update(user_params)
-        puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-        puts user_params
-        puts @user.image
-        puts @user.errors
-        puts @user.errors.full_messages[0]
-        puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
         if !@user.errors.full_messages.empty?
             @error = @user.errors.full_messages[0]
