@@ -14,6 +14,7 @@
         <div class = "date"><%= time_tag answer.updated_at, class: "timeago" %></div>
       </div>
       <div class="prism-box__footer" style="padding-bottom: 10px;">
+        <%= render 'like', a: answer %>
         <%= render 'drawer', a: answer %>
         <br>
       </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->

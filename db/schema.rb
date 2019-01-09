@@ -81,11 +81,13 @@ ActiveRecord::Schema.define(version: 20190108142103) do
 
   create_table "highlights", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "answer_id", null: false
+    t.integer "target_id_id"
+    t.integer "target_type_id"
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["answer_id"], name: "index_highlights_on_answer_id"
+    t.index ["target_id_id"], name: "index_highlights_on_target_id_id"
+    t.index ["target_type_id"], name: "index_highlights_on_target_type_id"
     t.index ["user_id"], name: "index_highlights_on_user_id"
   end
 
@@ -103,6 +105,8 @@ ActiveRecord::Schema.define(version: 20190108142103) do
     t.datetime "read_at"
     t.integer "target_id"
     t.string "target_type"
+    t.integer "origin_id"
+    t.string "origin_type"
     t.string "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

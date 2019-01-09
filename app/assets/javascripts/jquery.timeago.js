@@ -36,7 +36,7 @@ $.extend($.timeago, {
         prefixFromNow: null,
         suffixAgo: "전",
         suffixFromNow: "후",
-        seconds: "방금 전",
+        seconds: "방금",
         minute: "약 1분",
         minutes: "%d분",
         hour: "약 1시간",

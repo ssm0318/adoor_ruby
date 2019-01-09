@@ -3,23 +3,27 @@
     <% if !@user.friends.include? current_user and @user.id != current_user.id %>
         <%= @user.username %>님과 친구가 되어보세요.
     <% else %>
-    <% @answers.reverse_each do |a| %>
+    <% @answers.reverse_each do |answer| %>
         <div class="prism-box">
             <div class="prism-box__header">
-                <%= render partial: "./user_profile", locals: {user: a.author} %><br/>
+                <%= render partial: "./user_profile", locals: {user: answer.author} %><br/>
                     <%# TODO: 공개범위 수정하는거 구현 %> 
-                <!--
+                <%
+=begin%>
+ <!--
                 <% if current_user.id == @user.id %>
-                        <%= a.highlights.size %> 개의 형광펜
+                        <%#= Highlight.where(target_type: "Answer", target_id: a.id).size %> 개의 형광펜
                         <%= Drawer.where(target_type: "Answer", target_id: a.id).size %> 명이 별표함
                         <%= a.comments.size %> 개의 댓글 <br/><br>
                 <% end %>
-                -->
+                --> 
+<%
+=end%>
             </div>
             <div class="prism-box__content">
                 <br>
-                <a href="/questions/<%=a.question.id%>" class="question"><%= a.question.content %></a> <br><br>
-                <div class="answer"><%= a.content %></div>
+                <a href="/questions/<%=answer.question.id%>" class="question"><%= answer.question.content %></a> <br><br>
+                <div class="answer"><%= answer.content %></div>
                 <br>
                 <!--<%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>-->
                 <%
@@ -31,15 +35,20 @@
                 <br> 
 <%
 =end%>
+<<<<<<< HEAD
                 <div class = "date"><%= time_tag a.created_at, class: "timeago" %></div>
+=======
+                <div class = "date"><%= answer.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
+>>>>>>> 415bcd00b2150024aa222fc2dd2d20f69dd24172
                 <br>
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">
-                <%= render 'authorized_answer', a: a %>
-                <%= render 'drawer', a: a %>
+                <%= render 'authorized_answer', a: answer %>
+                <%= render 'like', a: answer %>
+                <%= render 'drawer', a: answer %>
                 <br>
             </div>
-            <%= render 'comment_form', user: @user, a: a %>
+            <%= render 'comment_form', user: @user, a: answer %>
         </div>
         <% end %>
     <% end %>
