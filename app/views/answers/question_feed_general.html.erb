@@ -1,0 +1,19 @@
+<div class="inner-container">
+    <div class = "question">
+        <div class = "question-content"><%= @question.content %>
+            <% if Drawer.where(user_id: current_user.id, target: @question).empty? %>
+                <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: @question.id, target_type: "Question"), method: :post %>
+            <% else %>
+                <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(@question.id, target_type: "Question"), method: :delete, data: {confirm: '이 글을 서랍장에서 꺼내시겠습니까?'} %>
+            <% end %>
+        </div>
+    </div>
+    <div class="feed-nav">
+        <%= active_link_to '친구', '/questions/' + @question.id.to_s + '/friend'  %>
+        <%= active_link_to '익명', '/questions/' + @question.id.to_s + '/general'%>
+    </div>
+    <%= render 'general_feed_form', answers: @answers %>
+</div>
+<!--더보기는 지금 구현하는 건 아닌 듯-->
+<%= render 'comment_general_script' %>
+<%= render 'layouts/timestamp' %>

@@ -5,7 +5,7 @@
             <div class = "prism-box">
                 <div class = "prism-box_question">
                     <br> 
-                    <a href="/questions/<%=d.target.id%>" class="question"><%= d.target.content %></a>   
+                    <a href="/questions/<%=d.target.id%>/friend" class="question"><%= d.target.content %></a>   
                     <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Question"), method: :delete, data: {confirm: '이 질문을 서랍장에서 꺼내시겠습니까?'} %>
                     <% if d.target.author.has_role? :newuser %>
                         <br><br>
@@ -25,7 +25,7 @@
                 </div>
                 <div class = "prism-box__content">
                     <br> 
-                    <a href="/questions/<%=d.target.question.id%>" class="question"><%= d.target.question.content %></a> <br>
+                    <a href="/questions/<%=d.target.question.id%>/friend" class="question"><%= d.target.question.content %></a> <br>
                     <div class = "answer">
                         <%= d.target.content %>
                         <%= link_to "전체 글 보기", answer_path(d.target.id) %><br/>
