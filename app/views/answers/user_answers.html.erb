@@ -12,7 +12,7 @@
 =begin%>
  <!--
                 <% if current_user.id == @user.id %>
-                        <%= a.highlights.size %> 개의 형광펜
+                        <%#= Highlight.where(target_type: "Answer", target_id: a.id).size %> 개의 형광펜
                         <%= Drawer.where(target_type: "Answer", target_id: a.id).size %> 명이 별표함
                         <%= a.comments.size %> 개의 댓글 <br/><br>
                 <% end %>

@@ -27,7 +27,7 @@ class HighlightsController < ApplicationController
     private
         # use highlight_params in create
         def highlight_params
-            params.require(:highlight).permit(:content, :author_id, :answer_id)
+            params.require(:highlight).permit(:content, :author_id, :target_id)
         end
     
 end

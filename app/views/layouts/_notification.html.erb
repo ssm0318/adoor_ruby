@@ -7,7 +7,7 @@
 <% end %>
 <div class="noti-content" style="display: none;">
     <% if user_signed_in? %>
-        <% noties.reverse_each do |noti| %>
+        <% noties.each do |noti| %>
             <% user = User.find(noti.actor_id)%>
             <% username = user.username %>
 

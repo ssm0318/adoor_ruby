@@ -7,6 +7,6 @@ class Drawer < ApplicationRecord
     private 
 
     def create_notifications
-        Notification.create(recipient: self.target.author, actor: self.user, target: self)
+        Notification.create(recipient: self.target.author, actor: self.user, target: self, origin: self.target)
     end
 end
