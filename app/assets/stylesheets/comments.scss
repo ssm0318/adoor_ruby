@@ -1,7 +1,13 @@
 .comment {
-    font-size: 14px;
+    font-size: 14px;    
+}
 
-    
+.comment-indent {
+    padding-left: 27px;
+    font-size: 14px;    
+}
+
+.comment, .comment-indent {
     .btn-comment-like {
         width: 20px;
         height: auto;
@@ -18,29 +24,30 @@
             width:20px; 
             border-radius:10px; 
             margin-right: 2px;
-
+    
         }
         
         .username {
             font-size: 14px;
             font-weight: bold;
-
+    
         }
         
         .content {
             vertical-align: 6px;
-
+    
         }
     }
-}
-
-.comment-info {
-    padding-left: 25px;
-    font-size: 10px;
-    color: #777777;
-    display: inline-block;
-
-    span {
-        padding-right: 10px;
+    
+    .comment-info {
+        padding-left: 27px;
+        font-size: 10px;
+        color: #777777;
+        display: inline-block;
+    
+        span {
+            padding-right: 10px;
+        }
     }
+
 }

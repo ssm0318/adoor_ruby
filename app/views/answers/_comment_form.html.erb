@@ -33,19 +33,7 @@
                 <div class="comments-div">
                     <div class="comments">
                         <% Comment.where(target: Answer.find(a.id), recipient_id: r).each do |c| %>
-                            <div class="comment">
-                                <% if c.author_id == user.id %>
-                                    ㄴ
-                                <% end %>
-                                <%= render partial: "./user_comment", locals: {user: c.author, c: c} %>
-
-                            </div>
-                            <div class = "comment-info">
-                                <span><%= time_tag c.created_at, class: "timeago" %></span>
-                                <span class = "comment-info-el">좋아요 <%= Like.where(target_type: "Comment", target_id: c.id).size %>개</span>
-                                <span> <%= render 'authorized_comment', c: c %></span>
-                            </div>
-                            <br>
+                            <%= render partial: "./user_comment", locals: {answer_author: user, comment_author: c.author, c: c} %>
                         <% end %>
                     </div>
                     <form class="prism-form friend-comment" action='/answers/<%= a.id %>/comments/<%= r %>' method='POST'>
