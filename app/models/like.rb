@@ -7,6 +7,10 @@ class Like < ApplicationRecord
     private 
 
     def create_notifications
-        Notification.create(recipient: self.target.author, actor: self.user, target: self)
+        if self.target.author.friends.include? self.user
+            Notification.create(recipient: self.target.author, actor: self.user, target: self, action: 'friend_like')
+        else
+            Notification.create(recipient: self.target.author, actor: self.user, target: self, action: 'anonymous_like')
+        end
     end
 end

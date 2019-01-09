@@ -43,7 +43,11 @@
                         누군가가 회원님의 글에 대댓글을 달았습니다.
                     <% end%>
                 <% elsif noti.target_type == 'Like' %>
-                    <%=username%>님이 당신의 글을 좋아했습니다.
+                    <% if noti.action == 'friend_like' %>
+                        <%=username%>님이 당신의 글을 좋아했습니다.
+                    <% elsif noti.action == 'anonymous_like'%>
+                        누군가가 당신의 글을 좋아했습니다.
+                    <% end%>
                 <% end %>
             </div> 
         <% end %>
