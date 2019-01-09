@@ -36,8 +36,9 @@
                             <%= render partial: "./user_comment", locals: {answer_author: user, comment_author: c.author, c: c} %>
                         <% end %>
                     </div>
+
                     <form class="prism-form friend-comment" action='/answers/<%= a.id %>/comments/<%= r %>' method='POST'>
-                        ㄴ<input class="prism-form__input" type='text' name='content' />
+                        <input class="prism-form__input" type='text' name='content' />
                         <input type='submit' class="prism-form__button">
                     </form>
                 </div>

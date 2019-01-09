@@ -13,24 +13,26 @@
                 data: form.serialize(),
                 success: function(data) {
                     
-
+                    //TODO: comment like, commment-info update
                     var html = `
-                        <img src='${data.imageurl}' 
-                            alt='' style='height:20px; width:20px; 
-                            border-radius:10px; margin-right: 2px;'>
-                        <a href='${data.path}' class='username'>
-                            ${data.username}
-                        </a>
-                        <span style='vertical-align: +6px;'>:
-                            ${data.content}<br/>
-                        </span>
+                        <div class="comment-indent">
+                            <div class = "comment-content">
+                                <span>
+                                    <img src='${data.imageurl}' 
+                                    alt='' class = 'user-profile'>
+                                    <a href='${data.path}' class='username'>
+                                        ${data.username}
+                                    </a>
+                                    <span class= "content">${data.content} </span>
+                                </span>
+                            </div>
                         </div>
                     `
 
                     if(form.hasClass("comment")) {
                         html = "<div class='comment'>" + html
                     } else {
-                        html = "<div class='comment'>ㄴ" + html
+                        html = "<div class='comment-indent'>" + html
                     }
 
                     if(form.hasClass("reply")) {
