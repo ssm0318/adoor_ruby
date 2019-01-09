@@ -43,10 +43,10 @@ class NotificationsController < ApplicationController
             elsif target_type == 'FriendRequest'
                 redirect_to user_answers_path(origin_id)
             elsif target_type == 'Reply'
-                #if origin_type == 'Post'
-                    #redirect_to post_path(origin_id)
-                #elsif origin_type == 'Answer'
-                    redirect_to answer_path(origin_id)
+                #if noti.origin.target_type == 'Post'
+                    #redirect_to post_path(noti.origin.target_id)
+                #elsif noti.origin.target_type == 'Answer'
+                    redirect_to answer_path(noti.origin.target_id)
                 #end
             elsif target_type == 'Like'
                 #if origin_type == 'Post'
