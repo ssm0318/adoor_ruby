@@ -11,7 +11,7 @@
                         <br><br>
                         <div class = "prism-box__content">
                             <div class = "date">Question made by <%= render partial: "./user_profile", locals: {user: d.target.author} %><br/>
-                            <%= d.target.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %>
+                            <%= time_tag d.target.created_at, class: "timeago" %>
                         </div>
                     <% end %>
                 </div>
@@ -31,7 +31,7 @@
                         <%= link_to "전체 글 보기", answer_path(d.target.id) %><br/>
                     </div>
                     <br>
-                    <div class = "date"><%= d.target.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
+                    <div class = "date"><%= time_tag d.target.created_at, class: "timeago" %></div>
                 </div>
                 <div class = "prism-box__footer" style="padding-bottom: 10px;">
                     <% if current_user.id == @user.id %>
@@ -51,3 +51,5 @@
         <% end %>
     <% end %>
 </div>
+
+<%= render 'layouts/timestamp' %>

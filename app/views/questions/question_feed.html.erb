@@ -31,7 +31,7 @@
 <%
 =end%>
                 <br>
-                <div class = "date"><%= answer.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
+                <div class = "date"><%= time_tag a.created_at, class: "timeago" %></div>
                 <br>
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">
@@ -63,3 +63,5 @@
 
 <!--한 사람은 질문 하나에 답변 여러 개 할 수 있는 건가..?!
         일단은 하나만 있다고 가정하고 만듦-->
+
+<%= render 'layouts/timestamp' %>

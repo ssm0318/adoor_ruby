@@ -35,7 +35,11 @@
                 <br> 
 <%
 =end%>
+<<<<<<< HEAD
+                <div class = "date"><%= time_tag a.created_at, class: "timeago" %></div>
+=======
                 <div class = "date"><%= answer.created_at.strftime("%Y년 %m월 %d일 %I : %M %p") %></div>
+>>>>>>> 415bcd00b2150024aa222fc2dd2d20f69dd24172
                 <br>
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">
@@ -50,3 +54,4 @@
     <% end %>
 </div>
 <%= render 'comment_script' %>
+<%= render 'layouts/timestamp' %>
