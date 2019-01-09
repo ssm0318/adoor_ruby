@@ -13,7 +13,7 @@
                         <% if d.target.author.has_role? :newuser %>
                             <br><br>
                             Question made by 
-                            <%= render partial: "./user_comment_profile", locals: {user: d.target.author} %>
+                            <%= render partial: "./user_profile_small", locals: {user: d.target.author} %>
                         <% end %>
                     </div>
                 </div>

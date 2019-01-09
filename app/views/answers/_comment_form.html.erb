@@ -37,7 +37,7 @@
                                 <% if c.author_id == user.id %>
                                     ㄴ
                                 <% end %>
-                                <%= render partial: "./user_comment_profile", locals: {user: c.author} %>
+                                <%= render partial: "./user_profile_small", locals: {user: c.author} %>
                                 <span style="vertical-align: +6px;">: <%= c.content %> <%= time_tag c.created_at, class: "timeago" %><br/></span>
                             </div>
                         <% end %>
@@ -85,7 +85,7 @@
                             <% if c.author.id == user.id %>
                                 ㄴ
                             <% end %>
-                            <%= render partial: "./user_comment_profile", locals: {user: c.author} %>
+                            <%= render partial: "./user_profile_small", locals: {user: c.author} %>
                             <span style="vertical-align: +6px;">: <%= c.content %><%= time_tag c.created_at, class: "timeago" %></span><br/>
                         </div>
                     <% end %>
