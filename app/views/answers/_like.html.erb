@@ -1,0 +1,5 @@
+<% if Drawer.where(user_id: current_user.id, target: a).empty? %>
+    <%= link_to image_tag("icons/like-default-icon", class: "btn-drawer"), likes_path(target_id: a.id, target_type: "Answer"), method: :post %>
+<% else %>
+    <%= link_to image_tag("icons/like-on-icon", class: "btn-drawer"), like_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '이 글의 좋아요를 취소하겠습니까?'} %>
+<% end %>
