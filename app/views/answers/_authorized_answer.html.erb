@@ -1,0 +1,6 @@
+<% if current_user.id == a.author.id %>
+    <%= link_to "수정", edit_answer_path(a.id) %>
+    <%= link_to "삭제", answer_path(a.id),
+        method: :delete,
+        data: { confirm: '답변을 지우시겠습니까?'} %>
+<% end %>
