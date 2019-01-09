@@ -1,0 +1,106 @@
+<script>
+  $(document).ready(function() {
+
+    $("form").submit( function(e) {
+
+        e.preventDefault();
+
+        var form = $(this)
+        $.ajax({
+          type: "POST",
+          url: form.attr('action'),
+          
+          data: form.serialize(),
+          success: function(data) {
+           
+            if(form.hasClass("comment")) {
+
+              var html = $(`
+              <div class='comment-replies-form'>
+                <div class='comment-replies'>
+                  <div class='comment'>
+                    <img src='${data.imageurl}' 
+                      alt='' style='height:20px; width:20px; 
+                      border-radius:10px; margin-right: 2px;'>
+                    <a href='${data.path}' class='username'>
+                      ${data.username}
+                    </a>
+                    <span style='vertical-align: +6px;'>:
+                      ${data.content}<br/>
+                    </span>  
+                  </div>
+                </div>
+                <form action='/answers/comment/${data.comment_id}/reply' method='POST' class="prism-form reply" >
+                    ㄴ<input class="prism-form__input" type="text" name="content">
+                    <input type="submit" class="prism-form__button">
+                </form>
+              </div>
+              `)
+
+              form.parent().find(".anonymous-comments-div").append(html)
+
+              ///////// 동적으로 삽입한 form에 다시 event binding 해줌. 하나만 선택해야됨.
+              html.find("form").submit( function(event) {
+
+                var newform = $(this)
+
+                event.preventDefault();
+                $.ajax({
+                  type: "POST",
+                  url: newform.attr('action'),
+                  data: newform.serialize(),
+                  success: function(data) {
+                    var newhtml =
+                      `
+                        <div class='reply'>
+                        ㄴ
+                          <img src='${data.imageurl}' 
+                            alt='' style='height:20px; width:20px; 
+                            border-radius:10px; margin-right: 2px;'>
+                          <a href='${data.path}' class='username'>
+                            ${data.username}
+                          </a>
+                          <span style='vertical-align: +6px;'>:
+                            ${data.content}<br/>
+                          </span>  
+                        </div>
+                      `
+                    newform.parent().find(".comment-replies").append(newhtml);
+                    newform.find(".prism-form__input").val('')
+                  },
+                  error: function(data) {
+                    console.log("error")
+                  }
+                })
+              })
+
+            }
+            else {
+              var html =
+              `
+                <div class='reply'>
+                ㄴ
+                  <img src='${data.imageurl}' 
+                    alt='' style='height:20px; width:20px; 
+                    border-radius:10px; margin-right: 2px;'>
+                  <a href='${data.path}' class='username'>
+                    ${data.username}
+                  </a>
+                  <span style='vertical-align: +6px;'>:
+                    ${data.content}<br/>
+                  </span>  
+                </div>
+              `
+              form.parent().find(".comment-replies").append(html)
+            
+            }
+            form.find(".prism-form__input").val('')
+          },
+          error: function(data) {
+              console.log("error")
+          }
+        })
+    })
+
+  })
+</script>
