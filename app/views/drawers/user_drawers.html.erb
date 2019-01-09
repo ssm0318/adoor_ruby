@@ -4,16 +4,18 @@
         <% if d.target_type == "Question" %>
             <div class = "prism-box">
                 <div class = "prism-box_question">
-                    <br> 
-                    <a href="/questions/<%=d.target.id%>" class="question"><%= d.target.content %></a>   
-                    <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Question"), method: :delete, data: {confirm: '이 질문을 서랍장에서 꺼내시겠습니까?'} %>
-                    <% if d.target.author.has_role? :newuser %>
-                        <br><br>
-                        <div class = "prism-box__content">
-                            <div class = "date">Question made by <%= render partial: "./user_profile", locals: {user: d.target.author} %><br/>
-                            <%= time_tag d.target.created_at, class: "timeago" %>
-                        </div>
-                    <% end %>
+                    <br>
+                    <div>
+                        <a href="/questions/<%=d.target.id%>" class="question-content"><%= d.target.content %></a>   
+                        <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Question"), method: :delete, data: {confirm: '이 질문을 서랍장에서 꺼내시겠습니까?'} %>
+                    </div>    
+                    <div classs = "question-author">    
+                        <% if d.target.author.has_role? :newuser %>
+                            <br><br>
+                            Question made by 
+                            <%= render partial: "./user_comment_profile", locals: {user: d.target.author} %>
+                        <% end %>
+                    </div>
                 </div>
                 <br>
             </div>

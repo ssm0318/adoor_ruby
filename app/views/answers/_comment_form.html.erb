@@ -5,8 +5,7 @@
             <div class="comments">
                 <% Comment.where(target: Answer.find(a.id), recipient_id: user.id).each do |c| %>
                     <div class="comment">
-                        <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                        <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
+                        <%= render partial: "./user_comment_profile", locals: {user: c.author} %>
                         <span style="vertical-align: +6px;">: <%= c.content %></span>
                         <span style="vertical-align: +6px;"><%= time_tag c.created_at, class: "timeago" %></span><br>
                     </div>
@@ -38,8 +37,7 @@
                                 <% if c.author_id == user.id %>
                                     ㄴ
                                 <% end %>
-                                <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                                <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
+                                <%= render partial: "./user_comment_profile", locals: {user: c.author} %>
                                 <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
                             </div>
                         <% end %>
@@ -65,8 +63,7 @@
                                     <% if r.author_id != user.id %>
                                         <%= render partial: "./user_profile_general", locals: {user_id: r.author_id, answer_id: a.id} %>
                                     <% else %>
-                                        <%= image_tag user.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                                        <%= link_to user.username, user_answers_path(user.id), class: "username" %>
+                                        <%= render partial: "./user_comment_profile", locals: {user: c.author} %>
                                     <% end %>
                                     <span style="vertical-align: +6px;">: <%= r.content %> <br/></span>
                                 </div>
@@ -88,8 +85,7 @@
                             <% if c.author.id == user.id %>
                                 ㄴ
                             <% end %>
-                            <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                            <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
+                            <%= render partial: "./user_comment_profile", locals: {user: c.author} %>
                             <span style="vertical-align: +6px;">: <%= c.content %></span> <br/>
                         </div>
                     <% end %>
