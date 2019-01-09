@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!, except: [:recover_password, :send_temporary_password, :accept_invitation]
     before_action :set_user, only: [:show, :edit, :update, :destroy]
+    before_action :check_user
     
     def recover_password
         render 'recover_password'
@@ -106,7 +107,7 @@ class UsersController < ApplicationController
 
         def check_user
             if @user != current_user
-                redirect_to new_user_session_path
+                redirect_to edit_user_profile_url(current_user.id)
             end
         end
 end
