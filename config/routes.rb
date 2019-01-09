@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   
   # user answers, highlights, drawers, likes
   get '/userpage/:id' => 'answers#user_answers', as: :user_answers
-  get '/userpage/:id/highlights' => 'highlights#user_highlights', as: :user_highlights
+  #get '/userpage/:id/highlights' => 'highlights#user_highlights', as: :user_highlights
   get '/userpage/:id/drawers' => 'drawers#user_drawers', as: :user_drawers
   get '/userpage/:id/likes' => 'likes#user_likes', as: :user_likes
 

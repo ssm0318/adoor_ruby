@@ -3,9 +3,16 @@
         width: 100%;
         display: flex;
         justify-content: space-around;
+        border-top: 1px solid #d7dae0;
+        padding-top: 10px;
+        margin-top: 10px;
 
         a {
             text-decoration: none;
+            color: gray;
+        }
+
+        a.active {
             color: #F48462;
         }
     }
