@@ -47,9 +47,9 @@
                     <%#= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete %>
                 <%# end %>
                 
-                <%= render 'authorized_answer', a: answer %>
-                <%= render 'like', a: answer %>
-                <%= render 'drawer', a: answer %>
+                
+                <%= render './answers/like', a: answer %>
+                <%= render './answers/drawer', a: answer %>
                 <br>
 
                 
