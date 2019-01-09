@@ -38,7 +38,7 @@
                                     ㄴ
                                 <% end %>
                                 <%= render partial: "./user_comment_profile", locals: {user: c.author} %>
-                                <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
+                                <span style="vertical-align: +6px;">: <%= c.content %> <%= time_tag c.created_at, class: "timeago" %><br/></span>
                             </div>
                         <% end %>
                     </div>
@@ -55,7 +55,7 @@
                         <div class="comment-replies">
                             <div class="comment">
                                 <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, answer_id: a.id} %>
-                                <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
+                                <span style="vertical-align: +6px;">: <%= c.content %> <%= time_tag c.created_at, class: "timeago" %><br/></span>
                             </div>
                             <% Reply.where(comment_id: c.id).each do |r|%>
                                 <div class="reply">
@@ -65,7 +65,7 @@
                                     <% else %>
                                         <%= render partial: "./user_comment_profile", locals: {user: c.author} %>
                                     <% end %>
-                                    <span style="vertical-align: +6px;">: <%= r.content %> <br/></span>
+                                    <span style="vertical-align: +6px;">: <%= r.content %> <%= time_tag r.created_at, class: "timeago" %><br/></span>
                                 </div>
                             <% end %>
                         </div>
@@ -86,14 +86,14 @@
                                 ㄴ
                             <% end %>
                             <%= render partial: "./user_comment_profile", locals: {user: c.author} %>
-                            <span style="vertical-align: +6px;">: <%= c.content %></span> <br/>
+                            <span style="vertical-align: +6px;">: <%= c.content %><%= time_tag c.created_at, class: "timeago" %></span><br/>
                         </div>
                     <% end %>
                 </div>
                 <form action='/answers/<%= a.id %>/comments/<%= current_user.id %>' method='POST' class="prism-form comment" >
                     <input class="prism-form__input" type="text" name="content">
                     <input type='submit' class="prism-form__button">
-                </form>
+                </form> 
             </div>
         <% end %>
     </div>
