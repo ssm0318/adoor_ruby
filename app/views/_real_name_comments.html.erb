@@ -15,9 +15,6 @@
 
         <div class = "comment-info">
             <span><%= time_tag c.created_at, class: "timeago" %></span>
-            <% if c.author_id === current_user.id %>
-                <span>좋아요 <%= Like.where(target_type: "Comment", target_id: c.id).size %>개</span>
-            <% end %>
-            <span> <%= render 'authorized_comment', c: c %></span>
+            <span> <%= render 'authorized_comment', c: c, target_type: "Comment" %></span>
         </div>
     </div>

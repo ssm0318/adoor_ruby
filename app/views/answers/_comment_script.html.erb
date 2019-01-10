@@ -1,5 +1,7 @@
 <script>
     $(document).ready(function() {
+
+        // like_ajax(".btn-answer-like")
         $("form").submit( function(e) {
 
             // console.log("hi")
@@ -15,7 +17,8 @@
                     
                     //TODO: indent 해
                     //TODO: comment like, commment-info update
-                    var html = `
+                    var html_str=
+                    `
                             <div class = "comment-content">
                                 <span>
                                     <img src='${data.imageurl}' 
@@ -29,11 +32,24 @@
                         </div>
                     `
 
+                    var btn_like = $(
+                        `
+                        <img src='/assets/icons/like-default-icon' 
+                        class='btn-comment-like do-like'
+                        data-url='${data.like_url}'
+                        data-changed-src='/assets/icons/like-on-icon'
+                        data-changed-url='${data.like_changed_url}'>
+                        `
+                    )
+
                     if(form.hasClass("comment")) {
-                        html = "<div class='comment'>" + html
+                        html_str = "<div class='comment'>" + html_str
                     } else {
-                        html = "<div class='comment-indent'>" + html
+                        html_str = "<div class='comment-indent'>" + html_str
                     }
+
+                    var html = $(html_str)
+                    html.find(".comment-content").append(btn_like);
 
                     if(form.hasClass("reply")) {
                         form.parent().find(".comment-replies").append(html)
@@ -42,6 +58,7 @@
                     }
 
                     form.find(".prism-form__input").val('')
+                    like_ajax(btn_like)
                 },
                 error: function(data) {
                     console.log("error")

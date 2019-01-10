@@ -93,14 +93,18 @@ class AnswersController < ApplicationController
                 path: user_answers_path(current_user.id),
                 username: current_user.username,
                 content: params[:content],
+                like_url: likes_path(target_id: c.id, target_type: 'Comment'), 
+                like_changed_url: like_path(c.id, target_type: 'Comment'),
             }
         else
-            Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], target: Answer.find(params[:id]))
+            c = Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], target: Answer.find(params[:id]))
             render json: {
                 imageurl: current_user.image.url,
                 path: user_answers_path(current_user.id),
                 username: current_user.username,
                 content: params[:content],
+                like_url: likes_path(target_id: c.id, target_type: 'Comment'), 
+                like_changed_url: like_path(c.id, target_type: 'Comment'),
             }
         end
             
@@ -121,6 +125,8 @@ class AnswersController < ApplicationController
             path: user_answers_path(current_user.id),
             username: current_user.username,
             content: params[:content],
+            like_url: likes_path(target_id: r.id, target_type: 'Reply'), 
+            like_changed_url: like_path(r.id, target_type: 'Reply'),
         }
     end
 

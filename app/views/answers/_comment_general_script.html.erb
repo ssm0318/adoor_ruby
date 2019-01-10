@@ -1,4 +1,37 @@
 <script>
+
+
+  function getReplyHtml(imageurl, path, username, content) {
+    return $(`
+      <div class='reply'>
+        <div class="comment-content">
+          <span>
+            <img src='${imageurl}' 
+              alt='' class='user-profile'>
+            <a href='${path}' class='username'>
+              ${username}
+            </a>
+            <span class="content">
+              ${content}
+            </span> 
+          </span>
+        </div> 
+      </div>
+    `)
+  }
+
+  function getButtonLike(like_url, like_changed_url) {
+    return $(
+      `
+      <img src='/assets/icons/like-default-icon' 
+      class='btn-comment-like do-like'
+      data-url='${like_url}'
+      data-changed-src='/assets/icons/like-on-icon'
+      data-changed-url='${like_changed_url}'>
+      `
+    )
+  }
+
   $(document).ready(function() {
 
     $("form").submit( function(e) {
@@ -40,38 +73,29 @@
               </div>
               `)
 
+              var btn_like = getButtonLike(data.like_url, data.like_changed_url)
+              html.find(".comment-content").append(btn_like)
               form.parent().find(".anonymous-comments-div").append(html)
 
+              like_ajax(btn_like)
               ///////// 동적으로 삽입한 form에 다시 event binding 해줌. 하나만 선택해야됨.
               html.find("form").submit( function(event) {
 
-                var newform = $(this)
+                var new_form = $(this)
 
                 event.preventDefault();
                 $.ajax({
                   type: "POST",
-                  url: newform.attr('action'),
-                  data: newform.serialize(),
+                  url: new_form.attr('action'),
+                  data: new_form.serialize(),
                   success: function(data) {
-                    var newhtml =
-                      `
-                        <div class='reply'>
-                          <div class="comment-content">
-                            <span>
-                              <img src='${data.imageurl}' 
-                                alt='' class='user-profile'>
-                              <a href='${data.path}' class='username'>
-                                ${data.username}
-                              </a>
-                              <span class="content">
-                                ${data.content}
-                              </span> 
-                            </span>
-                          </div> 
-                        </div>
-                      `
-                    newform.parent().find(".comment-replies").append(newhtml);
-                    newform.find(".prism-form__input").val('')
+                    var new_html = getReplyHtml(data.imageurl, data.path, data.username, data.content)
+                    var new_btn_like = getButtonLike(data.like_url, data.like_changed_url)
+                    new_html.find(".comment-content").append(new_btn_like)
+                    new_form.parent().find(".comment-replies").append(new_html);
+
+                    like_ajax(new_btn_like)
+                    new_form.find(".prism-form__input").val('')
                   },
                   error: function(data) {
                     console.log("error")
@@ -81,24 +105,13 @@
 
             }
             else {
-              var html =
-              `
-                <div class='reply'>
-                  <div class="comment-content">
-                    <span>
-                      <img src='${data.imageurl}' 
-                        alt='' class='user-profile'>
-                      <a href='${data.path}' class='username'>
-                        ${data.username}
-                      </a>
-                      <span class="content">
-                        ${data.content}
-                      </span> 
-                    </span>
-                  </div> 
-                </div>
-              `
+
+              var html = getReplyHtml(data.imageurl, data.path, data.username, data.content)
+              var btn_like = getButtonLike(data.like_url, data.like_changed_url)
+              html.find(".comment-content").append(btn_like)
               form.parent().find(".comment-replies").append(html)
+
+              like_ajax(btn_like)
             
             }
             form.find(".prism-form__input").val('')

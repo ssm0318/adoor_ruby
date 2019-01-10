@@ -18,3 +18,10 @@
 <%= render 'comment_general_script' %>
 <%= render 'drawer_script' %>
 <%= render 'layouts/timestamp' %>
+<%= render 'like_script' %>
+<script>
+  $(document).ready(function() {
+    like_ajax($(".btn-answer-like"))
+    like_ajax($(".btn-comment-like"))
+  })
+</script>
