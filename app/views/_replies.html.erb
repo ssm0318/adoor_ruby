@@ -7,7 +7,7 @@
                 <%= link_to image_tag(user.image.url, :class => "user-profile"), user_answers_path(user.id) %>
                 <%= link_to user.username, user_answers_path(user.id), class: "username" %>
             <% end %>
-                <span class="content"><%= r.content %> </span>
+                <span class = "content"><%= r.content %></span>
             </span>
             <%= render 'like', a: r, target_type: "Reply", like_btn_class: "btn-comment-like" %>
     </div>
