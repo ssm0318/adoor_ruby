@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20190108063635) do
-=======
-ActiveRecord::Schema.define(version: 20190108142103) do
->>>>>>> master
+ActiveRecord::Schema.define(version: 20190110014153) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "author_id", null: false
@@ -46,8 +42,18 @@ ActiveRecord::Schema.define(version: 20190108142103) do
   end
 
   create_table "channels", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_channels_on_user_id"
+  end
+
+  create_table "channels_friendships", id: false, force: :cascade do |t|
+    t.integer "channel_id", null: false
+    t.integer "friendship_id", null: false
+    t.index ["channel_id", "friendship_id"], name: "index_channels_friendships_on_channel_id_and_friendship_id"
+    t.index ["friendship_id", "channel_id"], name: "index_channels_friendships_on_friendship_id_and_channel_id"
   end
 
   create_table "comments", force: :cascade do |t|

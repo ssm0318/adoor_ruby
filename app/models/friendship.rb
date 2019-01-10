@@ -1,7 +1,7 @@
 class Friendship < ApplicationRecord
     belongs_to :user
     belongs_to :friend, :class_name => "User"
-    belongs_to :channel
+    has_and_belongs_to_many :channels
     
     after_create :create_notifications, :delete_request, :create_inverse
 
