@@ -140,7 +140,7 @@ class AnswersController < ApplicationController
         end
 
         def check_friends
-            if @answer.author.friends.where(id: current_user.id).empty?
+            if @answer.author.friends.where(id: current_user.id).empty? && current_user != @answer.author
                 redirect_to root_url
             end
         end
