@@ -10,7 +10,7 @@
             <% if current_user.id == user.id %>
                 <form class="prism-form comment" action='/answers/<%= a.id %>/comments/<%= user.id %>' method='POST'>
                     <input class="prism-form__input" type='text' name='content' />
-                    <input type='submit' class="prism-form__button"><br>
+                    <input type='submit' class="prism-form__button" value="저장"><br>
                     이 댓글은 전체 공개되는 댓글입니다
                 </form>
                 <br><br>
@@ -35,7 +35,7 @@
 
                     <form class="prism-form friend-comment" action='/answers/<%= a.id %>/comments/<%= r %>' method='POST'>
                         <input class="prism-form__input" type='text' name='content' />
-                        <input type='submit' class="prism-form__button">
+                        <input type='submit' class="prism-form__button" value="저장">
                     </form>
                 </div>
                 <br>
@@ -54,7 +54,7 @@
                         <%# TOOD: action 설정 %>
                         <form class="prism-form reply" action='/answers/comment/<%= c.id %>/reply' method='POST'>
                             <input class="prism-form__input" type='text' name='content' />
-                            <input type='submit' class="prism-form__button">
+                            <input type='submit' class="prism-form__button" value="저장">
                         </form>
                     </div>
                 <%end%>
@@ -68,7 +68,7 @@
                 </div>
                 <form action='/answers/<%= a.id %>/comments/<%= current_user.id %>' method='POST' class="prism-form comment" >
                     <input class="prism-form__input" type="text" name="content">
-                    <input type='submit' class="prism-form__button">
+                    <input type='submit' class="prism-form__button" value="저장">
                 </form> 
             </div>
         <% end %>
