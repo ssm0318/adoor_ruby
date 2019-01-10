@@ -17,7 +17,7 @@
             <time datetime='${created_at}', class='timeago'></time>
             <span>
                 <span>좋아요 <span class="show-likes">0</span>개</span>
-                <span class="delete-comment">삭제</span>
+                <span class="btn-comment-delete">삭제</span>
             </span>
         </div> 
       </div>
@@ -69,7 +69,7 @@
                         <time datetime='${data.created_at}', class='timeago'></time>
                         <span>
                             <span>좋아요 <span class="show-likes">0</span>개</span>
-                            <span class="delete-comment">삭제</span>
+                            <span class="btn-comment-delete">삭제</span>
                         </span>
                     </div> 
                   </div>
@@ -87,6 +87,7 @@
 
               ///////// 동적으로 삽입한 form에 다시 event binding 해줌. 하나만 선택해야됨.
               like_ajax(btn_like)
+              delete_ajax(html.find(".btn-comment-delete"))
               html.find("time.timeago").timeago();
               html.find("form").submit( function(event) {
 
@@ -104,6 +105,7 @@
                     new_form.parent().find(".comment-replies").append(new_html);
 
                     like_ajax(new_btn_like)
+                    delete_ajax(new_html.find(".btn-comment-delete"))
                     new_form.find(".prism-form__input").val('')
                   },
                   error: function(data) {
@@ -121,6 +123,7 @@
               form.parent().find(".comment-replies").append(html)
 
               like_ajax(btn_like)
+              delete_ajax(html.find(".btn-comment-delete"))
               html.find("time.timeago").timeago();
             }
             form.find(".prism-form__input").val('')

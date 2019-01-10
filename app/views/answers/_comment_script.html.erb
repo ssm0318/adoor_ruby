@@ -30,7 +30,7 @@
                                 <time datetime='${data.created_at}', class='timeago'></time>
                                 <span>
                                     <span>좋아요 <span class="show-likes">0</span>개</span>
-                                    <span class="delete-comment">삭제</span>
+                                    <span class="btn-comment-delete">삭제</span>
                                 </span>
                             </div>
                         </div>
@@ -64,6 +64,7 @@
 
                     form.find(".prism-form__input").val('')
                     like_ajax(btn_like)
+                    delete_ajax(html.find(".btn-comment-delete"))
                     html.find("time.timeago").timeago();
                 },
                 error: function(data) {

@@ -31,15 +31,17 @@
                         like.attr('data-changed-url', url)
                         like.toggleClass("do-like")
 
-
+                        var el
                         if(like.hasClass("btn-answer-like")) {
-                            var el = like.parent().find(".show-likes")
+                            // 클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
+                            el = like.parents().find(".show-likes")
                         } else {
-                            var el = like.parent().parent().find(".show-likes")
+                            // 클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
+                            el = like.parent().parent().find(".show-likes")
                         }
 
                         let like_num = parseInt(el.text())
-                        like_num += (!like.hasClass("do-like")) ? 1 : ((like_num >= 1) ? - 1 : 0)
+                        like_num += (!like.hasClass("do-like")) ? 1 : - 1
                         el.text(like_num)
                     },
                     error: function(data) {
