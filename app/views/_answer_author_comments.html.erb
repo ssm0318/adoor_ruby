@@ -9,7 +9,7 @@
     </div>
 
     <div class = "comment-info">
-        <span><%= time_tag c.created_at, class: "timeago" %></span>
-        <span> <%= render 'authorized_comment', c: c, target_type: "Comment"%></span>
+        <span class="time"><%= time_tag c.created_at, class: "timeago" %></span>
+        <span class="authorized"> <%= render 'authorized_comment', c: c, target_type: "Comment"%></span>
     </div>
 </div>

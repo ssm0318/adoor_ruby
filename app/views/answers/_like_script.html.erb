@@ -30,6 +30,17 @@
                         like.attr('data-changed-src', src)
                         like.attr('data-changed-url', url)
                         like.toggleClass("do-like")
+
+
+                        if(like.hasClass("btn-answer-like")) {
+                            var el = like.parent().find(".show-likes")
+                        } else {
+                            var el = like.parent().parent().find(".show-likes")
+                        }
+
+                        let like_num = parseInt(el.text())
+                        like_num += (!like.hasClass("do-like")) ? 1 : ((like_num >= 1) ? - 1 : 0)
+                        el.text(like_num)
                     },
                     error: function(data) {
                         console.log("error!")

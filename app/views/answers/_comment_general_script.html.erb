@@ -1,20 +1,24 @@
 <script>
 
 
-  function getReplyHtml(imageurl, path, username, content) {
+  function getReplyHtml(content, created_at) {
     return $(`
       <div class='reply'>
         <div class="comment-content">
           <span>
-            <img src='${imageurl}' 
-              alt='' class='user-profile'>
-            <a href='${path}' class='username'>
-              ${username}
-            </a>
+            <%= link_to image_tag(current_user.image.url, :class => "user-profile"), user_answers_path(current_user.id) %>
+            <%= link_to current_user.username, user_answers_path(current_user.id), class: "username" %>
             <span class="content">
               ${content}
             </span> 
           </span>
+        </div>
+        <div class = "comment-info">
+            <time datetime='${created_at}', class='timeago'></time>
+            <span>
+                <span>좋아요 <span class="show-likes">0</span>개</span>
+                <span class="delete-comment">삭제</span>
+            </span>
         </div> 
       </div>
     `)
@@ -54,15 +58,19 @@
                   <div class='comment'>
                     <div class='comment-content'>
                       <span>
-                        <img src='${data.imageurl}' 
-                          alt='' class='user-profile'>
-                        <a href='${data.path}' class='username'>
-                          ${data.username}
-                        </a>
+                        <%= link_to image_tag(current_user.image.url, :class => "user-profile"), user_answers_path(current_user.id) %>
+                        <%= link_to current_user.username, user_answers_path(current_user.id), class: "username" %>
                         <span class="content">
                           ${data.content}
                         </span> 
                       </span>
+                    </div>
+                    <div class = "comment-info">
+                        <time datetime='${data.created_at}', class='timeago'></time>
+                        <span>
+                            <span>좋아요 <span class="show-likes">0</span>개</span>
+                            <span class="delete-comment">삭제</span>
+                        </span>
                     </div> 
                   </div>
                 </div>
@@ -77,8 +85,9 @@
               html.find(".comment-content").append(btn_like)
               form.parent().find(".anonymous-comments-div").append(html)
 
-              like_ajax(btn_like)
               ///////// 동적으로 삽입한 form에 다시 event binding 해줌. 하나만 선택해야됨.
+              like_ajax(btn_like)
+              html.find("time.timeago").timeago();
               html.find("form").submit( function(event) {
 
                 var new_form = $(this)
@@ -89,7 +98,7 @@
                   url: new_form.attr('action'),
                   data: new_form.serialize(),
                   success: function(data) {
-                    var new_html = getReplyHtml(data.imageurl, data.path, data.username, data.content)
+                    var new_html = getReplyHtml(data.content, data.created_at)
                     var new_btn_like = getButtonLike(data.like_url, data.like_changed_url)
                     new_html.find(".comment-content").append(new_btn_like)
                     new_form.parent().find(".comment-replies").append(new_html);
@@ -106,13 +115,13 @@
             }
             else {
 
-              var html = getReplyHtml(data.imageurl, data.path, data.username, data.content)
+              var html = getReplyHtml(data.content, data.created_at)
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
               html.find(".comment-content").append(btn_like)
               form.parent().find(".comment-replies").append(html)
 
               like_ajax(btn_like)
-            
+              html.find("time.timeago").timeago();
             }
             form.find(".prism-form__input").val('')
           },

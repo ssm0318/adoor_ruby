@@ -21,12 +21,16 @@
                     `
                             <div class = "comment-content">
                                 <span>
-                                    <img src='${data.imageurl}' 
-                                    alt='' class = 'user-profile'>
-                                    <a href='${data.path}' class='username'>
-                                        ${data.username}
-                                    </a>
+                                    <%= link_to image_tag(current_user.image.url, :class => "user-profile"), user_answers_path(current_user.id) %>
+                                    <%= link_to current_user.username, user_answers_path(current_user.id), class: "username" %>
                                     <span class= "content">${data.content} </span>
+                                </span>
+                            </div>
+                            <div class = "comment-info">
+                                <time datetime='${data.created_at}', class='timeago'></time>
+                                <span>
+                                    <span>좋아요 <span class="show-likes">0</span>개</span>
+                                    <span class="delete-comment">삭제</span>
                                 </span>
                             </div>
                         </div>
@@ -50,6 +54,7 @@
 
                     var html = $(html_str)
                     html.find(".comment-content").append(btn_like);
+                    
 
                     if(form.hasClass("reply")) {
                         form.parent().find(".comment-replies").append(html)
@@ -59,6 +64,7 @@
 
                     form.find(".prism-form__input").val('')
                     like_ajax(btn_like)
+                    html.find("time.timeago").timeago();
                 },
                 error: function(data) {
                     console.log("error")
