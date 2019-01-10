@@ -2,7 +2,6 @@ class AnswersController < ApplicationController
     before_action :authenticate_user!
     before_action :set_answer, only: [:show, :edit, :update, :destroy]
     before_action :check_mine, only: [:edit, :update, :destroy]
-    before_action :check_friends, only: [:show]
 
     def new
         @question = Question.find(params[:id])
@@ -25,7 +24,7 @@ class AnswersController < ApplicationController
         redirect_to root_path
     end
 
-    def show 
+    def show
     end
 
     def edit
@@ -135,12 +134,6 @@ class AnswersController < ApplicationController
 
         def check_mine
             if @answer.author_id != current_user.id
-                redirect_to root_url
-            end
-        end
-
-        def check_friends
-            if @answer.author.friends.where(id: current_user.id).empty? && current_user != @answer.author
                 redirect_to root_url
             end
         end
