@@ -13,15 +13,6 @@
                 }
             }
 
-            if(delete_btn.hasClass("btn-answer-delete")) {
-                // 클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
-                delete_btn.parents(".prism-box").fadeOut(600, function(){ $(this).remove();});
-            } else if(delete_btn.parents().hasClass("comment")){
-                // 클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
-                delete_btn.parents(".comment-replies-form").fadeOut(600, function(){ $(this).remove();});
-            } else {
-                delete_btn.parents(".reply").fadeOut(600, function(){ $(this).remove();});
-            }
 
             // TODO delete ajax
 
@@ -29,18 +20,18 @@
             //     type: "DELETE",
             //     url: delete.attr("data-url"),
             //     success: function(data) {
-
-            //         // TODO : back ajax
-
-
-            //         if(delete.hasClass("btn-answer-delete")) {
-            //             // 클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
-            //             delete.parent().parent().remove()
-            //         } else {
-            //             // 클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
-            //             delete.parent().parent().parent().remove()
-            //         }
-                    
+            //      클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
+                    if(delete_btn.hasClass("btn-answer-delete")) {
+                        delete_btn.parents(".prism-box").fadeOut(600, function(){ $(this).remove();});
+                    } else if(delete_btn.parents().hasClass("comment") && delete_btn.parents().hasClass("comment-replies")){
+                        delete_btn.parents(".comment-replies-form").fadeOut(600, function(){ $(this).remove();});
+                    } else if(delete_btn.parents().hasClass("comment")) {
+                        delete_btn.parents(".comment").fadeOut(600, function(){ $(this).remove();});
+                    } else if(delete_btn.parents().hasClass("comment-indent")) {
+                        delete_btn.parents(".comment-indent").fadeOut(600, function(){ $(this).remove();});
+                    } else {
+                        delete_btn.parents(".reply").fadeOut(600, function(){ $(this).remove();});
+                    }     
             //     },
             //     error: function(data) {
             //         console.log("error!")
