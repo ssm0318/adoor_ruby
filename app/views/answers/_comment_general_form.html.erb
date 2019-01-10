@@ -5,30 +5,18 @@
             <% Comment.where(target: Answer.find(answer.id), recipient_id: nil).each do |c|%>
                 <div class="comment-replies-form">
                     <div class="comment-replies">
-                        <div class="comment">
-                            <% if c.author_id != current_user.id %>
-                                <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, answer_id: answer.id} %>
-                            <% else %>
-                                <%= image_tag current_user.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                                <%= link_to current_user.username, user_answers_path(current_user.id), class: "username" %>
-                            <% end %>
-                            <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
-                        </div>
+                        <% if c.author_id != current_user.id %>
+                            <%= render partial: "./general_comments", locals: {user_id: c.author_id, answer_id: answer.id, c:c} %>
+                        <% else %>
+                            <%= render partial: "./answer_author_comments", locals: {user: current_user, c: c} %>
+                        <% end %>
+                        
                         <% Reply.where(comment_id: c.id).each do |r|%>
-                            <div class="reply">
-                                ㄴ
-                                <% if r.author_id != current_user.id %>
-                                    <%= render partial: "./user_profile_general", locals: {user_id: r.author_id, answer_id: answer.id} %>
-                                <% else %>
-                                    <%= image_tag current_user.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                                    <%= link_to current_user.username, user_answers_path(current_user.id), class: "username" %>
-                                <% end %>
-                                <span style="vertical-align: +6px;">: <%= r.content %> <br/></span>
-                            </div>
+                            <%= render partial: "./replies", locals: {user_id: r.author_id, user: r.author, answer_id: answer.id, r: r} %>
                         <% end %>
                     </div>
                     <form action='/answers/comment/<%= c.id %>/reply' method='POST' class="prism-form reply" >
-                        ㄴ<input class="prism-form__input" type="text" name="content">
+                        <input class="prism-form__input" type="text" name="content">
                         <input type="submit" class="prism-form__button">
                     </form>
                 </div>

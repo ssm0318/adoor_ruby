@@ -1,0 +1,24 @@
+<div class="comment-indent">
+    <div class="comment-content">
+        <span>
+            <% if r.author_id != user.id %>
+            <% color = user_id + answer_id %>
+            <% r = color * color *color % 256 %>
+            <% g = (r * color) % 256 %>
+            <% b = (g * color) % 256 %>
+            <button style="height:20px; width:20px; border-radius:10px; margin-right: 5px; background-color: <%='rgb(' + r.to_s + ',' + g.to_s + ',' + b.to_s + ')' %>; margin-bottom: 5px; border: none;"></button>
+        <% else %>
+            <%= link_to image_tag(user.image.url, :class => "user-profile"), user_answers_path(user.id) %>
+            <%= link_to user.username, user_answers_path(user.id), class: "username" %>
+        <% end %>
+            <span class= "content"><%= r.content %> </span>
+        </span>
+        <%= render 'like', a: r, target_type: "Reply", like_btn_class: "btn-comment-like" %>
+    </div>
+
+    <div class = "comment-info">
+        <span><%= time_tag r.created_at, class: "timeago" %></span>
+        <span>좋아요 <%= Like.where(target_type: "Reply", target_id: r.id).size %>개</span>
+        <span> <%= render 'authorized_comment', c: r %></span>
+    </div>
+</div>

@@ -4,11 +4,7 @@
         <div class="author-comments-div">
             <div class="comments">
                 <% Comment.where(target: Answer.find(a.id), recipient_id: user.id).each do |c| %>
-                    <div class="comment">
-                        <%= render partial: "./user_profile_small", locals: {user: c.author} %>
-                        <span style="vertical-align: +6px;">: <%= c.content %></span>
-                        <span style="vertical-align: +6px;"><%= time_tag c.created_at, class: "timeago" %></span><br>
-                    </div>
+                    <%= render partial: "./answer_author_comments", locals: {user: c.author, c: c} %>
                 <% end %>
             </div>
             <% if current_user.id == user.id %>
@@ -33,7 +29,7 @@
                 <div class="comments-div">
                     <div class="comments">
                         <% Comment.where(target: Answer.find(a.id), recipient_id: r).each do |c| %>
-                            <%= render partial: "./user_comment", locals: {answer_author: user, comment_author: c.author, c: c} %>
+                            <%= render partial: "./real_name_comments", locals: {answer_author: user, comment_author: c.author, c: c} %>
                         <% end %>
                     </div>
 
@@ -48,25 +44,16 @@
                 <% Comment.where(target: Answer.find(a.id), recipient_id: nil).each do |c|%>
                     <div class="comment-replies-form">
                         <div class="comment-replies">
-                            <div class="comment">
-                                <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, answer_id: a.id} %>
-                                <span style="vertical-align: +6px;">: <%= c.content %> <%= time_tag c.created_at, class: "timeago" %><br/></span>
-                            </div>
+
+                            <%= render partial: "./general_comments", locals: {user_id: c.author_id, answer_id: a.id, c: c} %>
+
                             <% Reply.where(comment_id: c.id).each do |r|%>
-                                <div class="reply">
-                                    ㄴ
-                                    <% if r.author_id != user.id %>
-                                        <%= render partial: "./user_profile_general", locals: {user_id: r.author_id, answer_id: a.id} %>
-                                    <% else %>
-                                        <%= render partial: "./user_profile_small", locals: {user: c.author} %>
-                                    <% end %>
-                                    <span style="vertical-align: +6px;">: <%= r.content %> <%= time_tag r.created_at, class: "timeago" %><br/></span>
-                                </div>
+                                <%= render partial: "./replies", locals: {user_id: r.author_id, user: r.author, answer_id: a.id, r: r} %>
                             <% end %>
                         </div>
                         <%# TOOD: action 설정 %>
                         <form class="prism-form reply" action='/answers/comment/<%= c.id %>/reply' method='POST'>
-                            ㄴ<input class="prism-form__input" type='text' name='content' />
+                            <input class="prism-form__input" type='text' name='content' />
                             <input type='submit' class="prism-form__button">
                         </form>
                     </div>
@@ -76,13 +63,7 @@
             <div class="comments-div">
                 <div class="comments">
                     <% Comment.where(target: Answer.find(a.id), recipient_id: current_user.id).each do |c| %>
-                        <div class="comment">
-                            <% if c.author.id == user.id %>
-                                ㄴ
-                            <% end %>
-                            <%= render partial: "./user_profile_small", locals: {user: c.author} %>
-                            <span style="vertical-align: +6px;">: <%= c.content %><%= time_tag c.created_at, class: "timeago" %></span><br/>
-                        </div>
+                        <%= render partial: "./real_name_comments", locals: {answer_author: user, comment_author: c.author, c: c} %>
                     <% end %>
                 </div>
                 <form action='/answers/<%= a.id %>/comments/<%= current_user.id %>' method='POST' class="prism-form comment" >
