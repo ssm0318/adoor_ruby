@@ -1,14 +1,10 @@
 <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px solid #d7dae0;">
     <div>
-        댓글 <br/><br>
+        댓글 <br><br>
         <div class="author-comments-div">
             <div class="comments">
                 <% Comment.where(target: Answer.find(a.id), recipient_id: user.id).each do |c| %>
-                    <div class="comment">
-                        <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                        <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
-                        <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
-                    </div>
+                    <%= render partial: "./answer_author_comments", locals: {user: c.author, c: c} %>
                 <% end %>
             </div>
             <% if current_user.id == user.id %>
@@ -33,18 +29,12 @@
                 <div class="comments-div">
                     <div class="comments">
                         <% Comment.where(target: Answer.find(a.id), recipient_id: r).each do |c| %>
-                            <div class="comment">
-                                <% if c.author_id == user.id %>
-                                    ㄴ
-                                <% end %>
-                                <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                                <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
-                                <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
-                            </div>
+                            <%= render partial: "./real_name_comments", locals: {answer_author: user, comment_author: c.author, c: c} %>
                         <% end %>
                     </div>
+
                     <form class="prism-form friend-comment" action='/answers/<%= a.id %>/comments/<%= r %>' method='POST'>
-                        ㄴ<input class="prism-form__input" type='text' name='content' />
+                        <input class="prism-form__input" type='text' name='content' />
                         <input type='submit' class="prism-form__button">
                     </form>
                 </div>
@@ -54,26 +44,16 @@
                 <% Comment.where(target: Answer.find(a.id), recipient_id: nil).each do |c|%>
                     <div class="comment-replies-form">
                         <div class="comment-replies">
-                            <div class="comment">
-                                <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, answer_id: a.id} %>
-                                <span style="vertical-align: +6px;">: <%= c.content %> <br/></span>
-                            </div>
+
+                            <%= render partial: "./general_comments", locals: {user_id: c.author_id, answer_id: a.id, c: c} %>
+
                             <% Reply.where(comment_id: c.id).each do |r|%>
-                                <div class="reply">
-                                    ㄴ
-                                    <% if r.author_id != user.id %>
-                                        <%= render partial: "./user_profile_general", locals: {user_id: r.author_id, answer_id: a.id} %>
-                                    <% else %>
-                                        <%= image_tag user.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                                        <%= link_to user.username, user_answers_path(user.id), class: "username" %>
-                                    <% end %>
-                                    <span style="vertical-align: +6px;">: <%= r.content %> <br/></span>
-                                </div>
+                                <%= render partial: "./replies", locals: {user: current_user, answer_id: a.id, r: r} %>
                             <% end %>
                         </div>
                         <%# TOOD: action 설정 %>
                         <form class="prism-form reply" action='/answers/comment/<%= c.id %>/reply' method='POST'>
-                            ㄴ<input class="prism-form__input" type='text' name='content' />
+                            <input class="prism-form__input" type='text' name='content' />
                             <input type='submit' class="prism-form__button">
                         </form>
                     </div>
@@ -83,21 +63,16 @@
             <div class="comments-div">
                 <div class="comments">
                     <% Comment.where(target: Answer.find(a.id), recipient_id: current_user.id).each do |c| %>
-                        <div class="comment">
-                            <% if c.author.id == user.id %>
-                                ㄴ
-                            <% end %>
-                            <%= image_tag c.author.image.url, :style => "height:20px; width:20px; border-radius:10px; margin-right: 2px;" %>
-                            <%= link_to c.author.username, user_answers_path(c.author.id), class: "username" %>
-                            <span style="vertical-align: +6px;">: <%= c.content %></span> <br/>
-                        </div>
+                        <%= render partial: "./real_name_comments", locals: {answer_author: user, comment_author: c.author, c: c} %>
                     <% end %>
                 </div>
                 <form action='/answers/<%= a.id %>/comments/<%= current_user.id %>' method='POST' class="prism-form comment" >
                     <input class="prism-form__input" type="text" name="content">
                     <input type='submit' class="prism-form__button">
-                </form>
+                </form> 
             </div>
         <% end %>
     </div>
 </div>
+
+<%= render 'layouts/timestamp' %>

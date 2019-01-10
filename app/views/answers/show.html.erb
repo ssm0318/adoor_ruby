@@ -47,7 +47,7 @@
         <% end %> 
 <%
 =end%>
-        <div class = "date"><%= time_tag answer.created_at, class: "timeago" %></div>
+        <div class = "date"><%= time_tag answer.updated_at, class: "timeago" %></div>
         <br>
     </div>
     <div class="prism-box__footer" style="padding-bottom: 10px;">
@@ -64,7 +64,7 @@
         <%# end %>
       
         <%= render 'authorized_answer', a: answer %>
-        <%= render 'like', a: answer %>
+        <%= render 'like', a: answer, target_type: "Answer", like_btn_class: "btn-answer-like" %>
         <%= render 'drawer', a: answer %>
         <br>
     </div>
@@ -86,3 +86,13 @@
 <%else %>
     <%= render 'comment_script' %>
 <% end %>
+<%= render 'like_script' %>
+<%= render 'delete_script' %>
+<script>
+  $(document).ready(function() {
+    like_ajax($(".btn-answer-like"))
+    like_ajax($(".btn-comment-like"))
+    delete_ajax($(".btn-answer-delete"))
+    delete_ajax($(".btn-comment-delete"))
+  })
+</script>

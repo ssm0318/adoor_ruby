@@ -1,6 +1,12 @@
 // 폼 기본 형식 통일
 @import './variable.scss';
 
+.friend-comment {
+    padding-top: 10px;
+    padding-left: 50px;
+
+}
+
 .prism-form {
     .prism-form__input {
         width: calc(100% - 100px);
