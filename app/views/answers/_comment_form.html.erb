@@ -48,7 +48,7 @@
                             <%= render partial: "./general_comments", locals: {user_id: c.author_id, answer_id: a.id, c: c} %>
 
                             <% Reply.where(comment_id: c.id).each do |r|%>
-                                <%= render partial: "./replies", locals: {user_id: r.author_id, user: r.author, answer_id: a.id, r: r} %>
+                                <%= render partial: "./replies", locals: {user: current_user, answer_id: a.id, r: r} %>
                             <% end %>
                         </div>
                         <%# TOOD: action 설정 %>
