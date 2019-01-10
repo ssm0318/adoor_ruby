@@ -1,8 +1,20 @@
 <div class="inner-container">
-    <div class = "question">
-        <div class = "question-content"><%= @question.content %>
-            <%= render 'drawer', a: @question, target_type: "Answer" %>
+    <div class = "prism-box">
+        <div class = "prism-box_question">
+            <br>
+            <div>
+                <%= @question.content %>
+                <%= render 'drawer', a: @question, target_type: "Question" %>
+            </div>    
+            <div classs = "question-author">    
+                <% if @question.author.has_role? :newuser %>
+                    <br><br>
+                    Question made by 
+                    <%= render partial: "./user_profile_small", locals: {user: @question.author} %>
+                <% end %>
+            </div>
         </div>
+        <br>
     </div>
     <div class="feed-nav">
         <%= active_link_to '친구', '/questions/' + @question.id.to_s + '/friend'  %>

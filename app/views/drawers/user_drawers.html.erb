@@ -43,7 +43,7 @@
                                             data: { confirm: '답변을 지우시겠습니까?'} %>
                 <% end %>                 
 
-                <%= render 'answers/drawer', a: d.target %>
+                <%= render 'answers/drawer', a: d.target, target_type: "Answer" %>
                 </div>
             </div>
         <% end %>
