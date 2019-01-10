@@ -2,9 +2,11 @@
     <div class = "prism-box">
         <div class = "prism-box_question">
             <br>
-            <div>
+            <div style = "font-size: 20px; font-weight: bold;">
                 <%= @question.content %>
-                <%= render 'drawer', a: @question, target_type: "Question" %>
+                <div>
+                    <%= render 'drawer', a: @question, target_type: "Question" %>
+                </div>
             </div>    
             <div classs = "question-author">    
                 <% if @question.author.has_role? :newuser %>
@@ -26,3 +28,4 @@
 <%= render 'comment_general_script' %>
 <%= render 'drawer_script' %>
 <%= render 'layouts/timestamp' %>
+<%= render 'questions/assignment_script' %>
