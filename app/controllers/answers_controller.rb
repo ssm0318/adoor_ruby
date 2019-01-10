@@ -67,15 +67,20 @@ class AnswersController < ApplicationController
     end
 
     def friend_feed
-        @answers = []
-        @answers.concat(current_user.answers)
-        
-        for friend in current_user.friends
-            @answers.concat(friend.answers)
-        end
-
-        @answers = @answers.sort_by(&:created_at)
+        @answers = Answer.not_anonymous(current_user.id)
         render 'friend_feed'
+    end
+
+    def question_feed_friend
+        @question = Question.find(params[:id])
+        @answers = @question.answers.not_anonymous(current_user.id)
+        render 'question_feed_friend'
+    end
+
+    def question_feed_general
+        @question = Question.find(params[:id])
+        @answers = @question.answers.anonymous(current_user.id)
+        render 'question_feed_general'
     end
 
     def create_comment

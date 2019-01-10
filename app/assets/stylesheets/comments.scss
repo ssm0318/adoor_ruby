@@ -2,13 +2,13 @@
     font-size: 14px;    
 }
 
-.comment-indent {
+.comment-indent,.reply {
     padding-left: 27px;
     padding-bottom: 10px;
     font-size: 14px;    
 }
 
-.comment, .comment-indent {
+.comment, .comment-indent, .reply {
     .btn-comment-like {
         width: 20px;
         height: auto;
