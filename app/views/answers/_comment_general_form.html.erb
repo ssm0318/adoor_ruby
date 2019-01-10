@@ -1,6 +1,12 @@
 <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px solid #d7dae0;">
     <div>
         댓글 <br/><br>
+        <div class="author-comments-div">
+            <% Comment.where(target:Answer.find(answer.id), recipient_id: answer.author_id).each do |c| %>
+                <%= render partial: "./general_comments", locals: {user_id: answer.author_id, answer_id: answer.id, c:c} %>
+            <% end %>
+        </div>
+        <br>
         <div class="anonymous-comments-div">
             <% Comment.where(target: Answer.find(answer.id), recipient_id: nil).each do |c|%>
                 <div class="comment-replies-form">
