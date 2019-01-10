@@ -1,4 +1,49 @@
 .user-header {
+
+    #profile {
+        // display: flex; 
+        align-items:center;
+
+        img {
+            height:120px; 
+            width:120px; 
+            border-radius:60px;
+            float:left;
+            margin-bottom: 20px;
+        }
+
+        #profile-content-div {
+            float: left;
+            margin-left: 20px;
+            margin-top: 10px;
+
+            #username {
+                font-size: 20px;
+                margin-bottom: 10px;
+
+                #edit-btn{
+                    text-decoration: none;
+                    color: gray;
+                    font-size: 14px;
+                    margin-left: 10px;
+                }
+            }
+
+            #friends-btn {
+                text-decoration: none;
+                border-radius: 6px;
+                border: 0.75px solid #bcbcbc;
+                padding: 6px 12px 6px 12px;
+                color: gray;
+                font-size: 14px;
+            }
+
+
+
+        }
+    }
+
+
     .user-header__tab {
         width: 100%;
         display: flex;
@@ -6,6 +51,7 @@
         border-top: 1px solid #d7dae0;
         padding-top: 10px;
         margin-top: 10px;
+
 
         a {
             text-decoration: none;
