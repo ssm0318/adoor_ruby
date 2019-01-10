@@ -25,6 +25,7 @@ class AnswersController < ApplicationController
     end
 
     def show
+        @anonymous = @answer.author_id != current_user.id && !(current_user.friends.include? @answer.author)
     end
 
     def edit
