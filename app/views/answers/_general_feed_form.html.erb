@@ -10,7 +10,7 @@
         </div>
         <div class="prism-box__footer" style="padding-bottom: 10px;">
             <%= render 'like', a: answer, target_type: "Answer", like_btn_class: "btn-answer-like" %>
-            <%= render 'drawer', a: answer %>
+            <%= render 'drawer', a: answer , target_type: "Answer" %>
             <br>
         </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
         <%= render 'comment_general_form', answer: answer %>
