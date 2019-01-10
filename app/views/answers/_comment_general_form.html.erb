@@ -12,7 +12,7 @@
                         <% end %>
                         
                         <% Reply.where(comment_id: c.id).each do |r|%>
-                            <%= render partial: "./replies", locals: {user_id: r.author_id, user: r.author, answer_id: answer.id, r: r} %>
+                            <%= render partial: "./replies", locals: {user_id: r.author_id, user: current_user.id, answer_id: answer.id, r: r} %>
                         <% end %>
                     </div>
                     <form action='/answers/comment/<%= c.id %>/reply' method='POST' class="prism-form reply" >

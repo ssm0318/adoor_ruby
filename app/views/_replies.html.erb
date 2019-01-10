@@ -1,7 +1,7 @@
 <div class="reply">
     <div class="comment-content">
         <span>
-            <% if r.author_id != user.id %>
+        <% if r.author_id != user.id %>
             <% color = user_id + answer_id %>
             <% r = color * color *color % 256 %>
             <% g = (r * color) % 256 %>
