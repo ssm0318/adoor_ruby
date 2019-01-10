@@ -243,4 +243,19 @@ div.background {
             padding-top: 2px;
         }
     }
+
+    .feed-nav {
+        display: block;
+        padding-top: 10px;
+
+        a {
+            text-decoration: none;
+            color: gray;
+        }
+
+        a.active {
+            color: black;
+        }
+    }
+
 }

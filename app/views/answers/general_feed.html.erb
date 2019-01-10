@@ -1,27 +1,7 @@
 <div class="inner-container">
-  <div class="prism-title">
-    <h1>General Feed</h1>
-  </div>
-  <% @answers.anonymous(current_user.id).reverse_each do |answer| %>
-    <div class="prism-box">
-      <div class="prism-box__header">
-        <%= render partial: "./user_profile_general", locals: {user_id: answer.author_id, answer_id: answer.id} %>
-        <%#= answer.author.username %>
-      </div>
-      <div class="prism-box__content"><br>
-        <a href="/questions/<%=answer.question.id%>" class="question" style="font-size: 18px;"><%= answer.question.content %></a> <br><br>
-        <div class="answer"><%= answer.content %> <br><br></div>
-        <div class = "date"><%= time_tag answer.updated_at, class: "timeago" %></div>
-      </div>
-      <div class="prism-box__footer" style="padding-bottom: 10px;">
-        <%= render 'like', a: answer %>
-        <%= render 'drawer', a: answer %>
-        <br>
-      </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
-      <%= render 'comment_general_form', answer: answer %>
-    </div>
-  <% end %>
+  <%= render 'general_feed_form', answers: @answers %>
 </div>
 <!--더보기는 지금 구현하는 건 아닌 듯-->
 <%= render 'comment_general_script' %>
+<%= render 'drawer_script' %>
 <%= render 'layouts/timestamp' %>
