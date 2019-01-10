@@ -10,7 +10,7 @@
 
     <div class = "comment-info">
         <span><%= time_tag c.created_at, class: "timeago" %></span>
-        <span>좋아요 <%= Like.where(target_type: "Comment", target_id: c.id).size %>개</span>
+        <!--<span>좋아요 <%= Like.where(target_type: "Comment", target_id: c.id).size %>개</span>-->
         <span> <%= render 'authorized_comment', c: c %></span>
     </div>
 </div>

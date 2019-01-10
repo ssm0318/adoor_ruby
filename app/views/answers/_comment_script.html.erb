@@ -16,7 +16,6 @@
                     //TODO: indent 해
                     //TODO: comment like, commment-info update
                     var html = `
-                        <div class="comment">
                             <div class = "comment-content">
                                 <span>
                                     <img src='${data.imageurl}' 
@@ -33,7 +32,7 @@
                     if(form.hasClass("comment")) {
                         html = "<div class='comment'>" + html
                     } else {
-                        html = "<div class='comment'>ㄴ" + html
+                        html = "<div class='comment-indent'>" + html
                     }
 
                     if(form.hasClass("reply")) {
