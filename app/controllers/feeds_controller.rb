@@ -1,16 +1,20 @@
 class FeedsController < ApplicationController
+    before_action :authenticate_user!, only: [:friends]
+    
     def general
         @feeds = Post.anonymous(current_user.id) + Answer.anonymous(current_user.id) 
-        @feeds = @feeds.order('created_at DESC')
+        @feeds = @feeds.sort_by(&:created_at).reverse!
         
         render 'general'
     end
-
+ 
     def friends
-        @answers = Answer.not_anonymous(current_user.id)
-        @posts = Post.not_anonymous(current_user.id)
+        answers = Answer.named(current_user.id)
+        posts = Post.named(current_user.id)
+        @feeds = answers + posts
+        @feeds = @feeds.sort_by(&:created_at).reverse!
         
         render 'friends'
     end
 end
- 
+  

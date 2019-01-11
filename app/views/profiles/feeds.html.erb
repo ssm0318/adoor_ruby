@@ -1,0 +1,43 @@
+<div class="inner-container">
+<%= render partial: "profiles/layout", locals: {user: @user} %>
+    <% if !@user.friends.include? current_user and @user.id != current_user.id %>
+        <%= @user.username %>님과 친구가 되어보세요.
+    <% else %>
+    <% @feeds.reverse_each do |feed| %> 
+        <div class="prism-box">
+            <div class="prism-box__header">
+                <%= render partial: "./user_profile", locals: {user: feed.author} %><br/>
+            </div>
+            <div class="prism-box__content">
+                <br>
+                <% if feed.is_a? Answer %>
+                    <a href="/questions/<%=feed.question.id%>/friend" class="question"><%= feed.question.content %></a> <br><br>
+                <% end %>
+                <div class="answer"><%= feed.content %></div>
+                <br>
+                <div class = "date"><%= time_tag feed.created_at, class: "timeago" %></div>
+                <br>
+            </div>
+            <div class="prism-box__footer" style="padding-bottom: 10px;">
+                <%= render 'comments/my_comments_menu', target: feed %>
+                <%= render 'likes/default', target: feed, like_btn_class: "btn-answer-like" %>
+                <%= render 'drawers/default', target: feed %>
+                <br>
+            </div>
+            <%= render 'comments/friends_form', user: @user, feed: feed %>
+        </div>
+        <% end %>
+    <% end %>
+</div>
+<%= render 'comments/friends_script' %>
+<%= render 'drawers/script' %>
+<%= render 'likes/script' %>
+<%= render './delete_script' %>
+<script>
+  $(document).ready(function() {
+    like_ajax($(".btn-answer-like"))
+    like_ajax($(".btn-comment-like"))
+    delete_ajax($(".btn-answer-delete"))
+    delete_ajax($(".btn-comment-delete"))
+  })
+</script>

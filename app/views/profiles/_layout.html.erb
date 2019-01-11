@@ -3,7 +3,6 @@
 
     <div id="profile" >
         <%= image_tag(@user.image.url) %>
-        <%# link_to "#{@user.username}", user_answers_path(user.id), style: "vertical-align: +10px; color: black;" %><br>
         <div id="profile-content-div">
             <div id="username">
                 <%= @user.username %>
@@ -32,10 +31,10 @@
     </div>
     
     <div class="user-header__tab">
-        <%= active_link_to "답변", user_answers_path(user.id), :active => :exclusive %>
+        <%= active_link_to "답변", profile_path(user.id), :active => :exclusive %>
         <% if current_user.id == user.id %>
             <%# active_link_to "형광펜", user_highlights_path(user.id) %>
-            <%= active_link_to "서랍장", user_drawers_path(user.id) %>
+            <%= active_link_to "서랍장", profile_drawers_path(user.id) %>
         <% end %>
     </div>
 </div>

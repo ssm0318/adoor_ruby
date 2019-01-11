@@ -63,30 +63,30 @@
             <%#= link_to "<i class='material-icons'>star</i>".html_safe, drawer_path(a.id, target_type: "Answer"), method: :delete %>
         <%# end %>
       
-        <%= render 'authorized_answer', a: answer %>
-        <%= render 'like', a: answer, target_type: "Answer", like_btn_class: "btn-answer-like" %>
-        <%= render 'drawer', a: answer, target_type: "Answer"%>
+        <%= render 'comments/my_comments_menu', target: answer %>
+        <%= render 'likes/default', target: answer, target_type: "Answer", like_btn_class: "btn-answer-like" %>
+        <%= render 'drawers/default', target: answer, target_type: "Answer"%>
         <br>
     </div>
     <%# 익명글 %>
     <% if anonymous %>
-        <%= render 'comment_general_form', answer: answer %>
+        <%= render 'comments/general_form', target: answer %>
     <%# 친구글 or 내글 %>
     <%else %>
-        <%= render 'comment_form', user: answer.author, a: answer %>
+        <%= render 'comments/friends_form', feed: answer %>
     <% end %>
 </div>
 
-<%= render 'drawer_script' %>
+<%= render 'drawers/script' %>
 <%# 익명글 %>
 <% if anonymous %>
-    <%= render 'comment_general_script'%>
+    <%= render 'comments/general_script'%>
 <%# 친구글 or 내글 %>
 <%else %>
-    <%= render 'comment_script' %>
+    <%= render 'comments/friends_script' %>
 <% end %>
-<%= render 'like_script' %>
-<%= render 'delete_script' %>
+<%= render 'likes/script' %>
+<%= render './delete_script' %>
 <script>
   $(document).ready(function() {
     like_ajax($(".btn-answer-like"))
@@ -94,4 +94,4 @@
     delete_ajax($(".btn-answer-delete"))
     delete_ajax($(".btn-comment-delete"))
   })
-</script>
+</script> 

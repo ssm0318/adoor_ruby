@@ -48,8 +48,7 @@ class UsersController < ApplicationController
             friendship.destroy_all
             Friendship.where({user_id: params[:id], friend_id: current_user.id}).destroy_all
         end
-        #redirect_back fallback_location: user_answers_path(params[:id])
-        redirect_to user_answers_path(params[:id])
+        redirect_to profile_path(params[:id])
     end
 
     def friend_request
@@ -61,7 +60,7 @@ class UsersController < ApplicationController
         else
             friend_request.destroy_all
         end
-        redirect_back fallback_location: user_answers_path(params[:id])
+        redirect_back fallback_location: profile_path(params[:id])
     end
 
     private

@@ -28,7 +28,6 @@ class AnswersController < ApplicationController
     end
 
     def edit
-        @question = @answer.question
     end
 
     def update
@@ -52,7 +51,7 @@ class AnswersController < ApplicationController
     def destroy
         @answer.destroy 
 
-        redirect_to user_answers_path(current_user.id)
+        redirect_to profile_path(current_user.id)
     end
 
     private

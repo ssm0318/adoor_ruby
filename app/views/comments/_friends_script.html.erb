@@ -4,11 +4,11 @@
         // like_ajax(".btn-answer-like")
         $("form").submit( function(e) {
 
-            // console.log("hi")
+            console.log("hi")
             e.preventDefault();
             
             var form = $(this)
-
+ 
             $.ajax({
                 type: "POST",
                 url: form.attr('action'),
@@ -16,13 +16,13 @@
                 success: function(data) {
                     
                     //TODO: indent 해
-                    //TODO: comment like, commment-info update 
+                    //TODO: comment like, commment-info update
                     var html_str=
                     `
                             <div class = "comment-content">
                                 <span>
-                                    <%= link_to image_tag(current_user.image.url, :class => "user-profile"), user_answers_path(current_user.id) %>
-                                    <%= link_to current_user.username, user_answers_path(current_user.id), class: "username" %>
+                                    <%= link_to image_tag(current_user.image.url, :class => "user-profile"), profile_path(current_user.id) %>
+                                    <%= link_to current_user.username, profile_path(current_user.id), class: "username" %>
                                     <span class= "content">${data.content} </span>
                                 </span>
                             </div>

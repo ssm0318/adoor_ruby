@@ -3,7 +3,7 @@ class Question < ApplicationRecord
     has_many   :assignments, dependent: :destroy
     has_many   :drawers, dependent: :destroy, as: :target
     belongs_to :author, class_name: 'User'
-    has_and_belongs_to_many :tags, dependent: :destroy
+    has_and_belongs_to_many :tags, dependent: :destroy, as: :target
 
     scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
     scope :popular_questions, -> { joins(:answers).group("answers.question_id").order("count(answers.question_id) desc").take(7) }

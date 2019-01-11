@@ -1,15 +1,15 @@
 <div class="comment">
     <div class = "comment-content">
         <span>
-             <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, answer_id: answer_id } %>
+             <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, feed_id: feed_id } %>
             <span class= "content"><%= c.content %> </span>
         </span>
-        <%= render 'like', a: c, target_type: "Comment", like_btn_class: "btn-comment-like" %>
-
+        <%= render 'likes/default', target: c, like_btn_class: "btn-comment-like" %>
+  
     </div>
 
-    <div class = "comment-info">
+    <div class = "comment-info"> 
         <span><%= time_tag c.created_at, class: "timeago" %></span>
-        <span><%= render 'authorized_comment', c: c, target_type: "Comment" %></span>
+        <span><%= render 'comments/my_comments_menu', target: c %></span>
     </div>
-</div>
+</div> 

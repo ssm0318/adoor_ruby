@@ -6,7 +6,7 @@
     <% else %>
         <% @friends.each do |friend| %>
         <div class="friend-box">
-            <div class="friend-box-userpage" onclick="window.location='/userpage/<%=friend.id%>';">
+            <div class="friend-box-userpage" onclick="window.location='<%= profile_path(friend.id) %>';">
                 <p><%= friend.username %></p>
                 <%= image_tag friend.image.url, :style => "height:70px; width:70px; border-radius:35px;", class:"friend-box-image" %>
             </div>

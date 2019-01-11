@@ -1,11 +1,11 @@
 <div class="inner-container">
-  <%= render 'general_feed_form', feeds: @feeds %>
-</div>
+  <%= render 'feeds/general_index', feeds: @feeds %>
+</div> 
 <!--더보기는 지금 구현하는 건 아닌 듯-->
-<%= render 'comment_general_script' %>
-<%= render 'drawer_script' %>
-<%= render 'like_script' %>
-<%= render 'delete_script' %>
+<%= render 'comments/general_script' %>
+<%= render 'drawers/script' %>
+<%= render 'likes/script' %>
+<%= render './delete_script' %>
 <script>
   $(document).ready(function() {
     like_ajax($(".btn-answer-like"))

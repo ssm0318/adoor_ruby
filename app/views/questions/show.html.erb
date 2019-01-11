@@ -1,0 +1,34 @@
+<div class="inner-container">
+    <div class = "question"> 
+
+        <div class = "question-content"><%= @question.content %>
+            <% if Drawer.where(user_id: current_user.id, target: @question).empty? %>
+                <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: @question.id, target_type: "Question"), method: :post %>
+            <% else %>
+                <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(@question.id, target_type: "Question"), method: :delete, data: {confirm: '이 글을 서랍장에서 꺼내시겠습니까?'} %>
+            <% end %>
+        </div>
+    </div> 
+
+    <% @question.answers.reverse_each do |answer| %>
+        <div class="prism-box">
+            <div class="prism-box__header">
+                <%= render partial: "./user_profile", locals: {user: answer.author} %><br/>
+            </div>
+            <div class="prism-box__content">
+                <br>
+                <a href="/questions/<%=answer.question.id%>/friend" class="question"><%= answer.question.content %></a> <br><br>
+                <div class="answer"><%= answer.content %></div>
+                <br>
+                <div class = "date"><%= time_tag answer.updated_at, class: "timeago" %></div>
+                <br>
+            </div>
+            <div class="prism-box__footer" style="padding-bottom: 10px;">
+                <%= render 'likes/default', target: answer %>
+                <%= render 'drawers/default', target: answer %>
+                <br>
+                <br>
+            </div>
+        </div>
+    <% end %>
+</div>

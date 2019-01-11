@@ -1,0 +1,41 @@
+<div class="prism-box__footer" style="margin-top: 5px; border-top: 1px solid #d7dae0;">
+    <div>
+        댓글 <br/><br>
+        <div class="author-comments-div">
+            <% Comment.where(target: feed, recipient_id: feed.author_id).each do |c| %>
+                <%= render partial: "./general_comments", locals: {user_id: feed.author_id, feed_id: feed.id, c:c} %>
+            <% end %>
+        </div>
+        <br>
+        <div class="anonymous-comments-div">
+            <% Comment.where(target: feed, recipient_id: nil).each do |c|%>
+                <div class="comment-replies-form">
+                    <div class="comment-replies">
+                        <% if c.author_id != current_user.id %>
+                            <%= render partial: "comments/general_comments", locals: {user_id: c.author_id, feed_id: feed.id, c:c} %>
+                        <% else %>
+                            <%= render partial: "comments/friends_comments", locals: {feed: feed, c: c} %>
+                        <% end %>
+                        
+                        <% Reply.where(comment_id: c.id).each do |r|%>
+                            <%= render partial: "replies/default", locals: {user: current_user, feed_id: feed.id, r: r} %>
+                        <% end %> 
+                    </div>
+                    <%= form_tag replies_path, :class => "prism-form reply" do %>
+                        <%= hidden_field_tag "id", c.id %>
+                        <%= text_field_tag "content", "", :class => "prism-form__input" %>
+                        <%= button_tag "저장", class: "prism-form__button" %>
+                    <% end %>
+                </div>
+                <%# TOOD: action 설정 %>
+            <% end %>
+        </div>
+        <%= form_tag comments_path, :class => "prism-form comment" do %>
+            <%= hidden_field_tag "recipient_id", "0" %>
+            <%= hidden_field_tag "target_type", feed.class.to_s %>
+            <%= hidden_field_tag "target_id", feed.id %>
+            <%= text_field_tag "content", "", :class => "prism-form__input" %>
+            <%= button_tag "저장", :class => "prism-form__button" %>
+        <% end %>
+    </div>
+</div>

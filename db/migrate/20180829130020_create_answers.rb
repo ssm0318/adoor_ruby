@@ -4,7 +4,7 @@ class CreateAnswers < ActiveRecord::Migration[5.1]
       t.belongs_to :author,          null: false, foreign_key: { to_table: :users }
       t.belongs_to :question,        null: false
       t.text       :content,         null: false
-      # [TODO]: read_at 추가하기
+      t.string     :tag_string
       
       t.timestamps
     end

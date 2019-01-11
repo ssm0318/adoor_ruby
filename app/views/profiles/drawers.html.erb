@@ -1,5 +1,5 @@
 <div class="inner-container">
-    <%= render partial: "./user_answers_layout", locals: {user: @user} %>
+    <%= render partial: "profiles/layout", locals: {user: @user} %>
     <% @drawers.reverse_each do |d| %>
         <% if d.target_type == "Question" %>
             <div class = "prism-box">
@@ -47,7 +47,7 @@
                                             data: { confirm: '답변을 지우시겠습니까?'} %>
                 <% end %>                 
 
-                <%= render 'answers/drawer', a: d.target, target_type: "Answer" %>
+                <%= render 'drawers/default', target: a %>
                 </div>
             </div>
         <% end %>

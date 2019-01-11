@@ -1,7 +1,9 @@
 class RepliesController < ApplicationController
     def create
+        puts '================================================'
+        puts params[:id]
+        puts '==================================================='
         r = Reply.create(content: params[:content], author_id: current_user.id, comment_id: params[:id])
-        answer_author_id = r.comment.target.author_id
         
         render json: {
             content: r.content,
@@ -12,11 +14,11 @@ class RepliesController < ApplicationController
     end
 
     def destroy
-        @reply.destroy
+        # @reply.destroy
     end
 
     private
         def set_reply
-            @reply = Reply.find(params[:id])
+            # @reply = Reply.find(params[:id])
         end
 end

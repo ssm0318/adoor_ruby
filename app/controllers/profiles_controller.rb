@@ -1,9 +1,15 @@
 class ProfilesController < ApplicationController
     def index
         @user = User.find(params[:id])
-        @posts = @user.posts
+        @feeds = @user.posts + @user.answers
+        @feeds = @feeds.sort_by(&:created_at).reverse!
 
-        @user = User.find(params[:id])
-        @answers = @user.answers
+        render 'feeds'
     end
-end
+
+    def drawers
+        @user = User.find(params[:id])
+        @drawers = @user.drawers
+    end
+end 
+ 

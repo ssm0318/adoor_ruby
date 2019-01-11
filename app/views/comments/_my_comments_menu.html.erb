@@ -1,5 +1,5 @@
-<% if current_user.id == c.author.id %>
-    <span>좋아요 <span class="show-likes"><%= Like.where(target_type: target_type, target_id: c.id).count() %></span>개</span>
+<% if current_user.id == target.author.id %>
+    <span>좋아요<span class="show-likes"><%= Like.where(target_type: target.class.to_s, target_id: target.id).count() %></span>개</span>
     <span class="btn-comment-delete">삭제</span>
     <%
 =begin%>
@@ -8,4 +8,4 @@
         data: { confirm: '댓글을 지우시겠습니까?'} %> 
 <%
 =end%>
-<% end %>
+<% end %> 

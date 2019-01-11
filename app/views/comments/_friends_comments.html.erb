@@ -1,19 +1,20 @@
-<% if c.author_id == answer_author.id %>
+<% if feed.author.id == c.author.id && feed.author.id != c.recipient_id %>
     <div class="comment-indent">
-<% else %>
+<% else %> 
     <div class="comment">
 <% end %>
      <div class = "comment-content">
         <span>
-            <%= link_to image_tag(comment_author.image.url, :class => "user-profile"), user_answers_path(comment_author.id) %>
-            <%= link_to comment_author.username, user_answers_path(comment_author.id), class: "username" %>
+            <%= link_to image_tag(c.author.image.url, :class => "user-profile"), profile_path(c.author.id) %>
+            <%= link_to c.author.username, profile_path(c.author.id), class: "username" %>
             <span class= "content"><%= c.content %> </span>
         </span>
-        <%= render 'like', a: c, target_type: "Comment", like_btn_class: "btn-comment-like" %>
+        <%= render 'likes/default', target: c, like_btn_class: "btn-comment-like" %>
     </div>
 
     <div class = "comment-info">
         <span class="time"><%= time_tag c.created_at, class: "timeago" %></span>
-        <span class="authorized"> <%= render 'authorized_comment', c: c, target_type: "Comment"%></span>
+        <span class="authorized"> <%= render 'comments/my_comments_menu', target: c %></span>
     </div>
 </div>
+   

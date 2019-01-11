@@ -16,7 +16,7 @@ class NotificationsController < ApplicationController
             origin_type = noti.origin_type
             target_type = noti.target_type
             if target_type == 'Friendship'
-                redirect_to user_answers_path(origin_id)
+                redirect_to profile_path(origin_id)
             elsif target_type == 'Answer'
                 redirect_to answer_path(origin_id)
             elsif target_type == 'Assignment'
@@ -40,7 +40,7 @@ class NotificationsController < ApplicationController
                     redirect_to answer_path(origin_id)
                 #end
             elsif target_type == 'FriendRequest'
-                redirect_to user_answers_path(origin_id)
+                redirect_to profile_path(origin_id)
             elsif target_type == 'Reply'
                 #if noti.origin.target_type == 'Post'
                     #redirect_to post_path(noti.origin.target_id)

@@ -1,30 +1,27 @@
 class QuestionsController < ApplicationController
     require 'roo'
     before_action :authenticate_user!, except: [:index, :today, :intro]
+    before_action :set_question, only: [:show, :show_friends, :show_general]
     
     def index
-        @questions = Question.all
+        @questions = Question.where.not(selected_date: nil)
+    end
+
+    def show
     end
 
     def today
         @questions = Question.where(selected_date: (Date.today))
     end
 
-    def question_feed
-        @question = Question.find(params[:id])
-        render 'question_feed'
-    end
-
-    def question_feed_friend
-        @question = Question.find(params[:id])
+    def show_friends
         @answers = @question.answers.not_anonymous(current_user.id)
-        render 'question_feed_friend'
+        render 'show_friends'
     end
 
-    def question_feed_general
-        @question = Question.find(params[:id])
+    def show_general
         @answers = @question.answers.anonymous(current_user.id)
-        render 'question_feed_general'
+        render 'show_general'
     end
     
     def import_all
@@ -64,4 +61,9 @@ class QuestionsController < ApplicationController
         end
         redirect_to action: "today"
     end
+
+    private
+        def set_question
+            @question = Question.find(params[:id])
+        end
 end

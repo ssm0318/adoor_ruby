@@ -1,17 +1,16 @@
 <div class="inner-container">
-  <%# <div class="prism-title"><h1>Friend Feed</h1></div> %>
-  <%= render 'friend_feed_form_post', answers: @answers %>
+  <%= render 'feeds/friends_index' %>
 </div>
 <!--더보기는 지금 구현하는 건 아닌 듯-->
-<%= render 'comment_script' %>
-<%= render 'drawer_script' %>
-<%= render 'like_script' %>
-<%= render 'delete_script' %>
-<script>
+<%= render 'comments/friends_script' %>
+<%= render 'drawers/script' %> 
+<%= render 'likes/script' %>
+<%= render './delete_script' %>
+<script> 
   $(document).ready(function() {
     like_ajax($(".btn-answer-like"))
     like_ajax($(".btn-comment-like"))
     delete_ajax($(".btn-answer-delete"))
     delete_ajax($(".btn-comment-delete"))
   })
-</script>
+</script> 

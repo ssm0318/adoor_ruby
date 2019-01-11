@@ -2,22 +2,23 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Answer
-  resources :answers
+  resources :answers, except: [:new]
+  get '/answers/:id/new' => 'answers#new', as: :new_answer
 
   # Post
   resources :posts
 
   # Feed
-  get '/feeds/friends' => 'feeds#friends', as: :root
+  root 'feeds#friends'
   get '/feeds/general' => 'feeds#general', as: :general_feed
 
   # Question
-  resources :questions, only: [:index, :show]
   get '/questions/today' => 'questions#today', as: :today_questions
   get '/questions/:id/friends' => 'questions#friends', as: :question_friends
   get '/questions/:id/general' => 'questions#general', as: :question_general
   get '/questions/import_all' => 'questions#import_all', as: :import_all_questions
   get '/questions/import_new' => 'questions#import_new', as: :import_new_questions
+  resources :questions, only: [:index, :show]
 
   # Comment
   resources :comments, only: [:create, :destroy]

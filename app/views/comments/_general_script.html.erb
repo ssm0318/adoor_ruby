@@ -6,8 +6,8 @@
       <div class='reply'>
         <div class="comment-content">
           <span>
-            <%= link_to image_tag(current_user.image.url, :class => "user-profile"), user_answers_path(current_user.id) %>
-            <%= link_to current_user.username, user_answers_path(current_user.id), class: "username" %>
+            <%= link_to image_tag(current_user.image.url, :class => "user-profile"), profile_path(current_user.id) %>
+            <%= link_to current_user.username, profile_path(current_user.id), class: "username" %>
             <span class="content">
               ${content}
             </span> 
@@ -58,8 +58,8 @@
                   <div class='comment'>
                     <div class='comment-content'>
                       <span>
-                        <%= link_to image_tag(current_user.image.url, :class => "user-profile"), user_answers_path(current_user.id) %>
-                        <%= link_to current_user.username, user_answers_path(current_user.id), class: "username" %>
+                        <%= link_to image_tag(current_user.image.url, :class => "user-profile"), profile_path(current_user.id) %>
+                        <%= link_to current_user.username, profile_path(current_user.id), class: "username" %>
                         <span class="content">
                           ${data.content}
                         </span> 
@@ -74,10 +74,11 @@
                     </div> 
                   </div>
                 </div>
-                <form action='/answers/comment/${data.comment_id}/reply' method='POST' class="prism-form reply" >
-                    <input class="prism-form__input" type="text" name="content">
-                    <input type="submit" class="prism-form__button">
-                </form>
+                <%= form_tag replies_path, :class => "prism-form reply" do %>
+                    <%= hidden_field_tag "id", "${data.comment_id}" %>
+                    <%= text_field_tag "content", "", :class => "prism-form__input" %>
+                    <%= button_tag "저장", class: "prism-form__button" %>
+                <% end %>
               </div>
               `)
 

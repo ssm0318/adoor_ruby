@@ -3,9 +3,8 @@ class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
     before_action :check_mine, only: [:edit, :update, :destroy]
     
-    def create 
-        @post.new(post_params)
-        @post.save
+    def create
+        @post = Post.create(author_id: current_user.id, content: params[:content])
 
         if !@post.tag_string.nil?
             tag_array = @post.tag_string.gsub("\r\n", '\n').split('\n')
@@ -55,7 +54,7 @@ class PostsController < ApplicationController
         end
 
         def post_params
-            params.require(:post).permit(:author_id, :content, :tag_string)
+            params.require(:post).permit(:author_id, :content)
         end 
 
         def check_mine

@@ -1,6 +1,10 @@
-<% if current_user.id == a.author.id %>
-    <span>좋아요 <span class="show-likes"><%= Like.where(target_type: "Answer", target_id: a.id).count() %></span>개</span>
-    <%= link_to "수정", edit_answer_path(a.id) %>
+<% if current_user.id == feed.author.id %>
+    <span>좋아요 <span class="show-likes"><%= Like.where(target: feed).count() %></span>개</span>
+    <% if feed.is_a? Answer %>
+        <%= link_to "수정", edit_answer_path(feed.id) %>
+    <% else %>
+        <%= link_to "수정", edit_post_path(feed.id) %>
+    <% end %>
     <%# link_to "삭제", answer_path(a.id),
         method: :delete,
         data: { confirm: '답변을 지우시겠습니까?'} %>
