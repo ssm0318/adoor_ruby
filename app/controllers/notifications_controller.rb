@@ -23,37 +23,38 @@ class NotificationsController < ApplicationController
             elsif target_type == 'Assignment'
                 redirect_to new_answer_path(origin_id)
             elsif target_type == 'Highlight'
-                #if origin_type == 'Post'
-                    #redirect_to post_path(origin_id)
-                #elsif origin_type == 'Answer'
+                if origin_type == 'Post'
+                    redirect_to post_path(origin_id)
+                elsif origin_type == 'Answer'
                 redirect_to answer_path(origin_id)
-                #end
+                end
             elsif target_type == 'Drawer'
-                #if origin_type == 'Post'
-                    #redirect_to post_path(origin_id)
-                #elsif origin_type == 'Answer'
+                if origin_type == 'Post'
+                    redirect_to post_path(origin_id)
+                elsif origin_type == 'Answer'
                 redirect_to answer_path(origin_id)
-                #end
+                end
             elsif target_type == 'Comment'
-                #if origin_type == 'Post'
-                    #redirect_to post_path(origin_id)
-                #elsif origin_type == 'Answer'
+                if origin_type == 'Post'
+                    redirect_to post_path(origin_id)
+                elsif origin_type == 'Answer'
                     redirect_to answer_path(origin_id)
-                #end
+                end
             elsif target_type == 'FriendRequest'
                 redirect_to user_answers_path(origin_id)
             elsif target_type == 'Reply'
-                #if noti.origin.target_type == 'Post'
-                    #redirect_to post_path(noti.origin.target_id)
-                #elsif noti.origin.target_type == 'Answer'
+                if noti.origin.target_type == 'Post'
+                    redirect_to post_path(noti.origin.target_id)
+                elsif noti.origin.target_type == 'Answer'
                     redirect_to answer_path(noti.origin.target_id)
-                #end
+                end
             elsif target_type == 'Like'
-                #if origin_type == 'Post'
-                    #redirect_to post_path(origin_id)
-                #elsif origin_type == 'Answer'
+                if origin_type == 'Post'
+                    redirect_to post_path(origin_id)
+                elsif origin_type == 'Answer'
                     redirect_to answer_path(origin_id)
-                #end
+                # elsif origin_type == 'Comment'
+                end
             end
         end
     end
