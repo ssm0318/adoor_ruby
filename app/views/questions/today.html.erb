@@ -5,4 +5,4 @@
     <%= link_to "Import New Questions", import_new_questions_path %><br><br>
 <% end %>
 
-<%= render partial: "./questions_layout", locals: {title: "오늘의 질문", questions: @questions} %><br/>
+<%= render "./layout", locals: {title: "오늘의 질문", questions: @questions} %><br/>

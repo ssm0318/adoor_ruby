@@ -1,33 +1,3 @@
-<div class="prism-container">
-    <% questions.each do |question| %>
-        <div class="question-el" align="right">
-            <div class="question-content">
-            <%= link_to "#{question.content}", "questions/#{question.id}/friend" %>
-            </div>
-            <div class="question-btn">
-                <%= link_to image_tag("icons/write-icon.png", class: "btn-write"), new_answer_path(question.id) %>
-                <% if user_signed_in? %>
-                    <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
-                    <%= render 'questions/assignment', question: question %>
-                <% else %>
-                    <%= link_to image_tag("icons/assign-icon.png", class: "btn-assign"), new_user_session_path %>
-                <% end %>
-            </div>
-        </div>
-    <% end %>
-</div>
-
-<br>
-<br>
-<br>
-<!--<% if flash[:success] %>
-    <div class="notice"><%= flash[:success] %></div>
-<% end %>
-<% if flash[:error] %>
-    <div class="notice"><%= flash[:error] %></div>
-<% end %>-->
-
-
 <script>
     $(document).ready(function() {
 

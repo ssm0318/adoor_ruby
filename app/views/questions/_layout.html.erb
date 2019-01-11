@@ -1,4 +1,5 @@
-    <% @questions.reverse_each do |question| %>
+<div class="prism-container">
+    <% @questions.each do |question| %>
         <div class="question-el" align="right">
             <div class="question-content">
             <%= link_to question.content, "questions/#{question.id}/friend" %>
@@ -14,11 +15,16 @@
             </div>
         </div>
     <% end %>
+</div>
 
-    <br>
-    <br>
-    <br>
+<br>
+<br>
+<br>
+<!--<% if flash[:success] %>
+    <div class="notice"><%= flash[:success] %></div>
+<% end %>
+<% if flash[:error] %>
+    <div class="notice"><%= flash[:error] %></div>
+<% end %>-->
 
 <%= render "assignments/script" %>
-
-<%= render "./layout" %>
