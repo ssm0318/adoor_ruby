@@ -2,7 +2,6 @@ class NotificationsController < ApplicationController
     before_action :authenticate_user!
     
     def read
-
         noti = Notification.find(params[:id])
 
         if noti.recipient_id != current_user.id

@@ -8,8 +8,6 @@ class Answer < ApplicationRecord
     has_and_belongs_to_many :tags, dependent: :destroy
     
     scope :anonymous, -> (id) { where.not(author: User.find(id).friends).where.not(author: User.find(id)) }
-    # scope :not_anonymous, -> (id) { where(author: User.find(id).friends.push(User.find(id))) }
-    scope :not_anonymous, -> (id) { where(author: User.find(id).friends).or(where(author:User.find(id))).sort_by(&:created_at) }
 
     scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
 
