@@ -1,0 +1,19 @@
+<div class="reply">
+    <div class="comment-content">
+        <span>
+            <% if r.author_id != user.id %>
+                <%= render partial: "./user_profile_general", locals: {user_id: r.author_id, answer_id: answer_id } %>
+            <% else %>
+                <%= link_to image_tag(user.image.url, :class => "user-profile"), user_answers_path(user.id) %>
+                <%= link_to user.username, user_answers_path(user.id), class: "username" %>
+            <% end %>
+                <span class = "content"><%= r.content %></span>
+            </span>
+            <%= render 'like', a: r, target_type: "Reply", like_btn_class: "btn-comment-like" %>
+    </div>
+
+    <div class = "comment-info">
+        <span><%= time_tag r.created_at, class: "timeago" %></span>
+        <span> <%= render 'authorized_comment', c: r, target_type: "Reply"%></span>
+    </div>
+</div>

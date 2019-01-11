@@ -4,16 +4,18 @@
         <% if d.target_type == "Question" %>
             <div class = "prism-box">
                 <div class = "prism-box_question">
-                    <br> 
-                    <a href="/questions/<%=d.target.id%>/friend" class="question"><%= d.target.content %></a>   
-                    <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Question"), method: :delete, data: {confirm: '이 질문을 서랍장에서 꺼내시겠습니까?'} %>
-                    <% if d.target.author.has_role? :newuser %>
-                        <br><br>
-                        <div class = "prism-box__content">
-                            <div class = "date">Question made by <%= render partial: "./user_profile", locals: {user: d.target.author} %><br/>
-                            <%= time_tag d.target.created_at, class: "timeago" %>
-                        </div>
-                    <% end %>
+                    <br>
+                    <div>
+                        <a href="/questions/<%=d.target.id%>" class="question-content"><%= d.target.content %></a>   
+                        <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Question"), method: :delete, data: {confirm: '이 질문을 서랍장에서 꺼내시겠습니까?'} %>
+                    </div>    
+                    <div classs = "question-author">    
+                        <% if d.target.author.has_role? :newuser %>
+                            <br><br>
+                            Question made by 
+                            <%= render partial: "./user_profile_small", locals: {user: d.target.author} %>
+                        <% end %>
+                    </div>
                 </div>
                 <br>
             </div>
@@ -21,7 +23,11 @@
         <% else %>
             <div class = "prism-box">
                 <div class = "prism-box__header">
-                    <%= render partial: "./user_profile", locals: {user: d.target.author} %><br/>
+                    <% if current_user == d.target.author or current_user.friends.include? d.target.author %>
+                        <%= render partial: "./user_profile", locals: {user: d.target.author} %><br/>
+                    <% else %>
+                        <%= render partial: "./user_profile_general", locals: {user_id: d.target.author_id, answer_id: d.target.id }%>
+                    <% end %>
                 </div>
                 <div class = "prism-box__content">
                     <br> 
@@ -31,7 +37,7 @@
                         <%= link_to "전체 글 보기", answer_path(d.target.id) %><br/>
                     </div>
                     <br>
-                    <div class = "date"><%= time_tag d.target.created_at, class: "timeago" %></div>
+                    <div class = "date"><%= time_tag d.target.updated_at, class: "timeago" %></div>
                 </div>
                 <div class = "prism-box__footer" style="padding-bottom: 10px;">
                     <% if current_user.id == @user.id %>
@@ -41,7 +47,7 @@
                                             data: { confirm: '답변을 지우시겠습니까?'} %>
                 <% end %>                 
 
-                <%= render 'answers/drawer', a: d.target %>
+                <%= render 'answers/drawer', a: d.target, target_type: "Answer" %>
                 </div>
             </div>
         <% end %>

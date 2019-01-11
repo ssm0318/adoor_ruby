@@ -13,7 +13,7 @@
     text-align: center;
     position: relative;
 
-    a {
+    .question-content {
         color: black;
         text-decoration: none;
         font-family: 'Nanum Gothic', serif;
@@ -27,6 +27,12 @@
         height: auto;
         float: right;
         padding-bottom: 10px;
+    }
+
+    .question-author {
+        text-align: center;
+        font-family: 'Nanum Gothic', sans-serif;
+        font-size: 12px;
     }
 
     .btn-like {
@@ -106,7 +112,7 @@
             padding-bottom: 10px;
         }
 
-        .btn-like {
+        .btn-answer-like {
             width: 26px;
             height: auto;
             float: right;
@@ -138,5 +144,52 @@
     border: none;
     border-radius: 30px;
     font-size: 15px;
+
+}
+
+.prism-box-new-post {
+    background-color: white;
+    width: 100%;
+    margin: 20px 0px;
+    height: 215px;
+    border: 0.5px solid #dddddd;
+    border-radius: 10px;
+    padding: 10px 15px 10px 15px;
+    box-sizing: border-box;
+
+    .prism-box__content {
+
+        .new-answer-field {
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 17px;
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+            border: none;
+            outline: none;
+            line-height: 30px;
+            // border-bottom: 1px solid #C08BEF;
+            resize: none;
+            box-sizing: border-box;
+            margin-top: 5px;
+            padding: 0;
+        }
+
+        .answer-button {
+            float: right;
+            width: 70px;
+            height: 30px;
+            border-color: #bcbcbc;
+            border-radius: 20px;
+            background-color: white;
+            border: 0.5px solid $prism-box-gray;
+            font-size: 12px;
+            color: #aaaaaa;
+
+        
+        }
+
+    }
+
 
 }
