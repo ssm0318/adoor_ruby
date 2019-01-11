@@ -22,8 +22,8 @@
                         <% end %>
                     </div>
                     <form action='/answers/comment/<%= c.id %>/reply' method='POST' class="prism-form reply" >
-                        <input class="prism-form__input" type="text" name="content">
-                        <input type="submit" class="prism-form__button">
+                        <input class="prism-form__input" type="text" name="content" >
+                        <input type="submit" class="prism-form__button" value="저장">
                     </form>
                 </div>
                 <%# TOOD: action 설정 %>
@@ -31,7 +31,7 @@
         </div>
         <form action='/answers/<%= answer.id %>/comments/0' method='POST' class="prism-form comment" >
             <input class="prism-form__input" type="text" name="content">
-            <input type="submit" class="prism-form__button">
+            <input type="submit" class="prism-form__button" value="저장">
         </form>
     </div>
 </div>
