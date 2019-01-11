@@ -19,6 +19,7 @@ class UsersController < ApplicationController
    
     def friends
         @friends = current_user.friends
+        @channels = current_user.channels
     end
 
     def edit

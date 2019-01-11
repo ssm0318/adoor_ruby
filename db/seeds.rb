@@ -74,13 +74,17 @@ Assignment.find_or_create_by(question_id: 2, assigner_id: 2, assignee_id: 4)
 Assignment.find_or_create_by(question_id: 2, assigner_id: 1, assignee_id: 2)
 Assignment.find_or_create_by(question_id: 1, assigner_id: 2, assignee_id: 3)
 
-Answer.find_or_create_by(author_id: 5, question_id: 1, content: "내가 제일 못하는거!!!!!!!!!!!!!!!!\n
+a1 = Answer.find_or_create_by(author_id: 5, question_id: 1, content: "내가 제일 못하는거!!!!!!!!!!!!!!!!\n
 항상 뭐 시작하는건 되게 잘하는데 꾸준한게 없어서 끝을 마무리를 잘 못 짓는다.\n
 그래서 요즘은 어떤 일을 시작할지 말지 결정할 때 내가 과연 이걸 끝까지 할 수 있을지 시뮬레이션을 상상속으로 해본다. 그래서 요즘은 시작한 일이 없다!ㅋ
 ") # assiger인 2번 유저에게 노티 보내져야함.
-Answer.find_or_create_by(author_id: 2, question_id: 1, content: "내 하루의 마무리는 침대 옆의 켜져있던 장스탠드를 끄는 일이다.\n
+Entrance.find_or_create_by(channel: Channel.where(user_id: 5, name: "삼촌").first, target: a1)
+a2 = Answer.find_or_create_by(author_id: 2, question_id: 1, content: "내 하루의 마무리는 침대 옆의 켜져있던 장스탠드를 끄는 일이다.\n
 잠들기 직전 장스탠드를 켜 놓으면 노란빛이 마음을 편하게 해주어서 잠이 잘오기 때문이다.\n
 무엇보다 불을 끄러 일어나지 않아도 돼서 좋다.")
+Entrance.find_or_create_by(channel: Channel.where(user_id: 2, name: "삼촌").first, target: a2)
+Entrance.find_or_create_by(channel: Channel.where(user_id: 2, name: "이촌").first, target: a2)
+
 Answer.find_or_create_by(author_id: 1, question_id: 2, content: "존~~~~~~~~~~~~~~~~~~~~~~~~~~~~~나 좋은 스피커를 사서 개좋은 음질의 음악을 엄청 고요한 방에서 혼자 빵빵하게 틀어놓고 조용히 누워서 듣고 싶다. 개행복할듯.")
 Answer.find_or_create_by(author_id: 4, question_id: 2, content: "높은 곳에서 뛰어내리기, 맨몸으로 날기") # assigner인 1번과 2번 유저에게 노티 보내져야함.
 Answer.find_or_create_by(author_id: 3, question_id: 3, content: "중학교 때는 빨리 할머니가 되고싶었다. 빨리 현명한 할머니가 돼서 흰 머리를 휘날리며 “음.. 그래 그땐 내가 그랬었지... 참 어리석었군.. 허허”하면서 지난 날을 돌아보고 싶었다. 눈앞에 놓인 것들을 헤쳐나갈 자신이 없었던 것 같다. 역시 나는 도망치려고 태어났나보다. 대학생 이후로 나이를 먹는 건 항상 싫은 일이라고만 생각했다. 근데 돌아보면 나는 새내기 때보다 지금이 훨씬 좋다. 몰랐던 것들을 알게 되고, 나와 더 친해져서 좋다. 그렇게 생각하면 30대, 40대, 할머니가 되는 것도 그렇게 두려운 일은 아니지 않을까? 그 때는 또 그 때만의 재미와 새로움이 있겠지!! 

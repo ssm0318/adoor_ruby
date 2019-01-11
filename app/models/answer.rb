@@ -6,6 +6,8 @@ class Answer < ApplicationRecord
     has_many   :likes, dependent: :destroy, as: :target
     has_many   :drawers, dependent: :destroy, as: :target
     has_and_belongs_to_many :tags, dependent: :destroy
+    has_many   :entrances, as: :target, dependent: :destroy
+    has_many   :channels, through: :entrances
     
     scope :anonymous, -> (id) { where.not(author: User.find(id).friends).where.not(author: User.find(id)) }
     # scope :not_anonymous, -> (id) { where(author: User.find(id).friends.push(User.find(id))) }

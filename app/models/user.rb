@@ -29,7 +29,7 @@ class User < ApplicationRecord
   has_many :requestees, through: :made_requests, dependent: :destroy
  
   # friendship
-  has_many :friendships, dependent: :destroy
+  has_many :friendships, :class_name => "Friendship", :foreign_key => "user_id", dependent: :destroy
   has_many :friends, :through => :friendships, dependent: :destroy
 
   # assignment
@@ -63,6 +63,8 @@ class User < ApplicationRecord
 
   # channel
   has_many :channels, dependent: :destroy
+  has_many :passive_friendships, :class_name => "Friendship", :foreign_key => "friend_id", dependent: :destroy
+  has_many :belonging_channels, through: :passive_friendships, :source => :channels
 
   # reference: http://railscasts.com/episodes/163-self-referential-association
   
@@ -93,6 +95,6 @@ class User < ApplicationRecord
     Channel.create(name: "일촌", user: self)
     Channel.create(name: "이촌", user: self)
     Channel.create(name: "삼촌", user: self)
-    Channel.create(name: "전체공개", user: self)
+    # Channel.create(name: "전체공개", user: self)
   end
 end
