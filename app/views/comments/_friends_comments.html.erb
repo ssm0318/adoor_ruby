@@ -1,8 +1,12 @@
-<div class="comment">
-    <div class = "comment-content">
+<% if c.author_id == answer_author.id %>
+    <div class="comment-indent">
+<% else %>
+    <div class="comment">
+<% end %>
+     <div class = "comment-content">
         <span>
-            <%= link_to image_tag(user.image.url, :class => "user-profile"), user_answers_path(user.id) %>
-            <%= link_to user.username, user_answers_path(user.id), class: "username" %>
+            <%= link_to image_tag(comment_author.image.url, :class => "user-profile"), user_answers_path(comment_author.id) %>
+            <%= link_to comment_author.username, user_answers_path(comment_author.id), class: "username" %>
             <span class= "content"><%= c.content %> </span>
         </span>
         <%= render 'like', a: c, target_type: "Comment", like_btn_class: "btn-comment-like" %>

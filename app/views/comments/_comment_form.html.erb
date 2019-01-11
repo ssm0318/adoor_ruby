@@ -4,7 +4,7 @@
         <div class="author-comments-div">
             <div class="comments">
                 <% Comment.where(target: Answer.find(a.id), recipient_id: user.id).each do |c| %>
-                    <%= render partial: "./answer_author_comments", locals: {user: c.author, c: c} %>
+                    <%= render partial: "./answer_author_comments", locals: {comment_author: c.author, c: c} %>
                 <% end %>
             </div>
             <% if current_user.id == user.id %>
@@ -74,5 +74,3 @@
         <% end %>
     </div>
 </div>
-
-<%= render 'layouts/timestamp' %>

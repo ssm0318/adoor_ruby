@@ -14,7 +14,7 @@
                         <% if c.author_id != current_user.id %>
                             <%= render partial: "./general_comments", locals: {user_id: c.author_id, answer_id: answer.id, c:c} %>
                         <% else %>
-                            <%= render partial: "./answer_author_comments", locals: {user: current_user, c: c} %>
+                            <%= render partial: "./answer_author_comments", locals: {comment_author: current_user, c: c} %>
                         <% end %>
                         
                         <% Reply.where(comment_id: c.id).each do |r|%>
