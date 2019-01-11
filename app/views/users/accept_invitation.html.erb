@@ -4,7 +4,7 @@
     <% if @assigned_questions.empty? %>
         <%= @new_friend.username %>님이 당신을 어도어에 초대했어요<br>
         <% if !user_signed_in? %>
-            로그인 또는 회원가입 후 <%= @new_friend.username %>님과 친구가 되어보세요!
+            로그인 또는 회원가입 후 <%= @new_friend.username %>님과 친구가 되어보세요!<br>
         <% elsif !current_user.friends.include? @new_friend %>
             <% if FriendRequest.where(requester_id: @new_friend.id, requestee_id: current_user.id).exists? %>
                 <%= @new_friend.username %>님이 친구요청을 보냈어요!<br/>

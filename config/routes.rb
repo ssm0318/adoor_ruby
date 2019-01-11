@@ -62,6 +62,9 @@ Rails.application.routes.draw do
   get '/search/popular_search' => 'search#popular_search', as: :show_popular_search
   get '/search/user' => 'search#user', as: :search_user
 
+  #intro
+  get '/introduction' => 'users#introduction', as: :introduction
+
   devise_for :users
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions'

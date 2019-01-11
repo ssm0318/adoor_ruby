@@ -1,0 +1,32 @@
+.intro-tc-el {
+    font-weight: bold;
+    color: black;
+    &:hover {
+        color: #F48462;
+     }
+     line-height: 30px;
+}
+
+.intro-tc {
+    background-color: white;
+    position: fixed;
+    right: 70px;
+    top: 200px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.intro-title {
+    font-family: "Nanum Gothic", serif;
+    text-align: center;
+    color: #F48462;
+}
+
+.intro-img {
+    width: 60%;
+}
+
+.intro-accent {
+    font-weight: bold;
+    color: #F48462;
+}
