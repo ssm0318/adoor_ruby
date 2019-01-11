@@ -63,7 +63,7 @@ Rails.application.routes.draw do
   get '/search/user' => 'search#user', as: :search_user
 
   #intro
-  get '/introduction' => 'users#introduction', as: :introduction
+  get '/introduction' => 'application#intro', as: :introduction
 
   devise_for :users
   # devise_for :users, controllers: {
