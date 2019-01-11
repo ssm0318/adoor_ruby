@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   # end
 
   def intro
-    render 'intro'
+    render './intro'
   end
  
   protected

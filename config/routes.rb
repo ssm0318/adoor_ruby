@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  # Application
+  get '/introduction' => 'application#intro', as: :intro
+
   # Answer
   resources :answers, except: [:new]
   get '/answers/:id/new' => 'answers#new', as: :new_answer
