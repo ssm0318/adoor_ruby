@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
         @feeds = @user.posts + @user.answers
         @feeds = @feeds.sort_by(&:created_at).reverse!
 
-        render 'feeds'
+        render 'show'
     end
 
     def drawers

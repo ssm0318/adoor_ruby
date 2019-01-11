@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   root 'feeds#friends'
   get '/feeds/general' => 'feeds#general', as: :general_feed
 
-  # Question
+  # Question 
   get '/questions/today' => 'questions#today', as: :today_questions
   get '/questions/:id/friends' => 'questions#friends', as: :question_friends
   get '/questions/:id/general' => 'questions#general', as: :question_general
@@ -50,7 +50,6 @@ Rails.application.routes.draw do
   # User
   get '/users/:id/edit' => 'users#edit', as: :edit_user_profile
   patch '/users/:id/edit' => 'users#update', as: :update_user_profile
-  get '/users/mypage' => 'users#mypage', as: :mypage
   devise_for :users
   # 아래 코드는 이후에 멀티채널 구성에 맞추어 바뀌어야할수도.
   get '/users/friends' => 'users#friends', as: :friends

@@ -1,7 +1,38 @@
 <% if @assigned_questions.empty? %>
-    <%= render partial: "questions/layout", locals: {title: "#{@new_friend.username}님이 당신을 초대했어요", questions: @assigned_questions} %><br/>
+    <%= @new_friend.username %>님이 당신을 어도어에 초대했어요<br>
+    <% if !user_signed_in? %>
+        로그인 또는 회원가입 후 <%= @new_friend.username %>님과 친구가 되어보세요!
+    <% elsif !current_user.friends.include? @new_friend %>
+        <% if FriendRequest.where(requester_id: @new_friend.id, requestee_id: current_user.id).exists? %>
+            <%= @new_friend.username %>님이 친구요청을 보냈어요!<br/>
+            <%= link_to "친구수락", add_friend_path(@new_friend.id), method: :post, id: "friends-btn" %>
+        <% elsif FriendRequest.where(requester_id: current_user.id, requestee_id: @new_friend.id).exists? %>
+            <%= @new_friend.username %>님에게 친구요청을 보냈습니다.<br/>
+            <%= link_to "친구요청 취소", friend_request_path(@new_friend.id), method: :post, id: "friends-btn" %>
+        <% else %>
+            <%= @new_friend.username %>님과 친구가 되어보세요!<br/>
+            <%= link_to "친구요청", friend_request_path(@new_friend.id), method: :post, id: "friends-btn" %>
+        <% end %>
+    <% end%>
 <% else %>
-    <%= render partial: "questions/layout", locals: {title: "#{@new_friend.username}님이 보낸 질문", questions: @assigned_questions} %><br/>
+    <%= @new_friend.username %>님이 당신을 어도어에 초대했어요<br>
+    <% if !user_signed_in? %>
+        로그인 또는 회원가입 후 <%= @new_friend.username %>님과 친구가 되어보세요!
+    <% end %>
+    <%= @new_friend.username %>님이 보낸 질문
+    <%= render partial: "questions/layout", locals: { questions: @assigned_questions} %><br/>
+    <% if user_signed_in? && (!current_user.friends.include? @new_friend) %>
+        <% if FriendRequest.where(requester_id: @new_friend.id, requestee_id: current_user.id).exists? %>
+            <%= @new_friend.username %>님이 친구요청을 보냈어요!<br/>
+            <%= link_to "친구수락", add_friend_path(@new_friend.id), method: :post, id: "friends-btn" %>
+        <% elsif FriendRequest.where(requester_id: current_user.id, requestee_id: @new_friend.id).exists? %>
+            <%= @new_friend.username %>님에게 친구요청을 보냈습니다.<br/>
+            <%= link_to "친구요청 취소", friend_request_path(@new_friend.id), method: :post, id: "friends-btn" %>
+        <% else %>
+            <%= @new_friend.username %>님과 친구가 되어보세요!<br/>
+            <%= link_to "친구요청", friend_request_path(@new_friend.id), method: :post, id: "friends-btn" %>
+        <% end %>
+    <% end %>
 <% end %>
 <%# if !user_signed_in? || ((current_user.id != @new_friend.id) && (!current_user.friends.include? @new_friend)) %>
     <%#= @new_friend.username %><!--님과 친구가 되어보세요!<br/>-->

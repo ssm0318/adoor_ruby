@@ -24,11 +24,13 @@
                 <br>
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">
-                <%= render 'likes/default', target: answer %>
+                <%= render 'likes/default', target: answer, like_btn_class: "btn-answer-like" %>
                 <%= render 'drawers/default', target: answer %>
                 <br>
                 <br>
             </div>
-        </div>
+        </div> 
     <% end %>
 </div>
+
+<%= render 'layouts/timestamp' %>

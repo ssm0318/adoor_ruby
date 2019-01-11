@@ -47,13 +47,14 @@
                                             data: { confirm: '답변을 지우시겠습니까?'} %>
                 <% end %>                 
 
-                <%= render 'drawers/default', target: a %>
+                <%= render 'drawers/default', target: d %>
                 </div>
             </div>
         <% end %>
     <% end %>
 </div>
 
+<%= render 'layouts/timestamp' %>
 <script>
     $(document).ready(function() {
         $(".btn-drawer").on('click', function(e) {
