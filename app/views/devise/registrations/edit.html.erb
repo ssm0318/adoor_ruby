@@ -12,20 +12,20 @@
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
+    <%= f.input :current_password,
+                required: true,
+                input_html: { autocomplete: "current-password" },
+                placeholder: " 현재 비밀번호",
+                :label => false %>
     <%= f.input :password,
                 required: false,
                 input_html: { autocomplete: "new-password" },
-                placeholder: "password",
+                placeholder: " 새로운 비밀번호",
                 :label => false %>
     <%= f.input :password_confirmation,
                 required: false,
                 input_html: { autocomplete: "new-password" },
-                placeholder: "password confirmation",
-                :label => false %>
-    <%= f.input :current_password,
-                required: true,
-                input_html: { autocomplete: "current-password" },
-                placeholder: "current password",
+                placeholder: " 비밀번호 확인",
                 :label => false %>
   </div>
 <br/>

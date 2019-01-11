@@ -8,7 +8,7 @@
                 <a href="/questions/<%=feed.question.id%>/friend" class="question" style="font-size: 18px;"><%= feed.question.content %></a> <br><br>
             <% end %>
             <div class="answer"><%= feed.content %> <br><br></div>
-            <div class = "date"><%= time_tag feed.created_at, class: "timeago" %></div>
+            <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>
         </div>
         <div class="prism-box__footer" style="padding-bottom: 10px;">
             <%= render 'likes/default', target: feed, like_btn_class: "btn-answer-like" %>

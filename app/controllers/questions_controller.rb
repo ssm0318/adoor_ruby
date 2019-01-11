@@ -27,6 +27,7 @@ class QuestionsController < ApplicationController
     def import_all
         @questions = Question.where(selected_date: (Date.today))
         csv = Roo::CSV.new('./lib/assets/questions.csv')
+        select = (1..csv.last_row).to_a.sample 5
         for i in 1..csv.last_row
             q = Question.create(author_id: 1, content: csv.cell(i, 1), tag_string: csv.cell(i, 6))
             if !q.tag_string.nil?
@@ -36,7 +37,7 @@ class QuestionsController < ApplicationController
                     q.tags << new_tag
                 end
             end
-            if i <= 5
+            if select.include? i
                 q.selected_date = Date.today()
                 q.save
             end

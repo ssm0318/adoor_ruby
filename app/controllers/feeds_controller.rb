@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-    before_action :authenticate_user!, only: [:friends]
+    before_action :authenticate_user!
     
     def general
         @feeds = Post.anonymous(current_user.id) + Answer.anonymous(current_user.id) 

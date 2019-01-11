@@ -20,7 +20,7 @@
                 <a href="/questions/<%=answer.question.id%>/friend" class="question"><%= answer.question.content %></a> <br><br>
                 <div class="answer"><%= answer.content %></div>
                 <br>
-                <div class = "date"><%= time_tag answer.updated_at, class: "timeago" %></div>
+                <div class = "date time"><%= time_tag answer.created_at, class: "timeago" %></div>
                 <br>
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">

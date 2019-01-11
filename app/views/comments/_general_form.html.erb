@@ -3,7 +3,7 @@
         댓글 <br/><br>
         <div class="author-comments-div">
             <% Comment.where(target: feed, recipient_id: feed.author_id).each do |c| %>
-                <%= render partial: "./general_comments", locals: {user_id: feed.author_id, feed_id: feed.id, c:c} %>
+                <%= render partial: "comments/general_comments", locals: {user_id: feed.author_id, feed_id: feed.id, c:c} %>
             <% end %>
         </div>
         <br>

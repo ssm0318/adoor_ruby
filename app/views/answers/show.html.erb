@@ -35,7 +35,7 @@
     </div>
     <div class="prism-box__content">
         <br>
-        <a href="/questions/<%=answer.question.id%>/friend" class="question"><%= answer.question.content %></a><br><br>
+        <%= link_to answer.question.content question_friends_path(answer.question.id) %>
         <div class="answer"><%= answer.content %></div>
         <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
         <%
@@ -47,7 +47,7 @@
         <% end %> 
 <%
 =end%>
-        <div class = "date"><%= time_tag answer.updated_at, class: "timeago" %></div>
+        <div class = "date time"><%= time_tag answer.created_at, class: "timeago" %></div>
         <br>
     </div>
     <div class="prism-box__footer" style="padding-bottom: 10px;">

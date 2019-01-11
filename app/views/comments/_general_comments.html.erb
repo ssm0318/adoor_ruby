@@ -9,7 +9,7 @@
     </div>
 
     <div class = "comment-info"> 
-        <span><%= time_tag c.created_at, class: "timeago" %></span>
+        <span class="date time"><%= time_tag c.created_at, class: "timeago" %></span>
         <span><%= render 'comments/my_comments_menu', target: c %></span>
     </div>
 </div> 
