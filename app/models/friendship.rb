@@ -3,7 +3,7 @@ class Friendship < ApplicationRecord
     belongs_to :friend, :class_name => "User"
     has_and_belongs_to_many :channels
     
-    after_create :create_notifications, :delete_request, :create_inverse
+    after_create :create_notifications, :delete_request, :create_inverse, :default_channel
 
     private
 
@@ -24,5 +24,9 @@ class Friendship < ApplicationRecord
     def delete_request
         f = FriendRequest.where(requester: self.friend, requestee: self.user)
         f.destroy_all
+    end
+
+    def default_channel
+        Channel.where(user: user, name: "삼촌").first.friendships << self
     end
 end

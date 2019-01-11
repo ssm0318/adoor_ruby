@@ -93,5 +93,6 @@ class User < ApplicationRecord
     Channel.create(name: "일촌", user: self)
     Channel.create(name: "이촌", user: self)
     Channel.create(name: "삼촌", user: self)
+    Channel.create(name: "전체공개", user: self)
   end
 end
