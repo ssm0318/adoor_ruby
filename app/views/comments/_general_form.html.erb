@@ -3,7 +3,7 @@
         댓글 <br/><br>
         <div class="author-comments-div">
             <% Comment.where(target: feed, recipient_id: feed.author_id).each do |c| %>
-                <%= render partial: "comments/general_comments", locals: {user_id: feed.author_id, feed_id: feed.id, c:c} %>
+                <%= render partial: "comments/general", locals: {user_id: feed.author_id, feed_id: feed.id, c:c} %>
             <% end %>
         </div>
         <br>
@@ -12,9 +12,9 @@
                 <div class="comment-replies-form">
                     <div class="comment-replies">
                         <% if c.author_id != current_user.id %>
-                            <%= render partial: "comments/general_comments", locals: {user_id: c.author_id, feed_id: feed.id, c:c} %>
+                            <%= render partial: "comments/general", locals: {user_id: c.author_id, feed_id: feed.id, c:c} %>
                         <% else %>
-                            <%= render partial: "comments/friends_comments", locals: {feed: feed, c: c} %>
+                            <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
                         <% end %>
                         
                         <% Reply.where(comment_id: c.id).each do |r|%>

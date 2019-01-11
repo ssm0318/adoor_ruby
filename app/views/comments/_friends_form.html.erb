@@ -4,7 +4,7 @@
         <div class="author-comments-div">
             <div class="comments">
                 <% Comment.where(target: feed, recipient_id: feed.author.id).each do |c| %>
-                    <%= render partial: "comments/friends_comments", locals: {feed: feed, c: c} %>
+                    <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
                 <% end %> 
             </div> 
             <% if current_user.id == feed.author.id %>
@@ -32,7 +32,7 @@
                 <div class="comments-div">
                     <div class="comments">
                         <% Comment.where(target: feed, recipient_id: r).each do |c| %>
-                            <%= render partial: "comments/friends_comments", locals: {feed: feed, c: c} %>
+                            <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
                         <% end %>
                     </div>
                     <%= form_tag comments_path, :class => "prism-form friend-comment" do %>
@@ -50,7 +50,7 @@
                     <div class="comment-replies-form">
                         <div class="comment-replies">
 
-                            <%= render partial: "comments/general_comments", locals: {user_id: c.author_id, feed_id: feed.id, c: c} %>
+                            <%= render partial: "comments/general", locals: {user_id: c.author_id, feed_id: feed.id, c: c} %>
 
                             <% Reply.where(comment_id: c.id).each do |r|%>
                                 <%= render partial: "replies/default", locals: {user: current_user, feed_id: feed.id, r: r} %>
@@ -69,7 +69,7 @@
             <div class="comments-div">
                 <div class="comments">
                     <% Comment.where(target: feed, recipient_id: current_user.id).each do |c| %>
-                        <%= render partial: "comments/friends_comments", locals: {feed: feed, c: c} %>
+                        <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
                     <% end %>
                 </div>
                 <%= form_tag comments_path, :class => "prism-form comment" do %>

@@ -11,7 +11,7 @@
             <div class="prism-box__content">
                 <br>
                 <% if feed.is_a? Answer %>
-                    <a href="/questions/<%=feed.question.id%>/friend" class="question"><%= feed.question.content %></a> <br><br>
+                    <a href="/questions/<%=feed.question.id%>/friends" class="question"><%= feed.question.content %></a> <br><br>
                 <% end %>
                 <div class="answer"><%= feed.content %></div>
                 <br>
@@ -20,7 +20,7 @@
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">
                 <%= render 'comments/my_comments_menu', target: feed %>
-                <%= render 'likes/default', target: feed, like_btn_class: "btn-answer-like" %>
+                <%= render 'likes/default', target: feed, like_btn_class: "btn-feed-like" %>
                 <%= render 'drawers/default', target: feed %>
                 <br>
             </div>
@@ -36,9 +36,9 @@
 <%= render './delete_script' %>
 <script>
   $(document).ready(function() {
-    like_ajax($(".btn-answer-like"))
+    like_ajax($(".btn-feed-like"))
     like_ajax($(".btn-comment-like"))
-    delete_ajax($(".btn-answer-delete"))
+    delete_ajax($(".btn-feed-delete"))
     delete_ajax($(".btn-comment-delete"))
   })
 </script>

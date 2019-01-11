@@ -1,5 +1,5 @@
 <div class="inner-container">
-  <%= render 'feeds/general_index', feeds: @feeds %>
+  <%= render 'feeds/general_index' %>
 </div> 
 <!--더보기는 지금 구현하는 건 아닌 듯-->
 <%= render 'comments/general_script' %>
@@ -9,9 +9,9 @@
 <%= render './delete_script' %>
 <script>
   $(document).ready(function() {
-    like_ajax($(".btn-answer-like"))
+    like_ajax($(".btn-feed-like"))
     like_ajax($(".btn-comment-like"))
-    delete_ajax($(".btn-answer-delete"))
+    delete_ajax($(".btn-feed-delete"))
     delete_ajax($(".btn-comment-delete"))
   })
 </script>

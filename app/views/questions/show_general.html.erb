@@ -1,10 +1,12 @@
+<%= render 'questions/tabs', question: @question %>
+
 <div class="inner-container">
     <div class = "prism-box">
         <div class = "prism-box_question">
             <br>
             <div>
                 <%= @question.content %>
-                <%= render 'drawer', a: @question, target_type: "Question" %>
+                <%= render 'drawers/default', target: @question %>
             </div>    
             <div classs = "question-author">    
                 <% if @question.author.has_role? :newuser %>
@@ -16,11 +18,8 @@
         </div>
         <br>
     </div> 
-    <div class="feed-nav">
-        <%= active_link_to '친구', '/questions/' + @question.id.to_s + '/friend'  %>
-        <%= active_link_to '익명', '/questions/' + @question.id.to_s + '/general'%>
-    </div>
-    <%= render 'feeds/general_index', answers: @answers %>
+
+    <%= render 'feeds/general_index', feeds: @answers %>
 </div>
 <!--더보기는 지금 구현하는 건 아닌 듯-->
 <%= render 'comments/general_script' %>
@@ -30,9 +29,9 @@
 <%= render './delete_script' %>
 <script>
   $(document).ready(function() {
-    like_ajax($(".btn-answer-like"))
+    like_ajax($(".btn-feed-like"))
     like_ajax($(".btn-comment-like"))
-    delete_ajax($(".btn-answer-delete"))
+    delete_ajax($(".btn-feed-delete"))
     delete_ajax($(".btn-comment-delete"))
   })
 </script>

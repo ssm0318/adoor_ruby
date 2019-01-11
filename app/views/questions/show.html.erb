@@ -1,7 +1,16 @@
+<%= render 'questions/tabs', question: @question %>
+
 <div class="inner-container">
     <div class = "question"> 
 
         <div class = "question-content"><%= @question.content %>
+            <%= link_to image_tag("icons/write-icon.png", class: "btn-write"), new_answer_path(@question.id) %>
+            <% if user_signed_in? %> 
+                <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
+                <%= render 'assignments/default', question: @question %>
+            <% else %>
+                <%= link_to image_tag("icons/assign-icon.png", class: "btn-assign"), new_user_session_path %>
+            <% end %>
             <% if Drawer.where(user_id: current_user.id, target: @question).empty? %>
                 <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: @question.id, target_type: "Question"), method: :post %>
             <% else %>
@@ -9,27 +18,31 @@
             <% end %>
         </div>
     </div> 
-
+ 
     <% @question.answers.reverse_each do |answer| %>
         <div class="prism-box">
-            <div class="prism-box__header">
-                <%= render partial: "./user_profile", locals: {user: answer.author} %><br/>
+            <div class="prism-box__header"> 
+                <% if current_user == answer.author or current_user.friends.include? answer.author %>
+                    <%= render partial: "./user_profile", locals: {user: answer.author} %><br/>
+                <% else %>
+                    <%= render partial: "./user_profile_general", locals: {user_id: answer.author.id, feed_id: answer.id }%>
+                <% end %>
             </div>
             <div class="prism-box__content">
                 <br>
-                <a href="/questions/<%=answer.question.id%>/friend" class="question"><%= answer.question.content %></a> <br><br>
+                <a href="/questions/<%=answer.question.id%>/friends" class="question"><%= answer.question.content %></a> <br><br>
                 <div class="answer"><%= answer.content %></div>
                 <br>
                 <div class = "date time"><%= time_tag answer.created_at, class: "timeago" %></div>
                 <br>
-            </div>
+            </div> 
             <div class="prism-box__footer" style="padding-bottom: 10px;">
-                <%= render 'likes/default', target: answer, like_btn_class: "btn-answer-like" %>
+                <%= render 'likes/default', target: answer, like_btn_class: "btn-feed-like" %>
                 <%= render 'drawers/default', target: answer %>
                 <br>
                 <br>
             </div>
-        </div> 
+        </div>  
     <% end %>
 </div>
 

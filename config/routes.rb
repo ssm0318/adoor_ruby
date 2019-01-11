@@ -14,8 +14,8 @@ Rails.application.routes.draw do
 
   # Question 
   get '/questions/today' => 'questions#today', as: :today_questions
-  get '/questions/:id/friends' => 'questions#friends', as: :question_friends
-  get '/questions/:id/general' => 'questions#general', as: :question_general
+  get '/questions/:id/friends' => 'questions#show_friends', as: :question_friends
+  get '/questions/:id/general' => 'questions#show_general', as: :question_general
   get '/questions/import_all' => 'questions#import_all', as: :import_all_questions
   get '/questions/import_new' => 'questions#import_new', as: :import_new_questions
   resources :questions, only: [:index, :show]

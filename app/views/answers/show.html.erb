@@ -35,7 +35,7 @@
     </div>
     <div class="prism-box__content">
         <br>
-        <%= link_to answer.question.content question_friends_path(answer.question.id) %>
+        <%= link_to answer.question.content question_path(answer.question.id) %>
         <div class="answer"><%= answer.content %></div>
         <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
         <%
@@ -64,7 +64,7 @@
         <%# end %>
       
         <%= render 'comments/my_comments_menu', target: answer %>
-        <%= render 'likes/default', target: answer, target_type: "Answer", like_btn_class: "btn-answer-like" %>
+        <%= render 'likes/default', target: answer, target_type: "Answer", like_btn_class: "btn-feed-like" %>
         <%= render 'drawers/default', target: answer, target_type: "Answer"%>
         <br>
     </div>
@@ -90,9 +90,9 @@
 <%= render './delete_script' %>
 <script>
   $(document).ready(function() {
-    like_ajax($(".btn-answer-like"))
+    like_ajax($(".btn-feed-like"))
     like_ajax($(".btn-comment-like"))
-    delete_ajax($(".btn-answer-delete"))
+    delete_ajax($(".btn-feed-delete"))
     delete_ajax($(".btn-comment-delete"))
   })
 </script> 

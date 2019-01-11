@@ -15,17 +15,16 @@ class QuestionsController < ApplicationController
     end
 
     def show_friends
-        @answers = @question.answers.not_anonymous(current_user.id)
+        @answers = @question.answers.named(current_user.id).sort_by(&:created_at).reverse!
         render 'show_friends'
     end
 
     def show_general
-        @answers = @question.answers.anonymous(current_user.id)
+        @answers = @question.answers.anonymous(current_user.id).sort_by(&:created_at).reverse!
         render 'show_general'
     end
     
     def import_all
-        @questions = Question.where(selected_date: (Date.today))
         csv = Roo::CSV.new('./lib/assets/questions.csv')
         select = (1..csv.last_row).to_a.sample 5
         for i in 1..csv.last_row
