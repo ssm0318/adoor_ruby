@@ -17,7 +17,12 @@ class Like < ApplicationRecord
         if self.target.author.friends.include? self.user
             Notification.create(recipient: self.target.author, actor: self.user, target: self, action: 'friend_like', origin: origin )
         else
-            Notification.create(recipient: self.target.author, actor: self.user, target: self, action: 'anonymous_like', origin: origin)
+            noti_hash = {recipient: self.target.author, action: 'anonymous_like', origin: origin }
+            if Notification.where(noti_hash).unread.empty?
+                Notification.create(recipient: self.target.author, actor: self.user, target: self, action: 'anonymous_like', origin: origin)
+            else
+                Notification.where(noti_hash).first.target = self
+            end
         end
     end
 end
