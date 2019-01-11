@@ -49,7 +49,8 @@
                         누군가가 당신의 글을 좋아했습니다.
                     <% end%>
                 <% end %>
-            </div> 
+                <div class = "date" style="display: block; margin-top: 5px; font-size: 10px;"><%= time_tag noti.created_at, class: "timeago" %></div> 
+            </div>
         <% end %>
     <% end %>
 </div>
