@@ -23,7 +23,11 @@
         <% else %>
             <div class = "prism-box">
                 <div class = "prism-box__header">
-                    <%= render partial: "./user_profile", locals: {user: d.target.author} %><br/>
+                    <% if current_user == d.target.author or current_user.friends.include? d.target.author %>
+                        <%= render partial: "./user_profile", locals: {user: d.target.author} %><br/>
+                    <% else %>
+                        <%= render partial: "./user_profile_general", locals: {user_id: d.target.author_id, answer_id: d.target.id }%>
+                    <% end %>
                 </div>
                 <div class = "prism-box__content">
                     <br> 
