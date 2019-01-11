@@ -1,9 +1,7 @@
-<div class="prism-title"><h1>Question Feed</h1></div>
-    <br>
     <% @questions.reverse_each do |question| %>
         <div class="question-el" align="right">
             <div class="question-content">
-            <%= link_to question.content, "questions/#{question.id}" %>
+            <%= link_to question.content, "questions/#{question.id}/friend" %>
             </div>
             <div class="question-btn">
                 <%= image_tag "icons/write-icon.png", class: "btn-write", onclick:"window.location='/answers/new/question/#{question.id}'"%>

@@ -1,9 +1,10 @@
 .noti-content {
-    position: fixed;
+    position: absolute;
     right: 10px;
     top: 45px;
     margin-top: 15px;
-    border: 0.5px solid #bcbcbc;
+    // border: 0.5px solid #bcbcbc;
+    border-radius: 5px;
     max-height: 250px;
     overflow-y: scroll;
     z-index: 1;

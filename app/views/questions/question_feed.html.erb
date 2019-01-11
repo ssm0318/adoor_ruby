@@ -1,5 +1,4 @@
 <div class="inner-container">
-    <div class="prism-title"><h1>Question Feed</h1></div>
     <div class = "question">
 
         <div class = "question-content"><%= @question.content %>
@@ -18,7 +17,7 @@
             </div>
             <div class="prism-box__content">
                 <br>
-                <a href="/questions/<%=answer.question.id%>" class="question"><%= answer.question.content %></a> <br><br>
+                <a href="/questions/<%=answer.question.id%>/friend" class="question"><%= answer.question.content %></a> <br><br>
                 <div class="answer"><%= answer.content %></div>
                 <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
                 <%
@@ -31,7 +30,7 @@
 <%
 =end%>
                 <br>
-                <div class = "date"><%= time_tag answer.created_at, class: "timeago" %></div>
+                <div class = "date"><%= time_tag answer.updated_at, class: "timeago" %></div>
                 <br>
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">
@@ -47,9 +46,9 @@
                     <%#= link_to "<i class='material-icons'>star</i>".html_safe, star_path(a.id, target_type: "Answer"), method: :delete %>
                 <%# end %>
                 
-                <%= render 'authorized_answer', a: answer %>
-                <%= render 'like', a: answer %>
-                <%= render 'drawer', a: answer %>
+                
+                <%= render './answers/like', a: answer %>
+                <%= render './answers/drawer', a: answer %>
                 <br>
 
                 

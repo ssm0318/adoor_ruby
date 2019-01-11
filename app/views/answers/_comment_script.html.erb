@@ -1,5 +1,7 @@
 <script>
     $(document).ready(function() {
+
+        // like_ajax(".btn-answer-like")
         $("form").submit( function(e) {
 
             // console.log("hi")
@@ -13,25 +15,46 @@
                 data: form.serialize(),
                 success: function(data) {
                     
-
-                    var html = `
-                        <img src='${data.imageurl}' 
-                            alt='' style='height:20px; width:20px; 
-                            border-radius:10px; margin-right: 2px;'>
-                        <a href='${data.path}' class='username'>
-                            ${data.username}
-                        </a>
-                        <span style='vertical-align: +6px;'>:
-                            ${data.content}<br/>
-                        </span>
+                    //TODO: indent 해
+                    //TODO: comment like, commment-info update
+                    var html_str=
+                    `
+                            <div class = "comment-content">
+                                <span>
+                                    <%= link_to image_tag(current_user.image.url, :class => "user-profile"), user_answers_path(current_user.id) %>
+                                    <%= link_to current_user.username, user_answers_path(current_user.id), class: "username" %>
+                                    <span class= "content">${data.content} </span>
+                                </span>
+                            </div>
+                            <div class = "comment-info">
+                                <time datetime='${data.created_at}', class='timeago'></time>
+                                <span>
+                                    <span>좋아요 <span class="show-likes">0</span>개</span>
+                                    <span class="btn-comment-delete">삭제</span>
+                                </span>
+                            </div>
                         </div>
                     `
 
+                    var btn_like = $(
+                        `
+                        <img src='/assets/icons/like-default-icon' 
+                        class='btn-comment-like do-like'
+                        data-url='${data.like_url}'
+                        data-changed-src='/assets/icons/like-on-icon'
+                        data-changed-url='${data.like_changed_url}'>
+                        `
+                    )
+
                     if(form.hasClass("comment")) {
-                        html = "<div class='comment'>" + html
+                        html_str = "<div class='comment'>" + html_str
                     } else {
-                        html = "<div class='comment'>ㄴ" + html
+                        html_str = "<div class='comment-indent'>" + html_str
                     }
+
+                    var html = $(html_str)
+                    html.find(".comment-content").append(btn_like);
+                    
 
                     if(form.hasClass("reply")) {
                         form.parent().find(".comment-replies").append(html)
@@ -40,6 +63,9 @@
                     }
 
                     form.find(".prism-form__input").val('')
+                    like_ajax(btn_like)
+                    delete_ajax(html.find(".btn-comment-delete"))
+                    html.find("time.timeago").timeago();
                 },
                 error: function(data) {
                     console.log("error")

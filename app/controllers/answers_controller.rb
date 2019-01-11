@@ -2,7 +2,6 @@ class AnswersController < ApplicationController
     before_action :authenticate_user!
     before_action :set_answer, only: [:show, :edit, :update, :destroy]
     before_action :check_mine, only: [:edit, :update, :destroy]
-    before_action :check_friends, only: [:show]
 
     def new
         @question = Question.find(params[:id])
@@ -25,7 +24,8 @@ class AnswersController < ApplicationController
         redirect_to root_path
     end
 
-    def show 
+    def show
+        @anonymous = @answer.author_id != current_user.id && !(current_user.friends.include? @answer.author)
     end
 
     def edit
@@ -67,35 +67,42 @@ class AnswersController < ApplicationController
     end
 
     def friend_feed
-        @answers = []
-        @answers.concat(current_user.answers)
-        
-        for friend in current_user.friends
-            @answers.concat(friend.answers)
-        end
-
-        @answers = @answers.sort_by(&:created_at)
+        @answers = Answer.not_anonymous(current_user.id)
         render 'friend_feed'
+    end
+
+    def question_feed_friend
+        @question = Question.find(params[:id])
+        @answers = @question.answers.not_anonymous(current_user.id)
+        render 'question_feed_friend'
+    end
+
+    def question_feed_general
+        @question = Question.find(params[:id])
+        @answers = @question.answers.anonymous(current_user.id)
+        render 'question_feed_general'
     end
 
     def create_comment
         id = params[:recipient_id]
         if id == '0'
             c = Comment.create(content: params[:content], author_id: current_user.id, target: Answer.find(params[:id]))
+
             render json: {
+                content: c.content,
                 comment_id: c.id,
-                imageurl: current_user.image.url,
-                path: user_answers_path(current_user.id),
-                username: current_user.username,
-                content: params[:content],
+                created_at: c.created_at,
+                like_url: likes_path(target_id: c.id, target_type: 'Comment'), 
+                like_changed_url: like_path(c.id, target_type: 'Comment'),
             }
         else
-            Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], target: Answer.find(params[:id]))
+            c = Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], target: Answer.find(params[:id]))
+
             render json: {
-                imageurl: current_user.image.url,
-                path: user_answers_path(current_user.id),
-                username: current_user.username,
-                content: params[:content],
+                content: c.content,
+                created_at: c.created_at,
+                like_url: likes_path(target_id: c.id, target_type: 'Comment'), 
+                like_changed_url: like_path(c.id, target_type: 'Comment'),
             }
         end
             
@@ -112,10 +119,10 @@ class AnswersController < ApplicationController
         # redirect_back fallback_location: user_answers_path(answer_author_id)
 
         render json: {
-            imageurl: current_user.image.url,
-            path: user_answers_path(current_user.id),
-            username: current_user.username,
-            content: params[:content],
+            content: r.content,
+            created_at: r.created_at,
+            like_url: likes_path(target_id: r.id, target_type: 'Reply'), 
+            like_changed_url: like_path(r.id, target_type: 'Reply'),
         }
     end
 
@@ -130,12 +137,6 @@ class AnswersController < ApplicationController
 
         def check_mine
             if @answer.author_id != current_user.id
-                redirect_to root_url
-            end
-        end
-
-        def check_friends
-            if @answer.author.friends.where(id: current_user.id).empty?
                 redirect_to root_url
             end
         end

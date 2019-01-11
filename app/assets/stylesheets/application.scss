@@ -95,6 +95,7 @@
 #prism-container {
     width: 60%;
     margin: 0 auto;
+    padding-top: 50px;
     .prism-title {
         width: 100%;
         text-align: center;
@@ -243,4 +244,19 @@ div.background {
             padding-top: 2px;
         }
     }
+
+    .feed-nav {
+        display: block;
+        padding-top: 10px;
+
+        a {
+            text-decoration: none;
+            color: gray;
+        }
+
+        a.active {
+            color: black;
+        }
+    }
+
 }

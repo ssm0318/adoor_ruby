@@ -1,5 +1,16 @@
 <% if Drawer.where(user_id: current_user.id, target: a).empty? %>
-    <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: a.id, target_type: "Answer"), method: :post %>
+    <%# link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: a.id, target_type: "Answer"), method: :post %>
+    <%= image_tag("icons/drawer-default-icon", 
+        class: "btn-drawer do-drawer",
+        "data-url" => drawers_path(target_id: a.id, target_type: target_type),
+        "data-changed-src" =>  "/assets/icons/drawer-on-icon",
+        "data-changed-url" => drawer_path(a.id, target_type: target_type)) %>
 <% else %>
-    <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '이 글을 서랍장에서 꺼내시겠습니까?'} %>
+    <%# link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(a.id, target_type: "Answer"), method: :delete, data: {confirm: '이 글을 서랍장에서 꺼내시겠습니까?'} %>
+
+    <%= image_tag("icons/drawer-on-icon", 
+        class: "btn-drawer",
+        "data-url" => drawer_path(a.id, target_type: target_type),
+        "data-changed-src" =>  "/assets/icons/drawer-default-icon",
+        "data-changed-url" => drawers_path(target_id: a.id, target_type: target_type)) %>
 <% end %>

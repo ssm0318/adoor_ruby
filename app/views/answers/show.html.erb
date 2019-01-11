@@ -1,10 +1,18 @@
 <% @user = @answer.author %>
 <% answer = @answer %>
+<% anonymous = @anonymous%>
 <div class="inner-container">
 <div class="prism-box">
 
     <div class="prism-box__header">
-        <%= render partial: "./user_profile", locals: {user: answer.author} %><br/>
+        <%# 익명글 %>
+        <% if anonymous %>
+            <%= render partial: "./user_profile_general", locals: {user_id: answer.author_id, answer_id: answer.id} %>
+        <%# 친구글 or 내글 %>
+        <%else %>
+            <%= render partial: "./user_profile", locals: {user: answer.author} %>
+        <% end %>
+        <br/>
         
         <%
 =begin%>
@@ -27,7 +35,7 @@
     </div>
     <div class="prism-box__content">
         <br>
-        <a href="/questions/<%=answer.question.id%>" class="question"><%= answer.question.content %></a><br><br>
+        <a href="/questions/<%=answer.question.id%>/friend" class="question"><%= answer.question.content %></a><br><br>
         <div class="answer"><%= answer.content %></div>
         <%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>
         <%
@@ -39,7 +47,7 @@
         <% end %> 
 <%
 =end%>
-        <div class = "date"><%= time_tag answer.created_at, class: "timeago" %></div>
+        <div class = "date"><%= time_tag answer.updated_at, class: "timeago" %></div>
         <br>
     </div>
     <div class="prism-box__footer" style="padding-bottom: 10px;">
@@ -56,11 +64,35 @@
         <%# end %>
       
         <%= render 'authorized_answer', a: answer %>
-        <%= render 'like', a: answer %>
-        <%= render 'drawer', a: answer %>
+        <%= render 'like', a: answer, target_type: "Answer", like_btn_class: "btn-answer-like" %>
+        <%= render 'drawer', a: answer, target_type: "Answer"%>
         <br>
     </div>
-    <%= render 'comment_form', user: @user, a: answer %>
+    <%# 익명글 %>
+    <% if anonymous %>
+        <%= render 'comment_general_form', answer: answer %>
+    <%# 친구글 or 내글 %>
+    <%else %>
+        <%= render 'comment_form', user: answer.author, a: answer %>
+    <% end %>
 </div>
 
 <%= render 'layouts/timestamp' %>
+<%= render 'drawer_script' %>
+<%# 익명글 %>
+<% if anonymous %>
+    <%= render 'comment_general_script'%>
+<%# 친구글 or 내글 %>
+<%else %>
+    <%= render 'comment_script' %>
+<% end %>
+<%= render 'like_script' %>
+<%= render 'delete_script' %>
+<script>
+  $(document).ready(function() {
+    like_ajax($(".btn-answer-like"))
+    like_ajax($(".btn-comment-like"))
+    delete_ajax($(".btn-answer-delete"))
+    delete_ajax($(".btn-comment-delete"))
+  })
+</script>

@@ -23,14 +23,14 @@
                 <% elsif noti.target_type == 'Assignment' %>
                     <%=username%>님으로부터 새로운 질문이 도착했습니다.
                 <% elsif noti.target_type == 'Highlight' %>
-                    <%=username%>님이 회원님의 글을 highlight했습니다.
+                    <%=username%>님이 당신의 글을 highlight했습니다.
                 <% elsif noti.target_type == 'Drawer' %>
-                    회원님의 글이 누군가의 서랍장에 담겼습니다.
+                    당신의 글이 누군가의 서랍장에 담겼습니다.
                 <% elsif noti.target_type == 'Comment' %>
                     <% if noti.action == 'comment' %>
-                        <%=username%>님이 회원님의 글에 댓글을 달았습니다.
+                        <%=username%>님이 당신의 글에 댓글을 달았습니다.
                     <% elsif noti.action == 'recomment'%>
-                        <%=username%>님이 회원님의 댓글에 대댓글을 달았습니다.
+                        <%=username%>님이 당신의 댓글에 대댓글을 달았습니다.
                     <% elsif noti.action == 'anonymous_comment'%>
                         누군가가 당신의 글에 댓글을 달았습니다.
                     <% end %>
@@ -38,9 +38,9 @@
                     <%=username%>님이 친구요청을 보냈습니다.
                 <% elsif noti.target_type == 'Reply' %>
                     <% if noti.action == 'to_comment'%>
-                        누군가가 회원님의 댓글에 대댓글을 달았습니다.
+                        누군가가 당신의 댓글에 대댓글을 달았습니다.
                     <% elsif noti.action == 'to_author'%>
-                        누군가가 회원님의 글에 대댓글을 달았습니다.
+                        누군가가 당신의 글에 대댓글을 달았습니다.
                     <% end%>
                 <% elsif noti.target_type == 'Like' %>
                     <% if noti.action == 'friend_like' %>
@@ -49,7 +49,8 @@
                         누군가가 당신의 글을 좋아했습니다.
                     <% end%>
                 <% end %>
-            </div> 
+                <div class = "date" style="display: block; margin-top: 5px; font-size: 10px;"><%= time_tag noti.created_at, class: "timeago" %></div> 
+            </div>
         <% end %>
     <% end %>
 </div>

@@ -1,22 +1,21 @@
-
-<h1 class = "today-question-title"><%= title %></h1>
-<br>
-<% questions.each do |question| %>
-    <div class="question-el" align="right">
-        <div class="question-content">
-        <%= link_to "#{question.content}", "questions/#{question.id}" %>
+<div class="prism-container">
+    <% questions.each do |question| %>
+        <div class="question-el" align="right">
+            <div class="question-content">
+            <%= link_to "#{question.content}", "questions/#{question.id}/friend" %>
+            </div>
+            <div class="question-btn">
+                <%= link_to image_tag("icons/write-icon.png", class: "btn-write"), new_answer_path(question.id) %>
+                <% if user_signed_in? %>
+                    <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
+                    <%= render 'questions/assignment', question: question %>
+                <% else %>
+                    <%= link_to image_tag("icons/assign-icon.png", class: "btn-assign"), new_user_session_path %>
+                <% end %>
+            </div>
         </div>
-        <div class="question-btn">
-            <%= link_to image_tag("icons/write-icon.png", class: "btn-write"), new_answer_path(question.id) %>
-            <% if user_signed_in? %>
-                <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
-                <%= render 'questions/assignment', question: question %>
-            <% else %>
-                <%= link_to image_tag("icons/assign-icon.png", class: "btn-assign"), new_user_session_path %>
-            <% end %>
-        </div>
-    </div>
-<% end %>
+    <% end %>
+</div>
 
 <br>
 <br>

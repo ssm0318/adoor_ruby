@@ -22,7 +22,7 @@
             </div>
             <div class="prism-box__content">
                 <br>
-                <a href="/questions/<%=answer.question.id%>" class="question"><%= answer.question.content %></a> <br><br>
+                <a href="/questions/<%=answer.question.id%>/friend" class="question"><%= answer.question.content %></a> <br><br>
                 <div class="answer"><%= answer.content %></div>
                 <br>
                 <!--<%# 여기도. 이런 코드를 view에서 쓰는 게 맞는지 %>-->
@@ -35,13 +35,13 @@
                 <br> 
 <%
 =end%>
-                <div class = "date"><%= time_tag answer.created_at, class: "timeago" %></div>
+                <div class = "date"><%= time_tag answer.updated_at, class: "timeago" %></div>
                 <br>
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">
                 <%= render 'authorized_answer', a: answer %>
-                <%= render 'like', a: answer %>
-                <%= render 'drawer', a: answer %>
+                <%= render 'like', a: answer, target_type: "Answer", like_btn_class: "btn-answer-like" %>
+                <%= render 'drawer', a: answer, target_type: "Answer" %>
                 <br>
             </div>
             <%= render 'comment_form', user: @user, a: answer %>
@@ -50,4 +50,15 @@
     <% end %>
 </div>
 <%= render 'comment_script' %>
+<%= render 'drawer_script' %>
 <%= render 'layouts/timestamp' %>
+<%= render 'like_script' %>
+<%= render 'delete_script' %>
+<script>
+  $(document).ready(function() {
+    like_ajax($(".btn-answer-like"))
+    like_ajax($(".btn-comment-like"))
+    delete_ajax($(".btn-answer-delete"))
+    delete_ajax($(".btn-comment-delete"))
+  })
+</script>

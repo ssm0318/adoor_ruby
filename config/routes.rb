@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get '/notifications/:id' => 'notifications#read'
   
   get '/feeds' => 'answers#general_feed'
+  get '/questions/:id/friend' => 'answers#question_feed_friend'
+  get'/questions/:id/general' => 'answers#question_feed_general'
+
   get '/questions/:id' => 'questions#question_feed'
   get '/today' => 'questions#today'
   # 이거 나중에 id 말고 content로 하는 게 더 보기 좋을 듯..! 
@@ -26,7 +29,7 @@ Rails.application.routes.draw do
   
   # user answers, highlights, drawers, likes
   get '/userpage/:id' => 'answers#user_answers', as: :user_answers
-  get '/userpage/:id/highlights' => 'highlights#user_highlights', as: :user_highlights
+  #get '/userpage/:id/highlights' => 'highlights#user_highlights', as: :user_highlights
   get '/userpage/:id/drawers' => 'drawers#user_drawers', as: :user_drawers
   get '/userpage/:id/likes' => 'likes#user_likes', as: :user_likes
 

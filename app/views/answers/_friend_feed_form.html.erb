@@ -1,0 +1,21 @@
+<% answers.reverse_each do |answer| %>
+    <div class="prism-box">
+        <div class="prism-box__header">
+        <%= render partial: "./user_profile", locals: {user: answer.author} %>
+        <%#= answer.author.username %>
+        </div>
+        <div class="prism-box__content"><br>
+            <a href="/questions/<%=answer.question.id%>/friend" class="question" style="font-size: 18px;"><%= answer.question.content %></a> <br><br>
+            <div class="answer"><%= answer.content %> <br><br></div>
+            <div class = "date"><%= time_tag answer.updated_at, class: "timeago" %></div>
+            <!--update 날짜와 posting 날짜 따로 구분? -->
+        </div>
+        <div class="prism-box__footer" style="padding-bottom: 10px;">
+            <%= render 'authorized_answer', a: answer %>
+            <%= render 'like', a: answer, target_type: "Answer", like_btn_class: "btn-answer-like" %>
+            <%= render 'drawer', a: answer , target_type: "Answer"%>
+            <br>
+        </div>
+        <%= render 'comment_form', user: answer.author, a: answer %>
+    </div>
+<% end %>
