@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
             c = Comment.create(content: params[:content], author_id: current_user.id, target_type: params[:target_type], target_id: params[:target_id])
 
             render json: {
+                id: c.id,
                 content: c.content,
                 comment_id: c.id,
                 created_at: c.created_at,
@@ -15,6 +16,7 @@ class CommentsController < ApplicationController
             c = Comment.create(content: params[:content], author_id: current_user.id, recipient_id: params[:recipient_id], target_type: params[:target_type], target_id: params[:target_id])
 
             render json: { 
+                id: c.id,
                 content: c.content,
                 created_at: c.created_at,
                 like_url: likes_path(target_id: c.id, target_type: 'Comment'), 

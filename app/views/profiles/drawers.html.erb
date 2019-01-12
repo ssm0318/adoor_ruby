@@ -41,9 +41,7 @@
                 <div class = "prism-box__footer" style="padding-bottom: 10px;">
                     <% if current_user.id == @user.id %>
                         <%= link_to "수정", edit_answer_path(d.target.id) %>
-                        <%= link_to "삭제", answer_path(d.target.id),
-                                            method: :delete,
-                                            data: { confirm: '답변을 지우시겠습니까?'}, class="btn-feed-delete" %>
+                        <span class="btn-feed-delete" data-url="<%=answer_path(d.target.id)"%>삭제</span>
                 <% end %>                 
 
                 <%= render 'drawers/default', target: d %>

@@ -13,12 +13,9 @@
                 }
             } 
 
-
-            // TODO delete ajax
-
             $.ajax({
                 type: "DELETE",
-                url: delete.attr("data-url"),
+                url: delete_btn.attr("data-url"), 
                 success: function(data) {
             //      클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
                     if(delete_btn.hasClass("btn-feed-delete")) {

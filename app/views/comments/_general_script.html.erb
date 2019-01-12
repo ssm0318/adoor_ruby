@@ -2,6 +2,8 @@
 
 
   function getReplyHtml(content, created_at, id) {
+    var new_url = "/replies/" + id;
+
     return $(`
       <div class='reply'>
         <div class="comment-content">
@@ -17,7 +19,7 @@
             <time datetime='${created_at}', class='timeago'></time>
             <span>
                 <span>좋아요 <span class="show-likes">0</span>개</span>
-                <span class="btn-comment-delete", "data-url" => reply_path(${id}>삭제</span>
+                <span class="btn-comment-delete" data-url="${new_url}">삭제</span>
             </span>
         </div> 
       </div>
@@ -46,11 +48,13 @@
         $.ajax({
           type: "POST",
           url: form.attr('action'),
-          
           data: form.serialize(),
           success: function(data) {
            
             if(form.hasClass("comment")) {
+              var new_url = "/comments/" + data.id;
+              console.log(new_url);
+              console.log("hey"); 
 
               var html = $(`
               <div class='comment-replies-form'>
@@ -69,7 +73,7 @@
                         <time datetime='${data.created_at}', class='timeago'></time>
                         <span>
                             <span>좋아요 <span class="show-likes">0</span>개</span>
-                            <span class="btn-comment-delete", "data-url" => comment_path(${data.id}>삭제</span>
+                            <span class="btn-comment-delete" data-url="${new_url}">삭제</span>
                         </span>
                     </div> 
                   </div>
@@ -117,7 +121,7 @@
 
             }
             else {
-
+              console.log("here");
               var html = getReplyHtml(data.content, data.created_at, data.id)
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
               html.find(".comment-content").append(btn_like)

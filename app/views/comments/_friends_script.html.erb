@@ -4,7 +4,6 @@
         // like_ajax(".w-like")
         $("form").submit( function(e) {
 
-            console.log("hi")
             e.preventDefault();
             
             var form = $(this)
@@ -14,9 +13,11 @@
                 url: form.attr('action'),
                 data: form.serialize(),
                 success: function(data) {
+                    var new_url = "/comments/" + data.id;
+                    console.log(data);
+                    console.log("here");
+                    console.log(new_url);
                     
-                    //TODO: indent 해
-                    //TODO: comment like, commment-info update
                     var html_str=
                     `
                             <div class = "comment-content">
@@ -28,9 +29,9 @@
                             </div>
                             <div class = "comment-info">
                                 <time datetime='${data.created_at}', class='timeago'></time>
-                                <span>
+                                <span> 
                                     <span>좋아요 <span class="show-likes">0</span>개</span>
-                                    <span class="btn-comment-delete", "data-url" => comment_path(${data.id})삭제</span>
+                                    <span class="btn-comment-delete" data-url="${new_url}">삭제</span>
                                 </span>
                             </div>
                         </div>
