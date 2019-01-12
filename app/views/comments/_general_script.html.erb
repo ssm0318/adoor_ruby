@@ -1,7 +1,7 @@
 <script>
 
 
-  function getReplyHtml(content, created_at) {
+  function getReplyHtml(content, created_at, id) {
     return $(`
       <div class='reply'>
         <div class="comment-content">
@@ -17,7 +17,7 @@
             <time datetime='${created_at}', class='timeago'></time>
             <span>
                 <span>좋아요 <span class="show-likes">0</span>개</span>
-                <span class="btn-comment-delete">삭제</span>
+                <span class="btn-comment-delete", "data-url" => reply_path(${id}>삭제</span>
             </span>
         </div> 
       </div>
@@ -69,7 +69,7 @@
                         <time datetime='${data.created_at}', class='timeago'></time>
                         <span>
                             <span>좋아요 <span class="show-likes">0</span>개</span>
-                            <span class="btn-comment-delete">삭제</span>
+                            <span class="btn-comment-delete", "data-url" => comment_path(${data.id}>삭제</span>
                         </span>
                     </div> 
                   </div>
@@ -100,7 +100,7 @@
                   url: new_form.attr('action'),
                   data: new_form.serialize(),
                   success: function(data) {
-                    var new_html = getReplyHtml(data.content, data.created_at)
+                    var new_html = getReplyHtml(data.content, data.created_at, data.id)
                     var new_btn_like = getButtonLike(data.like_url, data.like_changed_url)
                     new_html.find(".comment-content").append(new_btn_like)
                     new_form.parent().find(".comment-replies").append(new_html);
@@ -118,7 +118,7 @@
             }
             else {
 
-              var html = getReplyHtml(data.content, data.created_at)
+              var html = getReplyHtml(data.content, data.created_at, data.id)
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
               html.find(".comment-content").append(btn_like)
               form.parent().find(".comment-replies").append(html)

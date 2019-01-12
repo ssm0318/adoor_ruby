@@ -2,11 +2,11 @@
     <span>좋아요 <span class="show-likes"><%= Like.where(target: feed).count() %></span>개</span>
     <% if feed.is_a? Answer %>
         <%= link_to "수정", edit_answer_path(feed.id) %>
+        <%= link_to "삭제", answer_path(feed.id), 
+            { :class => "btn-feed-delete", :"data-confirm" => "답변을 지우시겠습니까?", :"data-method" => :delete } %>
     <% else %>
         <%= link_to "수정", edit_post_path(feed.id) %>
+        <%= link_to "삭제", post_path(feed.id), 
+            { :class => "btn-feed-delete", :"data-confirm" => "글을 지우시겠습니까?", :"data-method" => :delete } %>
     <% end %>
-    <%# link_to "삭제", answer_path(a.id),
-        method: :delete,
-        data: { confirm: '답변을 지우시겠습니까?'} %>
-    <span class="btn-feed-delete">삭제</span>
 <% end %>

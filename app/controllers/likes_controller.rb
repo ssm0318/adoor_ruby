@@ -8,12 +8,7 @@ class LikesController < ApplicationController
 
         }
     end 
-
-    def user_likes
-        @user = User.find(params[:id])
-        @likes = @user.likes
-    end
-
+    
     def destroy
         like = Like.where(target_type: params[:target_type], target_id: params[:id], user_id: current_user.id)
         like.destroy_all

@@ -11,15 +11,15 @@
                 if(!confirm("댓글을 지우시겠습니까?")) {
                     return;
                 }
-            }
+            } 
 
 
             // TODO delete ajax
 
-            // $.ajax({
-            //     type: "DELETE",
-            //     url: delete.attr("data-url"),
-            //     success: function(data) {
+            $.ajax({
+                type: "DELETE",
+                url: delete.attr("data-url"),
+                success: function(data) {
             //      클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
                     if(delete_btn.hasClass("btn-feed-delete")) {
                         delete_btn.parents(".prism-box").fadeOut(600, function(){ $(this).remove();});
@@ -32,11 +32,11 @@
                     } else {
                         delete_btn.parents(".reply").fadeOut(600, function(){ $(this).remove();});
                     }     
-            //     },
-            //     error: function(data) {
-            //         console.log("error!")
-            //     }
-            // })
+                },
+                error: function(data) {
+                    console.log("error!")
+                }
+            })
         })
     }
     

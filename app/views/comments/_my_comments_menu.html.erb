@@ -1,11 +1,5 @@
 <% if current_user.id == target.author.id %>
     <span>좋아요<span class="show-likes"><%= Like.where(target_type: target.class.to_s, target_id: target.id).count() %></span>개</span>
-    <span class="btn-comment-delete">삭제</span>
-    <%
-=begin%>
- <%= link_to "삭제", comment_path(c.id),
-        method: :delete,
-        data: { confirm: '댓글을 지우시겠습니까?'} %> 
-<%
-=end%>
+    <%= link_to "삭제", comment_path(target.id), 
+            { :class => "btn-comment-delete", :"data-confirm" => "댓글을 지우시겠습니까?", :"data-method" => :delete } %>
 <% end %> 
