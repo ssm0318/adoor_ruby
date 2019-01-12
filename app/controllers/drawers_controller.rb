@@ -12,7 +12,7 @@ class DrawersController < ApplicationController
     end
 
     def user_drawers
-        @user = User.find(params[:id])
+        @user = User.find(params[:id]) 
         @drawers = @user.drawers
     end
 

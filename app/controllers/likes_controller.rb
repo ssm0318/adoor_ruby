@@ -7,7 +7,7 @@ class LikesController < ApplicationController
         render json: {
 
         }
-    end
+    end 
 
     def user_likes
         @user = User.find(params[:id])
