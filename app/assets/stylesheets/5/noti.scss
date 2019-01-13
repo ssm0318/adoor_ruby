@@ -29,13 +29,18 @@
     font-size: 13px;
 }
 
-// .noti-el:hover {
-//     background-color: #e8e8e8;
-// }
+.noti-el:hover {
+    background-color: #e8e8e8;
+    cursor: pointer;
+}
 
 .noti-el.unread {
     background-color: #FAD4BC;
     color: black;
     font-family: "Nanum Gothic", sans-serif;
     font-size: 13px;
+    &:hover {
+        background-color: rgb(247, 184, 146);
+
+    }
 }

@@ -1,10 +1,10 @@
 <% if current_user.id == feed.author.id %>
     <span>좋아요 <span class="show-likes"><%= Like.where(target: feed).count() %></span>개</span>
     <% if feed.is_a? Answer %>
-        <%= link_to "수정", edit_answer_path(feed.id) %>
-        <span class="btn-feed-delete" data-url="<%=answer_path(feed.id)%>">삭제</span>
+        <%= link_to "수정", edit_answer_path(feed.id), class: "hover-orange" %>
+        <span class="btn-feed-delete hover-orange hover-pointer" data-url="<%=answer_path(feed.id)%>">삭제</span>
     <% else %>
-        <%= link_to "수정", edit_post_path(feed.id) %>
-        <span class="btn-feed-delete" data-url="<%=post_path(feed.id)%>">삭제</span>
+        <%= link_to "수정", edit_post_path(feed.id), class: "hover-orange" %>
+        <span class="btn-feed-delete hover-orange hover-pointer" data-url="<%=post_path(feed.id)%>">삭제</span>
     <% end %>
 <% end %>

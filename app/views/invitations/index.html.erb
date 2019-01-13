@@ -5,7 +5,6 @@
             <div class="answer">
                 친구에게 초대링크를 보내보세요.
                 최대 3개의 질문과 함께 보낼 수 있어요!
-                <!-- TODO: 질문 검색창 만들기 -->
                 <%= form_tag(invitation_link_path, method: :get) do %>
                     <% @questions.each do |question| %>
                         <%= check_box_tag "q[]", question.id, false %>

@@ -11,14 +11,16 @@
 
     <div class = "nav-right">
         <% if user_signed_in? %>
+        <%= render 'layouts/searchbar' %>
         <%= link_to '로그아웃', destroy_user_session_path, 
                 method: :delete, class: "nav-el" %>
         <%= render 'layouts/notification', noties: noties %>
-        <%= link_to image_tag(current_user.image.url), profile_path(current_user.id), class: "my-page-btn" %>       
+        <%= link_to image_tag(current_user.image.url), profile_path(current_user.id), class: "my-page-btn" %> 
+              
         <% else %>
         <%= link_to '로그인', user_session_path, class: "nav-el, log-in" %>
         <% end %>
     </div>
     </div>
-    <%# <%= render 'layouts/searchbar' %>
+    
 </div>

@@ -42,7 +42,7 @@
                 <div class = "prism-box__footer" style="padding-bottom: 10px;">
                     <% if current_user.id == @user.id %>
                         <%= link_to "수정", edit_answer_path(d.target.id) %>
-                        <span class="btn-feed-delete" data-url="<%=answer_path(d.target.id)%>">삭제</span>
+                        <span class="btn-feed-delete hover-orange hover-pointer" data-url="<%=answer_path(d.target.id)%>">삭제</span>
                 <% end %>                 
 
                 <%= render 'drawers/default', target: d.target %>
