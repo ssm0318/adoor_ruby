@@ -39,7 +39,7 @@
 }
 
 .intro-img-smallest {
-    width: 30%;
+    width: 40%;
     margin-right: auto;
     margin-left: auto;
     display: block;
@@ -66,4 +66,16 @@
 .intro-accent {
     font-weight: bold;
     color: rgb(245, 154, 126);
+}
+
+.intro-link {
+    font-weight: bold;
+    &:hover {
+        color: #F48462;
+     }
+     color: black;
+}
+
+.intro-change-color {
+    color: #F48462;
 }

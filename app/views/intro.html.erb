@@ -3,12 +3,12 @@
 <div class="answer intro-container">
 <div class="intro-tc">
     <div style="color: #F48462; font-size: 25px; text-align: center; line-height: 10px;">목차</div>
-    <a href="#friend" class="intro-tc-el">1. 친구 만들기</a>
-    <a href="#assign" class="intro-tc-el">2. 질문 보내기</a>
-    <a href="#comment" class="intro-tc-el">3. 댓글 달기</a>
-    <a href="#drawer" class="intro-tc-el">4. 서랍장에 글 담기</a>
-    <a href="#like" class="intro-tc-el">5. 좋아요 누르기</a>
-    <a href="#notification" class="intro-tc-el">6. 알림 확인하기</a>
+    <a href="#friend" class="intro-tc-el tc-1">1. 친구 만들기</a>
+    <a href="#assign" class="intro-tc-el tc-2">2. 질문 보내기</a>
+    <a href="#comment" class="intro-tc-el tc-3">3. 댓글 달기</a>
+    <a href="#drawer" class="intro-tc-el tc-4">4. 서랍장에 글 담기</a>
+    <a href="#like" class="intro-tc-el tc-5">5. 좋아요 누르기</a>
+    <a href="#notification" class="intro-tc-el tc-6">6. 알림 확인하기</a>
     <div style="color: #F48462; font-size: 15px; text-align: center; font-weight: bold;">핵심만 보기</div><a href="#accent-assign" class="intro-tc-el">핵심1</a>  <a href="#accent-comment" class="intro-tc-el">핵심2</a>  <a href="#accent-like" class="intro-tc-el">핵심3</a>
 </div>
 <h2 id="friend" class="intro-topic">친구를 만들어보세요!</h2>
@@ -105,7 +105,31 @@
 
 <div style="color: grey;">
 어도어는 더 좋은 서비스가 되기 위해 노력하고 있어요.
-어도어에게 질문이 있거나 오류를 보고하려면 adoor.team@gmail.com 으로 연락주세요.
+질문이나 오류 보고, 후원을 환영합니다.
+<%= link_to '이메일', 'mailto:adoor.team@gmail.com', class: "intro-link"%> &nbsp &nbsp<%= link_to '페이스북', 'https://www.facebook.com/adoor.team', class: "intro-link" %> &nbsp &nbsp<%= link_to '인스타그램', 'https://www.instagram.com/adoor.official',class: "intro-link" %>
 </div>
 
 </div>
+
+<script>
+$(document).ready(function() {
+    console.log($("#friend").scrollTop)
+
+    console.log($("#comment").scrollTop())
+
+    console.log($("#drawer").scrollTop())
+
+    console.log($("#like").scrollTop())
+
+    console.log($("#notification").scrollTop())
+
+   $(window).scroll(function () {
+      if ($(this).scrollTop() > $("#comment").scrollTop()) {
+         $(".tc-2").addClass("intro-change-color")
+      }
+      if ($(this).scrollTop() < $("#comment").scrollTop()) {
+         $(".tc-2").removeClass("intro-change-color")
+      }
+   });
+});
+</script>
