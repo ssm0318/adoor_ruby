@@ -1,3 +1,66 @@
 // Place all the styles related to the search controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.search-header {
+    .search-form {
+        //padding-top: 20px;
+    }
+    .search-elements {
+    }
+    .search-input {
+        width: 500px;
+        height: 40px;
+        padding-left: 10px;
+        border: none;
+        background-color: white;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        display: inline-block;
+        font-size: 15px;
+        &:focus {
+            outline: none;
+            fill: none;
+        }
+    }
+    
+    .search-button {
+        height: 30px;
+        width: 30px;
+        background: url("icons/search-icon.png");
+        border: none;
+        cursor: pointer;
+        &:focus {
+            outline: none;
+        }
+        position: relative;
+        top: 10px;
+    }
+
+    .search-button-image {
+        height: 30px;
+        width: 30px;
+    }
+
+    .search-tab {
+        display: inline-block;
+        
+
+    }
+
+    .search-tab-button {
+        border: none;
+        background-color: transparent;
+        &:focus {
+            outline: none;
+        }
+        &:hover {
+            color: #F48462;
+        }
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    .search-keyword {
+        color: #F48462;
+    }
+}

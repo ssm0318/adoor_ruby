@@ -1,4 +1,6 @@
-<h1>핫한 검색어</h1>
-<% @results.each do |query| %>
-    <p><%= query.content %></p>
-<% end %>
+<div class="inner-container">
+    <%= render 'header', searchpath: @searchpath, query: @query %>
+    <% @results.reverse_each do |result| %> 
+        <p><%= result.content %></p>
+    <% end%>
+</div>

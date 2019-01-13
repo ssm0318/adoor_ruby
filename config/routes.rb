@@ -65,7 +65,7 @@ Rails.application.routes.draw do
   get '/invitation/:id(/:question_id1(/:question_id2(/:question_id3)))' => 'invitations#accept', as: :invitation_accept
 
   # Search
-  post '/search/all' => 'search#all', as: :search_all
+  get '/search/all' => 'search#all', as: :search_all
   get '/search/admin_question' => 'search#admin_question', as: :search_admin_question
   get '/search/custom_question' => 'search#custom_question', as: :search_custom_question
   get '/search/friend_answer' => 'search#friend_answer', as: :search_friend_answer
