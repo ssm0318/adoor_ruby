@@ -1,6 +1,5 @@
 .question-box {
     list-style: none;
-    margin-top: 16px;
     font-size: 20px; 
 
     .question {
@@ -25,6 +24,7 @@
     line-height: 30px;
     // border-bottom: 1px solid #C08BEF;
     resize: none;
+    margin-bottom: -30px;
 }
 
 .new-answer-field:focus {

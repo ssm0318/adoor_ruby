@@ -5,11 +5,12 @@
         textarea.addEventListener('keydown', () => {
         
         console.log("textarea yay");
+        console.log(document.documentElement.scrollTop);
 
         setTimeout(function(){
-            console.log(textarea.scrollHeight);
             textarea.style.cssText = 'height: 100px; padding:0';
             textarea.style.cssText = 'height: ' + (textarea.scrollHeight) + 'px';
+            document.documentElement.scrollTop = textarea.scrollHeight;
         },0);
       });
     }
