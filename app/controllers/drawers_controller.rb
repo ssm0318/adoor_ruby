@@ -20,10 +20,6 @@ class DrawersController < ApplicationController
         drawer = Drawer.where(target_type: params[:target_type], target_id: params[:id], user_id: current_user.id)
         drawer.destroy_all
 
-        # fallback_location은 그냥 임시
-        # redirect_back fallback_location: user_drawers_path(current_user.id)
-        render json: {
-            
-        }
+        redirect_back fallback_location: user_drawers_path(current_user.id)
     end
 end

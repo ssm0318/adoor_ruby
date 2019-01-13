@@ -16,11 +16,11 @@
           </span>
         </div>
         <div class = "comment-info">
-            <time datetime='${created_at}', class='timeago'></time>
             <span>
-                <span>좋아요 <span class="show-likes">0</span>개</span>
+                <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
                 <span class="btn-comment-delete" data-url="${new_url}">삭제</span>
             </span>
+            <time datetime='${created_at}', class='timeago'></time>
         </div> 
       </div> 
     `)
@@ -70,17 +70,17 @@
                       </span>
                     </div>
                     <div class = "comment-info">
-                        <time datetime='${data.created_at}', class='timeago'></time>
                         <span>
-                            <span>좋아요 <span class="show-likes">0</span>개</span>
+                            <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
                             <span class="btn-comment-delete" data-url="${new_url}">삭제</span>
                         </span>
+                        <time datetime='${data.created_at}', class='timeago'></time>
                     </div> 
                   </div>
                 </div>
                 <%= form_tag replies_path, :class => "prism-form reply" do %>
                     <%= hidden_field_tag "id", "${data.comment_id}" %>
-                    <%= text_field_tag "content", "", :class => "prism-form__input" %>
+                    <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
                     <%= button_tag "저장", class: "prism-form__button" %>
                 <% end %>
               </div>

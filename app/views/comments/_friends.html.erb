@@ -13,8 +13,8 @@
     </div>
 
     <div class = "comment-info">
-        <span class="date time"><%= time_tag c.created_at, class: "timeago" %></span>
         <span class="authorized"> <%= render 'comments/my_comments_menu', c: c %></span>
+        <span class="date time"><%= time_tag c.created_at, class: "timeago" %></span>
     </div>
 </div>
    

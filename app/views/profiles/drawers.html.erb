@@ -2,7 +2,7 @@
     <%= render partial: "profiles/layout", locals: {user: @user} %>
     <% @drawers.reverse_each do |d| %>
         <% if d.target_type == "Question" %>
-            <div class = "prism-box">
+            <div class = "prism-box"> 
                 <div class = "prism-box_question">
                     <br>
                     <div>
@@ -46,7 +46,7 @@
                 <% end %>                 
 
                 <%= render 'drawers/default', target: d %>
-                </div>
+                </div> 
             </div>
         <% end %>
     <% end %>

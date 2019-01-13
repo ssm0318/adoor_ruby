@@ -6,14 +6,14 @@
         <%= form_for answer do |f| %>
             <%= f.hidden_field :author_id, :value => current_user.id %>
             <%= f.hidden_field :question_id, :value => @question.id %>
-            <%= f.text_area :content, class: "new-answer-field",  autofocus: true, "data-enable-grammarly": "false" %>
+            <%= f.text_area :content, class: "new-answer-field", required: true, autofocus: true, "data-enable-grammarly": "false" %>
             <br><br>
 
             <!--tag field-->
             <%# <%= f.text_area :tag_string %>
             <br><br>
 
-            <%= f.submit "저장하기", class: "answer-button"%>
+            <%= f.submit "저장", class: "answer-button"%>
         <% end %>
     </div>
 </div>

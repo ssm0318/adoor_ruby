@@ -29,7 +29,7 @@
     </div>
     <% if anonymous %>
         <%= render 'comments/general_form', feed: post %>
-    <%else %>
+    <% else %>
         <%= render 'comments/friends_form', feed: post %>
     <% end %>
 </div>

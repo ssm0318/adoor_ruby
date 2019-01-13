@@ -47,7 +47,6 @@
                 <br>
             </div> 
             <div class="prism-box__footer" style="padding-bottom: 10px;">
-                <%= render 'feeds/my_feed', feed: post %>
                 <%= render 'likes/default', target: answer, like_btn_class: "btn-feed-like" %>
                 <%= render 'drawers/default', target: answer %>
                 <br>
@@ -56,5 +55,3 @@
         </div>  
     <% end %>
 </div>
-
-<%= render 'layouts/timestamp' %>

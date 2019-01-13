@@ -65,5 +65,8 @@ class QuestionsController < ApplicationController
     private
         def set_question
             @question = Question.find(params[:id])
+            # if @question.selected_date.nil?
+            #     redirect_to questions_path
+            # ends
         end
 end
