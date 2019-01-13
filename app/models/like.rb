@@ -25,6 +25,6 @@ class Like < ApplicationRecord
                     Notification.where(noti_hash).first.target = self
                 end
             end
-        end
+        end 
     end
 end

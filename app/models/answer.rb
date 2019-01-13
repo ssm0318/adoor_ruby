@@ -1,7 +1,7 @@
 class Answer < ApplicationRecord
     belongs_to :author, class_name: 'User'
     belongs_to :question
-    has_many   :highlights, dependent: :destroy
+    # has_many   :highlights, dependent: :destroy
     has_many   :comments, dependent: :destroy, as: :target
     has_many   :likes, dependent: :destroy, as: :target
     has_many   :drawers, dependent: :destroy, as: :target

@@ -1,5 +1,5 @@
 <div class="feed-nav">
-    <%= active_link_to '전체', '/questions/' + question.id.to_s %>
-    <%= active_link_to '친구', '/questions/' + question.id.to_s + '/friends'  %>
+    <%= active_link_to '전체', '/questions/' + question.id.to_s, active: :exact %> | 
+    <%= active_link_to '친구', '/questions/' + question.id.to_s + '/friends'  %> | 
     <%= active_link_to '익명', '/questions/' + question.id.to_s + '/general'%>
 </div> 

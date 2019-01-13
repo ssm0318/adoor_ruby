@@ -1,23 +1,33 @@
-<%= render 'questions/tabs', question: @question %>
 
 <div class="inner-container">
-    <div class = "question"> 
-
-        <div class = "question-content"><%= @question.content %>
-            <%= link_to image_tag("icons/write-icon.png", class: "btn-write"), new_answer_path(@question.id) %>
-            <% if user_signed_in? %> 
-                <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
-                <%= render 'assignments/default', question: @question %>
-            <% else %>
-                <%= link_to image_tag("icons/assign-icon.png", class: "btn-assign"), new_user_session_path %>
-            <% end %>
-            <% if Drawer.where(user_id: current_user.id, target: @question).empty? %>
-                <%= link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: @question.id, target_type: "Question"), method: :post %>
-            <% else %>
-                <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(@question.id, target_type: "Question"), method: :delete, data: {confirm: '이 글을 서랍장에서 꺼내시겠습니까?'} %>
-            <% end %>
+    <div class="question-btn">
+        <%= link_to image_tag("icons/write-icon.png", class: "btn-write"), new_answer_path(@question.id) %>
+        <% if user_signed_in? %> 
+            <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
+            <%= render 'assignments/default', question: @question %>
+        <% else %>
+            <%= link_to image_tag("icons/assign-icon.png", class: "btn-assign"), new_user_session_path %>
+        <% end %>
+    </div>
+    <%= render 'questions/tabs', question: @question %>
+    
+    <div class = "prism-box">
+        <div class = "prism-box_question">
+            <br>
+            <div>
+                <%= @question.content %>
+                <%= render 'drawers/default', target: @question %> 
+            </div>    
+            <!--<div classs = "question-author">    
+                <% if @question.author.has_role? :newuser %>
+                    <br><br>
+                    Question made by 
+                    <%= render partial: "./user_profile_small", locals: {user: @question.author} %>
+                <% end %>
+            </div>--> <!-- custom question not yet implemented -->
         </div>
-    </div> 
+        <br>
+    </div>
  
     <% @question.answers.reverse_each do |answer| %>
         <div class="prism-box">
@@ -37,6 +47,7 @@
                 <br>
             </div> 
             <div class="prism-box__footer" style="padding-bottom: 10px;">
+                <%= render 'feeds/my_feed', feed: post %>
                 <%= render 'likes/default', target: answer, like_btn_class: "btn-feed-like" %>
                 <%= render 'drawers/default', target: answer %>
                 <br>

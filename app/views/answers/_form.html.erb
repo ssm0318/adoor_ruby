@@ -6,11 +6,7 @@
         <%= form_for answer do |f| %>
             <%= f.hidden_field :author_id, :value => current_user.id %>
             <%= f.hidden_field :question_id, :value => @question.id %>
-            <% if answer.persisted? %>
-                <%= f.text_area :content, class: "edit-answer-field",  autofocus: true, "data-enable-grammarly": "false" %>
-            <% else %>
-                <%= f.text_area :content, class: "new-answer-field",  autofocus: true, "data-enable-grammarly": "false" %>
-            <% end %>
+            <%= f.text_area :content, class: "new-answer-field",  autofocus: true, "data-enable-grammarly": "false" %>
             <br><br>
 
             <!--tag field-->

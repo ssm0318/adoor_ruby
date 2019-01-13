@@ -6,7 +6,7 @@
 
     <div class="prism-box__header">
         <% if anonymous %>
-            <%= render partial: "./user_profile_general", locals: {user_id: answer.author_id, answer_id: answer.id} %>
+            <%= render partial: "./user_profile_general", locals: {user_id: answer.author_id, feed_id: answer.id} %>
         <%else %>
             <%= render partial: "./user_profile", locals: {user: answer.author} %>
         <% end %>
@@ -22,14 +22,14 @@
         <br>
     </div>
     <div class="prism-box__footer" style="padding-bottom: 10px;">
-      
-        <%= render 'comments/my_comments_menu', c: answer %>
+        <%= render 'feeds/my_feed', feed: answer %>
         <%= render 'likes/default', target: answer, target_type: "Answer", like_btn_class: "btn-feed-like" %>
         <%= render 'drawers/default', target: answer, target_type: "Answer"%>
         <br>
     </div>
+    
     <% if anonymous %>
-        <%= render 'comments/general_form', target: answer %>
+        <%= render 'comments/general_form', feed: answer %>
     <%else %>
         <%= render 'comments/friends_form', feed: answer %>
     <% end %>

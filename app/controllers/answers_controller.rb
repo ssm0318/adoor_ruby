@@ -53,8 +53,6 @@ class AnswersController < ApplicationController
 
     def destroy
         @answer.destroy 
-
-        redirect_to profile_path(current_user.id)
     end
 
     private
