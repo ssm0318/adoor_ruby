@@ -7,8 +7,8 @@
                     <br>
                     <div>
                         <%= link_to d.target.content, question_path(d.target.id), class: "question-content" %>
-                        <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Question"), method: :delete, data: {confirm: '이 질문을 서랍장에서 꺼내시겠습니까?'} %>
-                    </div>    
+                        <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Question"), method: :delete %>
+                    </div> 
                     <!--<div classs = "question-author">    
                         <% if d.target.author.has_role? :newuser %>
                             <br><br>
@@ -45,7 +45,7 @@
                         <span class="btn-feed-delete" data-url="<%=answer_path(d.target.id)%>">삭제</span>
                 <% end %>                 
 
-                <%= render 'drawers/default', target: d %>
+                <%= render 'drawers/default', target: d.target %>
                 </div> 
             </div>
         <% end %>
