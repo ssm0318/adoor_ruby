@@ -49,7 +49,6 @@
 
         .nav-right {
             float: right;
-            margin-right: 25px;
             
             .nav-el {
                 display: inline-block;
@@ -134,7 +133,9 @@ div.background {
     div.intro-container {
         background-color: #3B2763;
         opacity: 0.8;
-        width: 50vw;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto; 
         height: 100vh;
         float: right;
         display: flex;
@@ -217,7 +218,7 @@ div.background {
 .inner-container {
     width: 70%;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; 
 
     //for each question feed
     .question {
