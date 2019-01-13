@@ -9,12 +9,7 @@
                     method = "POST"
                 }
                 else {
-                    if(confirm("좋아요를 취소하겠습니까?")) {
-                        method = "DELETE"
-                    }
-                    else {
-                        return;
-                    }
+                    method = "DELETE"
                 }
 
                 $.ajax({

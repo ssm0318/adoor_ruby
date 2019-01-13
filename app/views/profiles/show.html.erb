@@ -11,7 +11,7 @@
             <div class="prism-box__content">
                 <br>
                 <% if feed.is_a? Answer %>
-                    <a href="/questions/<%=feed.question.id%>/friends" class="question"><%= feed.question.content %></a> <br><br>
+                    <%= link_to feed.question.content, question_path(feed.question.id), class: "question" %>
                 <% end %>
                 <div class="answer"><%= feed.content %></div>
                 <br>
@@ -19,7 +19,7 @@
                 <br>
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">
-                <%= render 'comments/my_comments_menu', target: feed %>
+                <%= render 'feeds/my_feed', feed: feed %>
                 <%= render 'likes/default', target: feed, like_btn_class: "btn-feed-like" %>
                 <%= render 'drawers/default', target: feed %>
                 <br>

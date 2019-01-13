@@ -1,0 +1,16 @@
+<script>
+    var textareas = document.querySelectorAll('textarea');
+
+    for(const textarea of textareas) {
+        textarea.addEventListener('keydown', () => {
+        
+        console.log("textarea yay");
+
+        setTimeout(function(){
+            console.log(textarea.scrollHeight);
+            textarea.style.cssText = 'height: 100px; padding:0';
+            textarea.style.cssText = 'height: ' + (textarea.scrollHeight) + 'px';
+        },0);
+      });
+    }
+</script>

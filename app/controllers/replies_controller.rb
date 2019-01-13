@@ -1,4 +1,6 @@
 class RepliesController < ApplicationController
+    before_action :set_reply, only: [:destroy]
+
     def create
         r = Reply.create(content: params[:content], author_id: current_user.id, comment_id: params[:id])
         

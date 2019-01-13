@@ -22,7 +22,6 @@ class PostsController < ApplicationController
     end
 
     def edit
-        @question = @post.question
     end
 
     def update

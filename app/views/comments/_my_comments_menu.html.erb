@@ -1,4 +1,4 @@
-<% if current_user.id == target.author.id %>
-    <span>좋아요<span class="show-likes"><%= Like.where(target_type: target.class.to_s, target_id: target.id).count() %></span>개</span>
-    <span class="btn-comment-delete" data-url="<%=comment_path(target.id)%>">삭제</span>
-<% end %> 
+<% if current_user.id == c.author.id %>
+    <span>좋아요<span class="show-likes"><%= Like.where(target_type: c.class.to_s, target_id: c.id).count() %></span>개</span>
+    <span class="btn-comment-delete" data-url="<%=comment_path(c.id)%>">삭제</span>
+<% end %>  

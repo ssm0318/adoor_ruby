@@ -5,12 +5,14 @@ class AnswersController < ApplicationController
 
     def new
         @question = Question.find(params[:id])
-        @answer = Answer.create(author_id: current_user.id, question_id: @question.id, content: "")
+        @answer = Answer.new
+
         render 'new'
     end
     
     def create 
-        @answer.update(answer_params)
+        @answer = Answer.new(answer_params)
+        @answer.save
 
         if !@answer.tag_string.nil?
             tag_array = @answer.tag_string.gsub("\r\n", '\n').split('\n')
@@ -28,6 +30,7 @@ class AnswersController < ApplicationController
     end
 
     def edit
+        @question = @answer.question
     end
 
     def update

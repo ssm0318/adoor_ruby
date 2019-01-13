@@ -1,13 +1,12 @@
-
+    
 <div class="prism-box-new-post">
     <div class="prism-box__content">
         <%= form_tag('/posts') do %>
             <%= text_area_tag :content, "", class: "new-answer-field",  placeholder: "나는 지금", autofocus: true, "data-enable-grammarly": "false" %>
 
-            <!--tag field-->
-            <%# <%= f.text_area :tag_string %>
-
             <%= button_tag "저장", class: "answer-button"%>
         <% end %>
     </div>
-</div>   
+</div> 
+
+<%= render 'layouts/textarea_script' %>

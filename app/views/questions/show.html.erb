@@ -30,7 +30,7 @@
             </div>
             <div class="prism-box__content">
                 <br>
-                <a href="/questions/<%=answer.question.id%>/friends" class="question"><%= answer.question.content %></a> <br><br>
+                <%= link_to answer.question.content, question_path(answer.question.id), class: "question" %>
                 <div class="answer"><%= answer.content %></div>
                 <br>
                 <div class = "date time"><%= time_tag answer.created_at, class: "timeago" %></div>

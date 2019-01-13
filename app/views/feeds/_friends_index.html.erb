@@ -9,7 +9,7 @@
         </div>
         <div class="prism-box__content"><br>
             <% if feed.is_a? Answer %>
-                <a href="/questions/<%=feed.question.id%>" class="question" style="font-size: 18px;"><%= feed.question.content %></a> <br><br>
+                <%= link_to feed.question.content, question_path(feed.question.id), class: "question", :style => "font-size: 18px;"%>
             <% end %>
             <div class="answer"><%= feed.content %> <br><br></div>
             <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>
