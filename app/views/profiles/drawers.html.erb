@@ -40,12 +40,10 @@
                     <div class = "date time"><%= time_tag d.target.created_at, class: "timeago" %></div>
                 </div>
                 <div class = "prism-box__footer" style="padding-bottom: 10px;">
-                    <% if current_user.id == @user.id %>
-                        <%= link_to "수정", edit_answer_path(d.target.id) %>
+                    <% if current_user.id == d.target.author_id %>
                         <span class="btn-feed-delete hover-orange hover-pointer" data-url="<%=answer_path(d.target.id)%>">삭제</span>
-                <% end %>                 
-
-                <%= render 'drawers/default', target: d.target %>
+                    <% end %>                 
+                    <%= render 'drawers/default', target: d.target %>
                 </div> 
             </div>
         <% end %>
