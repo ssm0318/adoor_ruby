@@ -1,0 +1,162 @@
+// Place all the styles related to the Invitations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 160px;
+    font-family: "Nanum Gothic", serif;
+    background-color: #bcbcbc;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #bcbcbc transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.invitation-link-box {
+    background-color: white;
+    width: calc(100% - 20px);
+    height: 300px;
+    margin: 20px 0px;
+    border: 0.5px solid #dddddd;
+    border-radius: 10px;
+    padding: 10px;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+
+    input[type="text"] {
+        width: 200px;
+        font-family: 'Nanum Gothic', serif;
+        font-size: 18px;
+    }
+
+    .invitation-link-title {
+        font-family: 'Nanum Gothic', serif;
+        font-size: 36px;
+        text-align: center;
+        color: #F48462;
+    }
+
+    button {
+        align-items: flex-start;
+        text-align: center;
+        color: white;
+        background-color: #F48462;
+        width: 100px;
+        height: 35px;
+        border-radius: 50px;
+        box-sizing: border-box;
+        padding: 2px 6px 3px;
+        border-width: 2px;
+        border-color: buttonface;
+        border-image: initial;
+    }
+
+
+}
+
+// accept page
+#friends-btn {
+    text-decoration: none;
+    border-radius: 6px;
+    border: 0.75px solid #bcbcbc;
+    padding: 6px 12px 6px 12px;
+    color: gray;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.invitation-accept-text {
+    margin-top: 50px;
+    text-align: center;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.link-generation-box {
+    font-family: "Nanum Gothic", serif;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    line-height: 1.5em;
+    padding-left: 20px;
+    padding-right: 20px;
+    .link-generation-text {
+        line-height: 2em;
+    }
+    .invitation-form {
+        text-align: left;
+        margin-top: 50px;
+        input {
+            padding: 0;
+            height: initial;
+            width: initial;
+            margin-bottom: 0px;
+            display: none;
+            cursor: pointer;
+        }
+        label {
+            position: relative;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        input[type="checkbox"] + label:before {
+            content:'';
+            -webkit-appearance: none;
+            background-color: transparent;
+            border: 1px solid #F48462;
+            //padding: 10px;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            cursor: pointer;
+            margin-right: 15px;
+            -webkit-transition: all .12s, border-color .08s;
+            transition: all .12s, border-color .08s;
+        }
+        input[type="checkbox"]:checked + label:before {
+            content: '';
+            // display: inline-block;
+            // position: absolute;
+            top: -2px;
+            left: 4px;
+            width: 10px;
+            //height: 14px;
+            border: solid #F48462;
+            border-width: 0 1px 1px 0;
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+        }
+
+    }
+}

@@ -172,7 +172,6 @@ Reply.find_or_create_by(author_id: 2, comment_id: 2, content: "유후~")
 Reply.find_or_create_by(author_id: 2, comment_id: 3, content: "뚱딴지")
 Reply.find_or_create_by(author_id: 3, comment_id: 1, content: "대탐험")
 Reply.find_or_create_by(author_id: 3, comment_id: 4, content: "보물찾기")
-Reply.find_or_create_by(author_id: 3, comment_id: 5, content: "진지잡수세요")
 Reply.find_or_create_by(author_id: 5, comment_id: 10, content: "답변 감사합니당")
 
 # Like 

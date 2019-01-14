@@ -1,0 +1,36 @@
+<div class = "inner-container">
+    <div class = "prism-box">
+        <div class  = "prism-box__content">
+        <%# <h1 class = "prism-title">친구 초대하기</h1> %>
+            <div class="link-generation-box">
+                <div class="link-generation-text">
+                    친구에게 초대링크를 보내보세요.<br>
+                    최대 3개의 질문과 함께 보낼 수 있어요!<br>
+                </div>
+                <%= form_tag(invitation_link_path, method: :get, class: "invitation-form") do %>
+                    <% @questions.each do |question| %>
+                        <%= check_box_tag "q[]", question.id, false, id: question.id.to_s%>
+                        <%= label_tag "#{question.id}", question.content %><br><br>
+                    <% end %>
+                    <%= button_tag "링크 생성하기", class: "link-generation-btn" %><br>
+                <% end %>
+            </div>               
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+$(document).ready(function() {
+
+    var limit = 3;
+    $('input[name="q[]"]').on('change', function(evt) {
+        if($(this).siblings(':checked').length >= limit) {
+            this.checked = false;
+            alert("질문은 3개까지만 선택할 수 있어요!");
+        }
+    });
+});
+
+</script>

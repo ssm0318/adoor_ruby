@@ -40,7 +40,7 @@ class User < ApplicationRecord
   has_many :assignees, :through => :made_assignments, dependent: :destroy
 
   # highlight
-  has_many :highlights, dependent: :destroy
+  # has_many :highlights, dependent: :destroy
 
   # highlight
   has_many :likes, dependent: :destroy

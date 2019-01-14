@@ -1,5 +1,5 @@
 <div class="sign-box">
-  <h1 class="sign-title">Enter your email to reset your password</h1>
+  <h1 class="sign-title">비밀번호 재설정을 위해 이메일을 입력해주세요.</h1>
 
   <div class="sign-content-box" align="center">
     <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
@@ -11,13 +11,13 @@
                     autofocus: true,
                     input_html: { autocomplete: "email" }, 
                     class: "form-input",
-                    placeholder: "email",
+                    placeholder: " 이메일",
                     :label => false,
                     style: "padding-bottom: 100px;"%>
       </div>
 
       <div class="form-actions">
-        <%= f.button :submit, "Send Email" , class: "orange-btn"%>
+        <%= f.button :submit, "이메일 보내기" , class: "orange-btn"%>
       </div>
     <% end %>
 

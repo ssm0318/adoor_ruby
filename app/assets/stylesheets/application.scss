@@ -43,13 +43,13 @@
             }
 
             .nav-el.active {
-                color: #F48462;;
+                color: #F48462;
             }
         }
 
         .nav-right {
             float: right;
-            margin-right: 25px;
+            margin-right: 35px;
             
             .nav-el {
                 display: inline-block;
@@ -74,7 +74,7 @@
                 width: 20px;
                 height: auto;
                 display: block;
-                cursor: pointer;
+                
             }
 
             .my-page-btn img {
@@ -83,8 +83,45 @@
                 width: 25px;
                 height: 25px;
                 border-radius:15px;
-                cursor: pointer;
                 margin-right: 20px;
+            }
+
+            .search-form {
+                //padding-top: 20px;
+                display: inline-block;
+            }
+            .search-input {
+                width: 150px;
+                height: 25px;
+                padding-left: 10px;
+                border: none;
+                background-color: white;
+                border-radius: 20px;
+                margin-bottom: 10px;
+                font-size: 15px;
+        
+                &:focus {
+                    outline: none;
+                    fill: none;
+                }
+            }
+            
+            .search-button {
+                height: 20px;
+                width: 20px;
+                background: url("icons/search-icon.png");
+                border: none;
+                cursor: pointer;
+                &:focus {
+                    outline: none;
+                }
+                position: relative;
+                top: 5px;
+            }
+        
+            .search-button-image {
+                height: 20px;
+                width: 20px;
             }
 
         }
@@ -95,7 +132,9 @@
 #prism-container {
     width: 60%;
     margin: 0 auto;
+    margin-bottom: 50px;
     padding-top: 50px;
+    position: relative;
     .prism-title {
         width: 100%;
         text-align: center;
@@ -103,7 +142,9 @@
         &:hover {
             color: #F48462;
          }
+         font-family: 'Open Sans', sans-serif;
     }
+    
 }
 
 a {
@@ -118,6 +159,9 @@ a {
 .username{
     color: black;
     vertical-align: +6px;
+    &:hover {
+        color: #F48462;
+    }
 }
 body {margin: 0px; background-color: #f9f9f9;}
 
@@ -132,7 +176,9 @@ div.background {
     div.intro-container {
         background-color: #3B2763;
         opacity: 0.8;
-        width: 50vw;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto; 
         height: 100vh;
         float: right;
         display: flex;
@@ -215,11 +261,12 @@ div.background {
 .inner-container {
     width: 70%;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; 
 
     //for each question feed
     .question {
         text-align: center;
+        margin-bottom: 200px;
         
         .question-content{
             position: relative;
@@ -227,7 +274,6 @@ div.background {
             text-decoration: none;
             color: black;
             font-size: 22px;
-
         }
 
         .btn-drawer {
@@ -235,6 +281,7 @@ div.background {
             height: auto;
             float: right;
             padding-bottom: 10px;
+            cursor: pointer;
         }
 
         .btn-like {
@@ -242,6 +289,7 @@ div.background {
             height: auto;
             float: right;
             padding-top: 2px;
+            cursor: pointer;
         }
     }
 
@@ -256,7 +304,18 @@ div.background {
 
         a.active {
             color: black;
+            font-weight: bold;
         }
     }
 
+}
+
+.hover-orange {
+    &:hover {
+        color: #F48462;
+    }
+}
+
+.hover-pointer {
+    cursor: pointer;
 }

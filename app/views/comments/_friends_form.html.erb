@@ -1,0 +1,85 @@
+<div class="prism-box__footer" style="margin-top: 5px; border-top: 1px solid #d7dae0;">
+    <div>
+        댓글 <br><br>
+        <div class="author-comments-div">
+            <div class="comments">
+                <% Comment.where(target: feed, recipient_id: feed.author.id).each do |c| %>
+                    <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
+                <% end %> 
+            </div> 
+            <% if current_user.id == feed.author.id %>
+                <%= form_tag comments_path, :class => "prism-form comment" do %>
+                    <%= hidden_field_tag "recipient_id", feed.author.id %>
+                    <%= hidden_field_tag "target_type", feed.class.to_s %>
+                    <%= hidden_field_tag "target_id", feed.id %>
+                    <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
+                    <%= button_tag "저장", :class => "prism-form__button" %>
+                    이 댓글은 전체 공개되는 댓글입니다
+                <% end %>
+                <br><br>
+            <% end %>
+        </div>
+
+        <% if current_user.id == feed.author.id %>
+            <% recipients = [] %>
+            <% feed.comments.each do |c| %>
+                <% if c.recipient_id!= nil && c.recipient_id != feed.author.id %>
+                    <% recipients.push(c.recipient_id) %>
+                <% end %>
+            <% end %>
+            <% recipients.uniq! %>
+            <% recipients.each do |r| %>
+                <div class="comments-div">
+                    <div class="comments">
+                        <% Comment.where(target: feed, recipient_id: r).each do |c| %>
+                            <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
+                        <% end %>
+                    </div>
+                    <%= form_tag comments_path, :class => "prism-form friend-comment" do %>
+                        <%= hidden_field_tag "recipient_id", r %>
+                        <%= hidden_field_tag "target_type", feed.class.to_s %>
+                        <%= hidden_field_tag "target_id", feed.id %>
+                        <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
+                        <%= button_tag "저장", :class => "prism-form__button" %>
+                    <% end %>
+                </div>
+                <br>
+            <% end %>
+            <div class="anonymous-comments-div">
+                <% Comment.where(target: feed, recipient_id: nil).each do |c|%>
+                    <div class="comment-replies-form">
+                        <div class="comment-replies">
+
+                            <%= render partial: "comments/general", locals: {user_id: c.author_id, feed_id: feed.id, c: c} %>
+
+                            <% Reply.where(comment_id: c.id).each do |r|%>
+                                <%= render partial: "replies/default", locals: {user: current_user, feed_id: feed.id, r: r} %>
+                            <% end %>
+                        </div>
+                        <%# TOOD: action 설정 %>
+                        <%= form_tag replies_path, :class => "prism-form reply" do %>
+                            <%= hidden_field_tag "id", c.id %>
+                            <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
+                            <%= button_tag "저장", class: "prism-form__button" %>
+                        <% end %>
+                    </div>
+                <%end%>
+            </div>
+        <% else %>
+            <div class="comments-div">
+                <div class="comments">
+                    <% Comment.where(target: feed, recipient_id: current_user.id).each do |c| %>
+                        <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
+                    <% end %>
+                </div>
+                <%= form_tag comments_path, :class => "prism-form comment" do %>
+                    <%= hidden_field_tag "recipient_id", current_user.id %>
+                    <%= hidden_field_tag "target_type", feed.class.to_s %>
+                    <%= hidden_field_tag "target_id", feed.id %>
+                    <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
+                    <%= button_tag "저장", :class => "prism-form__button" %>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+</div>

@@ -1,8 +1,4 @@
-<h1>검색 결과</h1>
-<% @results.each do |answer| %>
-    <div style="border: solid black 1px;">
-        글쓴이: <%= answer.author.username %><br>
-        내용: <%= answer.content %><br>
-        태그: <%= answer.tag_string %><br>
-    </div>
-<% end %>
+<div class="inner-container">
+    <%= render 'header', searchpath: @searchpath, query: @query %>
+    <%= render partial: 'feeds/friends_index', locals: {feeds: @results} %>
+</div>
