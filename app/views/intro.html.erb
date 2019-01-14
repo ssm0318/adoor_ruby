@@ -6,12 +6,12 @@
 <div class="intro-tc"> 
     <div style="color: #F48462; font-size: 25px; text-align: center; line-height: 5px;">목차</div>
     <a href="#friend" class="intro-tc-el tc-1">1. 친구 만들기</a>
-    <a href="#assign" class="intro-tc-el tc-2">2. 질문 보내기</a>
-    <a href="#comment" class="intro-tc-el tc-3">3. 댓글 달기</a>
+    <a href="#assign" class="intro-tc-el tc-2">2. 질문 보내기*</a>
+    <a href="#comment" class="intro-tc-el tc-3">3. 댓글 달기*</a>
     <a href="#drawer" class="intro-tc-el tc-4">4. 서랍장에 글 담기</a>
-    <a href="#like" class="intro-tc-el tc-5">5. 좋아요 누르기</a>
+    <a href="#like" class="intro-tc-el tc-5">5. 좋아요 누르기*</a>
     <a href="#notification" class="intro-tc-el tc-6">6. 알림 확인하기</a>
-    <div style="color: #F48462; font-size: 15px; text-align: center; font-weight: bold;">핵심만 보기</div><a href="#accent-assign" class="intro-tc-el">핵심1</a>  <a href="#accent-comment" class="intro-tc-el">핵심2</a>  <a href="#accent-like" class="intro-tc-el">핵심3</a>
+    <%# <div style="color: #F48462; font-size: 15px; text-align: center; font-weight: bold;">핵심만 보기</div><a href="#accent-assign" class="intro-tc-el">핵심1</a>  <a href="#accent-comment" class="intro-tc-el">핵심2</a>  <a href="#accent-like" class="intro-tc-el">핵심3</a> %>
 </div>
 <div id='friend'>
     <h2 class="intro-topic">친구를 만들어보세요!</h2>
@@ -42,7 +42,9 @@
 <div id="comment">
     <h2 class="intro-topic">댓글을 달아보세요!</h2>
     친구의 글에 댓글을 달면, 친구(글쓴이)가 대댓글을 달아줄 수 있어요.
-    친구에게 단 댓글과 친구가 내게 단 대댓글은 <span class="intro-accent" id="accent-comment">친구와 당신, 오직 두 사람만 볼 수 있어요. </span>
+    친구에게 단 댓글과 친구가 내게 단 대댓글은 
+    <span class="intro-accent" id="accent-comment">친구와 당신, 오직 두 사람만 볼 수 있어요. </span>
+
     <%= image_tag("img/writer_view.png", class: "intro-img") %><div class="img-caption">'마틸다'가 보는 자신의 글과 댓글</div>
     <%= image_tag("img/user1_view.png", class: "intro-img-small img-side") %><%= image_tag("img/user2_view.png", class: "intro-img-small img-side") %>
     <div class="img-caption">'마틸다'의 친구들이 보는 '마틸다'의 글과 댓글(왼쪽: '백산수'가 접속, 오른쪽: '잡동사니'가 접속)</div>
@@ -113,7 +115,6 @@
     질문이나 오류 보고, 후원을 환영합니다.
     <%= link_to '이메일', 'mailto:adoor.team@gmail.com', class: "intro-link"%> &nbsp &nbsp<%= link_to '페이스북', 'https://www.facebook.com/adoor.team', class: "intro-link" %> &nbsp &nbsp<%= link_to '인스타그램', 'https://www.instagram.com/adoor.official',class: "intro-link" %>
 </div>
-
 </div>
 
 <script>

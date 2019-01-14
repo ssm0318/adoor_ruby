@@ -73,8 +73,12 @@
 }
 
 .intro-accent {
-    font-weight: bold;
-    color: rgb(245, 154, 126);
+    //font-weight: bold;
+    //color: rgb(245, 154, 126);
+    font-size: 18px;
+    text-decoration: none;
+    border-bottom: 1px solid #F48462;
+    padding-bottom: 2px;
 }
 
 .intro-link {

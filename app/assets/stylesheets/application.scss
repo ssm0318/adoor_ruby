@@ -89,39 +89,54 @@
             .search-form {
                 //padding-top: 20px;
                 display: inline-block;
+                margin-right: 30px;
             }
             .search-input {
-                width: 150px;
-                height: 25px;
+                width: 0px;
+                height: 30px;
                 padding-left: 10px;
                 border: none;
                 background-color: white;
-                border-radius: 20px;
+                border-radius: 10px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
                 margin-bottom: 10px;
                 font-size: 15px;
-        
+                padding-left: 35px;
+                -webkit-transition: width .55s ease;
+                -moz-transition: width .55s ease;
+                -ms-transition: width .55s ease;
+                -o-transition: width .55s ease;
+                transition: width .55s ease;
                 &:focus {
                     outline: none;
                     fill: none;
                 }
             }
-            
-            .search-button {
-                height: 20px;
-                width: 20px;
-                background: url("icons/search-icon.png");
-                border: none;
-                cursor: pointer;
-                &:focus {
-                    outline: none;
-                }
-                position: relative;
-                top: 5px;
+
+            .search-input:focus, .search-input:active {
+                outline: none;
+                width: 120px;
+            }
+
+            .search-container:hover .search-input {
+                width: 120px;
             }
         
-            .search-button-image {
-                height: 20px;
-                width: 20px;
+            .search-container {
+                width: 120px;
+                vertical-align: middle;
+                white-space: nowrap;
+                position: relative;
+            }
+
+            .search-icon {
+                color: #F48462;
+                position: absolute;
+                margin-left: 10px;
+                margin-top: 8px;
+                z-index: 1;
+                
             }
 
         }

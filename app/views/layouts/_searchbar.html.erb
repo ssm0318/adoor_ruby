@@ -30,6 +30,8 @@
 <% end %> -->
 
 <%= form_tag(search_user_path, method: :get, class: "search-form") do %>
-    <%= text_field_tag :query, nil, required: true, class: "search-input", placeholder: "사용자 검색" %>
-    <%= button_tag image_tag("icons/search-icon.png", class: "search-button-image"), class: "search-button" %>
+    <div class="search-container">
+        <span class="search-icon"><i class="fas fa-search"></i></span>
+        <%= text_field_tag :query, nil, required: true, class: "search-input", placeholder: "사용자 검색" %>
+    </div>
 <% end %> 
