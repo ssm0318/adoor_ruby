@@ -1,6 +1,5 @@
-<div class="inner-container">
+<div class="inner-container search-question">
     <%= render 'header', searchpath: @searchpath, query: @query %>
-    <% @results.reverse_each do |result| %> 
+    <%= render "questions/layout", questions: @results %>
 
-    <% end%>
 </div>

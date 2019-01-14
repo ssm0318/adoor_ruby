@@ -49,6 +49,7 @@
 
         .nav-right {
             float: right;
+            margin-right: 35px;
             
             .nav-el {
                 display: inline-block;
@@ -141,6 +142,7 @@
         &:hover {
             color: #F48462;
          }
+         font-family: 'Open Sans', sans-serif;
     }
     
 }
