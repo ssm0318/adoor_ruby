@@ -8,7 +8,7 @@ class RepliesController < ApplicationController
             id: r.id,
             content: r.content,
             created_at: r.created_at,
-            like_url: likes_path(target_id: r.id, target_type: 'Reply'), 
+            like_url: likes_path(r.id, target_type: 'Reply'), 
             like_changed_url: like_path(r.id, target_type: 'Reply'),
         }
     end
