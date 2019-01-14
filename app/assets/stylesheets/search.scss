@@ -5,8 +5,6 @@
     .search-form {
         //padding-top: 20px;
     }
-    .search-elements {
-    }
     .search-input {
         width: 500px;
         height: 40px;
@@ -62,10 +60,29 @@
 
     .search-keyword {
         color: #F48462;
+        font-size: 20px;
+        margin-right: 5px;
     }
 }
 
 .user-box {
     padding: 20px;
     display: inline-block;
+    .username {
+        font-size: 15px;
+        font-family: "Nanum Gothic", serif;
+        vertical-align: 10px;
+    }
+}
+
+.search-question {
+    .question-el {
+        padding: 0 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .question-content {
+        font-size: 18px;
+        padding: 5px 0;
+    }
 }

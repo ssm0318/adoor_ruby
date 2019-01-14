@@ -7,5 +7,7 @@ class Post < ApplicationRecord
 
     scope :anonymous, -> (id) { where.not(author: User.find(id).friends).where.not(author: User.find(id)) }
     scope :named, -> (id) { where(author: User.find(id).friends).or(where(author:User.find(id))) }
+
+    scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
 end
   
