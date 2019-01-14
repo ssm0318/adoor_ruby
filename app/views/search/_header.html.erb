@@ -7,12 +7,10 @@
         </div>
     <% end %>
     <br>
-    <% if query.nil? %>
-        검색어를 입력해주세요.
-    <% else %>
-        <span class="search-keyword"><%= query %></span> 키워드로 찾은 사용자 검색 결과입니다.
-    <% end %>
-    <br/><br/><br>
+
+    <span class="search-keyword">'<%= query %>'</span> 키워드로 찾은 검색 결과입니다.
+
+    <br/><br/><br> 
     <div>
         <!-- FIXME: 현재 페이지에 색깔 주황색이게.. active link 없이 할 수 있나!! active link는 인자를 못보내는 듯 -->
         <!--
