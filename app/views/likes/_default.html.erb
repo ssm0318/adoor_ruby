@@ -1,0 +1,15 @@
+<% if Like.where(user_id: current_user.id, target: target).empty? %> 
+    <%# link_to image_tag("icons/like-default-icon", class: like_btn_class), likes_path(target_id: a.id, target_type: target_type), method: :post %>
+    <%= image_tag("icons/like-default-icon", 
+        class: like_btn_class + " do-like",
+        "data-url" => likes_path(target_type: target.class.to_s, id: target.id),
+        "data-changed-src" =>  "/assets/icons/like-on-icon",
+        "data-changed-url" => like_path(target_type: target.class.to_s, id: target.id)) %>
+<% else %>
+    <%# link_to image_tag("icons/like-on-icon", class: like_btn_class), like_path(a.id, target_type: target_type), method: :delete, data: {confirm: '좋아요를 취소하겠습니까?'} %>
+    <%= image_tag("icons/like-on-icon", 
+        class: like_btn_class,
+        "data-url" => like_path(target_type: target.class.to_s, id: target.id),
+        "data-changed-src" =>  "/assets/icons/like-default-icon",
+        "data-changed-url" => likes_path(target_type: target.class.to_s, id: target.id)) %>
+<% end %>   

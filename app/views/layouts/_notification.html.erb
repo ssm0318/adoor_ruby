@@ -1,8 +1,8 @@
 <% if user_signed_in? %>
     <% if noties.unread.length != 0 %>
-        <%=image_tag "icons/noti-on-icon.png", class:"btn-noti"%>
+        <%=image_tag "icons/noti-on-icon.png", class:"btn-noti hover-pointer"%>
     <% else %>
-        <%=image_tag "icons/noti-default-icon.png", class:"btn-noti"%>
+        <%=image_tag "icons/noti-default-icon.png", class:"btn-noti hover-pointer"%>
     <% end %>
 <% end %>
 <div class="noti-content" style="display: none;">
@@ -26,9 +26,17 @@
                     <%=username%>님이 당신의 글을 highlight했습니다.
                 <% elsif noti.target_type == 'Drawer' %>
                     <% if noti.origin.drawers.size == 1 %>
-                        당신의 글이 누군가의 서랍장에 담겼습니다.
+                        <% if noti.origin_type == 'Question' %>
+                            당신의 질문이 누군가의 서랍장에 담겼습니다.
+                        <% else %>
+                            당신의 글이 누군가의 서랍장에 담겼습니다.
+                        <% end %>
                     <% else %>
-                        <%= noti.origin.drawers.size %>명이 당신의 글을 서랍장에 담았습니다.
+                        <% if noti.origin_type == 'Question' %>
+                            <%= noti.origin.drawers.size %>명이 당신의 질문을 서랍장에 담았습니다.
+                        <% else %>
+                            <%= noti.origin.drawers.size %>명이 당신의 글을 서랍장에 담았습니다.
+                        <% end %>
                     <% end %>
                 <% elsif noti.target_type == 'Comment' %>
                     <% if noti.action == 'comment' %>
@@ -49,19 +57,35 @@
                 <% elsif noti.target_type == 'Like' %>
                     <% if noti.action == 'friend_like' %>
                         <% if noti.origin.likes.size == 1%>
-                            <%=username%>님이 당신의 글을 좋아했습니다.
+                            <% if noti.origin_type == 'Post' || noti.origin_type == 'Answer' %>
+                                <%=username%>님이 당신의 글을 좋아했습니다.
+                            <% elsif noti.origin_type == 'Comment' || noti.origin_type == 'Reply' %>
+                                <%=username%>님이 당신의 댓글을 좋아했습니다.
+                            <% end %>
                         <% else %>
-                            <%= username %>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 글을 좋아했습니다. 
+                            <% if noti.origin_type == 'Post' || noti.origin_type == 'Answer' %>
+                                <%= username %>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 글을 좋아했습니다. 
+                            <% elsif noti.origin_type == 'Comment' || noti.origin_type == 'Reply' %>
+                                <%= username %>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 댓글을 좋아했습니다. 
+                            <% end %>
                         <% end %>
                     <% elsif noti.action == 'anonymous_like'%>
                         <% if noti.origin.likes.size == 1 %>
-                            누군가가 당신의 글을 좋아했습니다.
+                            <% if noti.origin_type == 'Post' || noti.origin_type == 'Answer' %>
+                                누군가가 당신의 글을 좋아했습니다.
+                            <% elsif noti.origin_type == 'Comment' || noti.origin_type == 'Reply' %>
+                                누군가가 당신의 댓글을 좋아했습니다.
+                            <% end %>
                         <% else %>
-                            <%= noti.origin.drawers.size %>명이 당신의 글을 좋아했습니다.
+                            <% if noti.origin_type == 'Post' || noti.origin_type == 'Answer' %>
+                                <%= noti.origin.likes.size %>명이 당신의 글을 좋아했습니다.
+                            <% elsif noti.origin_type == 'Comment' || noti.origin_type == 'Reply' %>
+                                <%= noti.origin.likes.size %>명이 당신의 댓글을 좋아했습니다.
+                            <% end %>
                         <% end %>
                     <% end%>
                 <% end %>
-                <div class = "date" style="display: block; margin-top: 5px; font-size: 10px;"><%= time_tag noti.created_at, class: "timeago" %></div> 
+                <div class = "date time" style="display: block; margin-top: 5px; font-size: 10px;"><%= time_tag noti.created_at, class: "timeago" %></div> 
             </div>
         <% end %>
     <% end %>

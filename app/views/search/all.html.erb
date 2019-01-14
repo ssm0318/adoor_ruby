@@ -1,8 +1,7 @@
-<%= render 'search/search_header', searchpath: @searchpath, query: @query %>
-<% @results.each do |content| %>
-    <div style="border: 1px solid black;">
-        글쓴이: <%= content.author.username %><br>
-        내용: <%= content.content %><br>
-        태그: <%= content.tag_string %><br>
-    </div>
-<% end %>
+<div class="inner-container">
+    <!-- FIXME: 다 가져와서 항목별로 보여주는 걸루다가 -->
+    <%= render 'header', searchpath: @searchpath, query: @query %>
+    <% @results.reverse_each do |result| %> 
+        
+    <% end%>
+</div>

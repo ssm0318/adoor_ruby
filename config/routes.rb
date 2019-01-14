@@ -1,59 +1,71 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  # root 'questions#today'
-  root 'answers#friend_feed'
-  get 'intro' => 'questions#intro'
 
-  post '/assignments/:assignee_id/:question_id' => 'assignments#create'
-  delete '/assignments/:assignee_id/:question_id' => 'assignments#delete'
+  # Application
+  get '/introduction' => 'application#intro', as: :introduction
 
+  # Answer
+  resources :answers, except: [:new]
+  get '/answers/:id/new' => 'answers#new', as: :new_answer
+
+  # Post
+  resources :posts
+
+  # Feed
+  root 'feeds#friends'
+  get '/feeds/general' => 'feeds#general', as: :general_feed
+
+  # Question 
+  get '/questions/today' => 'questions#today', as: :today_questions
+  get '/questions/:id/friends' => 'questions#show_friends', as: :question_friends
+  get '/questions/:id/general' => 'questions#show_general', as: :question_general
+  get '/questions/import_all' => 'questions#import_all', as: :import_all_questions
+  get '/questions/import_new' => 'questions#import_new', as: :import_new_questions
+  resources :questions, only: [:index, :show]
+
+  # Comment
+  resources :comments, only: [:create, :destroy]
+
+  # Reply
+  resources :replies, only: [:create, :destroy]
+
+  # Like
+  resources :likes, only: [:create, :destroy]
+
+  # Assignment
+  post '/assignments/:assignee_id/:question_id' => 'assignments#create', as: :new_assignment # get?
+  delete '/assignments/:assignee_id/:question_id' => 'assignments#destroy', as: :destroy_assignment
+
+  # Drawer
+  resources :drawers, only: [:create, :destroy]
+
+  # Highlight
+  resources :highlights, only: [:create, :destroy]
+
+  # Notification
   get '/notifications/:id' => 'notifications#read'
-  
-  get '/feeds' => 'answers#general_feed'
-  get '/questions/:id/friend' => 'answers#question_feed_friend'
-  get'/questions/:id/general' => 'answers#question_feed_general'
 
-  get '/questions/:id' => 'questions#question_feed'
-  get '/today' => 'questions#today'
-  # 이거 나중에 id 말고 content로 하는 게 더 보기 좋을 듯..! 
-  get '/recover_password' => 'users#recover_password'
-  post '/recover_password' => 'users#send_temporary_password'
+  # Profile
+  get '/profiles/:id' => 'profiles#index', as: :profile
+  get '/profiles/:id/drawers' => 'profiles#drawers', as: :profile_drawers
+  # get '/profiles/:id/highlights' => 'profiles#highlights', as: :profile_highlights
 
-  resources :answers, except: [:new, :edit]
-  get '/answers/new/question/:id' => 'answers#new', as: :new_answer
-  get '/answers/edit/question/:id' => 'answers#edit', as: :edit_answer
-
-  resources :highlights
-  resources :drawers
-  resources :likes
-  
-  # user answers, highlights, drawers, likes
-  get '/userpage/:id' => 'answers#user_answers', as: :user_answers
-  #get '/userpage/:id/highlights' => 'highlights#user_highlights', as: :user_highlights
-  get '/userpage/:id/drawers' => 'drawers#user_drawers', as: :user_drawers
-  get '/userpage/:id/likes' => 'likes#user_likes', as: :user_likes
-
-  # friend request
-  post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend
-  post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request
-
-  # comment
-  post '/answers/:id/comments/:recipient_id' => 'answers#create_comment', as: :new_comment
-  post '/answers/comment/:id/reply' => 'answers#create_reply', as: :new_reply
-
-  get '/questions' => 'questions#index', as: :questions
+  # User
+  get '/users/:id/edit' => 'users#edit', as: :edit_user_profile
+  patch '/users/:id/edit' => 'users#update', as: :update_user_profile
+  devise_for :users
+  # 아래 코드는 이후에 멀티채널 구성에 맞추어 바뀌어야할수도.
   get '/users/friends' => 'users#friends', as: :friends
+  post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend # get?
+  post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request # get?
 
-  get '/users/profile/:id/edit' => 'users#edit', as: :edit_user_profile
-  patch '/users/profile/:id/edit' => 'users#update', as: :update_user_profile
-  get '/mypage' => 'users#mypage', as: :show_mypage
+  # Invitation
+  get '/invitation' => 'invitations#index', as: :invitation
+  get '/invitation/link' => 'invitations#link', as: :invitation_link
+  get '/invitation/:id(/:question_id1(/:question_id2(/:question_id3)))' => 'invitations#accept', as: :invitation_accept
 
-  get '/invitation' => 'questions#invitation', as: :invitation
-  get '/invitation/link' => 'questions#link_generation', as: :link_generation
-  get '/invitation/:id(/:question_id1(/:question_id2(/:question_id3)))' => 'users#accept_invitation', as: :accept_invitation
-  # search
+  # Search
   get '/search/all' => 'search#all', as: :search_all
-  get '/search/json' => 'search#json'
   get '/search/admin_question' => 'search#admin_question', as: :search_admin_question
   get '/search/custom_question' => 'search#custom_question', as: :search_custom_question
   get '/search/friend_answer' => 'search#friend_answer', as: :search_friend_answer
@@ -61,16 +73,4 @@ Rails.application.routes.draw do
   get '/search/popular_tags' => 'search#popular_tags', as: :show_popular_tags
   get '/search/popular_search' => 'search#popular_search', as: :show_popular_search
   get '/search/user' => 'search#user', as: :search_user
-
-  #intro
-  get '/introduction' => 'application#intro', as: :introduction
-
-  devise_for :users
-  # devise_for :users, controllers: {
-  #   sessions: 'users/sessions'
-  # }
-
-  # add question (admin only)
-  get '/admin/import_all_questions' => 'questions#import_all', as: :import_all_questions
-  get '/admin/import_new_questions' => 'questions#import_new', as: :import_new_questions
 end

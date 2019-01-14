@@ -1,8 +1,0 @@
-<% if current_user.id == a.author.id %>
-    <span>좋아요 <span class="show-likes"><%= Like.where(target_type: "Answer", target_id: a.id).count() %></span>개</span>
-    <%= link_to "수정", edit_answer_path(a.id) %>
-    <%# link_to "삭제", answer_path(a.id),
-        method: :delete,
-        data: { confirm: '답변을 지우시겠습니까?'} %>
-    <span class="btn-answer-delete">삭제</span>
-<% end %>

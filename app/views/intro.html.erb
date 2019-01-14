@@ -1,14 +1,15 @@
-<h1 class="intro-title">어도어 사용법</h1>
+<%# <h1 class="intro-title">어도어 사용법</h1> %>
 <%#= link_to "어도어에 질문/오류 보고하기", '/' %>
 <div class="answer intro-container">
-<div class="intro-tc">
+<div class="intro-tc"> 
     <div style="color: #F48462; font-size: 25px; text-align: center; line-height: 10px;">목차</div>
-    <a href="#friend" class="intro-tc-el tc-1">1. 친구 만들기</a>
-    <a href="#assign" class="intro-tc-el tc-2">2. 질문 보내기</a>
-    <a href="#comment" class="intro-tc-el tc-3">3. 댓글 달기</a>
-    <a href="#drawer" class="intro-tc-el tc-4">4. 서랍장에 글 담기</a>
-    <a href="#like" class="intro-tc-el tc-5">5. 좋아요 누르기</a>
-    <a href="#notification" class="intro-tc-el tc-6">6. 알림 확인하기</a>
+    <%= active_link_to '친구 만들기', "#friend", class: "intro-tc-el", active: :exact %>
+    <a href="#friend" class="intro-tc-el">1. 친구 만들기</a>
+    <a href="#assign" class="intro-tc-el">2. 질문 보내기</a>
+    <a href="#comment" class="intro-tc-el">3. 댓글 달기</a>
+    <a href="#drawer" class="intro-tc-el">4. 서랍장에 글 담기</a>
+    <a href="#like" class="intro-tc-el">5. 좋아요 누르기</a>
+    <a href="#notification" class="intro-tc-el">6. 알림 확인하기</a>
     <div style="color: #F48462; font-size: 15px; text-align: center; font-weight: bold;">핵심만 보기</div><a href="#accent-assign" class="intro-tc-el">핵심1</a>  <a href="#accent-comment" class="intro-tc-el">핵심2</a>  <a href="#accent-like" class="intro-tc-el">핵심3</a>
 </div>
 <h2 id="friend" class="intro-topic">친구를 만들어보세요!</h2>

@@ -35,6 +35,7 @@
         }
 
         .btn-do-assign {
+            
             float: right;
             text-align: center;
             display: block;
@@ -45,7 +46,7 @@
             text-decoration: none;
             font-family: 'Nanum Gothic', sans-serif;
             border-radius: 30px;
-            cursor: pointer;
+            
             line-height: 30px;
             border: 1px solid #F48462;
         }
@@ -56,7 +57,7 @@
     width: 32px;
     height: auto;
     margin: 3px;
-    cursor: pointer;
+    
 }
 
 .message {

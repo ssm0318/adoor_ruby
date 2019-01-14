@@ -3,21 +3,19 @@
         <%= @question.content %>
     </p>
     <div align = "center">
-        <%= form_for @answer do |f| %>
+        <%= form_for answer do |f| %>
             <%= f.hidden_field :author_id, :value => current_user.id %>
             <%= f.hidden_field :question_id, :value => @question.id %>
-            <% if @answer.persisted? %>
-                <%= f.text_area :content, class: "edit-answer-field",  autofocus: true, "data-enable-grammarly": "false" %>
-            <% else %>
-                <%= f.text_area :content, class: "new-answer-field",  autofocus: true, "data-enable-grammarly": "false" %>
-            <% end %>
+            <%= f.text_area :content, class: "new-answer-field", required: true, autofocus: true, "data-enable-grammarly": "false" %>
             <br><br>
 
             <!--tag field-->
             <%# <%= f.text_area :tag_string %>
             <br><br>
 
-            <%= f.submit "저장하기", class: "answer-button"%>
+            <%= f.submit "저장", class: "answer-button"%>
         <% end %>
     </div>
 </div>
+
+<%= render 'layouts/textarea_script' %>

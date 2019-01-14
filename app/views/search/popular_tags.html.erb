@@ -1,4 +1,6 @@
-<h1>핫한 태그</h1>
-<% @results.each do |tag| %>
-    <p><%= tag.content %></p>
-<% end %>
+<div class="inner-container">
+    <%= render 'header', searchpath: @searchpath, query: @query %>
+    <% @results.reverse_each do |result| %> 
+        <p><%= result.content %></p>
+    <% end%>
+</div>
