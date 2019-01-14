@@ -1,4 +1,4 @@
-<div class="prism-title"><h1>Friend List</h1></div>
+<div class="prism-title"><h1>친구 목록</h1></div>
 <div class="friend-list">
     <% if @friends.empty? %>
         친구를 초대해보세요!<br> <!-- FIXME: 버그인가 왜 줄바꿈이 안되지 -->
@@ -8,7 +8,7 @@
         <div class="friend-box">
             <div class="friend-box-userpage" onclick="window.location='<%= profile_path(friend.id) %>';">
                 <p><%= friend.username %></p>
-                <%= image_tag friend.image.url, :style => "height:70px; width:70px; border-radius:35px;", class:"friend-box-image" %>
+                <%= image_tag friend.image.url, class:"friend-box-image" %>
             </div>
             <!--<div class="friend-box-question">
                 <% friend.answers.each_with_index do |answer, i| %>

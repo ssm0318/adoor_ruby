@@ -114,6 +114,8 @@
                 &:focus {
                     outline: none;
                 }
+                position: relative;
+                top: 5px;
             }
         
             .search-button-image {
@@ -155,6 +157,9 @@ a {
 .username{
     color: black;
     vertical-align: +6px;
+    &:hover {
+        color: #F48462;
+    }
 }
 body {margin: 0px; background-color: #f9f9f9;}
 
@@ -274,6 +279,7 @@ div.background {
             height: auto;
             float: right;
             padding-bottom: 10px;
+            cursor: pointer;
         }
 
         .btn-like {
@@ -281,6 +287,7 @@ div.background {
             height: auto;
             float: right;
             padding-top: 2px;
+            cursor: pointer;
         }
     }
 
