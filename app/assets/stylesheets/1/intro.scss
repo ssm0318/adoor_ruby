@@ -8,6 +8,11 @@
      line-height: 30px;
 }
 
+// .intro-tc-el.active {
+//     color: #F48462;
+// }
+//한 페이지 내에서는 (scroll에 따라) active_link_to 안됨
+
 .intro-tc {
     background-color: rgb(241, 241, 241);
     position: fixed;
@@ -39,7 +44,7 @@
 }
 
 .intro-img-smallest {
-    width: 30%;
+    width: 40%;
     margin-right: auto;
     margin-left: auto;
     display: block;
@@ -70,4 +75,16 @@
 .intro-accent {
     font-weight: bold;
     color: rgb(245, 154, 126);
+}
+
+.intro-link {
+    font-weight: bold;
+    &:hover {
+        color: #F48462;
+     }
+     color: black;
+}
+
+.intro-change-color {
+    color: #F48462;
 }

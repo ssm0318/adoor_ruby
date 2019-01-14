@@ -1,6 +1,4 @@
 <div class="inner-container">
     <%= render 'header', searchpath: @searchpath, query: @query %>
-    <% @results.reverse_each do |result| %> 
-
-    <% end%>
+    <%= render partial: 'feeds/general_index', locals: {feeds: @results} %>
 </div>

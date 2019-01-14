@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
     def all
+        # FIXME: 다 다다
         @query = params[:query]
         Query.create(user: current_user, content: @query)
         @results = []
@@ -44,8 +45,13 @@ class SearchController < ApplicationController
         @query = params[:query]
         Query.create(user: current_user, content: @query)
         @results = []
+        post_results = []
         @results = Answer.all.search_tag(@query)
         @results = @results.where(author: current_user.friends) | @results.where(author: current_user)
+        post_results = Post.all.search_tag(@query)
+        post_results = post_results.where(author: current_user.friends) | post_results.where(author: current_user)
+        @results += post_results
+        @results.sort_by(&:created_at).reverse!
 
         render 'friend_answer'
     end
@@ -56,6 +62,10 @@ class SearchController < ApplicationController
         @results = []
         @results = Answer.all.search_tag(@query)
         @results = @results.anonymous(current_user.id)
+        post_results = Post.all.search_tag(@query)
+        post_results = post_results.anonymous(current_user.id)
+        @results += post_results
+        @results.sort_by(&:created_at).reverse!
 
         render 'anonymous_answer'
     end
@@ -75,7 +85,7 @@ class SearchController < ApplicationController
     def user
         @query = params[:query]
         UserQuery.create(user: current_user, content: @query)
-        @results = User.where("username LIKE ? ", "%#{@query}%")
+        @results = User.where("username LIKE ? ", "%#{@query}%").order(:username)
 
         render 'user'
     end
