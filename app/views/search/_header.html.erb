@@ -1,9 +1,10 @@
 <div class="search-header">
     <%= form_tag(searchpath, method: :get, class: "search-form") do %>
     <%# path 설정 %>
+        <div class="search-container">
+            <span class="search-icon"><i class="fas fa-search"></i></span>
             <%= text_field_tag :query, nil, required: true, class: "search-input", autofocus: true %>
-            <%= button_tag image_tag("icons/search-icon.png", class: "search-button-image"), class: "search-button" %>
-        
+        </div>
     <% end %>
     <br>
     <% if query.nil? %>

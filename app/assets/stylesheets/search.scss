@@ -11,33 +11,45 @@
         padding-left: 10px;
         border: none;
         background-color: white;
-        border-radius: 20px;
+        border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
         margin-bottom: 10px;
         display: inline-block;
         font-size: 15px;
+        padding-left: 50px;
         &:focus {
             outline: none;
             fill: none;
         }
     }
-    
-    .search-button {
-        height: 30px;
-        width: 30px;
-        background: url("icons/search-icon.png");
-        border: none;
-        cursor: pointer;
-        &:focus {
-            outline: none;
-        }
-        position: relative;
-        top: 10px;
-    }
 
-    .search-button-image {
-        height: 30px;
-        width: 30px;
+    .search-icon {
+        color: #F48462;
+        position: absolute;
+        margin-left: 13px;
+        margin-top: 13px;
+        z-index: 1;
+        
     }
+    // .search-button {
+    //     height: 30px;
+    //     width: 30px;
+    //     background: url("icons/search-icon.png");
+    //     border: none;
+    //     cursor: pointer;
+    //     &:focus {
+    //         outline: none;
+    //     }
+    //     position: relative;
+    //     top: 10px;
+    //     opacity: 0.8;
+    // }
+
+    // .search-button-image {
+    //     height: 30px;
+    //     width: 30px;
+    // }
 
     .search-tab {
         display: inline-block;
