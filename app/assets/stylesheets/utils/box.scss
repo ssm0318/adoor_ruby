@@ -144,6 +144,15 @@
     border: none;
     border-radius: 30px;
     font-size: 15px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    cursor: pointer;
+    &:focus {
+        outline: none;
+        fill: none;
+    }
 
 }
 
