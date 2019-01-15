@@ -11,7 +11,7 @@
             <div class="prism-box__content">
                 <br>
                 <% if feed.is_a? Answer %>
-                    <%= link_to feed.question.content, question_path(feed.question.id), class: "question" %>
+                    <%= link_to feed.question.content, question_path(feed.question.id), class: "question" %><br><br>
                 <% end %>
                 <div class="answer"><%= feed.content %></div>
                 <br>
