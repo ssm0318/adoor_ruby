@@ -8,7 +8,7 @@
                 <% end %> 
             </div> 
             <% if current_user.id == feed.author.id %>
-                <%= form_tag comments_path, :class => "prism-form comment" do %>
+                <%= form_tag comments_path, :class => "prism-form-friend comment" do %>
                     <%= hidden_field_tag "recipient_id", feed.author.id %>
                     <%= hidden_field_tag "target_type", feed.class.to_s %>
                     <%= hidden_field_tag "target_id", feed.id %>
@@ -35,7 +35,7 @@
                             <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
                         <% end %>
                     </div>
-                    <%= form_tag comments_path, :class => "prism-form friend-comment" do %>
+                    <%= form_tag comments_path, :class => "prism-form-friend friend-comment" do %>
                         <%= hidden_field_tag "recipient_id", r %>
                         <%= hidden_field_tag "target_type", feed.class.to_s %>
                         <%= hidden_field_tag "target_id", feed.id %>
@@ -57,7 +57,7 @@
                             <% end %>
                         </div>
                         <%# TOOD: action 설정 %>
-                        <%= form_tag replies_path, :class => "prism-form reply" do %>
+                        <%= form_tag replies_path, :class => "prism-form-friend reply" do %>
                             <%= hidden_field_tag "id", c.id %>
                             <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
                             <%= button_tag "저장", class: "prism-form__button" %>
@@ -72,7 +72,7 @@
                         <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
                     <% end %>
                 </div>
-                <%= form_tag comments_path, :class => "prism-form comment" do %>
+                <%= form_tag comments_path, :class => "prism-form-friend comment" do %>
                     <%= hidden_field_tag "recipient_id", current_user.id %>
                     <%= hidden_field_tag "target_type", feed.class.to_s %>
                     <%= hidden_field_tag "target_id", feed.id %>

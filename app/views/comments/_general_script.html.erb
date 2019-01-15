@@ -40,7 +40,7 @@
 
   $(document).ready(function() {
 
-    $(".prism-form").submit( function(e) {
+    $(".prism-form-general").submit( function(e) {
 
         e.preventDefault();
 
@@ -78,7 +78,7 @@
                     </div> 
                   </div>
                 </div>
-                <%= form_tag replies_path, :class => "prism-form reply" do %>
+                <%= form_tag replies_path, :class => "prism-form-general reply" do %>
                     <%= hidden_field_tag "id", "${data.comment_id}" %>
                     <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
                     <%= button_tag "저장", class: "prism-form__button" %>

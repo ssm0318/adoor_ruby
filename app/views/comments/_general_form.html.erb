@@ -21,7 +21,7 @@
                             <%= render partial: "replies/default", locals: {user: current_user, feed_id: feed.id, r: r} %>
                         <% end %> 
                     </div>
-                    <%= form_tag replies_path, :class => "prism-form reply" do %>
+                    <%= form_tag replies_path, :class => "prism-form-general reply" do %>
                         <%= hidden_field_tag "id", c.id %>
                         <%= text_field_tag "content", nil, required: true,  :class => "prism-form__input" %>
                         <%= button_tag "저장", class: "prism-form__button" %>
@@ -30,7 +30,7 @@
                 <%# TOOD: action 설정 %>
             <% end %>
         </div>
-        <%= form_tag comments_path, :class => "prism-form comment" do %>
+        <%= form_tag comments_path, :class => "prism-form-general comment" do %>
             <%= hidden_field_tag "recipient_id", "0" %>
             <%= hidden_field_tag "target_type", feed.class.to_s %>
             <%= hidden_field_tag "target_id", feed.id %>
