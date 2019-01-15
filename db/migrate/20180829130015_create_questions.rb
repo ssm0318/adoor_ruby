@@ -7,6 +7,7 @@ class CreateQuestions < ActiveRecord::Migration[5.1]
       t.string     :content,            null: false 
       t.boolean    :official
       t.date       :selected_date
+      t.string     :tag_string
       
       t.timestamps
     end

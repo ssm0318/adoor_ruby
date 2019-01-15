@@ -1,0 +1,58 @@
+<% if @new_friend == current_user %>
+    <div class="invitation-accept-text">
+        친구에게 초대링크를 보내보세요!
+    </div>
+<% else %>
+    <% if @assigned_questions.empty? %>
+        <div class="invitation-accept-text">
+            <% if !user_signed_in? %>
+                <%= @new_friend.username %>님이 당신을 어도어에 초대했어요!<br><br>
+                로그인 또는 회원가입 후 <%= @new_friend.username %>님과 친구가 되어보세요.<br><br><br>
+                <button class="orange-btn"><%= link_to '로그인', new_user_session_path, style: "color: white;"%></button><br>
+                <button class="white-btn"><%= link_to '회원가입', new_user_registration_path, style: "color: gray;"%></button><br>
+            <% elsif !current_user.friends.include? @new_friend %>
+                <% if user_signed_in? && (!current_user.friends.include? @new_friend) %>
+                    <% if FriendRequest.where(requester_id: @new_friend.id, requestee_id: current_user.id).exists? %>
+                        <%= @new_friend.username %>님이 친구요청을 보냈어요.<br/><br/>
+                        <%= link_to "친구수락", add_friend_path(@new_friend.id), method: :post, id: "friends-btn" %>
+                    <% elsif FriendRequest.where(requester_id: current_user.id, requestee_id: @new_friend.id).exists? %>
+                        <%= @new_friend.username %>님에게 친구요청을 보냈습니다.<br/><br/>
+                        <%= link_to "친구요청 취소", friend_request_path(@new_friend.id), method: :post, id: "friends-btn" %>
+                    <% else %>
+                        <%= @new_friend.username %>님과 친구가 되어보세요.<br/><br/>
+                        <%= link_to "친구요청", friend_request_path(@new_friend.id), method: :post, id: "friends-btn" %>
+                    <% end %>
+                <% end %>
+            <% else %>
+                <%= @new_friend.username %>님과 이미 친구입니다.<br><br>
+                <%= link_to "친구 페이지 가기", profile_path(@new_friend.id), method: :get, id: "friends-btn" %>
+            <% end%>
+        </div>
+    <% else %>
+        
+        <div class="prism-title"><h1><%= @new_friend.username %>님이 보낸 질문</h1></div>
+        <%= render partial: "questions/layout", locals: { questions: @assigned_questions} %><br/>
+        <div class="invitation-accept-text">
+            <% if !user_signed_in? %>
+                <%= @new_friend.username %>님이 당신을 어도어에 초대했어요!<br><br>
+                로그인 또는 회원가입 후 <%= @new_friend.username %>님과 친구가 되어보세요.<br><br><br>
+                <button class="orange-btn"><%= link_to '로그인', new_user_session_path, style: "color: white;"%></button><br>
+                <button class="white-btn"><%= link_to '회원가입', new_user_registration_path, style: "color: gray;"%></button><br>
+            <% elsif !current_user.friends.include? @new_friend %>
+                <% if FriendRequest.where(requester_id: @new_friend.id, requestee_id: current_user.id).exists? %>
+                    <%= @new_friend.username %>님이 친구요청을 보냈어요.<br/><br/>
+                    <%= link_to "친구수락", add_friend_path(@new_friend.id), method: :post, id: "friends-btn" %>
+                <% elsif FriendRequest.where(requester_id: current_user.id, requestee_id: @new_friend.id).exists? %>
+                    <%= @new_friend.username %>님에게 친구요청을 보냈습니다.<br/><br/>
+                    <%= link_to "친구요청 취소", friend_request_path(@new_friend.id), method: :post, id: "friends-btn" %>
+                <% else %>
+                    <%= @new_friend.username %>님과 친구가 되어보세요.<br/><br/>
+                    <%= link_to "친구요청", friend_request_path(@new_friend.id), method: :post, id: "friends-btn" %>
+                <% end %>
+            <% else %>
+                <%= @new_friend.username %>님과 이미 친구입니다.<br><br>
+                <%= link_to "친구 페이지 가기", profile_path(@new_friend.id), method: :get, id: "friends-btn" %>
+            <% end %>
+        </div>
+    <% end %>
+<% end %>

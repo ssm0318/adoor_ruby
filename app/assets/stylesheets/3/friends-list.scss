@@ -1,51 +1,59 @@
 .friend-box {
-    width: 270px;
+    width: 22%;
+    height: 180px;
     text-align: center;
     display: inline-block;
     margin: 8px;
     background-color: white;
+    border-radius: 10px;
 }
 
 .friend-box-image {
     margin-bottom: 20px;
+    height:70px; 
+    width:70px; 
+    border-radius:35px;
 }
 
 .friend-list{
     margin-top: 50px;
-    display: flex;
+    font-family: "Nanum Gothic", serif;
+    //display: flex;
+    //align-items: flex-start;
 }
 
 .friend-box-userpage {
     padding: 15px;
-    border: 0.75px solid #bcbcbc;
+    //border: 0.75px solid #bcbcbc;
+    cursor: pointer;
 }
 
 .friend-box-userpage p {
     font-size: 18px;
 }
 
-.friend-box-question {
-    background-color: #eaeaea;
-    padding: 20px;
-    height: 85px;
-    border-left: 0.75px solid #bcbcbc;
-    border-right: 0.75px solid #bcbcbc;
-    border-bottom: 0.75px solid #bcbcbc;
-    text-align: center;
-}
+// .friend-box-question {
+//     background-color: #eaeaea;
+//     padding: 20px;
+//     height: 85px;
+//     border-left: 0.75px solid #bcbcbc;
+//     border-right: 0.75px solid #bcbcbc;
+//     border-bottom: 0.75px solid #bcbcbc;
+//     text-align: center;
+// }
 
-.friend-box-question-el a {
-    color: black;
-    text-decoration: none;
-}
+// .friend-box-question-el a {
+//     color: black;
+//     text-decoration: none;
+// }
 
-.friend-box-question-el {
-    padding-top: 2.5px;
-    padding-bottom: 2.5px;
-}
+// .friend-box-question-el {
+//     padding-top: 2.5px;
+//     padding-bottom: 2.5px;
+// }
 
-.friend-box-question-el a:hover {
-    color: #F48462;
-}
+// .friend-box-question-el a:hover {
+//     color: #F48462;
+// }
 
 

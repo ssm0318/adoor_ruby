@@ -1,0 +1,186 @@
+<script>var controller = new ScrollMagic.Controller();</script>
+
+<%# <h1 class="intro-title">어도어 사용법</h1> %>
+<%#= link_to "어도어에 질문/오류 보고하기", '/' %>
+<div class="answer intro-container">
+<div class="intro-tc"> 
+    <div style="color: #F48462; font-size: 25px; text-align: center; line-height: 5px;">목차</div>
+    <a href="#friend" class="intro-tc-el tc-1">1. 친구 만들기</a>
+    <a href="#assign" class="intro-tc-el tc-2">2. 질문 보내기*</a>
+    <a href="#comment" class="intro-tc-el tc-3">3. 댓글 달기*</a>
+    <a href="#drawer" class="intro-tc-el tc-4">4. 서랍장에 글 담기</a>
+    <a href="#like" class="intro-tc-el tc-5">5. 좋아요 누르기*</a>
+    <a href="#notification" class="intro-tc-el tc-6">6. 알림 확인하기</a>
+    <%# <div style="color: #F48462; font-size: 15px; text-align: center; font-weight: bold;">핵심만 보기</div><a href="#accent-assign" class="intro-tc-el">핵심1</a>  <a href="#accent-comment" class="intro-tc-el">핵심2</a>  <a href="#accent-like" class="intro-tc-el">핵심3</a> %>
+</div>
+<div id='friend'>
+    <h2 class="intro-topic">친구를 만들어보세요!</h2>
+    '친구 초대' 탭에 들어가서, 친구에게 초대 링크를 보내보세요.
+    <%= image_tag("img/invitation.png", class: "intro-img") %>
+    친구가 초대 링크로 접속하면 회원가입을 하거나, 
+    이미 로그인한 경우 당신에게 친구요청을 보낼 수 있어요.
+
+    <%= image_tag("img/accept_invitation.png", class: "intro-img") %>
+    친구의 사용자명을 아는 경우, 검색창에 검색해서 친구요청을 보낼 수 있어요.
+
+    <%= image_tag("img/search_user.png", class: "intro-img-small") %>
+
+</div>
+<div id="assign">
+    <h2 class="intro-topic">친구에게 질문을 보내보세요!</h2>
+    '오늘의 질문' 또는 '질문 둘러보기' 탭에서 <span id="accent-assign" class="intro-accent">친구에게 질문을 보낼 수 있어요.</span>
+
+    <%= image_tag("img/assign.png", class: "intro-img") %>
+    친구에게 질문을 보내면, 알림이 가고
+
+    <%= image_tag("img/assign_noti.png", class: "intro-img-smallest") %>
+    친구가 답변하면 나에게 알림이 와요.
+
+    <%= image_tag("img/answer_noti.png", class: "intro-img-smallest") %>
+
+</div>
+<div id="comment">
+    <h2 class="intro-topic">댓글을 달아보세요!</h2>
+    친구의 글에 댓글을 달면, 친구(글쓴이)가 대댓글을 달아줄 수 있어요.
+    친구에게 단 댓글과 친구가 내게 단 대댓글은 
+    <span class="intro-accent" id="accent-comment">친구와 당신, 오직 두 사람만 볼 수 있어요. </span>
+
+    <%= image_tag("img/writer_view.png", class: "intro-img") %><div class="img-caption">'마틸다'가 보는 자신의 글과 댓글</div>
+    <%= image_tag("img/user1_view.png", class: "intro-img-small img-side") %><%= image_tag("img/user2_view.png", class: "intro-img-small img-side") %>
+    <div class="img-caption">'마틸다'의 친구들이 보는 '마틸다'의 글과 댓글(왼쪽: '백산수'가 접속, 오른쪽: '잡동사니'가 접속)</div>
+
+
+    내 글에 전체 공개 댓글을 달면 
+
+    <%= image_tag("img/mycomment.png", class: "intro-img") %>
+    글을 보는 친구 모두에게 댓글이 보여요.
+
+    <%= image_tag("img/mycomment_friend.png", class: "intro-img") %>
+
+
+    '익명 피드' 탭에 들어가면 친구가 아닌 익명의 사람들의 글을 볼 수 있어요.
+    댓글과 대댓글을 달면서 많은 사람과 소통해보세요.
+
+    <%= image_tag("img/anonymous_view.png", class: "intro-img") %>익명의 사용자들이 색으로 구분되어 보여요.
+
+    내가 쓴 글도 친구가 아닌 사용자들의 익명 피드에 등장할 수 있어요.
+
+</div>
+<div id="drawer">
+    <h2 class="intro-topic">서랍장에 글을 담아보세요!</h2>
+    기억하고 싶은 글은 서랍장 아이콘을 눌러 서랍장에 담아보세요.
+
+    <%= image_tag("img/click_drawer.png", class: "intro-img") %>
+    내 페이지에서 '서랍장'에 들어가면 담아둔 글을 모아 볼 수 있어요.
+
+    <%= image_tag("img/my_drawer.png", class: "intro-img") %>
+    글쓴이는 누군가가 자신의 글을 서랍장에 담았다는 알림을 받게 될 거에요.
+
+    <%= image_tag("img/drawer_noti.png", class: "intro-img-smallest") %>
+
+</div>
+<div id="like">
+    <h2 class="intro-topic">좋아요를 눌러보세요!</h2>
+    친구의 글에 좋아요를 눌러보세요.
+
+    <%= image_tag("img/click_like.png", class: "intro-img") %>
+    친구에게 알림이 갈 거에요.
+
+    <%= image_tag("img/like_noti.png", class: "intro-img-smallest") %>
+
+    익명 피드에서는 좋아요를 누르면 
+
+    <%= image_tag("img/click_like_anonymous.png", class: "intro-img") %>
+    글쓴이에게 익명의 알림이 가요.
+
+    <%= image_tag("img/like_noti_anonymous.png", class: "intro-img-smallest") %>
+
+    <span class="intro-accent" id="accent-like">내 글의 좋아요 개수는 나 자신만 볼 수 있어요.</span>
+
+    <%= image_tag("img/friend_view.png", class: "intro-img-small img-side") %><%= image_tag("img/own_view.png", class: "intro-img-small img-side") %>
+    <div class="img-caption">친구가 본 나의 글(왼쪽)과 내가 보는 나의 글(오른쪽)</div>
+
+</div>
+<div id="notification">
+    <h2 class="intro-topic">알림을 확인하세요!</h2>
+    <%= image_tag("img/notification.png", class: "intro-img-smallest") %>
+    당신에게 온 친구요청, 질문, 당신의 글에 대한 반응 등 다양한 알림이 실시간으로 전해질 거에요.
+    알림을 눌러 해당 알림의 내용을 확인해보세요.
+
+
+
+</div>
+<div style="color: grey;">
+    어도어는 더 좋은 서비스가 되기 위해 노력하고 있어요.
+    질문이나 오류 보고, 후원을 환영합니다.
+    <%= link_to '이메일', 'mailto:adoor.team@gmail.com', class: "intro-link"%> &nbsp &nbsp<%= link_to '페이스북', 'https://www.facebook.com/adoor.team', class: "intro-link" %> &nbsp &nbsp<%= link_to '인스타그램', 'https://www.instagram.com/adoor.official',class: "intro-link" %>
+</div>
+</div>
+
+<script>
+$(document).ready(function() {
+    var controller = new ScrollMagic.Controller();
+    var scene1 = new ScrollMagic.Scene({
+        triggerElement: '#friend',
+        triggerHook: "onCenter",
+        duration: $("#friend").height()
+    })
+    .setClassToggle('.tc-1','intro-change-color');
+
+    var scene2 = new ScrollMagic.Scene({
+        triggerElement: '#assign',
+        triggerHook: "onCenter",
+        duration: $("#assign").height()
+    })
+    .setClassToggle('.tc-2','intro-change-color');
+
+    var scene3 = new ScrollMagic.Scene({
+        triggerElement: '#comment',
+        triggerHook: "onCenter",
+        duration: $("#comment").height()
+    })
+    .setClassToggle('.tc-3','intro-change-color')
+
+    var scene4 = new ScrollMagic.Scene({
+        triggerElement: '#drawer',
+        triggerHook: "onCenter",
+        duration: $("#drawer").height()
+    })
+    .setClassToggle('.tc-4','intro-change-color')
+
+    var scene5 = new ScrollMagic.Scene({
+        triggerElement: '#like',
+        triggerHook: "onCenter",
+        duration: $("#like").height()
+    })
+    .setClassToggle('.tc-5','intro-change-color')
+
+    var scene6 = new ScrollMagic.Scene({
+        triggerElement: '#notification'  ,
+        triggerHook: "onCenter"   ,
+        duration: $("#notification").height()    
+    })
+    .setClassToggle('.tc-6','intro-change-color')
+
+    controller.addScene([scene1, scene2, scene3, scene4, scene5, scene6]);
+
+})
+// $('a').click(function(e) {
+//     e.preventDefault();
+// });
+// $(document).ready(function() {
+//     console.log(document.getElementById('comment').scrollTop)
+//     console.log(document.getElementById('drawer').scrollTop)
+//     console.log($("#drawer").scrollTop())
+//     console.log($("#like").scrollTop())
+//     console.log($("#notification").scrollTop())
+//     $(window).scroll(function () {
+//         if ($(this).scrollTop() > document.getElementById('comment').scrollTop) {
+//             $(".tc-2").addClass(".intro-change-color")
+//         }
+//         if ($(this).scrollTop() < $("#comment").scrollTop()) {
+//             $(".tc-2").removeClass(".intro-change-color")
+//         }
+//     });
+// });
+</script> 

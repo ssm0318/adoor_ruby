@@ -7,6 +7,13 @@ class Drawer < ApplicationRecord
     private 
 
     def create_notifications
-        Notification.create(recipient: self.target.author, actor: self.user, target: self, origin: self.target)
+        if self.target.author != self.user
+            noti_hash = {recipient: self.target.author, origin: self.target}
+            if Notification.where(noti_hash).unread.empty?
+                Notification.create(recipient: self.target.author, actor: self.user, target: self, origin: self.target)
+            else
+                Notification.where(noti_hash).first.target = self
+            end
+        end
     end
 end

@@ -1,5 +1,5 @@
 <div class="sign-box">
-  <h1 class="sign-title">Log in</h1>
+  <h1 class="sign-title">로그인</h1>
 
   <div class="sign-content-box" align="center">
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -20,15 +20,15 @@
           <!--remember me. 디자인 적용을 못해서 뺌-->
           <!--<%= f.input :remember_me, as: :boolean if devise_mapping.rememberable?%>-->
       </div>
-      <a href="/users/password/new" class="recover-link">forgot password?</a>
+      <a href="/users/password/new" class="recover-link">비밀번호를 잊어버리셨나요?</a>
       <br/>
       <br/>
       <div class="form-actions">
-        <%= f.button :submit, "Log in", class: "orange-btn" %>
+        <%= f.button :submit, "로그인", class: "orange-btn" %>
       </div>
     <% end %>
       <a href="/users/sign_up">
-        <button class = "white-btn">Sign up</button>
+        <button class = "white-btn">회원가입</button>
       </a>
   </div>
 </div>

@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190111121755) do
+ActiveRecord::Schema.define(version: 20190111134023) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "author_id", null: false
     t.integer "question_id", null: false
     t.text "content", null: false
+    t.string "tag_string"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "tag_string"
     t.index ["author_id"], name: "index_answers_on_author_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
@@ -139,9 +139,17 @@ ActiveRecord::Schema.define(version: 20190111121755) do
   create_table "posts", force: :cascade do |t|
     t.integer "author_id", null: false
     t.text "content", null: false
+    t.string "tag_string"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_posts_on_author_id"
+  end
+
+  create_table "posts_tags", id: false, force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "tag_id", null: false
+    t.index ["post_id", "tag_id"], name: "index_posts_tags_on_post_id_and_tag_id"
+    t.index ["tag_id", "post_id"], name: "index_posts_tags_on_tag_id_and_post_id"
   end
 
   create_table "queries", force: :cascade do |t|
@@ -157,9 +165,9 @@ ActiveRecord::Schema.define(version: 20190111121755) do
     t.string "content", null: false
     t.boolean "official"
     t.date "selected_date"
+    t.string "tag_string"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "tag_string"
   end
 
   create_table "questions_tags", id: false, force: :cascade do |t|

@@ -1,0 +1,94 @@
+.intro-tc-el {
+    font-weight: bold;
+    font-size: 15px;
+    color: black;
+    &:hover {
+        color: #F48462;
+     }
+     line-height: 30px;
+}
+
+// .intro-tc-el.active {
+//     color: #F48462;
+// }
+//한 페이지 내에서는 (scroll에 따라) active_link_to 안됨
+
+.intro-tc {
+    background-color: rgb(241, 241, 241);
+    position: fixed;
+    right: 50px;
+    top: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.intro-title {
+    font-family: "Nanum Gothic", serif;
+    text-align: center;
+    color: grey;
+}
+
+.intro-img {
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+.intro-img-small {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+.intro-img-smallest {
+    width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+.intro-container {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto; 
+    line-height: 30px;
+    text-align: center;
+    margin-top: -50px;
+}
+
+.intro-topic {
+    color: #F48462;
+
+}
+
+.img-side {
+    float: left;
+}
+
+.img-caption {
+    color: grey;
+}
+
+.intro-accent {
+    //font-weight: bold;
+    //color: rgb(245, 154, 126);
+    font-size: 18px;
+    text-decoration: none;
+    border-bottom: 1px solid #F48462;
+    padding-bottom: 2px;
+}
+
+.intro-link {
+    font-weight: bold;
+    &:hover {
+        color: #F48462;
+     }
+     color: black;
+}
+
+.intro-change-color {
+    color: #F48462;
+}

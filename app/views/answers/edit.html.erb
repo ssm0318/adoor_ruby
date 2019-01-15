@@ -1,24 +1,9 @@
 <div class = "today-question-box">
     <h1 class="today-question-title">답변 수정하기</h1>
-        <%= render 'form', answer: @answer %>
+    <%= render 'form', answer: @answer %>
+</div>
 <br/>
 
-<%= link_to '내 페이지로', user_answers_path(current_user.id) %></p>
+<%= link_to '내 페이지로', profile_path(current_user.id) %></p>
 
 </div>
-
-<script>
-    $("textarea").height( $("textarea")[0].scrollHeight );
-
-    var textarea = document.querySelector('textarea');
-
-    textarea.addEventListener('keydown', autosize);
-
-    function autosize(){
-        var el = this;
-        setTimeout(function(){
-            el.style.cssText = 'height:auto; padding:0';
-            el.style.cssText = 'height:' + (el.scrollHeight) + 'px';
-        },0);
-    }
-</script>

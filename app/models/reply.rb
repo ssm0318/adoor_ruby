@@ -1,6 +1,7 @@
 class Reply < ApplicationRecord
     belongs_to :comment
     belongs_to :author, class_name: 'User'
+    has_many   :likes, dependent: :destroy, as: :target
 
     after_create :create_notifications
 

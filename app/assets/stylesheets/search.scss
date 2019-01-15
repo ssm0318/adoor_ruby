@@ -1,3 +1,100 @@
 // Place all the styles related to the search controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.search-header {
+    .search-form {
+        //padding-top: 20px;
+    }
+    .search-input {
+        width: 500px;
+        height: 40px;
+        padding-left: 10px;
+        border: none;
+        background-color: white;
+        border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        margin-bottom: 10px;
+        display: inline-block;
+        font-size: 15px;
+        padding-left: 50px;
+        &:focus {
+            outline: none;
+            fill: none;
+        }
+    }
+
+    .search-icon {
+        color: #F48462;
+        position: absolute;
+        margin-left: 13px;
+        margin-top: 13px;
+        z-index: 1;
+        
+    }
+    // .search-button {
+    //     height: 30px;
+    //     width: 30px;
+    //     background: url("icons/search-icon.png");
+    //     border: none;
+    //     cursor: pointer;
+    //     &:focus {
+    //         outline: none;
+    //     }
+    //     position: relative;
+    //     top: 10px;
+    //     opacity: 0.8;
+    // }
+
+    // .search-button-image {
+    //     height: 30px;
+    //     width: 30px;
+    // }
+
+    .search-tab {
+        display: inline-block;
+        
+
+    }
+
+    .search-tab-button {
+        border: none;
+        background-color: transparent;
+        &:focus {
+            outline: none;
+        }
+        &:hover {
+            color: #F48462;
+        }
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    .search-keyword {
+        color: #F48462;
+        font-size: 20px;
+        margin-right: 5px;
+    }
+}
+
+.user-box {
+    padding: 20px;
+    display: inline-block;
+    .username {
+        font-size: 15px;
+        font-family: "Nanum Gothic", serif;
+        vertical-align: 10px;
+    }
+}
+
+.search-question {
+    .question-el {
+        padding: 0 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .question-content {
+        font-size: 18px;
+        padding: 5px 0;
+    }
+}

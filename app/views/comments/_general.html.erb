@@ -1,0 +1,14 @@
+<div class="comment">
+    <div class = "comment-content">
+        <span>
+             <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, feed_id: feed_id } %>
+            <span class= "content"><%= c.content %> </span>
+        </span>
+        <%= render 'likes/default', target: c, like_btn_class: "btn-comment-like" %>
+    </div>
+
+    <div class = "comment-info"> 
+        <span><%= render 'comments/my_comments_menu', c: c %></span>
+        <span class="date time"><%= time_tag c.created_at, class: "timeago" %></span>
+    </div>
+</div> 
