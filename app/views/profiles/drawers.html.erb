@@ -43,7 +43,7 @@
                     <% if current_user.id == d.target.author_id %>
                         <span class="btn-feed-delete hover-orange hover-pointer" data-url="<%=answer_path(d.target.id)%>">삭제</span>
                     <% end %>                 
-                    <%= render 'drawers/default', target: d.target %>
+                    <%= render 'drawers/default', target: d.target %> 
                 </div> 
             </div>
         <% end %>
