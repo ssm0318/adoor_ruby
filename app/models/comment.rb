@@ -9,13 +9,13 @@ class Comment < ApplicationRecord
     
     after_create :create_notifications
  
-    private
+    private 
 
     def create_notifications
         # 익명 댓글인 경우
         if !self.recipient_id.present?
             if self.author != self.target.author
-                noti_hash = {recipient: self.target.author, action: 'anonymous_comment', origin: self.target}
+                noti_hash = {recipient: self.target.author, actor: self.author, action: 'anonymous_comment', origin: self.target}
                 if Notification.where(noti_hash).unread.empty?
                     Notification.create(recipient: self.target.author, actor: self.author, target: self, action: 'anonymous_comment', origin: self.target)
                 else
