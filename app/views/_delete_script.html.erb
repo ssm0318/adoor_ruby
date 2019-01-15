@@ -15,19 +15,19 @@
 
             $.ajax({
                 type: "DELETE",
-                url: delete_btn.attr("data-url"), 
+                url: delete_btn.attr("data-url"),  
                 success: function(data) {
             //      클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
                     if(delete_btn.hasClass("btn-feed-delete")) {
-                        delete_btn.parents(".prism-box").fadeOut(600, function(){ $(this).remove();});
+                        delete_btn.parents(".prism-box").fadeOut(300, function(){ $(this).remove();});
                     } else if(delete_btn.parents().hasClass("comment") && delete_btn.parents().hasClass("comment-replies")){
-                        delete_btn.parents(".comment-replies-form").fadeOut(600, function(){ $(this).remove();});
+                        delete_btn.parents(".comment-replies-form").fadeOut(300, function(){ $(this).remove();});
                     } else if(delete_btn.parents().hasClass("comment")) {
-                        delete_btn.parents(".comment").fadeOut(600, function(){ $(this).remove();});
+                        delete_btn.parents(".comment").fadeOut(300, function(){ $(this).remove();});
                     } else if(delete_btn.parents().hasClass("comment-indent")) {
-                        delete_btn.parents(".comment-indent").fadeOut(600, function(){ $(this).remove();});
+                        delete_btn.parents(".comment-indent").fadeOut(300, function(){ $(this).remove();});
                     } else { 
-                        delete_btn.parents(".reply").fadeOut(600, function(){ $(this).remove();});
+                        delete_btn.parents(".reply").fadeOut(300, function(){ $(this).remove();});
                     }     
                 },
                 error: function(data) {
