@@ -82,6 +82,7 @@
                     <%= hidden_field_tag "id", "${data.comment_id}" %>
                     <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
                     <%= button_tag "저장", class: "prism-form__button" %>
+                    <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
                 <% end %>
               </div>
               `)
