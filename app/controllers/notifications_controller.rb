@@ -14,9 +14,6 @@ class NotificationsController < ApplicationController
             if noti.read_at == nil
                 noti.read_at = DateTime.now()
                 noti.save(touch: false)  # updated_at을 update하지 않기 위해!!
-                puts '=================================================='
-                puts noti.errors.full_messages
-                puts '=================================================='
             end
 
             origin_id = noti.origin_id
