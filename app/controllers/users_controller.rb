@@ -31,7 +31,7 @@ class UsersController < ApplicationController
             @error = @user.errors.full_messages[0]
             render 'edit'
         else
-            redirect_to show_mypage_path
+            redirect_to profile_path(@user.id)
         end
     end
 
