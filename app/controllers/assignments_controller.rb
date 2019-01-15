@@ -33,7 +33,7 @@ class AssignmentsController < ApplicationController
  
     end
 
-    def delete
+    def destroy
         assignee_id = params[:assignee_id]
         question_id = params[:question_id]
         assigner_id = current_user.id
@@ -46,4 +46,4 @@ class AssignmentsController < ApplicationController
             assigned_user: User.find(assignee_id)
         }
     end
-end
+end 
