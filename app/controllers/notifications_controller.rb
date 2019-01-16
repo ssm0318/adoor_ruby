@@ -67,9 +67,9 @@ class NotificationsController < ApplicationController
                 elsif origin_type == 'Answer'
                     redirect_to answer_path(origin_id)
                 elsif origin_type == 'Comment'
-                    redirect_to answer_path(noti.origin.target.id)
+                    redirect_to answer_path(noti.origin.target_id)
                 elsif origin_type == 'Reply'
-                    redirect_to answer_path(noti.origin.comment.target.id)
+                    redirect_to answer_path(noti.origin.comment.target_id)
                 end
             end
         end
