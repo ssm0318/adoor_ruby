@@ -5,7 +5,7 @@
         <% u.hidden_field :id, :value => current_user.id %>
 
         <div>
-            <%= u.label "Username" %>
+            <%= u.label "닉네임" %>
             <%= u.text_field :username, :required => true %>
         </div>
 
@@ -15,15 +15,15 @@
         <!-- </div>  -->
         <br>
         <div>
-            <%= u.label "Date of Birth" %>
+            <%= u.label "생년월일" %>
             <%= u.date_field :date_of_birth %>
         </div>
 
         <br>
         <div>
+            <%= u.label "프로필 사진 (jpg, jpeg, png, gif)" %><br>
             <%= image_tag current_user.image.url, :style => "height:40px; width:40px; border-radius:15px;" %>
-            <%= u.label "[jpg, jpeg, png, gif ONLY]" %>
-            <%= u.file_field :image%>
+            <%= u.file_field :image %>
         </div>
     <br>
         <%= u.submit "수정하기", class: "profile-button" %>

@@ -1,7 +1,7 @@
 <%= render 'users/tabs' %>
 <div class="sign-box">
 <h1 class="sign-title">비밀번호 변경</h1>
-<div class="profile-content-box" align="center">
+<div class="profile-content-box">
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 

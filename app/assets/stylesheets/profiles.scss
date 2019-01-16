@@ -14,3 +14,12 @@
         fill: none;
     } 
 }
+
+.profile-edit-tab {
+    color: gray;
+}
+
+.profile-edit-tab.active {
+    color: black;
+    font-weight: bold;
+}
