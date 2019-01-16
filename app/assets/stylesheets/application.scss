@@ -178,7 +178,11 @@ a {
         color: #F48462;
     }
 }
-body {margin: 0px; background-color: #f9f9f9;}
+body {
+    margin: 0px; 
+    background-color: #f9f9f9;
+    font-family: "Nanum Gothic", serif;
+}
 
 div.background {
     // width: 100%;
