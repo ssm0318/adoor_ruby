@@ -73,4 +73,8 @@ Rails.application.routes.draw do
   get '/search/popular_tags' => 'search#popular_tags', as: :show_popular_tags
   get '/search/popular_search' => 'search#popular_search', as: :show_popular_search
   get '/search/user' => 'search#user', as: :search_user
+
+  # Channel
+  resources :channels, only: [:create, :destroy]
+
 end

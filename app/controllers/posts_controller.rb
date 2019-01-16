@@ -13,6 +13,13 @@ class PostsController < ApplicationController
                 @post.tags << new_tag
             end
         end
+
+        channels = []   # 선택된 채널들을 갖고 있다.
+        channels = Channel.find(params[:c]) if params[:c]
+        channels.each do |c|
+            Entrance.create(channel: c, target: @post)
+        end
+
        
         redirect_to root_path
     end

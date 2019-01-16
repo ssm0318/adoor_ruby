@@ -3,7 +3,11 @@
     <div class="prism-box__content">
         <%= form_tag('/posts') do %>
             <%= text_area_tag :content, nil, required: true, class: "new-answer-field",  placeholder: "나는 지금", autofocus: true, "data-enable-grammarly": "false" %>
-
+            공개범위
+            <% current_user.channels.each do |channel| %>
+                <%= check_box_tag "c[]", channel.id, false, id: channel.id.to_s%>
+                <%= label_tag "#{channel.id}", channel.name %>
+            <% end %>
             <%= button_tag "저장", class: "answer-button"%>
         <% end %>
     </div>

@@ -9,7 +9,6 @@ class InvitationsController < ApplicationController
     def link
         assigned_questions = []   # 선택된 question들을 갖고 있다 (최대 3개, 최소 0개)
         assigned_questions = Question.find(params[:q]) if params[:q]
-        #FIXME: 이 부분은 deploy할 때 링크 꼭 바꿔줘야 함!! ---> https://adoor.app/....
         if Rails.env.production?
             @link = "adoor.app/invitation/#{current_user.id}"
         elsif Rails.env.development?

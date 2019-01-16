@@ -1,0 +1,8 @@
+<% friends.each do |friend| %>
+    <div class="friend-box">
+        <div class="friend-box-userpage" onclick="window.location='<%= profile_path(friend.id) %>';">
+            <p><%= friend.username %></p>
+            <%= image_tag friend.image.url, class:"friend-box-image" %>
+        </div>
+    </div>
+<% end %>
