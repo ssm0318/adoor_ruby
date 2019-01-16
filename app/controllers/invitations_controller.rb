@@ -2,9 +2,12 @@ class InvitationsController < ApplicationController
     before_action :authenticate_user!, except: [:accept]
 
     def index
-        @questions = Question.popular_questions
-        render 'index'
-    end
+        @questions = []
+        if (n = (7 - @questions.length)) > 0
+            @questions = Question.where.not(selected_date: nil).sample(n) # 답변된 질문이 부족하면 공개된 질문 중 랜덤하게 take
+        end
+        render 'index' 
+    end 
 
     def link
         assigned_questions = []   # 선택된 question들을 갖고 있다 (최대 3개, 최소 0개)
