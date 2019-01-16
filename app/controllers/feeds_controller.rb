@@ -9,6 +9,7 @@ class FeedsController < ApplicationController
     end
  
     def friends
+        # 
         answers = Answer.named(current_user.id)
         posts = Post.named(current_user.id)
         @feeds = answers + posts
