@@ -7,4 +7,9 @@
         <!-- <%= link_to "수정", edit_post_path(feed.id), class: "hover-orange" %> -->
         <span class="btn-feed-delete hover-orange hover-pointer" data-url="<%=post_path(feed.id)%>">삭제</span>
     <% end %>
+    <span>공개범위: 
+        <% feed.channels.each do |c| %>
+            <%= c.name %>
+        <% end %>
+    <span/>
 <% end %>
