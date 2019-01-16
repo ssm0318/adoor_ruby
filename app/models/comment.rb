@@ -9,7 +9,7 @@ class Comment < ApplicationRecord
     
     after_create :create_notifications
  
-    private
+    private 
 
     def create_notifications
         # 익명 댓글인 경우
@@ -20,6 +20,7 @@ class Comment < ApplicationRecord
                     Notification.create(recipient: self.target.author, actor: self.author, target: self, action: 'anonymous_comment', origin: self.target)
                 else
                     Notification.where(noti_hash).first.target = self
+                    Notification.where(noti_hash).first.actor = self.author # 필요하지 않지만 일관성을 위해
                 end
             end
         # 친구 댓글인 경우

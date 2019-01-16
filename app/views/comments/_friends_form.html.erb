@@ -8,13 +8,13 @@
                 <% end %> 
             </div> 
             <% if current_user.id == feed.author.id %>
-                <%= form_tag comments_path, :class => "prism-form comment" do %>
+                <%= form_tag comments_path, :class => "prism-form-friend comment" do %>
                     <%= hidden_field_tag "recipient_id", feed.author.id %>
                     <%= hidden_field_tag "target_type", feed.class.to_s %>
                     <%= hidden_field_tag "target_id", feed.id %>
                     <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
                     <%= button_tag "저장", :class => "prism-form__button" %>
-                    이 댓글은 전체 공개되는 댓글입니다
+                    <span class="comment-info-alert">이 댓글은 전체 공개되는 댓글입니다</span>
                 <% end %>
                 <br><br>
             <% end %>
@@ -35,12 +35,13 @@
                             <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
                         <% end %>
                     </div>
-                    <%= form_tag comments_path, :class => "prism-form friend-comment" do %>
+                    <%= form_tag comments_path, :class => "prism-form-friend friend-comment" do %>
                         <%= hidden_field_tag "recipient_id", r %>
                         <%= hidden_field_tag "target_type", feed.class.to_s %>
                         <%= hidden_field_tag "target_id", feed.id %>
                         <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
                         <%= button_tag "저장", :class => "prism-form__button" %>
+                        <span class="comment-info-alert">이 댓글은 댓글 상대에게만 공개되는 댓글입니다</span>
                     <% end %>
                 </div>
                 <br>
@@ -57,10 +58,11 @@
                             <% end %>
                         </div>
                         <%# TOOD: action 설정 %>
-                        <%= form_tag replies_path, :class => "prism-form reply" do %>
+                        <%= form_tag replies_path, :class => "prism-form-friend reply" do %>
                             <%= hidden_field_tag "id", c.id %>
                             <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
                             <%= button_tag "저장", class: "prism-form__button" %>
+                            <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다<span>
                         <% end %>
                     </div>
                 <%end%>
@@ -72,12 +74,13 @@
                         <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
                     <% end %>
                 </div>
-                <%= form_tag comments_path, :class => "prism-form comment" do %>
+                <%= form_tag comments_path, :class => "prism-form-friend comment" do %>
                     <%= hidden_field_tag "recipient_id", current_user.id %>
                     <%= hidden_field_tag "target_type", feed.class.to_s %>
                     <%= hidden_field_tag "target_id", feed.id %>
                     <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
                     <%= button_tag "저장", :class => "prism-form__button" %>
+                    <span class="comment-info-alert">이 댓글은 작성자에게만 공개되는 댓글입니다</span>
                 <% end %>
             </div>
         <% end %>
