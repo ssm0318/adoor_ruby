@@ -7,8 +7,8 @@
             <input type="text" value= "<%= @link %>" id="myInput">
 
             <div class="tooltip">
-                <button onclick="myFunction()" onmouseout="outFunc()" class="link-copy-btn">
-                <span class="tooltiptext" id="myTooltip">클립보드에 복사되었습니다</span>
+                <button onclick="myFunction()" onmouseout="outFunc()">
+                <span class="tooltiptext" id="myTooltip">클립보드에 복사하기</span>
                 링크 복사하기
                 </button>
             </div>
@@ -33,7 +33,7 @@ function myFunction() {
     tooltip.innerHTML = "클립보드에 복사되었습니다!";
     }
 
-    function outFunc() {
+function outFunc() {
     var tooltip = document.getElementById("myTooltip");
     tooltip.innerHTML = "클립보드에 복사하기";
 }
