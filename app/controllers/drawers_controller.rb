@@ -20,6 +20,9 @@ class DrawersController < ApplicationController
         drawer = Drawer.where(target_type: params[:target_type], target_id: params[:id], user_id: current_user.id)
         drawer.destroy_all
 
-        redirect_back fallback_location: profile_drawers_path(current_user.id)
+        #redirect_back fallback_location: profile_drawers_path(current_user.id)
+        render json: {
+            
+        }
     end
 end
