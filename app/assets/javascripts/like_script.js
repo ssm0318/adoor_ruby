@@ -44,3 +44,8 @@ function like_ajax(element) {
             })
     })
 }
+
+$(document).on('turbolinks:load', function()  {
+    like_ajax($(".btn-feed-like"))
+    like_ajax($(".btn-comment-like"))
+})

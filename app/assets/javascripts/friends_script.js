@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).on('turbolinks:load', function()  {
 
     // like_ajax(".w-like")
     $(".prism-form-friend").submit( function(e) {
@@ -16,6 +16,8 @@ $(document).on('turbolinks:load', function() {
                     console.log(data);
                     console.log("here");
                     console.log(new_url);
+
+                    // link_to는 undefined method라고 에러떠서 어쩔 수 없었듬다ㅠㅠㅠㅠ
                     
                     var html_str=
                     `

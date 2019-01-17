@@ -3,7 +3,7 @@
     <% if !@user.friends.include? current_user and @user.id != current_user.id %>
         <%= @user.username %>님과 친구가 되어보세요.
     <% else %>
-    <% @feeds.reverse_each do |feed| %> 
+    <% @feeds.each do |feed| %> 
         <div class="prism-box">
             <div class="prism-box__header">
                 <%= render partial: "./user_profile", locals: {user: feed.author} %><br/>
@@ -11,7 +11,7 @@
             <div class="prism-box__content">
                 <br>
                 <% if feed.is_a? Answer %>
-                    <%= link_to feed.question.content, question_path(feed.question.id), class: "question" %>
+                    <%= link_to feed.question.content, question_path(feed.question.id), class: "question" %><br><br>
                 <% end %>
                 <div class="answer"><%= feed.content %></div>
                 <br>
@@ -29,16 +29,3 @@
         <% end %>
     <% end %>
 </div>
-<%= render 'comments/friends_script' %>
-<%# render 'drawers/script' %>
-<%= render 'layouts/timestamp' %>
-<%= render 'likes/script' %>
-<%= render './delete_script' %>
-<script>
-  $(document).ready(function() {
-    like_ajax($(".btn-feed-like"))
-    like_ajax($(".btn-comment-like"))
-    delete_ajax($(".btn-feed-delete"))
-    delete_ajax($(".btn-comment-delete"))
-  })
-</script>

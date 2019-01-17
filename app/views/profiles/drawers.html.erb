@@ -31,7 +31,7 @@
                 <div class = "prism-box__content">
                     <br> 
                     <% if d.target.is_a? Answer %>
-                        <%= link_to d.target.question.content, question_path(d.target.question.id), class: "question" %>
+                        <%= link_to d.target.question.content, question_path(d.target.question.id), class: "question" %><br><br>
                     <% end %>
                     <div class = "answer">
                         <%= d.target.content %>
