@@ -35,20 +35,3 @@
     <% end %>
 </div>
 
-<%= render 'layouts/timestamp' %>
-<%= render 'drawers/script' %>
-<% if anonymous %>
-    <%= render 'comments/general_script'%>
-<%else %>
-    <%= render 'comments/friends_script' %>
-<% end %>
-<%= render 'likes/script' %>
-<%= render './delete_script' %>
-<script>
-  $(document).ready(function() {
-    like_ajax($(".btn-feed-like"))
-    like_ajax($(".btn-comment-like"))
-    delete_ajax($(".btn-feed-delete"))
-    delete_ajax($(".btn-comment-delete"))
-  })
-</script> 

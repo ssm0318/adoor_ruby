@@ -1,12 +1,11 @@
-<script>
-    $(document).ready(function() {
+$(document).on('turbolinks:load', function()  {
 
-        // like_ajax(".w-like")
-        $(".prism-form-friend").submit( function(e) {
+    // like_ajax(".w-like")
+    $(".prism-form-friend").submit( function(e) {
 
-            e.preventDefault();
-            
-            var form = $(this)
+        e.preventDefault();
+        
+        var form = $(this)
  
             $.ajax({
                 type: "POST",
@@ -17,13 +16,19 @@
                     console.log(data);
                     console.log("here");
                     console.log(new_url);
+
+                    // link_to는 undefined method라고 에러떠서 어쩔 수 없었듬다ㅠㅠㅠㅠ
                     
                     var html_str=
                     `
                             <div class = "comment-content">
                                 <span>
-                                    <%= link_to image_tag(current_user.image.url, :class => "user-profile"), profile_path(current_user.id) %>
-                                    <%= link_to current_user.username, profile_path(current_user.id), class: "username" %>
+                                    <a href="${data.profile_path}">
+                                        <img class="user-profile" src="${data.profile_img_url}">
+                                    </a>
+                                    <a class="username" href="${data.profile_path}">
+                                        ${data.username}
+                                    </a>
                                     <span class= "content">${data.content} </span>
                                 </span>
                             </div>
@@ -72,6 +77,5 @@
                     console.log("error")
                 }
             })
-        })
     })
-</script>
+})
