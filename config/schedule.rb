@@ -25,9 +25,15 @@
 #job_type :rails,    "cd :path && rails :task --silent :output"
 job_type :rake, 'cd :path && RAILS_ENV=production bundle exec rake :task --silent :output'
 # ENV['RAILS_ENV'] = "production"
-
+ 
 set :output, 'log/whenever.log'
+
 every :day, at: '0 am' do
 # every 1.minutes do
     rake "today_question:update"
+end
+
+# every :day, at: '9 pm' do
+every 1.minutes do  
+    rake "user_stats:update"
 end
