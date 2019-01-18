@@ -2,16 +2,5 @@
   <%= render 'posts/new'%>
   <%= render partial: 'feeds/friends_index', locals: {feeds: @feeds} %>
 </div>
-<%= render 'comments/friends_script' %>
-<%= render 'drawers/script' %> 
-<%= render 'layouts/timestamp' %>
-<%= render 'likes/script' %>
-<%= render './delete_script' %>
-<script> 
-  $(document).ready(function() {
-    like_ajax($(".btn-feed-like"))
-    like_ajax($(".btn-comment-like"))
-    delete_ajax($(".btn-feed-delete"))
-    delete_ajax($(".btn-comment-delete"))
-  })
-</script>  
+
+
