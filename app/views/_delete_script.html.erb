@@ -17,7 +17,7 @@
                 type: "DELETE",
                 url: delete_btn.attr("data-url"),  
                 success: function(data) {
-            //      클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
+            //      클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것 // 유리: 죄송해요 comment-indent가 없어져야 해서 바꿔버렸읍니다 (friends/_friends.html.erb 참고)
                     if(delete_btn.hasClass("btn-feed-delete")) {
                         delete_btn.parents(".prism-box").fadeOut(300, function(){ $(this).remove();});
                     } else if(delete_btn.parents().hasClass("comment") && delete_btn.parents().hasClass("comment-replies")){

@@ -1,14 +1,9 @@
 <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px solid #d7dae0;">
     <div>
         댓글 <br/><br>
-        <div class="author-comments-div">
-            <% Comment.where(target: feed, recipient_id: feed.author_id).each do |c| %>
-                <%= render partial: "comments/general", locals: {user_id: feed.author_id, feed_id: feed.id, c:c} %>
-            <% end %>
-        </div>
         <br>
         <div class="anonymous-comments-div">
-            <% Comment.where(target: feed, recipient_id: nil).each do |c|%>
+            <% Comment.where(target: feed, anonymous: true).each do |c|%>
                 <div class="comment-replies-form">
                     <div class="comment-replies">
                         <% if c.author_id != current_user.id %>
@@ -18,11 +13,17 @@
                         <% end %>
                         
                         <% Reply.where(comment_id: c.id).each do |r|%>
-                            <%= render partial: "replies/default", locals: {user: current_user, feed_id: feed.id, r: r} %>
+                            <% if r.author_id != current_user.id %>
+                                <% render partial: "replies/general", locals: {feed: feed, r: r}%>
+                            <% else %>
+                                <%= render partial: "replies/friends", locals: {r: r} %>
+                            <% end %>
                         <% end %> 
                     </div>
                     <%= form_tag replies_path, :class => "prism-form-general reply" do %>
                         <%= hidden_field_tag "id", c.id %>
+                        <%= hidden_field_tag "anonyomus", true %>
+                        <%= hidden_field_tag "secret", false %>  <!-- 이건 디폴트 값. 익명 댓글은 secret 무조건 false -->
                         <%= text_field_tag "content", nil, required: true,  :class => "prism-form__input" %>
                         <%= button_tag "저장", class: "prism-form__button" %>
                         <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
@@ -32,9 +33,10 @@
             <% end %>
         </div>
         <%= form_tag comments_path, :class => "prism-form-general comment" do %>
-            <%= hidden_field_tag "recipient_id", "0" %>
             <%= hidden_field_tag "target_type", feed.class.to_s %>
             <%= hidden_field_tag "target_id", feed.id %>
+            <%= hidden_field_tag "anonyomus", true %>
+            <%= hidden_field_tag "secret", false %>  <!-- 이건 디폴트 값. 익명 대댓글은 secret 무조건 false -->
             <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
             <%= button_tag "저장", :class => "prism-form__button" %>
             <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>

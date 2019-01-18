@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(version: 20190111134023) do
     t.integer "target_id"
     t.string "target_type"
     t.text "content", null: false
+    t.boolean "secret", default: false, null: false
+    t.boolean "anonymous", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_comments_on_author_id"
@@ -179,6 +181,8 @@ ActiveRecord::Schema.define(version: 20190111134023) do
     t.integer "author_id", null: false
     t.integer "comment_id", null: false
     t.text "content", null: false
+    t.boolean "secret", default: false, null: false
+    t.boolean "anonymous", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_replies_on_author_id"

@@ -1,51 +1,34 @@
 <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px solid #d7dae0;">
     <div>
         댓글 <br><br>
-        <div class="author-comments-div">
-            <div class="comments">
-                <% Comment.where(target: feed, recipient_id: feed.author.id).each do |c| %>
-                    <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
-                <% end %> 
-            </div> 
-            <% if current_user.id == feed.author.id %>
+        <!-- 글쓴이가 보는 댓글 -->
+        <% if current_user.id == feed.author.id %>
+            <div class="friend-comments-div">
+                <% feed.comments.where(anonymous: false).each do |c| %>
+                    <% render partial: "comments/friends", locals: {feed: feed, c: c} %>
+
+                    <% c.replies.each do |r| %>
+                        <%= render partial: "replies/friends", locals: {r: r} %>
+                    <% end %>
+                    <%= form_tag replies_path, class: "" do %>
+                        <%= hidden_field_tag "id", c.id %>
+                        <%= hidden_field_tag "anonyomus", false %>
+                        <%= check_box_tag "secret", "숨기기", false, class: "" %>
+                        <%= text_field_tag "content", nil, required: true,  :class => "prism-form__input" %>
+                        <%= button_tag "저장", class: "prism-form__button" %>
+                        <span class="comment-info-alert">숨기기 설정을 하면, 댓글 작성자에게만 댓글이 보입니다.</span>
+                    <% end %>
+                <% end %>
                 <%= form_tag comments_path, :class => "prism-form-friend comment" do %>
-                    <%= hidden_field_tag "recipient_id", feed.author.id %>
                     <%= hidden_field_tag "target_type", feed.class.to_s %>
                     <%= hidden_field_tag "target_id", feed.id %>
+                    <%= hidden_field_tag "anonyomus", false %>
                     <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
-                    <%= button_tag "저장", :class => "prism-form__button" %>
-                    <span class="comment-info-alert">이 댓글은 전체 공개되는 댓글입니다</span>
+                    <%= check_box_tag "secret", "숨기기", false, class: "" %>
+                    <%= button_tag "저장", class: "prism-form__button" %>
+                    <span class="comment-info-alert">숨기기 설정을 하면, 나만 보는 댓글이 작성됩니다.</span>
                 <% end %>
-                <br><br>
-            <% end %>
-        </div>
-
-        <% if current_user.id == feed.author.id %>
-            <% recipients = [] %>
-            <% feed.comments.each do |c| %>
-                <% if c.recipient_id!= nil && c.recipient_id != feed.author.id %>
-                    <% recipients.push(c.recipient_id) %>
-                <% end %>
-            <% end %>
-            <% recipients.uniq! %>
-            <% recipients.each do |r| %>
-                <div class="comments-div">
-                    <div class="comments">
-                        <% Comment.where(target: feed, recipient_id: r).each do |c| %>
-                            <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
-                        <% end %>
-                    </div>
-                    <%= form_tag comments_path, :class => "prism-form-friend friend-comment" do %>
-                        <%= hidden_field_tag "recipient_id", r %>
-                        <%= hidden_field_tag "target_type", feed.class.to_s %>
-                        <%= hidden_field_tag "target_id", feed.id %>
-                        <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
-                        <%= button_tag "저장", :class => "prism-form__button" %>
-                        <span class="comment-info-alert">이 댓글은 댓글 상대에게만 공개되는 댓글입니다</span>
-                    <% end %>
-                </div>
-                <br>
-            <% end %>
+            </div>
             <div class="anonymous-comments-div">
                 <% Comment.where(target: feed, recipient_id: nil).each do |c|%>
                     <div class="comment-replies-form">
@@ -67,20 +50,34 @@
                     </div>
                 <%end%>
             </div>
+        <!-- 친구가 보는 댓글 -->
         <% else %>
             <div class="comments-div">
                 <div class="comments">
-                    <% Comment.where(target: feed, recipient_id: current_user.id).each do |c| %>
-                        <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
+                    <% feed.comments.where(anonymous: false).accessible(current_user.id).each do |c| %>
+                        <% render partial: "comments/friends", locals: {feed: feed, c: c} %>
+
+                        <% c.replies.accessible(current_user.id).each do |r| %>
+                            <%= render partial: "replies/friends", locals: {r: r} %>
+                        <% end %>
+                        <%= form_tag replies_path, class: "" do %>
+                            <%= hidden_field_tag "id", c.id %>
+                            <%= hidden_field_tag "anonyomus", false %>
+                            <%= check_box_tag "secret", "숨기기", false, class: "" %>
+                            <%= text_field_tag "content", nil, required: true,  :class => "prism-form__input" %>
+                            <%= button_tag "저장", class: "prism-form__button" %>
+                            <span class="comment-info-alert">숨기기 설정을 하면, 글쓴이와 댓글 작성자에게만 댓글이 보입니다.</span>
+                        <% end %>
                     <% end %>
                 </div>
                 <%= form_tag comments_path, :class => "prism-form-friend comment" do %>
-                    <%= hidden_field_tag "recipient_id", current_user.id %>
                     <%= hidden_field_tag "target_type", feed.class.to_s %>
                     <%= hidden_field_tag "target_id", feed.id %>
+                    <%= hidden_field_tag "anonyomus", false %>
                     <%= text_field_tag "content", nil, required: true, :class => "prism-form__input" %>
-                    <%= button_tag "저장", :class => "prism-form__button" %>
-                    <span class="comment-info-alert">이 댓글은 작성자에게만 공개되는 댓글입니다</span>
+                    <%= check_box_tag "secret", "숨기기", false, class: "" %>
+                    <%= button_tag "저장", class: "prism-form__button" %>
+                    <span class="comment-info-alert">숨기기 설정을 하면, 글쓴이에게만 댓글이 보입니다.</span>
                 <% end %>
             </div>
         <% end %>

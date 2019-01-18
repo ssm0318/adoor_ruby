@@ -2,7 +2,7 @@ class RepliesController < ApplicationController
     before_action :set_reply, only: [:destroy]
 
     def create
-        r = Reply.create(content: params[:content], author_id: current_user.id, comment_id: params[:id])
+        r = Reply.create(content: params[:content], author_id: current_user.id, comment_id: params[:id], secret: params[:secret], anonymous: params[:anonymous])
         
         render json: {
             id: r.id,
