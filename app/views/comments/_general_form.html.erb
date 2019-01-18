@@ -20,6 +20,7 @@
                             <% end %>
                         <% end %> 
                     </div>
+                    <!-- FIXME: 버그_ 댓글 쓰고 그 댓글에 바로 대댓글 쓰면 그거 안써짐 -->
                     <%= form_tag replies_path, class: "prism-form-general reply" do %>
                         <%= hidden_field_tag "id", c.id %>
                         <%= hidden_field_tag "anonymous", "true" %>

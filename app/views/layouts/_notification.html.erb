@@ -63,6 +63,8 @@
                             <%=username%>님이 당신의 글을 좋아했습니다.
                         <% elsif noti.action == 'friend_like_comment' %>
                             <%=username%>님이 당신의 댓글을 좋아했습니다.
+                        <% elsif noti.action == 'friend_like_reply'%>
+                            <%= username %>님이 당신의 대댓글을 좋아했습니다.
                         <% elsif noti.action == 'anonymous_like_article' %>
                             누군가가 당신의 글을 좋아했습니다.
                         <% elsif noti.action == 'anonymous_like_comment' %>
@@ -75,6 +77,8 @@
                             <%= username %>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 글을 좋아했습니다. 
                         <% elsif noti.action == 'friend_like_comment' %>
                             <%= username %>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 댓글을 좋아했습니다. 
+                        <% elsif noti.action == 'friend_like_reply' %>
+                            <%= username %>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 대댓글을 좋아했습니다.
                         <% elsif noti.action == 'anonymous_like_article' %>
                             <%= noti.origin.likes.size %>명이 당신의 글을 좋아했습니다.
                         <% elsif noti.action == 'anonymous_like_comment' %>
@@ -84,7 +88,7 @@
                         <% end %>
                     <% end %>        
                 <% end %>
-                <div class = "date time" style="display: block; margin-top: 5px; font-size: 10px;"><%= time_tag noti.created_at, class: "timeago" %></div> 
+                <div class = "date time" style="display: block; margin-top: 5px; font-size: 10px;"><%= time_tag noti.updated_at, class: "timeago" %></div> 
             </div>
         <% end %>
     <% end %>

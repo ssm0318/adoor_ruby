@@ -97,6 +97,7 @@
                         <% end %>
                     <% end %>
                 </div>
+                <!-- FIXME: 댓글 쓰고 나서 그 창에서는 그 댓글에 대한 대댓글 form이 안나옴. 새로고침하면 나옴-->
                 <%= form_tag comments_path, :class => "prism-form-friend comment" do %>
                     <%= hidden_field_tag "target_type", feed.class.to_s %>
                     <%= hidden_field_tag "target_id", feed.id %>

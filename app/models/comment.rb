@@ -20,8 +20,10 @@ class Comment < ApplicationRecord
                 if Notification.where(noti_hash).unread.empty?
                     Notification.create(recipient: self.target.author, actor: self.author, target: self, action: 'anonymous_comment', origin: self.target)
                 else
-                    Notification.where(noti_hash).first.target = self
-                    Notification.where(noti_hash).first.actor = self.author # 필요하지 않지만 일관성을 위해
+                    n = Notification.where(noti_hash).first
+                    n.target = self
+                    n.actor = self.author # 필요하지 않지만 일관성을 위해
+                    n.save
                 end
             # 친구 댓글인 경우
             else
@@ -30,7 +32,9 @@ class Comment < ApplicationRecord
                     Notification.create(recipient: self.target.author, actor: self.author, target: self, action: 'friend_comment', origin: self.target)
                 # 안읽은 같은 노티가 이미 있는 경우, target만 update해준다 (그러면 updated_at도 update됨)
                 else
-                    Notification.where(noti_hash).first.target = self
+                    n = Notification.where(noti_hash).first
+                    n.target = self
+                    n.save
                 end
             end
         end
