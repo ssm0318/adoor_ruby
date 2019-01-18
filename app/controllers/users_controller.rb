@@ -18,8 +18,14 @@ class UsersController < ApplicationController
     end
    
     def friends
-        @friends = current_user.friends
-        @channels = current_user.channels
+        #@friends = current_user.friends
+        @channels = current_user.channels.drop(2)
+        @friends_with_channels = []
+
+        current_user.friends.each do |friend|
+            @friends_with_channels.push({friend: friend, channels: friend.belonging_channels.where(user_id: current_user.id)})
+        end
+
     end
 
     def edit

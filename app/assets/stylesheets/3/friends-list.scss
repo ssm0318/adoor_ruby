@@ -1,11 +1,41 @@
-.friend-box {
+.channel-nav.active {
+    color: red;
+}
+
+#btn-channel-edit-complete {
+    display: none;
+}
+
+#btn-channel-edit {
+    display: none;
+}
+
+.btn-friend-channel-edit {
+    display: none;
+}
+
+.friend-box-with-edit {
+    display: inline-block;
     width: 22%;
+    margin: 8px;
+}
+
+.friend-box {
     height: 180px;
     text-align: center;
-    display: inline-block;
-    margin: 8px;
+    display: block;
     background-color: white;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.friend-box.editing {
+    pointer-events: none;
+}
+
+.friend-box.disabled {
+    pointer-events: none;
+    background-color: gray;
 }
 
 .friend-box-image {
@@ -25,7 +55,6 @@
 .friend-box-userpage {
     padding: 15px;
     //border: 0.75px solid #bcbcbc;
-    cursor: pointer;
 }
 
 .friend-box-userpage p {

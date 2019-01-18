@@ -1,24 +1,129 @@
 <div class="prism-title"><h1>친구 목록</h1></div>
 <div class="friend-list">
-    
+
+    <button id="btn-channel-edit">채널 편집</button>
+    <button id="btn-channel-edit-complete">완료</button>
     <%= render partial: "channels/new" %>
     <!-- TODO: 채널 별 삭제 버튼, 사람 옮기기 가능하게-->
     <!-- TODO: 단, '익명피드'와 '나만보기' 채널은 이 리스트에 안나오게!! 글 쓸 때 체크하는 채널 리스트와, 마이페이지에 들어갔을 때 채널 리스트에만 등장해야 함 -->
     <!-- TODO: 그 이유는, 두 채널은 친구들을 분류하는 그룹으로서의 기능이 없을 뿐 아니라, 삭제 또는 수정이 불가하나 채널으로 둘 것이기 때문 -->
 
     <!-- 전체 친구 -->
-    전체<br>
-    <%= render partial: "friend_list", locals: {friends: @friends} %>
-
-    <!-- 채널별 친구 -->
-    <div>
+    <div id="channel-nav-div">
+        <div class="channel-nav all active">전체</div>
         <% @channels.each do |channel| %>
-            <%= channel.name %><%= link_to "채널 삭제", channel_path(channel.id), method: :delete %><br/> 
-            <%= render partial: "friend_list", locals: {friends: channel.friends} %><br>
+            <div class="channel-nav <%=channel.id%>"><%= channel.name%></div>
         <% end %>
     </div>
-    <% if @friends.empty? %>
+
+    <%= render partial: "friend_list", locals: {friends_with_channels: @friends_with_channels} %>
+
+    <% if @friends_with_channels.empty? %>
         친구를 초대해보세요!<br> <!-- FIXME: 버그인가 왜 줄바꿈이 안되지 -->
         <%= link_to "친구 초대하기", invitation_path %>
     <% end %>
 </div>
+
+
+<script>
+    $( document ).ready(function() {
+        //채널탭 클릭
+        $(".channel-nav").on('click', function(e) {
+
+            if($(".friend-box").hasClass("editing")) {
+                if(!confirm("편집하는거 날아가는데 괜찮겠어? 하지마~")) {
+                    return;
+                }
+
+                $(".friend-box").removeClass("editing")
+                $("#btn-channel-edit-complete").hide()
+                $("#btn-channel-edit").show()
+                $(".btn-friend-channel-edit").hide()
+                //편집하던거 다 날리기
+            } 
+
+            $(".channel-nav").removeClass("active")
+            $(this).addClass("active")
+            $(".friend-box").removeClass("disabled");
+
+            if($(this).hasClass("all")) {
+                //전체보기
+                $("#btn-channel-edit").hide()
+            }
+            else {
+                $("#btn-channel-edit").show()
+                const channelId = $(this).attr('class').split(/\s+/)[1];
+
+                $(".friend-box").filter(function(index) {
+                    return $(this).has('.' + channelId).length ? false : true
+                }).addClass("disabled")
+            }
+        })
+
+
+        //편집 시작
+        $("#btn-channel-edit").on('click', function(e) {
+            $(".friend-box").addClass("editing")
+            $(this).hide()
+            $("#btn-channel-edit-complete").show()
+
+            $(".btn-friend-channel-edit").html('-')
+            $(".friend-box-with-edit").find(".disabled").siblings(".btn-friend-channel-edit").html('+')
+            $(".btn-friend-channel-edit").show()
+        })
+
+
+        //편집 완료
+        $("#btn-channel-edit-complete").on('click', function(e) {
+            //TODO friend-box 값들, active한 nav 값 받아서 ajax send
+            const channelId = $("#channel-nav-div").find(".active").attr('class').split(/\s+/)[1]
+            var friend_ids = []
+
+            //TODO 값 바뀐 friend-box 값들 for문 돌려서 friend id 쌓기
+            $(".value-changed").each(function(index, element) {
+                friend_ids.push($(element).attr('class').split(/\s+/)[1])
+                
+                if($(this).hasClass("disabled")) {
+                    //delete span
+                    $(this).find('.' + channelId).remove()
+                } else {
+                    //add span
+                    $(this).append(`<span class="channel-id ${channelId}"></span>`)
+                }
+            })
+
+            $(".friend-box").removeClass("editing")
+            $(".friend-box").removeClass("value-changed")
+            $(this).hide()
+            $("#btn-channel-edit").show()
+            $(".btn-friend-channel-edit").hide()
+
+            if(friend_ids.length > 0) {
+                $.ajax({
+                    type: "PUT",
+                    url: `/channels/${channelId}/edit_friendship`,
+                    data: {"friend_ids": friend_ids},
+                    success: function(data) {
+                        console.log("successed!")
+                    },
+                    error: function(data) {
+                        console.log("error!")
+                    }
+                })
+            }
+        })
+
+
+        //+ 또는 - 버튼 누름
+        $(".btn-friend-channel-edit").on('click', function(e) {
+            $(this).siblings(".friend-box").toggleClass("disabled")
+            $(this).siblings(".friend-box").toggleClass("value-changed")
+            if($(this).html()=='+') {
+                $(this).html('-')
+            } else {
+                $(this).html('+')
+            }
+        })
+        
+    });
+</script>

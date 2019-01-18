@@ -31,6 +31,29 @@ class ChannelsController < ApplicationController
         friendship.channels.delete(@channel)
     end
 
+    def edit_friendship
+        #channel params[:id]
+        #json [{friend_id:[1,3,4]}]
+        # if friendship.channels.include? channel -> delete. not include-> add
+        puts "========="
+        puts params[:friend_ids]
+
+        friends_ids = params[:friend_ids]
+
+        friends_ids.each do |friend_id|
+            friendship_hash = {user_id: current_user.id, friend_id: friend_id}
+            friendship = Friendship.where(friendship_hash).first
+            if friendship.channels.include? @channel
+                friendship.channels.delete(@channel)
+            else
+                friendship.channels << @channel
+            end
+        end
+        
+        render json: {
+        }
+    end
+
     # add post to a channel (글의 공개범위 수정할 때만 필요, 처음 post생성 시에는 post create에서 entrance 처리됨)
     def add_post
         entrance_hash = {target_type: 'Post', target_id: params[:target_id], channel: @channel}

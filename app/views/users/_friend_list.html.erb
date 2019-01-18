@@ -1,8 +1,14 @@
-<% friends.each do |friend| %>
-    <div class="friend-box">
-        <div class="friend-box-userpage" onclick="window.location='<%= profile_path(friend.id) %>';">
-            <p><%= friend.username %></p>
-            <%= image_tag friend.image.url, class:"friend-box-image" %>
+<% friends_with_channels.each do |friend_with_channels| %>
+    <div class="friend-box-with-edit">
+        <button class="btn-friend-channel-edit">-</button>
+        <div class="friend-box <%=friend_with_channels[:friend].id%>" onclick="window.location='<%= profile_path(friend_with_channels[:friend].id) %>';">
+            <div class="friend-box-userpage">
+                <p><%= friend_with_channels[:friend].username %></p>
+                <%= image_tag friend_with_channels[:friend].image.url, class:"friend-box-image" %>
+            </div>
+            <%friend_with_channels[:channels].each do |channel| %>
+                <span class="channel-id <%= channel.id%>"></span>
+            <%end%>
         </div>
     </div>
 <% end %>

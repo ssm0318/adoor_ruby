@@ -76,5 +76,6 @@ Rails.application.routes.draw do
 
   # Channel
   resources :channels, only: [:create, :destroy]
+  put '/channels/:id/edit_friendship' => 'channels#edit_friendship'
 
 end
