@@ -19,7 +19,7 @@ namespace :user_stats do
             bd = (DateTime.now - x.days).beginning_of_day
             ed = (DateTime.now - x.days).end_of_day
             daily_header.push(ed.strftime("%b %d")) # 오늘 데이터는 제외 (21시에 업데이트가 되므로)
-            answers.push(Answer.where(created_at: bd .. ed).length)
+            answers.push(Answer.where(created_at: bd .. ed).length) 
             assignments.push(Assignment.where(created_at: bd .. ed).length)
             comments.push(Comment.where(created_at: bd .. ed).length)
             drawers.push(Drawer.where(created_at: bd .. ed).length)
