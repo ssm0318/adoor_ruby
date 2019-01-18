@@ -58,14 +58,12 @@ ActiveRecord::Schema.define(version: 20190111134023) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "author_id", null: false
-    t.integer "recipient_id"
     t.integer "target_id"
     t.string "target_type"
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_comments_on_author_id"
-    t.index ["recipient_id"], name: "index_comments_on_recipient_id"
   end
 
   create_table "drawers", force: :cascade do |t|
