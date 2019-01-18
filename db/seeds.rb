@@ -237,5 +237,7 @@ if Rails.env.development?
     a.tags << Tag.create(author_id: 6, content: "너는 태그냐", target: a)
     a.tags << Tag.create(author_id: 6, content: "와썹맨", target: a)
 elsif Rails.env.production?
-    
+    if User.where(email: "adoor.team@gmail.com").empty?
+        User.create(email: "adoor.team@gmail.com", password: "adoor2019", username: "관리자")
+    end
 end
