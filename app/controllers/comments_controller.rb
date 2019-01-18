@@ -1,6 +1,11 @@
 class CommentsController < ApplicationController
     def create
-        c = Comment.create(content: params[:content], author_id: current_user.id, target_type: params[:target_type], target_id: params[:target_id], anonymous: params[:anonymous], secret: params[:secret])
+        if params[:secret].nil?
+            secret = false
+        else
+            secret = params[:secret]
+        end
+        c = Comment.create(content: params[:content], author_id: current_user.id, target_type: params[:target_type], target_id: params[:target_id], anonymous: params[:anonymous], secret: secret)
 
         render json: {
             id: c.id,

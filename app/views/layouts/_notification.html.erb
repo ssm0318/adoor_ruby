@@ -40,23 +40,25 @@
                         <% end %>
                     <% end %>
                 <% elsif noti.target_type == 'Comment' %>
-                    <% if noti.action == 'comment' %>
+                    <% if noti.action == 'friend_comment' %>
                         <%=username%>님이 당신의 글에 댓글을 달았습니다.
-                    <% elsif noti.action == 'recomment'%>
-                        <%=username%>님이 당신의 댓글에 대댓글을 달았습니다.
                     <% elsif noti.action == 'anonymous_comment'%> 
                         누군가가 당신의 글에 댓글을 달았습니다.
                     <% end %>
                 <% elsif noti.target_type == 'Reply' %>
-                    <% if noti.action == 'to_comment'%>
+                    <% if noti.action == 'anonymous_to_comment'%>
                         누군가가 당신의 댓글에 대댓글을 달았습니다.
-                    <% elsif noti.action == 'to_author'%>
+                    <% elsif noti.action == 'anonymous_to_author'%>
                         누군가가 당신의 글에 대댓글을 달았습니다.
+                    <% elsif noti.action == 'friend_to_comment' %>
+                        <%= username %>님이 당신의 댓글에 대댓글을 달았습니다.
+                    <% elsif noti.action == 'friend_to_author' %>
+                        <%= username %>님이 당신의 글에 대댓글을 달았습니다.
                     <% end%>
                 <% elsif noti.target_type == 'FriendRequest'%>
                     <%=username%>님이 친구요청을 보냈습니다.
                 <% elsif noti.target_type == 'Like' %>
-                    <% if noti.origin.likes.size == 1%>
+                    <% if noti.origin.likes.size == 1 %>
                         <% if noti.action == 'friend_like_article' %>
                             <%=username%>님이 당신의 글을 좋아했습니다.
                         <% elsif noti.action == 'friend_like_comment' %>
