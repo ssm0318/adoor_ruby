@@ -27,6 +27,7 @@ class Friendship < ApplicationRecord
     end
 
     def default_channel
+        # 현재는 친구가 default로 삼촌 채널에 들어가도록 설정해놓음. (추후 변경 가능)
         Channel.where(user: user, name: "삼촌").first.friendships << self
     end
 end

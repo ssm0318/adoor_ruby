@@ -4,6 +4,8 @@
         <%= form_tag('/posts') do %>
             <%= text_area_tag :content, nil, required: true, class: "new-answer-field",  placeholder: "나는 지금", autofocus: true, "data-enable-grammarly": "false" %>
             공개범위
+            <!-- FIXME: 디자인 입히기, 하나 이상 체크 꼭 되야하게 하기(ajax) -->
+            <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
             <% current_user.channels.each do |channel| %>
                 <%= check_box_tag "c[]", channel.id, false, id: channel.id.to_s%>
                 <%= label_tag "#{channel.id}", channel.name %>

@@ -2,14 +2,18 @@
 <div class="friend-list">
     
     <%= render partial: "channels/new" %>
+    <!-- TODO: 채널 별 삭제 버튼, 사람 옮기기 가능하게-->
+    <!-- TODO: 단, '익명피드'와 '나만보기' 채널은 이 리스트에 안나오게!! 글 쓸 때 체크하는 채널 리스트와, 마이페이지에 들어갔을 때 채널 리스트에만 등장해야 함 -->
+    <!-- TODO: 그 이유는, 두 채널은 친구들을 분류하는 그룹으로서의 기능이 없을 뿐 아니라, 삭제 또는 수정이 불가하나 채널으로 둘 것이기 때문 -->
+
     <!-- 전체 친구 -->
     전체<br>
     <%= render partial: "friend_list", locals: {friends: @friends} %>
 
     <!-- 채널별 친구 -->
-    <div> <!-- FIXME: 리스트 디자인이.. 엉망스가 된다 ㅠㅠ -->
+    <div>
         <% @channels.each do |channel| %>
-            <%= channel.name %><br/>
+            <%= channel.name %><%= link_to "채널 삭제", channel_path(channel.id), method: :delete %><br/> 
             <%= render partial: "friend_list", locals: {friends: channel.friends} %><br>
         <% end %>
     </div>

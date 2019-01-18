@@ -5,7 +5,15 @@ class ChannelsController < ApplicationController
     def create
         Channel.create(user_id: current_user.id, name: params[:name])    
         render json: {
-            # 뭘 보내야하는지 몰라서 비워둡니다
+            # FIXME: 뭘 보내야하는지 몰라서 비워둡니다 ajax 부탁드립니다
+        }
+    end
+
+    def destroy
+        @channel.destroy
+
+        render json: {
+
         }
     end
 
