@@ -40,7 +40,7 @@ function click_channel_nav(element) {
     })
 }
 
-$(document).on('turbolinks:load', function() {
+
 
     //채널탭 클릭
     click_channel_nav($(".channel-nav"))
@@ -222,4 +222,3 @@ $(document).on('turbolinks:load', function() {
 
 
     
-});
