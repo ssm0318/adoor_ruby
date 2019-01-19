@@ -16,7 +16,7 @@
         </div>
         <button id="btn-channel-add">+</button>
         <%= form_tag '/channels/-1', :id => "name-create-form" do %>
-            <%= text_field_tag "name", nil, required: true, :id => "name-create-input", :placeholder => "새 채널" %>
+            <%= text_field_tag "name", nil, required: true, :id => "name-create-input", :maxlength => 15 %>
             <%= button_tag "완료", :id => "name-create-btn" %>
         <% end %>
     </div>

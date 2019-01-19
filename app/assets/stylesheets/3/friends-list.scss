@@ -67,10 +67,7 @@ button {
                 border-radius: 20px;
                 outline: none;
                 font-size: 14px;
-                width: 40px;
-            }
-            button {
-                opacity: 0;
+                width: 42px;
             }
         }
     }
@@ -130,8 +127,9 @@ button {
     
     .friend-box-with-edit {
         display: inline-block;
-        width: 15.5%;
-        margin: 0.3%;
+        width: 19%;
+        margin: 1.6px;
+        min-width:180px;
 
         .btn-friend-channel-edit {
             // float: right;
@@ -163,9 +161,9 @@ button {
                 .friend-box-image {
                     cursor: pointer;
                     margin-top: 20px;
-                    height:70px; 
-                    width:70px; 
-                    border-radius:35px;
+                    height:80px; 
+                    width:80px; 
+                    border-radius:40px;
                 }
             
                 div{
