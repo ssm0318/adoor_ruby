@@ -62,6 +62,7 @@ $(document).on('turbolinks:load', function() {
         $(".btn-friend-channel-edit").html('-')
         $(".friend-box-with-edit").find(".disabled").siblings(".btn-friend-channel-edit").html('+')
         $(".btn-friend-channel-edit").show()
+
     })
 
 
@@ -187,6 +188,36 @@ $(document).on('turbolinks:load', function() {
                 console.log("error!")
             }
         })
+    })
+
+    $(".btn-friend-remove").on('click', function(e) {
+    
+        if($("#channel-nav-div").hasClass("editing")) {
+            $("#name-create-form").hide()
+            $("#btn-channel-add").show()
+            $("#name-edit-form").hide()
+            $("#channel-name").show()
+        }
+
+        if(!confirm("정말 친구를 끊으시겠습니까?")) {
+            return;
+        }
+
+        form = $(this)
+        $.ajax({
+            type: "POST",
+            url: form.attr('data-url'),
+            data: {"from_friend_list": true },
+            success: function(data) {
+                console.log("successed!")
+                form.parents(".friend-box-with-edit").fadeOut(300, function(){ $(this).remove();});
+            },
+            error: function(data) {
+                console.log("error!")
+            }
+        })
+
+
     })
 
 

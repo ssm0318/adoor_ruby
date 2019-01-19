@@ -51,11 +51,20 @@ class UsersController < ApplicationController
         friendship = Friendship.where(friendship_hash)
         if friendship.empty?
             Friendship.create(friendship_hash)
+            redirect_to profile_path(params[:id])
         else
             friendship.destroy_all
             Friendship.where({user_id: params[:id], friend_id: current_user.id}).destroy_all
+
+            if(params[:from_friend_list])
+                render json: {
+
+                }
+            else
+                redirect_back fallback_location: profile_path(params[:id])
+            end
+            
         end
-        redirect_to profile_path(params[:id])
     end
 
     def friend_request
