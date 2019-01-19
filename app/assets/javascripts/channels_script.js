@@ -2,6 +2,7 @@
 function channel_edit_clear() {
     $("#channel-nav-div").removeClass("editing")
     $(".friend-box").removeClass("value-changed")
+    $(".friend-box").removeClass("editing")
     $(".btn-friend-channel-edit").hide()
     $("#name-edit-form").hide()
     $("#btn-channel-edit-complete").hide()
@@ -54,6 +55,7 @@ $(document).on('turbolinks:load', function() {
         }
 
         $("#channel-nav-div").addClass("editing")
+        $(".friend-box").addClass("editing")
         $("#channel-default-btns").hide()
         $("#btn-channel-edit-complete").show()
 
