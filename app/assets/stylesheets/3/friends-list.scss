@@ -2,11 +2,19 @@
     color: red;
 }
 
+#name-edit-form {
+    display: none;
+}
+
+#name-create-form {
+    display: none;
+}
+
 #btn-channel-edit-complete {
     display: none;
 }
 
-#btn-channel-edit {
+#channel-default-btns {
     display: none;
 }
 
