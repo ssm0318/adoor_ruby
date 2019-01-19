@@ -129,6 +129,7 @@ function click_channel_nav(element) {
         $("#channel-default-btns").hide()
         $("#name-edit-input").val($("#channel-nav-div").find(".active").html())
         $("#name-edit-form").show()
+        $("#name-edit-input").focus()
     })
 
 
@@ -145,11 +146,12 @@ function click_channel_nav(element) {
 
         $("#channel-nav-div").addClass("editing")
         $(this).hide()
-        $("#name-create-form").show()
+        $("#name-create-form").css('display', 'inline')
+        $("#name-create-input").focus()
     })
 
     //채널 이름 수정 완료 or 채널 추가 완료
-    $("form").submit( function(e) {
+    $("#name-edit-form, #name-create-form").submit( function(e) {
         e.preventDefault();
         
         const channelId = $("#channel-nav-div").find(".active").attr('class').split(/\s+/)[1]
