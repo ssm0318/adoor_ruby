@@ -23,6 +23,7 @@ function click_channel_nav(element) {
         $(this).addClass("active")
         $("#channel-name").html($(this).html())
         $(".friend-box").removeClass("disabled");
+        $(".friend-box-with-edit").show()
 
         if($(this).hasClass("all")) {
             //전체보기
@@ -38,7 +39,6 @@ function click_channel_nav(element) {
             })
 
             htmls.addClass("disabled")
-            $(".friend-box-with-edit").show()
             htmls.parents(".friend-box-with-edit").hide()
         }
     })
