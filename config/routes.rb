@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   # Post
   resources :posts
 
+  # CustomQuestion
+  resources :custom_questions
+  get '/custom_questions/:id/repost/' => 'custom_questions#repost', as: :custom_question_repost
+
   # Feed
   root 'feeds#friends'
   get '/feeds/general' => 'feeds#general', as: :general_feed

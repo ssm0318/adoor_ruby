@@ -9,13 +9,6 @@
                         <%= link_to d.target.content, question_path(d.target.id), class: "question-content" %>
                         <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Question"), method: :delete %>
                     </div> 
-                    <!--<div classs = "question-author">    
-                        <% if d.target.author.has_role? :newuser %>
-                            <br><br>
-                            Question made by 
-                            <%= render partial: "./user_profile_small", locals: {user: d.target.author} %>
-                        <% end %>
-                    </div> --> <!-- custom question not yet implemented -->
                 </div>
                 <br>
             </div>

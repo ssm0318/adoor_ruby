@@ -1,18 +1,16 @@
-    
 <div class="prism-box-new-post">
     <div class="prism-box__content">
-        <%= form_tag('/posts') do %>
-            <%= text_area_tag :content, nil, required: true, class: "new-answer-field",  placeholder: "나는 지금", autofocus: true, "data-enable-grammarly": "false" %>
+        <%= form_tag('/custom_questions') do %>
+            <%= text_field_tag :content, nil, required: true, class: "new-answer-field",  placeholder: "질문을 작성해보세요", "data-enable-grammarly": "false" %>
             공개범위
             <!-- FIXME: 디자인 입히기, 하나 이상 체크 꼭 되야하게 하기(ajax) -->
             <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
             <% current_user.channels.each do |channel| %>
-                <%= check_box_tag "c[]", channel.id, false, id: "q"+ channel.id.to_s %>
-                <%= label_tag "q#{channel.id}", channel.name %>
+                <%= check_box_tag "c[]", channel.id, false, id: channel.id.to_s%>
+                <%= label_tag "#{channel.id}", channel.name %>
             <% end %>
             <%= button_tag "저장", class: "answer-button"%>
         <% end %>
     </div>
 </div> 
 
-<%= render 'layouts/textarea_script' %>

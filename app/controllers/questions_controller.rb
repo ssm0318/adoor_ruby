@@ -28,11 +28,11 @@ class QuestionsController < ApplicationController
         csv = Roo::CSV.new('./lib/assets/questions.csv')
         select = (1..csv.last_row).to_a.sample 5
         for i in 1..csv.last_row
-            q = Question.create(author_id: 1, content: csv.cell(i, 1), tag_string: csv.cell(i, 6))
+            q = Question.create(content: csv.cell(i, 1), tag_string: csv.cell(i, 6))
             if !q.tag_string.nil?
                 tag_array = q.tag_string.gsub("\r\n", '\n').split('\n')
                 tag_array.each do |tag|
-                    new_tag = Tag.create(author_id: q.author.id, content: tag, target: q)
+                    new_tag = Tag.create(author_id: 1, content: tag, target: q)
                     q.tags << new_tag
                 end
             end
@@ -47,14 +47,14 @@ class QuestionsController < ApplicationController
     def import_new
         @questions = Question.where(selected_date: (Date.today))
         csv = Roo::CSV.new('./lib/assets/questions.csv')
-        start_idx = Question.where(author_id: 1).last.id
+        start_idx = Question.last.id
         
         for i in start_idx..csv.last_row
-            q = Question.create(author_id: 1, content: csv.cell(i, 1), tag_string: csv.cell(i, 2))
+            q = Question.create(content: csv.cell(i, 1), tag_string: csv.cell(i, 2))
             if !q.tag_string.nil?
                 tag_array = q.tag_string.gsub("\r\n", '\n').split('\n')
                 tag_array.each do |tag|
-                    new_tag = Tag.create(author_id: q.author.id, content: tag, target: q)
+                    new_tag = Tag.create(author_id: 1, content: tag, target: q)
                     q.tags << new_tag
                 end
             end
