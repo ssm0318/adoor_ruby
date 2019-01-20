@@ -33,9 +33,13 @@ function click_channel_nav(element) {
             $("#btn-channel-delete").attr('href', `/channels/${channelId}`)
             $("#channel-default-btns").show()
 
-            $(".friend-box").filter(function(index) {
+            var htmls = $(".friend-box").filter(function(index) {
                 return $(this).has('.' + channelId).length ? false : true
-            }).addClass("disabled")
+            })
+
+            htmls.addClass("disabled")
+            $(".friend-box-with-edit").show()
+            htmls.parents(".friend-box-with-edit").hide()
         }
     })
 }
@@ -56,6 +60,7 @@ function click_channel_nav(element) {
 
         $("#channel-nav-div").addClass("editing")
         $(".friend-box").addClass("editing")
+        $(".friend-box-with-edit").show()
         $("#channel-default-btns").hide()
         $("#btn-channel-edit-complete").show()
 
@@ -86,6 +91,7 @@ function click_channel_nav(element) {
         })
 
         channel_edit_clear();
+        $(".friend-box.disabled").parents(".friend-box-with-edit").hide()
 
         if(friend_ids.length > 0) {
             $.ajax({
