@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20190120045023) do
     t.string "content", null: false
     t.boolean "reposted", default: false
     t.string "tag_string"
+    t.string "repost_message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_custom_questions_on_author_id"

@@ -9,11 +9,13 @@ Rails.application.routes.draw do
   get '/answers/:id/new' => 'answers#new', as: :new_answer
 
   # Post
-  resources :posts
+  resources :posts, except: [:new]
 
   # CustomQuestion
-  resources :custom_questions
-  get '/custom_questions/:id/repost/' => 'custom_questions#repost', as: :custom_question_repost
+  resources :custom_questions, except: [:new]
+  get '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost
+  post '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost_form
+  get '/custom_questions/:id/message' => 'custom_questions#message', as: :custom_question_message
 
   # Feed
   root 'feeds#friends'

@@ -1,6 +1,6 @@
 class CustomQuestionsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_custom_question, only: [:show, :edit, :update, :destroy]
+    before_action :set_custom_question, only: [:show, :edit, :update, :destroy, :message]
     before_action :check_mine, only: [:edit, :update, :destroy]
 
     def create
@@ -23,10 +23,17 @@ class CustomQuestionsController < ApplicationController
         redirect_to root_path
     end
 
-    def repost
-        @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, reposted: true)
+    def message
+        render 'repost'
+    end
 
-        # if !@custom_question.tag_string.nil?
+    def repost
+        if params[:repost_message]
+            @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, reposted: true, repost_message: params[:repost_message])
+        else
+            @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, reposted: true)
+        end
+            # if !@custom_question.tag_string.nil?
         #     tag_array = @custom_question.tag_string.gsub("\r\n", '\n').split('\n')
         #     tag_array.each do |tag|
         #         new_tag = Tag.create(author_id: @custom_question.author.id, content: tag, target: @custom_question)
