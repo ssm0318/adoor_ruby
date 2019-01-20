@@ -81,6 +81,7 @@ Rails.application.routes.draw do
   get '/search/user' => 'search#user', as: :search_user
 
   # Channel
-  resources :channels, only: [:create, :destroy]
+  resources :channels, only: [:create, :update, :destroy]
+  put '/channels/:id/edit_friendship' => 'channels#edit_friendship'
 
 end

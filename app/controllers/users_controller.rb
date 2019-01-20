@@ -18,8 +18,14 @@ class UsersController < ApplicationController
     end
    
     def friends
-        @friends = current_user.friends
-        @channels = current_user.channels
+        #@friends = current_user.friends
+        @channels = current_user.channels.drop(2)
+        @friends_with_channels = []
+
+        current_user.friends.each do |friend|
+            @friends_with_channels.push({friend: friend, channels: friend.belonging_channels.where(user_id: current_user.id)})
+        end
+
     end
 
     def edit
@@ -45,11 +51,20 @@ class UsersController < ApplicationController
         friendship = Friendship.where(friendship_hash)
         if friendship.empty?
             Friendship.create(friendship_hash)
+            redirect_to profile_path(params[:id])
         else
             friendship.destroy_all
             Friendship.where({user_id: params[:id], friend_id: current_user.id}).destroy_all
+
+            if(params[:from_friend_list])
+                render json: {
+
+                }
+            else
+                redirect_back fallback_location: profile_path(params[:id])
+            end
+            
         end
-        redirect_to profile_path(params[:id])
     end
 
     def friend_request
