@@ -1,54 +1,32 @@
 class QuestionsController < ApplicationController
     require 'roo'
     before_action :authenticate_user!, except: [:index, :today, :intro]
+    before_action :set_question, only: [:show, :show_friends, :show_general]
     
+    def index
+        @questions = Question.where.not(selected_date: nil)
+    end
+
+    def show
+    end
+
     def today
         @questions = Question.where(selected_date: (Date.today))
     end
-    
-    # before_action :authenticate_user!
-    # general feed?
-    # def general_feed
-    #     @questions = Question.all
-    #     render 'general_feed'
-    # end
 
-    def question_feed
-        @question = Question.find(params[:id])
-        render 'question_feed'
+    def show_friends
+        @answers = @question.answers.named(current_user.id).sort_by(&:created_at).reverse!
+        render 'show_friends'
     end
 
-    def index
-        @questions = Question.where.not(selected_date: nil) 
-    end
-
-    def intro
-        render 'intro'
-    end
-
-    def invitation
-        @questions = Question.popular_questions
-        render 'invitation'
-    end
-
-    def link_generation
-        assigned_questions = []   # 선택된 question들을 갖고 있다 (최대 3개, 최소 0개)
-        assigned_questions = Question.find(params[:q]) if params[:q]
-        #FIXME: 이 부분은 deploy할 때 링크 꼭 바꿔줘야 함!! ---> https://adoor.app/....
-        @link = "localhost:3000/invitation/#{current_user.id}"
-        assigned_questions.each do |q|
-            @link += "/" + q.id.to_s
-        end
-        if assigned_questions.empty?
-            @link += "/" + "empty"
-        end
-        # now the link looks like ".../invitation/:user_id/:qid1/:qid2/:qid3" (qid's are optional)
-        render 'link_generation'
+    def show_general
+        @answers = @question.answers.anonymous(current_user.id).sort_by(&:created_at).reverse!
+        render 'show_general'
     end
     
     def import_all
-        @questions = Question.where(selected_date: (Date.today))
         csv = Roo::CSV.new('./lib/assets/questions.csv')
+        select = (1..csv.last_row).to_a.sample 5
         for i in 1..csv.last_row
             q = Question.create(author_id: 1, content: csv.cell(i, 1), tag_string: csv.cell(i, 6))
             if !q.tag_string.nil?
@@ -58,7 +36,7 @@ class QuestionsController < ApplicationController
                     q.tags << new_tag
                 end
             end
-            if i <= 5
+            if select.include? i
                 q.selected_date = Date.today()
                 q.save
             end
@@ -83,4 +61,12 @@ class QuestionsController < ApplicationController
         end
         redirect_to action: "today"
     end
+
+    private
+        def set_question
+            @question = Question.find(params[:id])
+            if @question.selected_date.nil?
+                redirect_to questions_path
+            end
+        end
 end

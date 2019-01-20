@@ -7,7 +7,7 @@
 
 }
 
-.prism-form {
+.prism-form-friend, .prism-form-general {
     .prism-form__input {
         width: calc(100% - 100px);
         height: 25px;
@@ -35,6 +35,17 @@
         border: 0.5px solid $prism-box-gray;
         font-size: 12px;
         color: #aaaaaa;
-    
+        cursor: pointer;
+        &:focus {
+            outline: none;
+        }
     }
+
+    .comment-info-alert {
+        color: gray;
+        font-size: 10px;
+        padding-left: 5px;
+        padding-top: 0px;
+    }
+
 }

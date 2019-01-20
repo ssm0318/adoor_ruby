@@ -22,10 +22,14 @@
                 margin-bottom: 10px;
 
                 #edit-btn{
+                    
                     text-decoration: none;
                     color: gray;
                     font-size: 14px;
                     margin-left: 10px;
+                    &:hover {
+                        color: #F48462;
+                    }
                 }
             }
 

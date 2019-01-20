@@ -1,5 +1,5 @@
 <div class="sign-box">
-<h1 class="sign-title">Sign up</h1>
+<h1 class="sign-title">회원가입</h1>
 
 <div class="sign-content-box" align="center">
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -20,30 +20,30 @@
                 autofocus: true ,
                 input_html: { autocomplete: "email" },
                 class: "form-input",
-                placeholder: "email",
+                placeholder: " 이메일",
                 :label => false%>
     <%= f.input :password,
                 required: true,
                 input_html: { autocomplete: "new-password" },
                 class: "form-input",
-                placeholder: "password",
+                placeholder: " 비밀번호",
                 :label => false %>
     <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" },
                 class: "form-input",
-                placeholder: "password confirmation",
+                placeholder: " 비밀번호 확인",
                 :label => false %>
     <%= f.input :username,
                 required: true,
                 autofocus: true,
                 class: "form-input",
-                placeholder: "username",
+                placeholder: " 닉네임",
                 :label => false %>
   </div>
   <br/>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign up", class: "orange-btn" %>
+    <%= f.button :submit, "회원가입", class: "orange-btn" %>
   </div>
 <% end %>

@@ -277,7 +277,7 @@ ul.link-list .type {
   background-color: #f5f5f5;
 }
 #documentation .method-heading {
-  cursor: pointer;
+  
   position: relative;
   font-size: 125%;
   line-height: 125%;

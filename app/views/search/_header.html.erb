@@ -1,0 +1,67 @@
+<div class="search-header">
+    <%= form_tag(searchpath, method: :get, class: "search-form") do %>
+    <%# path 설정 %>
+        <div class="search-container">
+            <span class="search-icon"><i class="fas fa-search"></i></span>
+            <%= text_field_tag :query, nil, required: true, class: "search-input", autofocus: true %>
+        </div>
+    <% end %>
+    <br>
+
+    <span class="search-keyword">'<%= query %>'</span> 키워드로 찾은 검색 결과입니다.
+
+    <br/><br/><br> 
+    <div>
+        <!-- FIXME: 현재 페이지에 색깔 주황색이게.. active link 없이 할 수 있나!! active link는 인자를 못보내는 듯 -->
+        <!--
+        <%= form_tag(search_all_path, method: :get, class: "search-tab") do %>
+            <%= hidden_field_tag :query, query %>
+            <%= button_tag '전체', class: "search-tab-button" %>
+        <% end %> | 
+        <%= form_tag(search_user_path, method: :get, class: "search-tab") do %>
+            <%= hidden_field_tag :query, query %>
+            <%= button_tag '사용자', class: "search-tab-button" %>
+        <% end %> | 
+        <%= form_tag(search_friend_answer_path, method: :get, class: "search-tab") do %>
+            <%= hidden_field_tag :query, query %>
+            <%= button_tag '친구 게시물', class: "search-tab-button" %>
+        <% end %> | 
+        <%= form_tag(search_anonymous_answer_path, method: :get, class: "search-tab") do %>
+            <%= hidden_field_tag :query, query %>
+            <%= button_tag '익명 게시물', class: "search-tab-button" %>
+        <% end %> | 
+        <%= form_tag(search_admin_question_path, method: :get, class: "search-tab") do %>
+            <%= hidden_field_tag :query, query %>
+            <%= button_tag '질문', class: "search-tab-button" %>
+        <% end %> | 
+        <%= form_tag(search_custom_question_path, method: :get, class: "search-tab") do %>
+            <%= hidden_field_tag :query, query %>
+            <%= button_tag '사용자 질문', class: "search-tab-button" %>
+        <% end %>
+        
+        <br><br>
+        -->
+        <!-- TODO: popular tags, popular questions 부분 추가 -->
+<%#         
+        <span class="searchtab">customQ</span>
+        <span class="searchtab">anonymousA</span>
+        <span class="searchtab">friendA</span> %>
+    </div>
+</div>
+
+<%# <script>
+    $(document).ready(function() {
+        $(".searchtab").on('click', function() {
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                data: {query: '삽질왕 김삽질'},
+                url: '/search/json',
+                success: function(data) {
+                    console.log(data);
+                }
+            })
+        })
+    })
+</script>
+%>

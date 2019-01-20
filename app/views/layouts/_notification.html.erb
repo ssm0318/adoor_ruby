@@ -1,8 +1,8 @@
 <% if user_signed_in? %>
     <% if noties.unread.length != 0 %>
-        <%=image_tag "icons/noti-on-icon.png", class:"btn-noti"%>
+        <%=image_tag "icons/noti-on-icon.png", class:"btn-noti hover-pointer"%>
     <% else %>
-        <%=image_tag "icons/noti-default-icon.png", class:"btn-noti"%>
+        <%=image_tag "icons/noti-default-icon.png", class:"btn-noti hover-pointer"%>
     <% end %>
 <% end %>
 <div class="noti-content" style="display: none;">
@@ -16,6 +16,7 @@
             <% else %>
                 <div class="noti-el unread" onclick="window.location='/notifications/<%=noti.id%>'">
             <% end %>
+
                 <% if noti.target_type == 'Friendship' %>
                     <%=username%>님과 친구가 되었습니다.
                 <% elsif noti.target_type == 'Answer' %>
@@ -25,31 +26,63 @@
                 <% elsif noti.target_type == 'Highlight' %>
                     <%=username%>님이 당신의 글을 highlight했습니다.
                 <% elsif noti.target_type == 'Drawer' %>
-                    당신의 글이 누군가의 서랍장에 담겼습니다.
+                    <% if noti.origin.drawers.size == 1 %>
+                        <% if noti.origin_type == 'Question' %>
+                            당신의 질문이 누군가의 서랍장에 담겼습니다.
+                        <% else %>
+                            당신의 글이 누군가의 서랍장에 담겼습니다.
+                        <% end %>
+                    <% else %>
+                        <% if noti.origin_type == 'Question' %>
+                            <%= noti.origin.drawers.size %>명이 당신의 질문을 서랍장에 담았습니다.
+                        <% else %>
+                            <%= noti.origin.drawers.size %>명이 당신의 글을 서랍장에 담았습니다.
+                        <% end %>
+                    <% end %>
                 <% elsif noti.target_type == 'Comment' %>
                     <% if noti.action == 'comment' %>
                         <%=username%>님이 당신의 글에 댓글을 달았습니다.
                     <% elsif noti.action == 'recomment'%>
                         <%=username%>님이 당신의 댓글에 대댓글을 달았습니다.
-                    <% elsif noti.action == 'anonymous_comment'%>
+                    <% elsif noti.action == 'anonymous_comment'%> 
                         누군가가 당신의 글에 댓글을 달았습니다.
                     <% end %>
-                <% elsif noti.target_type == 'FriendRequest'%>
-                    <%=username%>님이 친구요청을 보냈습니다.
                 <% elsif noti.target_type == 'Reply' %>
                     <% if noti.action == 'to_comment'%>
                         누군가가 당신의 댓글에 대댓글을 달았습니다.
                     <% elsif noti.action == 'to_author'%>
                         누군가가 당신의 글에 대댓글을 달았습니다.
                     <% end%>
+                <% elsif noti.target_type == 'FriendRequest'%>
+                    <%=username%>님이 친구요청을 보냈습니다.
                 <% elsif noti.target_type == 'Like' %>
-                    <% if noti.action == 'friend_like' %>
-                        <%=username%>님이 당신의 글을 좋아했습니다.
-                    <% elsif noti.action == 'anonymous_like'%>
-                        누군가가 당신의 글을 좋아했습니다.
-                    <% end%>
+                    <% if noti.origin.likes.size == 1%>
+                        <% if noti.action == 'friend_like_article' %>
+                            <%=username%>님이 당신의 글을 좋아했습니다.
+                        <% elsif noti.action == 'friend_like_comment' %>
+                            <%=username%>님이 당신의 댓글을 좋아했습니다.
+                        <% elsif noti.action == 'anonymous_like_article' %>
+                            누군가가 당신의 글을 좋아했습니다.
+                        <% elsif noti.action == 'anonymous_like_comment' %>
+                            누군가가 당신의 댓글을 좋아했습니다.
+                        <% elsif noti.action == 'anonymous_like_reply' %>
+                            누군가가 당신의 대댓글을 좋아했습니다.
+                        <% end %>
+                    <% else %>
+                        <% if noti.action == 'friend_like_article' %>
+                            <%= username %>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 글을 좋아했습니다. 
+                        <% elsif noti.action == 'friend_like_comment' %>
+                            <%= username %>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 댓글을 좋아했습니다. 
+                        <% elsif noti.action == 'anonymous_like_article' %>
+                            <%= noti.origin.likes.size %>명이 당신의 글을 좋아했습니다.
+                        <% elsif noti.action == 'anonymous_like_comment' %>
+                            <%= noti.origin.likes.size %>명이 당신의 댓글을 좋아했습니다.
+                        <% elsif noti.action == 'anonymous_like_reply' %>
+                            <%= noti.origin.likes.size %>명이 당신의 대댓글을 좋아했습니다.
+                        <% end %>
+                    <% end %>        
                 <% end %>
-                <div class = "date" style="display: block; margin-top: 5px; font-size: 10px;"><%= time_tag noti.created_at, class: "timeago" %></div> 
+                <div class = "date time" style="display: block; margin-top: 5px; font-size: 10px;"><%= time_tag noti.created_at, class: "timeago" %></div> 
             </div>
         <% end %>
     <% end %>

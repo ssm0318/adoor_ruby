@@ -1,0 +1,62 @@
+
+<div class="inner-container">
+    <div class="question-btn">
+        <%= link_to image_tag("icons/write-icon.png", class: "btn-write"), new_answer_path(@question.id) %>
+        <% if user_signed_in? %> 
+            <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
+            <%= render 'assignments/default', question: @question %>
+        <% else %>
+            <%= link_to image_tag("icons/assign-icon.png", class: "btn-assign"), new_user_session_path %>
+        <% end %>
+    </div>
+    <%= render 'questions/tabs', question: @question %>
+    
+    <div class = "prism-box">
+        <div class = "prism-box_question">
+            <br>
+            <div>
+                <%= @question.content %>
+                <%= render 'drawers/default', target: @question %>  
+            </div>    
+            <!--<div classs = "question-author">    
+                <% if @question.author.has_role? :newuser %>
+                    <br><br>
+                    Question made by 
+                    <%= render partial: "./user_profile_small", locals: {user: @question.author} %>
+                <% end %>
+            </div>--> <!-- custom question not yet implemented -->
+        </div>
+        <br>
+    </div>
+ 
+    <% @question.answers.reverse_each do |answer| %>
+        <div class="prism-box">
+            <div class="prism-box__header"> 
+                <% if current_user == answer.author or current_user.friends.include? answer.author %>
+                    <%= render partial: "./user_profile", locals: {user: answer.author} %><br/>
+                <% else %>
+                    <%= render partial: "./user_profile_general", locals: {user_id: answer.author.id, feed_id: answer.id }%>
+                <% end %>
+            </div>
+            <div class="prism-box__content">
+                <br>
+                <%= link_to answer.question.content, question_path(answer.question.id), class: "question" %><br><br>
+                <div class="answer"><%= answer.content %></div>
+                <br>
+                <div class = "date time"><%= time_tag answer.created_at, class: "timeago" %></div>
+                <br>
+            </div> 
+            <div class="prism-box__footer" style="padding-bottom: 10px;">
+                <%= render 'likes/default', target: answer, like_btn_class: "btn-feed-like" %>
+                <%= render 'drawers/default', target: answer %>
+                <br>
+                <br>
+            </div>
+        </div>  
+    <% end %>
+</div>
+
+<%= render 'drawers/script' %>
+<%= render 'layouts/timestamp' %>
+<%= render 'likes/script' %>
+<%= render "assignments/script" %>

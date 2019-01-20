@@ -14,6 +14,7 @@
         height: auto;
         float: right;
         margin-left: 10px;
+        cursor: pointer;
     }
     
     .comment-content {
@@ -46,10 +47,18 @@
         font-size: 10px;
         color: #777777;
         display: inline-block;
-    
-        span {
-            padding-right: 10px;
+
+        .comment-like {
+            padding: 0 5px 0 0;
         }
+        
+        .btn-comment-delete {
+            padding-right: 5px;
+        }
+    
+        // span {
+            // padding-right: 10px;
+        // }
         // .time, .authorized {
         //     padding-right: 10px;
         // }

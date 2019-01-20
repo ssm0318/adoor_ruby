@@ -1,12 +1,12 @@
 .today-question-box {
-    margin-top: 150px;
     width: 100%;
+    margin-bottom: 100px;
 }
 
 .today-question-title {
     font-family: 'Nanum Gothic', sans-serif;
     font-size: 40px;
-    text-align: center;
+    text-align: center; 
     color: #F48462;
 }
 
@@ -34,4 +34,10 @@
     .question-btn {
         min-width: 84px;
     }
+}
+
+.question-btn {
+    height: 100%;
+    display: block;
+    float: right;
 }
