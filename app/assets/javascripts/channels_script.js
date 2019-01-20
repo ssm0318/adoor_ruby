@@ -194,6 +194,7 @@ function click_channel_nav(element) {
                     $(".friend-box").addClass("disabled")
                     $("#name-create-input").val('')
                     $("#btn-channel-delete").attr('href', `/channels/${data.channel_id}`)
+                    $(".friend-box-with-edit").hide()
                 }
                 $("#channel-name").show()
                 $("#channel-default-btns").show()
