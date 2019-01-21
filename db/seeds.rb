@@ -141,34 +141,35 @@ if Rails.env.development?
     # Highlight.find_or_create_by(user_id: 3, target: Answer.find(12), content: "충분히 쉬고 시작할 수 있어서 좋다.")
     # Highlight.find_or_create_by(user_id: 3, target: Answer.find(15), content: "세상에 저절로 되는 일은 없다.")
 
-    Comment.find_or_create_by(author_id: 2, recipient_id: 2, target: Answer.find(1), content: "oh really?")
-    Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(3), content: "awesome!")
-    Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(4), content: "same.")
-    Comment.find_or_create_by(author_id: 4, recipient_id: 4, target: Answer.find(5), content: "be a butterfly")
-    Comment.find_or_create_by(author_id: 1, recipient_id: 1, target: Answer.find(1), content: "그랬구나~")
-    Comment.find_or_create_by(author_id: 2, recipient_id: 2, target: Answer.find(5), content: "그런 일이 있었다니 몰랐네.")
-    Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(10), content: "아하~")
-    Comment.find_or_create_by(author_id: 7, recipient_id: 7, target: Answer.find(16), content: "오~")
-    Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(22), content: "아하~")
-    Comment.find_or_create_by(author_id: 7, recipient_id: nil, target: Answer.find(22), content: "오~")
-    Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(17), content: "아하~")
-    Comment.find_or_create_by(author_id: 6, recipient_id: 6, target: Answer.find(17), content: "오~")
-    Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(23), content: "아하~")
-    Comment.find_or_create_by(author_id: 6, recipient_id: 6, target: Answer.find(23), content: "오~")
-    Comment.find_or_create_by(author_id: 1, target: Answer.find(23), content: "오~")
-    Comment.find_or_create_by(author_id: 6, target: Answer.find(23), content: "오~")
+    # Comment.find_or_create_by(author_id: 2, recipient_id: 2, target: Answer.find(1), content: "oh really?")
+    # Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(3), content: "awesome!")
+    # Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(4), content: "same.")
+    # Comment.find_or_create_by(author_id: 4, recipient_id: 4, target: Answer.find(5), content: "be a butterfly")
+    # Comment.find_or_create_by(author_id: 1, recipient_id: 1, target: Answer.find(1), content: "그랬구나~")
+    # Comment.find_or_create_by(author_id: 2, recipient_id: 2, target: Answer.find(5), content: "그런 일이 있었다니 몰랐네.")
+    # Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(10), content: "아하~")
+    # Comment.find_or_create_by(author_id: 7, recipient_id: 7, target: Answer.find(16), content: "오~")
+    # Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(22), content: "아하~")
+    # Comment.find_or_create_by(author_id: 7, recipient_id: nil, target: Answer.find(22), content: "오~")
+    # Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(17), content: "아하~")
+    # Comment.find_or_create_by(author_id: 6, recipient_id: 6, target: Answer.find(17), content: "오~")
+    # Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(23), content: "아하~")
+    # Comment.find_or_create_by(author_id: 6, recipient_id: 6, target: Answer.find(23), content: "오~")
+    # Comment.find_or_create_by(author_id: 1, target: Answer.find(23), content: "오~")
+    # Comment.find_or_create_by(author_id: 6, target: Answer.find(23), content: "오~")
+    
     # Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Post.find(3), content: "아하~")
     # Comment.find_or_create_by(author_id: 6, recipient_id: 6, target: Post.find(2), content: "오~")
     # Comment.find_or_create_by(author_id: 1, target: Post.find(4), content: "오~")
     # Comment.find_or_create_by(author_id: 6, target: Post.find(5), content: "예~")
 
     # Reply
-    Reply.find_or_create_by(author_id: 1, comment_id: 1, content: "오호라")
-    Reply.find_or_create_by(author_id: 2, comment_id: 2, content: "유후~")
-    Reply.find_or_create_by(author_id: 2, comment_id: 3, content: "뚱딴지")
-    Reply.find_or_create_by(author_id: 3, comment_id: 1, content: "대탐험")
-    Reply.find_or_create_by(author_id: 3, comment_id: 4, content: "보물찾기")
-    Reply.find_or_create_by(author_id: 5, comment_id: 10, content: "답변 감사합니당")
+    # Reply.find_or_create_by(author_id: 1, comment_id: 1, content: "오호라")
+    # Reply.find_or_create_by(author_id: 2, comment_id: 2, content: "유후~")
+    # Reply.find_or_create_by(author_id: 2, comment_id: 3, content: "뚱딴지")
+    # Reply.find_or_create_by(author_id: 3, comment_id: 1, content: "대탐험")
+    # Reply.find_or_create_by(author_id: 3, comment_id: 4, content: "보물찾기")
+    # Reply.find_or_create_by(author_id: 5, comment_id: 10, content: "답변 감사합니당")
 
     # Like 
     Like.find_or_create_by(user_id: 1, target: Answer.find(1))
@@ -240,5 +241,7 @@ if Rails.env.development?
     a.tags << Tag.create(author_id: 6, content: "너는 태그냐", target: a)
     a.tags << Tag.create(author_id: 6, content: "와썹맨", target: a)
 elsif Rails.env.production?
-    
+    if User.where(email: "adoor.team@gmail.com").empty?
+        User.create(email: "adoor.team@gmail.com", password: "adoor2019", username: "관리자")
+    end
 end

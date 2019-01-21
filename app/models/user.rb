@@ -66,6 +66,7 @@ class User < ApplicationRecord
   has_many :passive_friendships, :class_name => "Friendship", :foreign_key => "friend_id", dependent: :destroy
   has_many :belonging_channels, through: :passive_friendships, :source => :channels
 
+
   # reference: http://railscasts.com/episodes/163-self-referential-association
   
   # BETA: email confirmation 잠깐 해지해놓음!! 베타 이전에 이 부분 다시 주석처리해야 email confirmation 제대로 됨

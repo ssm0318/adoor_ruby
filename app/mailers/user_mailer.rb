@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
   before_action :putsputs
   after_action :putsputs
 
-  def putsputs
+  def puts
     puts "*****************************"
   end
 
