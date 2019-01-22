@@ -23,6 +23,8 @@ class Answer < ApplicationRecord
     scope :channel, -> (id) { joins(:channels).where(channels: {id: id}) }
     scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
 
+    scope :channel_name, -> (name) {joins(:channels).where(channels: {name: name})}
+
     after_create :create_notifications
 
     private 

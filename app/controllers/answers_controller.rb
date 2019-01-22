@@ -21,6 +21,13 @@ class AnswersController < ApplicationController
                 @answer.tags << new_tag
             end
         end
+
+        channels = []   # 선택된 채널들을 갖고 있다.
+        channels = Channel.find(params[:c]) if params[:c]
+        channels.each do |c|
+            puts c
+            Entrance.create(channel: c, target: @answer)
+        end
        
         redirect_to root_path
     end
@@ -33,7 +40,7 @@ class AnswersController < ApplicationController
         @question = @answer.question
     end
 
-    def update
+def update
         if @answer.update(answer_params)
             @answer.tags.destroy_all
 
