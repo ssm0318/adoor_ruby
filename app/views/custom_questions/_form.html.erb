@@ -2,7 +2,7 @@
     <%= form_tag('/custom_questions') do %>
         <%= text_area_tag :content, nil, required: true, class: "new-answer-field",  placeholder: "질문을 작성해보세요", "data-enable-grammarly": "false" %>
         <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
-
+        <!-- FIXME: checkbox가 /posts/form과 왜때무네 연동되는 것? -->
         <div class = "channels">
             <span>공개범위 커스텀 퀘스쳔</span>
             <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
