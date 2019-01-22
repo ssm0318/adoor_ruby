@@ -19,5 +19,7 @@ class Post < ApplicationRecord
     scope :channel, -> (id) { joins(:channels).where(channels: {id: id}) }  # TODO: 컨트롤러 / 뷰에서 날짜 순으로 바꿔주기
 
     scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
+
+    scope :channel_name, -> (name) {joins(:channels).where(channels: {name: name})}
 end
   

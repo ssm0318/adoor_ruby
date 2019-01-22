@@ -3,20 +3,37 @@ class ChannelsController < ApplicationController
     before_action :set_channel, except: [:create]
 
     def create
-        c = Channel.create(user_id: current_user.id, name: params[:name])    
         
-        render json: {
-            channel_id: c.id, 
-        }
+        if current_user.channels.where(name: params[:name]).length > 0
+            render json: {
+                successed: false,
+                message: "#{params[:name]} 채널은 이미 존재하는 채널입니다.",
+            }
+        else
+            c = Channel.create(user_id: current_user.id, name: params[:name])    
+            
+            render json: {
+                successed: true,
+                channel_id: c.id, 
+            }
+        end
     end
 
     def update
-        @channel.name = params[:name] 
-        @channel.save()
 
-        render json: {
-
-        }
+        if current_user.channels.where(name: params[:name]).length > 0
+            render json: {
+                successed: false,
+                message: "`#{params[:name]} 채널은 이미 존재하는 채널입니다.`",
+            }
+        else
+            @channel.name = params[:name] 
+            @channel.save()
+            
+            render json: {
+                successed: true,
+            }
+        end
     end
 
     def destroy

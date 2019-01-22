@@ -4,8 +4,8 @@
         <%= form_tag('/posts') do %>
             <div class = "posting-or-custom-question">포스팅  질문</div>
             <%= text_area_tag :content, nil, required: true, class: "new-answer-field",  placeholder: "나는 지금", autofocus: true, "data-enable-grammarly": "false" %>
-            <!-- FIXME: 디자인 입히기, 하나 이상 체크 꼭 되야하게 하기(ajax) -->
             <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
+
             <div class = "channels">
                 <span>공개범위</span>
                 <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
@@ -20,3 +20,4 @@
 </div> 
 
 <%= render 'layouts/textarea_script' %>
+<%= render 'posting_channels_script' %>

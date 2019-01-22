@@ -179,27 +179,36 @@ function click_channel_nav(element) {
             success: function(data) {
                 console.log("successed!")
                 
-                form.hide()
-                $("#channel-nav-div").removeClass("editing")
-
-                if(form.is("#name-edit-form")) {
-                    $("#channel-name").html($("#name-edit-input").val())
-                    $("#channel-nav-div").find(".active").html($("#name-edit-input").val())
+                if(data.successed == false) {
+                    if(form.is("#name-edit-form")) {
+                        $("#name-edit-input").val('')
+                    }
+                    else {
+                        $("#name-create-input").val('')
+                    }
+                    alert(data.message)
                 } else {
-                     $("#channel-name").html($("#name-create-input").val())
-                    $(".channel-nav").removeClass("active")
-                    var html = $(`<div class="channel-nav ${data.channel_id} active">${$("#name-create-input").val()}</div>`)
-                    $("#channel-nav-div").append(html)
-                    click_channel_nav(html)
-                    $(".friend-box").addClass("disabled")
-                    $("#name-create-input").val('')
-                    $("#btn-channel-delete").attr('href', `/channels/${data.channel_id}`)
-                    $(".friend-box-with-edit").hide()
+                    form.hide()
+                    $("#channel-nav-div").removeClass("editing")
+
+                    if(form.is("#name-edit-form")) {
+                        $("#channel-name").html($("#name-edit-input").val())
+                        $("#channel-nav-div").find(".active").html($("#name-edit-input").val())
+                    } else {
+                        $("#channel-name").html($("#name-create-input").val())
+                        $(".channel-nav").removeClass("active")
+                        var html = $(`<div class="channel-nav ${data.channel_id} active">${$("#name-create-input").val()}</div>`)
+                        $("#channel-nav-div").append(html)
+                        click_channel_nav(html)
+                        $(".friend-box").addClass("disabled")
+                        $("#name-create-input").val('')
+                        $("#btn-channel-delete").attr('href', `/channels/${data.channel_id}`)
+                        $(".friend-box-with-edit").hide()
+                    }
+                    $("#channel-name").show()
+                    $("#channel-default-btns").show()
+                    $("#btn-channel-add").show()
                 }
-                $("#channel-name").show()
-                $("#channel-default-btns").show()
-                $("#btn-channel-add").show()
-                
             },
             error: function(data) {
                 console.log("error!")

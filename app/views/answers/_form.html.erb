@@ -11,7 +11,11 @@
 
             <!--tag field-->
             <%# <%= f.text_area :tag_string %>
-            <br><br>
+
+            <% current_user.channels.each do |channel| %>
+                <%= check_box_tag "c[]", channel.id, false, id: channel.id.to_s%>
+                <%= label_tag "#{channel.id}", channel.name %>
+            <% end %>
 
             <%= f.submit "저장", class: "answer-button"%>
         <% end %>
