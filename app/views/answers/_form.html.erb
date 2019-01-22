@@ -13,7 +13,7 @@
             <%# <%= f.text_area :tag_string %>
 
             <% current_user.channels.each do |channel| %>
-                <%= check_box_tag "c[]", channel.id, false, id: channel.id.to_s%>
+                <%= check_box_tag "c[]", channel.id, answer.channels.include?(channel), id: channel.id.to_s%>
                 <%= label_tag "#{channel.id}", channel.name %>
             <% end %>
 
@@ -22,4 +22,4 @@
     </div>
 </div>
 
-<%= render 'layouts/textarea_script' %>
+<%# render 'layouts/textarea_script' %>

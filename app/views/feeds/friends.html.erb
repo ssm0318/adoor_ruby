@@ -3,4 +3,48 @@
   <%= render partial: 'feeds/friends_index', locals: {feeds: @feeds} %>
 </div>
 
+<script>
+  $(document).ready(function() {
+    textarea_init($('textarea'))
+    $(".feed-edit").on('click', function() {
+      // TODO black 창 깔기
+      // TODO prism-container append
+      form = $(this)
+      $.ajax({
+        type: "GET",
+        url: form.attr('data-url'),
+        success: function(data) {
 
+          var html = $(`${data.html_content}`)
+          $("#prism-container").append(html)
+          textarea_init($(html.find('textarea')))
+          $(".edit_answer").submit( function(e) {
+            e.preventDefault()
+
+            form = $(this)
+            console.log(form)
+            $.ajax({
+              type: "PUT",
+              url: form.attr('action'),
+              data: form.serialize(),
+              success: function(data) {
+                console.log("successed")
+                  $(`.prism-box.${data.id}`).find(".answer").html(form.find(".new-answer-field").val())
+                  $(`.prism-box.${data.id}`).find(".feed-channels").html("공개범위: " + data.channels)
+                  $(".question-box").remove()
+              },
+              error: function(data) {
+                  console.log("error!")
+              }
+            })
+          })
+        },
+        error: function(data) {
+            console.log("error!")
+        }
+      })
+      
+    })
+
+  })
+</script>
