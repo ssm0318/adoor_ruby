@@ -209,9 +209,18 @@
             position: absolute;
             bottom: 10px;
             font-size: 15px;
-            margin-right: 10px;
+
             span {
+                margin-right: 3px;
+            }
+
+            .channel-setting-icon {
+                width: 20px;
+                height: auto;
+                top: 5px;
+                position: relative;
                 margin-right: 10px;
+
             }
             input {
                 padding: 0;
@@ -244,12 +253,14 @@
                 margin-right: 8px;
                 -webkit-transition: all .12s, border-color .08s;
                 transition: all .12s, border-color .08s;
+                top: -1px;
             }
+
             input[type="checkbox"]:checked + label:before {
                 content: '';
                 // display: inline-block;
                 // position: absolute;
-                top: -1px;
+                top: -4px;
                 left: 4px;
                 width: 8px;
                 margin-right: 11px;
