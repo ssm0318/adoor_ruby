@@ -34,17 +34,17 @@ if Rails.env.development?
     # User.find_or_create_by(email: "d@d.com", password: "dddddd", username: "이룰렁")
 
     Question.find_or_create_by(content: "마무리") # 디폴트로 admin이 생성한 것으로 되는지 확인
-    Question.find_or_create_by(content: "꿈", author_id: 6)
+    Question.find_or_create_by(content: "꿈")
     Question.find_or_create_by(content: "쿵따리") # 디폴트로 admin이 생성한 것으로 되는지 확인
-    Question.find_or_create_by(content: "샤바라", author_id: 6)
+    Question.find_or_create_by(content: "샤바라")
     Question.find_or_create_by(content: "빠빠빠") # 디폴트로 admin이 생성한 것으로 되는지 확인
-    Question.find_or_create_by(content: "탐사수", author_id: 6)
+    Question.find_or_create_by(content: "탐사수")
     Question.find_or_create_by(content: "삼다수") # 디폴트로 admin이 생성한 것으로 되는지 확인
-    Question.find_or_create_by(content: "나띵북", author_id: 6)
+    Question.find_or_create_by(content: "나띵북")
     Question.find_or_create_by(content: "피카츄") # 디폴트로 admin이 생성한 것으로 되는지 확인
-    Question.find_or_create_by(content: "라이츄", author_id: 6)
+    Question.find_or_create_by(content: "라이츄")
     Question.find_or_create_by(content: "파이리") # 디폴트로 admin이 생성한 것으로 되는지 확인
-    Question.find_or_create_by(content: "꼬부기", author_id: 6)
+    Question.find_or_create_by(content: "꼬부기")
 
     # FriendRequest.find_or_create_by(requester_id: 1, requestee_id: 2)
     # FriendRequest.find_or_create_by(requester_id: 1, requestee_id: 3)

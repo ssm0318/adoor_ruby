@@ -9,7 +9,7 @@ class PostsController < ApplicationController
         if !@post.tag_string.nil?
             tag_array = @post.tag_string.gsub("\r\n", '\n').split('\n')
             tag_array.each do |tag|
-                new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @post)
+                new_tag = Tag.create(author_id: @post.author.id, content: tag, target: @post)
                 @post.tags << new_tag
             end
         end
@@ -50,8 +50,6 @@ class PostsController < ApplicationController
 
     def destroy
         @post.destroy 
-
-        redirect_to user_posts_path(current_user.id)
     end
 
     private
