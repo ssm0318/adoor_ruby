@@ -41,16 +41,31 @@ ActiveRecord::Schema.define(version: 20190111134023) do
     t.index ["question_id"], name: "index_assignments_on_question_id"
   end
 
+  create_table "channels", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_channels_on_user_id"
+  end
+
+  create_table "channels_friendships", id: false, force: :cascade do |t|
+    t.integer "channel_id", null: false
+    t.integer "friendship_id", null: false
+    t.index ["channel_id", "friendship_id"], name: "index_channels_friendships_on_channel_id_and_friendship_id"
+    t.index ["friendship_id", "channel_id"], name: "index_channels_friendships_on_friendship_id_and_channel_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer "author_id", null: false
-    t.integer "recipient_id"
     t.integer "target_id"
     t.string "target_type"
     t.text "content", null: false
+    t.boolean "secret", default: false, null: false
+    t.boolean "anonymous", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_comments_on_author_id"
-    t.index ["recipient_id"], name: "index_comments_on_recipient_id"
   end
 
   create_table "drawers", force: :cascade do |t|
@@ -59,6 +74,15 @@ ActiveRecord::Schema.define(version: 20190111134023) do
     t.string "target_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "entrances", force: :cascade do |t|
+    t.integer "channel_id", null: false
+    t.integer "target_id"
+    t.string "target_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_entrances_on_channel_id"
   end
 
   create_table "friend_requests", force: :cascade do |t|
@@ -157,6 +181,8 @@ ActiveRecord::Schema.define(version: 20190111134023) do
     t.integer "author_id", null: false
     t.integer "comment_id", null: false
     t.text "content", null: false
+    t.boolean "secret", default: false, null: false
+    t.boolean "anonymous", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_replies_on_author_id"
@@ -209,6 +235,7 @@ ActiveRecord::Schema.define(version: 20190111134023) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "last_sign_in_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

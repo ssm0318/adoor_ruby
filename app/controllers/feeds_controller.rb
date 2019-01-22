@@ -9,11 +9,12 @@ class FeedsController < ApplicationController
     end
  
     def friends
-        answers = Answer.named(current_user.id)
-        posts = Post.named(current_user.id)
+        
+        answers = Answer.accessible(current_user.id) + Answer.where(author: current_user)
+        posts = Post.accessible(current_user.id) + Post.where(author:current_user)
         @feeds = answers + posts
         @feeds = @feeds.sort_by(&:created_at).reverse!
-        
+
         render 'friends'
     end
 end

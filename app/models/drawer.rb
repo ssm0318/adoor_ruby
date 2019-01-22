@@ -12,7 +12,9 @@ class Drawer < ApplicationRecord
             if Notification.where(noti_hash).unread.empty?
                 Notification.create(recipient: self.target.author, actor: self.user, target: self, origin: self.target)
             else
-                Notification.where(noti_hash).first.target = self
+                n = Notification.where(noti_hash).first
+                n.target = self
+                n.save
             end
         end
     end

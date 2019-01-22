@@ -1,13 +1,18 @@
-<% if feed.author.id == c.author.id && feed.author.id != c.recipient_id %>
-    <div class="comment-indent">
-<% else %> 
+<%# if feed.author.id == c.author.id && feed.author.id != c.recipient_id %>
+    <%# <div class="comment-indent"> %>
+<%# else %> 
     <div class="comment">
-<% end %>
+<%# end %>
      <div class = "comment-content">
         <span>
-            <%= link_to image_tag(c.author.image.url, :class => "user-profile"), profile_path(c.author.id) %>
+            <%= link_to image_tag(c.author.image.url, class: "user-profile"), profile_path(c.author.id) %>
             <%= link_to c.author.username, profile_path(c.author.id), class: "username" %>
-            <span class= "content"><%= c.content %> </span>
+            <span class= "content">
+                <% if c.secret %>
+                    (숨김댓글)
+                <% end %>
+                <%= c.content %>
+            </span>
         </span>
         <%= render 'likes/default', target: c, like_btn_class: "btn-comment-like" %>
     </div>
