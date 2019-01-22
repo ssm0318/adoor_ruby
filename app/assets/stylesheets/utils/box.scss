@@ -169,6 +169,10 @@
 
     .prism-box__content {
 
+        #new-custom-question-form {
+            display: none;
+        }
+
         .new-answer-field {
             font-family: 'Nanum Gothic', sans-serif;
             font-size: 17px;
@@ -203,11 +207,17 @@
             position: absolute;
             top: 10px;
             font-size: 15px;
+            cursor: pointer;
+
+            .selected {
+                color: #F48462;
+            }
 
         }
+        
         .channels {
             position: absolute;
-            bottom: 10px;
+            bottom: 16px;
             font-size: 15px;
 
             span {
@@ -222,6 +232,7 @@
                 margin-right: 10px;
 
             }
+
             input {
                 padding: 0;
                 height: initial;
