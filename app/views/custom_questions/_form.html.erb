@@ -1,19 +1,22 @@
-<div id = "new-post-form">
-    <%= form_tag('/posts') do %>
-        <%= text_area_tag :content, nil, required: true, class: "new-answer-field",  placeholder: "나는 지금", autofocus: true, "data-enable-grammarly": "false" %>
+<div id = "new-custom-question-form">
+    <%= form_tag('/custom_questions') do %>
+        <%= text_area_tag :content, nil, required: true, class: "new-answer-field",  placeholder: "질문을 작성해보세요", "data-enable-grammarly": "false" %>
         <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
-       
+
         <!-- FIXME: checkbox가 /posts/form과 왜때무네 연동되는 것? -->
-        <div class = "channels post">
+        <div class = "channels custom-question">
             <span>공개범위</span>
             <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
             <!-- TODO: 채널이 많아질 경우 style -->
+        
             <% current_user.channels.each do |channel| %>
-                <%= check_box_tag "c[]", channel.id, false, id: channel.id.to_s + "post" %>
-                <%= label_tag "#{channel.id}post", channel.name %>
+                <%= check_box_tag "c[]", channel.id, false, id: channel.id.to_s %>
+                <%= label_tag "#{channel.id}", channel.name %>
             <% end %>
+            
         </div>
         <%= button_tag "저장", class: "answer-button"%>
     <% end %>
 </div>
+
 

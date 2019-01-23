@@ -7,6 +7,16 @@
             <% if feed.is_a? Answer %>
                 <%= link_to feed.question.content, question_path(feed.question.id), class: "question", :style => "font-size: 18px;"%><br><br>
             <% end %>
+            <% if feed.is_a? CustomQuestion %>
+                질문
+                <% if feed.reposted %>
+                    reposted 
+                    <% if feed.repost_message? %>
+                        with message: <%= feed.repost_message %><br>
+                    <% end %>
+                <% end %><br>
+                
+            <% end %>
             <div class="answer"><%= feed.content %></div><br><br>
             <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>
         </div>
@@ -14,6 +24,9 @@
             <%= render 'feeds/my_feed', feed: feed %> 
             <%= render 'likes/default', target: feed, like_btn_class: "btn-feed-like" %>
             <%= render 'drawers/default', target: feed %>
+            <% if (feed.is_a? CustomQuestion) && (feed.author != current_user) %>
+                <%= render 'custom_questions/repost', parent_id: feed.id %>
+            <% end %>
             <br> 
         </div> 
         <%= render 'comments/friends_form', user: feed.author, feed: feed %>

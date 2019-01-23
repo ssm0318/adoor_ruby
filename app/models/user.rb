@@ -12,14 +12,14 @@ class User < ApplicationRecord
 
   mount_uploader :image, ImageUploader
   
-  # question
-  has_many :questions, dependent: :destroy, :foreign_key => "author_id"
-
   # answer
   has_many :answers, dependent: :destroy, :foreign_key => "author_id"
 
   # post
   has_many :posts, dependent: :destroy, :foreign_key => "author_id"
+
+  # custom question
+  has_many :custom_questions, dependent: :destroy, :foreign_key => "author_id"
 
   # friend requests
   has_many :received_requests, :class_name => "FriendRequest", :foreign_key => "requestee_id", dependent: :destroy

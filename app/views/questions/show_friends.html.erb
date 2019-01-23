@@ -18,13 +18,6 @@
                 <%= @question.content %>
                 <%= render 'drawers/default', target: @question %>
             </div>    
-            <!--<div classs = "question-author">    
-                <% if @question.author.has_role? :newuser %>
-                    <br><br>
-                    Question made by 
-                    <%= render partial: "./user_profile_small", locals: {user: @question.author} %>
-                <% end %>
-            </div>--> <!-- custom question not yet implemented -->
         </div>
         <br>
     </div>

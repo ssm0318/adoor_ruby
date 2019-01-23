@@ -1,0 +1,18 @@
+<div class="prism-box-new-post">
+    <div class="prism-box__content">
+        <%= form_tag(custom_question_repost_form_path(@custom_question.id)) do %>
+            <%= text_field_tag :repost_message, nil, required: true, class: "new-answer-field", placeholder: "공유 메세지", "data-enable-grammarly": "false" %>
+            <%= hidden_field_tag "id", @custom_question.id %>
+            공유되는 질문: <%= @custom_question.content %><br>
+            공개범위
+            <!-- FIXME: 디자인 입히기, 하나 이상 체크 꼭 되야하게 하기(ajax) -->
+            <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
+            <% current_user.channels.each do |channel| %>
+                <%= check_box_tag "c[]", channel.id, false, id: channel.id.to_s%>
+                <%= label_tag "#{channel.id}", channel.name %>
+            <% end %>
+            <%= button_tag "저장", class: "answer-button"%>
+        <% end %>
+    </div>
+</div> 
+
