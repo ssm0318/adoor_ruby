@@ -17,7 +17,7 @@
         <button id="btn-channel-add">+</button>
         <%= form_tag '/channels/-1', :id => "name-create-form" do %>
             <%= text_field_tag "name", nil, required: true, :id => "name-create-input", :maxlength => 15 %>
-            <%= button_tag "완료", :id => "name-create-btn" %>
+            <%#= button_tag "완료", :id => "name-create-btn" %>
         <% end %>
     </div>
 
@@ -35,7 +35,7 @@
         <!-- TODO  사람수 표시-->
         <div id="channel-default-btns">
             <button id="btn-channel-name-edit">이름 편집</button>
-            <%= link_to '삭제',  '/channels/-1',  method: :delete, data: { confirm: '정말 지울래?!' }, id: "btn-channel-delete" %>
+            <%= link_to '삭제',  '/channels/-1',  method: :delete, data: { confirm: '정말 이 채널을 삭제하시겠습니까?' }, id: "btn-channel-delete" %>
             <button id="btn-channel-edit">채널 편집</button>
         </div>
         <button id="btn-channel-edit-complete">완료</button>

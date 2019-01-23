@@ -19,6 +19,6 @@ class CustomQuestion < ApplicationRecord
     # 예: CustomQuestion.channel(3) 하면 3번 채널에 속한 answer들 나옴
     scope :channel, -> (id) { includes(:channels).references(:channels).where(channels: {id: id}) }
     scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
-
+    scope :channel_name, -> (name) {joins(:channels).where(channels: {name: name})}
 
 end
