@@ -1,6 +1,7 @@
 <div id = "new-post-form">
     <%= form_for post do |f| %>
-        <%= f.text_area :content, required: true, class: "new-answer-field",  placeholder: "나는 지금", autofocus: true, "data-enable-grammarly": "false" %>
+        <%= f.hidden_field :author_id, :value => current_user.id %>
+        <%= f.text_area :content, class: "new-answer-field", required: true, autofocus: true, "data-enable-grammarly": "false" %>
         <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
        
         <!-- FIXME: checkbox가 /posts/form과 왜때무네 연동되는 것? -->

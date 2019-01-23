@@ -4,7 +4,7 @@ class PostsController < ApplicationController
     before_action :check_mine, only: [:edit, :update, :destroy]
     
     def create
-        @post = Post.create(author_id: current_user.id, content: params[:content])
+        @post = Post.create(post_params)
 
         if !@post.tag_string.nil?
             tag_array = @post.tag_string.gsub("\r\n", '\n').split('\n')
