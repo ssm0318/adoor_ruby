@@ -108,11 +108,25 @@ button {
         #channel-name-div {
             
             font-size: 24px;
+            margin-right: 5px;
     
             #name-edit-form {
                 display: none;
+
                 input {
                     outline: none;
+                    font-size: 24px;
+                    padding: 5px;
+                }
+
+                #name-edit-btn {
+                    padding: 8px 20px;
+                    background-color: white;
+                    border: 0.5px solid #dddddd;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    font-size: 15px;
+
                 }
             }
         }
@@ -133,12 +147,49 @@ button {
         #channel-default-btns {
             display: none;
 
-            #btn-channel-edit {
-                width: 40px;
-                height: auto;
-                cursor: pointer;
+            .channel-btns-div {
+                display:flex;
+
+                #btn-channel-edit {
+                    width: 30px;
+                    height: 30px;
+                    cursor: pointer;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 5px;
+    
+                }
+    
+                #btn-channel-name-edit {
+                    font-family: 'Nanum Gothic', sans-serif;
+                    padding: 8px 20px;
+                    background-color: white;
+                    border: 0.5px solid #dddddd;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    font-size: 13px;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 5px;
+    
+                }
+    
+                #btn-channel-delete {
+                    font-family: 'Nanum Gothic', sans-serif;
+                    padding: 8px 20px;
+                    background-color: white;
+                    border: 0.5px solid #dddddd;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    text-decoration: none;
+                    font-size: 13px;
+                    color: black;
+                    align-items: center;
+                    justify-content: center;
+                }
 
             }
+            
         }
     }
     

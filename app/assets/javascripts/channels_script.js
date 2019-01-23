@@ -131,7 +131,7 @@ $("#btn-channel-name-edit").on('click', function(e) {
     $("#channel-nav-div").addClass("editing")
     $("#channel-name").hide()
     $("#channel-default-btns").hide()
-    $("#name-edit-input").val($("#channel-nav-div").find(".active").html())
+    $("#name-edit-input").val($("#channel-nav-div").find(".active").html().trim())
     $("#name-edit-form").show()
     $("#name-edit-input").focus()
 })
