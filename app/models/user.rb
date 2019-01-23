@@ -66,6 +66,8 @@ class User < ApplicationRecord
   has_many :passive_friendships, :class_name => "Friendship", :foreign_key => "friend_id", dependent: :destroy
   has_many :belonging_channels, through: :passive_friendships, :source => :channels
 
+  # unread annoucement
+  has_and_belongs_to_many :announcements, dependent: :destroy
 
   # reference: http://railscasts.com/episodes/163-self-referential-association
   

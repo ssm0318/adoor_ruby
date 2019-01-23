@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190111134023) do
+ActiveRecord::Schema.define(version: 20190123053142) do
+
+  create_table "announcements", force: :cascade do |t|
+    t.text "content"
+    t.boolean "published", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "announcements_users", id: false, force: :cascade do |t|
+    t.integer "announcement_id", null: false
+    t.integer "user_id", null: false
+    t.index ["announcement_id", "user_id"], name: "index_announcements_users_on_announcement_id_and_user_id"
+    t.index ["user_id", "announcement_id"], name: "index_announcements_users_on_user_id_and_announcement_id"
+  end
 
   create_table "answers", force: :cascade do |t|
     t.integer "author_id", null: false
