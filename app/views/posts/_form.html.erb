@@ -1,5 +1,5 @@
 <div id = "new-post-form">
-    <%= form_tag('/posts') do %>
+    <%= form_tag post do %>
         <%= text_area_tag :content, nil, required: true, class: "new-answer-field",  placeholder: "나는 지금", autofocus: true, "data-enable-grammarly": "false" %>
         <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
        
@@ -9,7 +9,7 @@
             <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
             <!-- TODO: 채널이 많아질 경우 style -->
             <% current_user.channels.each do |channel| %>
-                <%= check_box_tag "c[]", channel.id, false, id: channel.id.to_s + "post" %>
+                <%= check_box_tag "c[]", channel.id, post.channels.include?(channel), id: channel.id.to_s + "post" %>
                 <%= label_tag "#{channel.id}post", channel.name %>
             <% end %>
         </div>

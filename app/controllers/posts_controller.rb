@@ -29,6 +29,14 @@ class PostsController < ApplicationController
     end
 
     def edit
+        unless ajax_request?
+            redirect_to root_url
+        else
+            html_content = render_to_string :partial => 'posts/form', :locals => { :post => @post }
+            render :json => { 
+                html_content: "#{html_content}",
+            }
+        end
     end
 
     def update
@@ -65,5 +73,8 @@ class PostsController < ApplicationController
             if @post.author_id != current_user.id
                 redirect_to root_url
             end
+        end
+        def ajax_request?
+            (defined? request) && request.xhr?
         end
 end

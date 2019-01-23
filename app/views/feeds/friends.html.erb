@@ -70,14 +70,14 @@
 </script>
 <script>
 
-  textarea_init($('#new-post-form').find("textarea"), window)
-
+  // textarea_init($('#new-custom-question-form').find("textarea"), window)
   $(".posting").on('click', function () {
     var selected = $(this);
     $(this).addClass("selected");
     $('.custom-question').removeClass("selected");
     $('#new-post-form').show();
     $('#new-custom-question-form').hide();
+    // textarea_init($('#new-post-form').find("textarea"), window)
   })
 
   $(".custom-question").on('click', function () {
@@ -86,7 +86,8 @@
     $('.posting').removeClass("selected");
     $('#new-custom-question-form').show();
     $('#new-post-form').hide();
-    textarea_init($('#new-custom-question-form').find("textarea"), window)
+    // textarea_init($('#new-custom-question-form').find("textarea"), window)
   })
 </script>
+
 
