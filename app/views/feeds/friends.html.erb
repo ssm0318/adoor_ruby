@@ -14,22 +14,29 @@
 </div>
 
 <script>
-  $(document).ready(function() {
-    textarea_init($('textarea'))
     $(".feed-edit").on('click', function() {
-      // TODO black 창 깔기
-      // TODO prism-container append
+      
       form = $(this)
       $.ajax({
         type: "GET",
         url: form.attr('data-url'),
         success: function(data) {
-          var html = $(`<div id='edit-background'><div id='edit-box'>${data.html_content}</div></div>`)
-          $("body").append(html)
-          $("body").css('overflow', 'hidden')
-          textarea_init($(html.find('textarea')))
 
-          // TODO x 버튼 만들기
+          var html = $(`${data.html_content}`)
+
+          $("#edit-background").find("#edit-box").append(html)
+          $("#edit-background").show()
+          $("body").css('overflow', 'hidden')
+          textarea_init($(html.find('textarea')), $("#edit-background"))
+
+          //편집 exit 버튼
+          $("#btn-edit-exit").on('click', function() {
+            html.remove()
+            $("#edit-background").hide()
+            $("body").css('overflow', 'auto')
+          })
+          
+          //편집 완료
           $(".edit_answer").submit( function(e) {
             e.preventDefault()
 
@@ -43,7 +50,8 @@
                 console.log("successed")
                   $(`.prism-box.${data.id}`).find(".answer").html(form.find(".new-answer-field").val())
                   $(`.prism-box.${data.id}`).find(".feed-channels").html("공개범위: " + data.channels)
-                  $("#edit-background").remove()
+                  html.remove()
+                  $("#edit-background").hide()
                   $("body").css('overflow', 'auto')
               },
               error: function(data) {
@@ -59,9 +67,30 @@
       
     })
 
+</script>
+<script>
+
+  textarea_init($('#new-post-form').find("textarea"), window)
+
+  $(".posting").on('click', function () {
+    var selected = $(this);
+    $(this).addClass("selected");
+    $('.custom-question').removeClass("selected");
+    $('#new-post-form').show();
+    $('#new-custom-question-form').hide();
+  })
+
+  $(".custom-question").on('click', function () {
+    var selected = $(this);
+    $(this).addClass("selected");
+    $('.posting').removeClass("selected");
+    $('#new-custom-question-form').show();
+    $('#new-post-form').hide();
+    textarea_init($('#new-custom-question-form').find("textarea"), window)
   })
 </script>
 
+<<<<<<< HEAD
 <script>
   $(".posting").on('click', function () {
     var selected = $(this);
@@ -79,3 +108,5 @@
     $('#new-post-form').hide();
   })
 </script>
+=======
+>>>>>>> 5be6c269acc92566cfd0673b3be314b0a38a8e22

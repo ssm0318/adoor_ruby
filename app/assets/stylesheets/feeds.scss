@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #edit-background {
+    display: none;
     background: rgba(0, 0, 0, 0.3);
     z-index: 1;
     position: fixed; /* Stay in place */
@@ -10,6 +11,16 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow-y: scroll; /* Enable scroll if needed */
+
+    #btn-edit-exit {
+        margin-top: 170px;
+        float: right;
+        margin-right: 29%;
+        background: none;
+        color: white;
+        font-size: 20px;
+        border: none;
+    }
 
     #edit-box {
         background-color: white;
@@ -29,6 +40,20 @@
 
         label {
             font-size: 17px;
+        }
+
+        input[type=submit] {
+            float: right;
+            width: 70px;
+            height: 30px;
+            border-radius: 20px;
+            background-color: #F48462;
+            border: none;
+            font-size: 12px;
+            color: white;
+            &:focus {
+                outline: none;
+            }
         }
 
         .question {
