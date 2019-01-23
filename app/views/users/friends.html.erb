@@ -1,55 +1,62 @@
-<div id="friend-list-profile" >
-    <%= image_tag(current_user.image.url) %>
-    <span><strong><%= current_user.username %></strong>님의 친구목록</span>
-</div>
-<div id="friend-list">
+<div class="inner-container">
+    <div class="user-header" >
+        <div id="profile" >
+            <%= link_to image_tag(current_user.image.url), profile_path(current_user.id) %> 
+            <div id="profile-content-div">
+                <div id="username">
+                    <%= current_user.username %>님의 친구 목록
+                </div>
+            </div>
+        </div>
 
-
-    <%# render partial: "channels/new" %>
-    <div id="channel-nav-with-create-div">
-        
-        <div id="channel-nav-div">
-            <div class="channel-nav all active">전체</div>
-            <% @channels.each do |channel| %>
-                <div class="channel-nav <%=channel.id%>"><%= channel.name%></div>
+    <div id="friend-list">
+        <%# render partial: "channels/new" %>
+        <div id="channel-nav-with-create-div">
+            
+            <div id="channel-nav-div">
+                <div class="channel-nav all active">전체</div>
+                <% @channels.each do |channel| %>
+                    <div class="channel-nav <%=channel.id%>"><%= channel.name%></div>
+                <% end %>
+            </div>
+            <button id="btn-channel-add">+</button>
+            <%= form_tag '/channels/-1', :id => "name-create-form" do %>
+                <%= text_field_tag "name", nil, required: true, :id => "name-create-input", :maxlength => 15 %>
+                <%#= button_tag "완료", :id => "name-create-btn" %>
             <% end %>
         </div>
-        <button id="btn-channel-add">+</button>
-        <%= form_tag '/channels/-1', :id => "name-create-form" do %>
-            <%= text_field_tag "name", nil, required: true, :id => "name-create-input", :maxlength => 15 %>
-            <%#= button_tag "완료", :id => "name-create-btn" %>
+
+        <br>
+        <br>
+
+        <div id="channel-info">
+            <div id="channel-name-div">
+                <div id="channel-name">전체</div>
+                <%= form_tag '/channels/-1', :id => "name-edit-form" do %>
+                    <%= text_field_tag "name", nil, required: true, :value => '전체', :id => "name-edit-input" %>
+                    <%= button_tag "저장", :id => "name-edit-btn" %>
+                <% end %>
+            </div>
+            <!-- TODO  사람수 표시-->
+            <div id="channel-default-btns">
+                <button id="btn-channel-name-edit">이름 편집</button>
+                <button><%= link_to '삭제',  '/channels/-1',  method: :delete, data: { confirm: '정말 이 채널을 삭제하시겠습니까?' }, id: "btn-channel-delete" %></button>
+                <button id="btn-channel-edit">채널 편집</button>
+            </div>
+            <button id="btn-channel-edit-complete">완료</button>
+        </div>
+
+        <br>
+
+        <div id="friends-div">
+            <%= render partial: "friend_list", locals: {friends_with_channels: @friends_with_channels} %>
+        </div>
+        <% if @friends_with_channels.empty? %>
+            친구를 초대해보세요!<br> <!-- FIXME: 버그인가 왜 줄바꿈이 안되지 -->
+            <%= link_to "친구 초대하기", invitation_path %>
         <% end %>
     </div>
 
-    <br>
-    <br>
-
-    <div id="channel-info">
-        <div id="channel-name-div">
-            <div id="channel-name">전체</div>
-            <%= form_tag '/channels/-1', :id => "name-edit-form" do %>
-                <%= text_field_tag "name", nil, required: true, :value => '전체', :id => "name-edit-input" %>
-                <%= button_tag "저장", :id => "name-edit-btn" %>
-            <% end %>
-        </div>
-        <!-- TODO  사람수 표시-->
-        <div id="channel-default-btns">
-            <button id="btn-channel-name-edit">이름 편집</button>
-            <%= link_to '삭제',  '/channels/-1',  method: :delete, data: { confirm: '정말 이 채널을 삭제하시겠습니까?' }, id: "btn-channel-delete" %>
-            <button id="btn-channel-edit">채널 편집</button>
-        </div>
-        <button id="btn-channel-edit-complete">완료</button>
-    </div>
-
-     <br>
-
-    <div id="friends-div">
-        <%= render partial: "friend_list", locals: {friends_with_channels: @friends_with_channels} %>
-    </div>
-    <% if @friends_with_channels.empty? %>
-        친구를 초대해보세요!<br> <!-- FIXME: 버그인가 왜 줄바꿈이 안되지 -->
-        <%= link_to "친구 초대하기", invitation_path %>
-    <% end %>
 </div>
 
 
