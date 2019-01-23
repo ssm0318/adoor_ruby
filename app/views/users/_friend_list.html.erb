@@ -1,7 +1,6 @@
 <% friends_with_channels.each do |friend_with_channels| %>
     <% friend = friend_with_channels[:friend] %>
     <div class="friend-box-with-edit">
-        <button class="btn-friend-channel-edit">-</button>
         <div class="friend-box <%=friend.id%>">
             <div class="friend-box-userprofile">
                 <%= link_to image_tag(friend.image.url, class:"friend-box-image"), profile_path(friend.id) %>
