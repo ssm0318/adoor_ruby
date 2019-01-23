@@ -13,6 +13,54 @@
   <%= render partial: 'feeds/friends_index', locals: {feeds: @feeds} %>
 </div>
 
+<script>
+  $(document).ready(function() {
+    textarea_init($('textarea'))
+    $(".feed-edit").on('click', function() {
+      // TODO black 창 깔기
+      // TODO prism-container append
+      form = $(this)
+      $.ajax({
+        type: "GET",
+        url: form.attr('data-url'),
+        success: function(data) {
+          var html = $(`<div id='edit-background'><div id='edit-box'>${data.html_content}</div></div>`)
+          $("body").append(html)
+          $("body").css('overflow', 'hidden')
+          textarea_init($(html.find('textarea')))
+
+          // TODO x 버튼 만들기
+          $(".edit_answer").submit( function(e) {
+            e.preventDefault()
+
+            form = $(this)
+            console.log(form)
+            $.ajax({
+              type: "PUT",
+              url: form.attr('action'),
+              data: form.serialize(),
+              success: function(data) {
+                console.log("successed")
+                  $(`.prism-box.${data.id}`).find(".answer").html(form.find(".new-answer-field").val())
+                  $(`.prism-box.${data.id}`).find(".feed-channels").html("공개범위: " + data.channels)
+                  $("#edit-background").remove()
+                  $("body").css('overflow', 'auto')
+              },
+              error: function(data) {
+                  console.log("error!")
+              }
+            })
+          })
+        },
+        error: function(data) {
+            console.log("error!")
+        }
+      })
+      
+    })
+
+  })
+</script>
 
 <script>
   $(".posting").on('click', function () {
@@ -31,4 +79,3 @@
     $('#new-post-form').hide();
   })
 </script>
-

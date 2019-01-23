@@ -1,3 +1,38 @@
 // Place all the styles related to the Feeds controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#edit-background {
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    position: fixed; /* Stay in place */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow-y: scroll; /* Enable scroll if needed */
+
+    #edit-box {
+        background-color: white;
+        width: 37%;
+        margin: auto;
+        margin-top: 200px;
+        margin-bottom: 100px;
+        padding: 2.5%;
+        border-radius: 10px;
+
+        textarea {
+            width: 80%;
+            margin: auto;
+            font-size: 17px;
+            height: 400px;
+        }
+
+        label {
+            font-size: 17px;
+        }
+
+        .question {
+            font-size: 18px;
+        }
+    }
+}

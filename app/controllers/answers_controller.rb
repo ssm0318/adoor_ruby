@@ -25,7 +25,6 @@ class AnswersController < ApplicationController
         channels = []   # 선택된 채널들을 갖고 있다.
         channels = Channel.find(params[:c]) if params[:c]
         channels.each do |c|
-            puts c
             Entrance.create(channel: c, target: @answer)
         end
        
@@ -37,7 +36,10 @@ class AnswersController < ApplicationController
     end
 
     def edit
-        @question = @answer.question
+        html_content = render_to_string :partial => 'answers/form', :locals => { :answer => @answer, :@question => @answer.question }
+        render :json => { 
+            html_content: "#{html_content}",
+        }
     end
 
 def update
@@ -52,7 +54,22 @@ def update
                 end
             end
 
-            redirect_to @answer
+            Entrance.where(target: @answer).destroy_all
+            channels = []   # 선택된 채널들을 갖고 있다.
+            channels = Channel.find(params[:c]) if params[:c]
+            channels.each do |c|
+                Entrance.create(channel: c, target: @answer)
+            end
+
+            channel_names = ""
+            channels.each do |channel|
+                channel_names += channel.name + " "
+            end
+
+            render :json => {
+                id: @answer.id,
+                channels: channel_names
+            }
         else
             render 'edit'
         end

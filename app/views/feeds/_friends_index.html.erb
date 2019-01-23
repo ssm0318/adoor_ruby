@@ -1,5 +1,5 @@
 <% feeds.each do |feed| %>
-    <div class="prism-box">
+    <div class="prism-box <%=feed.id%>">
         <div class="prism-box__header">
         <%= render partial: "./user_profile", locals: {user: feed.author} %>
         </div>
@@ -17,7 +17,7 @@
                 <% end %><br>
                 
             <% end %>
-            <div class="answer"><%= feed.content %> <br><br></div>
+            <div class="answer"><%= feed.content %></div><br><br>
             <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>
         </div>
         <div class="prism-box__footer" style="padding-bottom: 10px;">
