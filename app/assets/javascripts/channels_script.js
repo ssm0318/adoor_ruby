@@ -112,9 +112,10 @@ $("#btn-channel-edit-complete").on('click', function(e) {
 //FIXME: editing인 상태에서만 disabled가 먹히도록!!!ㅠㅠ
 // $(".friend-box-with-edit .editing").on('click', function(e) {
 $(".friend-box-with-edit").on('click', function(e) {
-    console.log("hi")
-    $(this).find(".friend-box").toggleClass("disabled")
-    $(this).find(".friend-box").toggleClass("value-changed")
+    if ($(this).hasClass("editing")) {
+        $(this).find(".friend-box").toggleClass("disabled")
+        $(this).find(".friend-box").toggleClass("value-changed")
+    }
 })
 
 
