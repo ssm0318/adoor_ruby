@@ -4,10 +4,17 @@ class AnswersController < ApplicationController
     before_action :check_mine, only: [:edit, :update, :destroy]
 
     def new
-        @question = Question.find(params[:id])
-        @answer = Answer.new
+        unless ajax_request?
+            redirect_to root_url
+        else
+            @question = Question.find(params[:id])
+            @answer = Answer.new
 
-        render 'new'
+            html_content = render_to_string :partial => 'answers/form', :locals => { :answer => @answer, :@question => @question }
+            render :json => { 
+                html_content: "#{html_content}",
+            }
+        end
     end
     
     def create 
@@ -28,7 +35,9 @@ class AnswersController < ApplicationController
             Entrance.create(channel: c, target: @answer)
         end
        
-        redirect_to root_path
+        render :json => {
+
+        }
     end
 
     def show
@@ -36,10 +45,14 @@ class AnswersController < ApplicationController
     end
 
     def edit
+        unless ajax_request?
+            redirect_to root_url
+        else
         html_content = render_to_string :partial => 'answers/form', :locals => { :answer => @answer, :@question => @answer.question }
         render :json => { 
             html_content: "#{html_content}",
         }
+        end
     end
 
 def update
@@ -92,5 +105,9 @@ def update
             if @answer.author_id != current_user.id
                 redirect_to root_url
             end
+        end
+
+        def ajax_request?
+            (defined? request) && request.xhr?
         end
 end
