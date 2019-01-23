@@ -15,9 +15,12 @@
         url: form.attr('data-url'),
         success: function(data) {
 
-          var html = $(`${data.html_content}`)
-          $("#prism-container").append(html)
+          var html = $(`<div id='edit-background'><div id='edit-box'>${data.html_content}</div></div>`)
+          $("body").append(html)
+          $("body").css('overflow', 'hidden')
           textarea_init($(html.find('textarea')))
+
+          // TODO x 버튼 만들기
           $(".edit_answer").submit( function(e) {
             e.preventDefault()
 
@@ -31,7 +34,8 @@
                 console.log("successed")
                   $(`.prism-box.${data.id}`).find(".answer").html(form.find(".new-answer-field").val())
                   $(`.prism-box.${data.id}`).find(".feed-channels").html("공개범위: " + data.channels)
-                  $(".question-box").remove()
+                  $("#edit-background").remove()
+                  $("body").css('overflow', 'auto')
               },
               error: function(data) {
                   console.log("error!")
