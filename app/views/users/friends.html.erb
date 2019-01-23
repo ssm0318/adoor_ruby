@@ -16,7 +16,9 @@
             <div id="channel-nav-div">
                 <div class="channel-nav all active">전체</div>
                 <% @channels.each do |channel| %>
-                    <div class="channel-nav <%=channel.id%>"><%= channel.name%></div>
+                    <div class="channel-nav <%=channel.id%>">
+                        <%= channel.name%>
+                    </div>
                 <% end %>
             </div>
             <button id="btn-channel-add">+</button>
@@ -39,9 +41,9 @@
             </div>
             <!-- TODO  사람수 표시-->
             <div id="channel-default-btns">
+                <%= image_tag("icons/setting-default-icon.png", id: "btn-channel-edit") %>
                 <button id="btn-channel-name-edit">이름 편집</button>
-                <button><%= link_to '삭제',  '/channels/-1',  method: :delete, data: { confirm: '정말 이 채널을 삭제하시겠습니까?' }, id: "btn-channel-delete" %></button>
-                <button id="btn-channel-edit">채널 편집</button>
+                <button><%= link_to '채널 삭제',  '/channels/-1',  method: :delete, data: { confirm: '정말 이 채널을 삭제하시겠습니까?' }, id: "btn-channel-delete" %></button>
             </div>
             <button id="btn-channel-edit-complete">완료</button>
         </div>

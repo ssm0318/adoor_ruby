@@ -22,7 +22,7 @@ function click_channel_nav(element) {
         $(".channel-nav").removeClass("active")
         $(this).addClass("active")
         $("#channel-name").html($(this).html())
-        $(".friend-box").removeClass("disabled");
+        $(".friend-box").removeClass("disabled")
         $(".friend-box-with-edit").show()
 
         if($(this).hasClass("all")) {

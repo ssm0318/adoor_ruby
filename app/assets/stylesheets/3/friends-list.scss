@@ -1,22 +1,24 @@
 button {
     outline: none;
+
 }
 
 #friend-list-profile {
+    display: flex;
+    border-bottom: 0.5px solid #dddddd;
+    padding-bottom: 10px;
 
     img {
         height:50px; 
         width:50px; 
         border-radius:30px;
+
     }
+
     span{
         padding-top: 20px;
         margin-left: 10px;
     }
-
-    display: flex;
-    border-bottom: 0.5px solid #dddddd;
-    padding-bottom: 10px;
 }
 
 
@@ -34,6 +36,7 @@ button {
     
         #channel-nav-div {
             display: inline-block;
+
             .channel-nav {
                 display: inline-block;
                 margin: 2px;
@@ -41,6 +44,7 @@ button {
                 background-color: white;
                 border: 0.5px solid #dddddd;
                 border-radius: 20px;
+
             }
         
             .channel-nav.active {
@@ -128,6 +132,13 @@ button {
         
         #channel-default-btns {
             display: none;
+
+            #btn-channel-edit {
+                width: 40px;
+                height: auto;
+                cursor: pointer;
+
+            }
         }
     }
     
@@ -172,15 +183,15 @@ button {
                 float: left;
                 .friend-box-image {
                     cursor: pointer;
-                    height:30px; 
-                    width:30px; 
+                    height: 40px; 
+                    width: 40px; 
                     border-radius: 30px;
                     margin-right: 5px;
                 }
             
                 .user-name{
-                    font-size: 14px;
-                    vertical-align: 9px;
+                    font-size: 15px;
+                    vertical-align: 12px;
                 }
             }
 
@@ -192,6 +203,7 @@ button {
                 border: 0.5px solid #dddddd;
                 border-radius: 20px;
                 cursor: pointer;
+                font-size: 10px;
             }
         
         }
@@ -207,5 +219,4 @@ button {
             background-color: #e0e0e0;
         }
     }
-
 }
