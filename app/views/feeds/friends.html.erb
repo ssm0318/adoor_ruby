@@ -14,6 +14,7 @@
 </div>
 
 <script>
+    check_channels($(".answer-button"))
     $(".feed-edit").on('click', function() {
       
       form = $(this)
@@ -25,6 +26,7 @@
           var html = $(`${data.html_content}`)
 
           $("#edit-background").find("#edit-box").append(html)
+          check_channels(html.find(".answer-button"))
           $("#edit-background").show()
           $("body").css('overflow', 'hidden')
           textarea_init($(html.find('textarea')), $("#edit-background"))
@@ -37,7 +39,7 @@
           })
           
           //편집 완료
-          $(".edit_answer").submit( function(e) {
+          $(".edit_answer, .edit_post").submit( function(e) {
             e.preventDefault()
 
             form = $(this)

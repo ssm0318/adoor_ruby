@@ -84,7 +84,7 @@ def update
                 channels: channel_names
             }
         else
-            render 'edit'
+            redirect_to root_url
         end
     end
 

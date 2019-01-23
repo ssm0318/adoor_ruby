@@ -50,9 +50,25 @@ class PostsController < ApplicationController
                     @post.tags << Tag.find(new_tag.id)
                 end
             end
-            redirect_to @post
+
+            Entrance.where(target: @post).destroy_all
+            channels = []   # 선택된 채널들을 갖고 있다.
+            channels = Channel.find(params[:c]) if params[:c]
+            channels.each do |c|
+                Entrance.create(channel: c, target: @post)
+            end
+
+            channel_names = ""
+            channels.each do |channel|
+                channel_names += channel.name + " "
+            end
+
+            render :json => {
+                id: @post.id,
+                channels: channel_names
+            }
         else
-            render 'edit'
+            redirect_to root_url
         end
     end
 
