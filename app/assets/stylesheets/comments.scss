@@ -1,3 +1,11 @@
+.friend-comments-nav.selected, .anonymous-comments-nav.selected {
+    color: black;
+}
+
+.friend-comments-nav, .anonymous-comments-nav {
+    color: gray;
+}
+
 .comment {
     font-size: 14px;    
 }
