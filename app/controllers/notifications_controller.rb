@@ -52,6 +52,8 @@ class NotificationsController < ApplicationController
                     redirect_to post_path(origin_id)
                 elsif origin_type == 'Answer'
                     redirect_to answer_path(origin_id)
+                elsif origin_type == 'Announcement'
+                    redirect_to announcement_index_path
                 end
             elsif target_type == 'FriendRequest'
                 redirect_to profile_path(origin_id)
@@ -60,6 +62,8 @@ class NotificationsController < ApplicationController
                     redirect_to post_path(noti.origin.target.id)
                 elsif noti.origin.target_type == 'Answer'
                     redirect_to answer_path(noti.origin.target.id)
+                elsif noti.origin.target_type == 'Announcement'
+                    redirect_to announcement_index_path
                 end
             elsif target_type == 'Like'
                 if origin_type == 'Post'
@@ -71,12 +75,16 @@ class NotificationsController < ApplicationController
                         redirect_to post_path(noti.origin.target_id)
                     elsif noti.origin.target_type == 'Answer'
                         redirect_to answer_path(noti.origin.target_id)
+                    elsif noti.origin.target_type == 'Announcement'
+                        redirect_to announcement_index_path
                     end
                 elsif origin_type == 'Reply'
                     if noti.origin.comment.target_type == 'Post'
                         redirect_to post_path(noti.origin.comment.target_id)
                     elsif noti.origin.comment.target_type == 'Answer'
                         redirect_to answer_path(noti.origin.comment.target_id)
+                    elsif noti.origin.comment.target_type == 'Announcement'
+                        redirect_to announcement_index_path
                     end
                 end
             elsif target_type == 'Announcement'

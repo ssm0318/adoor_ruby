@@ -11,6 +11,7 @@ class Reply < ApplicationRecord
     # https://stackoverflow.com/questions/10871131/how-to-use-or-condition-in-activerecord-query
     
     after_create :create_notifications
+    after_destroy :destroy_notifications
 
     private
 
@@ -65,5 +66,9 @@ class Reply < ApplicationRecord
                 end
             end
         end
+    end
+
+    def destroy_notifications
+        Notification.where(target: self).destroy_all
     end
 end

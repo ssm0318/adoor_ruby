@@ -9,6 +9,7 @@ class Comment < ApplicationRecord
     # 내가 볼 수 있는 친구의 글의 실명 댓글 중 내가 볼 수 있는 것 찾아내기 (비밀 설정 안되어있는 것)
     scope :accessible, -> (id) { where(secret: false).or(Comment.where(author_id: id)) } # 또는 글쓴이가 내 자신
     after_create :create_notifications
+    after_destroy :destroy_notifications
  
     private 
 
@@ -40,6 +41,10 @@ class Comment < ApplicationRecord
                 end
             end
         end
+    end
+
+    def destroy_notifications
+        Notification.where(target: self).destroy_all
     end
 end
  
