@@ -98,7 +98,7 @@ $(document).on('turbolinks:load', function()  {
 
             var btn_like = getButtonLike(data.like_url, data.like_changed_url)
             html.find(".comment-content").append(btn_like)
-            form.parent().find(".anonymous-comments-div").append(html)
+            form.parent().find(".anonymous-comments").append(html)
 
             ///////// 동적으로 삽입한 form에 다시 event binding 해줌. 하나만 선택해야됨.
             like_ajax(btn_like)
@@ -121,6 +121,7 @@ $(document).on('turbolinks:load', function()  {
 
                   like_ajax(new_btn_like)
                   delete_ajax(new_html.find(".btn-comment-delete"))
+                  new_html.find("time.timeago").timeago()
                   new_form.find(".prism-form__input").val('')
                 },
                 error: function(data) {
