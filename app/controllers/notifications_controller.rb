@@ -27,11 +27,12 @@ class NotificationsController < ApplicationController
             puts 'target_type: ' + target_type
             puts '====================================================='
 
-            if target_type == 'Friendship'
+            case target_type
+            when 'Friendship'
                 redirect_to profile_path(origin_id)
-            elsif target_type == 'Answer'
+            when 'Answer'
                 redirect_to answer_path(origin_id)
-            elsif target_type == 'Assignment'
+            when 'Assignment'
                 redirect_to new_answer_path(origin_id)
             # elsif target_type == 'Highlight'
             #     if origin_type == 'Post'
@@ -39,56 +40,69 @@ class NotificationsController < ApplicationController
             #     elsif origin_type == 'Answer'
             #         redirect_to answer_path(origin_id)
             #     end
-            elsif target_type == 'Drawer'
-                if origin_type == 'Post'
+            when 'Drawer'
+                case origin_type
+                when 'Post'
                     redirect_to post_path(origin_id)
-                elsif origin_type == 'Answer'
+                when 'Answer'
                     redirect_to answer_path(origin_id)
-                elsif origin_type == 'Question'
+                when 'Question'
                     redirect_to question_path(origin_id)
+                else
                 end
-            elsif target_type == 'Comment'
-                if origin_type == 'Post'
+            when 'Comment'
+                case origin_type
+                when 'Post'
                     redirect_to post_path(origin_id)
-                elsif origin_type == 'Answer'
+                when 'Answer'
                     redirect_to answer_path(origin_id)
-                elsif origin_type == 'Announcement'
+                when 'Announcement'
                     redirect_to announcement_index_path
+                else
                 end
-            elsif target_type == 'FriendRequest'
+            when 'FriendRequest'
                 redirect_to profile_path(origin_id)
-            elsif target_type == 'Reply'
-                if noti.origin.target_type == 'Post'
+            when 'Reply'
+                case noti.origin.target_type
+                when 'Post'
                     redirect_to post_path(noti.origin.target.id)
-                elsif noti.origin.target_type == 'Answer'
+                when 'Answer'
                     redirect_to answer_path(noti.origin.target.id)
-                elsif noti.origin.target_type == 'Announcement'
+                when 'Announcement'
                     redirect_to announcement_index_path
+                else
                 end
-            elsif target_type == 'Like'
-                if origin_type == 'Post'
+            when 'Like'
+                case origin_type
+                when 'Post'
                     redirect_to post_path(origin_id)
-                elsif origin_type == 'Answer'
+                when 'Answer'
                     redirect_to answer_path(origin_id)
-                elsif origin_type == 'Comment'
-                    if noti.origin.target_type == 'Post'
+                when 'Comment'
+                    case noti.origin.target_type
+                    when 'Post'
                         redirect_to post_path(noti.origin.target_id)
-                    elsif noti.origin.target_type == 'Answer'
+                    when 'Answer'
                         redirect_to answer_path(noti.origin.target_id)
-                    elsif noti.origin.target_type == 'Announcement'
+                    when 'Announcement'
                         redirect_to announcement_index_path
+                    else
                     end
-                elsif origin_type == 'Reply'
-                    if noti.origin.comment.target_type == 'Post'
+                when 'Reply'
+                    case noti.origin.comment.target_type
+                    when 'Post'
                         redirect_to post_path(noti.origin.comment.target_id)
-                    elsif noti.origin.comment.target_type == 'Answer'
+                    when 'Answer'
                         redirect_to answer_path(noti.origin.comment.target_id)
-                    elsif noti.origin.comment.target_type == 'Announcement'
+                    when 'Announcement'
                         redirect_to announcement_index_path
+                    else
                     end
+                else
                 end
-            elsif target_type == 'Announcement'
+            when 'Announcement'
                 redirect_to announcement_index_path
+            else
             end
         end
     end
