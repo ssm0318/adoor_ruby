@@ -1,18 +1,27 @@
-    
-<div class="prism-box-new-post">
-    <div class="prism-box__content">
-        <%= form_tag('/posts') do %>
-            <%= text_area_tag :content, nil, required: true, class: "new-answer-field",  placeholder: "나는 지금", autofocus: true, "data-enable-grammarly": "false" %>
-            공개범위
-            <!-- FIXME: 디자인 입히기, 하나 이상 체크 꼭 되야하게 하기(ajax) -->
-            <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
-            <% current_user.channels.each do |channel| %>
-                <%= check_box_tag "c[]", channel.id, false, id: channel.id.to_s%>
-                <%= label_tag "#{channel.id}", channel.name %>
+<div id = "new-post-form">
+    <%= form_for post do |f| %>
+        <%= f.hidden_field :author_id, :value => current_user.id %>
+        <%= f.text_area :content, class: "new-answer-field", required: true, autofocus: true, placeholder: "나는 지금", "data-enable-grammarly": "false" %>
+        <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
+       
+        <!-- FIXME: checkbox가 /posts/form과 왜때무네 연동되는 것? -->
+        <div class = "channels post">
+            <span>공개범위</span>
+            <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
+            <!-- TODO: 채널이 많아질 경우 style -->
+            <% if post.id != nil %>
+                <%# edit post의 경우 %>
+                <% label_id = "post_edit" %>
+            <% else %>
+                <%# create post의 경우 %>
+                <% label_id = "post" %>
             <% end %>
-            <%= button_tag "저장", class: "answer-button"%>
-        <% end %>
-    </div>
-</div> 
+            <% current_user.channels.each do |channel| %>
+                <%= check_box_tag "c[]", channel.id, post.channels.include?(channel), id: channel.id.to_s + label_id %>
+                <%= label_tag channel.id.to_s + label_id, channel.name %>
+            <% end %>
+        </div>
+        <%= f.submit "저장", class: "answer-button"%>
+    <% end %>
+</div>
 
-<%# render 'layouts/textarea_script' %>

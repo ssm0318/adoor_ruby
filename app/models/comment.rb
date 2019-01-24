@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-    belongs_to :target, polymorphic: true
+    belongs_to :target, polymorphic: true  # post, answer, custom_question
     belongs_to :author, class_name: 'User'
     has_many   :replies, dependent: :destroy
     has_many   :likes, dependent: :destroy, as: :target

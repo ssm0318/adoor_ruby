@@ -76,6 +76,24 @@ ActiveRecord::Schema.define(version: 20190123033448) do
     t.index ["author_id"], name: "index_comments_on_author_id"
   end
 
+  create_table "custom_questions", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.string "content", null: false
+    t.boolean "reposted", default: false
+    t.string "tag_string"
+    t.string "repost_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_custom_questions_on_author_id"
+  end
+
+  create_table "custom_questions_tags", id: false, force: :cascade do |t|
+    t.integer "custom_question_id", null: false
+    t.integer "tag_id", null: false
+    t.index ["custom_question_id", "tag_id"], name: "index_custom_questions_tags_on_custom_question_id_and_tag_id"
+    t.index ["tag_id", "custom_question_id"], name: "index_custom_questions_tags_on_tag_id_and_custom_question_id"
+  end
+
   create_table "drawers", force: :cascade do |t|
     t.integer "user_id"
     t.integer "target_id"
@@ -169,7 +187,6 @@ ActiveRecord::Schema.define(version: 20190123033448) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.integer "author_id", default: 1
     t.string "content", null: false
     t.boolean "official"
     t.date "selected_date"
@@ -239,6 +256,7 @@ ActiveRecord::Schema.define(version: 20190123033448) do
     t.string "encrypted_password", default: "", null: false
     t.string "username"
     t.date "date_of_birth"
+    t.string "profile"
     t.string "image"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

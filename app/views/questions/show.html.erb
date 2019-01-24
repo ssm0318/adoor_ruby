@@ -1,13 +1,12 @@
 
 <div class="inner-container">
     <div class="question-btn">
-        <%= link_to image_tag("icons/write-icon.png", class: "btn-write"), new_answer_path(@question.id) %>
-        <% if user_signed_in? %> 
-            <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
-            <%= render 'assignments/default', question: @question %>
-        <% else %>
-            <%= link_to image_tag("icons/assign-icon.png", class: "btn-assign"), new_user_session_path %>
-        <% end %>
+        <a class="btn-write-modal feed" 
+            data-url='<%=new_answer_path(@question.id)%>'>
+            <%= image_tag("icons/write-icon.png", class: "btn-write") %>
+        </a>
+        <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
+        <%= render 'assignments/default', question: @question %>
     </div>
     <%= render 'questions/tabs', question: @question %>
     
@@ -18,13 +17,6 @@
                 <%= @question.content %>
                 <%= render 'drawers/default', target: @question %>  
             </div>    
-            <!--<div classs = "question-author">    
-                <% if @question.author.has_role? :newuser %>
-                    <br><br>
-                    Question made by 
-                    <%= render partial: "./user_profile_small", locals: {user: @question.author} %>
-                <% end %>
-            </div>--> <!-- custom question not yet implemented -->
         </div>
         <br>
     </div>

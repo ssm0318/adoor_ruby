@@ -1,5 +1,5 @@
 class Like < ApplicationRecord
-    belongs_to :target, polymorphic: true  # post, answer, comment, reply
+    belongs_to :target, polymorphic: true  # post, answer, custom_question, comment, reply
     belongs_to :user
 
     after_create :create_notifications

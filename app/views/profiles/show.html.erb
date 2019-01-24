@@ -4,7 +4,7 @@
         <%= @user.username %>님과 친구가 되어보세요.
     <% else %>
     <% @feeds.each do |feed| %> 
-        <div class="prism-box">
+        <div class="prism-box <%=feed.id%>">
             <div class="prism-box__header">
                 <%= render partial: "./user_profile", locals: {user: feed.author} %><br/>
             </div>
@@ -12,6 +12,10 @@
                 <br>
                 <% if feed.is_a? Answer %>
                     <%= link_to feed.question.content, question_path(feed.question.id), class: "question" %><br><br>
+                <% end %>
+                <% if feed.is_a? CustomQuestion %>
+                    <% if feed.reposted %>reposted<% end %>
+                    질문: <br>
                 <% end %>
                 <div class="answer"><%= feed.content %></div>
                 <br>
@@ -22,6 +26,9 @@
                 <%= render 'feeds/my_feed', feed: feed %>
                 <%= render 'likes/default', target: feed, like_btn_class: "btn-feed-like" %>
                 <%= render 'drawers/default', target: feed %>
+                <% if (feed.is_a? CustomQuestion) && (feed.author != current_user) %>
+                    <%= render 'custom_questions/repost', parent_id: feed.id %>
+                <% end %>
                 <br>
             </div>
             <%= render 'comments/friends_form', user: @user, feed: feed %>
