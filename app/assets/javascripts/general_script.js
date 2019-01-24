@@ -87,6 +87,8 @@ $(document).on('turbolinks:load', function()  {
                 <form class="prism-form-general reply" action="/replies" accept-charset="UTF-8" method="post">
                   <input name="utf8" type="hidden" value="✓">
                   <input type="hidden" name="id" id="id" value="${data.id}">
+                  <input type="hidden" name="anonymous" value="true">
+                  <input type="hidden" name="secret" value="false">
                   <input type="text" name="content" id="content" required="required" class="prism-form__input">
                   <button name="button" type="submit" class="prism-form__button">저장</button>
                   <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
