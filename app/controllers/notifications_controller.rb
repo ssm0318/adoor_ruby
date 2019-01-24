@@ -71,6 +71,8 @@ class NotificationsController < ApplicationController
                 elsif origin_type == 'Reply'
                     redirect_to answer_path(noti.origin.comment.target_id)
                 end
+            elsif target_type == 'Announcement'
+                redirect_to announcement_index_path
             end
         end
     end

@@ -86,7 +86,9 @@
                         <% elsif noti.action == 'anonymous_like_reply' %>
                             <%= noti.origin.likes.size %>명이 당신의 대댓글을 좋아했습니다.
                         <% end %>
-                    <% end %>        
+                    <% end %>   
+                <% elsif noti.target_type == 'Announcement' %>
+                    어도어에 새로운 공지가 있습니다.     
                 <% end %>
                 <div class = "date time" style="display: block; margin-top: 5px; font-size: 10px;"><%= time_tag noti.updated_at, class: "timeago" %></div> 
             </div>

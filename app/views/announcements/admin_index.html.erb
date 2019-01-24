@@ -1,0 +1,47 @@
+<div class="inner-container">
+    <%= link_to "공지 페이지로", announcement_index_path %>
+    <div class="prism-box-new-post">
+        <div class="prism-box__content">
+            <%= form_tag(announcements_path) do %>
+                <%= text_field_tag :title, nil, required: true, placeholder: "제목", "data-enable-grammarly": "false" %>
+                <%= text_area_tag :content, nil, required: true, class: "new-answer-field",  placeholder: "공지 쓰기", "data-enable-grammarly": "false" %>
+                <%= button_tag "저장", class: "answer-button"%>
+            <% end %>
+        </div>
+    </div> 
+    현재 발행중인 공지<br>
+    <% @published_announcements.each do |a| %>
+        <div class="prism-box">
+            <div class="prism-box__header">
+                <%= link_to '삭제', announcement_path(a.id), method: :delete%>
+            </div>
+            <div class="prism-box__content">
+                <div class="announcement-title"><%= a.title %></div>
+                <div class="answer"><%= a.content %></div><br><br>
+                <div class = "date time">작성: <%= time_tag a.created_at %></div>
+                <div class = "date time">발행: <%= time_tag a.published_at %></div>                </div><br><br>
+            <% unread_users = [] %>
+            <% Notification.where(target: a).unread.each do |n| %>
+                <% unread_users.push(n.recipient_id) %>
+            <% end %>
+            <div>도달한 사용자: <%= User.all.ids - unread_users %></div>
+            <div>도달률: <%= (User.all.count-unread_users.count)*100/(User.all.count) %>%</div>
+        </div>
+    <% end %> 
+    발행 안된 공지<br>
+    <% @unpublished_announcements.each do |a| %>
+        <div class="prism-box">
+            <div class="prism-box__header">
+                <% if a.published_at == nil %> 
+                    <%= link_to "공지 발행하기", announcement_publish_path(a.id) %>
+                <% end %>
+                <%= link_to '삭제', announcement_path(a.id), method: :delete%>
+            </div>
+            <div class="prism-box__content">
+                <div class="announcement-title"><%= a.title %></div>
+                <div class="answer"><%= a.content %></div><br><br>
+                <div class = "date time">작성: <%= time_tag a.created_at %></div>
+            </div><br><br>
+        </div>
+    <% end %> 
+</div>
