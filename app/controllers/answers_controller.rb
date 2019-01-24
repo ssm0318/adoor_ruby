@@ -34,10 +34,14 @@ class AnswersController < ApplicationController
         channels.each do |c|
             Entrance.create(channel: c, target: @answer)
         end
-       
-        render :json => {
 
-        }
+        if params[:from_feed]
+            redirect_to question_path(@answer.question)
+        else
+            render :json => {
+
+            }
+        end
     end
 
     def show
