@@ -1,6 +1,7 @@
+var lock_icon = '<img src="/assets/icons/lock-icon.png" class="lock-icon" alt="Lock icon")>'
+
 $(document).on('turbolinks:load', function()  {
 
-    
     // TODO : 숨김댓글 체크한채로 보내면 숨김댓글이라고 뜨기!
     $(".prism-form-friend").submit( function(e) {
         e.preventDefault();
@@ -13,7 +14,7 @@ $(document).on('turbolinks:load', function()  {
           success: function(data) {
             
             let secret = form.find("#secret").is(":checked") ? true : false
-            console.log(secret)
+            
             if(form.hasClass("comment")) {
               var new_url = "/comments/" + data.id;
               console.log(new_url);
@@ -58,7 +59,7 @@ $(document).on('turbolinks:load', function()  {
 
               if(secret) {
                 //TODO (숨김댓글)추가
-                html.find(".content").prepend("(숨김댓글)")
+                html.find(".content").before($(lock_icon))
                 html.find("form").find("#content").after('<input type="hidden" name="secret" value="true" id="secret">')
               }
               else {

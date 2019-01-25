@@ -28,7 +28,7 @@ function getReplyHtml(profile_path, profile_img_url, username, content, created_
   `)
 
   if(secret) {
-    reply_html.find(".content").prepend("(숨김댓글)")
+    reply_html.find(".content").before($(lock_icon))
   }
 
   return reply_html
