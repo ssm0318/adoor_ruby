@@ -14,6 +14,7 @@ class Notification < ApplicationRecord
   # noti의 target이 answer, highlight, drawer, comment인 경우 answer이고
   # noti의 target이 friendship, friendrequest인 경우 noti의 actor인 user이고
   # noti의 target이 assignment인 경우 해당 assignment의 question이다
+  # noti의 target이 announcement인 경우 announcement자체이다
   ##### 예외: noti의 target이 reply의 origin은 그 reply가 달린 댓글이다.
   ##### 예외2: noti의 target이 like인 경우 origin은 그 like의 target이다
 

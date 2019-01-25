@@ -28,50 +28,6 @@ class NotificationsController < ApplicationController
             puts '====================================================='
 
             case target_type
-            when 'Friendship'
-                redirect_to profile_path(origin_id)
-            when 'Answer'
-                redirect_to answer_path(origin_id)
-            when 'Assignment'
-                redirect_to new_answer_path(origin_id)
-            # elsif target_type == 'Highlight'
-            #     if origin_type == 'Post'
-            #         redirect_to post_path(origin_id)
-            #     elsif origin_type == 'Answer'
-            #         redirect_to answer_path(origin_id)
-            #     end
-            when 'Drawer'
-                case origin_type
-                when 'Post'
-                    redirect_to post_path(origin_id)
-                when 'Answer'
-                    redirect_to answer_path(origin_id)
-                when 'Question'
-                    redirect_to question_path(origin_id)
-                else
-                end
-            when 'Comment'
-                case origin_type
-                when 'Post'
-                    redirect_to post_path(origin_id)
-                when 'Answer'
-                    redirect_to answer_path(origin_id)
-                when 'Announcement'
-                    redirect_to announcement_index_path
-                else
-                end
-            when 'FriendRequest'
-                redirect_to profile_path(origin_id)
-            when 'Reply'
-                case noti.origin.target_type
-                when 'Post'
-                    redirect_to post_path(noti.origin.target.id)
-                when 'Answer'
-                    redirect_to answer_path(noti.origin.target.id)
-                when 'Announcement'
-                    redirect_to announcement_index_path
-                else
-                end
             when 'Like'
                 case origin_type
                 when 'Post'
@@ -100,6 +56,50 @@ class NotificationsController < ApplicationController
                     end
                 else
                 end
+            when 'Comment'
+                case origin_type
+                when 'Post'
+                    redirect_to post_path(origin_id)
+                when 'Answer'
+                    redirect_to answer_path(origin_id)
+                when 'Announcement'
+                    redirect_to announcement_index_path
+                else
+                end
+            when 'Reply'
+                case noti.origin.target_type
+                when 'Post'
+                    redirect_to post_path(noti.origin.target.id)
+                when 'Answer'
+                    redirect_to answer_path(noti.origin.target.id)
+                when 'Announcement'
+                    redirect_to announcement_index_path
+                else
+                end
+            when 'Drawer'
+                case origin_type
+                when 'Post'
+                    redirect_to post_path(origin_id)
+                when 'Answer'
+                    redirect_to answer_path(origin_id)
+                when 'Question'
+                    redirect_to question_path(origin_id)
+                else
+                end
+            when 'Assignment'
+                redirect_to new_answer_path(origin_id)
+            when 'Answer'
+                redirect_to answer_path(origin_id)
+            when 'Friendship'
+                redirect_to profile_path(origin_id)
+            # when 'Highlight'
+            #     if origin_type == 'Post'
+            #         redirect_to post_path(origin_id)
+            #     elsif origin_type == 'Answer'
+            #         redirect_to answer_path(origin_id)
+            #     end
+            when 'FriendRequest'
+                redirect_to profile_path(origin_id)
             when 'Announcement'
                 redirect_to announcement_index_path
             else

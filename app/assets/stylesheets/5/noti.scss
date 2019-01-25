@@ -22,11 +22,13 @@
 }
 
 .noti-el {
-    padding: 16px;
+    padding: 12px;
     text-decoration: none;
     color: black;
-    font-family: "Nanum Gothic", sans-serif;
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 150%;
+    display: grid;
+    grid-template-columns: 40px 265px; 
 }
 
 .noti-el:hover {
@@ -35,12 +37,36 @@
 }
 
 .noti-el.unread {
-    background-color: #FAD4BC;
+    background-color: rgb(255, 231, 217);
     color: black;
-    font-family: "Nanum Gothic", sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     &:hover {
-        background-color: rgb(247, 184, 146);
+        background-color: rgb(255, 210, 182);
 
     }
+}
+.noti-text {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+.noti-image {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+.noti-image-named {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    
+}
+
+.noti-image-anonymous {
+    height:30px; 
+    width:30px; 
+    border-radius:15px;
+    border: none; 
+    &:focus {
+        outline: none; 
+        fill: none;
+    } 
 }
