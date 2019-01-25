@@ -12,13 +12,4 @@
         <div class="edit-or-delete-el feed-edit post-edit hover-orange hover-pointer" data-url='<%=edit_custom_question_path(feed.id)%>'>수정</div>
         <div class="edit-or-delete-el btn-feed-delete hover-orange hover-pointer" data-url="<%=custom_question_path(feed.id)%>">삭제</div>
     <% end %>
-        <%
-=begin%>
- <span class="feed-channels">공개범위: 
-            <% feed.channels.each do |c| %>
-                <%= c.name %>
-            <% end %>
-        </span> 
-<%
-=end%>
 </span>

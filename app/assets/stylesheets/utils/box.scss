@@ -112,11 +112,21 @@
         font-family: 'Nanum Gothic', sans-serif;
         vertical-align: bottom;
         width: 100%;
-        text-align: right;
         font-size: 12px;
-        padding-top: 10px;
-        padding-bottom: 5px;
+
         position: relative;
+
+        display:flex;
+        flex-direction:column; 
+        align-items: flex-end;
+
+        .feed-channels {
+            // float: left;
+            align-self: flex-start;
+            vertical-align: bottom;
+        }
+
+
 
         .btn-drawer {
             width: 30px;
@@ -125,8 +135,9 @@
             vertical-align: -2px;
 
         }
-
+        
         .btn-feed-like {
+            padding-left: 2px;
             width: 26px;
             height: auto;
             cursor: pointer;
