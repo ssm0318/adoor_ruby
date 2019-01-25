@@ -11,57 +11,64 @@ class Reply < ApplicationRecord
     # https://stackoverflow.com/questions/10871131/how-to-use-or-condition-in-activerecord-query
     
     after_create :create_notifications
+    after_destroy :destroy_notifications
 
     private
 
     def create_notifications
-        origin = self.comment
-        # 익명 대댓글인 경우
-        if self.anonymous
-            if self.author != self.comment.author
-                # 댓글 주인에게 노티
-                noti_hash = {recipient: self.comment.author, action: 'anonymous_to_comment', origin: origin}
-                if Notification.where(noti_hash).unread.empty?
-                    Notification.create(recipient: self.comment.author, actor: self.author, target: self, action: 'anonymous_to_comment', origin: origin)
-                else
-                    n = Notification.where(noti_hash).first
-                    n.target = self
-                    n.actor = self.author
-                    n.save
+        if self.comment.target_type != 'Announcement'
+            origin = self.comment
+            # 익명 대댓글인 경우
+            if self.anonymous
+                if self.author != self.comment.author
+                    # 댓글 주인에게 노티
+                    noti_hash = {recipient: self.comment.author, action: 'anonymous_to_comment', origin: origin}
+                    if Notification.where(noti_hash).unread.empty?
+                        Notification.create(recipient: self.comment.author, actor: self.author, target: self, action: 'anonymous_to_comment', origin: origin)
+                    else
+                        n = Notification.where(noti_hash).first
+                        n.target = self
+                        n.actor = self.author
+                        n.save
+                    end
                 end
-            end
-            if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
-                # 글 주인에게 노티
-                noti_hash = {recipient: self.comment.target.author, action: 'anonymous_to_author', origin: origin}
-                if Notification.where(noti_hash).unread.empty?
-                    Notification.create(recipient: self.comment.target.author, actor: self.author, target: self, action: 'anonymous_to_author', origin: origin)
-                else
-                    Notification.where(noti_hash).first.target = self
-                    Notification.where(noti_hash).first.actor = self.author
+                if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
+                    # 글 주인에게 노티
+                    noti_hash = {recipient: self.comment.target.author, action: 'anonymous_to_author', origin: origin}
+                    if Notification.where(noti_hash).unread.empty?
+                        Notification.create(recipient: self.comment.target.author, actor: self.author, target: self, action: 'anonymous_to_author', origin: origin)
+                    else
+                        Notification.where(noti_hash).first.target = self
+                        Notification.where(noti_hash).first.actor = self.author
+                    end
                 end
-            end
-        # 친구 대댓글인 경우
-        else
-            if self.author != self.comment.author
-                # 댓글 주인에게 노티
-                noti_hash = {recipient: self.comment.author, action: 'friend_to_comment', origin: origin}
-                if Notification.where(noti_hash).unread.empty?
-                    Notification.create(recipient: self.comment.author, actor: self.author, target: self, action: 'friend_to_comment', origin: origin)
-                else
-                    Notification.where(noti_hash).first.target = self
-                    Notification.where(noti_hash).first.actor = self.author
+            # 친구 대댓글인 경우
+            else
+                if self.author != self.comment.author
+                    # 댓글 주인에게 노티
+                    noti_hash = {recipient: self.comment.author, action: 'friend_to_comment', origin: origin}
+                    if Notification.where(noti_hash).unread.empty?
+                        Notification.create(recipient: self.comment.author, actor: self.author, target: self, action: 'friend_to_comment', origin: origin)
+                    else
+                        Notification.where(noti_hash).first.target = self
+                        Notification.where(noti_hash).first.actor = self.author
+                    end
                 end
-            end
-            if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
-                # 글 주인에게 노티
-                noti_hash = {recipient: self.comment.target.author, action: 'friend_to_author', origin: origin}
-                if Notification.where(noti_hash).unread.empty?
-                    Notification.create(recipient: self.comment.target.author, actor: self.author, target: self, action: 'friend_to_author', origin: origin)
-                else
-                    Notification.where(noti_hash).first.target = self
-                    Notification.where(noti_hash).first.actor = self.author
+                if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
+                    # 글 주인에게 노티
+                    noti_hash = {recipient: self.comment.target.author, action: 'friend_to_author', origin: origin}
+                    if Notification.where(noti_hash).unread.empty?
+                        Notification.create(recipient: self.comment.target.author, actor: self.author, target: self, action: 'friend_to_author', origin: origin)
+                    else
+                        Notification.where(noti_hash).first.target = self
+                        Notification.where(noti_hash).first.actor = self.author
+                    end
                 end
             end
         end
+    end
+
+    def destroy_notifications
+        Notification.where(target: self).destroy_all
     end
 end

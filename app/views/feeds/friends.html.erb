@@ -33,22 +33,7 @@
     $('#new-post-form').hide();
   })
 
-  $(".posting").on('click', function () {
-    var selected = $(this);
-    $(this).addClass("selected");
-    $('.custom-question').removeClass("selected");
-    $('#new-post-form').show();
-    $('#new-custom-question-form').hide();
-  })
-
-  $(".custom-question").on('click', function () {
-    var selected = $(this);
-    $(this).addClass("selected");
-    $('.posting').removeClass("selected");
-    $('#new-custom-question-form').show();
-    $('#new-post-form').hide();
-  })
-
+<script>
   $(".friend-comments-nav").on('click', function() {
     $(this).siblings(".anonymous-comments-nav").removeClass("selected")
     $(this).addClass("selected")
