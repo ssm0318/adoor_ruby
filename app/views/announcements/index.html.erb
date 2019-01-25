@@ -1,0 +1,58 @@
+<div class="inner-container">
+    <div class="prism-title"><h1>공지사항</h1></div>
+    <% @published_announcements.each do |a| %>
+        <div class="prism-box">
+            <div class="prism-box__content"><br>
+                <div class="announcement-title"><%= a.title %></div>
+                <div class="answer"><%= a.content %></div><br><br>
+                <div class = "date time"><%= time_tag a.published_at %></div>
+            </div>
+            <div class="prism-box__footer" style="margin-top: 5px; border-top: 1px solid #d7dae0;">
+                <div>
+                    댓글 <br/><br>
+                    <br>
+                    <div class="anonymous-comments-div">
+                        <% a.comments.each do |c|%>
+                            <div class="comment-replies-form">
+                                <div class="comment-replies">
+                                    <% if (c.author_id != current_user.id) && (c.author_id != 1) %>
+                                        <%= render partial: "comments/general", locals: {user_id: c.author_id, feed_id: a.id, c:c} %>
+                                    <% else %>
+                                        <%= render partial: "comments/friends", locals: {feed: a, c: c} %>
+                                    <% end %>
+                                    
+                                    <% c.replies.each do |r|%>
+                                        <% if (r.author_id != current_user.id) && (r.author_id != 1) %>
+                                            <%= render partial: "replies/general", locals: {feed_id: a.id, r: r}%>
+                                        <% else %>
+                                            <%= render partial: "replies/friends", locals: {r: r} %>
+                                        <% end %>
+                                    <% end %> 
+                                </div>
+                                <!-- FIXME: 버그_ 댓글 쓰고 그 댓글에 바로 대댓글 쓰면 그거 안써짐 -->
+                                <%= form_tag replies_path, class: "prism-form-general reply" do %>
+                                    <%= hidden_field_tag "id", c.id %>
+                                    <%= hidden_field_tag "anonymous", "true" %>
+                                    <%= hidden_field_tag "secret", "false" %>  <!-- 이건 디폴트 값. 익명 댓글은 secret 무조건 false -->
+                                    <%= text_field_tag "content", nil, required: true, class: "prism-form__input" %>
+                                    <%= button_tag "저장", class: "prism-form__button" %>
+                                    <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
+                                <% end %>
+                            </div>
+                            <%# TOOD: action 설정 %>
+                        <% end %>
+                    </div>
+                    <%= form_tag comments_path, class: "prism-form-general comment" do %>
+                        <%= hidden_field_tag "target_type", a.class.to_s %>
+                        <%= hidden_field_tag "target_id", a.id %>
+                        <%= hidden_field_tag "anonymous", "true" %>
+                        <%= hidden_field_tag "secret", "false" %>  <!-- 이건 디폴트 값. 익명 대댓글은 secret 무조건 false -->
+                        <%= text_field_tag "content", nil, required: true, class: "prism-form__input" %>
+                        <%= button_tag "저장", class: "prism-form__button" %>
+                        <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    <% end %> 
+</div>

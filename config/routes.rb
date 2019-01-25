@@ -84,4 +84,10 @@ Rails.application.routes.draw do
   resources :channels, only: [:create, :update, :destroy]
   put '/channels/:id/edit_friendship' => 'channels#edit_friendship'
 
+  # Announcement
+  resources :announcements, only: [:create, :update, :destroy]
+  get '/announcement' => 'announcements#index', as: :announcement_index
+  get '/announcement/admin'  => 'announcements#admin_index', as: :announcement_admin_index
+  get '/announcement/:id/publish' => 'announcements#publish', as: :announcement_publish
+
 end

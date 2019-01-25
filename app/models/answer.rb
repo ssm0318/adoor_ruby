@@ -26,6 +26,7 @@ class Answer < ApplicationRecord
     scope :channel_name, -> (name) {joins(:channels).where(channels: {name: name})}
 
     after_create :create_notifications
+    after_destroy :destroy_notifications
 
     private 
 
@@ -38,5 +39,9 @@ class Answer < ApplicationRecord
             Notification.create(recipient: assignment.assigner, actor: self.author, target: self, origin: self )
             # assignment.destroy
         end
+    end
+    
+    def destroy_notifications
+        Notification.where(target: self).destroy_all
     end
 end
