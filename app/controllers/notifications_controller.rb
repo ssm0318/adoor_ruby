@@ -94,6 +94,8 @@ class NotificationsController < ApplicationController
                     redirect_to question_path(origin_id)
                 else
                 end
+            when 'CustomQuestion'
+                redirect_to custom_question_path(origin_id)
             when 'Assignment'
                 redirect_to new_answer_path(origin_id)
             when 'Answer'

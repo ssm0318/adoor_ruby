@@ -29,9 +29,9 @@ class CustomQuestionsController < ApplicationController
 
     def repost
         if params[:repost_message]
-            @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, reposted: true, repost_message: params[:repost_message])
+            @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, reposted: true, repost_message: params[:repost_message], ancestor_id: params[:id])
         else
-            @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, reposted: true)
+            @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, reposted: true, ancestor_id: params[:id])
         end
             # if !@custom_question.tag_string.nil?
         #     tag_array = @custom_question.tag_string.gsub("\r\n", '\n').split('\n')

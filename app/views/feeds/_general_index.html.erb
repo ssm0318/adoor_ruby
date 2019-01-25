@@ -17,7 +17,8 @@
         <div class="prism-box__footer">
             <%= render 'feeds/feed_footer', target: feed %>
             <% if (feed.is_a? CustomQuestion) && (feed.author != current_user) %>
-                <%= render 'custom_questions/repost', parent_id: feed.id %>
+                <% ancestor_id = feed.ancestor_id == nil ? feed.id : feed.ancestor_id %>
+                <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
             <% end %>
         </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
         <div class="prism-box__comment">

@@ -6,6 +6,7 @@ class CreateCustomQuestions < ActiveRecord::Migration[5.1]
       t.boolean     :reposted, default: false
       t.string      :tag_string
       t.string      :repost_message
+      t.integer     :ancestor_id
 
       t.timestamps
     end

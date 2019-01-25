@@ -8,6 +8,9 @@ class CustomQuestion < ApplicationRecord
     has_many   :drawers, dependent: :destroy, as: :target
     has_and_belongs_to_many :tags, dependent: :destroy, as: :target
 
+    after_create :create_notifications
+    after_destroy :destroy_notifications
+
     scope :anonymous, -> (id) { where.not(author: User.find(id).friends).where.not(author: User.find(id)) }
     scope :named, -> (id) { where(author: User.find(id).friends).or(where(author:User.find(id))) }
 
@@ -21,4 +24,36 @@ class CustomQuestion < ApplicationRecord
     scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
     scope :channel_name, -> (name) {joins(:channels).where(channels: {name: name})}
 
+    private
+    def create_notifications
+        if self.ancestor_id != nil
+            if self.author_id != self.ancestor_id
+                noti_hash = {recipient_id: self.ancestor_id, origin: CustomQuestion.find(ancestor_id), action: "repost"}
+                if !Notification.where(noti_hash).empty?
+                    Notification.where(noti_hash).each do |n|
+                        n.invisible = true
+                        n.save(touch: false)
+                    end
+                end
+                Notification.create(recipient_id: self.ancestor_id, origin: CustomQuestion.find(ancestor_id), action: "repost", target: self, actor: self.author)
+            end
+        end
+    end
+
+    def destroy_notifications
+        if self.ancestor_id != nil
+            if self.author_id != self.ancestor_id
+                noti_hash = {recipient_id: self.ancestor_id, origin: CustomQuestion.find(ancestor_id), action: "repost"}
+                if Notification.where(noti_hash) > 1
+                    n = Notification.where(noti_hash)[-2]
+                    n.invisible = false
+                    if Notification.where(target: self).first.read_at != nil && n.read_at == nil
+                        n.read_at = self.read_at
+                    end
+                    n.save(touch: false)
+                end
+                Notification.where(target: self).destroy_all
+            end
+        end
+    end
 end

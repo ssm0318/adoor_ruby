@@ -6,9 +6,11 @@
     <% end %>
 <% end %>
 <div class="noti-content" style="display: none;">
-    <div class="noti-header">
-        <%= link_to "전체 읽음 표시", notification_read_all_path, class: "noti-read-text hover-orange" %>
-    </div>
+    <% if noties.size > 0 %>
+        <div class="noti-header">
+            <%= link_to "전체 읽음 표시", notification_read_all_path, class: "noti-read-text hover-orange" %>
+        </div>
+    <% end %>
     <% if user_signed_in? %>
         <% noties.each do |noti| %>
             <% user = User.find(noti.actor_id)%>
@@ -21,7 +23,7 @@
             <% end %>
 
                 <div class="noti-image">
-                    <% if noti.target_type == 'Drawer' || (noti.action? && noti.action.start_with?("anonymous")) %>
+                    <% if noti.target_type == 'Drawer' || noti.target_type == 'CustomQuestion' || (noti.action? && noti.action.start_with?("anonymous")) %>
                         <% color = user.id + noti.target.id %>
                         <% r = color * color *color % 256 %>
                         <% g = (r * color) % 256 %>
@@ -116,6 +118,13 @@
                             당신의 글 <%= message %>이 누군가의 서랍장에 담겼습니다.
                         <% else %>
                             <%= noti.origin.drawers.size %>명이 당신의 글 <%= message %>을 서랍장에 담았습니다.
+                        <% end %>
+                    <% when 'CustomQuestion' %>
+                        <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
+                        <% if CustomQuestion.where(ancestor_id: noti.origin.id).size == 1 %>
+                            누군가가 당신의 질문 <%= message %>을 리포스팅했습니다.
+                        <% else %>
+                            <%= CustomQuestion.where(ancestor_id: noti.origin.id).size %>명이 당신의 질문 <%= message %>을 리포스팅했습니다.
                         <% end %>
                     <% when 'Assignment' %>
                         <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
