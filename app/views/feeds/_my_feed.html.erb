@@ -12,7 +12,7 @@
         <a class="feed-edit post-edit hover-orange" data-url='<%=edit_custom_question_path(feed.id)%>'>수정</a>
         <span class="btn-feed-delete hover-orange hover-pointer" data-url="<%=custom_question_path(feed.id)%>">삭제</span>
     <% end %>
-    <span class="feed-channels">공개범위: 
+    <span class="feed-channels">공개그룹: 
         <% feed.channels.each do |c| %>
             <%= c.name %>
         <% end %>
