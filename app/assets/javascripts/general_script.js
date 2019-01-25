@@ -87,6 +87,8 @@ $(document).on('turbolinks:load', function()  {
                 <form class="prism-form-general reply" action="/replies" accept-charset="UTF-8" method="post">
                   <input name="utf8" type="hidden" value="✓">
                   <input type="hidden" name="id" id="id" value="${data.id}">
+                  <input type="hidden" name="anonymous" value="true">
+                  <input type="hidden" name="secret" value="false">
                   <input type="text" name="content" id="content" required="required" class="prism-form__input">
                   <button name="button" type="submit" class="prism-form__button">저장</button>
                   <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
@@ -96,7 +98,7 @@ $(document).on('turbolinks:load', function()  {
 
             var btn_like = getButtonLike(data.like_url, data.like_changed_url)
             html.find(".comment-content").append(btn_like)
-            form.parent().find(".anonymous-comments-div").append(html)
+            form.parent().find(".anonymous-comments").append(html)
 
             ///////// 동적으로 삽입한 form에 다시 event binding 해줌. 하나만 선택해야됨.
             like_ajax(btn_like)
@@ -119,6 +121,7 @@ $(document).on('turbolinks:load', function()  {
 
                   like_ajax(new_btn_like)
                   delete_ajax(new_html.find(".btn-comment-delete"))
+                  new_html.find("time.timeago").timeago()
                   new_form.find(".prism-form__input").val('')
                 },
                 error: function(data) {
