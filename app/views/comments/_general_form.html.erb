@@ -17,19 +17,36 @@
                         <% else %>
                             <%= render partial: "replies/friends", locals: {r: r} %>
                         <% end %>
-                    <% end %> 
+                        
+                        <% c.replies.each do |r|%>
+                            <% if r.author_id != current_user.id %>
+                                <%= render partial: "replies/general", locals: {feed_id: feed.id, r: r}%>
+                            <% else %>
+                                <%= render partial: "replies/friends", locals: {r: r} %>
+                            <% end %>
+                        <% end %> 
+                    </div>
+                    <!-- FIXME: 버그_ 댓글 쓰고 그 댓글에 바로 대댓글 쓰면 그거 안써짐 => FIXED(수) -->
+                    <%= form_tag replies_path, class: "prism-form-general reply" do %>
+                        <%= hidden_field_tag "id", c.id %>
+                        <%= hidden_field_tag "anonymous", "true" %>
+                        <%= hidden_field_tag "secret", "false" %>  <!-- 이건 디폴트 값. 익명 댓글은 secret 무조건 false -->
+                        <%= text_field_tag "content", nil, required: true, class: "prism-form__input", autocomplete: "off" %>
+                        <%= button_tag "저장", class: "prism-form__button" %>
+                        <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
+                    <% end %>
                 </div>
-                <!-- FIXME: 버그_ 댓글 쓰고 그 댓글에 바로 대댓글 쓰면 그거 안써짐 => FIXED(수) -->
-                <%= form_tag replies_path, class: "prism-form-general reply" do %>
-                    <%= hidden_field_tag "id", c.id %>
-                    <%= hidden_field_tag "anonymous", "true" %>
-                    <%= hidden_field_tag "secret", "false" %>  <!-- 이건 디폴트 값. 익명 댓글은 secret 무조건 false -->
-                    <%= text_field_tag "content", nil, required: true, class: "prism-form__input" %>
-                    <%= button_tag "저장", class: "prism-form__button" %>
-                    <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
-                <% end %>
-            </div>
-            <%# TOOD: action 설정 %>
+                <%# TOOD: action 설정 %>
+            <% end %>
+        </div>
+        <%= form_tag comments_path, class: "prism-form-general comment" do %>
+            <%= hidden_field_tag "target_type", feed.class.to_s %>
+            <%= hidden_field_tag "target_id", feed.id %>
+            <%= hidden_field_tag "anonymous", "true" %>
+            <%= hidden_field_tag "secret", "false" %>  <!-- 이건 디폴트 값. 익명 대댓글은 secret 무조건 false -->
+            <%= text_field_tag "content", nil, required: true, class: "prism-form__input", autocomplete: "off" %>
+            <%= button_tag "저장", class: "prism-form__button" %>
+            <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
         <% end %>
     </div>
     <%= form_tag comments_path, class: "prism-form-general comment" do %>

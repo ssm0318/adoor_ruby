@@ -3,7 +3,7 @@
     <div class="prism-box-new-post">
         <div class="prism-box__content">
             <%= form_tag(announcements_path) do %>
-                <%= text_field_tag :title, nil, required: true, placeholder: "제목", "data-enable-grammarly": "false" %>
+                <%= text_field_tag :title, nil, required: true, placeholder: "제목", "data-enable-grammarly": "false", autocomplete: "off" %>
                 <%= text_area_tag :content, nil, required: true, class: "new-answer-field",  placeholder: "공지 쓰기", "data-enable-grammarly": "false" %>
                 <%= button_tag "저장", class: "answer-button"%>
             <% end %>

@@ -21,7 +21,7 @@
             </div>
             <button id="btn-channel-add">+</button>
             <%= form_tag '/channels/-1', :id => "name-create-form" do %>
-                <%= text_field_tag "name", nil, required: true, :id => "name-create-input", :maxlength => 15 %>
+                <%= text_field_tag "name", nil, required: true, :id => "name-create-input", :maxlength => 15, autocomplete: "off" %>
                 <%#= button_tag "완료", :id => "name-create-btn" %>
             <% end %>
         </div>
@@ -33,7 +33,7 @@
             <div id="channel-name-div">
                 <div id="channel-name">전체</div>
                 <%= form_tag '/channels/-1', :id => "name-edit-form" do %>
-                    <%= text_field_tag "name", nil, required: true, :value => '전체', :id => "name-edit-input" %>
+                    <%= text_field_tag "name", nil, required: true, :value => '전체', :id => "name-edit-input", autocomplete: "off" %>
                     <%= button_tag "저장", :id => "name-edit-btn" %>
                 <% end %>
             </div>
