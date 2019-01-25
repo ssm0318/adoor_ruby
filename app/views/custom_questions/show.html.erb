@@ -9,6 +9,9 @@
             <%= render partial: "./user_profile_general", locals: {user_id: custom_question.author_id, feed_id: custom_question.id} %>
         <%else %>
             <%= render partial: "./user_profile", locals: {user: custom_question.author} %>
+            <% if current_user.id == custom_question.author.id %>
+                <%= render 'feeds/delete_or_edit', feed: custom_question %>
+            <% end %>
         <% end %>
         <br/>
 
@@ -20,9 +23,8 @@
         <div class = "date time"><%= time_tag custom_question.created_at, class: "timeago" %></div>
         <br>
     </div>
-    <div class="prism-box__footer" style="padding-bottom: 10px;">
-      
-        <%= render 'feeds/my_feed', feed: custom_question %>
+    <div class="prism-box__footer" style="padding-bottom: 10px;">  
+        <%#= render 'feeds/my_feed', feed: custom_question %>
         <%= render 'likes/default', target: custom_question, like_btn_class: "btn-feed-like" %>
         <%= render 'drawers/default', target: custom_question %>
         <br>

@@ -6,7 +6,10 @@
     <% @feeds.each do |feed| %> 
         <div class="prism-box <%=feed.id%>">
             <div class="prism-box__header">
-                <%= render partial: "./user_profile", locals: {user: feed.author} %><br/>
+                <%= render partial: "./user_profile", locals: {user: feed.author} %>
+                <% if current_user.id == feed.author.id %>
+                    <%= render 'feeds/delete_or_edit', feed: feed %>
+                <% end %>
             </div>
             <div class="prism-box__content">
                 <br>
@@ -23,7 +26,7 @@
                 <br>
             </div>
             <div class="prism-box__footer" style="padding-bottom: 10px;">
-                <%= render 'feeds/my_feed', feed: feed %>
+                <%#= render 'feeds/my_feed', feed: feed %>
                 <%= render 'likes/default', target: feed, like_btn_class: "btn-feed-like" %>
                 <%= render 'drawers/default', target: feed %>
                 <% if (feed.is_a? CustomQuestion) && (feed.author != current_user) %>

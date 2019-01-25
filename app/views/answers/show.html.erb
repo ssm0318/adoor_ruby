@@ -7,8 +7,11 @@
     <div class="prism-box__header">
         <% if anonymous %>
             <%= render partial: "./user_profile_general", locals: {user_id: answer.author_id, feed_id: answer.id} %>
-        <%else %>
+        <% else %>
             <%= render partial: "./user_profile", locals: {user: answer.author} %>
+            <% if current_user.id == answer.author.id %>
+                <%= render 'feeds/delete_or_edit', feed: answer %>
+            <% end %>
         <% end %>
         <br/>
 
@@ -22,9 +25,12 @@
         <br>
     </div>
     <div class="prism-box__footer" style="padding-bottom: 10px;">
-        <%= render 'feeds/my_feed', feed: answer %>
+        <%#= render 'feeds/my_feed', feed: answer %>
         <%= render 'likes/default', target: answer, target_type: "Answer", like_btn_class: "btn-feed-like" %>
-        <%= render 'drawers/default', target: answer, target_type: "Answer"%>
+        <span class="num-of-reaction"><%= Like.where(target: answer).count() %></span>
+        <%= render 'drawers/default', target: answer, target_type: "Answer" %>
+        <span class="num-of-reaction"><%= Drawer.where(target: answer).count() %></span>
+        
         <br>
     </div>
     <div class="prism-box__comment">

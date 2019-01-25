@@ -1,7 +1,10 @@
 <% feeds.each do |feed| %>
     <div class="prism-box <%=feed.id%>">
         <div class="prism-box__header">
-        <%= render partial: "./user_profile", locals: {user: feed.author} %>
+            <%= render partial: "./user_profile", locals: {user: feed.author} %>
+            <% if current_user.id == feed.author.id %>
+                <%= render 'feeds/delete_or_edit', feed: feed %>
+            <% end %>
         </div>
         <div class="prism-box__content"><br>
             <% if feed.is_a? Answer %>
@@ -22,12 +25,12 @@
         </div>
         <div class="prism-box__footer" style="padding-bottom: 10px;">
             <%= render 'likes/default', target: feed, like_btn_class: "btn-feed-like" %>
+            <%= render 'likes/num_of_likes', target: feed %>
             <%= render 'drawers/default', target: feed %>
+            <%= render 'drawers/num_of_drawers', target: feed %>
             <% if (feed.is_a? CustomQuestion) && (feed.author != current_user) %>
                 <%= render 'custom_questions/repost', parent_id: feed.id %>
             <% end %>
-            <%= render 'likes/number_of_likes', feed: feed %> 
-            <%= render 'feeds/my_feed', feed: feed %> 
             <br> 
         </div>
         <div class="prism-box__comment">
