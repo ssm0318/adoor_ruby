@@ -20,6 +20,9 @@
         color: white;
         font-size: 20px;
         border: none;
+        &:hover {
+            color: #e8e8e8;
+        }
     }
 
     #edit-box {

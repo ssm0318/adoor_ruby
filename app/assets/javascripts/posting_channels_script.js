@@ -4,7 +4,7 @@ function check_channels(element) {
     checked = $(this).siblings(".channels").find("input[type=checkbox]:checked").length;
   
     if(!checked) {
-      alert("공개 범위는 하나 이상 선택해야 합니다!.");
+      alert("공개그룹은 하나 이상 선택해야 합니다!.");
       return false;
     }
   
