@@ -6,11 +6,13 @@
     <% end %>
 <% end %>
 <div class="noti-content" style="display: none;">
-    <% if noties.size > 0 %>
-        <div class="noti-header">
+    <div class="noti-header">
+        <% if noties.size > 0 %>
             <%= link_to "전체 읽음 표시", notification_read_all_path, class: "noti-read-text hover-orange" %>
-        </div>
-    <% end %>
+        <% else %>
+            알림이 없습니다.
+        <% end %>
+    </div>
     <% if user_signed_in? %>
         <% noties.each do |noti| %>
             <% user = User.find(noti.actor_id)%>
