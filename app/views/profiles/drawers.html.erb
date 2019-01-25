@@ -31,7 +31,7 @@
                     <% end %>
                     <% if d.target.is_a? CustomQuestion %>
                         <strong>질문</strong>
-                        <% if d.target.reposted %>
+                        <% if d.target.ancestor_id != nil %>
                             reposted 
                             <% if d.target.repost_message? %>
                                 with message: <%= d.target.repost_message %><br>

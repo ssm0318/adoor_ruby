@@ -79,7 +79,6 @@ ActiveRecord::Schema.define(version: 20190123033448) do
   create_table "custom_questions", force: :cascade do |t|
     t.integer "author_id", null: false
     t.string "content", null: false
-    t.boolean "reposted", default: false
     t.string "tag_string"
     t.string "repost_message"
     t.integer "ancestor_id"

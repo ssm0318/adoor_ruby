@@ -27,23 +27,25 @@ class CustomQuestion < ApplicationRecord
     private
     def create_notifications
         if self.ancestor_id != nil
-            if self.author_id != self.ancestor_id
-                noti_hash = {recipient_id: self.ancestor_id, origin: CustomQuestion.find(ancestor_id), action: "repost"}
+            ancestor_author_id = CustomQuestion.find(self.ancestor_id).author_id
+            if self.author_id != ancestor_author_id && ancestor_author_id != 1
+                noti_hash = {recipient_id: ancestor_author_id, origin: CustomQuestion.find(ancestor_id), action: "repost"}
                 if !Notification.where(noti_hash).empty?
                     Notification.where(noti_hash).each do |n|
                         n.invisible = true
                         n.save(touch: false)
                     end
                 end
-                Notification.create(recipient_id: self.ancestor_id, origin: CustomQuestion.find(ancestor_id), action: "repost", target: self, actor: self.author)
+                Notification.create(recipient_id: ancestor_author_id, origin: CustomQuestion.find(ancestor_id), action: "repost", target: self, actor: self.author)
             end
         end
     end
 
     def destroy_notifications
         if self.ancestor_id != nil
-            if self.author_id != self.ancestor_id
-                noti_hash = {recipient_id: self.ancestor_id, origin: CustomQuestion.find(ancestor_id), action: "repost"}
+            ancestor_author_id = CustomQuestion.find(self.ancestor_id).author_id
+            if self.author_id != ancestor_author_id && ancestor_author_id != 1
+                noti_hash = {recipient_id: ancestor_author_id, origin: CustomQuestion.find(ancestor_id), action: "repost"}
                 if Notification.where(noti_hash).size > 1
                     n = Notification.where(noti_hash)[-2]
                     n.invisible = false
@@ -53,7 +55,7 @@ class CustomQuestion < ApplicationRecord
                     n.save(touch: false)
                 end
                 Notification.where(target: self).destroy_all
-            end
+            end      
         end
     end
 end

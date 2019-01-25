@@ -12,7 +12,7 @@
             <% end %>
             <% if feed.is_a? CustomQuestion %>
                 <strong>질문</strong>
-                <% if feed.reposted %>
+                <% if feed.ancestor_id != nil %>
                     reposted 
                     <% if feed.repost_message? %>
                         with message: <%= feed.repost_message %><br>

@@ -18,7 +18,7 @@
                     <%= link_to feed.question.content, question_path(feed.question.id), class: "question" %><br><br>
                 <% end %>
                 <% if feed.is_a? CustomQuestion %>
-                    <% if feed.reposted %>reposted<% end %>
+                    <% if feed.ancestor_id != nil %>reposted<% end %>
                     <strong>질문<strong><br>
                 <% end %>
                 <div class="answer"><%= feed.content %></div>
