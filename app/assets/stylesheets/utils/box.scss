@@ -251,6 +251,7 @@
                 background-color: white;
                 width: 30%;
                 min-width: 100px;
+                max-height: 200px;
                 z-index: 1;
                 padding: 10px;
                 padding-top: 15px;
@@ -259,6 +260,7 @@
                 position: absolute;
                 top: 30px;
                 box-shadow: 2px 2px 30px #dddddd;
+                overflow-y: scroll;
 
                 input {
                     padding: 0;
@@ -358,6 +360,7 @@
             background-color: white;
             width: 15%;
             min-width: 100px;
+            max-height: 200px;
             z-index: 2;
             padding: 10px;
             padding-top: 15px;
@@ -367,6 +370,7 @@
             left: 10%;
             top: 200px;
             box-shadow: 2px 2px 30px #888888;
+            overflow-y: scroll;
 
             input {
                 padding: 0;
