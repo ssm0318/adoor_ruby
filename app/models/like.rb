@@ -9,78 +9,87 @@ class Like < ApplicationRecord
 
     def create_notifications
         origin = self.target
-
         if self.target.author != self.user
+            noti_hash = {recipient: self.target.author, origin: origin}
+            create_noti_hash = {recipient: self.target.author, actor: self.user, target: self, origin: origin}
             # 친구의 좋아요
             if self.target.author.friends.include? self.user
                 # 글에 좋아요
-                if self.target_type == 'Post' || self.target_type == 'Answer'
-                    noti_hash = {recipient: self.target.author, action: 'friend_like_article', origin: origin}
-                    if Notification.where(noti_hash).unread.empty?
-                        Notification.create(recipient: self.target.author, actor: self.user, target: self, action: 'friend_like_article', origin: origin )
-                    else
-                        n = Notification.where(noti_hash).first
-                        n.target = self
-                        n.save
-                    end
-                # 댓글에 좋아요
-                elsif self.target_type == 'Comment'
-                    noti_hash = {recipient: self.target.author, action: 'friend_like_comment', origin: origin}
-                    if Notification.where(noti_hash).unread.empty?
-                        Notification.create(recipient: self.target.author, actor: self.user, target: self, action: 'friend_like_comment', origin: origin )
-                    else
-                        n = Notification.where(noti_hash).first
-                        n.target = self
-                        n.save
-                    end
-                # 대댓글에 좋아요
-                elsif self.target_type == 'Reply'
-                    noti_hash = {recipient: self.target.author, action: 'friend_like_reply', origin: origin }
-                    if Notification.where(noti_hash).unread.empty?
-                        Notification.create(recipient: self.target.author, actor: self.user, target: self, action: 'friend_like_reply', origin: origin)
-                    else
-                        n = Notification.where(noti_hash).first
-                        n.target = self
-                        n.save
-                    end
+                case self.target_type
+                when 'Post', 'Answer'
+                    noti_hash[:action] = 'friend_like_article'
+                    create_noti_hash[:action] = 'friend_like_article'
+                when 'Comment'
+                    noti_hash[:action] =  'friend_like_comment'
+                    create_noti_hash[:action] = 'friend_like_comment'
+                when 'Reply'
+                    noti_hash[:action] =  'friend_like_reply'
+                    create_noti_hash[:action] = 'friend_like_reply'
+                else
                 end
             # 익명의 좋아요
             else
                 # 글에 좋아요
-                if self.target_type == 'Post' || self.target_type == 'Answer'
-                    noti_hash = {recipient: self.target.author, action: 'anonymous_like_article', origin: origin }
-                    if Notification.where(noti_hash).unread.empty?
-                        Notification.create(recipient: self.target.author, actor: self.user, target: self, action: 'anonymous_like_article', origin: origin)
-                    else
-                        n = Notification.where(noti_hash).first
-                        n.target = self
-                        n.save
-                    end
-                elsif self.target_type == 'Comment'
-                    noti_hash = {recipient: self.target.author, action: 'anonymous_like_comment', origin: origin }
-                    if Notification.where(noti_hash).unread.empty?
-                        Notification.create(recipient: self.target.author, actor: self.user, target: self, action: 'anonymous_like_comment', origin: origin)
-                    else
-                        n = Notification.where(noti_hash).first
-                        n.target = self
-                        n.save
-                    end
-                elsif self.target_type == 'Reply'
-                    noti_hash = {recipient: self.target.author, action: 'anonymous_like_reply', origin: origin }
-                    if Notification.where(noti_hash).unread.empty?
-                        Notification.create(recipient: self.target.author, actor: self.user, target: self, action: 'anonymous_like_reply', origin: origin)
-                    else
-                        n = Notification.where(noti_hash).first
-                        n.target = self
-                        n.save
-                    end
+                case self.target_type
+                when 'Post', 'Answer'
+                    noti_hash[:action] = 'anonymous_like_article'
+                    create_noti_hash[:action] = 'anonymous_like_article'
+                when 'Comment'
+                    noti_hash[:action] = 'anonymous_like_comment'
+                    create_noti_hash[:action] = 'anonymous_like_comment'
+                when 'Reply'
+                    noti_hash[:action] = 'anonymous_like_reply'
+                    create_noti_hash[:action] = 'anonymous_like_reply'
+                else
                 end
-
             end
+            if !Notification.where(noti_hash).empty?
+                Notification.where(noti_hash).each do |n|
+                    n.invisible = true
+                    n.save
+                end
+            end
+            Notification.create(create_noti_hash)
         end 
     end
     
     def destroy_notifications
+        origin = self.target
+        if self.target.author != self.user
+            noti_hash = {recipient: self.target.author, origin: origin}
+            # 친구의 좋아요
+            if self.target.author.friends.include? self.user
+                case self.target_type
+                when 'Post', 'Answer'
+                    noti_hash[:action] = 'friend_like_article'
+                when 'Comment'
+                    noti_hash[:action] = 'friend_like_comment'
+                when 'Reply'
+                    noti_hash[:action] = 'friend_like_reply'
+                else
+                end
+            # 익명의 좋아요
+            else
+                # 글에 좋아요
+                case self.target_type
+                when 'Post', 'Answer'
+                    noti_hash[:action] = 'anonymous_like_article'
+                when 'Comment'
+                    noti_hash[:action] = 'anonymous_like_comment'
+                when 'Reply'
+                    noti_hash[:action] = 'anonymous_like_reply'
+                else
+                end 
+            end
+            if Notification.where(noti_hash).size > 1
+                n = Notification.where(noti_hash)[-2]
+                n.invisible = false
+                if self.read_at != nil && n.read_at == nil
+                    n.read_at = self.read_at
+                end
+                n.save
+            end
+        end
         Notification.where(target: self).destroy_all
     end
 end

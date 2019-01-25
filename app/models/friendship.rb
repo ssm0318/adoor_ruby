@@ -9,7 +9,7 @@ class Friendship < ApplicationRecord
     private
 
     def create_notifications
-        Notification.create(recipient: self.friend, actor: self.user, target: self, origin: self.user)
+        Notification.create(recipient: self.friend, actor: self.user, target: self, origin: self.user, action: "friendship")
     end
 
     def destroy_notifications

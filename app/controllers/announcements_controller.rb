@@ -27,7 +27,7 @@ class AnnouncementsController < ApplicationController
         end
 
         User.all.each do |u|
-            Notification.create(recipient: u, actor: User.find(1), target: @announcement, origin: @announcement)
+            Notification.create(recipient: u, actor: User.find(1), target: @announcement, origin: @announcement, action: "announcement")
         end
 
         redirect_to announcement_admin_index_path

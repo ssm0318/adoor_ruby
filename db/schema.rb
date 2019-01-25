@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20190123033448) do
     t.integer "origin_id"
     t.string "origin_type"
     t.string "action"
+    t.boolean "invisible", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -208,6 +209,7 @@ ActiveRecord::Schema.define(version: 20190123033448) do
     t.text "content", null: false
     t.boolean "secret", default: false, null: false
     t.boolean "anonymous", null: false
+    t.integer "target_author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_replies_on_author_id"

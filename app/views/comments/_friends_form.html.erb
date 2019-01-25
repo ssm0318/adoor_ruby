@@ -18,7 +18,7 @@
                                 <%= hidden_field_tag "anonymous", "false" %>
                                 <%= text_field_tag "content", nil, required: true, class: "prism-form__input" %>
                                 <% if c.secret %>
-                                     <%= hidden_field_tag "secret", "true" %>
+                                    <%= hidden_field_tag "secret", "true" %>
                                 <% else %>
                                     <label>
                                         <%= check_box_tag "secret", "true", false, class: "" %>

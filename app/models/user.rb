@@ -95,7 +95,7 @@ class User < ApplicationRecord
     # 나만보기와 익명피드는 아무도 friend로 들어갈 수 없는 채널임.
     # 이것은 백이 아니라 프론트에서 막을 것임 (콘솔에서는 가능하지만, UI상 그렇게 할 수 있는 버튼이 없기 때문에 실제 서비스에서는 불가능할 예정)
     Channel.create(name: "익명피드", user: self)
-    Channel.create(name: "나만보기", user: self)
+    Channel.create(name: "나", user: self)
     Channel.create(name: "일촌", user: self)
     Channel.create(name: "이촌", user: self)
     Channel.create(name: "삼촌", user: self)

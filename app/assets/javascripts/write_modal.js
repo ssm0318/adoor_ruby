@@ -16,6 +16,7 @@ $(document).on('turbolinks:load', function()  {
                 html.find(".new_answer").prepend(`<input value="true" type="hidden" name="from_feed">`)
             }
             check_channels($(".answer-button"))
+            toggle_channels_dropdown(html.find(".channels-dropdown"))
             $("#edit-background").show()
             $("body").css('overflow', 'hidden')
             textarea_init($(html.find('textarea')), $("#edit-background"))
