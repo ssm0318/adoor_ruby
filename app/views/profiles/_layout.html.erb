@@ -24,10 +24,6 @@
                         <%= link_to "친구요청", friend_request_path(user.id), method: :post, id: "friends-btn" %>
                     <% end %>
                 <% else %>
-                    <% channels = Friendship.where(user: current_user, friend: user).first.channels %>
-                    <% channels.each do |c| %>
-                        <%= c.name %>
-                    <% end %>
                     <%= link_to "친구 끊기", add_friend_path(user.id), method: :post, id: "friends-btn" %>
                 <% end %>
             <% end %>
