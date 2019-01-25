@@ -9,8 +9,29 @@
                         <div class="comment-replies">
                             <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
 
+<<<<<<< HEAD
                             <% c.replies.each do |r| %>
                                 <%= render partial: "replies/friends", locals: {r: r} %>
+=======
+                                <% c.replies.each do |r| %>
+                                    <%= render partial: "replies/friends", locals: {r: r} %>
+                                <% end %>
+                            </div>
+                            <%= form_tag replies_path, class: "prism-form-friend reply" do %>
+                                <%= hidden_field_tag "id", c.id %>
+                                <%= hidden_field_tag "anonymous", "false" %>
+                                <%= text_field_tag "content", nil, required: true, class: "prism-form__input" %>
+                                <% if c.secret %>
+                                     <%= hidden_field_tag "secret", "true" %>
+                                <% else %>
+                                    <label>
+                                        <%= check_box_tag "secret", "true", false, class: "" %>
+                                        숨기기
+                                    </label>
+                                <% end %>
+                                <%= button_tag "저장", class: "prism-form__button" %>
+                                <span class="comment-info-alert">숨기기 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
+>>>>>>> edc5198358005fe7f3e8d9e76dd19c4b661b22d5
                             <% end %>
                         </div>
                         <%= form_tag replies_path, class: "prism-form-friend reply" do %>

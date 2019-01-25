@@ -1,8 +1,9 @@
+var lock_icon = '<img src="/assets/icons/lock-icon.png" class="lock-icon" alt="Lock icon")>'
+
 $(document).on('turbolinks:load', function()  {
 
     // TODO : 숨김댓글 체크한채로 보내면 숨김댓글이라고 뜨기!
     $(".prism-form-friend").submit( function(e) {
-  
         e.preventDefault();
   
         var form = $(this)
@@ -11,6 +12,8 @@ $(document).on('turbolinks:load', function()  {
           url: form.attr('action'),
           data: form.serialize(),
           success: function(data) {
+            
+            let secret = form.find("#secret").is(":checked") ? true : false
             
             if(form.hasClass("comment")) {
               var new_url = "/comments/" + data.id;
@@ -47,17 +50,21 @@ $(document).on('turbolinks:load', function()  {
                     <input name="utf8" type="hidden" value="✓">
                     <input type="hidden" name="id" id="id" value="${data.id}">
                     <input type="hidden" name="anonymous" value="true">
-                    <input type="hidden" name="secret" value="false">
                     <input type="text" name="content" id="content" required="required" class="prism-form__input">
-                    <label>
-                        <input type="checkbox" name="secret" id="secret" value="true" class="">
-                        숨기기
-                    </label>
                     <button name="button" type="submit" class="prism-form__button">저장</button>
                     <span class="comment-info-alert">숨기기 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
                   </form>
                 </div>
               `)
+
+              if(secret) {
+                //TODO (숨김댓글)추가
+                html.find(".content").before($(lock_icon))
+                html.find("form").find("#content").after('<input type="hidden" name="secret" value="true" id="secret">')
+              }
+              else {
+                html.find("form").find("#content").after('<label><input type="checkbox" name="secret" id="secret" value="true">숨기기</label>')
+              }
 
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
               html.find(".comment-content").append(btn_like)
@@ -85,7 +92,9 @@ $(document).on('turbolinks:load', function()  {
                   url: new_form.attr('action'),
                   data: new_form.serialize(),
                   success: function(data) {
-                    var new_html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id)
+
+                    var new_html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, 
+                        data.content, data.created_at, data.id, secret || new_form.find("#secret").is(":checked"))
                     var new_btn_like = getButtonLike(data.like_url, data.like_changed_url)
                     new_html.find(".comment-content").append(new_btn_like)
                     new_form.parent().find(".comment-replies").append(new_html);
@@ -104,7 +113,7 @@ $(document).on('turbolinks:load', function()  {
             }
             else {
               console.log("here");
-              var html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id)
+              var html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, secret)
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
               html.find(".comment-content").append(btn_like)
               form.parent().find(".comment-replies").append(html)
