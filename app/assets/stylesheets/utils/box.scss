@@ -98,7 +98,7 @@
         font-family: 'Nanum Gothic', sans-serif;
         vertical-align: bottom;
         width: 100%;
-        text-align: left;
+        text-align: right;
         font-size: 12px;
         padding-top: 10px;
         padding-bottom: 5px;
@@ -107,17 +107,20 @@
         .btn-drawer {
             width: 30px;
             height: auto;
-            float: right;
-            padding-bottom: 10px;
             cursor: pointer;
+            vertical-align: -2px;
+
         }
 
         .btn-feed-like {
             width: 26px;
             height: auto;
-            float: right;
-            padding-top: 2px;
             cursor: pointer;
+        }
+
+        .num-of-like {
+            text-align: right;
+
         }
 
         a {
@@ -131,6 +134,21 @@
             }
 
         }
+    }
+
+    .prism-box__comment {
+        font-family: 'Nanum Gothic', sans-serif;
+        vertical-align: bottom;
+        width: 100%;
+        text-align: left;
+        font-size: 12px;
+        padding-top: 10px;
+        padding-bottom: 5px;
+        position: relative;
+
+        margin-top: 5px; 
+        border-top: 1px solid #d7dae0;
+
     }
 }
 

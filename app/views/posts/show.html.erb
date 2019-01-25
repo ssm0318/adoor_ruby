@@ -27,10 +27,12 @@
         <%= render 'drawers/default', target: post %>
         <br>
     </div>
-    <% if anonymous %>
-        <%= render 'comments/general_form', feed: post %>
-    <% else %>
-        <%= render 'comments/friends_form', feed: post %>
-    <% end %>
+    <div class="prism-box__comment">
+        <% if anonymous %>
+            <%= render 'comments/general_form', feed: post %>
+        <% else %>
+            <%= render 'comments/friends_form', feed: post %>
+        <% end %>
+    </div>
 </div>
 

@@ -27,11 +27,12 @@
         <%= render 'drawers/default', target: answer, target_type: "Answer"%>
         <br>
     </div>
-    
-    <% if anonymous %>
-        <%= render 'comments/general_form', feed: answer %>
-    <%else %>
-        <%= render 'comments/friends_form', feed: answer %>
-    <% end %>
+    <div class="prism-box__comment">
+        <% if anonymous %>
+            <%= render 'comments/general_form', feed: answer %>
+        <%else %>
+            <%= render 'comments/friends_form', feed: answer %>
+        <% end %>
+    </div>
 </div>
 

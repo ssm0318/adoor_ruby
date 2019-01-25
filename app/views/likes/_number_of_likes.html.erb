@@ -1,0 +1,5 @@
+<div class = "num-of-like">
+    <% if current_user.id == feed.author.id %>
+        <span>좋아요 <span class="show-likes"><%= Like.where(target: feed).count() %></span>개 </span>
+    <% end %>
+</div>

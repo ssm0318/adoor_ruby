@@ -31,7 +31,9 @@
                 <% end %>
                 <br>
             </div>
-            <%= render 'comments/friends_form', user: @user, feed: feed %>
+            <div class="prism-box__comment">
+                <%= render 'comments/friends_form', user: @user, feed: feed %>
+            </div>
         </div>
         <% end %>
     <% end %>
