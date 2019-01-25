@@ -11,14 +11,13 @@
                 <%= link_to feed.question.content, question_path(feed.question.id), class: "question", :style => "font-size: 18px;"%><br><br>
             <% end %>
             <% if feed.is_a? CustomQuestion %>
-                질문
+                <strong>질문</strong>
                 <% if feed.reposted %>
                     reposted 
                     <% if feed.repost_message? %>
                         with message: <%= feed.repost_message %><br>
                     <% end %>
                 <% end %><br>
-                
             <% end %>
             <div class="answer"><%= feed.content %></div><br><br>
             <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>

@@ -1,3 +1,4 @@
+<% anonymous = @anonymous%>
 <div class="inner-container">
     <%= render partial: "profiles/layout", locals: {user: @user} %>
     <% @drawers.reverse_each do |d| %>
@@ -24,15 +25,21 @@
                         <%= render partial: "./user_profile_general", locals: {user_id: d.target.author_id, feed_id: d.target.id }%>
                     <% end %>
                 </div>
-                <div class = "prism-box__content">
-                    <br> 
+                <div class = "prism-box__content"><br> 
                     <% if d.target.is_a? Answer %>
                         <%= link_to d.target.question.content, question_path(d.target.question.id), class: "question" %><br><br>
                     <% end %>
-                    <div class = "answer">
-                        <%= d.target.content %>
-                    </div>
-                    <br>
+                    <% if d.target.is_a? CustomQuestion %>
+                        <strong>질문</strong>
+                        <% if d.target.reposted %>
+                            reposted 
+                            <% if d.target.repost_message? %>
+                                with message: <%= d.target.repost_message %><br>
+                            <% end %>
+                        <% end %><br>
+                    <% end %>
+
+                    <div class="answer"><%= d.target.content %></div><br><br>
                     <div class = "date time"><%= time_tag d.target.created_at, class: "timeago" %></div>
                 </div>
                 <div class = "prism-box__footer">
@@ -40,6 +47,13 @@
                         <%= render 'feeds/my_feed_footer', target: d.target %>
                     <% else %>
                         <%= render 'feeds/feed_footer', target: d.target %>
+                    <% end %>
+                </div>
+                <div class="prism-box__comment">
+                    <% if anonymous %>
+                        <%= render 'comments/general_form', feed: d.target %>
+                    <%else %>
+                        <%= render 'comments/friends_form', feed: d.target %>
                     <% end %>
                 </div> 
             </div>
