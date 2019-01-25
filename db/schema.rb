@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20190123033448) do
     t.integer "origin_id"
     t.string "origin_type"
     t.string "action"
+    t.boolean "invisible", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

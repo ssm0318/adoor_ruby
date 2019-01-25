@@ -17,37 +17,49 @@ class Comment < ApplicationRecord
     def create_notifications
         if self.target_type != 'Announcement'
             if self.author != self.target.author
+                noti_hash = {recipient: self.target.author, origin: self.target}
+                create_noti_hash = {recipient: self.target.author, actor: self.author, target: self, origin: self.target}
                 # 익명 댓글인 경우
                 if self.anonymous
-                    noti_hash = {recipient: self.target.author, action: 'anonymous_comment', origin: self.target}
-                    if Notification.where(noti_hash).empty?
-                        Notification.create(recipient: self.target.author, actor: self.author, target: self, action: 'anonymous_comment', origin: self.target)
-                    else
-                        n = Notification.where(noti_hash).first
-                        n.target = self
-                        n.actor = self.author # 필요하지 않지만 일관성을 위해
-                        n.read_at = nil
-                        n.save
-                    end
+                    noti_hash[:action] = 'anonymous_comment'
+                    create_noti_hash[:action] = 'anonymous_comment'
                 # 친구 댓글인 경우
                 else
-                    noti_hash = {recipient: self.target.author, action: 'friend_comment', origin: self.target}
-                    if Notification.where(noti_hash).empty?
-                        Notification.create(recipient: self.target.author, actor: self.author, target: self, action: 'friend_comment', origin: self.target)
-                    # 안읽은 같은 노티가 이미 있는 경우, target만 update해준다 (그러면 updated_at도 update됨)
-                    else
-                        n = Notification.where(noti_hash).first
-                        n.target = self
-                        n.actor = self.author
-                        n.read_at = nil
+                    noti_hash[:action] = 'friend_comment'
+                    create_noti_hash[:action] = 'friend_comment'
+                end
+                if !Notification.where(noti_hash).empty?
+                    Notification.where(noti_hash).each do |n|
+                        n.invisible = true
                         n.save
                     end
                 end
+                Notification.create(create_noti_hash)
             end
         end
     end
 
     def destroy_notifications
+        if self.target_type != 'Announcement'
+            if self.author != self.target.author
+                noti_hash = {recipient: self.target.author, origin: self.target}
+                # 익명 댓글인 경우
+                if self.anonymous
+                    noti_hash[:action] = 'anonymous_comment'
+                # 친구 댓글인 경우
+                else
+                    noti_hash[:action] = 'friend_comment'
+                end
+                if Notification.where(noti_hash).size > 1
+                    n = Notification.where(noti_hash)[-2]
+                    n.invisible = false
+                    if self.read_at != nil && n.read_at == nil
+                        n.read_at = self.read_at
+                    end
+                    n.save
+                end
+            end
+        end
         Notification.where(target: self).destroy_all
     end
 end

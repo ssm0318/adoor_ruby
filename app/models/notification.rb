@@ -20,5 +20,7 @@ class Notification < ApplicationRecord
 
   # notification.unread로 확인하지 않은 노티들을 찾을 수 있음
   scope :unread, -> { where(read_at: nil) }
+  scope :invisible, -> {where(invisible: true)}
+  scope :visible, -> {where(invisible: false)}
   
 end

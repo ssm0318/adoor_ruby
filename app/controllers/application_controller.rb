@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def noties
     if user_signed_in?
-      @noties = Notification.where(recipient_id: current_user.id).order(updated_at: :desc)
+      @noties = Notification.where(recipient_id: current_user.id).visible.order(updated_at: :desc)
     end
   end
 

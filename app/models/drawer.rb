@@ -8,23 +8,36 @@ class Drawer < ApplicationRecord
     private 
 
     def create_notifications
-        if !(self.target_type =='Question')
+        if self.target_type !='Question'
             if self.target.author != self.user
                 noti_hash = {recipient: self.target.author, origin: self.target, action: "drawer"}
-                if Notification.where(noti_hash).empty?
-                    Notification.create(recipient: self.target.author, actor: self.user, target: self, origin: self.target, action: "drawer")
-                else
-                    n = Notification.where(noti_hash).first
-                    n.target = self
-                    n.read_at = nil
-                    n.actor = self.user
-                    n.save
+                if !Notification.where(noti_hash).empty?
+                    Notification.where(noti_hash).each do |n|
+                        n.invisible = true
+                        n.save
+                    end
                 end
+                Notification.create(recipient: self.target.author, actor: self.user, target: self, origin: self.target, action: "drawer")
             end
         end
     end
 
     def destroy_notifications
+        if self.target_type !='Question'
+            if self.target.author != self.user
+                noti_hash = {recipient: self.target.author, origin: self.target, action: "drawer"}
+                if Notification.where(noti_hash).size > 1
+                    n = Notification.where(noti_hash)[-2]
+                    n.invisible = false
+                    if self.read_at != nil && n.read_at == nil
+                        n.read_at = self.read_at
+                    end
+                    n.save
+                end
+            end
+        end
         Notification.where(target: self).destroy_all
     end
 end
+
+
