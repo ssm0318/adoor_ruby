@@ -30,13 +30,6 @@
         cursor: pointer;
     }
 
-        .btn-drawer {
-            width: 30px;
-            height: auto;
-            padding-bottom: 10px;
-            vertical-align: middle;
-        }
-
     .btn-like {
         width: 26px;
         height: auto;
@@ -51,14 +44,35 @@
         font-family: 'Nanum Gothic', sans-serif;
         font-size: 14px;
         padding-bottom: 5px;
+        z-index: 0;
 
-        i {
+        .btn-read-more {
             float: right;
-            color: $prism-box-gray;
+            width: 30px;
+            height: auto;
+
         }
 
         a {
             font-family: 'Nanum Gothic', sans-serif;
+        }
+
+    }
+
+    .edit-or-delete {
+        position: absolute;
+        left: 87%;
+        border-radius: 5px;
+        z-index: 1;
+        background-color: white;
+        border: 0.5px solid #dddddd;
+
+        .edit-or-delete-el {
+            padding: 16px;
+            text-decoration: none;
+            color: black;
+            font-family: "Nanum Gothic", sans-serif;
+            font-size: 13px;
         }
 
     }
@@ -98,27 +112,77 @@
         font-family: 'Nanum Gothic', sans-serif;
         vertical-align: bottom;
         width: 100%;
+        font-size: 12px;
+        position: relative;
+        display: grid;
+        grid-template-columns:  90% 10%;
+        grid-template-rows: 30px 30px;
+
+        .feed-channels {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            display: flex;
+            align-items: center;  
+
+        }
+
+        .likes {
+            text-align: right; 
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+
+        }
+
+        .drawers {
+            text-align: right; 
+            grid-column: 2 / 3;
+            grid-row: 1 / 2; 
+
+        }
+
+        .btn-drawer {
+            width: 30px;
+            height: auto;
+            cursor: pointer;
+            vertical-align: -2px;
+
+        }
+        
+        .btn-feed-like {
+            padding-left: 2px;
+            padding-right: 2px;
+            width: 26px;
+            height: auto;
+            cursor: pointer;
+        }
+
+        .num-of-likes {
+            vertical-align: 8px;
+            font-family: 'Nanum Gothic', sans-serif;
+            color: #F48462;
+
+        }
+
+        .num-of-drawers {
+            vertical-align: 8px;
+            font-family: 'Nanum Gothic', sans-serif;
+            color: #F48462;
+
+        }
+    }
+
+    .prism-box__comment {
+        font-family: 'Nanum Gothic', sans-serif;
+        vertical-align: bottom;
+        width: 100%;
         text-align: left;
         font-size: 12px;
         padding-top: 10px;
         padding-bottom: 5px;
         position: relative;
-
-        .btn-drawer {
-            width: 30px;
-            height: auto;
-            float: right;
-            padding-bottom: 10px;
-            cursor: pointer;
-        }
-
-        .btn-feed-like {
-            width: 26px;
-            height: auto;
-            float: right;
-            padding-top: 2px;
-            cursor: pointer;
-        }
+        margin-top: 5px; 
+        border-top: 1px solid #d7dae0;
+        
 
         a {
             color: black;
@@ -236,6 +300,10 @@
                 margin-right: 3px;
             }
 
+            .channels-dropdown {
+                cursor: pointer;
+            }
+
             .channel-setting-icon {
                 width: 20px;
                 height: auto;
@@ -343,6 +411,10 @@
 
         span {
             margin-right: 3px;
+        }
+
+        .channels-dropdown {
+            cursor: pointer;
         }
 
         .channel-setting-icon {

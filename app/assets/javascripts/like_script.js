@@ -28,10 +28,10 @@ function like_ajax(element) {
                     var el
                     if(like.hasClass("btn-feed-like")) {
                         // 클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
-                        el = like.parent().find(".show-likes")
+                        el = like.parent().find(".num-of-likes")
                     } else {
                         // 클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
-                        el = like.parent().parent().find(".show-likes")
+                        el = like.parent().parent().find(".num-of-likes")
                     }
 
                     let like_num = parseInt(el.text())

@@ -14,7 +14,8 @@
     </div>
 
     <div class = "comment-info">
-        <span> <%= render 'replies/my_replies_menu', r: r %></span>
         <span class="time"><%= time_tag r.created_at, class: "timeago" %></span>
+        <span> <%= render 'replies/my_replies_menu', r: r %></span>
+        <span class="btn-comment">댓글달기</span>
     </div>
 </div>  

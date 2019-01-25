@@ -7,6 +7,10 @@
 
 }
 
+.prism-form-friend.reply, .prism-form-general.reply {
+    display: none;
+}
+
 .prism-form-friend, .prism-form-general {
     .prism-form__input {
         width: calc(100% - 100px);

@@ -1,4 +1,4 @@
-<div class="prism-box__footer" style="margin-top: 5px; border-top: 1px solid #d7dae0;">
+<div class="prism-box__comment">
     <div>
         댓글 <br/><br>
         <br>
@@ -25,7 +25,7 @@
                         <%= hidden_field_tag "id", c.id %>
                         <%= hidden_field_tag "anonymous", "true" %>
                         <%= hidden_field_tag "secret", "false" %>  <!-- 이건 디폴트 값. 익명 댓글은 secret 무조건 false -->
-                        <%= text_field_tag "content", nil, required: true, class: "prism-form__input", autocomplete: "off" %>
+                        <%= text_field_tag "content", nil, required: true, class: "prism-form__input" %>
                         <%= button_tag "저장", class: "prism-form__button" %>
                         <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
                     <% end %>
@@ -38,7 +38,7 @@
             <%= hidden_field_tag "target_id", feed.id %>
             <%= hidden_field_tag "anonymous", "true" %>
             <%= hidden_field_tag "secret", "false" %>  <!-- 이건 디폴트 값. 익명 대댓글은 secret 무조건 false -->
-            <%= text_field_tag "content", nil, required: true, class: "prism-form__input", autocomplete: "off" %>
+            <%= text_field_tag "content", nil, required: true, class: "prism-form__input" %>
             <%= button_tag "저장", class: "prism-form__button" %>
             <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
         <% end %>
