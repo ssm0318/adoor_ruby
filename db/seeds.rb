@@ -244,4 +244,6 @@ elsif Rails.env.production?
     if User.where(email: "adoor.team@gmail.com").empty?
         User.create(email: "adoor.team@gmail.com", password: "adoor2019", username: "관리자")
     end
+    User.find(1).image = Rails.root.join("app/assets/images/logo/final-app-logo.png").open
+    self.save!
 end
