@@ -23,11 +23,12 @@
         <div class = "date time"><%= time_tag custom_question.created_at, class: "timeago" %></div>
         <br>
     </div>
-    <div class="prism-box__footer" style="padding-bottom: 10px;">  
-        <%#= render 'feeds/my_feed', feed: custom_question %>
-        <%= render 'likes/default', target: custom_question, like_btn_class: "btn-feed-like" %>
-        <%= render 'drawers/default', target: custom_question %>
-        <br>
+    <div class="prism-box__footer" >  
+        <% if current_user.id == custom_question.author.id %>
+            <%= render 'feeds/my_feed_footer', target: custom_question %>
+        <% else %>
+            <%= render 'feeds/feed_footer', target: custom_question %>
+        <% end %>
     </div>
     <div class="prism-box__comment">
         <% if anonymous %>

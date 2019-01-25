@@ -1,0 +1,13 @@
+<div class = "likes"> 
+    <%= render 'likes/num_of_likes', target: target %>
+    <%= render 'likes/default', target: target, like_btn_class: "btn-feed-like" %>
+</div>
+<div class = "drawers">
+    <%= render 'drawers/num_of_drawers', target: target %>
+    <%= render 'drawers/default', target: target %>
+</div>
+<div class="feed-channels"> <strong style = "padding-right: 10px;">공개범위</strong>
+    <% target.channels.each do |c| %>
+        <%= c.name %>
+    <% end %>
+</div>

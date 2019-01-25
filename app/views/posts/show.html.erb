@@ -9,8 +9,8 @@
             <%= render partial: "./user_profile_general", locals: {user_id: post.author_id, feed_id: post.id} %>
         <%else %>
             <%= render partial: "./user_profile", locals: {user: post.author} %>
-            <% if current_user.id == feed.author.id %>
-                <%= render 'feeds/delete_or_edit', feed: feed %>
+            <% if current_user.id == post.author.id %>
+                <%= render 'feeds/delete_or_edit', feed: post %>
             <% end %>
         <% end %>
         <br/>
@@ -23,10 +23,12 @@
         <div class = "date time"><%= time_tag post.created_at, class: "timeago" %></div>
         <br>
     </div>
-    <div class="prism-box__footer" style="padding-bottom: 10px;">
-        <%#= render 'feeds/my_feed', feed: post %>
-        <%= render 'likes/default', target: post, like_btn_class: "btn-feed-like" %>
-        <%= render 'drawers/default', target: post %>
+    <div class="prism-box__footer">
+        <% if current_user.id == post.author.id %>
+            <%= render 'feeds/my_feed_footer', target: post %>
+        <% else %>
+            <%= render 'feeds/feed_footer', target: post %>
+        <% end %>
         <br>
     </div>
     <div class="prism-box__comment">

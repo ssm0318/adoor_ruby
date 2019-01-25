@@ -20,18 +20,15 @@
         <br>
         <%= link_to answer.question.content, question_path(answer.question.id), class: "question" %>
         <div class="answer"><%= answer.content %></div>
-
         <div class = "date time"><%= time_tag answer.created_at, class: "timeago" %></div>
         <br>
     </div>
-    <div class="prism-box__footer" style="padding-bottom: 10px;">
-        <%#= render 'feeds/my_feed', feed: answer %>
-        <%= render 'likes/default', target: answer, target_type: "Answer", like_btn_class: "btn-feed-like" %>
-        <span class="num-of-reaction"><%= Like.where(target: answer).count() %></span>
-        <%= render 'drawers/default', target: answer, target_type: "Answer" %>
-        <span class="num-of-reaction"><%= Drawer.where(target: answer).count() %></span>
-        
-        <br>
+    <div class="prism-box__footer">
+        <% if current_user.id == answer.author.id %>
+            <%= render 'feeds/my_feed_footer', target: answer %>
+        <% else %>
+            <%= render 'feeds/feed_footer', target: answer %>
+        <% end %>
     </div>
     <div class="prism-box__comment">
         <% if anonymous %>

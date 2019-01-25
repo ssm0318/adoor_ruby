@@ -113,20 +113,32 @@
         vertical-align: bottom;
         width: 100%;
         font-size: 12px;
-
         position: relative;
-
-        display:flex;
-        flex-direction:column; 
-        align-items: flex-end;
+        display: grid;
+        grid-template-columns:  90% 10%;
+        grid-template-rows: 30px 30px;
 
         .feed-channels {
-            // float: left;
-            align-self: flex-start;
-            vertical-align: bottom;
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            display: flex;
+            align-items: center;  
+
         }
 
+        .likes {
+            text-align: right; 
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
 
+        }
+
+        .drawers {
+            text-align: right; 
+            grid-column: 2 / 3;
+            grid-row: 1 / 2; 
+
+        }
 
         .btn-drawer {
             width: 30px;
@@ -138,6 +150,7 @@
         
         .btn-feed-like {
             padding-left: 2px;
+            padding-right: 2px;
             width: 26px;
             height: auto;
             cursor: pointer;
