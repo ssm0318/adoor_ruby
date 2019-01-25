@@ -32,8 +32,6 @@
                 <%= render 'custom_questions/repost', parent_id: feed.id %>
             <% end %>
         </div>
-        <div class="prism-box__comment">
-            <%= render 'comments/friends_form', user: feed.author, feed: feed %>
-        </div>
+        <%= render 'comments/friends_form', user: feed.author, feed: feed %>
     </div>
 <% end %> 

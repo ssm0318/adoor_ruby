@@ -1,3 +1,4 @@
+<% anonymous = @anonymous%>
 <div class="inner-container">
 <%= render partial: "profiles/layout", locals: {user: @user} %>
     <% if !@user.friends.include? current_user and @user.id != current_user.id %>
@@ -18,7 +19,7 @@
                 <% end %>
                 <% if feed.is_a? CustomQuestion %>
                     <% if feed.reposted %>reposted<% end %>
-                    질문: <br>
+                    <strong>질문<strong><br>
                 <% end %>
                 <div class="answer"><%= feed.content %></div>
                 <br>
@@ -36,9 +37,11 @@
                 <% end %>
                 <br>
             </div>
-            <div class="prism-box__comment">
-                <%= render 'comments/friends_form', user: @user, feed: feed %>
-            </div>
+            <% if anonymous %>
+                <%= render 'comments/general_form', feed: feed %>
+            <% else %>
+                <%= render 'comments/friends_form', feed: feed %>
+            <% end %>
         </div>
         <% end %>
     <% end %>

@@ -48,14 +48,16 @@
                     <% else %>
                         <%= render 'feeds/feed_footer', target: d.target %>
                     <% end %>
-                </div>
-                <div class="prism-box__comment">
-                    <% if anonymous %>
-                        <%= render 'comments/general_form', feed: d.target %>
-                    <%else %>
-                        <%= render 'comments/friends_form', feed: d.target %>
+                    <% if (d.target.is_a? CustomQuestion) && (d.target.author != current_user) %>
+                        <%= render 'custom_questions/repost', parent_id: d.target.id %>
                     <% end %>
-                </div> 
+                    <br>
+                </div>
+                <% if anonymous %>
+                    <%= render 'comments/general_form', feed: d.target %>
+                <% else %>
+                    <%= render 'comments/friends_form', feed: d.target %>
+                <% end %>
             </div>
         <% end %>
     <% end %>

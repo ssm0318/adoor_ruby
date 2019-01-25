@@ -9,7 +9,7 @@
             <% end %>
             <% if feed.is_a? CustomQuestion %>
                 <% if feed.reposted %>reposted<% end %>
-                질문: <br>
+                <strong>질문<strong> <br>
             <% end %>
             <div class="answer"><%= feed.content %> <br><br></div>
             <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>
