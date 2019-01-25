@@ -7,7 +7,7 @@
 <% end %>
 <div class="noti-content" style="display: none;">
     <div class="noti-header">
-        <% link_to "전체 읽음 표시", notification_read_all_path%>
+        <%= link_to "전체 읽음 표시", notification_read_all_path, class: "noti-read-text hover-orange" %>
     </div>
     <% if user_signed_in? %>
         <% noties.each do |noti| %>

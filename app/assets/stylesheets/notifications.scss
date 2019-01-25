@@ -1,3 +1,85 @@
 // Place all the styles related to the Notifications controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.noti-content {
+    position: absolute;
+    right: 10px;
+    top: 45px;
+    margin-top: 15px;
+    // border: 0.5px solid #bcbcbc;
+    border-radius: 5px;
+    max-height: 250px;
+    overflow-y: scroll;
+    z-index: 1;
+    background-color: white;
+    box-shadow: 2px 2px 30px #dddddd;
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+.noti-header {
+    padding: 5px 10px;
+    .noti-read-text {
+        color: black;
+        font-size: 11px;
+        line-height: 150%;
+    }
+}
+
+.noti-el {
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+    font-size: 12px;
+    line-height: 150%;
+    display: grid;
+    grid-template-columns: 40px 265px; 
+}
+
+.noti-el:hover {
+    background-color: #e8e8e8;
+    cursor: pointer;
+}
+
+.noti-el.unread {
+    background-color: rgb(255, 231, 217);
+    color: black;
+    font-size: 12px;
+    &:hover {
+        background-color: rgb(255, 210, 182);
+
+    }
+}
+.noti-text {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+.noti-image {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+.noti-image-named {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    
+}
+
+.noti-image-anonymous {
+    height:30px; 
+    width:30px; 
+    border-radius:15px;
+    border: none; 
+    &:focus {
+        outline: none; 
+        fill: none;
+    } 
+}

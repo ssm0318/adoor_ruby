@@ -49,8 +49,8 @@ Rails.application.routes.draw do
   resources :highlights, only: [:create, :destroy]
 
   # Notification
-  get '/notifications/:id' => 'notifications#read'
   get '/notifications/read_all' => 'notifications#read_all', as: :notification_read_all
+  get '/notifications/:id' => 'notifications#read'
 
   # Profile
   get '/profiles/:id' => 'profiles#index', as: :profile
