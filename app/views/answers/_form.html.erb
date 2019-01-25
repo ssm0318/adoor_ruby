@@ -11,7 +11,7 @@
         <!--tag field-->
         <%# <%= f.text_area :tag_string %>
         <div class = "channels channels-answer">
-            <span class="channels-dropdown">공개그룹</span>
+            <span class="channels-dropdown hover-orange">공개그룹</span>
             <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
             <div class="channels-dropdown-content">
                 <% current_user.channels.each do |channel| %>
