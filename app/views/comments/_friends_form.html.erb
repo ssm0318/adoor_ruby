@@ -18,10 +18,14 @@
                                 <%= hidden_field_tag "id", c.id %>
                                 <%= hidden_field_tag "anonymous", "false" %>
                                 <%= text_field_tag "content", nil, required: true, class: "prism-form__input" %>
-                                <label>
-                                    <%= check_box_tag "secret", "true", false, class: "" %>
-                                    숨기기
-                                </label>
+                                <% if c.secret %>
+                                     <%= hidden_field_tag "secret", "true" %>
+                                <% else %>
+                                    <label>
+                                        <%= check_box_tag "secret", "true", false, class: "" %>
+                                        숨기기
+                                    </label>
+                                <% end %>
                                 <%= button_tag "저장", class: "prism-form__button" %>
                                 <span class="comment-info-alert">숨기기 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
                             <% end %>

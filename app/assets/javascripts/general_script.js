@@ -1,8 +1,8 @@
 
-function getReplyHtml(profile_path, profile_img_url, username, content, created_at, id) {
+function getReplyHtml(profile_path, profile_img_url, username, content, created_at, id, secret) {
   var new_url = "/replies/" + id;
 
-  return $(`
+  let reply_html = $(`
     <div class='reply'>
       <div class="comment-content">
         <span>
@@ -26,6 +26,12 @@ function getReplyHtml(profile_path, profile_img_url, username, content, created_
       </div> 
     </div> 
   `)
+
+  if(secret) {
+    reply_html.find(".content").prepend("(숨김댓글)")
+  }
+
+  return reply_html
 }
 
 function getButtonLike(like_url, like_changed_url) {
@@ -53,6 +59,8 @@ $(document).on('turbolinks:load', function()  {
         data: form.serialize(),
         success: function(data) {
           
+          let secret = form.find("#secret").val() ? true : false
+
           if(form.hasClass("comment")) {
             var new_url = "/comments/" + data.id;
             console.log(new_url);
@@ -88,7 +96,7 @@ $(document).on('turbolinks:load', function()  {
                   <input name="utf8" type="hidden" value="✓">
                   <input type="hidden" name="id" id="id" value="${data.id}">
                   <input type="hidden" name="anonymous" value="true">
-                  <input type="hidden" name="secret" value="false">
+                  <input type="hidden" name="secret" value="false" id="secret">
                   <input type="text" name="content" id="content" required="required" class="prism-form__input">
                   <button name="button" type="submit" class="prism-form__button">저장</button>
                   <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
@@ -114,7 +122,7 @@ $(document).on('turbolinks:load', function()  {
                 url: new_form.attr('action'),
                 data: new_form.serialize(),
                 success: function(data) {
-                  var new_html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id)
+                  var new_html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, false)
                   var new_btn_like = getButtonLike(data.like_url, data.like_changed_url)
                   new_html.find(".comment-content").append(new_btn_like)
                   new_form.parent().find(".comment-replies").append(new_html);
@@ -133,7 +141,7 @@ $(document).on('turbolinks:load', function()  {
           }
           else {
             console.log("here");
-            var html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id)
+            var html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, false)
             var btn_like = getButtonLike(data.like_url, data.like_changed_url)
             html.find(".comment-content").append(btn_like)
             form.parent().find(".comment-replies").append(html)
