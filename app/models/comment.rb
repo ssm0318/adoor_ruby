@@ -20,24 +20,26 @@ class Comment < ApplicationRecord
                 # 익명 댓글인 경우
                 if self.anonymous
                     noti_hash = {recipient: self.target.author, action: 'anonymous_comment', origin: self.target}
-                    if Notification.where(noti_hash).unread.empty?
+                    if Notification.where(noti_hash).empty?
                         Notification.create(recipient: self.target.author, actor: self.author, target: self, action: 'anonymous_comment', origin: self.target)
                     else
                         n = Notification.where(noti_hash).first
                         n.target = self
                         n.actor = self.author # 필요하지 않지만 일관성을 위해
+                        n.read_at = nil
                         n.save
                     end
                 # 친구 댓글인 경우
                 else
                     noti_hash = {recipient: self.target.author, action: 'friend_comment', origin: self.target}
-                    if Notification.where(noti_hash).unread.empty?
+                    if Notification.where(noti_hash).empty?
                         Notification.create(recipient: self.target.author, actor: self.author, target: self, action: 'friend_comment', origin: self.target)
                     # 안읽은 같은 노티가 이미 있는 경우, target만 update해준다 (그러면 updated_at도 update됨)
                     else
                         n = Notification.where(noti_hash).first
                         n.target = self
                         n.actor = self.author
+                        n.read_at = nil
                         n.save
                     end
                 end

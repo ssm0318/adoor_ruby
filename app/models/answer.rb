@@ -36,7 +36,7 @@ class Answer < ApplicationRecord
     def create_notifications
         assignment_hash = { question_id: self.question_id, assignee_id: self.author_id }
         Assignment.where(assignment_hash).find_each do |assignment|
-            Notification.create(recipient: assignment.assigner, actor: self.author, target: self, origin: self )
+            Notification.create(recipient: assignment.assigner, actor: self.author, target: self, origin: self, action: 'assignment-answer')
             # assignment.destroy
         end
     end

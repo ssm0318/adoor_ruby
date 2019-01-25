@@ -10,12 +10,14 @@ class Drawer < ApplicationRecord
     def create_notifications
         if !(self.target_type =='Question')
             if self.target.author != self.user
-                noti_hash = {recipient: self.target.author, origin: self.target}
-                if Notification.where(noti_hash).unread.empty?
-                    Notification.create(recipient: self.target.author, actor: self.user, target: self, origin: self.target)
+                noti_hash = {recipient: self.target.author, origin: self.target, action: "drawer"}
+                if Notification.where(noti_hash).empty?
+                    Notification.create(recipient: self.target.author, actor: self.user, target: self, origin: self.target, action: "drawer")
                 else
                     n = Notification.where(noti_hash).first
                     n.target = self
+                    n.read_at = nil
+                    n.actor = self.user
                     n.save
                 end
             end

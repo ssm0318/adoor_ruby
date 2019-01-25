@@ -13,7 +13,7 @@ class Assignment < ApplicationRecord
         # 초대링크를 받은 사람이 보낸 사람과 친구가 아닌 경우 (자동으로 assigner이 1번 유저_admin으로 설정되어있음)에는 노티 생성 안함
         # 초대링크를 받은 사람이 보낸 사람과 친구인 경우
         if self.assigner_id != 1
-            Notification.create(recipient: self.assignee, actor: self.assigner, target: self, origin: self.question)
+            Notification.create(recipient: self.assignee, actor: self.assigner, target: self, origin: self.question, action: "assignment")
         end
     end
 
@@ -22,4 +22,3 @@ class Assignment < ApplicationRecord
         Notification.where(recipient: self.assignee, actor: self.assigner, target: self).destroy_all
     end
 end
-  
