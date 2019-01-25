@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function()  {
 
+    // TODO : 숨김댓글 체크한채로 보내면 숨김댓글이라고 뜨기!
     $(".prism-form-friend").submit( function(e) {
   
         e.preventDefault();
@@ -48,8 +49,12 @@ $(document).on('turbolinks:load', function()  {
                     <input type="hidden" name="anonymous" value="true">
                     <input type="hidden" name="secret" value="false">
                     <input type="text" name="content" id="content" required="required" class="prism-form__input">
+                    <label>
+                        <input type="checkbox" name="secret" id="secret" value="true" class="">
+                        숨기기
+                    </label>
                     <button name="button" type="submit" class="prism-form__button">저장</button>
-                    <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
+                    <span class="comment-info-alert">숨기기 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
                   </form>
                 </div>
               `)
