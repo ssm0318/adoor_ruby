@@ -19,10 +19,11 @@ function getReplyHtml(profile_path, profile_img_url, username, content, created_
       </div>
       <div class = "comment-info">
           <span>
+              <time datetime='${created_at}', class='timeago'></time>
               <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
               <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
+              <span class="btn-comment">댓글달기</span>
           </span>
-          <time datetime='${created_at}', class='timeago'></time>
       </div> 
     </div> 
   `)
@@ -85,10 +86,11 @@ $(document).on('turbolinks:load', function()  {
                     </div>
                     <div class = "comment-info">
                         <span>
+                            <time datetime='${data.created_at}', class='timeago'></time>
                             <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
                             <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
+                            <span class="btn-comment">댓글달기</span>
                         </span>
-                        <time datetime='${data.created_at}', class='timeago'></time>
                     </div> 
                   </div>
                 </div>

@@ -18,7 +18,7 @@
   textarea_init($('#new-post-form').find("textarea"), window)
   textarea_init($('#new-custom-question-form').find("textarea"), window)
   toggle_channels_dropdown($(".channels-dropdown"))
-  
+
   $(".posting").on('click', function () {
     var selected = $(this);
     $(this).addClass("selected");
@@ -37,18 +37,7 @@
 </script>
 
 <script>
-  $(".friend-comments-nav").on('click', function() {
-    $(this).siblings(".anonymous-comments-nav").removeClass("selected")
-    $(this).addClass("selected")
-    $(this).siblings(".anonymous-comments-div").hide()
-    $(this).siblings(".friend-comments-div").show()
-  })
-
-  $(".anonymous-comments-nav").on('click', function() {
-    $(this).siblings(".friend-comments-nav").removeClass("selected")
-    $(this).addClass("selected")
-    $(this).siblings(".anonymous-comments-div").show()
-    $(this).siblings(".friend-comments-div").hide()
+  $(".btn-comment").on('click', function() {
+    
   })
 </script>
-

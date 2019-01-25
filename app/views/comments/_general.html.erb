@@ -7,8 +7,9 @@
         <%= render 'likes/default', target: c, like_btn_class: "btn-comment-like" %>
     </div>
 
-    <div class = "comment-info"> 
-        <span><%= render 'comments/my_comments_menu', c: c %></span>
+    <div class = "comment-info">
         <span class="date time"><%= time_tag c.created_at, class: "timeago" %></span>
+        <span><%= render 'comments/my_comments_menu', c: c %></span>
+        <span class="btn-comment">댓글달기</span>
     </div>
 </div> 
