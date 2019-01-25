@@ -44,7 +44,7 @@ class CustomQuestion < ApplicationRecord
         if self.ancestor_id != nil
             if self.author_id != self.ancestor_id
                 noti_hash = {recipient_id: self.ancestor_id, origin: CustomQuestion.find(ancestor_id), action: "repost"}
-                if Notification.where(noti_hash) > 1
+                if Notification.where(noti_hash).size > 1
                     n = Notification.where(noti_hash)[-2]
                     n.invisible = false
                     if Notification.where(target: self).first.read_at != nil && n.read_at == nil
