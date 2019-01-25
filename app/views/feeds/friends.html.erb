@@ -14,84 +14,9 @@
 </div>
 
 <script>
-    $(".feed-edit").on('click', function() {
-      
-      form = $(this)
-      $.ajax({
-        type: "GET",
-        url: form.attr('data-url'),
-        success: function(data) {
-
-          var html = $(`${data.html_content}`)
-
-          $("#edit-background").find("#edit-box").append(html)
-          $("#edit-background").show()
-          $("body").css('overflow', 'hidden')
-          textarea_init($(html.find('textarea')), $("#edit-background"))
-
-          //편집 exit 버튼
-          $("#btn-edit-exit").on('click', function() {
-            html.remove()
-            $("#edit-background").hide()
-            $("body").css('overflow', 'auto')
-          })
-          
-          //편집 완료
-          $(".edit_answer").submit( function(e) {
-            e.preventDefault()
-
-            form = $(this)
-            console.log(form)
-            $.ajax({
-              type: "PUT",
-              url: form.attr('action'),
-              data: form.serialize(),
-              success: function(data) {
-                console.log("successed")
-                  $(`.prism-box.${data.id}`).find(".answer").html(form.find(".new-answer-field").val())
-                  $(`.prism-box.${data.id}`).find(".feed-channels").html("공개범위: " + data.channels)
-                  html.remove()
-                  $("#edit-background").hide()
-                  $("body").css('overflow', 'auto')
-              },
-              error: function(data) {
-                  console.log("error!")
-              }
-            })
-          })
-        },
-        error: function(data) {
-            console.log("error!")
-        }
-      })
-      
-    })
-
-</script>
-<script>
-
+  check_channels($(".answer-button"))
   textarea_init($('#new-post-form').find("textarea"), window)
-
-  $(".posting").on('click', function () {
-    var selected = $(this);
-    $(this).addClass("selected");
-    $('.custom-question').removeClass("selected");
-    $('#new-post-form').show();
-    $('#new-custom-question-form').hide();
-  })
-
-  $(".custom-question").on('click', function () {
-    var selected = $(this);
-    $(this).addClass("selected");
-    $('.posting').removeClass("selected");
-    $('#new-custom-question-form').show();
-    $('#new-post-form').hide();
-    textarea_init($('#new-custom-question-form').find("textarea"), window)
-  })
-</script>
-
-<<<<<<< HEAD
-<script>
+  textarea_init($('#new-custom-question-form').find("textarea"), window)
   $(".posting").on('click', function () {
     var selected = $(this);
     $(this).addClass("selected");
@@ -107,6 +32,36 @@
     $('#new-custom-question-form').show();
     $('#new-post-form').hide();
   })
+
+  $(".posting").on('click', function () {
+    var selected = $(this);
+    $(this).addClass("selected");
+    $('.custom-question').removeClass("selected");
+    $('#new-post-form').show();
+    $('#new-custom-question-form').hide();
+  })
+
+  $(".custom-question").on('click', function () {
+    var selected = $(this);
+    $(this).addClass("selected");
+    $('.posting').removeClass("selected");
+    $('#new-custom-question-form').show();
+    $('#new-post-form').hide();
+  })
+
+  $(".friend-comments-nav").on('click', function() {
+    $(this).siblings(".anonymous-comments-nav").removeClass("selected")
+    $(this).addClass("selected")
+    $(this).siblings(".anonymous-comments-div").hide()
+    $(this).siblings(".friend-comments-div").show()
+  })
+
+  $(".anonymous-comments-nav").on('click', function() {
+    $(this).siblings(".friend-comments-nav").removeClass("selected")
+    $(this).addClass("selected")
+    $(this).siblings(".anonymous-comments-div").show()
+    $(this).siblings(".friend-comments-div").hide()
+  })
+  
 </script>
-=======
->>>>>>> 5be6c269acc92566cfd0673b3be314b0a38a8e22
+

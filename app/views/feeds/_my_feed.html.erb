@@ -4,9 +4,13 @@
         <%# link_to "수정", edit_answer_path(feed.id), class: "feed-edit answer-edit hover-orange", remote: true %>
         <a class="feed-edit answer-edit hover-orange" data-url='<%=edit_answer_path(feed.id)%>'>수정</a>
         <span class="btn-feed-delete hover-orange hover-pointer" data-url="<%=answer_path(feed.id)%>">삭제</span>
-    <% else %>
+    <% elsif feed.is_a? Post %>
         <!-- <%= link_to "수정", edit_post_path(feed.id), class: "hover-orange" %> -->
+        <a class="feed-edit post-edit hover-orange" data-url='<%=edit_post_path(feed.id)%>'>수정</a>
         <span class="btn-feed-delete hover-orange hover-pointer" data-url="<%=post_path(feed.id)%>">삭제</span>
+    <% else %>
+        <a class="feed-edit post-edit hover-orange" data-url='<%=edit_custom_question_path(feed.id)%>'>수정</a>
+        <span class="btn-feed-delete hover-orange hover-pointer" data-url="<%=custom_question_path(feed.id)%>">삭제</span>
     <% end %>
     <span class="feed-channels">공개범위: 
         <% feed.channels.each do |c| %>

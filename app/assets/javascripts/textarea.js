@@ -6,9 +6,11 @@ function textarea_init (element, back) {
 
     var text = element;
     function resize () {
-
         text.css('height', 'auto')
-        text.css('height', text[0].scrollHeight)
+
+        if(text[0].scrollHeight > 0) {
+            text.css('height', text[0].scrollHeight)
+        }
 
         if(back == window) {
             var scrollTop  = window.pageYOffset ||
