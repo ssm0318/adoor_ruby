@@ -11,6 +11,7 @@ $(document).on('turbolinks:load', function()  {
 
             $("#edit-background").find("#edit-box").append(html)
             check_channels(html.find(".answer-button"))
+            toggle_channels_dropdown(html.find(".channels-dropdown"))
             $("#edit-background").show()
             $("body").css('overflow', 'hidden')
             textarea_init($(html.find('textarea')), $("#edit-background"))
@@ -35,7 +36,7 @@ $(document).on('turbolinks:load', function()  {
                 success: function(data) {
                 console.log("successed")
                     $(`.prism-box.${data.id}`).find(".answer").html(form.find(".new-answer-field").val())
-                    $(`.prism-box.${data.id}`).find(".feed-channels").html("공개범위: " + data.channels)
+                    $(`.prism-box.${data.id}`).find(".feed-channels").html("공개그룹: " + data.channels)
                     html.remove()
                     $("#edit-background").hide()
                     $("body").css('overflow', 'auto')
