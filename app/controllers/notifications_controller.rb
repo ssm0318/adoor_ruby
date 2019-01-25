@@ -5,6 +5,13 @@ class NotificationsController < ApplicationController
         @notifications = Notification.all
     end
     
+    def read_all
+        Notification.where(recipient_id: current_user.id).visible.unread.each do |n|
+            n.read_at = DateTime.now()
+            n.save(touch: false)
+        end
+    end
+
     def read
         noti = Notification.find(params[:id])
 

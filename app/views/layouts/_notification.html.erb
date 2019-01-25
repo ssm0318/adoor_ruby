@@ -6,6 +6,9 @@
     <% end %>
 <% end %>
 <div class="noti-content" style="display: none;">
+    <div class="noti-header">
+        <% link_to "전체 읽음 표시", notification_read_all_path%>
+    </div>
     <% if user_signed_in? %>
         <% noties.each do |noti| %>
             <% user = User.find(noti.actor_id)%>

@@ -31,7 +31,7 @@ class Comment < ApplicationRecord
                 if !Notification.where(noti_hash).empty?
                     Notification.where(noti_hash).each do |n|
                         n.invisible = true
-                        n.save
+                        n.save(touch: false)
                     end
                 end
                 Notification.create(create_noti_hash)
@@ -53,10 +53,10 @@ class Comment < ApplicationRecord
                 if Notification.where(noti_hash).size > 1
                     n = Notification.where(noti_hash)[-2]
                     n.invisible = false
-                    if self.read_at != nil && n.read_at == nil
+                    if Notification.where(target: self).first.read_at != nil && n.read_at == nil
                         n.read_at = self.read_at
                     end
-                    n.save
+                    n.save(touch: false)
                 end
             end
         end
