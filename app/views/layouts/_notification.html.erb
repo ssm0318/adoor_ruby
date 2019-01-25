@@ -104,7 +104,7 @@
                                 <strong><%=username%></strong>님이 당신의 댓글 <%= message %>에 대댓글을 남겼습니다.
                             <% else %>
                                 <strong><%=username%></strong>님 외 <%= noti.origin.replies.where(target_author_id: current_user.id).distinct.count('author_id')-1 %>명이 당신의 댓글 <%= message %>에 대댓글을 남겼습니다.
-
+                            <% end %>
                         <% else %>
                         <% end %>
                     <% when 'Drawer' %>
