@@ -46,7 +46,8 @@
         // text-align: center;
         // border-top: 1px dashed $prism-box-gray;
         // border-bottom: 1px dashed $prism-box-gray;
-        // padding: 0px 40px;
+
+        padding: 0px 40px;
         line-height: 140%;
         text-align: center;
 
@@ -136,6 +137,19 @@
             font-family: 'Nanum Gothic', sans-serif;
             color: #F48462;
 
+        }
+        
+        .btn-repost {
+            width: 30px;
+            height: auto;
+            cursor: pointer;
+            vertical-align: -2px;
+
+        }
+
+        .reposts {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
         }
     }
 
