@@ -2,7 +2,7 @@
     <div>
         <!-- 글쓴이가 보는 댓글 -->
         <% if current_user.id == feed.author.id %>
-            <span class="friend-comments-nav selected">친구댓글 </span>&nbsp;<span class="anonymous-comments-nav"> 익명댓글 </span><br><br>
+            <span class="friend-comments-nav selected hover-pointer">친구댓글 </span>&nbsp;<span class="anonymous-comments-nav hover-pointer"> 익명댓글 </span><br><br>
             <div class="friend-comments-div">
                 <div class="friend-comments">
                     <% feed.comments.where(anonymous: false).each do |c| %>

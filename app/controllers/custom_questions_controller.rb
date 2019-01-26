@@ -29,9 +29,9 @@ class CustomQuestionsController < ApplicationController
 
     def repost
         if params[:repost_message]
-            @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, reposted: true, repost_message: params[:repost_message])
+            @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, repost_message: params[:repost_message], ancestor_id: params[:id])
         else
-            @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, reposted: true)
+            @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, ancestor_id: params[:id])
         end
             # if !@custom_question.tag_string.nil?
         #     tag_array = @custom_question.tag_string.gsub("\r\n", '\n').split('\n')
@@ -99,7 +99,16 @@ class CustomQuestionsController < ApplicationController
     end
 
     def destroy
-        @custom_question.destroy 
+        # 창조자이며, 누군가가 repost한 사람이 있는 경우
+        if !CustomQuestion.where(ancestor_id: params[:id]).empty?
+            Notification.where(origin: @custom_question, action: "repost", recipient_id: @custom_question.author_id).destroy_all
+            # 실제로는 삭제되지 않고 author가 admin으로 바뀐다. (얘네를 repost한 애들이 있다면 ancestor_id를 그대로 유지해야 하기 때문)
+            @custom_question.author_id = 1
+            @custom_question.save
+        # 창조자이지만 repost한 사람이 없거나, 창조자가 아닌 경우
+        else
+            @custom_question.destroy
+        end
     end
 
     private

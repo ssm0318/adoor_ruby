@@ -2,14 +2,14 @@
 <span class = "edit-or-delete" style="display: none;">
     <% if feed.is_a? Answer %>
         <%# link_to "수정", edit_answer_path(feed.id), class: "feed-edit answer-edit hover-orange", remote: true %>
-        <div class="edit-or-delete-el feed-edit answer-edit hover-orange hover-pointer" data-url='<%=edit_answer_path(feed.id)%>'>수정</div>
-        <div class="edit-or-delete-el btn-feed-delete hover-orange hover-pointer" data-url="<%=answer_path(feed.id)%>">삭제</div>
+        <div class="edit-or-delete-el feed-edit answer-edit hover-pointer" data-url='<%=edit_answer_path(feed.id)%>'>수정</div>
+        <div class="edit-or-delete-el btn-feed-delete hover-pointer" data-url="<%=answer_path(feed.id)%>">삭제</div>
     <% elsif feed.is_a? Post %>
         <!-- <%= link_to "수정", edit_post_path(feed.id), class: "hover-orange" %> -->
-        <div class="edit-or-delete-el feed-edit post-edit hover-orange hover-pointer" data-url='<%=edit_post_path(feed.id)%>'>수정</div>
-        <div class="edit-or-delete-el btn-feed-delete hover-orange hover-pointer" data-url="<%=post_path(feed.id)%>">삭제</div>
+        <div class="edit-or-delete-el feed-edit post-edit hover-pointer" data-url='<%=edit_post_path(feed.id)%>'>수정</div>
+        <div class="edit-or-delete-el btn-feed-delete hover-pointer" data-url="<%=post_path(feed.id)%>">삭제</div>
     <% else %>
-        <div class="edit-or-delete-el feed-edit post-edit hover-orange hover-pointer" data-url='<%=edit_custom_question_path(feed.id)%>'>수정</div>
-        <div class="edit-or-delete-el btn-feed-delete hover-orange hover-pointer" data-url="<%=custom_question_path(feed.id)%>">삭제</div>
+        <div class="edit-or-delete-el feed-edit post-edit hover-pointer" data-url='<%=edit_custom_question_path(feed.id)%>'>수정</div>
+        <div class="edit-or-delete-el btn-feed-delete hover-pointer" data-url="<%=custom_question_path(feed.id)%>">삭제</div>
     <% end %>
 </span>

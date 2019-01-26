@@ -18,7 +18,7 @@
                     <%= link_to feed.question.content, question_path(feed.question.id), class: "question" %><br><br>
                 <% end %>
                 <% if feed.is_a? CustomQuestion %>
-                    <% if feed.reposted %>reposted<% end %>
+                    <% if feed.ancestor_id != nil %>reposted<% end %>
                     <strong>질문<strong><br>
                 <% end %>
                 <div class="answer"><%= feed.content %></div>
@@ -33,7 +33,8 @@
                     <%= render 'feeds/feed_footer', target: feed %>
                 <% end %>
                 <% if (feed.is_a? CustomQuestion) && (feed.author != current_user) %>
-                    <%= render 'custom_questions/repost', parent_id: feed.id %>
+                    <% ancestor_id = feed.ancestor_id == nil ? feed.id : feed.ancestor_id %>
+                    <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
                 <% end %>
                 <br>
             </div>

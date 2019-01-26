@@ -44,7 +44,7 @@ button {
                 background-color: white;
                 border: 0.5px solid #dddddd;
                 border-radius: 20px;
-
+                cursor: pointer;
             }
         
             .channel-nav.active {
@@ -61,6 +61,7 @@ button {
             border: 0.5px solid #dddddd;
             border-radius: 20px;
             font-size: 20px;
+            cursor: pointer;
         }
         
         #name-create-form {

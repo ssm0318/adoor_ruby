@@ -101,7 +101,7 @@
                 -webkit-border-radius: 10px;
                 -moz-border-radius: 10px;
                 margin-bottom: 10px;
-                font-size: 15px;
+                font-size: 12px;
                 padding-left: 35px;
                 -webkit-transition: width .55s ease;
                 -moz-transition: width .55s ease;
@@ -170,6 +170,7 @@ a {
     font-family: "Nanum Gothic", serif;
     white-space: pre-line;
     text-align: left;
+    overflow-wrap: break-word;
 }
 
 .username{

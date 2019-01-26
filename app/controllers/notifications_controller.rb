@@ -5,6 +5,14 @@ class NotificationsController < ApplicationController
         @notifications = Notification.all
     end
     
+    def read_all
+        Notification.where(recipient_id: current_user.id).visible.unread.each do |n|
+            n.read_at = DateTime.now()
+            n.save(touch: false)
+        end
+        redirect_to root_url
+    end
+
     def read
         noti = Notification.find(params[:id])
 
@@ -86,6 +94,8 @@ class NotificationsController < ApplicationController
                     redirect_to question_path(origin_id)
                 else
                 end
+            when 'CustomQuestion'
+                redirect_to custom_question_path(origin_id)
             when 'Assignment'
                 redirect_to new_answer_path(origin_id)
             when 'Answer'

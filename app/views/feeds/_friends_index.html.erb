@@ -12,7 +12,7 @@
             <% end %>
             <% if feed.is_a? CustomQuestion %>
                 <strong>질문</strong>
-                <% if feed.reposted %>
+                <% if feed.ancestor_id != nil %>
                     reposted 
                     <% if feed.repost_message? %>
                         with message: <%= feed.repost_message %><br>
@@ -29,7 +29,8 @@
                 <%= render 'feeds/feed_footer', target: feed %>
             <% end %>
             <% if (feed.is_a? CustomQuestion) && (feed.author != current_user) %>
-                <%= render 'custom_questions/repost', parent_id: feed.id %>
+                <% ancestor_id = feed.ancestor_id == nil ? feed.id : feed.ancestor_id %>
+                <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
             <% end %>
         </div>
         <%= render 'comments/friends_form', user: feed.author, feed: feed %>
