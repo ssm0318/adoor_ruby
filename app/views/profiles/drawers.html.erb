@@ -49,7 +49,7 @@
                         <%= render 'feeds/feed_footer', target: d.target %>
                     <% end %>
                     <% if (d.target.is_a? CustomQuestion) && (d.target.author != current_user) %>
-                        <% ancestor_id = feed.ancestor_id == nil ? feed.id : feed.ancestor_id %>
+                        <% ancestor_id = d.target.ancestor_id == nil ? d.target.id : d.target.ancestor_id %>
                         <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
                     <% end %>
                     <br>
