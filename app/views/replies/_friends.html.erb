@@ -1,19 +1,21 @@
 <div class="reply">
     <div class="comment-content">
-        <span> 
+        
             <%= link_to image_tag(r.author.image.url, class: "user-profile"), profile_path(r.author.id) %>
-            <%= link_to r.author.username, profile_path(r.author.id), class: "username" %>
-            <% if r.secret %>
-                <%= image_tag("icons/lock-icon.png", class: "lock-icon")%>
-            <% end %>
-            <!-- author처럼 target_author 자체를 가져와서 굳이 query 안날려도 되면 좋겠다!!!-->
-            <% if r.target_author_id %>
-                <span class="replier-name"><%=User.find(r.target_author_id).username%></span>
-            <% end %>
-            <span class = "content">
-                <%= r.content %>
+            <span class="comment-text">
+                <%= link_to r.author.username, profile_path(r.author.id), class: "username" %>
+                <% if r.secret %>
+                    <%= image_tag("icons/lock-icon.png", class: "lock-icon")%>
+                <% end %>
+                <!-- author처럼 target_author 자체를 가져와서 굳이 query 안날려도 되면 좋겠다!!!-->
+                <% if r.target_author_id %>
+                    <%=link_to User.find(r.target_author_id).username, profile_path(r.target_author_id), class: "replier-name" %>
+                <% end %>
+                <span class = "content">
+                    <%= r.content %>
+                </span>
             </span>
-        </span>
+        
         <%= render 'likes/default', target: r, like_btn_class: "btn-comment-like" %>
     </div>
 

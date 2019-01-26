@@ -1,15 +1,15 @@
 <div class="comment">
      <div class = "comment-content">
-        <span>
             <%= link_to image_tag(c.author.image.url, class: "user-profile"), profile_path(c.author.id) %>
-            <%= link_to c.author.username, profile_path(c.author.id), class: "username" %>
-            <% if c.secret %>
-                <%= image_tag("icons/lock-icon.png", class: "lock-icon")%>
-            <% end %>
-            <span class= "content">
-                <%= c.content %>
+            <span class="comment-text">
+                <%= link_to c.author.username, profile_path(c.author.id), class: "username" %>
+                <% if c.secret %>
+                    <%= image_tag("icons/lock-icon.png", class: "lock-icon")%>
+                <% end %>
+                <span class= "content">
+                    <%= c.content %>
+                </span>
             </span>
-        </span>
         <%= render 'likes/default', target: c, like_btn_class: "btn-comment-like" %>
     </div>
 

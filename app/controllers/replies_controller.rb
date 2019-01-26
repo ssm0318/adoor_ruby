@@ -21,7 +21,6 @@ class RepliesController < ApplicationController
             profile_img_url: current_user.image.url,
             profile_path: profile_path(current_user.id),
             username: current_user.username,
-            target_author: target_author,
         }
     end
 
@@ -29,7 +28,7 @@ class RepliesController < ApplicationController
         @reply.destroy
 
         render json: {
-            
+
         }
     end
 

@@ -2,7 +2,9 @@
     <div class="comment-content">
         <span> 
             <%= render partial: "./user_profile_general", locals: {user_id: r.author_id, feed_id: feed_id } %>
-            <span class = "content"><%= r.content %></span>
+            <span class="comment-text">
+                <span class= "content"><%= r.content %> </span>
+            </span>
         </span>
         <%= render 'likes/default', target: r, like_btn_class: "btn-comment-like" %>
     </div>

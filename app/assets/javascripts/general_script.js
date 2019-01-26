@@ -15,10 +15,10 @@ function getReplyHtml(profile_path, profile_img_url, username, content, created_
   let reply_html = $(`
     <div class='reply'>
       <div class="comment-content">
-        <span>
-          <a href="${profile_path}">
-            <img class="user-profile" src="${profile_img_url}">
-          </a>
+        <a href="${profile_path}">
+          <img class="user-profile" src="${profile_img_url}">
+        </a>
+        <span class="comment-text">
           <a class="username" href="${profile_path}">
               ${username}
           </a>
@@ -80,10 +80,10 @@ $(document).on('turbolinks:load', function()  {
                 <div class='comment-replies'>
                   <div class='comment'>
                     <div class='comment-content'>
-                      <span>
-                        <a href="${data.profile_path}">
-                            <img class="user-profile" src="${data.profile_img_url}">
-                        </a>
+                      <a href="${data.profile_path}">
+                          <img class="user-profile" src="${data.profile_img_url}">
+                      </a>
+                      <span class="comment-text">
                         <a class="username" href="${data.profile_path}">
                             ${data.username}
                         </a>

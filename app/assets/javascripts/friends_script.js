@@ -1,4 +1,4 @@
-var lock_icon = '<img src="/assets/icons/lock-icon.png" class="lock-icon" alt="Lock icon")>'
+const lock_icon = '<img src="/assets/icons/lock-icon.png" class="lock-icon" alt="Lock icon")>'
 
 function click_friend_reply(element) {
   element.on('click', function() {
@@ -56,10 +56,10 @@ $(document).on('turbolinks:load', function()  {
                   <div class='comment-replies'>
                     <div class='comment'>
                       <div class='comment-content'>
-                        <span>
-                          <a href="${data.profile_path}">
-                              <img class="user-profile" src="${data.profile_img_url}">
-                          </a>
+                        <a href="${data.profile_path}">
+                            <img class="user-profile" src="${data.profile_img_url}">
+                        </a>
+                        <span class="comment-text">
                           <a class="username" href="${data.profile_path}">
                               ${data.username}
                           </a>
@@ -148,13 +148,16 @@ $(document).on('turbolinks:load', function()  {
   
             }
             else {
-              console.log(data.target_author);
               var html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, secret)
               html.find(".comment-info").append("<span class='btn-comment friend' data-self='true'>댓글달기</span>")
               click_friend_reply(html.find(".btn-comment"))
               
-              if(data.target_author) {
-                html.find(".content").before(`<span class="replier-name">${data.target_author}</span>`)
+              if(form.find(".replier-name")) {
+                html.find(".content").before(`
+                  <a href="/profiles/${form.find(".target_author_id").val()}" 
+                  class="replier-name">
+                    ${form.find(".replier-name").text()}
+                  </a>`)
               }
               
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
