@@ -148,10 +148,14 @@ $(document).on('turbolinks:load', function()  {
   
             }
             else {
-              console.log("here");
+              console.log(data.target_author);
               var html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, secret)
               html.find(".comment-info").append("<span class='btn-comment friend' data-self='true'>댓글달기</span>")
               click_friend_reply(html.find(".btn-comment"))
+              
+              if(data.target_author) {
+                html.find(".content").before(`<span class="replier-name">${data.target_author}</span>`)
+              }
               
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
               html.find(".comment-content").append(btn_like)

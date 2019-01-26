@@ -7,8 +7,11 @@ class RepliesController < ApplicationController
         else
             secret = params[:secret]
         end
-        r = Reply.create(content: params[:content], author_id: current_user.id, comment_id: params[:id], secret: secret, anonymous: params[:anonymous])
+        r = Reply.create(content: params[:content], author_id: current_user.id, comment_id: params[:id], secret: secret, anonymous: params[:anonymous], target_author_id: params[:target_author_id])
         
+
+        target_author = params[:target_author_id] ? User.find(params[:target_author_id]).username : nil
+ 
         render json: {
             id: r.id,
             content: r.content,
@@ -17,12 +20,17 @@ class RepliesController < ApplicationController
             like_changed_url: like_path(r.id, target_type: 'Reply'),
             profile_img_url: current_user.image.url,
             profile_path: profile_path(current_user.id),
-            username: current_user.username
+            username: current_user.username,
+            target_author: target_author,
         }
     end
 
     def destroy
         @reply.destroy
+
+        render json: {
+            
+        }
     end
 
     private
