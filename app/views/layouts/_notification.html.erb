@@ -160,7 +160,14 @@
                         <strong><%=username%></strong>님이 친구요청을 보냈습니다.
                     <% when 'Announcement' %>
                         <% message = "\"" + noti.origin.title.truncate(30, separator: /\s/) + "\"" %>
-                        어도어에 새로운 공지가 있습니다: <%= message %>
+                        <% case noti.action %>
+                        <% when 'announcement'%>
+                            어도어에 새로운 공지가 있습니다: <%= message %>
+                        <% when 're_announcement' %>
+                            어도어에 당신의 소중한 의견을 남겨주세요.
+                        <% else %>
+                        <% end %>
+
                     <% when 'Highlight' %>
                         <strong><%=username%></strong>님이 당신의 글을 highlight했습니다.
                     <% else %>  

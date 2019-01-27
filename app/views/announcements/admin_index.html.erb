@@ -13,7 +13,8 @@
     <% @published_announcements.each do |a| %>
         <div class="prism-box">
             <div class="prism-box__header">
-                <%= link_to '삭제', announcement_path(a.id), method: :delete%>
+                <%= link_to '삭제', announcement_path(a.id), method: :delete%> | 
+                <%= link_to '노티 한 번 더 보내기', announcement_noti_path(a.id) %>
             </div>
             <div class="prism-box__content">
                 <div class="announcement-title"><%= a.title %></div>
@@ -21,11 +22,21 @@
                 <div class = "date time">작성: <%= time_tag a.created_at %></div>
                 <div class = "date time">발행: <%= time_tag a.published_at %></div>                </div><br><br>
             <% unread_users = [] %>
-            <% Notification.where(target: a).unread.each do |n| %>
+            <% Notification.where(target: a, action: 'announcement').unread.each do |n| %>
                 <% unread_users.push(n.recipient_id) %>
             <% end %>
+            <p>첫 공지 도달률</P>
             <div>도달한 사용자: <%= User.all.ids - unread_users %></div>
             <div>도달률: <%= (User.all.count-unread_users.count)*100/(User.all.count) %>%</div>
+            <% if !Notification.where(target: a, action: 're_announcement').empty? %>
+                <% unread_users2 = [] %>
+                <% Notification.where(target: a, action: 're_announcement').unread.each do |n| %>
+                    <% unread_users2.push(n.recipient_id) %>
+                <% end %>
+                <p>두 번째 공지 도달률</p> (세번째 공지를 보낸 순간부터 이거는 의미없는 숫자입니다)
+                <div>도달한 사용자: <%= User.all.ids - unread_users2 %></div>
+                <div>도달률: <%= (User.all.count-unread_users2.count)*100/(User.all.count) %>%</div>
+            <% end %>
         </div>
     <% end %> 
     발행 안된 공지<br>
