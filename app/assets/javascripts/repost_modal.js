@@ -1,6 +1,7 @@
 $(document).on('turbolinks:load', function()  {
-    $(".btn-write-modal").on('click', function() {
-        console.log("write-modal")
+    $(".btn-repost-modal").on('click', function() {
+        
+        console.log("repost-modal")
         form = $(this)
         $.ajax({
         type: "GET",
@@ -20,6 +21,10 @@ $(document).on('turbolinks:load', function()  {
             $("#edit-background").show()
             $("body").css('overflow', 'hidden')
             textarea_init($(html.find('textarea')), $("#edit-background"))
+
+
+            //FIXME 룰렁: 저장하고 나서 모달 내리기, x누르면 창 닫히기...
+            //지금 저장 버튼 누르면 모달은 내려가지 않지만.... 새로고침을 하면 저장되긴 함
 
             //편집 exit 버튼
             $("#btn-edit-exit").on('click', function() {
