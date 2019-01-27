@@ -11,7 +11,7 @@
                                 <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
 
                                 <% c.replies.each do |r| %>
-                                    <%= render partial: "replies/friends", locals: {r: r} %>
+                                    <%= render partial: "replies/friends", locals: {r: r, comment_available: true} %>
                                 <% end %>
                             </div>
                             <%= form_tag replies_path, class: "prism-form-friend reply" do %>
@@ -58,7 +58,7 @@
                                     <% if r.author_id != current_user.id %>
                                         <%= render partial: "replies/general", locals: {feed_id: feed.id, r: r} %>
                                     <% else %>
-                                        <%= render partial: "replies/friends", locals: {r: r} %>
+                                        <%= render partial: "replies/friends", locals: {r: r, comment_available: false} %>
                                     <% end %>
                                 <% end %>
                             </div>
@@ -95,7 +95,7 @@
                                 <%=render partial: "comments/friends", locals: {feed: feed, c: c} %>
 
                                 <% c.replies.accessible(current_user.id).each do |r| %>
-                                    <%= render partial: "replies/friends", locals: {r: r} %>
+                                    <%= render partial: "replies/friends", locals: {r: r, comment_available: true} %>
                                 <% end %>
                             </div>
                             <%= form_tag replies_path, class: "prism-form-friend reply" do %>

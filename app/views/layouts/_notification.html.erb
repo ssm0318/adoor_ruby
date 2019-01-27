@@ -19,9 +19,9 @@
             <% username = user.username %>
 
             <% if noti.read_at != nil %>
-                <div class="noti-el" onclick="window.location='/notifications/<%=noti.id%>'">
+                <div class="noti-el" data-url="/notifications/<%=noti.id%>">
             <% else %>
-                <div class="noti-el unread" onclick="window.location='/notifications/<%=noti.id%>'">
+                <div class="noti-el unread" data-url="/notifications/<%=noti.id%>">
             <% end %>
 
                 <div class="noti-image">
@@ -78,7 +78,7 @@
                             <% if noti.origin.comments.named.distinct.count('author_id') == 1 %>
                                 <strong><%=username%></strong>님이 당신의 글 <%= message %>에 댓글을 남겼습니다.
                             <% else %>
-                                <strong><%=username%></strong>님 외 <% noti.origin.comments.named.distinct.count('author_id')-1 %>명의 친구가 당신의 글 <%= message %>에 댓글을 남겼습니다. 
+                                <strong><%=username%></strong>님 외 <%= noti.origin.comments.named.distinct.count('author_id')-1 %>명의 친구가 당신의 글 <%= message %>에 댓글을 남겼습니다. 
                             <% end %>
                         <% elsif noti.action == 'anonymous_comment'%>
                             <% if noti.origin.comments.anonymous.distinct.count('author_id') == 1 %>
@@ -108,9 +108,9 @@
                             <!--<%= username %>님이 당신의 글에 대댓글을 남겼습니다.-->
                         <% when 'friend_to_recomment' %>
                             <% if noti.origin.replies.where(target_author_id: current_user.id).distinct.count('author_id') == 1 %>
-                                <strong><%=username%></strong>님이 당신의 댓글 <%= message %>에 대댓글을 남겼습니다.
+                                <strong><%=username%></strong>님이 당신의 댓글에 대댓글을 남겼습니다.
                             <% else %>
-                                <strong><%=username%></strong>님 외 <%= noti.origin.replies.where(target_author_id: current_user.id).distinct.count('author_id')-1 %>명이 당신의 댓글 <%= message %>에 대댓글을 남겼습니다.
+                                <strong><%=username%></strong>님 외 <%= noti.origin.replies.where(target_author_id: current_user.id).distinct.count('author_id')-1 %>명이 당신의 댓글에 대댓글을 남겼습니다.
                             <% end %>
                         <% else %>
                         <% end %>
@@ -152,19 +152,3 @@
     <% end %>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $(".btn-noti").on('click', function() {
-            $(".noti-content").toggle();
-        })
-
-        $("html").on('click', function(event) {
-            var target = $(event.target)
-            if(!target.hasClass("btn-noti") &&
-            !target.hasClass("noti-content") &&
-            !target.hasClass("noti-el")) {
-                $(".noti-content").hide();
-            }
-        });
-    })
-</script>

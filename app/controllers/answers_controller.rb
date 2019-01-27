@@ -46,6 +46,8 @@ class AnswersController < ApplicationController
 
         if params[:from_feed]
             redirect_to question_path(@answer.question)
+        elsif params[:from_noti]
+            redirect_to answer_path(@answer)
         else
             render :json => {
 
@@ -91,7 +93,7 @@ def update
             channels.each do |channel|
                 channel_names += channel.name + " "
             end
-
+            
             render :json => {
                 id: @answer.id,
                 channels: channel_names

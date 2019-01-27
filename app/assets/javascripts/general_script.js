@@ -1,3 +1,13 @@
+function click_general_reply(element) {
+  element.on('click', function() {
+
+    var form = $(this).parents(".comment-replies-form").find("form")
+    form.show()
+    form.submit( function(e) {
+      form.hide()
+    })
+  })
+}
 
 function getReplyHtml(profile_path, profile_img_url, username, content, created_at, id, secret) {
   var new_url = "/replies/" + id;
@@ -5,10 +15,10 @@ function getReplyHtml(profile_path, profile_img_url, username, content, created_
   let reply_html = $(`
     <div class='reply'>
       <div class="comment-content">
-        <span>
-          <a href="${profile_path}">
-            <img class="user-profile" src="${profile_img_url}">
-          </a>
+        <a href="${profile_path}">
+          <img class="user-profile" src="${profile_img_url}">
+        </a>
+        <span class="comment-text">
           <a class="username" href="${profile_path}">
               ${username}
           </a>
@@ -18,12 +28,9 @@ function getReplyHtml(profile_path, profile_img_url, username, content, created_
         </span>
       </div>
       <div class = "comment-info">
-          <span>
-              <time datetime='${created_at}', class='timeago'></time>
-              <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
-              <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
-              <span class="btn-comment">댓글달기</span>
-          </span>
+        <time datetime='${created_at}', class='timeago'></time>
+        <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
+        <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
       </div> 
     </div> 
   `)
@@ -49,6 +56,7 @@ function getButtonLike(like_url, like_changed_url) {
 
 $(document).on('turbolinks:load', function()  {
 
+  click_general_reply($(".btn-comment.general"))
   $(".prism-form-general").submit( function(e) {
 
       e.preventDefault();
@@ -72,10 +80,10 @@ $(document).on('turbolinks:load', function()  {
                 <div class='comment-replies'>
                   <div class='comment'>
                     <div class='comment-content'>
-                      <span>
-                        <a href="${data.profile_path}">
-                            <img class="user-profile" src="${data.profile_img_url}">
-                        </a>
+                      <a href="${data.profile_path}">
+                          <img class="user-profile" src="${data.profile_img_url}">
+                      </a>
+                      <span class="comment-text">
                         <a class="username" href="${data.profile_path}">
                             ${data.username}
                         </a>
@@ -85,12 +93,10 @@ $(document).on('turbolinks:load', function()  {
                       </span>
                     </div>
                     <div class = "comment-info">
-                        <span>
-                            <time datetime='${data.created_at}', class='timeago'></time>
-                            <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
-                            <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
-                            <span class="btn-comment">댓글달기</span>
-                        </span>
+                      <time datetime='${data.created_at}', class='timeago'></time>
+                      <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
+                      <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
+                      <span class="btn-comment general hover-orange hover-pointer">댓글달기</span>
                     </div> 
                   </div>
                 </div>
@@ -106,6 +112,7 @@ $(document).on('turbolinks:load', function()  {
               </div>
             `)
 
+            click_general_reply(html.find(".btn-comment.general"))
             var btn_like = getButtonLike(data.like_url, data.like_changed_url)
             html.find(".comment-content").append(btn_like)
             form.parent().find(".anonymous-comments").append(html)

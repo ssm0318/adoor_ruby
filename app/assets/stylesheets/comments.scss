@@ -7,12 +7,15 @@
 }
 
 .comment {
-    font-size: 14px;    
+    font-size: 14px; 
+    padding-top: 5px;
+    padding-bottom: 5px;   
 }
 
 .comment-indent,.reply {
     padding-left: 27px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;   
     font-size: 14px;    
 }
 
@@ -26,27 +29,39 @@
     }
     
     .comment-content {
-        display:flex; 
-        justify-content: space-between; 
-        align-items:center;
+        display: grid;
+        grid-template-columns: 26px auto 30px;
     
         .user-profile {
             height:20px; 
             width:20px; 
             border-radius:10px; 
             margin-right: 2px;
-    
         }
         
         .username {
             font-size: 14px;
             font-weight: bold;
-    
+            vertical-align: middle;
         }
+
+        .lock-icon {
+            width: 22px;
+            height: auto;
+            margin: 0px;
+            padding: 0px;
+            vertical-align: middle;
+        }
+
+        .replier-name {
+            color: #F79277;
+        }
+
         
-        .content {
-            vertical-align: 6px;
+        .comment-text {
+            line-height: 20px;
         }
+
     }
     
     .comment-info {

@@ -25,7 +25,7 @@
                                         <% if (r.author_id != current_user.id) && (r.author_id != 1) %>
                                             <%= render partial: "replies/general", locals: {feed_id: a.id, r: r}%>
                                         <% else %>
-                                            <%= render partial: "replies/friends", locals: {r: r} %>
+                                            <%= render partial: "replies/friends", locals: {r: r, comment_available: false} %>
                                         <% end %>
                                     <% end %> 
                                 </div>

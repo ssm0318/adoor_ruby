@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(version: 20190123033448) do
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_replies_on_author_id"
     t.index ["comment_id"], name: "index_replies_on_comment_id"
+    t.index ["target_author_id"], name: "index_replies_on_target_author_id"
   end
 
   create_table "roles", force: :cascade do |t|

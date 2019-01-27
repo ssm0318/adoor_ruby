@@ -1,7 +1,38 @@
-var lock_icon = '<img src="/assets/icons/lock-icon.png" class="lock-icon" alt="Lock icon")>'
+const lock_icon = '<img src="/assets/icons/lock-icon.png" class="lock-icon" alt="Lock icon")>'
+
+function click_friend_reply(element) {
+  element.on('click', function() {
+
+    var form = $(this).parents(".comment-replies-form").find("form")
+    form.show()
+    form.find(".target_author_id").remove()
+    form.find(".replier-name").remove()
+
+    //답글하기 나한테 쓰는건 태그안되게
+
+    if($(this).parents().hasClass("reply") && 
+      $(this).attr("data-self")=="false") {
+      let tag = $(`
+      <input type="hidden" 
+        name="target_author_id" 
+        class="target_author_id" 
+        value="${$(this).attr("data-recipient-id")}">`)
+
+      let name_span = $(`<span class="replier-name">${$(this).attr("data-recipient-name")}</span>`)
+
+      form.prepend(tag)
+      form.prepend(name_span)
+    }
+    form.submit( function(e) {
+      form.hide()
+    })
+  })
+}
+
 
 $(document).on('turbolinks:load', function()  {
-
+  
+    click_friend_reply($(".btn-comment.friend"))
     // TODO : 숨김댓글 체크한채로 보내면 숨김댓글이라고 뜨기!
     $(".prism-form-friend").submit( function(e) {
         e.preventDefault();
@@ -25,10 +56,10 @@ $(document).on('turbolinks:load', function()  {
                   <div class='comment-replies'>
                     <div class='comment'>
                       <div class='comment-content'>
-                        <span>
-                          <a href="${data.profile_path}">
-                              <img class="user-profile" src="${data.profile_img_url}">
-                          </a>
+                        <a href="${data.profile_path}">
+                            <img class="user-profile" src="${data.profile_img_url}">
+                        </a>
+                        <span class="comment-text">
                           <a class="username" href="${data.profile_path}">
                               ${data.username}
                           </a>
@@ -42,7 +73,7 @@ $(document).on('turbolinks:load', function()  {
                               <time datetime='${data.created_at}', class='timeago'></time>
                               <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
                               <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
-                              <span class="btn-comment">댓글달기</span>
+                              <span class="btn-comment friend hover-orange hover-pointer">댓글달기</span>
                           </span>
                       </div> 
                     </div>
@@ -50,7 +81,7 @@ $(document).on('turbolinks:load', function()  {
                   <form class="prism-form-general reply" action="/replies" accept-charset="UTF-8" method="post">
                     <input name="utf8" type="hidden" value="✓">
                     <input type="hidden" name="id" id="id" value="${data.id}">
-                    <input type="hidden" name="anonymous" value="true">
+                    <input type="hidden" name="anonymous" value="false">
                     <input type="text" name="content" id="content" required="required" class="prism-form__input">
                     <button name="button" type="submit" class="prism-form__button">저장</button>
                     <span class="comment-info-alert">숨기기 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
@@ -67,6 +98,7 @@ $(document).on('turbolinks:load', function()  {
                 html.find("form").find("#content").after('<label><input type="checkbox" name="secret" id="secret" value="true">숨기기</label>')
               }
 
+              click_friend_reply(html.find(".btn-comment"))
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
               html.find(".comment-content").append(btn_like)
 
@@ -96,6 +128,9 @@ $(document).on('turbolinks:load', function()  {
 
                     var new_html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, 
                         data.content, data.created_at, data.id, secret || new_form.find("#secret").is(":checked"))
+                    new_html.find(".comment-info").append("<span class='btn-comment friend hover-orange hover-pointer' data-self='true'>댓글달기</span>")
+                    click_friend_reply(new_html.find(".btn-comment"))
+
                     var new_btn_like = getButtonLike(data.like_url, data.like_changed_url)
                     new_html.find(".comment-content").append(new_btn_like)
                     new_form.parent().find(".comment-replies").append(new_html);
@@ -113,8 +148,18 @@ $(document).on('turbolinks:load', function()  {
   
             }
             else {
-              console.log("here");
               var html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, secret)
+              html.find(".comment-info").append("<span class='btn-comment friend hover-orange hover-pointer' data-self='true'>댓글달기</span>")
+              click_friend_reply(html.find(".btn-comment"))
+              
+              if(form.find(".replier-name")) {
+                html.find(".content").before(`
+                  <a href="/profiles/${form.find(".target_author_id").val()}" 
+                  class="replier-name">
+                    ${form.find(".replier-name").text()}
+                  </a>`)
+              }
+              
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
               html.find(".comment-content").append(btn_like)
               form.parent().find(".comment-replies").append(html)
