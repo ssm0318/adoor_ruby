@@ -8,36 +8,19 @@
     border: 0.5px solid #dddddd;
     border-radius: 10px;
     padding: 10px;
-
-.prism-box_question{
-    text-align: center; 
-    position: relative;
-
-    .question-content {
-        color: black;
-        text-decoration: none;
-        font-family: 'Nanum Gothic', serif;
-        font-size: 18px;
-        
-        font-weight: bold;
-    }
-
-    .btn-drawer {
-        width: 30px;
-        height: auto;
-        float: right;
-        padding-bottom: 10px;
-        cursor: pointer;
-    }
-
-    .btn-like {
-        width: 26px;
-        height: auto;
-        float: right;
-        padding-top: 2px;
-        cursor: pointer;
-    }
 }
+
+.prism-box-custom-question {
+    background-color: white;
+    width: calc(100% - 20px);
+    margin: 20px 0px;
+    border: 0.5px solid rgb(232, 186, 172);
+    border-radius: 10px;
+    padding: 10px;
+
+}
+
+.prism-box, .prism-box-custom-question {
 
     .prism-box__header {
         width: 100%;
@@ -59,28 +42,11 @@
 
     }
 
-    .edit-or-delete {
-        position: absolute;
-        left: 87%;
-        border-radius: 5px;
-        z-index: 1;
-        background-color: white;
-        border: 0.5px solid #dddddd;
-
-        .edit-or-delete-el {
-            padding: 16px;
-            text-decoration: none;
-            color: black;
-            font-family: "Nanum Gothic", sans-serif;
-            font-size: 13px;
-        }
-
-    }
-
     .prism-box__content {
         // text-align: center;
         // border-top: 1px dashed $prism-box-gray;
         // border-bottom: 1px dashed $prism-box-gray;
+
         padding: 0px 40px;
         line-height: 140%;
         text-align: center;
@@ -88,6 +54,8 @@
         .question {
             font-family: "Nanum Gothic", sans-serif;
             font-size: 18px;
+            padding: 0;
+            margin: 0 ;
         }
 
         a {
@@ -104,7 +72,8 @@
 
         .date { 
             font-family: 'Nanum Gothic', sans-serif;
-            font-size: 12px;
+            font-size: 11px;
+            color: #888888;
         }
     }
 
@@ -115,7 +84,7 @@
         font-size: 12px;
         position: relative;
         display: grid;
-        grid-template-columns:  90% 10%;
+        grid-template-columns:  70% 30%;
         grid-template-rows: 30px 30px;
 
         .feed-channels {
@@ -169,6 +138,19 @@
             color: #F48462;
 
         }
+        
+        .btn-repost {
+            width: 30px;
+            height: auto;
+            cursor: pointer;
+            vertical-align: -2px;
+
+        }
+
+        .reposts {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
     }
 
     .prism-box__comment {
@@ -191,34 +173,58 @@
             font-size: 12px;
 
             &:hover {
-               color: #F48462;
+            color: #F48462;
             }
 
         }
     }
-}
 
-.link-generation-btn {
+    .prism-box_question{
+        text-align: center; 
+        position: relative;
 
-    
-    background-color: #F48462;
-    color: white;
-    font-family: 'Nanum Gothic', sans-serif;
-    width: 180px;
-    height: 50px;
-    border: none;
-    border-radius: 30px;
-    font-size: 15px;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    cursor: pointer;
-    &:focus {
-        outline: none;
-        fill: none;
+        .question-content {
+            color: black;
+            text-decoration: none;
+            font-family: 'Nanum Gothic', serif;
+            font-size: 18px;
+            
+            font-weight: bold;
+        }
+
+        .btn-drawer {
+            width: 30px;
+            height: auto;
+            float: right;
+            padding-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .btn-like {
+            width: 26px;
+            height: auto;
+            float: right;
+            padding-top: 2px;
+            cursor: pointer;
+        }
     }
 
+    .edit-or-delete {
+        position: absolute;
+        left: 87%;
+        border-radius: 5px;
+        z-index: 1;
+        background-color: white;
+        border: 0.5px solid #dddddd;
+
+        .edit-or-delete-el {
+            padding: 16px;
+            text-decoration: none;
+            color: black;
+            font-family: "Nanum Gothic", sans-serif;
+            font-size: 13px;
+        }
+    }
 }
 
 .prism-box-new-post {
@@ -490,3 +496,24 @@
     }
 }
 
+
+.link-generation-btn {
+    background-color: #F48462;
+    color: white;
+    font-family: 'Nanum Gothic', sans-serif;
+    width: 180px;
+    height: 50px;
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    cursor: pointer;
+    &:focus {
+        outline: none;
+        fill: none;
+    }
+
+}

@@ -21,8 +21,6 @@
                 <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
             <% end %>
         </div> <!--이거 처음 쓴 날짠지 업데이트한 날짠지..?-->
-        <div class="prism-box__comment">
-            <%= render 'comments/general_form', feed: feed %>
-        </div>
+        <%= render 'comments/general_form', feed: feed %>
     </div>
 <% end %>  
