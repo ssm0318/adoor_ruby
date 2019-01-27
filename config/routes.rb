@@ -90,5 +90,6 @@ Rails.application.routes.draw do
   get '/announcements' => 'announcements#index', as: :announcement_index
   get '/announcements/admin'  => 'announcements#admin_index', as: :announcement_admin_index
   get '/announcements/:id/publish' => 'announcements#publish', as: :announcement_publish
-
+  get '/announcements/:id/noti' => 'announcements#noti', as: :announcement_noti
+  
 end
