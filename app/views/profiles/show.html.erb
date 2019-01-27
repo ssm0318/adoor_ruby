@@ -4,46 +4,82 @@
     <% if !@user.friends.include? current_user and @user.id != current_user.id %>
         <%= @user.username %>님과 친구가 되어보세요.
     <% else %>
-    <% @feeds.each do |feed| %> 
-        <div class="prism-box <%=feed.id%>">
-            <div class="prism-box__header">
-                <%= render partial: "./user_profile", locals: {user: feed.author} %>
-                <% if current_user.id == feed.author.id %>
-                    <%= render 'feeds/delete_or_edit', feed: feed %>
-                <% end %>
-            </div>
-            <div class="prism-box__content">
-                <br>
-                <% if feed.is_a? Answer %>
-                    <%= link_to feed.question.content, question_path(feed.question.id), class: "question" %><br><br>
-                <% end %>
-                <% if feed.is_a? CustomQuestion %>
-                    <% if feed.ancestor_id != nil %>reposted<% end %>
-                    <strong>질문<strong><br>
-                <% end %>
-                <div class="answer"><%= feed.content %></div>
-                <br>
-                <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>
-                <br>
-            </div>
-            <div class="prism-box__footer" >
-                <% if current_user.id == feed.author.id %>
-                    <%= render 'feeds/my_feed_footer', target: feed %>
-                <% else %>
-                    <%= render 'feeds/feed_footer', target: feed %>
-                <% end %>
-                <% if (feed.is_a? CustomQuestion) && (feed.author != current_user) %>
-                    <% ancestor_id = feed.ancestor_id == nil ? feed.id : feed.ancestor_id %>
-                    <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
-                <% end %>
-                <br>
-            </div>
-            <% if anonymous %>
-                <%= render 'comments/general_form', feed: feed %>
+        <% @feeds.each do |feed| %>
+            <!-- custom question feed -->
+            <% if feed.is_a? CustomQuestion %>
+                <div class="prism-box <%=feed.id%>">
+                    <div class="prism-box__header">
+                        <%= render partial: "./user_profile", locals: {user: feed.author} %>
+                        <% if current_user.id == feed.author.id %>
+                            <%= render 'feeds/delete_or_edit', feed: feed %>
+                        <% end %>
+                    </div>
+                    <div class = "prism-box__content">
+                        <div class = "prism-box-custom-question">
+                            <span class = "question"><%= feed.content %></span>
+                            <% if feed.author != current_user %>
+                                <% ancestor_id = feed.ancestor_id == nil ? feed.id : feed.ancestor_id %>
+                                <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
+                            <% end %>
+                        </div>
+                        <% if feed.ancestor_id != nil %>
+                            <div class = "repost-message">
+                                <% if feed.repost_message? %>
+                                    <%= feed.repost_message %>
+                                <% end %>
+                            </div>
+                            <br>
+                        <% end %> 
+                        <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>
+                    </div>
+                    <div class="prism-box__footer">
+                        <% if current_user.id == feed.author.id %>
+                            <%= render 'feeds/my_feed_footer', target: feed %>
+                        <% else %>
+                            <%= render 'feeds/feed_footer', target: feed %>
+                        <% end %>
+                    </div>
+                    <% if anonymous %>
+                        <%= render 'comments/general_form', feed: feed %>
+                    <% else %>
+                        <%= render 'comments/friends_form', feed: feed %>
+                    <% end %>
+                </div>
+
+            <!-- posting or Answer -->
             <% else %>
-                <%= render 'comments/friends_form', feed: feed %>
-            <% end %>
-        </div>
+                <div class="prism-box <%=feed.id%>">
+                    <div class="prism-box__header">
+                        <%= render partial: "./user_profile", locals: {user: feed.author} %>
+                        <% if current_user.id == feed.author.id %>
+                            <%= render 'feeds/delete_or_edit', feed: feed %>
+                        <% end %>
+                    </div>
+                    <div class = "prism-box__content">
+                        <% if feed.is_a? Answer %>
+                            <div class = "prism-box-question">
+                                <%= link_to feed.question.content, question_path(feed.question.id), class: "question"%>
+                            </div>
+                        <% else %>
+                            <br>
+                        <% end %>
+                        <div class="answer"><%= feed.content %></div><br>
+                        <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>
+                    </div>
+                    <div class="prism-box__footer">
+                        <% if current_user.id == feed.author.id %>
+                            <%= render 'feeds/my_feed_footer', target: feed %>
+                        <% else %>
+                            <%= render 'feeds/feed_footer', target: feed %>
+                        <% end %>
+                    </div>
+                    <% if anonymous %>
+                        <%= render 'comments/general_form', feed: feed %>
+                    <% else %>
+                        <%= render 'comments/friends_form', feed: feed %>
+                    <% end %>
+                </div>
+            <% end %>   
         <% end %>
     <% end %>
 </div>

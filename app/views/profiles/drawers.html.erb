@@ -2,20 +2,20 @@
 <div class="inner-container">
     <%= render partial: "profiles/layout", locals: {user: @user} %>
     <% @drawers.reverse_each do |d| %>
+        <!-- question -->
         <% if d.target_type == "Question" %>
-            <div class = "prism-box"> 
-                <div class = "prism-box_question">
-                    <br>
-                    <div>
-                        <%= link_to d.target.content, question_path(d.target.id), class: "question-content" %>
-                        <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Question"), method: :delete %>
-                    </div> 
-                </div>
+            <div class = "prism-box__question">
                 <br>
+                <div class = "question-content">
+                    <%= link_to d.target.content, question_path(d.target.id), class: "question-content" %>
+                    <%= link_to image_tag("icons/drawer-on-icon", class: "btn-drawer"), drawer_path(d.target.id, target_type: "Question"), method: :delete %>
+                </div>
+                <br>    
             </div>
-        <% else %>
-            <div class = "prism-box">
-                <div class = "prism-box__header">
+        <!-- custom question -->
+        <% elsif d.target_type == "CustomQuestion" %>
+            <div class="prism-box <%=d.target.id%>">
+                <div class="prism-box__header">
                     <% if current_user == d.target.author or current_user.friends.include? d.target.author %>
                         <%= render partial: "./user_profile", locals: {user: d.target.author} %>
                         <% if current_user.id == d.target.author.id %>
@@ -25,34 +25,68 @@
                         <%= render partial: "./user_profile_general", locals: {user_id: d.target.author_id, feed_id: d.target.id }%>
                     <% end %>
                 </div>
-                <div class = "prism-box__content"><br> 
-                    <% if d.target.is_a? Answer %>
-                        <%= link_to d.target.question.content, question_path(d.target.question.id), class: "question" %><br><br>
-                    <% end %>
-                    <% if d.target.is_a? CustomQuestion %>
-                        <strong>질문</strong>
-                        <% if d.target.ancestor_id != nil %>
-                            reposted 
+                <div class = "prism-box__content">
+                    <div class = "prism-box-custom-question">
+                        <span class = "question"><%= d.target.content %></span>
+                        <% if d.target.author != current_user %>
+                            <% ancestor_id = d.target.ancestor_id == nil ? d.target.id : d.target.ancestor_id %>
+                            <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
+                        <% end %>
+                    </div>
+                    <% if d.target.ancestor_id != nil %>
+                        <div class = "repost-message">
                             <% if d.target.repost_message? %>
-                                with message: <%= d.target.repost_message %><br>
+                                <%= d.target.repost_message %>
                             <% end %>
-                        <% end %><br>
-                    <% end %>
-
-                    <div class="answer"><%= d.target.content %></div><br><br>
+                        </div>
+                        <br>
+                    <% end %> 
                     <div class = "date time"><%= time_tag d.target.created_at, class: "timeago" %></div>
                 </div>
-                <div class = "prism-box__footer">
+                <div class="prism-box__footer">
                     <% if current_user.id == d.target.author.id %>
                         <%= render 'feeds/my_feed_footer', target: d.target %>
                     <% else %>
                         <%= render 'feeds/feed_footer', target: d.target %>
                     <% end %>
-                    <% if (d.target.is_a? CustomQuestion) && (d.target.author != current_user) %>
-                        <% ancestor_id = d.target.ancestor_id == nil ? d.target.id : d.target.ancestor_id %>
-                        <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
+                </div>
+                <% if anonymous %>
+                    <%= render 'comments/general_form', feed: d.target %>
+                <% else %>
+                    <%= render 'comments/friends_form', feed: d.target %>
+                <% end %>
+            </div>
+
+        <!-- posting or Answer -->
+        <% else %>
+            <div class="prism-box <%= d.target.id %>">
+                <div class="prism-box__header">
+                    <% if current_user == d.target.author or current_user.friends.include? d.target.author %>
+                        <%= render partial: "./user_profile", locals: {user: d.target.author} %>
+                        <% if current_user.id == d.target.author.id %>
+                            <%= render 'feeds/delete_or_edit', feed: d.target %>
+                        <% end %>
+                    <% else %>
+                        <%= render partial: "./user_profile_general", locals: {user_id: d.target.author_id, feed_id: d.target.id }%>
                     <% end %>
-                    <br>
+                </div>
+                <div class = "prism-box__content">
+                    <% if d.target.is_a? Answer %>
+                        <div class = "prism-box-question">
+                            <%= link_to d.target.question.content, question_path(d.target.question.id), class: "question"%>
+                        </div>
+                    <% else %>
+                        <br>
+                    <% end %>
+                    <div class="answer"><%= d.target.content %></div><br>
+                    <div class = "date time"><%= time_tag d.target.created_at, class: "timeago" %></div>
+                </div>
+                <div class="prism-box__footer">
+                    <% if current_user.id == d.target.author.id %>
+                        <%= render 'feeds/my_feed_footer', target: d.target %>
+                    <% else %>
+                        <%= render 'feeds/feed_footer', target: d.target %>
+                    <% end %>
                 </div>
                 <% if anonymous %>
                     <%= render 'comments/general_form', feed: d.target %>
