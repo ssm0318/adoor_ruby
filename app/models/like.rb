@@ -16,7 +16,7 @@ class Like < ApplicationRecord
             if self.target.author.friends.include? self.user
                 # 글에 좋아요
                 case self.target_type
-                when 'Post', 'Answer'
+                when 'Post', 'Answer', 'CustomQuestion'
                     noti_hash[:action] = 'friend_like_article'
                     create_noti_hash[:action] = 'friend_like_article'
                 when 'Comment'
@@ -31,7 +31,7 @@ class Like < ApplicationRecord
             else
                 # 글에 좋아요
                 case self.target_type
-                when 'Post', 'Answer'
+                when 'Post', 'Answer', 'CustomQuestion'
                     noti_hash[:action] = 'anonymous_like_article'
                     create_noti_hash[:action] = 'anonymous_like_article'
                 when 'Comment'
@@ -60,7 +60,7 @@ class Like < ApplicationRecord
             # 친구의 좋아요
             if self.target.author.friends.include? self.user
                 case self.target_type
-                when 'Post', 'Answer'
+                when 'Post', 'Answer', 'CustomQuestion'
                     noti_hash[:action] = 'friend_like_article'
                 when 'Comment'
                     noti_hash[:action] = 'friend_like_comment'
@@ -72,7 +72,7 @@ class Like < ApplicationRecord
             else
                 # 글에 좋아요
                 case self.target_type
-                when 'Post', 'Answer'
+                when 'Post', 'Answer', 'CustomQuestion'
                     noti_hash[:action] = 'anonymous_like_article'
                 when 'Comment'
                     noti_hash[:action] = 'anonymous_like_comment'

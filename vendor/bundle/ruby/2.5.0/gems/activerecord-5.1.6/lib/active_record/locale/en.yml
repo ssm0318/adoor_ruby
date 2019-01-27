@@ -7,8 +7,8 @@ en:
   # Default error messages
   errors:
     messages:
-      required: "must exist"
-      taken: "has already been taken"
+      required: "필수 항목입니다."
+      taken: "은(는) 이미 존재합니다."
 
   # Active Record models configuration
   activerecord:

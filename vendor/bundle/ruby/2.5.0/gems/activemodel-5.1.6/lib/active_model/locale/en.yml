@@ -9,7 +9,7 @@ en:
       model_invalid: "Validation failed: %{errors}"
       inclusion: "is not included in the list"
       exclusion: "is reserved"
-      invalid: "is invalid"
+      invalid: "는 유효하지 않습니다."
       confirmation: "doesn't match %{attribute}"
       accepted: "must be accepted"
       empty: "can't be empty"
@@ -20,7 +20,7 @@ en:
         other: "is too long (maximum is %{count} characters)"
       too_short:
         one: "is too short (minimum is 1 character)"
-        other: "is too short (minimum is %{count} characters)"
+        other: "는 최소 %{count}자 이상이어야 합니다.)"
       wrong_length:
         one: "is the wrong length (should be 1 character)"
         other: "is the wrong length (should be %{count} characters)"

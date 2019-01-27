@@ -58,8 +58,6 @@
                 color: #777777;
                 padding-left: 25px;
                 padding-right: 25px;
-                
-        
                 &:hover {
                     color: #F48462;
                 }
@@ -89,20 +87,22 @@
             .search-form {
                 //padding-top: 20px;
                 display: inline-block;
-                margin-right: 30px;
+                //margin-right: 30px;
+                //position: 
             }
             .search-input {
                 width: 0px;
                 height: 30px;
-                padding-left: 10px;
+                padding-left: 15px;
+                padding-right: 15px;
                 border: none;
                 background-color: white;
                 border-radius: 10px;
+                position: absolute;
+                right: 0;
                 -webkit-border-radius: 10px;
                 -moz-border-radius: 10px;
-                margin-bottom: 10px;
                 font-size: 12px;
-                padding-left: 35px;
                 -webkit-transition: width .55s ease;
                 -moz-transition: width .55s ease;
                 -ms-transition: width .55s ease;
@@ -112,6 +112,7 @@
                     outline: none;
                     fill: none;
                 }
+                border: 0.5px solid #dddddd;
             }
 
             .search-input:focus, .search-input:active {
@@ -119,12 +120,13 @@
                 width: 120px;
             }
 
-            .search-container:hover .search-input {
+            .hover-container:hover .search-input {
                 width: 120px;
             }
         
             .search-container {
                 width: 120px;
+                height: 30px;
                 vertical-align: middle;
                 white-space: nowrap;
                 position: relative;
@@ -133,6 +135,7 @@
             .search-icon {
                 color: #F48462;
                 position: absolute;
+                right: 7px;
                 margin-left: 10px;
                 margin-top: 8px;
                 z-index: 1;

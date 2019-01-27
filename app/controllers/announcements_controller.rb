@@ -1,7 +1,7 @@
 class AnnouncementsController < ApplicationController
     before_action :authenticate_user!
     before_action :check_admin, except: [:index]
-    before_action :set_announcement, only: [:publish, :unpublish, :destroy]
+    before_action :set_announcement, only: [:publish, :unpublish, :noti, :destroy]
 
     def index 
         @published_announcements = Announcement.published.sort_by(&:published_at).reverse!
@@ -30,6 +30,13 @@ class AnnouncementsController < ApplicationController
             Notification.create(recipient: u, actor: User.find(1), target: @announcement, origin: @announcement, action: "announcement")
         end
 
+        redirect_to announcement_admin_index_path
+    end
+
+    def noti
+        User.all.each do |u|
+            Notification.create(recipient: u, actor: User.find(1), target: @announcement, origin: @announcement, action: "re_announcement")
+        end
         redirect_to announcement_admin_index_path
     end
 

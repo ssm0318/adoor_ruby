@@ -43,9 +43,20 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    ahoy_matey (2.2.0)
+      addressable
+      browser (~> 2.0)
+      device_detector
+      geocoder (>= 1.4.5)
+      railties (>= 4.2)
+      referer-parser (>= 0.3)
+      request_store
+      safely_block (>= 0.2.1)
+      user_agent_parser
     arel (8.0.0)
     bcrypt (3.1.12)
     bindex (0.5.0)
+    browser (2.5.3)
     builder (3.2.3)
     byebug (10.0.2)
     capybara (2.18.0)
@@ -74,15 +85,18 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
+    device_detector (1.0.1)
     devise (4.5.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    errbase (0.1.1)
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.25)
+    geocoder (1.5.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     i18n (1.1.1)
@@ -180,6 +194,9 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    referer-parser (0.3.0)
+    request_store (1.4.1)
+      rack (>= 1.4)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -189,6 +206,8 @@ GEM
       rubyzip (~> 1.1, < 2.0.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
+    safely_block (0.2.1)
+      errbase
     sass (3.6.0)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -234,6 +253,7 @@ GEM
     uglifier (4.1.19)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.0)
+    user_agent_parser (2.5.1)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.7.0)
@@ -254,6 +274,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_link_to
+  ahoy_matey (~> 2.2)
   byebug
   capybara (~> 2.13)
   carrierwave (~> 1.0)
@@ -285,4 +306,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.17.1
+   2.0.1

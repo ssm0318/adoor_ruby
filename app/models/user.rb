@@ -11,6 +11,9 @@ class User < ApplicationRecord
   after_create :add_default_role, :add_default_image, :add_default_channels
 
   mount_uploader :image, ImageUploader
+
+  # visit
+  has_many :visits, class_name: "Ahoy::Visit"
   
   # answer
   has_many :answers, dependent: :destroy, :foreign_key => "author_id"
@@ -61,6 +64,9 @@ class User < ApplicationRecord
   has_many :queries, dependent: :destroy
   has_many :user_queries, dependent: :destroy
 
+  # tag
+  has_many :tags, dependent: :destroy, :foreign_key => "author_id"
+
   # channel
   has_many :channels, dependent: :destroy
   has_many :passive_friendships, :class_name => "Friendship", :foreign_key => "friend_id", dependent: :destroy
@@ -69,9 +75,12 @@ class User < ApplicationRecord
   # reference: http://railscasts.com/episodes/163-self-referential-association
   
   # BETA: email confirmation 잠깐 해지해놓음!! 베타 이전에 이 부분 다시 주석처리해야 email confirmation 제대로 됨
+  
   protected
   def confirmation_required?
-    false
+    if Rails.env.development?
+      false
+    end
   end
 
   private
