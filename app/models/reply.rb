@@ -40,7 +40,7 @@ class Reply < ApplicationRecord
                 # end
                 # 친구 대댓글인 경우
                 else
-                    if self.target_author_id
+                    if self.target_author_id == nil
                         # 댓글 주인에게 노티
                         noti_hash[:action] = 'friend_to_comment'
                         create_noti_hash[:action] = 'friend_to_comment'
