@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
 if Rails.env.development?
     # 1: 백산수, 2: 마틸다, 3:율로몬, 4: 잡동사니, 5: 이룰렁, 6: 누구게, 7: 메롱
     if User.where(email: "prism@snu.com").empty?
@@ -132,15 +133,6 @@ if Rails.env.development?
     Post.find_or_create_by(author_id: 1, content: "100만원이 왔다갔다")
     Post.find_or_create_by(author_id: 1, content: "1000만원이 왔다갔다")
 
-    # Highlight 모델을 어떻게?
-    # Highlight.find_or_create_by(user_id: 2, target: Answer.find(3), content: "좋은 스피커를 사서")
-    # Highlight.find_or_create_by(user_id: 2, target: Answer.find(1), content: "시작하는건 되게 잘하는데 꾸준한게 없어서")
-    # Highlight.find_or_create_by(user_id: 3, target: Answer.find(6), content: "초를 꽂지 말자고")
-    # Highlight.find_or_create_by(user_id: 1, target: Answer.find(4), content: "높은 곳에서")
-    # Highlight.find_or_create_by(user_id: 3, target: Answer.find(14), content: "저절로, 습관대로 행동하고 생각하고 말하게 되는 순간이 무섭다.")
-    # Highlight.find_or_create_by(user_id: 3, target: Answer.find(12), content: "충분히 쉬고 시작할 수 있어서 좋다.")
-    # Highlight.find_or_create_by(user_id: 3, target: Answer.find(15), content: "세상에 저절로 되는 일은 없다.")
-
     # Comment.find_or_create_by(author_id: 2, recipient_id: 2, target: Answer.find(1), content: "oh really?")
     # Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(3), content: "awesome!")
     # Comment.find_or_create_by(author_id: 3, recipient_id: 3, target: Answer.find(4), content: "same.")
@@ -240,7 +232,9 @@ if Rails.env.development?
     a.tags << Tag.create(author_id: 6, content: "나는 태그다", target: a)
     a.tags << Tag.create(author_id: 6, content: "너는 태그냐", target: a)
     a.tags << Tag.create(author_id: 6, content: "와썹맨", target: a)
+
 elsif Rails.env.production?
+
     if User.where(email: "adoor.team@gmail.com").empty?
         User.create(email: "adoor.team@gmail.com", password: "adoor2019", username: "관리자")
     end
