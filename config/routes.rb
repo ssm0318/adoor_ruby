@@ -67,9 +67,9 @@ Rails.application.routes.draw do
   post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request # get?
 
   # Invitation
-  get '/invitation' => 'invitations#index', as: :invitation
-  get '/invitation/link' => 'invitations#link', as: :invitation_link
-  get '/invitation/:id(/:question_id1(/:question_id2(/:question_id3)))' => 'invitations#accept', as: :invitation_accept
+  get '/invitations' => 'invitations#index', as: :invitation
+  get '/invitations/link' => 'invitations#link', as: :invitation_link
+  get '/invitations/:id(/:question_id1(/:question_id2(/:question_id3)))' => 'invitations#accept', as: :invitation_accept
 
   # Search
   get '/search/all' => 'search#all', as: :search_all
@@ -87,8 +87,8 @@ Rails.application.routes.draw do
 
   # Announcement
   resources :announcements, only: [:create, :update, :destroy]
-  get '/announcement' => 'announcements#index', as: :announcement_index
-  get '/announcement/admin'  => 'announcements#admin_index', as: :announcement_admin_index
-  get '/announcement/:id/publish' => 'announcements#publish', as: :announcement_publish
+  get '/announcements' => 'announcements#index', as: :announcement_index
+  get '/announcements/admin'  => 'announcements#admin_index', as: :announcement_admin_index
+  get '/announcements/:id/publish' => 'announcements#publish', as: :announcement_publish
 
 end
