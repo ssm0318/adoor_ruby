@@ -1,6 +1,9 @@
 $(document).on('turbolinks:load', function()  {
     $(".feed-edit").on('click', function() {
         
+        $("#edit-background").show()
+        $("body").css('overflow', 'hidden')
+
         form = $(this)
         $.ajax({
         type: "GET",
@@ -12,8 +15,6 @@ $(document).on('turbolinks:load', function()  {
             $("#edit-background").find("#edit-box").append(html)
             check_channels(html.find(".answer-button"))
             toggle_channels_dropdown(html.find(".channels-dropdown"))
-            $("#edit-background").show()
-            $("body").css('overflow', 'hidden')
             textarea_init($(html.find('textarea')), $("#edit-background"))
 
             //편집 exit 버튼
@@ -40,6 +41,7 @@ $(document).on('turbolinks:load', function()  {
                     html.remove()
                     $("#edit-background").hide()
                     $("body").css('overflow', 'auto')
+                    form.on('click')
                 },
                 error: function(data) {
                     console.log("error!")
