@@ -144,6 +144,19 @@ namespace :user_stats do
             csv << user_queries
         end
 
+        # users - total
+
+        puts "updating total user stats.............."
+
+        CSV.open("lib/user_stats/total_user_stats.csv", "wb") do |csv|
+            csv << ["", "Answers", "Assignments", "Comments", "Drawers", "Friendships", "Likes", "Posts", "Queries", "Replies", "Tags", "User_Queries"]
+
+        end
+
+        # users - recent
+
+        puts "updating recent user stats.............."
+
         StatsMailer.send_stats.deliver_now
         puts "#{Time.now} - Success!"
     end

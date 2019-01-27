@@ -20,7 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 
 # every :day, at: '0am' do
-# end
+# end 
 
 #job_type :rails,    "cd :path && rails :task --silent :output"
 job_type :rake, 'cd :path && RAILS_ENV=production bundle exec rake :task --silent :output'
@@ -33,7 +33,7 @@ every :day, at: '0 am' do
     rake "today_question:update"
 end
 
-# every :day, at: '5 am' do
-every 1.minutes do  
+every :day, at: '9 pm' do
+# every 1.minutes do  
     rake "user_stats:update"
 end
