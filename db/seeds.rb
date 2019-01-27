@@ -240,5 +240,6 @@ elsif Rails.env.production?
     end
     u = User.find(1)
     u.image = Rails.root.join("app/assets/images/logo/final-app-logo.png").open
+    u.skip_confirmation!
     u.save!
 end
