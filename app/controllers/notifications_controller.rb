@@ -5,6 +5,14 @@ class NotificationsController < ApplicationController
         @notifications = Notification.all
     end
     
+    def read_all
+        Notification.where(recipient_id: current_user.id).visible.unread.each do |n|
+            n.read_at = DateTime.now()
+            n.save(touch: false)
+        end
+        redirect_to root_url
+    end
+
     def read
         noti = Notification.find(params[:id])
 
@@ -27,59 +35,104 @@ class NotificationsController < ApplicationController
             puts 'target_type: ' + target_type
             puts '====================================================='
 
-            if target_type == 'Friendship'
-                redirect_to profile_path(origin_id)
-            elsif target_type == 'Answer'
-                redirect_to answer_path(origin_id)
-            elsif target_type == 'Assignment'
-                redirect_to new_answer_path(origin_id)
-            # elsif target_type == 'Highlight'
+            case target_type
+            when 'Like'
+                case origin_type
+                when 'Post'
+                    render js: "window.location = '#{post_path(origin_id)}'"
+                when 'Answer'
+                    render js: "window.location = '#{answer_path(origin_id)}'"
+                when 'CustomQuestion'
+                    render js: "window.location = '#{custom_question_path(origin_id)}'"
+                when 'Comment'
+                    case noti.origin.target_type
+                    when 'Post'
+                        render js: "window.location = '#{post_path(noti.origin.target_id)}'"
+                    when 'Answer'
+                        render js: "window.location = '#{answer_path(noti.origin.target_id)}'"
+                    when 'CustomQuestion'
+                        render js: "window.location = '#{custom_question_path(noti.origin.target_id)}'"
+                    when 'Announcement'
+                        render js: "window.location = '#{announcement_index_path}'"
+                    else
+                    end
+                when 'Reply'
+                    case noti.origin.comment.target_type
+                    when 'Post'
+                        render js: "window.location = '#{post_path(noti.origin.comment.target_id)}'"
+                    when 'Answer'
+                        render js: "window.location = '#{answer_path(noti.origin.comment.target_id)}'"
+                    when 'CustomQuestion'
+                        render js: "window.location = '#{custom_question_path(noti.origin.comment.target_id)}'"
+                    when 'Announcement'
+                        render js: "window.location = '#{announcement_index_path}'"
+                    else
+                    end
+                else
+                end
+            when 'Comment'
+                case origin_type
+                when 'Post'
+                    render js: "window.location = '#{post_path(origin_id)}'"
+                when 'Answer'
+                    render js: "window.location = '#{answer_path(origin_id)}'"
+                when 'CustomQuestion'
+                    render js: "window.location = '#{custom_question_path(origin_id)}'"
+                when 'Announcement'
+                    render js: "window.location = '#{announcement_index_path}'"
+                else
+                end
+            when 'Reply'
+                case noti.origin.target_type
+                when 'Post'
+                    render js: "window.location = '#{post_path(noti.origin.target_id)}'"
+                when 'Answer'
+                    render js: "window.location = '#{answer_path(noti.origin.target_id)}'"
+                when 'CustomQuestion'
+                    render js: "window.location = '#{custom_question_path(noti.origin.target_id)}''"
+                when 'Announcement'
+                    render js: "window.location = '#{announcement_index_path}'"
+                else
+                end
+            when 'Drawer'
+                case origin_type
+                when 'Post'
+                    render js: "window.location = '#{post_path(origin_id)}'"
+                when 'Answer'
+                    render js: "window.location = '#{answer_path(origin_id)}'"
+                when 'CustomQuestion'
+                    render js: "window.location = '#{custom_question_path(origin_id)}'"
+                when 'Question'
+                    render js: "window.location = '#{question_path(origin_id)}'"
+                else
+                end
+            when 'CustomQuestion'
+                render js: "window.location = '#{custom_question_path(origin_id)}'"
+            when 'Assignment'
+                @question = Question.find(origin_id)
+                @answer = Answer.new
+
+                html_content = render_to_string :partial => 'answers/form', :locals => { :answer => @answer, :@question => @question }
+                render :json => { 
+                    html_content: "#{html_content}",
+                }
+
+            when 'Answer'
+                render js: "window.location = '#{answer_path(origin_id)}'"
+            when 'Friendship'
+                render js: "window.location = '#{profile_path(origin_id)}'"
+            # when 'Highlight'
             #     if origin_type == 'Post'
             #         redirect_to post_path(origin_id)
             #     elsif origin_type == 'Answer'
             #         redirect_to answer_path(origin_id)
             #     end
-            elsif target_type == 'Drawer'
-                if origin_type == 'Post'
-                    redirect_to post_path(origin_id)
-                elsif origin_type == 'Answer'
-                    redirect_to answer_path(origin_id)
-                elsif origin_type == 'Question'
-                    redirect_to question_path(origin_id)
-                end
-            elsif target_type == 'Comment'
-                if origin_type == 'Post'
-                    redirect_to post_path(origin_id)
-                elsif origin_type == 'Answer'
-                    redirect_to answer_path(origin_id)
-                end
-            elsif target_type == 'FriendRequest'
-                redirect_to profile_path(origin_id)
-            elsif target_type == 'Reply'
-                if noti.origin.target_type == 'Post'
-                    redirect_to post_path(noti.origin.target.id)
-                elsif noti.origin.target_type == 'Answer'
-                    redirect_to answer_path(noti.origin.target.id)
-                end
-            elsif target_type == 'Like'
-                if origin_type == 'Post'
-                    redirect_to post_path(origin_id)
-                elsif origin_type == 'Answer'
-                    redirect_to answer_path(origin_id)
-                elsif origin_type == 'Comment'
-                    if noti.origin.target_type == 'Post'
-                        redirect_to post_path(noti.origin.target_id)
-                    elsif noti.origin.target_type == 'Answer'
-                        redirect_to answer_path(noti.origin.target_id)
-                    end
-                elsif origin_type == 'Reply'
-                    if noti.origin.comment.target_type == 'Post'
-                        redirect_to post_path(noti.origin.comment.target_id)
-                    elsif noti.origin.comment.target_type == 'Answer'
-                        redirect_to answer_path(noti.origin.comment.target_id)
-                    end
-                end
-            end 
+            when 'FriendRequest'
+                render js: "window.location = '#{profile_path(origin_id)}'"
+            when 'Announcement'
+                render js: "window.location = '#{announcement_index_path}'"
+            else
+            end
         end
     end
 end 

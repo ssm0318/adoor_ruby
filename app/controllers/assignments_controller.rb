@@ -46,4 +46,4 @@ class AssignmentsController < ApplicationController
             assigned_user: User.find(assignee_id)
         }
     end
-end 
+end

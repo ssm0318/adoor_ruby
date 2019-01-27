@@ -7,6 +7,9 @@
         <%= active_link_to '익명 피드', general_feed_path, class: "nav-el" %>
         <%= active_link_to '친구 초대', invitation_path, class: "nav-el" %>
         <%= active_link_to '도움말', introduction_path, class: "nav-el"%>
+        <% if user_signed_in? && (current_user.has_role? :admin) %>
+            <%= active_link_to '공지 관리', announcement_admin_index_path, class: "nav-el"%>
+        <% end %>
     </div>
 
     <div class = "nav-right">

@@ -3,7 +3,7 @@
     <%# path 설정 %>
         <div class="search-container">
             <span class="search-icon"><i class="fas fa-search"></i></span>
-            <%= text_field_tag :query, nil, required: true, class: "search-input", autofocus: true %>
+            <%= text_field_tag :query, nil, required: true, class: "search-input", autocomplete: "off" %>
         </div>
     <% end %>
     <br>

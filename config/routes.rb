@@ -9,7 +9,13 @@ Rails.application.routes.draw do
   get '/answers/:id/new' => 'answers#new', as: :new_answer
 
   # Post
-  resources :posts
+  resources :posts, except: [:new]
+
+  # CustomQuestion
+  resources :custom_questions, except: [:new]
+  get '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost
+  post '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost_form
+  get '/custom_questions/:id/message' => 'custom_questions#message', as: :custom_question_message
 
   # Feed
   root 'feeds#friends'
@@ -43,6 +49,7 @@ Rails.application.routes.draw do
   resources :highlights, only: [:create, :destroy]
 
   # Notification
+  get '/notifications/read_all' => 'notifications#read_all', as: :notification_read_all
   get '/notifications/:id' => 'notifications#read'
 
   # Profile
@@ -73,4 +80,15 @@ Rails.application.routes.draw do
   get '/search/popular_tags' => 'search#popular_tags', as: :show_popular_tags
   get '/search/popular_search' => 'search#popular_search', as: :show_popular_search
   get '/search/user' => 'search#user', as: :search_user
+
+  # Channel
+  resources :channels, only: [:create, :update, :destroy]
+  put '/channels/:id/edit_friendship' => 'channels#edit_friendship'
+
+  # Announcement
+  resources :announcements, only: [:create, :update, :destroy]
+  get '/announcement' => 'announcements#index', as: :announcement_index
+  get '/announcement/admin'  => 'announcements#admin_index', as: :announcement_admin_index
+  get '/announcement/:id/publish' => 'announcements#publish', as: :announcement_publish
+
 end

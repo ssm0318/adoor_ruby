@@ -14,10 +14,14 @@ class Notification < ApplicationRecord
   # noti의 target이 answer, highlight, drawer, comment인 경우 answer이고
   # noti의 target이 friendship, friendrequest인 경우 noti의 actor인 user이고
   # noti의 target이 assignment인 경우 해당 assignment의 question이다
+  # noti의 target이 announcement인 경우 announcement자체이다
+  # noti의 target이 custom question인 경우 그 custom question의 ancestor인 custom question이다
   ##### 예외: noti의 target이 reply의 origin은 그 reply가 달린 댓글이다.
   ##### 예외2: noti의 target이 like인 경우 origin은 그 like의 target이다
 
   # notification.unread로 확인하지 않은 노티들을 찾을 수 있음
   scope :unread, -> { where(read_at: nil) }
+  scope :invisible, -> {where(invisible: true)}
+  scope :visible, -> {where(invisible: false)}
   
 end
