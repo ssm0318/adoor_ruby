@@ -1,44 +1,49 @@
+<% anonymous = @anonymous%>
 <div class="inner-container">
 <%= render partial: "profiles/layout", locals: {user: @user} %>
     <% if !@user.friends.include? current_user and @user.id != current_user.id %>
         <%= @user.username %>님과 친구가 되어보세요.
     <% else %>
     <% @feeds.each do |feed| %> 
-        <div class="prism-box">
+        <div class="prism-box <%=feed.id%>">
             <div class="prism-box__header">
-                <%= render partial: "./user_profile", locals: {user: feed.author} %><br/>
+                <%= render partial: "./user_profile", locals: {user: feed.author} %>
+                <% if current_user.id == feed.author.id %>
+                    <%= render 'feeds/delete_or_edit', feed: feed %>
+                <% end %>
             </div>
             <div class="prism-box__content">
                 <br>
                 <% if feed.is_a? Answer %>
                     <%= link_to feed.question.content, question_path(feed.question.id), class: "question" %><br><br>
                 <% end %>
+                <% if feed.is_a? CustomQuestion %>
+                    <% if feed.ancestor_id != nil %>reposted<% end %>
+                    <strong>질문<strong><br>
+                <% end %>
                 <div class="answer"><%= feed.content %></div>
                 <br>
                 <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>
                 <br>
             </div>
-            <div class="prism-box__footer" style="padding-bottom: 10px;">
-                <%= render 'feeds/my_feed', feed: feed %>
-                <%= render 'likes/default', target: feed, like_btn_class: "btn-feed-like" %>
-                <%= render 'drawers/default', target: feed %>
+            <div class="prism-box__footer" >
+                <% if current_user.id == feed.author.id %>
+                    <%= render 'feeds/my_feed_footer', target: feed %>
+                <% else %>
+                    <%= render 'feeds/feed_footer', target: feed %>
+                <% end %>
+                <% if (feed.is_a? CustomQuestion) && (feed.author != current_user) %>
+                    <% ancestor_id = feed.ancestor_id == nil ? feed.id : feed.ancestor_id %>
+                    <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
+                <% end %>
                 <br>
             </div>
-            <%= render 'comments/friends_form', user: @user, feed: feed %>
+            <% if anonymous %>
+                <%= render 'comments/general_form', feed: feed %>
+            <% else %>
+                <%= render 'comments/friends_form', feed: feed %>
+            <% end %>
         </div>
         <% end %>
     <% end %>
 </div>
-<%= render 'comments/friends_script' %>
-<%= render 'drawers/script' %>
-<%= render 'layouts/timestamp' %>
-<%= render 'likes/script' %>
-<%= render './delete_script' %>
-<script>
-  $(document).ready(function() {
-    like_ajax($(".btn-feed-like"))
-    like_ajax($(".btn-comment-like"))
-    delete_ajax($(".btn-feed-delete"))
-    delete_ajax($(".btn-comment-delete"))
-  })
-</script>

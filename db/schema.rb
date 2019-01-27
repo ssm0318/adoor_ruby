@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190111134023) do
+ActiveRecord::Schema.define(version: 20190123033448) do
+
+  create_table "announcements", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "answers", force: :cascade do |t|
     t.integer "author_id", null: false
@@ -41,16 +49,49 @@ ActiveRecord::Schema.define(version: 20190111134023) do
     t.index ["question_id"], name: "index_assignments_on_question_id"
   end
 
+  create_table "channels", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_channels_on_user_id"
+  end
+
+  create_table "channels_friendships", id: false, force: :cascade do |t|
+    t.integer "channel_id", null: false
+    t.integer "friendship_id", null: false
+    t.index ["channel_id", "friendship_id"], name: "index_channels_friendships_on_channel_id_and_friendship_id"
+    t.index ["friendship_id", "channel_id"], name: "index_channels_friendships_on_friendship_id_and_channel_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer "author_id", null: false
-    t.integer "recipient_id"
     t.integer "target_id"
     t.string "target_type"
     t.text "content", null: false
+    t.boolean "secret", default: false, null: false
+    t.boolean "anonymous", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_comments_on_author_id"
-    t.index ["recipient_id"], name: "index_comments_on_recipient_id"
+  end
+
+  create_table "custom_questions", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.string "content", null: false
+    t.string "tag_string"
+    t.string "repost_message"
+    t.integer "ancestor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_custom_questions_on_author_id"
+  end
+
+  create_table "custom_questions_tags", id: false, force: :cascade do |t|
+    t.integer "custom_question_id", null: false
+    t.integer "tag_id", null: false
+    t.index ["custom_question_id", "tag_id"], name: "index_custom_questions_tags_on_custom_question_id_and_tag_id"
+    t.index ["tag_id", "custom_question_id"], name: "index_custom_questions_tags_on_tag_id_and_custom_question_id"
   end
 
   create_table "drawers", force: :cascade do |t|
@@ -59,6 +100,15 @@ ActiveRecord::Schema.define(version: 20190111134023) do
     t.string "target_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "entrances", force: :cascade do |t|
+    t.integer "channel_id", null: false
+    t.integer "target_id"
+    t.string "target_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_entrances_on_channel_id"
   end
 
   create_table "friend_requests", force: :cascade do |t|
@@ -108,6 +158,7 @@ ActiveRecord::Schema.define(version: 20190111134023) do
     t.integer "origin_id"
     t.string "origin_type"
     t.string "action"
+    t.boolean "invisible", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -137,7 +188,6 @@ ActiveRecord::Schema.define(version: 20190111134023) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.integer "author_id", default: 1
     t.string "content", null: false
     t.boolean "official"
     t.date "selected_date"
@@ -157,6 +207,9 @@ ActiveRecord::Schema.define(version: 20190111134023) do
     t.integer "author_id", null: false
     t.integer "comment_id", null: false
     t.text "content", null: false
+    t.boolean "secret", default: false, null: false
+    t.boolean "anonymous", null: false
+    t.integer "target_author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_replies_on_author_id"
@@ -205,10 +258,12 @@ ActiveRecord::Schema.define(version: 20190111134023) do
     t.string "encrypted_password", default: "", null: false
     t.string "username"
     t.date "date_of_birth"
+    t.string "profile"
     t.string "image"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "last_sign_in_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

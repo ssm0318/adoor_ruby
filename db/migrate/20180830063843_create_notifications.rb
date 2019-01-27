@@ -9,6 +9,7 @@ class CreateNotifications < ActiveRecord::Migration[5.1]
       t.integer  :origin_id
       t.string   :origin_type
       t.string   :action  # 현재는 필요하지 않지만 이후에 하나의 모델에 대해 여러가지 노티가 생길 수 있기 때문에 액션을 구분함.
+      t.boolean  :invisible, default: false
 
       # reference: http://aalvarez.me/blog/posts/easy-notification-system-in-rails.html 참조
       t.timestamps

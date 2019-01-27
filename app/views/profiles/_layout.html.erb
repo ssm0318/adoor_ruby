@@ -31,7 +31,7 @@
     </div>
     
     <div class="user-header__tab">
-        <%= active_link_to "답변", profile_path(user.id), :active => :exclusive %>
+        <%= active_link_to "게시물", profile_path(user.id), :active => :exclusive %>
         <% if current_user.id == user.id %>
             <%# active_link_to "형광펜", user_highlights_path(user.id) %>
             <%= active_link_to "서랍장", profile_drawers_path(user.id) %>

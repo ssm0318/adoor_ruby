@@ -1,0 +1,41 @@
+<% @user = @custom_question.author %>
+<% custom_question = @custom_question %>
+<% anonymous = @anonymous%>
+<div class="inner-container">
+<div class="prism-box">
+
+    <div class="prism-box__header">
+        <% if anonymous %>
+            <%= render partial: "./user_profile_general", locals: {user_id: custom_question.author_id, feed_id: custom_question.id} %>
+        <%else %>
+            <%= render partial: "./user_profile", locals: {user: custom_question.author} %>
+            <% if current_user.id == custom_question.author.id %>
+                <%= render 'feeds/delete_or_edit', feed: custom_question %>
+            <% end %>
+        <% end %>
+        <br/>
+
+    </div> 
+    <div class="prism-box__content">
+        <br>
+        <div class="answer"><%= custom_question.content %></div>
+
+        <div class = "date time"><%= time_tag custom_question.created_at, class: "timeago" %></div>
+        <br>
+    </div>
+    <div class="prism-box__footer" >  
+        <% if current_user.id == custom_question.author.id %>
+            <%= render 'feeds/my_feed_footer', target: custom_question %>
+        <% else %>
+            <%= render 'feeds/feed_footer', target: custom_question %>
+        <% end %>
+        <br>
+    </div>
+    <div class="prism-box__comment">
+        <% if anonymous %>
+            <%= render 'comments/general_form', feed: custom_question %>
+        <% else %>
+            <%= render 'comments/friends_form', feed: custom_question %>
+        <% end %>
+    </div>
+</div>

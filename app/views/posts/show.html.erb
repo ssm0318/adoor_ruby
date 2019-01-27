@@ -9,6 +9,9 @@
             <%= render partial: "./user_profile_general", locals: {user_id: post.author_id, feed_id: post.id} %>
         <%else %>
             <%= render partial: "./user_profile", locals: {user: post.author} %>
+            <% if current_user.id == post.author.id %>
+                <%= render 'feeds/delete_or_edit', feed: post %>
+            <% end %>
         <% end %>
         <br/>
 
@@ -20,34 +23,20 @@
         <div class = "date time"><%= time_tag post.created_at, class: "timeago" %></div>
         <br>
     </div>
-    <div class="prism-box__footer" style="padding-bottom: 10px;">
-      
-        <%= render 'feeds/my_feed', feed: post %>
-        <%= render 'likes/default', target: post, like_btn_class: "btn-feed-like" %>
-        <%= render 'drawers/default', target: post %>
+    <div class="prism-box__footer">
+        <% if current_user.id == post.author.id %>
+            <%= render 'feeds/my_feed_footer', target: post %>
+        <% else %>
+            <%= render 'feeds/feed_footer', target: post %>
+        <% end %>
         <br>
     </div>
-    <% if anonymous %>
-        <%= render 'comments/general_form', feed: post %>
-    <% else %>
-        <%= render 'comments/friends_form', feed: post %>
-    <% end %>
+    <div class="prism-box__comment">
+        <% if anonymous %>
+            <%= render 'comments/general_form', feed: post %>
+        <% else %>
+            <%= render 'comments/friends_form', feed: post %>
+        <% end %>
+    </div>
 </div>
 
-<%= render 'layouts/timestamp' %>
-<%= render 'drawers/script' %>
-<% if anonymous %>
-    <%= render 'comments/general_script'%>
-<%else %>
-    <%= render 'comments/friends_script' %>
-<% end %>
-<%= render 'likes/script' %>
-<%= render './delete_script' %>
-<script>
-  $(document).ready(function() {
-    like_ajax($(".btn-feed-like"))
-    like_ajax($(".btn-comment-like"))
-    delete_ajax($(".btn-feed-delete"))
-    delete_ajax($(".btn-comment-delete"))
-  })
-</script> 
