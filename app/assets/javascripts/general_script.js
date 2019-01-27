@@ -96,7 +96,7 @@ $(document).on('turbolinks:load', function()  {
                       <time datetime='${data.created_at}', class='timeago'></time>
                       <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
                       <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
-                      <span class="btn-comment general">댓글달기</span>
+                      <span class="btn-comment general hover-orange hover-pointer">댓글달기</span>
                     </div> 
                   </div>
                 </div>

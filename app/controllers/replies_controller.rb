@@ -2,13 +2,8 @@ class RepliesController < ApplicationController
     before_action :set_reply, only: [:destroy]
 
     def create
-        if params[:secret].nil?
-            secret = false
-        else
-            secret = params[:secret]
-        end
+        secret = params[:secret].nil? ? false : params[:secret]
         r = Reply.create(content: params[:content], author_id: current_user.id, comment_id: params[:id], secret: secret, anonymous: params[:anonymous], target_author_id: params[:target_author_id])
-        
 
         target_author = params[:target_author_id] ? User.find(params[:target_author_id]).username : nil
  

@@ -73,7 +73,7 @@ $(document).on('turbolinks:load', function()  {
                               <time datetime='${data.created_at}', class='timeago'></time>
                               <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
                               <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
-                              <span class="btn-comment friend">댓글달기</span>
+                              <span class="btn-comment friend hover-orange hover-pointer">댓글달기</span>
                           </span>
                       </div> 
                     </div>
@@ -128,7 +128,7 @@ $(document).on('turbolinks:load', function()  {
 
                     var new_html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, 
                         data.content, data.created_at, data.id, secret || new_form.find("#secret").is(":checked"))
-                    new_html.find(".comment-info").append("<span class='btn-comment friend' data-self='true'>댓글달기</span>")
+                    new_html.find(".comment-info").append("<span class='btn-comment friend hover-orange hover-pointer' data-self='true'>댓글달기</span>")
                     click_friend_reply(new_html.find(".btn-comment"))
 
                     var new_btn_like = getButtonLike(data.like_url, data.like_changed_url)
@@ -149,7 +149,7 @@ $(document).on('turbolinks:load', function()  {
             }
             else {
               var html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, secret)
-              html.find(".comment-info").append("<span class='btn-comment friend' data-self='true'>댓글달기</span>")
+              html.find(".comment-info").append("<span class='btn-comment friend hover-orange hover-pointer' data-self='true'>댓글달기</span>")
               click_friend_reply(html.find(".btn-comment"))
               
               if(form.find(".replier-name")) {

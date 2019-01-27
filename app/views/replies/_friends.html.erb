@@ -8,8 +8,8 @@
                     <%= image_tag("icons/lock-icon.png", class: "lock-icon")%>
                 <% end %>
                 <!-- author처럼 target_author 자체를 가져와서 굳이 query 안날려도 되면 좋겠다!!!-->
-                <% if r.target_author_id %>
-                    <%=link_to User.find(r.target_author_id).username, profile_path(r.target_author_id), class: "replier-name" %>
+                <% if r.target_author %>
+                    <%=link_to r.target_author.username, profile_path(r.target_author_id), class: "replier-name" %>
                 <% end %>
                 <span class = "content">
                     <%= r.content %>
@@ -24,7 +24,7 @@
         <span> <%= render 'replies/my_replies_menu', r: r %></span>
         <% if comment_available %>
             <span 
-                class="btn-comment friend" 
+                class="btn-comment friend hover-orange hover-pointer" 
                 data-recipient-id="<%= r.author.id%>" 
                 data-recipient-name="<%= r.author.username%>"
                 data-self="<%=current_user.id == r.author.id%>">댓글달기</span>

@@ -1,6 +1,7 @@
 class Reply < ApplicationRecord
     belongs_to :comment
     belongs_to :author, class_name: 'User'
+    belongs_to :target_author, class_name: 'User', optional: true
     has_many   :likes, dependent: :destroy, as: :target
 
     # 익명 대댓글
@@ -18,39 +19,38 @@ class Reply < ApplicationRecord
     def create_notifications
         if self.comment.target_type != 'Announcement'
             origin = self.comment
-            if self.author != self.comment.author
-                noti_hash = {recipient_id: self.comment.author_id, origin: origin}
-                create_noti_hash = {recipient_id: self.comment.author_id, actor: self.author, target: self, origin: origin}
-                # 익명 대댓글인 경우
-                if self.anonymous
+            noti_hash = {recipient_id: self.comment.author_id, origin: origin}
+            create_noti_hash = {recipient_id: self.comment.author_id, actor: self.author, target: self, origin: origin}
+            # 익명 대댓글인 경우
+            if self.anonymous && self.author != self.comment.author
+                # 댓글 주인에게 노티
+                noti_hash[:action] = 'anonymous_to_comment'
+                create_noti_hash[:action] = 'anonymous_to_comment'
+            # if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
+            #     # 글 주인에게 노티
+            #     noti_hash = {recipient: self.comment.target.author, action: 'anonymous_to_author', origin: origin}
+            #     if Notification.where(noti_hash).empty?
+            #         Notification.create(recipient: self.comment.target.author, actor: self.author, target: self, action: 'anonymous_to_author', origin: origin)
+            #     else
+            #         n = Notification.where(noti_hash).first
+            #         n.target = self
+            #         n.actor = self.author
+            #         n.read_at = nil
+            #     end
+            # end
+            # 친구 대댓글인 경우
+            else
+                if self.target_author == nil && self.author != self.comment.author
                     # 댓글 주인에게 노티
-                    noti_hash[:action] = 'anonymous_to_comment'
-                    create_noti_hash[:action] = 'anonymous_to_comment'
-                # if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
-                #     # 글 주인에게 노티
-                #     noti_hash = {recipient: self.comment.target.author, action: 'anonymous_to_author', origin: origin}
-                #     if Notification.where(noti_hash).empty?
-                #         Notification.create(recipient: self.comment.target.author, actor: self.author, target: self, action: 'anonymous_to_author', origin: origin)
-                #     else
-                #         n = Notification.where(noti_hash).first
-                #         n.target = self
-                #         n.actor = self.author
-                #         n.read_at = nil
-                #     end
-                # end
-                # 친구 대댓글인 경우
-                else
-                    if self.target_author_id == nil
-                        # 댓글 주인에게 노티
-                        noti_hash[:action] = 'friend_to_comment'
-                        create_noti_hash[:action] = 'friend_to_comment'
-                    else
-                        # target 대댓글 주인에게 노티
-                        noti_hash[:action] = 'friend_to_recomment'
-                        noti_hash[:recipient_id] = self.target_author_id
-                        create_noti_hash[:action] = 'friend_to_recomment'
-                        create_noti_hash[:recipient_id] = self.target_author_id
-                    end
+                    noti_hash[:action] = 'friend_to_comment'
+                    create_noti_hash[:action] = 'friend_to_comment'
+                elsif self.author != self.target_author_id
+                    # target 대댓글 주인에게 노티
+                    noti_hash[:action] = 'friend_to_recomment'
+                    noti_hash[:recipient_id] = self.target_author_id
+                    create_noti_hash[:action] = 'friend_to_recomment'
+                    create_noti_hash[:recipient_id] = self.target_author_id
+                end
                 # if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
                 #     # 글 주인에게 노티
                 #     noti_hash = {recipient: self.comment.target.author, action: 'friend_to_author', origin: origin}
@@ -63,46 +63,43 @@ class Reply < ApplicationRecord
                 #         n.read_at = nil
                 #     end
                 # end
-                end
-                if !Notification.where(noti_hash).empty?
-                    Notification.where(noti_hash).each do |n|
-                        n.invisible = true
-                        n.save(touch: false)
-                    end
-                end
-                Notification.create(create_noti_hash)
             end
+            if !Notification.where(noti_hash).empty?
+                Notification.where(noti_hash).each do |n|
+                    n.invisible = true
+                    n.save(touch: false)
+                end
+            end
+            Notification.create(create_noti_hash)
         end
     end
 
     def destroy_notifications
         if self.comment.target_type != 'Announcement'
             origin = self.comment
-            if self.author != self.comment.author
-                noti_hash = {recipient_id: self.comment.author_id, origin: origin}
-                # 익명 대댓글인 경우
-                if self.anonymous
+            noti_hash = {recipient_id: self.comment.author_id, origin: origin}
+            # 익명 대댓글인 경우
+            if self.anonymous && self.author != self.comment.author
+                # 댓글 주인에게 노티
+                noti_hash[:action] = 'anonymous_to_comment'
+            # 친구 대댓글인 경우
+            else
+                if self.target_author == nil && self.author != self.comment.author
                     # 댓글 주인에게 노티
-                    noti_hash[:action] = 'anonymous_to_comment'
-                # 친구 대댓글인 경우
+                    noti_hash[:action] = 'friend_to_comment'
                 else
-                    if self.target_author_id
-                        # 댓글 주인에게 노티
-                        noti_hash[:action] = 'friend_to_comment'
-                    else
-                        # target 대댓글 주인에게 노티
-                        noti_hash[:action] = 'friend_to_recomment'
-                        noti_hash[:recipient_id] = self.target_author_id
-                    end
+                    # target 대댓글 주인에게 노티
+                    noti_hash[:action] = 'friend_to_recomment'
+                    noti_hash[:recipient_id] = self.target_author_id
                 end
-                if Notification.where(noti_hash).size > 1
-                    n = Notification.where(noti_hash)[-2]
-                    n.invisible = false
-                    if Notification.where(target:self).first.read_at != nil && n.read_at == nil
-                        n.read_at = self.read_at
-                    end
-                    n.save(touch: false)
+            end
+            if Notification.where(noti_hash).size > 1
+                n = Notification.where(noti_hash)[-2]
+                n.invisible = false
+                if Notification.where(target:self).first.read_at != nil && n.read_at == nil
+                    n.read_at = self.read_at
                 end
+                n.save(touch: false)
             end
         end
         Notification.where(target: self).destroy_all
