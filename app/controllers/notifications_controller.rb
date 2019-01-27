@@ -42,12 +42,16 @@ class NotificationsController < ApplicationController
                     render js: "window.location = '#{post_path(origin_id)}'"
                 when 'Answer'
                     render js: "window.location = '#{answer_path(origin_id)}'"
+                when 'CustomQuestion'
+                    render js: "window.location = '#{custom_question_path(origin_id)}'"
                 when 'Comment'
                     case noti.origin.target_type
                     when 'Post'
                         render js: "window.location = '#{post_path(noti.origin.target_id)}'"
                     when 'Answer'
                         render js: "window.location = '#{answer_path(noti.origin.target_id)}'"
+                    when 'CustomQuestion'
+                        render js: "window.location = '#{custom_question_path(noti.origin.target_id)}'"
                     when 'Announcement'
                         render js: "window.location = '#{announcement_index_path}'"
                     else
@@ -58,6 +62,8 @@ class NotificationsController < ApplicationController
                         render js: "window.location = '#{post_path(noti.origin.comment.target_id)}'"
                     when 'Answer'
                         render js: "window.location = '#{answer_path(noti.origin.comment.target_id)}'"
+                    when 'CustomQuestion'
+                        render js: "window.location = '#{custom_question_path(noti.origin.comment.target_id)}'"
                     when 'Announcement'
                         render js: "window.location = '#{announcement_index_path}'"
                     else
@@ -70,6 +76,8 @@ class NotificationsController < ApplicationController
                     render js: "window.location = '#{post_path(origin_id)}'"
                 when 'Answer'
                     render js: "window.location = '#{answer_path(origin_id)}'"
+                when 'CustomQuestion'
+                    render js: "window.location = '#{custom_question_path(origin_id)}'"
                 when 'Announcement'
                     render js: "window.location = '#{announcement_index_path}'"
                 else
@@ -77,9 +85,11 @@ class NotificationsController < ApplicationController
             when 'Reply'
                 case noti.origin.target_type
                 when 'Post'
-                    render js: "window.location = '#{post_path(noti.origin.target.id)}'"
+                    render js: "window.location = '#{post_path(noti.origin.target_id)}'"
                 when 'Answer'
-                    render js: "window.location = '#{answer_path(noti.origin.target.id)}'"
+                    render js: "window.location = '#{answer_path(noti.origin.target_id)}'"
+                when 'CustomQuestion'
+                    render js: "window.location = '#{custom_question_path(noti.origin.target_id)}''"
                 when 'Announcement'
                     render js: "window.location = '#{announcement_index_path}'"
                 else
@@ -90,6 +100,8 @@ class NotificationsController < ApplicationController
                     render js: "window.location = '#{post_path(origin_id)}'"
                 when 'Answer'
                     render js: "window.location = '#{answer_path(origin_id)}'"
+                when 'CustomQuestion'
+                    render js: "window.location = '#{custom_question_path(origin_id)}'"
                 when 'Question'
                     render js: "window.location = '#{question_path(origin_id)}'"
                 else
