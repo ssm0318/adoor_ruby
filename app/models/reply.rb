@@ -14,7 +14,7 @@ class Reply < ApplicationRecord
     
     after_create :create_notifications
     after_destroy :destroy_notifications
-
+ 
     private
 
     def create_notifications
