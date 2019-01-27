@@ -2,7 +2,7 @@ en:
   devise:
     failure:
       user:
-        does_not_exist: "User %{name} does not exist"
+        does_not_exist: "%{name}(이)라는 사용자는 존재하지 않습니다."
   errors:
     messages:
-      taken: "has already been taken"
+      taken: "은(는) 이미 존재합니다."
