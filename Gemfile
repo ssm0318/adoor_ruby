@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'ahoy_matey', '~> 2.2'
 gem 'jquery-turbolinks'
 gem 'active_link_to'
 gem 'roo', '~> 2.7', '>= 2.7.1'
