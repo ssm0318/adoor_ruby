@@ -51,9 +51,6 @@ class User < ApplicationRecord
   # comment
   has_many :comments, dependent: :destroy, :foreign_key => "author_id"
 
-  # tmi
-  has_many :tmis, dependent: :destroy, :foreign_key => "author_id"
-
   # notification
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy 
 
