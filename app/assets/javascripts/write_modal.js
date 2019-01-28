@@ -1,9 +1,7 @@
 $(document).on('turbolinks:load', function()  {
-    $(".btn-write-modal").on('click', function() {
+    $(".btn-write-modal").on('click', function(event) {
         
-        $("#edit-background").show()
-        $("body").css('overflow', 'hidden')
-
+        event.stopPropagation();
         form = $(this)
         $.ajax({
         type: "GET",
@@ -20,6 +18,8 @@ $(document).on('turbolinks:load', function()  {
             }
             check_channels($(".answer-button"))
             toggle_channels_dropdown(html.find(".channels-dropdown"))
+            $("#edit-background").show()
+            $("body").css('overflow', 'hidden')
             textarea_init($(html.find('textarea')), $("#edit-background"))
 
             //편집 exit 버튼
