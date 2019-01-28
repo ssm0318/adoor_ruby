@@ -23,16 +23,37 @@ class CustomQuestionsController < ApplicationController
         redirect_to root_path
     end
 
+    # custom question repost new
     def message
-        render 'repost'
+        unless ajax_request?
+            redirect_to root_url
+        else
+            
+            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question, :repost_message => @repost_message }
+            render :json => { 
+                html_content: "#{html_content}",
+            }
+
+        end
     end
 
-    def repost
-        if params[:repost_message]
-            @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, repost_message: params[:repost_message], ancestor_id: params[:id])
+    # custom question repost message edit
+    def message_edit
+        unless ajax_request?
+            redirect_to root_url
         else
-            @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, ancestor_id: params[:id])
+        html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :repost_message => @repost_message, :custom_question => @repost_message.custom_question }
+        render :json => { 
+            html_content: "#{html_content}",
+        }
         end
+    end
+
+    # custom question create
+    # custom question을 repost했을 때 새로운 custom_question 만들기
+    def repost
+
+        @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, repost_message: params[:repost_message], ancestor_id: params[:id])
             # if !@custom_question.tag_string.nil?
         #     tag_array = @custom_question.tag_string.gsub("\r\n", '\n').split('\n')
         #     tag_array.each do |tag|
@@ -47,7 +68,7 @@ class CustomQuestionsController < ApplicationController
             Entrance.create(channel: c, target: @custom_question)
         end
 
-        redirect_back(fallback_location: root_path)
+        # redirect_back(fallback_location: root_path)
     end
 
     def show

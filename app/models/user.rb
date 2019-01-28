@@ -11,6 +11,9 @@ class User < ApplicationRecord
   after_create :add_default_role, :add_default_image, :add_default_channels
 
   mount_uploader :image, ImageUploader
+
+  # visit
+  has_many :visits, class_name: "Ahoy::Visit"
   
   # answer
   has_many :answers, dependent: :destroy, :foreign_key => "author_id"
@@ -60,6 +63,9 @@ class User < ApplicationRecord
   # query
   has_many :queries, dependent: :destroy
   has_many :user_queries, dependent: :destroy
+
+  # tag
+  has_many :tags, dependent: :destroy, :foreign_key => "author_id"
 
   # channel
   has_many :channels, dependent: :destroy
