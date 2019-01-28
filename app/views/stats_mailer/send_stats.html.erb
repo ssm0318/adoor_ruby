@@ -11,20 +11,20 @@
         총 User 수: <%= User.all.length %><br>
         총 Answer 수: <%= Answer.all.length %><br>
         총 Post 수: <%= Post.all.length %><br>
-        총 Custom Question 수: <%= CustomQuestion.all.length %>
+        총 Custom Question 수: <%= CustomQuestion.all.length %><br>
         총 Channel 수: <%= Channel.all.length %><br><br>
 
-        어제의 질문
+        어제의 질문<br>
         <% Question.where(selected_date: Date.yesterday()).each do |question| %>
-          -"<%= question.content %>": <%= question.answers.size %>개 답변
+          -"<%= question.content %>": <%= question.answers.size %>개 답변<br>
         <% end %><br>
 
-        인기 많은 질문
+        인기 많은 질문<br>
         <% Question.popular_questions.each do |question| %>
           -<%= question.content %><br>
         <% end %><br>
 
-        인기 많은 태그
+        인기 많은 태그<br>
         <% Tag.popular_tags(5).each do |tag| %>
           -<%= tag.content %><br>
         <% end %><br>  

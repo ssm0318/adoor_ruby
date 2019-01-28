@@ -1,6 +1,13 @@
 $(document).on('turbolinks:load', function()  {
     $(".btn-write-modal").on('click', function() {
+<<<<<<< HEAD
         console.log("write-modal")
+=======
+        
+        $("#edit-background").show()
+        $("body").css('overflow', 'hidden')
+
+>>>>>>> c25bc72226555582e6d411f1fd57482f8019ad7d
         form = $(this)
         $.ajax({
         type: "GET",
@@ -17,8 +24,6 @@ $(document).on('turbolinks:load', function()  {
             }
             check_channels($(".answer-button"))
             toggle_channels_dropdown(html.find(".channels-dropdown"))
-            $("#edit-background").show()
-            $("body").css('overflow', 'hidden')
             textarea_init($(html.find('textarea')), $("#edit-background"))
 
             //편집 exit 버튼
