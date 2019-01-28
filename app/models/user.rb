@@ -80,6 +80,8 @@ class User < ApplicationRecord
   def confirmation_required?
     if Rails.env.development?
       false
+    elsif Rails.env.production?
+      true
     end
   end
 
