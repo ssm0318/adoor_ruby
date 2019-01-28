@@ -329,6 +329,22 @@
                 box-shadow: 2px 2px 30px #dddddd;
                 overflow-y: scroll;
 
+                .btn-select-all-channels {
+                    display: inline-block;
+                    padding: 5px;
+                    border-radius: 6px;
+                    background-color: white;
+                    border: 0.5px solid #dddddd;
+                    font-size: 12px;
+                    color: gray;
+                    margin-bottom: 10px;
+                }
+    
+                .btn-select-all-channels.unselect {
+                    border: 0.5px solid #F48462;
+                    color: #F48462;
+                }
+
                 input {
                     padding: 0;
                     height: initial;
@@ -442,6 +458,23 @@
             top: 200px;
             box-shadow: 2px 2px 30px #888888;
             overflow-y: scroll;
+
+            .btn-select-all-channels {
+                display: inline-block;
+                padding: 5px;
+                border-radius: 6px;
+                background-color: white;
+                border: 0.5px solid #dddddd;
+                font-size: 12px;
+                color: gray;
+                margin-bottom: 10px;
+            }
+
+            .btn-select-all-channels.unselect {
+                border: 0.5px solid #F48462;
+                color: #F48462;
+            }
+
 
             input {
                 padding: 0;
