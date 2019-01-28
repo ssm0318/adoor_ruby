@@ -343,3 +343,19 @@ div.background {
 .hover-pointer {
     cursor: pointer;
 }
+
+#flash-messages {
+    position: fixed;
+    left: 20px;
+    top: 100px;
+    z-index: 3;
+    .flash-message {
+        font-size: 14px;
+        z-index: 3;
+        display: block;
+        background-color: white;
+        padding: 20px;
+        color: gray;
+        margin-bottom: 10px;
+    }
+}

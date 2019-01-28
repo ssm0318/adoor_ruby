@@ -33,34 +33,5 @@
         margin-bottom: 100px;
         padding: 2.5%;
         border-radius: 10px;
-
-        textarea {
-            width: 80%;
-            margin: auto;
-            font-size: 17px;
-            height: 400px;
-        }
-
-        label {
-            font-size: 17px;
-        }
-
-        input[type=submit] {
-            float: right;
-            width: 70px;
-            height: 30px;
-            border-radius: 20px;
-            background-color: #F48462;
-            border: none;
-            font-size: 12px;
-            color: white;
-            &:focus {
-                outline: none;
-            }
-        }
-
-        .question {
-            font-size: 18px;
-        }
     }
 }

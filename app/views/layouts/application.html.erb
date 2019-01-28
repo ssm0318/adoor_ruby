@@ -40,6 +40,7 @@
     <%= javascript_include_tag('channel_dropdown.js') %>
     <%= javascript_include_tag('comments_nav.js') %>
     <%= javascript_include_tag('exit_modal.js') %>
+    <%= javascript_include_tag('flash_message.js') %>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.2/ScrollMagic.min.js"></script>
     <!-- integrity, crossorigin 이런거 해야하는건감 -->
@@ -54,6 +55,8 @@
       <button id='btn-edit-exit' class="hover-pointer">x</button>
       <div id='edit-box'>
       </div>
+    </div>
+    <div id="flash-messages">
     </div>
   </body>
   </html>
