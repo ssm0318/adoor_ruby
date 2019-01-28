@@ -1,9 +1,8 @@
-$(document).on('turbolinks:load', function()  {
-    $(".btn-write-modal").on('click', function(event) {
-        
-        event.stopPropagation();
-        form = $(this)
-        $.ajax({
+function write_modal(event) {
+    event.stopImmediatePropagation();
+    console.log("hoho")
+    form = $(this)
+    $.ajax({
         type: "GET",
         url: form.attr('data-url'),
         success: function(data) {
@@ -20,27 +19,21 @@ $(document).on('turbolinks:load', function()  {
             toggle_channels_dropdown(html.find(".channels-dropdown"))
             $("#edit-background").show()
             $("body").css('overflow', 'hidden')
+            form.one('click', write_modal)
             textarea_init($(html.find('textarea')), $("#edit-background"))
-
-            //편집 exit 버튼
-            $("#btn-edit-exit").on('click', function() {
-            html.remove()
-            $("#edit-background").hide()
-            $("body").css('overflow', 'auto')
-            })
             
             //편집 완료
             $(".new_answer").submit( function(e) {
-                
+                        
                 e.preventDefault()
-                form = $(this)
+                var new_form = $(this)
                 $.ajax({
                     type: "POST",
-                    url: form.attr('action'),
-                    data: form.serialize(),
+                    url: new_form.attr('action'),
+                    data: new_form.serialize(),
                     success: function(data) {
                         console.log("successed")
-                        html.remove()
+                        $("#edit-box").html(``)
                         $("#edit-background").hide()
                         $("body").css('overflow', 'auto')
                     },
@@ -49,11 +42,14 @@ $(document).on('turbolinks:load', function()  {
                     }
                 })
             })
+            
         },
         error: function(data) {
             console.log("error!")
         }
-        })
-        
     })
+}
+
+$(document).on('turbolinks:load', function()  {
+    $(".btn-write-modal").one('click', write_modal)
 })
