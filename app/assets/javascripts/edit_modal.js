@@ -41,6 +41,7 @@ $(document).on('turbolinks:load', function()  {
                     html.remove()
                     $("#edit-background").hide()
                     $("body").css('overflow', 'auto')
+                    form.on('click')
                 },
                 error: function(data) {
                     console.log("error!")
