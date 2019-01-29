@@ -1,5 +1,5 @@
 
 <% if current_user.id == r.author.id %>
-    <span class="comment-like">좋아요 <span class="show-likes"><%= Like.where(target: r).count() %></span>개</span>
+    <span class="comment-like">좋아요 <span class="show-likes"><%= r.likes.count() %></span>개</span>
     <span class="btn-comment-delete hover-orange hover-pointer" data-url="<%=reply_path(r.id)%>">삭제</span>
 <% end %>  
