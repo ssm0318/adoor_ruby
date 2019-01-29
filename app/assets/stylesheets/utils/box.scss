@@ -19,7 +19,7 @@
     padding: 20px;
     font-size: 18px; 
     display: grid;
-    grid-template-columns: 70px minmax(calc(80%-80px), 90%) minmax(80px, 10%);
+    grid-template-columns: minmax(15%,80px) 70% minmax(50px, 15%);
     
 
     .question-content {
@@ -29,24 +29,26 @@
         grid-column: 2 / 3;
         padding: 0;
         margin: 0 ;
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         
     }
 
     .reposts {
         grid-column: 3 / 4;
-        float: right; 
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        padding-left: 10px;
 
     }
 
     .btn-repost {
-        width: 29px;
+        width: 30px;
         height: auto;
         cursor: pointer;
-        vertical-align: -8px;
+        vertical-align: -4px;
 
     }
 

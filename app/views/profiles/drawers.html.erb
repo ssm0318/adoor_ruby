@@ -27,11 +27,14 @@
                 </div>
                 <div class = "prism-box__content">
                     <div class = "prism-box-custom-question">
-                        <span class = "question-content"><%= d.target.content %></span>
-                        <% if d.target.author != current_user %>
+                        <div class = "question-content"><%= d.target.content %></div>
+                        <div class = "reposts">
                             <% ancestor_id = d.target.ancestor_id == nil ? d.target.id : d.target.ancestor_id %>
+                            <% if d.target.ancestor_id == nil && current_user.id == d.target.author.id %>
+                                <span class = "num-of-reposts"> <%= CustomQuestion.where(ancestor_id: d.target.id).size %></span>
+                            <% end %>
                             <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
-                        <% end %>
+                        </div>
                     </div>
                     <% if d.target.ancestor_id != nil %>
                         <div class = "repost-message">
