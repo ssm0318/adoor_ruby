@@ -180,17 +180,6 @@ if Rails.env.development?
     # Like.find_or_create_by(user_id: 3, target: Post.find(1))
     # Like.find_or_create_by(user_id: 3, target: Post.find(8))
 
-    Tmi.find_or_create_by(author_id: 1, content: "I want bingsu.")
-    Tmi.find_or_create_by(author_id: 1, content: "writing TMIs")
-    Tmi.find_or_create_by(author_id: 1, content: "no shit yet today")
-    Tmi.find_or_create_by(author_id: 2, content: "I love soccer")
-    Tmi.find_or_create_by(author_id: 2, content: "I have an iPad.")
-    Tmi.find_or_create_by(author_id: 3, content: "I want to get a Macbook Pro.")
-    Tmi.find_or_create_by(author_id: 3, content: "Bangna came visit me yesterday")
-    Tmi.find_or_create_by(author_id: 3, content: "two lovely chihuahuas")
-    Tmi.find_or_create_by(author_id: 3, content: "salmon sushi ftw")
-    Tmi.find_or_create_by(author_id: 4, content: "406 sucks")
-
     Drawer.find_or_create_by(user_id: 1, target: Question.find(1))
     Drawer.find_or_create_by(user_id: 1, target: Question.find(2))
     Drawer.find_or_create_by(user_id: 1, target: Answer.find(1))

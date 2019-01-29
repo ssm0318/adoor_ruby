@@ -1,11 +1,9 @@
-$(document).on('turbolinks:load', function()  {
-    $(".feed-edit").on('click', function() {
-        
-        $("#edit-background").show()
-        $("body").css('overflow', 'hidden')
+function edit_modal(event) {
+    event.stopImmediatePropagation();
+    console.log("hohoho")
 
-        form = $(this)
-        $.ajax({
+    form = $(this)
+    $.ajax({
         type: "GET",
         url: form.attr('data-url'),
         success: function(data) {
@@ -15,14 +13,10 @@ $(document).on('turbolinks:load', function()  {
             $("#edit-background").find("#edit-box").append(html)
             check_channels(html.find(".answer-button"))
             toggle_channels_dropdown(html.find(".channels-dropdown"))
+            $("#edit-background").show()
+            $("body").css('overflow', 'hidden')
+            form.one('click', edit_modal)
             textarea_init($(html.find('textarea')), $("#edit-background"))
-
-            //편집 exit 버튼
-            $("#btn-edit-exit").on('click', function() {
-            html.remove()
-            $("#edit-background").hide()
-            $("body").css('overflow', 'auto')
-            })
             
             //편집 완료
             $(".edit_answer, .edit_post, .edit_custom_question").submit( function(e) {
@@ -52,7 +46,8 @@ $(document).on('turbolinks:load', function()  {
         error: function(data) {
             console.log("error!")
         }
-        })
-        
     })
+}
+$(document).on('turbolinks:load', function()  {
+    $(".feed-edit").one('click', edit_modal)
 })
