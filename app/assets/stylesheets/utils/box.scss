@@ -233,7 +233,7 @@
     margin: 20px 0px;
     border: 0.5px solid #dddddd;
     border-radius: 10px;
-    padding: 10px 15px 70px 15px;
+    padding: 10px 15px 50px 15px;
     box-sizing: border-box;
     position: relative;
 
@@ -251,17 +251,17 @@
             font-family: 'Nanum Gothic', sans-serif;
             font-size: 17px;
             width: 100%;
-            height: 60px;
+            // height: 60px;
             overflow: hidden;
             border: none;
             outline: none;
             line-height: 30px;
+            padding : 0px;
             // border-bottom: 1px solid #C08BEF;
             resize: none;
             box-sizing: border-box;
-            margin-top: 20px; 
-            padding: 0; 
-            margin-bottom: -30px;
+            margin-top: 30px; 
+            margin-bottom: 0px;
         }
 
         .answer-button {
