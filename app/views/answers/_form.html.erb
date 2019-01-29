@@ -6,7 +6,7 @@
         <%= f.hidden_field :author_id, :value => current_user.id %>
         <%= f.hidden_field :question_id, :value => @question.id %>
         <%= f.text_area :content, class: "new-answer-field", required: true, autofocus: true, "data-enable-grammarly": "false" %>
-        <br><br>
+        <br><br> 
 
         <!--tag field-->
         <%# <%= f.text_area :tag_string %>
