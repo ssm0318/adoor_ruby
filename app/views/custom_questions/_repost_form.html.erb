@@ -2,7 +2,7 @@
     <p class = "question">
         <%= @custom_question.content %>
     </p>
-    <%= form_tag(custom_question_repost_form_path(@custom_question.id)) do %>
+    <%= form_tag(custom_question_repost_form_path(@custom_question.id),{class: 'new_repost'}) do %>
         <%= text_field_tag :repost_message, nil, required: false, class: "new-answer-field", placeholder: "공유 메세지", "data-enable-grammarly": "false", autocomplete: "off" %>
         <% ancestor_id = @custom_question.ancestor_id == nil ? @custom_question.id : @custom_question.ancestor_id %>
         <%= hidden_field_tag "id", ancestor_id %>
