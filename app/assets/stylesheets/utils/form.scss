@@ -14,7 +14,7 @@
 .prism-form-friend, .prism-form-general {
     .prism-form__input {
         width: calc(100% - 100px);
-        // height: 25px;
+        height: 25px;
         padding-left: 10px;
         padding-right: 10px;
         margin-right: 3px;
@@ -23,9 +23,7 @@
         background-color: #f9f9f9;
         border-radius: 20px;
         margin-bottom: 10px;
-        overflow: hidden;
-        resize: none;
-        box-sizing: border-box;
+        font-size: 14px;
 
         &:focus {
             outline: none;

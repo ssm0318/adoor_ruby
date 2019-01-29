@@ -4,7 +4,7 @@
         <div class="friend-box <%=friend.id%>">
             <div class="friend-box-userprofile">
                 <%= link_to image_tag(friend.image.url, class:"friend-box-image"), profile_path(friend.id) %>
-                <span class = "user-name" ><%= friend.username %></span>
+                <%= link_to friend.username, profile_path(friend.id), class: "user-name" %>
             </div>
             <button data-url="<%=add_friend_path(friend.id)%>" class="btn-friend-remove" >친구 끊기</button>
             <%friend_with_channels[:channels].each do |channel| %>
