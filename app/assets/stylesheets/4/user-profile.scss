@@ -1,49 +1,80 @@
 .user-header {
 
     #profile {
-        // display: flex; 
-        align-items:center;
+        display: grid;
+        grid-template-columns: 140px calc(100% - 140px);
+        margin-bottom: 20px;
 
-        img {
-            height:120px; 
-            width:120px; 
-            border-radius:60px;
-            float:left;
-            margin-bottom: 20px;
+        #profile__image {
+            grid-column: 1 / 2;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-right: 20px;
+            
+            img {
+                height:120px; 
+                width:120px; 
+                border-radius:60px;
+            }
         }
 
-        #profile-content-div {
-            float: left;
-            margin-left: 20px;
-            margin-top: 10px;
+        #profile__content-div {
+            grid-column: 2 / 3;
+            display: flex;
+            align-items: center;
+            display: grid;
+            grid-template-rows: 30% 30% 30%;
 
             #username {
+                grid-row: 1 / 2;
                 font-size: 20px;
-                margin-bottom: 10px;
+                font-weight: bold;
+                color: #4f4f4f;
+                position: absolute;
+                top: 65px;
+            }
 
-                #edit-btn{
-                    
-                    text-decoration: none;
-                    color: gray;
-                    font-size: 14px;
-                    margin-left: 10px;
-                    &:hover {
-                        color: #F48462;
+            #user-message {
+                grid-row: 2 / 3;
+                display: flex;
+                align-items: center;
+                font-size: 16px;
+                font-weight: 100;
+                color: #4f4f4f;
+            }
+
+            #profile__settings {
+                grid-row: 3 / 4;
+                display: flex;
+                align-items: center;
+
+                #profile__info-setting {
+
+                    #profile__info-setting-btn{
+                        text-decoration: none;
+                        border-radius: 6px;
+                        border: 0.75px solid #bcbcbc;
+                        padding: 6px 10px 8px 12px;
+                        color: gray;
+                        font-size: 14px;
+                        margin-right: 10px;
                     }
                 }
+
+                #profile__friends-setting {
+                
+                    #profile__friends-setting-btn {
+                        text-decoration: none;
+                        border-radius: 6px;
+                        border: 0.75px solid #bcbcbc;
+                        padding: 6px 10px 8px 12px;
+                        color: gray;
+                        font-size: 14px;
+                    }
+    
+                }
             }
-
-            #friends-btn {
-                text-decoration: none;
-                border-radius: 6px;
-                border: 0.75px solid #bcbcbc;
-                padding: 6px 12px 6px 12px;
-                color: gray;
-                font-size: 14px;
-            }
-
-
-
         }
     }
 

@@ -19,7 +19,7 @@
     padding: 20px;
     font-size: 18px; 
     display: grid;
-    grid-template-columns: minmax(15%,80px) 70% minmax(50px, 15%);
+    grid-template-columns: minmax(calc(10%-50px), 10%) 80% minmax(50px, 10%);
     
 
     .question-content {
@@ -246,10 +246,10 @@
             text-decoration: none;
             font-family: 'Nanum Gothic', sans-serif;
             font-size: 12px;
-
-            &:hover {
-            color: #F48462;
-            }
+            cursor: pointer;
+            // &:hover {
+            // color: #F48462;
+            // }
 
         }
     }

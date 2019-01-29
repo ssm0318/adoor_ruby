@@ -36,10 +36,11 @@
                 color: #777777;
                 padding-left: 25px;
                 padding-right: 25px;
+                cursor: pointer;
     
-                &:hover {
-                    color: #F48462;
-                }
+                // &:hover {
+                //     color: #F48462;
+                // }
             }
 
             .nav-el.active {
@@ -61,19 +62,15 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;    
+                cursor: pointer;
 
                 a {
                     text-align: center;
                 }
 
-                &:hover {
-                    color: #F48462;
-                }
-            }
-
-            .log-in {
-                color: #F48462;
-
+                // &:hover {
+                //     color: #F48462;
+                // }
             }
 
             .btn-noti-box {
@@ -164,6 +161,19 @@
             }
 
         }
+        .nav-right-login {
+            float: right;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 15px;
+            color: #777777;
+
+            .log-in {
+                margin-right: 20px;
+                grid-column: 4 / 5;
+                color: #F48462;
+    
+            }
+        }
     }
     
 }
@@ -178,9 +188,11 @@
         width: 100%;
         text-align: center;
         color: #F48462;
-        &:hover {
-            color: #F48462;
-         }
+        cursor: pointer;
+
+        // &:hover {
+        //     color: #F48462;
+        //  }
          font-family: 'Open Sans', sans-serif;
     }
     
@@ -200,9 +212,10 @@ a {
 .username{
     color: black;
     vertical-align: 9px;
-    &:hover {
-        color: #F48462;
-    }
+    cursor: pointer;
+    // &:hover {
+    //     color: #F48462;
+    // }
 }
 body {
     margin: 0px; 
@@ -355,11 +368,11 @@ div.background {
 
 }
 
-.hover-orange {
-    &:hover {
-        color: #F48462;
-    }
-}
+// .hover-orange {
+//     &:hover {
+//         color: #F48462;
+//     }
+// }
 
 .hover-pointer {
     cursor: pointer;

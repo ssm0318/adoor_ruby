@@ -1,11 +1,10 @@
 <div class="inner-container">
     <div class="user-header" >
-        <div id="profile" >
-            <%= link_to image_tag(current_user.image.url), profile_path(current_user.id) %> 
-            <div id="profile-content-div">
-                <div id="username">
-                    <%= current_user.username %>님의 친구 목록
-                </div>
+        <div id = "profile" >
+            <div id = "profile__image"><%= link_to image_tag(current_user.image.url), profile_path(current_user.id)%></div>
+            <div id = "profile__content-div">
+                <div id = "username"><%= current_user.username %></div>
+                <div id = "user-message">상태메시지</div>
             </div>
         </div>
     </div>
