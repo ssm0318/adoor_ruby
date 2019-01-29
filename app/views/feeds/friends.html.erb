@@ -38,4 +38,21 @@
     $('#new-post-form').hide();
   })
 </script>
+<script>
+  $(".num-of-likes").on('click', function() {
+
+    form = $(this)
+    $.ajax({
+      type: "GET",
+      url: form.attr('data-url'),
+      success: function(data) {
+          console.log("successed")
+          console.log(data.html_content)
+      },
+      error: function(data) {
+          console.log("error!")
+      }
+    })
+  })
+</script>
 

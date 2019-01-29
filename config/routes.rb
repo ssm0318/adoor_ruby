@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   # Like
   resources :likes, only: [:create, :destroy]
+  get '/likes/:target_type/:target_id' => 'likes#likes_info'
 
   # Assignment
   post '/assignments/:assignee_id/:question_id' => 'assignments#create', as: :new_assignment # get?

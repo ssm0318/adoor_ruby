@@ -3,7 +3,7 @@
     <% if feed.is_a? CustomQuestion %>
         <div class="prism-box <%=feed.id%>">
             <div class="prism-box__header">
-                <%= render partial: "./user_profile_general", locals: {user_id: feed.author_id, feed_id: feed.id} %>
+                <%= render partial: "./user_profile_general", locals: {user_id: feed.author.id, feed_id: feed.id} %>
             </div>
             <div class = "prism-box__content">
                 <div class = "prism-box-custom-question">
@@ -40,7 +40,7 @@
      <% else %>
         <div class="prism-box <%=feed.id%>">
             <div class="prism-box__header">
-                <%= render partial: "./user_profile_general", locals: {user_id: feed.author_id, feed_id: feed.id}%>
+                <%= render partial: "./user_profile_general", locals: {user_id: feed.author.id, feed_id: feed.id}%>
                 <% if current_user.id == feed.author.id %>
                     <%= render 'feeds/delete_or_edit', feed: feed %>
                 <% end %>
