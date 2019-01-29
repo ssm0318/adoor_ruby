@@ -10,6 +10,7 @@
             <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
             <!-- TODO: 채널이 많아질 경우 style -->
             <div class="channels-dropdown-content">
+                <span class="btn-select-all-channels">전체선택</span>
                 <% if custom_question.id != nil %>
                     <%# edit post의 경우 %>
                     <% label_id = "custom_question_edit" %>
@@ -18,7 +19,9 @@
                     <% label_id = "custom_question" %>
                 <% end %>
                 <% current_user.channels.each do |channel| %>
-                    <%= check_box_tag "c[]", channel.id, custom_question.channels.include?(channel), id: channel.id.to_s + label_id, class: "channel-el" %>
+                    <%= check_box_tag "c[]", channel.id, 
+                        custom_question.channels.count() > 0 ? custom_question.channels.include?(channel) : !(channel.name=="익명피드" || channel.name=="나"),
+                        id: channel.id.to_s + label_id, class: "channel-el" %>
                     <%= label_tag channel.id.to_s + label_id, channel.name, class: "channel-el" %>
                 <% end %>
             </div>

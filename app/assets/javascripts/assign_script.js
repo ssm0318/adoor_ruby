@@ -35,21 +35,15 @@ $(document).on('turbolinks:load', function() {
                 dataType: "JSON",
                 url: '/assignments/' + friendId + '/' + questionId,
                 success: function(data) {
-                    if (data.assign_id != "-1") {
-                        console.log("success assign!");
-                        thisButton.text("질문취소");
-                        thisButton.data("assign-id", data.assign_id);
-                        thisButton.css("background-color", "white");
-                        thisButton.css("color", "black");
-                        $(".message").text(data.assigned_user.username+ "님께 질문을 보냈습니다.");
-                        $(".message").fadeIn(900).fadeOut(900);
-                        console.log(data.assigned_user);
-                    }
-                    else {
-                        console.log("이미 답했음");
-                        $(".message").text(data.assigned_user.username+ "님은 이미 질문에 답하셨습니다.");
-                        $(".message").fadeIn(900).fadeOut(900);
-                    }
+                    console.log("success assign!");
+                    thisButton.text("질문취소");
+                    thisButton.data("assign-id", data.assign_id);
+                    thisButton.css("background-color", "white");
+                    thisButton.css("color", "black");
+                    flash_message(data.assigned_user.username+ "님께 질문을 보냈습니다.")
+                    // $(".message").text(data.assigned_user.username+ "님께 질문을 보냈습니다.");
+                    // $(".message").fadeIn(900).fadeOut(900);
+                    // console.log(data.assigned_user);
                 }
             })
         } else {
@@ -67,8 +61,9 @@ $(document).on('turbolinks:load', function() {
                     thisButton.text("질문하기");
                     thisButton.css("background-color", "#F48462");
                     thisButton.css("color", "white");
-                    $(".message").text(data.assigned_user.username+ "님께 질문 보내기를 취소하셨습니다.");
-                    $(".message").fadeIn(900).fadeOut(900);
+                    flash_message(data.assigned_user.username+ "님께 질문 보내기를 취소하셨습니다.")
+                    // $(".message").text(data.assigned_user.username+ "님께 질문 보내기를 취소하셨습니다.");
+                    // $(".message").fadeIn(900).fadeOut(900);
                 }
             })
         }

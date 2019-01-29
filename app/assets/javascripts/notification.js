@@ -31,13 +31,6 @@ $(document).on('turbolinks:load', function()  {
                     $("#edit-background").show()
                     $("body").css('overflow', 'hidden')
                     textarea_init($(html.find('textarea')), $("#edit-background"))
-
-                    //편집 exit 버튼
-                    $("#btn-edit-exit").on('click', function() {
-                    html.remove()
-                    $("#edit-background").hide()
-                    $("body").css('overflow', 'auto')
-                    })
                     
                     //편집 완료
                     $(".new_answer").submit( function(e) {

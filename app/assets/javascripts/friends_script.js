@@ -8,8 +8,6 @@ function click_friend_reply(element) {
     form.find(".target_author_id").remove()
     form.find(".replier-name").remove()
 
-    //답글하기 나한테 쓰는건 태그안되게
-
     if($(this).parents().hasClass("reply") && 
       $(this).attr("data-self")=="false") {
       let tag = $(`
@@ -31,12 +29,16 @@ function click_friend_reply(element) {
 
 
 $(document).on('turbolinks:load', function()  {
-  
+
+    // textarea_init($(".prism-form-friend").find(".prism-form__input"), window)
     click_friend_reply($(".btn-comment.friend"))
     // TODO : 숨김댓글 체크한채로 보내면 숨김댓글이라고 뜨기!
+
     $(".prism-form-friend").submit( function(e) {
         e.preventDefault();
-  
+
+        console.log(e)
+
         var form = $(this)
         $.ajax({
           type: "POST",

@@ -20,27 +20,26 @@ function edit_modal(event) {
             
             //편집 완료
             $(".edit_answer, .edit_post, .edit_custom_question").submit( function(e) {
-            e.preventDefault()
+                e.preventDefault()
 
-            form = $(this)
-            console.log(form)
-            $.ajax({
-                type: "PUT",
-                url: form.attr('action'),
-                data: form.serialize(),
-                success: function(data) {
-                console.log("successed")
-                    $(`.prism-box.${data.id}`).find(".answer").html(form.find(".new-answer-field").val())
-                    $(`.prism-box.${data.id}`).find(".feed-channels").html("공개그룹: " + data.channels)
-                    html.remove()
-                    $("#edit-background").hide()
-                    $("body").css('overflow', 'auto')
-                    form.on('click')
-                },
-                error: function(data) {
-                    console.log("error!")
-                }
-            })
+                form = $(this)
+                console.log(form)
+                $.ajax({
+                    type: "PUT",
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function(data) {
+                    console.log("successed")
+                        $(`.prism-box.${data.id}`).find(".answer").html(form.find(".new-answer-field").val())
+                        $(`.prism-box.${data.id}`).find(".feed-channels").html("공개그룹: " + data.channels)
+                        html.remove()
+                        $("#edit-background").hide()
+                        $("body").css('overflow', 'auto')
+                    },
+                    error: function(data) {
+                        console.log("error!")
+                    }
+                })
             })
         },
         error: function(data) {
