@@ -49,15 +49,23 @@
 
         .nav-right {
             float: right;
-            margin-right: 35px;
+            display: grid;
+            grid-template-columns: minmax(140px, 25%) minmax(110px, 25%) minmax(50px, 25%) minmax(50px, 25%);
             
             .nav-el {
-                display: inline-block;
+                grid-column: 2 / 3;
+                // display: inline-block;
                 font-family: 'Open Sans', sans-serif;
                 font-size: 15px;
                 color: #777777;
-                padding-left: 25px;
-                padding-right: 25px;
+                display: flex;
+                align-items: center;
+                justify-content: center;    
+
+                a {
+                    text-align: center;
+                }
+
                 &:hover {
                     color: #F48462;
                 }
@@ -65,28 +73,39 @@
 
             .log-in {
                 color: #F48462;
-            }
-            .btn-noti {
-                padding-top: 2px;
-                float: right;
-                width: 20px;
-                height: auto;
-                display: block;
-                
+
             }
 
-            .my-page-btn img {
-                float: right;
-                display: block;
-                width: 25px;
-                height: 25px;
-                border-radius:15px;
-                margin-right: 20px;
+            .btn-noti-box {
+                display: flex;
+                align-items: center;
+                justify-content: center; 
+                grid-column: 4 / 5;
+
+                img {
+                    width: 20px;
+                    height: auto;
+                    
+                }
             }
+
+            .my-page-btn {
+                grid-column: 3 / 4;
+                align-items: center;
+                justify-content: center; 
+                display: flex;
+
+                img {
+                    width: 25px;
+                    height: 25px;
+                    border-radius:15px;
+
+                }
+            }ㅣ
 
             .search-form {
-                //padding-top: 20px;
-                display: inline-block;
+                padding-top: 20px;
+                // display: inline-block;
                 //margin-right: 30px;
                 //position: 
             }
@@ -130,6 +149,7 @@
                 vertical-align: middle;
                 white-space: nowrap;
                 position: relative;
+                grid-column: 1 / 2;
             }
 
             .search-icon {

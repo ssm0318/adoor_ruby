@@ -27,7 +27,7 @@
                 </div>
                 <div class = "prism-box__content">
                     <div class = "prism-box-custom-question">
-                        <span class = "question"><%= d.target.content %></span>
+                        <span class = "question-content"><%= d.target.content %></span>
                         <% if d.target.author != current_user %>
                             <% ancestor_id = d.target.ancestor_id == nil ? d.target.id : d.target.ancestor_id %>
                             <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>

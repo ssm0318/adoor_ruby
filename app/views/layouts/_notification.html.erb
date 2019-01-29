@@ -1,10 +1,12 @@
-<% if user_signed_in? %>
-    <% if noties.unread.length != 0 %>
-        <%=image_tag "icons/noti-on-icon.png", class:"btn-noti hover-pointer"%>
-    <% else %>
-        <%=image_tag "icons/noti-default-icon.png", class:"btn-noti hover-pointer"%>
+<div class = btn-noti-box>
+    <% if user_signed_in? %>
+        <% if noties.unread.length != 0 %>
+            <%=image_tag "icons/noti-on-icon.png", class:"btn-noti hover-pointer"%>
+        <% else %>
+            <%=image_tag "icons/noti-default-icon.png", class:"btn-noti hover-pointer"%>
+        <% end %>
     <% end %>
-<% end %>
+</div>
 <div class="noti-content" style="display: none;">
     <div class="noti-header">
         <% if noties.size > 0 %>
