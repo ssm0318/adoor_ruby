@@ -266,15 +266,21 @@ button {
         }
     }
 
-    .friend-box-with-edit .invitation{
-        width: 100%;
-        display: inline-block;
-        background-color: white;
-        border-radius: 10px;
-        border: 0.5px solid #F48462;
-        padding: 20px;
-        vertical-align: center;
-        color: #F48462;
-        
+    .friend-box-invitation{
+        display: flex;
+        margin: 5px;
+
+        .btn-invitation {
+            width: 100%;
+            width: 100%;
+            display: inline-block;
+            background-color: white;
+            border-radius: 10px;
+            border: 0.5px solid #F48462;
+            padding: 20px;
+            vertical-align: center;
+            color: #F48462;
+
+        }
     }
 }

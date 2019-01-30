@@ -12,6 +12,7 @@ function channel_edit_clear() {
     $("#channel-name").show()
     $(".btn-friend-remove").show()
    // $("#channel-setting-btn").show()
+   $(".friend-box-invitation").hide()
 } 
 
 function click_channel_nav(element) {
@@ -32,9 +33,9 @@ function click_channel_nav(element) {
         if($(this).hasClass("all")) {
             //전체보기
             $("#channel-default-btns").hide()
+            $(".friend-box-invitation").show()
         }
         else {
-            console.log("jinsun")
             const channelId = $(this).attr('class').split(/\s+/)[1];
             $("#btn-channel-delete").attr('href', `/channels/${channelId}`)
             $("#channel-default-btns").show()
@@ -45,6 +46,7 @@ function click_channel_nav(element) {
 
             htmls.addClass("disabled")
             htmls.parents(".friend-box-with-edit").hide()
+            $(".friend-box-invitation").hide()
             
         }
     })
