@@ -30,7 +30,6 @@ function click_friend_reply(element) {
 
 $(document).on('turbolinks:load', function()  {
 
-    // textarea_init($(".prism-form-friend").find(".prism-form__input"), window)
     click_friend_reply($(".btn-comment.friend"))
     // TODO : 숨김댓글 체크한채로 보내면 숨김댓글이라고 뜨기!
 

@@ -1,11 +1,10 @@
 function click_general_reply(element) {
   element.on('click', function() {
-
     var form = $(this).parents(".comment-replies-form").find("form")
     form.show()
-    form.submit( function(e) {
-      form.hide()
-    })
+    // form.submit( function(e) {
+    //   form.hide()
+    // })
   })
 }
 
@@ -124,10 +123,13 @@ $(document).on('turbolinks:load', function()  {
 
             click_general_reply(html.find(".btn-comment.general"))
             var btn_like = getButtonLike(data.like_url, data.like_changed_url)
+            var btn_show_like = getShowLike("Comment", data.id)
+            html.find(".likes").append(btn_show_like)
             html.find(".likes").append(btn_like)
             form.parent().find(".anonymous-comments").append(html)
 
-            ///////// 동적으로 삽입한 form에 다시 event binding 해줌. 하나만 선택해야됨.
+            btn_show_like.one('click', show_likes)
+            textarea_init(html.find(".prism-form__comment"), window)
             like_ajax(btn_like)
             delete_ajax(html.find(".btn-comment-delete"))
             html.find("time.timeago").timeago();
@@ -143,9 +145,12 @@ $(document).on('turbolinks:load', function()  {
                 success: function(data) {
                   var new_html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, false)
                   var new_btn_like = getButtonLike(data.like_url, data.like_changed_url)
-                  new_html.find(".comment-content").append(new_btn_like)
+                  var new_btn_show_like = getShowLike("Comment", data.id)
+                  new_html.find(".likes").append(new_btn_show_like)
+                  new_html.find(".likes").append(new_btn_like)
                   new_form.parent().find(".comment-replies").append(new_html);
 
+                  new_btn_show_like.one('click', show_likes)
                   like_ajax(new_btn_like)
                   delete_ajax(new_html.find(".btn-comment-delete"))
                   new_html.find("time.timeago").timeago()
@@ -163,10 +168,12 @@ $(document).on('turbolinks:load', function()  {
             console.log("here");
             var html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, false)
             var btn_like = getButtonLike(data.like_url, data.like_changed_url)
+            var btn_show_like = getShowLike("Comment", data.id)
+            html.find(".likes").append(btn_show_like)
             html.find(".likes").append(btn_like)
             form.parent().find(".comment-replies").append(html)
 
-            textarea_init(html.find(".prism-form__comment"), window)
+            btn_show_like.one('click', show_likes)
             like_ajax(btn_like)
             delete_ajax(html.find(".btn-comment-delete"))
             html.find("time.timeago").timeago();
