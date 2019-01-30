@@ -5,13 +5,14 @@ function channel_edit_clear() {
     $(".friend-box").removeClass("editing")
     $(".friend-box-with-edit").removeClass("editing")
     $("#name-edit-form").hide()
-    $("#btn-channel-edit-complete").hide()
+    // $("#btn-channel-edit-complete").hide()
     $("#name-create-form").hide()
     $("#channel-default-btns").show()
     $("#btn-channel-add").show()
     $("#channel-name").show()
     $(".btn-friend-remove").show()
-}
+   // $("#channel-setting-btn").show()
+} 
 
 function click_channel_nav(element) {
     element.on('click', function(e) {
@@ -21,7 +22,9 @@ function click_channel_nav(element) {
         } 
 
         $(".channel-nav").removeClass("active")
+       // $(".channel-nav").find("#channel-setting-btn").hide();
         $(this).addClass("active")
+        //$(this).find("#channel-setting-btn").show();
         $("#channel-name").html($(this).html())
         $(".friend-box").removeClass("disabled")
         $(".friend-box-with-edit").show()
@@ -31,6 +34,7 @@ function click_channel_nav(element) {
             $("#channel-default-btns").hide()
         }
         else {
+            console.log("jinsun")
             const channelId = $(this).attr('class').split(/\s+/)[1];
             $("#btn-channel-delete").attr('href', `/channels/${channelId}`)
             $("#channel-default-btns").show()
@@ -41,6 +45,7 @@ function click_channel_nav(element) {
 
             htmls.addClass("disabled")
             htmls.parents(".friend-box-with-edit").hide()
+            
         }
     })
 }
@@ -65,13 +70,17 @@ $("#btn-channel-edit").on('click', function(e) {
     $(".friend-box-with-edit").show()
     $("#channel-default-btns").hide()
     $(".btn-friend-remove").hide()
-    $("#btn-channel-edit-complete").show()
+    // $("#btn-channel-edit-complete").show()
+    $("#channel-name").hide()
+    $("#name-edit-input").val($("#channel-nav-div").find(".active").html().trim())
+    $("#name-edit-form").show()
+    $("#name-edit-input").focus()
     
 })
 
 
 //인원 편집 완료
-$("#btn-channel-edit-complete").on('click', function(e) {
+$("#name-edit-btn").on('click', function(e) {
     //TODO friend-box 값들, active한 nav 값 받아서 ajax send
     const channelId = $("#channel-nav-div").find(".active").attr('class').split(/\s+/)[1]
     var friend_ids = []
@@ -108,9 +117,6 @@ $("#btn-channel-edit-complete").on('click', function(e) {
 })
 
 
-//box를 클릭해 해당 채널에 친구 추가 또는 삭제
-//FIXME: editing인 상태에서만 disabled가 먹히도록!!!ㅠㅠ
-// $(".friend-box-with-edit .editing").on('click', function(e) {
 $(".friend-box-with-edit").on('click', function(e) {
     if ($(this).hasClass("editing")) {
         $(this).find(".friend-box").toggleClass("disabled")
@@ -119,22 +125,22 @@ $(".friend-box-with-edit").on('click', function(e) {
 })
 
 
-//채널 이름 수정
-$("#btn-channel-name-edit").on('click', function(e) {
+// //채널 이름 수정
+// $("#btn-channel-name-edit").on('click', function(e) {
 
-    //채널 추가하고 있었을 경우
-    if($("#channel-nav-div").hasClass("editing")) {
-        $("#name-create-form").hide()
-        $("#btn-channel-add").show()
-    }
+//     //채널 추가하고 있었을 경우
+//     if($("#channel-nav-div").hasClass("editing")) {
+//         $("#name-create-form").hide()
+//         $("#btn-channel-add").show()
+//     }
 
-    $("#channel-nav-div").addClass("editing")
-    $("#channel-name").hide()
-    $("#channel-default-btns").hide()
-    $("#name-edit-input").val($("#channel-nav-div").find(".active").html().trim())
-    $("#name-edit-form").show()
-    $("#name-edit-input").focus()
-})
+//     $("#channel-nav-div").addClass("editing")
+//     $("#channel-name").hide()
+//     $("#channel-default-btns").hide()
+//     $("#name-edit-input").val($("#channel-nav-div").find(".active").html().trim())
+//     $("#name-edit-form").show()
+//     $("#name-edit-input").focus()
+// })
 
 
 //채널 추가
@@ -156,7 +162,7 @@ $("#btn-channel-add").on('click', function(e) {
 
         if($(this).val().length > 3) {
             $(this).stop().animate({
-                width: $(this).val().length*14
+                width: $(this).val().length*15
             },100)  
         }
     });
@@ -243,6 +249,5 @@ $(".btn-friend-remove").on('click', function(e) {
 
 
 })
-
 
 

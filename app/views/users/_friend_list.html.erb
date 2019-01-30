@@ -1,6 +1,9 @@
+<div class = "friend-box-with-edit invitation">
+    <%= link_to "+ 친구 초대하기", invitation_path, class: "friend-box invitation" %>
+</div>
 <% friends_with_channels.each do |friend_with_channels| %>
     <% friend = friend_with_channels[:friend] %>
-    <div class="friend-box-with-edit">
+    <div class="friend-box-with-edit"> 
         <div class="friend-box <%=friend.id%>">
             <div class="friend-box-userprofile">
                 <%= link_to image_tag(friend.image.url, class:"friend-box-image"), profile_path(friend.id) %>
