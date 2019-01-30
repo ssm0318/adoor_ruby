@@ -47,10 +47,6 @@ function like_ajax(element) {
 }
 
 $(document).on('turbolinks:load', function()  {
-    $(".num-of-likes").filter(function(index) {
-        return $(this).text() != '0'
-    }).removeClass("zero")
-
     like_ajax($(".btn-feed-like"))
     like_ajax($(".btn-comment-like"))
 })

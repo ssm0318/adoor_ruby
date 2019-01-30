@@ -55,8 +55,5 @@ function drawer_ajax(element) {
 }
 
 $(document).on('turbolinks:load', function()  {
-    $(".num-of-drawers").filter(function(index) {
-        return $(this).text() != '0'
-    }).removeClass("zero")
     drawer_ajax($(".btn-drawer"))
 })

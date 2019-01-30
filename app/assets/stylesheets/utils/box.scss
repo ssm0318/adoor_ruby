@@ -60,6 +60,9 @@
         padding: 3px;
         margin-right:2px;
     }
+    .num-of-reposts.zero {
+        display: none;
+    }
 
 }
 
@@ -232,7 +235,7 @@
             color: #F48462;
             padding: 3px;
             margin-right: 2px;
-
+            // cursor: pointer;
         }
 
     }

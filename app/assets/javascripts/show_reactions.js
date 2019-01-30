@@ -1,4 +1,5 @@
 function show_likes() {
+    console.log("wh")
     form = $(this)
     $.ajax({
         type: "GET",
@@ -21,5 +22,18 @@ function show_likes() {
 }
 
 $(document).on('turbolinks:load', function()  {
+    $(".num-of-likes").filter(function(index) {
+        return $(this).text() != '0'
+    }).removeClass("zero")
+
+    $(".num-of-drawers").filter(function(index) {
+        return $(this).text() != '0'
+    }).removeClass("zero")
+
+    $(".num-of-reposts").filter(function(index) {
+        return $(this).text() != '0'
+    }).removeClass("zero")
+
     $(".num-of-likes").one('click', show_likes)
+    // $(".num-of-drawers").one('click', show_likes)
 })

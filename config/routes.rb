@@ -48,6 +48,7 @@ Rails.application.routes.draw do
 
   # Drawer
   resources :drawers, only: [:create, :destroy]
+  get '/drawers/:target_type/:target_id' => 'drawers#drawers_info'
 
   # Highlight
   resources :highlights, only: [:create, :destroy]
