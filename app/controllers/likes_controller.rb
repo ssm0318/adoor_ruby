@@ -19,15 +19,21 @@ class LikesController < ApplicationController
     end
 
     def likes_info
-        target = Like.where(target_type: params[:target_type], target_id: params[:target_id])
-        users = []
 
-        target.likes.each do |like|
-            const user = like.user
-            users.push({image_url: user.image.url, profile_path: profile_path(user), username: user.name})
+        likes = Like.where(target_type: params[:target_type], target_id: params[:target_id])
+        users = []
+        friends_count = 0
+
+        likes.each do |like|
+            user = like.user
+            if user.id == current_user.id || (current_user.friends.include? user)
+                users.push({ image_url: user.image.url, profile_path: profile_path(user), username: user.username})
+                friends_count += 1
+            end
         end
 
-        html_content = render_to_string :partial => 'likes/likes_info', :locals => { :users => users }
+        html_content = render_to_string :partial => 'likes/likes_info', 
+            :locals => { :users => users, :friends_count => friends_count, :anonymous_count => likes.count()-friends_count }
 
         render json: {
             html_content: html_content,

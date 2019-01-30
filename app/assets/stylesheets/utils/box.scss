@@ -57,7 +57,8 @@
         font-family: 'Nanum Gothic', sans-serif;
         color: #F48462;
         font-size: 13px;
-
+        padding: 3px;
+        margin-right:2px;
     }
 
 }
@@ -216,13 +217,21 @@
             vertical-align: 8px;
             font-family: 'Nanum Gothic', sans-serif;
             color: #F48462;
+            cursor: pointer;
+            padding: 3px;
+            margin-right: 2px;
+        }
 
+        .num-of-likes.zero, .num-of-drawers.zero {
+            display: none;
         }
 
         .num-of-drawers {
             vertical-align: 8px;
             font-family: 'Nanum Gothic', sans-serif;
             color: #F48462;
+            padding: 3px;
+            margin-right: 2px;
 
         }
 

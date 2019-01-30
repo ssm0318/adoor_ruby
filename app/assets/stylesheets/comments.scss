@@ -21,17 +21,10 @@
 }
 
 .comment, .comment-indent, .reply {
-    .btn-comment-like {
-        width: 20px;
-        height: auto;
-        float: right;
-        margin-left: 10px;
-        cursor: pointer;
-    }
-    
+
     .comment-content {
         display: grid;
-        grid-template-columns: 26px auto 30px;
+        grid-template-columns: 26px auto 30%;
     
         .user-profile {
             height:20px; 
@@ -61,6 +54,32 @@
         
         .comment-text {
             line-height: 20px;
+        }
+
+        .likes {
+            text-align: right;
+            .num-of-likes {
+                vertical-align: 8px;
+                font-family: 'Nanum Gothic', sans-serif;
+                color: #F48462;
+                cursor: pointer;
+                padding: 3px;
+                margin-right: 5px;
+                font-size: 12px;
+                vertical-align: middle;
+            }
+    
+            .num-of-likes.zero {
+                display: none;
+            }
+        
+            .btn-comment-like {
+                width: 20px;
+                height: auto;
+                float: right;
+                cursor: pointer;
+            }
+    
         }
 
     }

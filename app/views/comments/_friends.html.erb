@@ -10,7 +10,10 @@
                     <%= c.content %>
                 </span>
             </span>
-        <%= render 'likes/default', target: c, like_btn_class: "btn-comment-like" %>
+            <div class="likes">
+                <%= render 'likes/num_of_likes', target: c %>
+                <%= render 'likes/default', target: c, like_btn_class: "btn-comment-like" %>
+            </div>
     </div>
 
     <div class = "comment-info">

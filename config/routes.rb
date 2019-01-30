@@ -42,7 +42,8 @@ Rails.application.routes.draw do
   get '/likes/:target_type/:target_id' => 'likes#likes_info'
 
   # Assignment
-  post '/assignments/:assignee_id/:question_id' => 'assignments#create', as: :new_assignment # get?
+  get '/assignments/:question_id' => 'assignments#new', as: :new_assignment
+  post '/assignments/:assignee_id/:question_id' => 'assignments#create', as: :create_assignment # get?
   delete '/assignments/:assignee_id/:question_id' => 'assignments#destroy', as: :destroy_assignment
 
   # Drawer

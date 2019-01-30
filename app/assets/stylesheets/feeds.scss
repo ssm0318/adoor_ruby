@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #edit-background {
     display: none;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.15);
     z-index: 1;
     position: fixed; /* Stay in place */
     left: 0;
@@ -33,9 +33,23 @@
         margin-bottom: 100px;
         padding: 2.5%;
         border-radius: 10px;
-
+        box-shadow: 2px 2px 30px #cccccc;
         .question {
             font-size: 18px;
         }
+    }
+
+    #friends-box {
+        display: none;
+        background-color: white;
+        width: 24%;
+        margin: auto;
+        margin-top: 160px;
+        margin-bottom: 100px;
+        padding: 2%;
+        border-radius: 10px;
+        overflow-y: scroll;
+        max-height: 600px;
+        box-shadow: 2px 2px 30px #cccccc;
     }
 }

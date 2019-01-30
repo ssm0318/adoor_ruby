@@ -38,6 +38,13 @@ function drawer_ajax(element) {
                     let drawer_num = parseInt(el.text())
                     drawer_num += (!drawer.hasClass("do-drawer")) ? 1 : - 1
                     el.text(drawer_num)
+
+                    if(drawer_num == 0) {
+                        el.addClass("zero")
+                    }
+                    else {
+                        el.removeClass("zero")
+                    }
                 },
                 error: function(data) {
                     console.log("error!")
@@ -48,5 +55,8 @@ function drawer_ajax(element) {
 }
 
 $(document).on('turbolinks:load', function()  {
+    $(".num-of-drawers").filter(function(index) {
+        return $(this).text() != '0'
+    }).removeClass("zero")
     drawer_ajax($(".btn-drawer"))
 })
