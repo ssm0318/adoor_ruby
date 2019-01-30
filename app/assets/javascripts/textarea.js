@@ -1,6 +1,8 @@
 function textarea_init (element, back) {
-    
-    // resizeTextArea(element, back)
+
+    if(back!=window) {
+        resizeTextArea(element, back)
+    }
     element.on('keyup', function() {
         var elem = $(this);
         
@@ -15,6 +17,8 @@ function textarea_init (element, back) {
                 
         resizeTextArea($(this), back);
     });
+
+    element.focus()
 }
 
 

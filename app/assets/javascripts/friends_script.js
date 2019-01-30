@@ -69,14 +69,13 @@ $(document).on('turbolinks:load', function()  {
                             ${data.content}
                           </span> 
                         </span>
+                        <div class="likes">
+                        </div>
                       </div>
                       <div class = "comment-info">
-                          <span>
-                              <time datetime='${data.created_at}', class='timeago'></time>
-                              <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
-                              <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
-                              <span class="btn-comment friend hover-orange hover-pointer">댓글달기</span>
-                          </span>
+                        <time datetime='${data.created_at}', class='timeago'></time>
+                        <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
+                        <span class="btn-comment friend hover-orange hover-pointer">댓글달기</span>
                       </div> 
                     </div>
                   </div>
@@ -102,7 +101,9 @@ $(document).on('turbolinks:load', function()  {
 
               click_friend_reply(html.find(".btn-comment"))
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
-              html.find(".comment-content").append(btn_like)
+              var btn_show_like = getShowLike("Comment", data.id)
+              html.find(".likes").append(btn_show_like)
+              html.find(".likes").append(btn_like)
 
               if(form.hasClass("author")) {
                 console.log("author")
@@ -112,8 +113,8 @@ $(document).on('turbolinks:load', function()  {
                 console.log("not author")
                 form.parent().find(".comments").append(html)
               }
-  
-              ///////// 동적으로 삽입한 form에 다시 event binding 해줌. 하나만 선택해야됨.
+
+              btn_show_like.one('click', show_likes)
               like_ajax(btn_like)
               delete_ajax(html.find(".btn-comment-delete"))
               html.find("time.timeago").timeago();
@@ -134,9 +135,12 @@ $(document).on('turbolinks:load', function()  {
                     click_friend_reply(new_html.find(".btn-comment"))
 
                     var new_btn_like = getButtonLike(data.like_url, data.like_changed_url)
-                    new_html.find(".comment-content").append(new_btn_like)
+                    var new_btn_show_like = getShowLike("Reply", data.id)
+                    new_html.find(".likes").append(new_btn_show_like)
+                    new_html.find(".likes").append(new_btn_like)
                     new_form.parent().find(".comment-replies").append(new_html);
-  
+
+                    new_btn_show_like.one('click', show_likes)
                     like_ajax(new_btn_like)
                     delete_ajax(new_html.find(".btn-comment-delete"))
                     new_html.find("time.timeago").timeago()
@@ -163,9 +167,12 @@ $(document).on('turbolinks:load', function()  {
               }
               
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
-              html.find(".comment-content").append(btn_like)
+              var btn_show_like = getShowLike("Reply", data.id)
+              html.find(".likes").append(btn_show_like)
+              html.find(".likes").append(btn_like)
               form.parent().find(".comment-replies").append(html)
-  
+
+              btn_show_like.one('click', show_likes)
               like_ajax(btn_like)
               delete_ajax(html.find(".btn-comment-delete"))
               html.find("time.timeago").timeago();
