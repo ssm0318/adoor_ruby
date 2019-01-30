@@ -21,9 +21,9 @@ function click_friend_reply(element) {
       form.prepend(tag)
       form.prepend(name_span)
     }
-    form.submit( function(e) {
-      form.hide()
-    })
+    // form.submit( function(e) {
+    //   form.hide()
+    // })
   })
 }
 
@@ -83,7 +83,7 @@ $(document).on('turbolinks:load', function()  {
                     <input name="utf8" type="hidden" value="✓">
                     <input type="hidden" name="id" id="id" value="${data.id}">
                     <input type="hidden" name="anonymous" value="false">
-                    <input type="text" name="content" id="content" required="required" class="prism-form__input">
+                    <textarea type="text" name="content" id="content" required="required" class="prism-form__comment" data-enable-grammarly= "false"></textarea>
                     <button name="button" type="submit" class="prism-form__button">저장</button>
                     <span class="comment-info-alert">숨기기 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
                   </form>
@@ -114,6 +114,8 @@ $(document).on('turbolinks:load', function()  {
                 form.parent().find(".comments").append(html)
               }
 
+              console.log(html.find(".prism-form__comment"))
+              textarea_init(html.find(".prism-form__comment"), window)
               btn_show_like.one('click', show_likes)
               like_ajax(btn_like)
               delete_ajax(html.find(".btn-comment-delete"))
@@ -144,7 +146,8 @@ $(document).on('turbolinks:load', function()  {
                     like_ajax(new_btn_like)
                     delete_ajax(new_html.find(".btn-comment-delete"))
                     new_html.find("time.timeago").timeago()
-                    new_form.find(".prism-form__input").val('')
+                    new_form.find(".prism-form__comment").val('')
+                    new_form.find(".prism-form__comment").css('height', '17px')
                   },
                   error: function(data) {
                     console.log("error")
@@ -177,9 +180,9 @@ $(document).on('turbolinks:load', function()  {
               delete_ajax(html.find(".btn-comment-delete"))
               html.find("time.timeago").timeago();
             }
-  
-            console.log(form)
-            form.find(".prism-form__input").val('')
+
+            form.find(".prism-form__comment").val('')
+            form.find(".prism-form__comment").css('height', '17px')
           },
           error: function(data) {
               console.log("error")

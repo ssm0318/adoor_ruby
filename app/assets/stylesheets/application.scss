@@ -179,6 +179,8 @@
 }
 
 #prism-container {
+    height: 100%;
+    overflow: auto;
     width: 60%;
     margin: 0 auto;
     margin-bottom: 50px;
@@ -222,6 +224,7 @@ body {
     margin: 0px; 
     background-color: #f9f9f9;
     font-family: "Nanum Gothic", serif;
+    height: 100%;
 }
 
 div.background {

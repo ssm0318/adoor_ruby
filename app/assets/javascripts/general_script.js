@@ -115,7 +115,7 @@ $(document).on('turbolinks:load', function()  {
                   <input type="hidden" name="id" id="id" value="${data.id}">
                   <input type="hidden" name="anonymous" value="true">
                   <input type="hidden" name="secret" value="false" id="secret">
-                  <input type="text" name="content" id="content" required="required" class="prism-form__input">
+                  <textarea type="text" name="content" id="content" required="required" class="prism-form__comment" data-enable-grammarly= "false"></textarea>
                   <button name="button" type="submit" class="prism-form__button">저장</button>
                   <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
                 </form>
@@ -149,7 +149,8 @@ $(document).on('turbolinks:load', function()  {
                   like_ajax(new_btn_like)
                   delete_ajax(new_html.find(".btn-comment-delete"))
                   new_html.find("time.timeago").timeago()
-                  new_form.find(".prism-form__input").val('')
+                  new_form.find(".prism-form__comment").val('')
+                  new_form.find(".prism-form__comment").css('height', '17px')
                 },
                 error: function(data) {
                   console.log("error")
@@ -165,13 +166,15 @@ $(document).on('turbolinks:load', function()  {
             html.find(".likes").append(btn_like)
             form.parent().find(".comment-replies").append(html)
 
+            textarea_init(html.find(".prism-form__comment"), window)
             like_ajax(btn_like)
             delete_ajax(html.find(".btn-comment-delete"))
             html.find("time.timeago").timeago();
           }
 
           console.log(form)
-          form.find(".prism-form__input").val('')
+          form.find(".prism-form__comment").val('')
+          form.find(".prism-form__comment").css('height', '17px')
         },
         error: function(data) {
             console.log("error")

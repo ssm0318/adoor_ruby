@@ -31,6 +31,26 @@
         }
     }
 
+    .prism-form__comment {
+        width: calc(100% - 100px);
+        height: 17px;
+        padding: 5px 10px;
+        margin-right: 3px;
+        // border: 0.5px solid $prism-box-gray;
+        border: none;
+        background-color: #f9f9f9;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        resize: none;
+        overflow: hidden;
+
+        &:focus {
+            outline: none;
+            fill: none;
+        }
+    }
+
     .prism-form__button {
         // visibility: hidden;
         width: 70px;

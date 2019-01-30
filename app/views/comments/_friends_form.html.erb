@@ -17,7 +17,7 @@
                             <%= form_tag replies_path, class: "prism-form-friend reply" do %>
                                 <%= hidden_field_tag "id", c.id %>
                                 <%= hidden_field_tag "anonymous", "false" %>
-                                <%= text_field_tag "content", nil, required: true, class: "prism-form__input", autocomplete: "off" %>
+                                <%= text_area_tag "content", nil, required: true, class: "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
                                 <% if c.secret %>
                                     <%= hidden_field_tag "secret", "true" %>
                                 <% else %>
@@ -36,7 +36,7 @@
                     <%= hidden_field_tag "target_type", feed.class.to_s %>
                     <%= hidden_field_tag "target_id", feed.id %>
                     <%= hidden_field_tag "anonymous", "false" %>
-                    <%= text_field_tag "content", nil, required: true, :class => "prism-form__input", autocomplete: "off" %>
+                    <%= text_area_tag "content", nil, required: true, :class => "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
                     <label>
                         <%= check_box_tag "secret", "true", false, class: "" %>
                         나만보기
@@ -66,7 +66,7 @@
                                 <%= hidden_field_tag "id", c.id %>
                                 <%= hidden_field_tag "anonymous", "true" %>
                                 <%= hidden_field_tag "secret", "false" %>  <!-- 이건 디폴트 값. 익명 댓글은 secret 무조건 false -->
-                                <%= text_field_tag "content", nil, required: true, :class => "prism-form__input", autocomplete: "off" %>
+                                <%= text_area_tag "content", nil, required: true, :class => "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
                                 <%= button_tag "저장", class: "prism-form__button" %>
                                 <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다<span>
                             <% end %>
@@ -79,7 +79,7 @@
                     <%= hidden_field_tag "target_id", feed.id %>
                     <%= hidden_field_tag "anonymous", "true" %>
                     <%= hidden_field_tag "secret", "false"%>
-                    <%= text_field_tag "content", nil, required: true, :class => "prism-form__input", autocomplete: "off" %>
+                    <%= text_area_tag "content", nil, required: true, :class => "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
                     <%= button_tag "저장", class: "prism-form__button" %>
                     <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다<span>
                 <% end %>
@@ -101,7 +101,7 @@
                             <%= form_tag replies_path, class: "prism-form-friend reply" do %>
                                 <%= hidden_field_tag "id", c.id %>
                                 <%= hidden_field_tag "anonymous", "false" %>
-                                <%= text_field_tag "content", nil, required: true, class: "prism-form__input", autocomplete: "off" %>
+                                <%= text_area_tag "content", nil, required: true, class: "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
                                 <label>
                                     <%= check_box_tag "secret", "true", false, class: "" %>
                                     숨기기
@@ -117,7 +117,7 @@
                     <%= hidden_field_tag "target_type", feed.class.to_s %>
                     <%= hidden_field_tag "target_id", feed.id %>
                     <%= hidden_field_tag "anonymous", "false" %>
-                    <%= text_field_tag "content", nil, required: true, :class => "prism-form__input", autocomplete: "off" %>
+                    <%= text_area_tag "content", nil, required: true, :class => "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
                     <label>
                         <%= check_box_tag "secret", "true", false, class: "" %>
                         숨기기
