@@ -5,6 +5,7 @@ function click_friend_reply(element) {
 
     var form = $(this).parents(".comment-replies-form").find("form")
     form.show()
+    form.find("textarea").focus()
     form.find(".target_author_id").remove()
     form.find(".replier-name").remove()
 
@@ -30,13 +31,21 @@ function click_friend_reply(element) {
 
 $(document).on('turbolinks:load', function()  {
 
+    $(".prism-form__comment").on('keypress', function(e) {
+      if(e.keyCode == 13 && !e.shiftKey) {        
+        $(this).parents("form").submit();
+      } 
+    })
+
     click_friend_reply($(".btn-comment.friend"))
     // TODO : 숨김댓글 체크한채로 보내면 숨김댓글이라고 뜨기!
 
     $(".prism-form-friend").submit( function(e) {
         e.preventDefault();
 
-        console.log(e)
+        if($(this).find(".prism-form__comment").val().trim() ==''){
+           return;
+        }
 
         var form = $(this)
         $.ajax({

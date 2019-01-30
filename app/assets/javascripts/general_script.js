@@ -2,6 +2,7 @@ function click_general_reply(element) {
   element.on('click', function() {
     var form = $(this).parents(".comment-replies-form").find("form")
     form.show()
+    form.find("textarea").focus()
     // form.submit( function(e) {
     //   form.hide()
     // })
@@ -68,6 +69,9 @@ $(document).on('turbolinks:load', function()  {
   $(".prism-form-general").submit( function(e) {
 
       e.preventDefault();
+      if($(this).find(".prism-form__comment").val().trim() ==''){
+        return;
+     }
 
       var form = $(this)
       $.ajax({
