@@ -4,6 +4,17 @@
     <div>
         <% u.hidden_field :id, :value => current_user.id %>
 
+        <div class="image-upload">
+            <div class="image-container">
+                <%= image_tag current_user.image.url, class: "edit-profile-img" %>
+                <%= u.file_field :image, id: "file-input" %>
+                <label for="file-input">
+                    <span class="camera-icon"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></span>
+                </label>
+            </div>
+            
+        </div>
+(jpg, jpeg, png, gif)
         <div>
             <%= u.label "닉네임" %>
             <%= u.text_field :username, :required => true, autocomplete: "off" %>
@@ -20,13 +31,10 @@
         </div>
 
         <br>
-        <div>
-            <%= u.label "프로필 사진 (jpg, jpeg, png, gif)" %><br>
-            <%= image_tag current_user.image.url, :style => "height:40px; width:40px; border-radius:15px;" %>
-            <%= u.file_field :image %>
-        </div>
+        
     <br>
         <%= u.submit "수정하기", class: "profile-button" %>
     </div>
 <% end %>
+<%= link_to "계정 삭제하기", user_registration_path, method: :delete, data: { confirm: '정말 계정을 삭제하시겠습니까? 계정 삭제 후에는 다시 복구할 수 없습니다.' }, class: "account-delete-btn"%>
 </div>

@@ -277,14 +277,6 @@ ActiveRecord::Schema.define(version: 20190127132921) do
     t.index ["author_id"], name: "index_tags_on_author_id"
   end
 
-  create_table "tmis", force: :cascade do |t|
-    t.integer "author_id", null: false
-    t.text "content", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_tmis_on_author_id"
-  end
-
   create_table "user_queries", force: :cascade do |t|
     t.integer "user_id"
     t.string "content"
