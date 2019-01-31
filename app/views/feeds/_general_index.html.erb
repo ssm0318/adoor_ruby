@@ -9,6 +9,7 @@
                 <div class = "prism-box-custom-question">
                     <div class = "question-content"><%= feed.content %></div>
                     <div class = "reposts">
+                        <% ancestor_id = feed.ancestor_id == nil ? feed.id : feed.ancestor_id %>
                         <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
                     </div>
                 </div>
@@ -46,8 +47,7 @@
                 <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>
             </div>
             <div class="prism-box__footer">
-                    <%= render 'feeds/feed_footer', target: feed %>
-                <% end %>
+                <%= render 'feeds/feed_footer', target: feed %>
             </div>
             <%= render 'comments/general_form', user: feed.author, feed: feed %>
         </div>
