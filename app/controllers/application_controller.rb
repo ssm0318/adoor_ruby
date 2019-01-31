@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :noties
 
+  def test
+    render json: {
+      data: current_user.username
+    }
+
   def noties
     if user_signed_in?
       @noties = Notification.where(recipient_id: current_user.id).visible.order(updated_at: :desc)
