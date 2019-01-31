@@ -28,14 +28,15 @@ function click_friend_reply(element) {
   })
 }
 
+function submit_on_enter(e) {
+  if(e.keyCode == 13 && !e.shiftKey) {        
+    $(this).parents("form").submit();
+  } 
+}
 
 $(document).on('turbolinks:load', function()  {
 
-    $(".prism-form__comment").on('keypress', function(e) {
-      if(e.keyCode == 13 && !e.shiftKey) {        
-        $(this).parents("form").submit();
-      } 
-    })
+    $(".prism-form__comment").on('keypress', submit_on_enter)
 
     click_friend_reply($(".btn-comment.friend"))
     // TODO : 숨김댓글 체크한채로 보내면 숨김댓글이라고 뜨기!
@@ -54,7 +55,7 @@ $(document).on('turbolinks:load', function()  {
           data: form.serialize(),
           success: function(data) {
             
-            let secret = form.find("#secret").is(":checked") ? true : false
+            let secret = form.find("input[type=checkbox]").is(":checked") ? true : false
             
             if(form.hasClass("comment")) {
               var new_url = "/comments/" + data.id;
@@ -87,12 +88,13 @@ $(document).on('turbolinks:load', function()  {
                       </div> 
                     </div>
                   </div>
-                  <form class="prism-form-general reply" action="/replies" accept-charset="UTF-8" method="post">
+                  <form class="prism-form-friend reply" action="/replies" accept-charset="UTF-8" method="post">
                     <input name="utf8" type="hidden" value="✓">
                     <input type="hidden" name="id" id="id" value="${data.id}">
                     <input type="hidden" name="anonymous" value="false">
-                    <textarea type="text" name="content" id="content" required="required" class="prism-form__comment" data-enable-grammarly= "false"></textarea>
-                    <button name="button" type="submit" class="prism-form__button">저장</button>
+                    <div class="form-text"">
+                      <textarea type="text" name="content" id="content" required="required" class="prism-form__comment" data-enable-grammarly= "false"></textarea>
+                    </div>
                     <span class="comment-info-alert">숨기기 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
                   </form>
                 </div>
@@ -101,10 +103,12 @@ $(document).on('turbolinks:load', function()  {
               if(secret) {
                 //TODO (숨김댓글)추가
                 html.find(".content").before($(lock_icon))
-                html.find("form").find("#content").after('<input type="hidden" name="secret" value="true" id="secret">')
+                html.find("form").find(".form-text").append($('<input type="hidden" name="secret" value="true" id="secret">'))
+                html.find("textarea").css('width', '100%')
+                html.find("comment-info-alert").remove()
               }
               else {
-                html.find("form").find("#content").after('<label><input type="checkbox" name="secret" id="secret" value="true">숨기기</label>')
+                html.find("form").find(".form-text").append($(`<input type="checkbox" name="secret" id="reply_${data.id}" value="true"><label for="reply_${data.id}">숨기기</label>`))
               }
 
               click_friend_reply(html.find(".btn-comment"))
@@ -128,6 +132,8 @@ $(document).on('turbolinks:load', function()  {
               like_ajax(btn_like)
               delete_ajax(html.find(".btn-comment-delete"))
               html.find("time.timeago").timeago();
+
+              html.find("textarea").on('keypress', submit_on_enter)
               html.find("form").submit( function(event) {
   
                 var new_form = $(this)

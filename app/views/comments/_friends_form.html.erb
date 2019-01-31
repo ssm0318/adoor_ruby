@@ -17,16 +17,18 @@
                             <%= form_tag replies_path, class: "prism-form-friend reply" do %>
                                 <%= hidden_field_tag "id", c.id %>
                                 <%= hidden_field_tag "anonymous", "false" %>
-                                <%= text_area_tag "content", nil, required: true, class: "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
-                                <% if c.secret %>
-                                    <%= hidden_field_tag "secret", "true" %>
-                                <% else %>
-                                    <label>
-                                        <%= check_box_tag "secret", "true", false, class: "" %>
-                                        숨기기
-                                    </label>
-                                <% end %>
-                                <%= button_tag "저장", class: "prism-form__button" %>
+                                <div class="form-text">
+                                    <%= text_area_tag "content", nil, required: true, class: "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
+                                    <% if c.secret %>
+                                        <%= hidden_field_tag "secret", "true" %>
+                                    <% else %>
+                                         <%= check_box_tag "secret", "true", false, id: "reply_"+c.id.to_s %>
+                                        <label for="reply_<%=c.id%>">
+                                            숨기기
+                                        </label>
+                                    <% end %>
+                                </div>
+                                <%# button_tag "저장", class: "prism-form__button" %>
                                 <span class="comment-info-alert">숨기기 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
                             <% end %>
                         </div>
@@ -36,12 +38,14 @@
                     <%= hidden_field_tag "target_type", feed.class.to_s %>
                     <%= hidden_field_tag "target_id", feed.id %>
                     <%= hidden_field_tag "anonymous", "false" %>
-                    <%= text_area_tag "content", nil, required: true, :class => "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
-                    <label>
-                        <%= check_box_tag "secret", "true", false, class: "" %>
-                        나만보기
-                    </label>
-                    <%= button_tag "저장", class: "prism-form__button" %>
+                    <div class="form-text">
+                        <%= text_area_tag "content", nil, required: true, :class => "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
+                        <%= check_box_tag "secret", "true", false, id: "comment_"+feed.id.to_s %>
+                        <label for="comment_<%=feed.id%>">
+                            나만보기
+                        </label>
+                    </div>
+                    <%# button_tag "저장", class: "prism-form__button" %>
                 <% end %>
             </div>
             <div class="anonymous-comments-div" style="display:none">
@@ -67,7 +71,7 @@
                                 <%= hidden_field_tag "anonymous", "true" %>
                                 <%= hidden_field_tag "secret", "false" %>  <!-- 이건 디폴트 값. 익명 댓글은 secret 무조건 false -->
                                 <%= text_area_tag "content", nil, required: true, :class => "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
-                                <%= button_tag "저장", class: "prism-form__button" %>
+                                <%# button_tag "저장", class: "prism-form__button" %>
                                 <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다<span>
                             <% end %>
                         </div>
@@ -80,7 +84,7 @@
                     <%= hidden_field_tag "anonymous", "true" %>
                     <%= hidden_field_tag "secret", "false"%>
                     <%= text_area_tag "content", nil, required: true, :class => "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
-                    <%= button_tag "저장", class: "prism-form__button" %>
+                    <%# button_tag "저장", class: "prism-form__button" %>
                     <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다<span>
                 <% end %>
             </div>
@@ -101,12 +105,14 @@
                             <%= form_tag replies_path, class: "prism-form-friend reply" do %>
                                 <%= hidden_field_tag "id", c.id %>
                                 <%= hidden_field_tag "anonymous", "false" %>
-                                <%= text_area_tag "content", nil, required: true, class: "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
-                                <label>
-                                    <%= check_box_tag "secret", "true", false, class: "" %>
-                                    숨기기
-                                </label>
-                                <%= button_tag "저장", class: "prism-form__button" %>
+                                <div class="form-text">
+                                    <%= text_area_tag "content", nil, required: true, class: "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
+                                    <%= check_box_tag "secret", "true", false, id: "reply_"+c.id.to_s %>
+                                    <label for="reply_<%=c.id%>">
+                                        숨기기
+                                    </label>
+                                </div>
+                                <%# button_tag "저장", class: "prism-form__button" %>
                                 <span class="comment-info-alert">숨기기 설정을 하면, 글쓴이와 댓글 작성자에게만 댓글이 보입니다.</span>
                             <% end %>
                         </div>
@@ -117,12 +123,14 @@
                     <%= hidden_field_tag "target_type", feed.class.to_s %>
                     <%= hidden_field_tag "target_id", feed.id %>
                     <%= hidden_field_tag "anonymous", "false" %>
-                    <%= text_area_tag "content", nil, required: true, :class => "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
-                    <label>
-                        <%= check_box_tag "secret", "true", false, class: "" %>
-                        숨기기
-                    </label>
-                    <%= button_tag "저장", class: "prism-form__button" %>
+                    <div class="form-text">
+                        <%= text_area_tag "content", nil, required: true, :class => "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
+                        <%= check_box_tag "secret", "true", false, id: "comment_"+feed.id.to_s %>
+                        <label for="comment_<%=feed.id%>">
+                            숨기기
+                        </label>
+                    </div>
+                    <%# button_tag "저장", class: "prism-form__button" %>
                     <span class="comment-info-alert">숨기기 설정을 하면, 글쓴이에게만 댓글이 보입니다.</span>
                 <% end %>
             </div>
