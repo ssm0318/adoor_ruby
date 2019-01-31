@@ -26,17 +26,18 @@ function like_ajax(element) {
                     like.toggleClass("do-like")
 
                     var el
-                    if(like.hasClass("btn-feed-like")) {
-                        // 클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
-                        el = like.parent().find(".num-of-likes")
-                    } else {
-                        // 클래스 구조 바뀌면 에러 날 수 있으니 바꾸지 말 것
-                        el = like.parents(".comment-content").siblings(".comment-info").find(".show-likes")
-                    }
+                    el = like.parent().find(".num-of-likes")
 
-                    let like_num = parseInt(el.text())
+                    let like_num = parseInt(el.text());
                     like_num += (!like.hasClass("do-like")) ? 1 : - 1
                     el.text(like_num)
+
+                    if(like_num == 0) {
+                        el.addClass("zero")
+                    }
+                    else {
+                        el.removeClass("zero")
+                    }
                 },
                 error: function(data) {
                     console.log("error!")

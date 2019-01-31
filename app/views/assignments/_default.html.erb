@@ -1,6 +1,6 @@
-<div class="assignment-content" style="display: none;">
-    <div>
-        <p class="message"></p>
+<div class="assignment-content">
+    <div class="prism-box-question" style="text-align: center;">
+        <%=link_to question.content, question_path(question), class: "question"%>
     </div>
     <% if user_signed_in? %>
         <% if !current_user.friends.exists? %>
@@ -8,10 +8,8 @@
         <% else %>
             <% current_user.friends.each do |friend| %>
                 <div class="assignment-content-el">
-                    <div class = "assignee">
-                        <%= image_tag friend.image.url,  :class => "assignee-profile"%>
-                        <span class = "assignee-name"><%= friend.username%></span>
-                    </div>
+                    <%= link_to image_tag(friend.image.url, :class => "assignee-profile" ), profile_path(friend) %>
+                    <%= link_to friend.username, profile_path(friend), class: "assignee-name" %>
                     
                     <% assign = Assignment.find_by(question_id: question.id, assigner_id: current_user.id, assignee_id: friend.id) %>
                     <%if assign.nil? %>

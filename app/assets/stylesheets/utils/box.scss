@@ -1,6 +1,11 @@
 // 글상자(?) 기본 형식 통일
 @import 'variable.scss';
 
+
+div {
+    // display: inline-block;
+    word-break: break-all;
+}
 .prism-box {
     background-color: white;
     width: calc(100% - 20px);
@@ -57,7 +62,11 @@
         font-family: 'Nanum Gothic', sans-serif;
         color: #F48462;
         font-size: 13px;
-
+        padding: 3px;
+        margin-right:2px;
+    }
+    .num-of-reposts.zero {
+        display: none;
     }
 
 }
@@ -216,14 +225,22 @@
             vertical-align: 8px;
             font-family: 'Nanum Gothic', sans-serif;
             color: #F48462;
+            cursor: pointer;
+            padding: 3px;
+            margin-right: 2px;
+        }
 
+        .num-of-likes.zero, .num-of-drawers.zero {
+            display: none;
         }
 
         .num-of-drawers {
             vertical-align: 8px;
             font-family: 'Nanum Gothic', sans-serif;
             color: #F48462;
-
+            padding: 3px;
+            margin-right: 2px;
+            // cursor: pointer;
         }
 
     }

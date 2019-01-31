@@ -39,13 +39,16 @@ Rails.application.routes.draw do
 
   # Like
   resources :likes, only: [:create, :destroy]
+  get '/likes/:target_type/:target_id' => 'likes#likes_info'
 
   # Assignment
-  post '/assignments/:assignee_id/:question_id' => 'assignments#create', as: :new_assignment # get?
+  get '/assignments/:question_id' => 'assignments#new', as: :new_assignment
+  post '/assignments/:assignee_id/:question_id' => 'assignments#create', as: :create_assignment # get?
   delete '/assignments/:assignee_id/:question_id' => 'assignments#destroy', as: :destroy_assignment
 
   # Drawer
   resources :drawers, only: [:create, :destroy]
+  get '/drawers/:target_type/:target_id' => 'drawers#drawers_info'
 
   # Highlight
   resources :highlights, only: [:create, :destroy]

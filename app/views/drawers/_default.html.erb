@@ -1,4 +1,4 @@
-<% if Drawer.where(user_id: current_user.id, target: target).empty? %>
+<% if target.drawers.where(user_id: current_user.id).empty? %>
     <%# link_to image_tag("icons/drawer-default-icon", class: "btn-drawer"), drawers_path(target_id: a.id, target_type: "Answer"), method: :post %>
     <%= image_tag("icons/drawer-default-icon", 
         class: "btn-drawer do-drawer",
