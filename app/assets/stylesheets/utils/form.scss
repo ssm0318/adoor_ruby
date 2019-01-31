@@ -23,6 +23,10 @@
         margin-right: 10px
     }
 
+    .prism-form__comment.secret {
+        width: 100%;
+    }
+
     input[type="checkbox"] {
         padding: 0;
         height: initial;
@@ -39,6 +43,7 @@
         display: block;
         margin-bottom: 20px;
         // margin-right: 15px;
+        padding-top: 8px;
     }
 
     input[type="checkbox"] + label:before {

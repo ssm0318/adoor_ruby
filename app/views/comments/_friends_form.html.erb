@@ -24,12 +24,12 @@
                                     <% else %>
                                          <%= check_box_tag "secret", "true", false, id: "reply_"+c.id.to_s %>
                                         <label for="reply_<%=c.id%>">
-                                            숨기기
+                                            귓속말
                                         </label>
                                     <% end %>
                                 </div>
                                 <%# button_tag "저장", class: "prism-form__button" %>
-                                <span class="comment-info-alert">숨기기 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
+                                <span class="comment-info-alert">귓속말 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
                             <% end %>
                         </div>
                     <% end %>
@@ -40,8 +40,8 @@
                     <%= hidden_field_tag "anonymous", "false" %>
                     <div class="form-text">
                         <%= text_area_tag "content", nil, required: true, :class => "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
-                        <%= check_box_tag "secret", "true", false, id: "comment_"+feed.id.to_s %>
-                        <label for="comment_<%=feed.id%>">
+                        <%= check_box_tag "secret", "true", false, id: "comment_"+feed.class.to_s+ feed.id.to_s %>
+                        <label for="comment_<%=feed.class.to_s + feed.id.to_s%>">
                             나만보기
                         </label>
                     </div>
@@ -109,11 +109,11 @@
                                     <%= text_area_tag "content", nil, required: true, class: "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
                                     <%= check_box_tag "secret", "true", false, id: "reply_"+c.id.to_s %>
                                     <label for="reply_<%=c.id%>">
-                                        숨기기
+                                        귓속말
                                     </label>
                                 </div>
                                 <%# button_tag "저장", class: "prism-form__button" %>
-                                <span class="comment-info-alert">숨기기 설정을 하면, 글쓴이와 댓글 작성자에게만 댓글이 보입니다.</span>
+                                <span class="comment-info-alert">귓속말 설정을 하면, 글쓴이와 댓글 작성자에게만 댓글이 보입니다.</span>
                             <% end %>
                         </div>
                     <% end %>
@@ -125,13 +125,13 @@
                     <%= hidden_field_tag "anonymous", "false" %>
                     <div class="form-text">
                         <%= text_area_tag "content", nil, required: true, :class => "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
-                        <%= check_box_tag "secret", "true", false, id: "comment_"+feed.id.to_s %>
-                        <label for="comment_<%=feed.id%>">
-                            숨기기
+                        <%= check_box_tag "secret", "true", false, id: "comment_"+feed.class.to_s+ feed.id.to_s %>
+                        <label for="comment_<%=feed.class.to_s + feed.id.to_s%>">
+                            귓속말
                         </label>
                     </div>
                     <%# button_tag "저장", class: "prism-form__button" %>
-                    <span class="comment-info-alert">숨기기 설정을 하면, 글쓴이에게만 댓글이 보입니다.</span>
+                    <span class="comment-info-alert">귓속말 설정을 하면, 글쓴이에게만 댓글이 보입니다.</span>
                 <% end %>
             </div>
         <% end %>

@@ -37,6 +37,12 @@ function submit_on_enter(e) {
 $(document).on('turbolinks:load', function()  {
 
     $(".prism-form__comment").on('keypress', submit_on_enter)
+    $(".friend-comments, .comments").find(".comment").each(function(index) {
+      if($(this).find(".lock-icon").length != 0) {
+        console.log($(this))
+        $(this).parents(".comment-replies-form").find("textarea").addClass("secret")
+      }
+    }) 
 
     click_friend_reply($(".btn-comment.friend"))
     // TODO : 숨김댓글 체크한채로 보내면 숨김댓글이라고 뜨기!
@@ -95,7 +101,7 @@ $(document).on('turbolinks:load', function()  {
                     <div class="form-text"">
                       <textarea type="text" name="content" id="content" required="required" class="prism-form__comment" data-enable-grammarly= "false"></textarea>
                     </div>
-                    <span class="comment-info-alert">숨기기 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
+                    <span class="comment-info-alert">귓속말 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
                   </form>
                 </div>
               `)
@@ -104,11 +110,11 @@ $(document).on('turbolinks:load', function()  {
                 //TODO (숨김댓글)추가
                 html.find(".content").before($(lock_icon))
                 html.find("form").find(".form-text").append($('<input type="hidden" name="secret" value="true" id="secret">'))
-                html.find("textarea").css('width', '100%')
+                html.find("textarea").addClass("secret")
                 html.find("comment-info-alert").remove()
               }
               else {
-                html.find("form").find(".form-text").append($(`<input type="checkbox" name="secret" id="reply_${data.id}" value="true"><label for="reply_${data.id}">숨기기</label>`))
+                html.find("form").find(".form-text").append($(`<input type="checkbox" name="secret" id="reply_${data.id}" value="true"><label for="reply_${data.id}">귓속말</label>`))
               }
 
               click_friend_reply(html.find(".btn-comment"))
