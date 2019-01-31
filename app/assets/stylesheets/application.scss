@@ -25,9 +25,14 @@
                 
         }
 
-        .active {
+        .nav-link.active{
             color: #F48462;
+        }
 
+        .login {
+            a {
+                color: #F48462;
+            }
         }
 
         .logout {
@@ -57,7 +62,12 @@
 
     .mr-auto-custom {
         margin-left: auto!important;
+        display: flex!important;
     }
+}
+
+.navbar-active {
+    color: #F48462;
 }
 
 .navbar .navbar-collapse {
