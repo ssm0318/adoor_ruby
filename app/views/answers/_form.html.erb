@@ -6,16 +6,17 @@
         <%= f.hidden_field :author_id, :value => current_user.id %>
         <%= f.hidden_field :question_id, :value => @question.id %>
         <%= f.text_area :content, class: "new-answer-field", required: true, autofocus: true, "data-enable-grammarly": "false" %>
-        <br><br>
+        <br><br> 
 
-        <!--tag field-->
-        <%# <%= f.text_area :tag_string %>
         <div class = "channels channels-answer">
             <span class="channels-dropdown hover-orange">공개그룹</span>
             <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
             <div class="channels-dropdown-content">
+                <span class="btn-select-all-channels">전체선택</span>
                 <% current_user.channels.each do |channel| %>
-                    <%= check_box_tag "c[]", channel.id, answer.channels.include?(channel), id: channel.id.to_s, class: "channel-el"%>
+                    <%= check_box_tag "c[]", channel.id, 
+                        answer.channels.count() > 0 ? answer.channels.include?(channel) : !(channel.name=="익명피드" || channel.name=="나"), 
+                        id: channel.id.to_s, class: "channel-el"%>
                     <%= label_tag "#{channel.id}", channel.name, class: "channel-el" %>
                 <% end %>
             </div>

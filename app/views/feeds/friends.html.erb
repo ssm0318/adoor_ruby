@@ -6,7 +6,7 @@
         <span class = "custom-question"> 질문 </span>
       </div>  
       <%= render 'posts/new'%>
-      <%= render 'custom_questions/new'%>
+      <%= render partial: "custom_questions/new", locals: {custom_question: CustomQuestion.new} %>
     </div>
   </div>
   <%= render partial: 'feeds/friends_index', locals: {feeds: @feeds} %>
@@ -22,6 +22,8 @@
     var selected = $(this);
     $(this).addClass("selected");
     $('.custom-question').removeClass("selected");
+    $(this).parent().parent().parent().removeClass("custom-question-form");
+    $(this).parent().parent().removeClass("custom-question-form");
     $('#new-post-form').show();
     $('#new-custom-question-form').hide();
   })
@@ -29,9 +31,14 @@
   $(".custom-question").on('click', function () {
     var selected = $(this);
     $(this).addClass("selected");
+    $(this).parent().parent().parent().addClass("custom-question-form");
+    $(this).parent().parent().addClass("custom-question-form");
     $('.posting').removeClass("selected");
     $('#new-custom-question-form').show();
     $('#new-post-form').hide();
   })
+</script>
+<script>
+  textarea_init($(".prism-form__comment"), window)
 </script>
 

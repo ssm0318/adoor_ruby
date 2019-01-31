@@ -1,40 +1,52 @@
-function observe(element, event, handler) {
-    element.on(event, handler)
-}
-
 function textarea_init (element, back) {
 
-    var text = element;
-    function resize () {
-        text.css('height', 'auto')
-
-        if(text[0].scrollHeight > 0) {
-            text.css('height', text[0].scrollHeight)
-        }
-
-        if(back == window) {
-            var scrollTop  = window.pageYOffset ||
-            (document.documentElement || document.body.parentNode || document.body).scrollTop;
-
-            window.scrollTo(0, scrollTop)
-        } else {
-            back.scrollTop(text[0].scrollHeight);
-        }
-
+    if(back!=window) {
+        resizeTextArea(element, back)
     }
-    /* 0-timeout to get the already changed text */
-    function delayedResize () {
-        window.setTimeout(resize, 0);
-    }
-    observe(text, 'change',  resize);
-    observe(text, 'cut',     delayedResize);
-    observe(text, 'paste',   delayedResize);
-    observe(text, 'drop',    delayedResize);
-    observe(text, 'keydown', delayedResize);
+    element.on('keyup', function() {
+        var elem = $(this);
+        
+        //bind scroll
+        if(!elem.data('has-scroll'))
+        {
+            elem.data('has-scroll', true);
+            elem.bind('scroll keyup', function(){
+                resizeTextArea($(this), back);
+            });
+        }
+                
+        resizeTextArea($(this), back);
+    });
 
-
-
-    text.focus();
-    text.select();
-    resize();
+    element.focus()
 }
+
+
+//resize text area
+function resizeTextArea(elem, back) {
+    elem.height(1);
+    elem.scrollTop(0);
+    elem.height(elem[0].scrollHeight - elem[0].clientHeight + elem.height());
+    // console.log($(window).height())
+    if(back == window) {
+        var scrollTop  = window.pageYOffset ||
+        (document.documentElement || document.body.parentNode || document.body).scrollTop;
+        a = $(window).height()
+        b = scrollTop
+        c = elem.offset().top
+        d = elem.height()
+
+        //만약 선 넘어가버리면 
+        // window.scrollTo(0, elem[0].scrollHeight - 600)
+        if(a < d) {
+            window.scrollTo(0, c + d - a + 10)
+        } 
+        else if(a + b <= c + d + 10) {
+            window.scrollTo(0, c + d - a + 10)
+        }
+
+    } else {
+        back.scrollTop(elem[0].scrollHeight);
+    }
+}
+

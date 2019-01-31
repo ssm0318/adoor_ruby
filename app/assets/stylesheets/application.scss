@@ -13,153 +13,159 @@
  *= require_tree .
  *= require_self
  */
-
-.adoor-header {
-    width: 100%;
-    display: inline-block;
-
-    .logo {
-        float: left;
-        width: 180px;
-        height: auto;
-    }
-
-    .nav {
-        padding-top: 25px;
-
-        .nav-left{
-            float:left;
-
-            .nav-el {
-                font-family: 'Open Sans', sans-serif;
-                font-size: 15px;
-                color: #777777;
-                padding-left: 25px;
-                padding-right: 25px;
+ ::-webkit-scrollbar { 
+    display: none; 
+ }
     
-                &:hover {
-                    color: #F48462;
-                }
-            }
-
-            .nav-el.active {
-                color: #F48462;
-            }
+.navbar {
+    .navbar-nav {
+        .nav-link {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 15px;
+            color: #777777;
+            padding-left: 25px;
+            padding-right: 25px;
+                
         }
 
-        .nav-right {
-            float: right;
-            margin-right: 35px;
-            
-            .nav-el {
-                display: inline-block;
-                font-family: 'Open Sans', sans-serif;
-                font-size: 15px;
-                color: #777777;
-                padding-left: 25px;
-                padding-right: 25px;
-                &:hover {
-                    color: #F48462;
-                }
-            }
+        .nav-link.active{
+            color: #F48462;
+        }
 
-            .log-in {
-                color: #F48462;
-            }
-            .btn-noti {
-                padding-top: 2px;
-                float: right;
-                width: 20px;
-                height: auto;
-                display: block;
-                
-            }
 
-            .my-page-btn img {
-                float: right;
-                display: block;
+    }
+
+    .mr-auto-custom {
+        display: flex;
+        margin-left: auto!important;
+
+        .search-form {
+            padding-top: 12px;
+        }
+    
+        .search-input {
+            width: 0px;
+            height: 30px;
+            padding-left: 15px;
+            padding-right: 15px;
+            border: none;
+            background-color: white;
+            border-radius: 10px;
+            position: absolute;
+            right: 0;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            font-size: 12px;
+            -webkit-transition: width .55s ease;
+            -moz-transition: width .55s ease;
+            -ms-transition: width .55s ease;
+            -o-transition: width .55s ease;
+            transition: width .55s ease;
+    
+            &:focus {
+                outline: none;
+                fill: none;
+    
+            }
+            border: 0.5px solid #dddddd;
+    
+        }
+    
+        .search-input:focus, .search-input:active {
+            outline: none;
+            width: 120px;
+    
+        }
+    
+        .hover-container:hover .search-input {
+            width: 120px;
+    
+        }
+    
+        .search-container {
+            width: 120px;
+            height: 30px;
+            vertical-align: middle;
+            white-space: nowrap;
+            position: relative;
+            grid-column: 1 / 2;
+    
+        }
+    
+        .search-icon {
+            color: #F48462;
+            position: absolute;
+            right: 7px;
+            margin-left: 10px;
+            margin-top: 5px;
+            z-index: 1;
+    
+        }
+
+        .logout {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 15px;
+            color: #777777;
+            padding-left: 25px;
+            padding-right: 25px;
+            padding-top: 15px;
+        }
+    
+        .my-page-btn {
+            padding: 11px 25px 10px 10px;
+
+            img {
                 width: 25px;
                 height: 25px;
                 border-radius:15px;
-                margin-right: 20px;
+    
             }
-
-            .search-form {
-                //padding-top: 20px;
-                display: inline-block;
-                //margin-right: 30px;
-                //position: 
-            }
-            .search-input {
-                width: 0px;
-                height: 30px;
-                padding-left: 15px;
-                padding-right: 15px;
-                border: none;
-                background-color: white;
-                border-radius: 10px;
-                position: absolute;
-                right: 0;
-                -webkit-border-radius: 10px;
-                -moz-border-radius: 10px;
-                font-size: 12px;
-                -webkit-transition: width .55s ease;
-                -moz-transition: width .55s ease;
-                -ms-transition: width .55s ease;
-                -o-transition: width .55s ease;
-                transition: width .55s ease;
-                &:focus {
-                    outline: none;
-                    fill: none;
-                }
-                border: 0.5px solid #dddddd;
-            }
-
-            .search-input:focus, .search-input:active {
-                outline: none;
-                width: 120px;
-            }
-
-            .hover-container:hover .search-input {
-                width: 120px;
-            }
-        
-            .search-container {
-                width: 120px;
-                height: 30px;
-                vertical-align: middle;
-                white-space: nowrap;
-                position: relative;
-            }
-
-            .search-icon {
-                color: #F48462;
-                position: absolute;
-                right: 7px;
-                margin-left: 10px;
-                margin-top: 8px;
-                z-index: 1;
+        }
+    
+        .btn-noti-box {
+            padding-top: 10px;
+    
+            img {
+                width: 22px;
+                height: 25px;
                 
             }
-
         }
     }
-    
 }
 
+.navbar-active {
+    color: #F48462;
+}
+
+.navbar-toggler:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    top: 17px;
+    right: 0.5em;
+    border: none;    
+}
+    
+
 #prism-container {
+    height: 100%;
+    overflow: auto;
     width: 60%;
     margin: 0 auto;
     margin-bottom: 50px;
     padding-top: 50px;
     position: relative;
+    min-width: 600px;
     .prism-title {
         width: 100%;
         text-align: center;
         color: #F48462;
-        &:hover {
-            color: #F48462;
-         }
+        cursor: pointer;
+
+        // &:hover {
+        //     color: #F48462;
+        //  }
          font-family: 'Open Sans', sans-serif;
     }
     
@@ -178,15 +184,15 @@ a {
 
 .username{
     color: black;
-    vertical-align: 9px;
-    &:hover {
-        color: #F48462;
-    }
+    cursor: pointer;
+    text-decoration: none;
 }
+
 body {
     margin: 0px; 
     background-color: #f9f9f9;
     font-family: "Nanum Gothic", serif;
+    height: 100%;
 }
 
 div.background {
@@ -327,19 +333,35 @@ div.background {
         }
 
         a.active {
-            color: black;
             font-weight: bold;
+            color: #4f4f4f;
         }
     }
 
 }
 
-.hover-orange {
-    &:hover {
-        color: #F48462;
-    }
-}
+// .hover-orange {
+//     &:hover {
+//         color: #F48462;
+//     }
+// }
 
 .hover-pointer {
     cursor: pointer;
+}
+
+#flash-messages {
+    position: fixed;
+    right: 20px;
+    top: 60px;
+    z-index: 3;
+    .flash-message {
+        font-size: 14px;
+        z-index: 3;
+        display: block;
+        background-color: white;
+        padding: 20px;
+        color: gray;
+        margin-bottom: 10px;
+    }
 }

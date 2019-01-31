@@ -1,4 +1,4 @@
-<% if Like.where(user_id: current_user.id, target: target).empty? %> 
+<% if target.likes.where(user_id: current_user.id).empty? %> 
     <%# link_to image_tag("icons/like-default-icon", class: like_btn_class), likes_path(target_id: a.id, target_type: target_type), method: :post %>
     <%= image_tag("icons/like-default-icon", 
         class: like_btn_class + " do-like",

@@ -1,6 +1,5 @@
 <div class="reply">
     <div class="comment-content">
-        
             <%= link_to image_tag(r.author.image.url, class: "user-profile"), profile_path(r.author.id) %>
             <span class="comment-text">
                 <%= link_to r.author.username, profile_path(r.author.id), class: "username" %>
@@ -15,8 +14,10 @@
                     <%= r.content %>
                 </span>
             </span>
-        
-        <%= render 'likes/default', target: r, like_btn_class: "btn-comment-like" %>
+            <div class="likes">
+                <%= render 'likes/num_of_likes', target: r %>
+                <%= render 'likes/default', target: r, like_btn_class: "btn-comment-like" %>
+            </div>
     </div>
 
     <div class = "comment-info">

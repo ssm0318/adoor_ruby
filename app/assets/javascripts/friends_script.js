@@ -5,10 +5,9 @@ function click_friend_reply(element) {
 
     var form = $(this).parents(".comment-replies-form").find("form")
     form.show()
+    form.find("textarea").focus()
     form.find(".target_author_id").remove()
     form.find(".replier-name").remove()
-
-    //답글하기 나한테 쓰는건 태그안되게
 
     if($(this).parents().hasClass("reply") && 
       $(this).attr("data-self")=="false") {
@@ -23,20 +22,38 @@ function click_friend_reply(element) {
       form.prepend(tag)
       form.prepend(name_span)
     }
-    form.submit( function(e) {
-      form.hide()
-    })
+    // form.submit( function(e) {
+    //   form.hide()
+    // })
   })
 }
 
+function submit_on_enter(e) {
+  if(e.keyCode == 13 && !e.shiftKey) {        
+    $(this).parents("form").submit();
+  } 
+}
 
 $(document).on('turbolinks:load', function()  {
-  
+
+    $(".prism-form__comment").on('keypress', submit_on_enter)
+    $(".friend-comments, .comments").find(".comment").each(function(index) {
+      if($(this).find(".lock-icon").length != 0) {
+        console.log($(this))
+        $(this).parents(".comment-replies-form").find("textarea").addClass("secret")
+      }
+    }) 
+
     click_friend_reply($(".btn-comment.friend"))
     // TODO : 숨김댓글 체크한채로 보내면 숨김댓글이라고 뜨기!
+
     $(".prism-form-friend").submit( function(e) {
         e.preventDefault();
-  
+
+        if($(this).find(".prism-form__comment").val().trim() ==''){
+           return;
+        }
+
         var form = $(this)
         $.ajax({
           type: "POST",
@@ -44,7 +61,7 @@ $(document).on('turbolinks:load', function()  {
           data: form.serialize(),
           success: function(data) {
             
-            let secret = form.find("#secret").is(":checked") ? true : false
+            let secret = form.find("input[type=checkbox]").is(":checked") ? true : false
             
             if(form.hasClass("comment")) {
               var new_url = "/comments/" + data.id;
@@ -67,24 +84,24 @@ $(document).on('turbolinks:load', function()  {
                             ${data.content}
                           </span> 
                         </span>
+                        <div class="likes">
+                        </div>
                       </div>
                       <div class = "comment-info">
-                          <span>
-                              <time datetime='${data.created_at}', class='timeago'></time>
-                              <span class="comment-like">좋아요 <span class="show-likes">0</span>개</span>
-                              <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
-                              <span class="btn-comment friend hover-orange hover-pointer">댓글달기</span>
-                          </span>
+                        <time datetime='${data.created_at}', class='timeago'></time>
+                        <span class="btn-comment-delete hover-orange hover-pointer" data-url="${new_url}">삭제</span>
+                        <span class="btn-comment friend hover-orange hover-pointer">댓글달기</span>
                       </div> 
                     </div>
                   </div>
-                  <form class="prism-form-general reply" action="/replies" accept-charset="UTF-8" method="post">
+                  <form class="prism-form-friend reply" action="/replies" accept-charset="UTF-8" method="post">
                     <input name="utf8" type="hidden" value="✓">
                     <input type="hidden" name="id" id="id" value="${data.id}">
                     <input type="hidden" name="anonymous" value="false">
-                    <input type="text" name="content" id="content" required="required" class="prism-form__input">
-                    <button name="button" type="submit" class="prism-form__button">저장</button>
-                    <span class="comment-info-alert">숨기기 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
+                    <div class="form-text"">
+                      <textarea type="text" name="content" id="content" required="required" class="prism-form__comment" data-enable-grammarly= "false"></textarea>
+                    </div>
+                    <span class="comment-info-alert">귓속말 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
                   </form>
                 </div>
               `)
@@ -92,15 +109,19 @@ $(document).on('turbolinks:load', function()  {
               if(secret) {
                 //TODO (숨김댓글)추가
                 html.find(".content").before($(lock_icon))
-                html.find("form").find("#content").after('<input type="hidden" name="secret" value="true" id="secret">')
+                html.find("form").find(".form-text").append($('<input type="hidden" name="secret" value="true" id="secret">'))
+                html.find("textarea").addClass("secret")
+                html.find("comment-info-alert").remove()
               }
               else {
-                html.find("form").find("#content").after('<label><input type="checkbox" name="secret" id="secret" value="true">숨기기</label>')
+                html.find("form").find(".form-text").append($(`<input type="checkbox" name="secret" id="reply_${data.id}" value="true"><label for="reply_${data.id}">귓속말</label>`))
               }
 
               click_friend_reply(html.find(".btn-comment"))
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
-              html.find(".comment-content").append(btn_like)
+              var btn_show_like = getShowLike("Comment", data.id)
+              html.find(".likes").append(btn_show_like)
+              html.find(".likes").append(btn_like)
 
               if(form.hasClass("author")) {
                 console.log("author")
@@ -110,11 +131,15 @@ $(document).on('turbolinks:load', function()  {
                 console.log("not author")
                 form.parent().find(".comments").append(html)
               }
-  
-              ///////// 동적으로 삽입한 form에 다시 event binding 해줌. 하나만 선택해야됨.
+
+              console.log(html.find(".prism-form__comment"))
+              textarea_init(html.find(".prism-form__comment"), window)
+              btn_show_like.one('click', show_likes)
               like_ajax(btn_like)
               delete_ajax(html.find(".btn-comment-delete"))
               html.find("time.timeago").timeago();
+
+              html.find("textarea").on('keypress', submit_on_enter)
               html.find("form").submit( function(event) {
   
                 var new_form = $(this)
@@ -132,13 +157,17 @@ $(document).on('turbolinks:load', function()  {
                     click_friend_reply(new_html.find(".btn-comment"))
 
                     var new_btn_like = getButtonLike(data.like_url, data.like_changed_url)
-                    new_html.find(".comment-content").append(new_btn_like)
+                    var new_btn_show_like = getShowLike("Reply", data.id)
+                    new_html.find(".likes").append(new_btn_show_like)
+                    new_html.find(".likes").append(new_btn_like)
                     new_form.parent().find(".comment-replies").append(new_html);
-  
+
+                    new_btn_show_like.one('click', show_likes)
                     like_ajax(new_btn_like)
                     delete_ajax(new_html.find(".btn-comment-delete"))
                     new_html.find("time.timeago").timeago()
-                    new_form.find(".prism-form__input").val('')
+                    new_form.find(".prism-form__comment").val('')
+                    new_form.find(".prism-form__comment").css('height', '17px')
                   },
                   error: function(data) {
                     console.log("error")
@@ -161,16 +190,19 @@ $(document).on('turbolinks:load', function()  {
               }
               
               var btn_like = getButtonLike(data.like_url, data.like_changed_url)
-              html.find(".comment-content").append(btn_like)
+              var btn_show_like = getShowLike("Reply", data.id)
+              html.find(".likes").append(btn_show_like)
+              html.find(".likes").append(btn_like)
               form.parent().find(".comment-replies").append(html)
-  
+
+              btn_show_like.one('click', show_likes)
               like_ajax(btn_like)
               delete_ajax(html.find(".btn-comment-delete"))
               html.find("time.timeago").timeago();
             }
-  
-            console.log(form)
-            form.find(".prism-form__input").val('')
+
+            form.find(".prism-form__comment").val('')
+            form.find(".prism-form__comment").css('height', '17px')
           },
           error: function(data) {
               console.log("error")

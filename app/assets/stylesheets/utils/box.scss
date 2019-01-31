@@ -1,24 +1,168 @@
 // 글상자(?) 기본 형식 통일
 @import 'variable.scss';
 
+
+div {
+    // display: inline-block;
+    word-break: break-all;
+}
+
+#friend-box-invitation {
+    .btn-invitation {
+        width: 100%;
+        width: 100%;
+        display: inline-block;
+        background-color: white;
+        border-radius: 10px;
+        border: 0.5px solid #F48462;
+        padding: 20px;
+        vertical-align: center;
+        color: #F48462;
+        text-decoration: none;
+
+    }
+
+}
 .prism-box {
     background-color: white;
-    width: calc(100% - 20px);
+    width: 100%;
     margin: 20px 0px;
     border: 0.5px solid #dddddd;
     border-radius: 10px;
     padding: 10px;
+
 }
 
 .prism-box-custom-question {
-    background-color: white;
-    width: calc(100% - 20px);
-    margin: 20px 0px;
-    border: 0.5px solid rgb(232, 186, 172);
+    background-color: rgb(255, 241, 235);
+    width: calc(100% - 40px);
+    margin: 20px 0px 20px 20px;
+    border: none;
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px;
+    font-size: 18px; 
+    display: grid;
+    grid-template-columns: minmax(calc(10%-50px), 10%) 80% minmax(50px, 10%);
+    
+
+    .question-content {
+        font-family: "Nanum Gothic", sans-serif;
+        font-size: 18px;
+        color: #4f4f4f;
+        padding: 20px 10px 10px 10px;
+        margin: 0 ;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-column: 1 /2;
+        grid-row: 1/2;
+    }
+
+    .question-tags {
+        grid-column: 1/2;
+        grid-row: 2/3;
+        padding: 10px;
+
+        .question-tag {
+            font-size: 12px;
+            padding: 8px;
+            background-color: white;
+            border: none;
+            border-radius: 3px;
+            color: gray;
+            margin: 1.5px;
+        }
+    }
+
+    .reposts {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-left: 10px;
+
+    }
+
+    .btn-repost {
+        width: 30px;
+        height: auto;
+        cursor: pointer;
+        vertical-align: -4px;
+
+    }
+
+    .num-of-reposts {
+        vertical-align: 2px;
+        font-family: 'Nanum Gothic', sans-serif;
+        color: #F48462;
+        font-size: 13px;
+        padding: 3px;
+        margin-right:2px;
+    }
+    .num-of-reposts.zero {
+        display: none;
+    }
 
 }
+
+.prism-box-question {
+    background-color:rgb(242, 242, 242);
+    width: calc(100% - 40px);
+    margin: 20px 0px 20px 20px;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+
+    .question {
+        font-family: "Nanum Gothic", sans-serif;
+        font-size: 18px;
+        padding: 0;
+        margin: 0 ;
+        color: #4f4f4f;
+
+    }
+
+}
+
+.prism-box__question{
+    background-color:rgb(242, 242, 242);
+    margin: 20px 0px 20px 20px;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center; 
+    position: relative;
+    grid-template-columns:  70% 30%;
+
+    .question-content {
+        font-family: "Nanum Gothic", sans-serif;
+        font-size: 18px;
+        padding: 0;
+        margin: 0 ;
+        color: #4f4f4f;
+        grid-column: 1 /2;
+        grid-row: 1 / 2;
+    }
+
+    .question-tags {
+        grid-column: 1/2;
+        grid-row: 2/3;
+
+        .question-tag {
+            font-size: 12px;
+        }
+    }
+
+    .btn-drawer {
+        width: 30px;
+        height: auto;
+        float: right;
+        padding-bottom: 10px;
+        cursor: pointer;
+    }
+}
+
 
 .prism-box, .prism-box-custom-question {
 
@@ -38,6 +182,8 @@
 
         a {
             font-family: 'Nanum Gothic', sans-serif;
+            color: black;
+            text-decoration: none;
         }
 
     }
@@ -51,18 +197,11 @@
         line-height: 140%;
         text-align: center;
 
-        .question {
-            font-family: "Nanum Gothic", sans-serif;
-            font-size: 18px;
-            padding: 0;
-            margin: 0 ;
-        }
 
         a {
             color: black;
             text-decoration: none;
             font-family: "Nanum Gothic", sans-serif;
-            font-weight: bold;
 
         }
 
@@ -74,6 +213,10 @@
             font-family: 'Nanum Gothic', sans-serif;
             font-size: 11px;
             color: #888888;
+        }
+
+        .repost-message {
+            text-align: left;
         }
     }
 
@@ -120,37 +263,33 @@
         .btn-feed-like {
             padding-left: 2px;
             padding-right: 2px;
-            width: 26px;
+            width: 30px;
             height: auto;
             cursor: pointer;
         }
 
         .num-of-likes {
-            vertical-align: 8px;
+            vertical-align: 0px;
             font-family: 'Nanum Gothic', sans-serif;
             color: #F48462;
+            cursor: pointer;
+            padding: 3px;
+            margin-right: 2px;
+        }
 
+        .num-of-likes.zero, .num-of-drawers.zero {
+            display: none;
         }
 
         .num-of-drawers {
             vertical-align: 8px;
             font-family: 'Nanum Gothic', sans-serif;
             color: #F48462;
-
-        }
-        
-        .btn-repost {
-            width: 30px;
-            height: auto;
-            cursor: pointer;
-            vertical-align: -2px;
-
+            padding: 3px;
+            margin-right: 2px;
+            // cursor: pointer;
         }
 
-        .reposts {
-            grid-column: 1 / 2;
-            grid-row: 1 / 2;
-        }
     }
 
     .prism-box__comment {
@@ -171,41 +310,11 @@
             text-decoration: none;
             font-family: 'Nanum Gothic', sans-serif;
             font-size: 12px;
-
-            &:hover {
-            color: #F48462;
-            }
-
-        }
-    }
-
-    .prism-box_question{
-        text-align: center; 
-        position: relative;
-
-        .question-content {
-            color: black;
-            text-decoration: none;
-            font-family: 'Nanum Gothic', serif;
-            font-size: 18px;
-            
-            font-weight: bold;
-        }
-
-        .btn-drawer {
-            width: 30px;
-            height: auto;
-            float: right;
-            padding-bottom: 10px;
             cursor: pointer;
-        }
+            // &:hover {
+            // color: #F48462;
+            // }
 
-        .btn-like {
-            width: 26px;
-            height: auto;
-            float: right;
-            padding-top: 2px;
-            cursor: pointer;
         }
     }
 
@@ -233,7 +342,7 @@
     margin: 20px 0px;
     border: 0.5px solid #dddddd;
     border-radius: 10px;
-    padding: 10px 15px 70px 15px;
+    padding: 10px 15px 50px 15px;
     box-sizing: border-box;
     position: relative;
 
@@ -251,17 +360,17 @@
             font-family: 'Nanum Gothic', sans-serif;
             font-size: 17px;
             width: 100%;
-            height: 60px;
+            // height: 60px;
             overflow: hidden;
             border: none;
             outline: none;
             line-height: 30px;
+            padding : 0px;
             // border-bottom: 1px solid #C08BEF;
             resize: none;
             box-sizing: border-box;
-            margin-top: 20px; 
-            padding: 0; 
-            margin-bottom: -30px;
+            margin-top: 30px; 
+            margin-bottom: 0px;
         }
 
         .answer-button {
@@ -304,11 +413,9 @@
             }
 
             .channel-setting-icon {
-                width: 20px;
+                width: 22px;
+                vertical-align: -6px;
                 height: auto;
-                top: 5px;
-                position: relative;
-                margin-right: 10px;
 
             }
 
@@ -328,6 +435,23 @@
                 top: 30px;
                 box-shadow: 2px 2px 30px #dddddd;
                 overflow-y: scroll;
+
+                .btn-select-all-channels {
+                    display: inline-block;
+                    padding: 5px;
+                    border-radius: 6px;
+                    background-color: white;
+                    border: 0.5px solid #dddddd;
+                    font-size: 12px;
+                    color: gray;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+                }
+    
+                .btn-select-all-channels.unselect {
+                    border: 0.5px solid #F48462;
+                    color: #F48462;
+                }
 
                 input {
                     padding: 0;
@@ -387,6 +511,16 @@
     visibility: hidden;
 }
 
+.custom-question-form {
+    background-color:rgb(255, 241, 235);
+    border-color: #FCF3F0;
+
+    textarea {
+        background-color: rgb(255, 241, 235);
+        
+    }
+}
+
 
 
 #edit-box {
@@ -417,11 +551,9 @@
         }
 
         .channel-setting-icon {
-            width: 20px;
+            width: 22px;
+            vertical-align: -6px;
             height: auto;
-            top: 5px;
-            position: relative;
-            margin-right: 10px;
 
         }
 
@@ -430,7 +562,7 @@
             display: none;
             background-color: white;
             width: 15%;
-            min-width: 100px;
+            min-width: 200px;
             max-height: 200px;
             z-index: 2;
             padding: 10px;
@@ -440,8 +572,25 @@
             position: fixed;
             left: 10%;
             top: 200px;
-            box-shadow: 2px 2px 30px #888888;
+            box-shadow: 2px 2px 30px #cccccc;
             overflow-y: scroll;
+
+            .btn-select-all-channels {
+                display: inline-block;
+                padding: 6px 13px 6px 13px;
+                border-radius: 15px;
+                background-color: white;
+                border: 0.5px solid #dddddd;
+                font-size: 12px;
+                color: gray;
+                margin-bottom: 10px;
+            }
+
+            .btn-select-all-channels.unselect {
+                border: 0.5px solid #F48462;
+                color: #F48462;
+            }
+
 
             input {
                 padding: 0;

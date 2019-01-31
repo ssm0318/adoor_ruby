@@ -1,69 +1,123 @@
 .user-header {
 
     #profile {
-        // display: flex; 
-        align-items:center;
+        // background-color: white;
+        // border: 0.5px solid #dddddd;
+        // height: 180px;
+        // border-radius: 5px;
+        // display: grid;
+        // grid-template-columns: 180px calc(100% - 180px);
+        margin-bottom: 20px;
 
-        img {
-            height:120px; 
-            width:120px; 
-            border-radius:60px;
-            float:left;
-            margin-bottom: 20px;
+        #profile__image {
+
+            img {
+                height:100px; 
+                width:100px; 
+                border-radius:50px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
 
-        #profile-content-div {
-            float: left;
-            margin-left: 20px;
-            margin-top: 10px;
+        #profile__content-div {
+            text-align: center;
+            margin-top: 2px;
 
-            #username {
-                font-size: 20px;
-                margin-bottom: 10px;
-
-                #edit-btn{
+            #profile__username-setting-div {
+                margin-top: 3px;
+                display: inline-flex;
+                
+                #username {
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #4f4f4f;
+                    padding-top: 4px;
+                }
+    
+                #profile__setting {
                     
-                    text-decoration: none;
-                    color: gray;
-                    font-size: 14px;
-                    margin-left: 10px;
-                    &:hover {
-                        color: #F48462;
+                    #profile__setting-btn{
+                        width: 25px;
+                        height: 25px;
+                        margin-top: 5px;
+
                     }
                 }
             }
 
-            #friends-btn {
-                text-decoration: none;
-                border-radius: 6px;
-                border: 0.75px solid #bcbcbc;
-                padding: 6px 12px 6px 12px;
-                color: gray;
-                font-size: 14px;
+            #user-message {
+                margin-top: 2px;
+                font-size: 16px;
+                font-weight: 100;
+                color: #4f4f4f;
             }
 
+            #profile__friends-setting {
+                margin-top: 13px;
 
-
+                #profile__friends-setting-btn {
+                    text-decoration: none;
+                    border-radius: 9px;
+                    border: 0.75px solid #F48462;
+                    padding: 6px 10px 8px 12px;
+                    color: #F48462;
+                    font-size: 12px;
+                }
+            }
         }
     }
 
 
     .user-header__tab {
         width: 100%;
-        display: flex;
-        justify-content: space-around;
-        border-top: 1px solid #d7dae0;
-        padding-top: 10px;
-        margin-top: 10px;
+        display: inline-flex;
+        // justify-content: space-around;
+        // border-top: 1px solid #d7dae0;
+        // padding-top: 10px;
+        // margin-top: 10px;
 
 
-        a {
-            text-decoration: none;
-            color: gray;
+        .user-header__tab-el-left {
+            background-color: white;
+            width: 50%;
+            height: 40px;
+            border: 0.5px solid #dddddd;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-right: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
         }
 
-        a.active {
-            color: #F48462;
+        .user-header__tab-el-right {
+            background-color: white;
+            width: 50%;
+            height: 40px;
+            border: 0.5px solid #dddddd;
+            border-top-right-radius:10px;
+            border-bottom-right-radius:10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+        }
+
+        .user-header__tab-el-left, .user-header__tab-el-right {
+            a {
+            text-decoration: none;
+            color: grey;
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 15px;
+ 
+            }
+            a.active {
+                color: #F48462;
+            }
         }
     }
 }

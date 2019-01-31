@@ -10,7 +10,10 @@
                     <%= c.content %>
                 </span>
             </span>
-        <%= render 'likes/default', target: c, like_btn_class: "btn-comment-like" %>
+            <div class="likes">
+                <%= render 'likes/num_of_likes', target: c %>
+                <%= render 'likes/default', target: c, like_btn_class: "btn-comment-like" %>
+            </div>
     </div>
 
     <div class = "comment-info">
@@ -18,5 +21,5 @@
         <span class="authorized"> <%= render 'comments/my_comments_menu', c: c %></span>
         <span class="btn-comment friend hover-orange hover-pointer">댓글달기</span>
     </div>
-</div>
+</div> 
    

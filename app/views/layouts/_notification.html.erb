@@ -1,14 +1,17 @@
-<% if user_signed_in? %>
-    <% if noties.unread.length != 0 %>
-        <%=image_tag "icons/noti-on-icon.png", class:"btn-noti hover-pointer"%>
-    <% else %>
-        <%=image_tag "icons/noti-default-icon.png", class:"btn-noti hover-pointer"%>
+<div class = btn-noti-box>
+    <% if user_signed_in? %>
+        <% if noties.unread.length != 0 %>
+            <%=image_tag "icons/noti-on-icon.png", class:"btn-noti hover-pointer"%>
+        <% else %>
+            <%=image_tag "icons/noti-default-icon.png", class:"btn-noti hover-pointer"%>
+        <% end %>
     <% end %>
-<% end %>
+</div>
 <div class="noti-content" style="display: none;">
     <div class="noti-header">
         <% if noties.size > 0 %>
             <%= link_to "모두 읽음 표시", notification_read_all_path, class: "noti-read-text hover-orange" %>
+            <%= link_to "알림 모두 보기", notification_index_path, class: "noti-index-link hover-orange" %>
         <% else %>
             알림이 없습니다.
         <% end %>
@@ -23,7 +26,7 @@
             <% else %>
                 <div class="noti-el unread" data-url="/notifications/<%=noti.id%>">
             <% end %>
-
+ 
                 <div class="noti-image">
                     <% if noti.target_type == 'Drawer' || noti.target_type == 'CustomQuestion' || (noti.action? && noti.action.start_with?("anonymous")) %>
                         <% color = user.id + noti.target.id %>

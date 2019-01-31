@@ -1,5 +1,6 @@
 .friend-comments-nav.selected, .anonymous-comments-nav.selected {
-    color: black;
+    font-weight: bold;
+    color: #4f4f4f;
 }
 
 .friend-comments-nav, .anonymous-comments-nav {
@@ -20,17 +21,13 @@
 }
 
 .comment, .comment-indent, .reply {
-    .btn-comment-like {
-        width: 20px;
-        height: auto;
-        float: right;
-        margin-left: 10px;
-        cursor: pointer;
-    }
-    
+
     .comment-content {
         display: grid;
-        grid-template-columns: 26px auto 30px;
+        grid-template-columns: 26px auto 40px;
+
+        // grid-template-columns: repeat(26px auto-fit, minmax(40px, auto));
+        // grid-auto-columns: max-content;
     
         .user-profile {
             height:20px; 
@@ -42,15 +39,13 @@
         .username {
             font-size: 14px;
             font-weight: bold;
-            vertical-align: middle;
         }
 
         .lock-icon {
-            width: 22px;
+            width: 20px;
             height: auto;
             margin: 0px;
             padding: 0px;
-            vertical-align: middle;
         }
 
         .replier-name {
@@ -60,6 +55,36 @@
         
         .comment-text {
             line-height: 20px;
+
+            // .content {
+            //     display: inline-block;
+            //     word-break: break-all;
+            // }
+        }
+
+        .likes {
+            text-align: right;
+
+            .num-of-likes {
+                font-family: 'Nanum Gothic', sans-serif;
+                color: #F48462;
+                cursor: pointer;
+                padding: 3px;
+                margin-right: 5px;
+                font-size: 12px;
+            }
+    
+            .num-of-likes.zero {
+                display: none;
+            }
+        
+            .btn-comment-like {
+                width: 20px;
+                height: auto;
+                float: right;
+                cursor: pointer;
+            }
+    
         }
 
     }

@@ -31,11 +31,9 @@
         <% end %>
         <br>
     </div>
-    <div class="prism-box__comment">
-        <% if anonymous %>
-            <%= render 'comments/general_form', feed: custom_question %>
-        <% else %>
-            <%= render 'comments/friends_form', feed: custom_question %>
-        <% end %>
-    </div>
+    <% if anonymous %>
+        <%= render 'comments/general_form', feed: custom_question %>
+    <% else %>
+        <%= render 'comments/friends_form', feed: custom_question %>
+    <% end %>
 </div>

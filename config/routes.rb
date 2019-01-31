@@ -13,10 +13,12 @@ Rails.application.routes.draw do
   resources :posts, except: [:new]
 
   # CustomQuestion
-  resources :custom_questions, except: [:new]
-  get '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost
-  post '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost_form
-  get '/custom_questions/:id/message' => 'custom_questions#message', as: :custom_question_message
+  resources :custom_questions, only: [:show, :create, :destroy]
+  # get '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost
+  # get '/custom_questions/:id/message' => 'custom_questions#repost_create', as: :custom_question_repost
+  post '/custom_questions/:id/repost' => 'custom_questions#repost_create', as: :custom_question_repost_form
+  get '/custom_questions/:id/repost' => 'custom_questions#repost_new', as: :custom_question_repost
+  get '/custom_questions/:id/repost/edit' => 'custom_questions#repost_edit', as: :custom_question_repost_edit
 
   # Feed
   root 'feeds#friends'
@@ -38,13 +40,16 @@ Rails.application.routes.draw do
 
   # Like
   resources :likes, only: [:create, :destroy]
+  get '/likes/:target_type/:target_id' => 'likes#likes_info'
 
   # Assignment
-  post '/assignments/:assignee_id/:question_id' => 'assignments#create', as: :new_assignment # get?
+  get '/assignments/:question_id' => 'assignments#new', as: :new_assignment
+  post '/assignments/:assignee_id/:question_id' => 'assignments#create', as: :create_assignment # get?
   delete '/assignments/:assignee_id/:question_id' => 'assignments#destroy', as: :destroy_assignment
 
   # Drawer
   resources :drawers, only: [:create, :destroy]
+  get '/drawers/:target_type/:target_id' => 'drawers#drawers_info'
 
   # Highlight
   resources :highlights, only: [:create, :destroy]
@@ -52,6 +57,7 @@ Rails.application.routes.draw do
   # Notification
   get '/notifications/read_all' => 'notifications#read_all', as: :notification_read_all
   get '/notifications/:id' => 'notifications#read'
+  get '/notifications/all/index' => 'notifications#index' , as: :notification_index 
 
   # Profile
   get '/profiles/:id' => 'profiles#index', as: :profile

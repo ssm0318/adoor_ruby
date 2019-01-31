@@ -1,10 +1,13 @@
 <div class="comment">
     <div class = "comment-content">
-            <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, feed_id: feed_id } %>
-            <span class="comment-text">
-                <span class= "content"><%= c.content %> </span>
-            </span>
-        <%= render 'likes/default', target: c, like_btn_class: "btn-comment-like" %>
+        <%= render partial: "./user_profile_general", locals: {user_id: c.author_id, feed_id: feed_id } %>
+        <span class="comment-text">
+            <span class= "content"><%= c.content %> </span>
+        </span>
+        <div class="likes">
+            <span class="num-of-likes zero" data-url="/likes/<%=c.class.to_s%>/<%=c.id%>"><%= c.likes.count() %></span>
+            <%= render 'likes/default', target: c, like_btn_class: "btn-comment-like" %>
+        </div>
     </div>
 
     <div class = "comment-info">
