@@ -1,38 +1,44 @@
 <div class="inner-container">
-    <div class="user-header" >
-        <div id = "profile" >
-            <div id = "profile__image"><%= link_to image_tag(current_user.image.url), profile_path(current_user.id)%></div>
-            <div id = "profile__content-div">
+    <div class = "user-header" >
+    <div id = "profile" >
+        <div id = "profile__image"><%= link_to image_tag(current_user.image.url), profile_path(current_user.id)%></div>
+        <div id = "profile__content-div">
+            <div id = "profile__username-setting-div">
                 <div id = "username"><%= current_user.username %></div>
-                <div id = "user-message">상태메시지</div>
+                <div id ="profile__setting">
+                    <%= link_to image_tag("icons/setting-default-icon.png", id: "profile__setting-btn"), edit_user_profile_path(current_user.id) %>
+                </div>
+            </div>
+            <div id = "user-message">상태메시지</div>
+            <div id = "profile__friends-setting">
+                <%= link_to "게시물 / 서랍장", profile_path(current_user.id), id: "profile__friends-setting-btn" %>
             </div>
         </div>
     </div>
     <div id="friend-list">
         <%# render partial: "channels/new" %>
         <div id="channel-nav-with-create-div">
-            
             <div id="channel-nav-div">
                 <div class="channel-nav all active">전체</div>
                 <% @channels.each do |channel| %>
-                    <div class="channel-nav <%=channel.id%>"><%= channel.name%></div>
+                    <div class="channel-nav <%=channel.id%>">
+                        <%= channel.name%>
+                        <%#= link_to image_tag("icons/setting-white-icon.png", id: "channel-setting-btn", style: " display: none; width: 20px; height:auto; vertical-align: -4px;") %>
+                    </div>
                 <% end %>
             </div>
             <button id="btn-channel-add">+</button>
             <%= form_tag '/channels/-1', :id => "name-create-form" do %>
-                <%= text_field_tag "name", nil, required: true, :id => "name-create-input", :maxlength => 15, autocomplete: "off" %>
+                <%= text_field_tag "name", nil, required: true, :id => "name-create-input", :maxlength => 20, autocomplete: "off" %>
                 <%#= button_tag "완료", :id => "name-create-btn" %>
             <% end %>
         </div>
-
-        <br>
-        <br>
 
         <div id="channel-info">
             <div id="channel-name-div">
                 <div id="channel-name">전체</div>
                 <%= form_tag '/channels/-1', :id => "name-edit-form" do %>
-                    <%= text_field_tag "name", nil, required: true, :value => '전체', :id => "name-edit-input", autocomplete: "off" %>
+                    <%= text_field_tag "name", nil, required: true, :value => '전체', :id => "name-edit-input", :maxlength => 20, autocomplete: "off"%>
                     <%= button_tag "저장", :id => "name-edit-btn" %>
                 <% end %>
             </div>
@@ -40,11 +46,10 @@
             <div id="channel-default-btns">
                 <div class ="channel-btns-div">
                     <%= image_tag("icons/setting-default-icon.png", id: "btn-channel-edit") %>
-                    <button id="btn-channel-name-edit">이름 편집</button>
-                    <%= link_to '그룹 삭제',  '/channels/-1',  method: :delete, data: { confirm: '정말 이 그룹을 삭제하시겠습니까?' }, id: "btn-channel-delete" %>
+                    <%= link_to image_tag("icons/delete-icon", class: "btns-channel-delete"), '/channels/-1', method: :delete, data: { confirm: '정말 이 그룹을 삭제하시겠습니까?' }, id: "btn-channel-delete" %>
                 </div>
             </div>
-            <button id="btn-channel-edit-complete">완료</button>
+            <!--button id="btn-channel-edit-complete">완료</button-->
         </div>
 
         <br>
