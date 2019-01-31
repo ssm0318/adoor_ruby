@@ -1,7 +1,9 @@
 require 'mini_magick'
+require 'base64'
+
 class UsersController < ApplicationController
     before_action :authenticate_user!, except: [:recover_password, :send_temporary_password]
-    before_action :set_user, only: [:show, :edit, :update, :destroy]
+    before_action :set_user, only: [:show, :edit, :update, :destroy, :image_upload]
     before_action :check_user, only: [:edit, :update, :destroy]
     
     def recover_password
@@ -44,8 +46,28 @@ class UsersController < ApplicationController
     end
 
     def image_upload
-        @user.image = params[:image]
-        @user.save
+        uploaded_io = params[:image]
+        if uploaded_io.include? "data:image/jpeg;base64,"
+            metadata = "data:image/jpeg;base64,"
+            base64_string = uploaded_io[metadata.size..-1]
+            image_data = Base64.decode64(base64_string)
+            image = MiniMagick::Image.read(image_data)
+            image.write 'image.jpeg'
+            @user.image = MiniMagick::Image.open("image.jpeg")
+            @user.save
+        elsif uploaded_io.include? "data:image/png;base64,"
+            metadata = "data:image/png;base64,"
+            base64_string = uploaded_io[metadata.size..-1]
+            image_data = Base64.decode64(base64_string)
+            image = MiniMagick::Image.read(image_data)
+            image.write 'image.png'
+            @user.image = MiniMagick::Image.open("image.png")
+            @user.save
+        end
+
+        render json: {
+
+        }
     end
 
     def new_image
