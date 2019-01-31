@@ -3,18 +3,6 @@
 <%= form_for user, url: edit_user_profile_url(user) do |u| %>
     <div>
         <% u.hidden_field :id, :value => current_user.id %>
-
-        <div class="image-upload">
-            <div class="image-container">
-                <%= image_tag current_user.image.url, class: "edit-profile-img" %>
-                <%= u.file_field :image, id: "file-input" %>
-                <label for="file-input">
-                    <span class="camera-icon"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></span>
-                </label>
-            </div>
-            
-        </div>
-(jpg, jpeg, png, gif)
         <div>
             <%= u.label "닉네임" %>
             <%= u.text_field :username, :required => true, autocomplete: "off" %>

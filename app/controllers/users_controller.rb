@@ -1,3 +1,4 @@
+require 'mini_magick'
 class UsersController < ApplicationController
     before_action :authenticate_user!, except: [:recover_password, :send_temporary_password]
     before_action :set_user, only: [:show, :edit, :update, :destroy]
@@ -40,6 +41,15 @@ class UsersController < ApplicationController
         else
             redirect_to profile_path(@user.id)
         end
+    end
+
+    def image_upload
+        @user.image = params[:image]
+        @user.save
+    end
+
+    def new_image
+        render 'new_image'
     end
 
     def mypage
@@ -86,6 +96,10 @@ class UsersController < ApplicationController
 
         def user_params
             params.require(:user).permit(:id, :email, :username, :image, :date_of_birth, :profile)
+        end
+
+        def image_params
+            params.require(:user).permit(:image)
         end
 
         def check_user

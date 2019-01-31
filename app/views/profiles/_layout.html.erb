@@ -1,6 +1,27 @@
 <div class = "user-header" >
     <div id = "profile" >
-        <div id = "profile__image"><%= image_tag(@user.image.url) %></div>
+        <% if current_user.id != user.id %>
+            <div id = "profile__image"><%= image_tag(@user.image.url) %></div>
+        <% else %>
+            <%= form_for @user, url: edit_user_profile_url(@user) do |u| %>
+                <% u.hidden_field :id, :value => current_user.id %>
+                <div class="image-upload">
+                    <div class="image-container">
+                        <%#= link_to image_tag(current_user.image.url, class: "edit-profile-img"), new_image_path(@user.id) %>
+                        <%= image_tag current_user.image.url, class: "edit-profile-img", id: "edit-profile-img" %>
+                        <%= u.file_field :image, id: "file-input", "data-url" => image_upload_path(current_user.id)%>
+                        <div class="collapse">
+                            <label for="file-input">
+                                <span class="camera-icon">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-camera fa-3x" aria-hidden="true"></i><br>사진 올리기</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <%#= u.submit "수정하기", class: "profile-button" %>
+                
+            <% end %>
+        <% end %>
+
         <div id = "profile__content-div">
             <div id = "profile__username-setting-div">
                 <div id = "username"><%= @user.username %></div>
@@ -31,7 +52,7 @@
                 <% end %>
             </div>
         </div>
-    </div>
+    </>
     
     <div class="user-header__tab">
         <div class = "user-header__tab-el-left">

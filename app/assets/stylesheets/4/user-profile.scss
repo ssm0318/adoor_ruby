@@ -18,6 +18,65 @@
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
+            }         
+        }
+
+        .image-upload {
+            display: flex;
+            justify-content: center;
+            .image-container {
+                display: inline-block;
+
+                .edit-profile-img {
+                    height:100px; 
+                    width:100px; 
+                    border-radius:50px;
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    z-index: 1;
+                    //opacity: 0.2;
+                    
+                }
+                .camera-icon {
+                    color: white;
+                    cursor: pointer;
+                    width: 10px;
+                    height: 10px;
+                    visibility: hidden;
+                    font-size: 11px;
+                    z-index: 2;
+                    
+                }
+            }
+            .image-container:hover .edit-profile-img {
+                -webkit-filter: grayscale(20%) contrast(25%);
+                -moz-filter: grayscale(20%) contrast(25%);
+                -o-filter: grayscale(20%) contrast(25%);
+                -ms-filter: grayscale(20%) contrast(25%);
+                filter: grayscale(20%) contrast(25%);
+            }
+            
+            .image-container:hover .camera-icon {
+                visibility: visible;
+            }
+        
+            .image-container > input {
+                display: none;
+            }
+
+            .collapse {
+                // line-height: 0px;
+                height: 0px;
+            }
+
+            .collapse > label {
+                left: 22px;
+                top: -70px;
+                position: relative;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
             }
         }
 
