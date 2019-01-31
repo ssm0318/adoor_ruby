@@ -9,7 +9,7 @@ class Reply < ApplicationRecord
     scope :named, -> {where(anonymous: false)}
     # 내가 볼 수 있는 친구의 글의 실명 대댓글 중 내가 볼 수 있는 것 찾아내기 (비밀 설정 안되어있는 것)
     # secret 설정이 된 대댓글을 볼 수 있는 사람은 글쓴이와 댓글쓴이
-    scope :accessible, -> (id) {joins(:comment).where(Reply.arel_table[:secret].eq(false).or(Reply.arel_table[:author_id].eq(id).or(Comment.arel_table[:author_id].eq(id).or(Reply.arel_table[:target_author_id].eq(id)))))}
+    scope :accessible, -> (id) {joins(:comment).where(Reply.arel_table[:secret].eq(false).or(Reply.arel_table[:author_id].eq(id).or(Comment.arel_table[:author_id].eq(id).or(Reply.arel_table[:target_author_id].eq(id))))).distinct}
     # https://stackoverflow.com/questions/10871131/how-to-use-or-condition-in-activerecord-query
     
     after_create :create_notifications

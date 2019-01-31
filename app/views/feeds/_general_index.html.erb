@@ -23,14 +23,13 @@
                 <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>
             </div>
             <div class="prism-box__footer">
-                    <%= render 'feeds/feed_footer', target: feed %>
-                <% end %>
+                <%= render 'feeds/feed_footer', target: feed %>
             </div>
             <%= render 'comments/general_form', user: feed.author, feed: feed %>
         </div>
 
-     <!-- posting or Answer -->
-     <% else %>
+    <!-- posting or Answer -->
+    <% else %>
         <div class="prism-box <%=feed.id%>">
             <div class="prism-box__header">
                 <%= render partial: "./user_profile_general", locals: {user_id: feed.author.id, feed_id: feed.id}%>
@@ -50,8 +49,7 @@
                 <div class = "date time"><%= time_tag feed.created_at, class: "timeago" %></div>
             </div>
             <div class="prism-box__footer">
-                    <%= render 'feeds/feed_footer', target: feed %>
-                <% end %>
+                <%= render 'feeds/feed_footer', target: feed %>
             </div>
             <%= render 'comments/general_form', user: feed.author, feed: feed %>
         </div>
