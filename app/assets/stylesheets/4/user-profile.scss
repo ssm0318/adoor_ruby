@@ -24,9 +24,9 @@
         .image-upload {
             display: flex;
             justify-content: center;
+            padding: 0;
             .image-container {
                 display: inline-block;
-
                 .edit-profile-img {
                     height:100px; 
                     width:100px; 
@@ -35,9 +35,8 @@
                     margin-left: auto;
                     margin-right: auto;
                     z-index: 1;
-                    //opacity: 0.2;
-                    
                 }
+                
                 .camera-icon {
                     color: white;
                     cursor: pointer;
@@ -135,7 +134,7 @@
         // justify-content: space-around;
         // border-top: 1px solid #d7dae0;
         // padding-top: 10px;
-        // margin-top: 10px;
+        margin-top: 20px;
 
 
         .user-header__tab-el-left {

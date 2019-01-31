@@ -8,13 +8,11 @@ function readURL(input) {
 
             var image_url= e.target.result
             console.log(e.target.result)
-            $('#edit-profile-img').attr('src', image_url);
 
             $.ajax({
                 type: "PUT",
                 url: input.attr('data-url'),
                 data: {image: image_url},
-                //data: input.parents("form").serialize(),
                 success: function(data) {
                     console.log("successed!")
                 },
@@ -23,11 +21,6 @@ function readURL(input) {
                 }
             })
         }
-
-        // console.log(input.html)
-        // let html = $(`${toString(input)}`)
-        // console.log(input)
-
 
         reader.readAsDataURL(input[0].files[0]);
     }

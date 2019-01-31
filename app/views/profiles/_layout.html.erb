@@ -7,7 +7,6 @@
                 <% u.hidden_field :id, :value => current_user.id %>
                 <div class="image-upload">
                     <div class="image-container">
-                        <%#= link_to image_tag(current_user.image.url, class: "edit-profile-img"), new_image_path(@user.id) %>
                         <%= image_tag current_user.image.url, class: "edit-profile-img", id: "edit-profile-img" %>
                         <%= u.file_field :image, id: "file-input", accept: 'image/png,image/jpeg,image/jpg', "data-url" => image_upload_path(current_user.id) %>
                         <div class="collapse">

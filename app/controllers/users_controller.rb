@@ -65,9 +65,7 @@ class UsersController < ApplicationController
             @user.save
         end
 
-        render json: {
-
-        }
+        redirect_back fallback_location: profile_path(params[:id])
     end
 
     def new_image
