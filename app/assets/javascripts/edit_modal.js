@@ -1,6 +1,5 @@
 function edit_modal(event) {
     event.stopImmediatePropagation();
-    console.log("hohoho")
 
     form = $(this)
     $.ajax({
