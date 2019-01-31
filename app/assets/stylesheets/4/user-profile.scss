@@ -21,6 +21,54 @@
             }         
         }
 
+        
+
+        #profile__content-div {
+            text-align: center;
+            margin-top: 2px;
+
+            #profile__username-setting-div {
+                margin-top: 3px;
+                display: inline-flex;
+                
+                #username {
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #4f4f4f;
+                    padding-top: 4px;
+                }
+    
+                #profile__setting {
+                    
+                    #profile__setting-btn{
+                        width: 25px;
+                        height: 25px;
+                        padding-top: 3px;
+
+                    }
+                }
+            }
+
+            #user-message {
+                margin-top: 2px;
+                font-size: 16px;
+                font-weight: 100;
+                color: #4f4f4f;
+            }
+
+            #profile__friends-setting {
+                margin-top: 13px;
+
+                #profile__friends-setting-btn {
+                    text-decoration: none;
+                    border-radius: 9px;
+                    border: 0.75px solid #F48462;
+                    padding: 6px 10px 8px 12px;
+                    color: #F48462;
+                    font-size: 12px;
+                }
+            }
+        }
         .image-upload {
             display: flex;
             justify-content: center;
@@ -78,53 +126,6 @@
                 margin-right: auto;
             }
         }
-
-        #profile__content-div {
-            text-align: center;
-            margin-top: 2px;
-
-            #profile__username-setting-div {
-                margin-top: 3px;
-                display: inline-flex;
-                
-                #username {
-                    font-size: 20px;
-                    font-weight: bold;
-                    color: #4f4f4f;
-                    padding-top: 4px;
-                }
-    
-                #profile__setting {
-                    
-                    #profile__setting-btn{
-                        width: 25px;
-                        height: 25px;
-                        padding-top: 3px;
-
-                    }
-                }
-            }
-
-            #user-message {
-                margin-top: 2px;
-                font-size: 16px;
-                font-weight: 100;
-                color: #4f4f4f;
-            }
-
-            #profile__friends-setting {
-                margin-top: 13px;
-
-                #profile__friends-setting-btn {
-                    text-decoration: none;
-                    border-radius: 9px;
-                    border: 0.75px solid #F48462;
-                    padding: 6px 10px 8px 12px;
-                    color: #F48462;
-                    font-size: 12px;
-                }
-            }
-        }
     }
 
 
@@ -179,3 +180,7 @@
         }
     }
 }
+
+
+
+
