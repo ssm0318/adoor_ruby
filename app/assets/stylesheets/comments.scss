@@ -24,7 +24,10 @@
 
     .comment-content {
         display: grid;
-        grid-template-columns: 26px auto 30%;
+        grid-template-columns: 26px auto 40px;
+
+        // grid-template-columns: repeat(26px auto-fit, minmax(40px, auto));
+        // grid-auto-columns: max-content;
     
         .user-profile {
             height:20px; 
