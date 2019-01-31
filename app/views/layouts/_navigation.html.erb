@@ -2,47 +2,42 @@
   <a class="navbar-brand" href= "<%= root_path %>">
     <%= image_tag("logo/logo-no-margin.png", style: "width: 130px; height:auto;") %>
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+    <li class="nav-item">
         <%= active_link_to '오늘의 질문', today_questions_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item">
+    </li>
+    <li class="nav-item">
         <%= active_link_to '질문 둘러보기', questions_path, class: "nav-link", active: :exclusive %>
-      </li>
-      <li class="nav-item">
-         <%= active_link_to '익명 피드', general_feed_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item">
+    </li>
+    <li class="nav-item">
+        <%= active_link_to '익명 피드', general_feed_path, class: "nav-link" %>
+    </li>
+    <li class="nav-item">
         <%= active_link_to '도움말', introduction_path, class: "nav-link"%>
-      </li>
-      <% if user_signed_in? && (current_user.has_role? :admin) %>
+    </li>
+    <% if user_signed_in? && (current_user.has_role? :admin) %>
         <li class="nav-item">
             <%= active_link_to '공지 관리', announcement_admin_index_path, class: "nav-link"%>
         </li>
-      <% end %>
+    <% end %>
     </ul>
-
-    <ul class="navbar-nav mr-auto-custom">
-      <% if user_signed_in? %>
+  </div>
+  <div class ="mr-auto-custom" style="cursor: pointer; z-index: 1; position: absolute; top: 10px; right: 60px;">
+    <% if user_signed_in? %>
         <%= render 'layouts/searchbar' %>
-        <li class="nav-item">
-            <a class="nav-link logout" href="<%=destroy_user_session_path%>" data-method = "delete">로그아웃</a>
-        </li>
+        <div class="nav-item"><a class="nav-link logout" href="<%=destroy_user_session_path%>" data-method = "delete">로그아웃</a></div>
         <a class="my-page-btn" href="<%=profile_path(current_user.id)%>">
             <%= image_tag(current_user.image.url) %>
         </a>
         <%= render 'layouts/notification', noties: noties %>
-      <% else %>
-        <li class="nav-item login">
-            <a class="nav-link" href="<%=user_session_path%>">로그인</a>
-        </li>
-      <% end %>
-    </ul>
+    <% else %>
+        <a class="nav-link login" href="<%=user_session_path%>">로그인</a>
+    <% end %>
   </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon" style = "color: #F48462; width: 1.2em; height: 1.2em;"></span>
+  </button>
 </nav>
 
 <script>
