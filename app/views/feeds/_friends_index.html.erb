@@ -11,6 +11,11 @@
             <div class = "prism-box__content">
                 <div class = "prism-box-custom-question">
                     <div class = "question-content"><%= feed.content %></div>
+                    <div class="question-tags">
+                        <% feed.tags.each do |tag| %>
+                            <span class="question-tag"><%=tag.content%></span>
+                        <% end %>
+                    </div>
                     <div class = "reposts">
                         <% ancestor_id = feed.ancestor_id == nil ? feed.id : feed.ancestor_id %>
                         <% if feed.ancestor_id == nil && current_user.id == feed.author.id %>
