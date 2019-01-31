@@ -36,6 +36,7 @@ function submit_on_enter(e) {
 
 $(document).on('turbolinks:load', function()  {
 
+    textarea_init($(".prism-form__comment"), window)
     $(".prism-form__comment").on('keypress', submit_on_enter)
     $(".friend-comments, .comments").find(".comment").each(function(index) {
       if($(this).find(".lock-icon").length != 0) {

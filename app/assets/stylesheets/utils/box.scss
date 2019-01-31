@@ -47,12 +47,13 @@ div {
 
         .question-tag {
             font-size: 12px;
-            padding: 8px;
+            padding: 2px 10px;
             background-color: white;
             border: none;
-            border-radius: 3px;
+            border-radius: 10px;
             color: gray;
-            margin: 1.5px;
+            margin: 4px 1.5px;
+            display: inline-block;
         }
     }
 
@@ -375,6 +376,45 @@ div {
                 color: #F48462;
             }
 
+        }
+        #tags {
+
+            padding-top: 20px;
+            #tag-title {
+                color: gray;
+                font-size: 14px;
+            }
+            .tag {
+                font-size: 12px;
+                padding: 6px 10px;
+                background-color: white;
+                border: none;
+                border-radius: 10px;
+                color: gray;
+                margin: 4px;
+                display: inline-block;
+                
+                .tag-close {
+                    width: 8px;
+                    height: auto;
+                    margin-left: 5px;
+                }
+            }
+
+            #tags_input {
+                border: none;
+                width: auto;
+                padding: 6px 10px;
+                background-color: rgba(255,255,255,0.5);
+                margin: 4px;
+                outline: none;
+            }
+
+        }
+
+        #tags-info-alert {
+            color: gray;
+            font-size: 12px;
         }
 
         
