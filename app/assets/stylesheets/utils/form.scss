@@ -37,13 +37,13 @@
     }
 
     label {
-        font-size: 10px;
+        font-size: 13px;
         position: relative;
         cursor: pointer;
         display: block;
         margin-bottom: 20px;
         // margin-right: 15px;
-        padding-top: 8px;
+        padding-top: 5px;
     }
 
     input[type="checkbox"] + label:before {
@@ -52,8 +52,8 @@
         background-color: transparent;
         border: 1px solid #F48462;
         //padding: 10px;
-        width: 8px;
-        height: 8px;
+        width: 10px;
+        height: 10px;
         display: inline-block;
         position: relative;
         vertical-align: middle;
@@ -86,7 +86,7 @@
     }
 
     .prism-form__comment {
-        height: 17px;
+        height: 31px;
         padding: 5px 10px;
         // border: 0.5px solid $prism-box-gray;
         border: none;

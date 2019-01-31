@@ -13,7 +13,10 @@
  *= require_tree .
  *= require_self
  */
-
+ ::-webkit-scrollbar { 
+    display: none; 
+ }
+    
 .navbar {
     .navbar-nav {
         .nav-link {
@@ -29,9 +32,7 @@
             color: #F48462;
         }
 
-        .login {
-            color: #F48462;
-        }
+
     }
 
     .mr-auto-custom {
@@ -183,12 +184,10 @@ a {
 
 .username{
     color: black;
-    vertical-align: 9px;
     cursor: pointer;
-    // &:hover {
-    //     color: #F48462;
-    // }
+    text-decoration: none;
 }
+
 body {
     margin: 0px; 
     background-color: #f9f9f9;

@@ -6,6 +6,23 @@ div {
     // display: inline-block;
     word-break: break-all;
 }
+
+#friend-box-invitation {
+    .btn-invitation {
+        width: 100%;
+        width: 100%;
+        display: inline-block;
+        background-color: white;
+        border-radius: 10px;
+        border: 0.5px solid #F48462;
+        padding: 20px;
+        vertical-align: center;
+        color: #F48462;
+        text-decoration: none;
+
+    }
+
+}
 .prism-box {
     background-color: white;
     width: 100%;
@@ -13,11 +30,12 @@ div {
     border: 0.5px solid #dddddd;
     border-radius: 10px;
     padding: 10px;
+
 }
 
 .prism-box-custom-question {
     background-color: rgb(255, 241, 235);
-    width: calc(100% - 80px);
+    width: calc(100% - 40px);
     margin: 20px 0px 20px 20px;
     border: none;
     border-radius: 10px;
@@ -73,7 +91,7 @@ div {
 
 .prism-box-question {
     background-color:rgb(242, 242, 242);
-    width: calc(100% - 80px);
+    width: calc(100% - 40px);
     margin: 20px 0px 20px 20px;
     border: none;
     border-radius: 10px;
@@ -137,6 +155,8 @@ div {
 
         a {
             font-family: 'Nanum Gothic', sans-serif;
+            color: black;
+            text-decoration: none;
         }
 
     }
@@ -216,13 +236,13 @@ div {
         .btn-feed-like {
             padding-left: 2px;
             padding-right: 2px;
-            width: 26px;
+            width: 30px;
             height: auto;
             cursor: pointer;
         }
 
         .num-of-likes {
-            vertical-align: 8px;
+            vertical-align: 0px;
             font-family: 'Nanum Gothic', sans-serif;
             color: #F48462;
             cursor: pointer;
@@ -366,11 +386,9 @@ div {
             }
 
             .channel-setting-icon {
-                width: 20px;
+                width: 22px;
+                vertical-align: -6px;
                 height: auto;
-                top: 5px;
-                position: relative;
-                margin-right: 10px;
 
             }
 
@@ -506,11 +524,9 @@ div {
         }
 
         .channel-setting-icon {
-            width: 20px;
+            width: 22px;
+            vertical-align: -6px;
             height: auto;
-            top: 5px;
-            position: relative;
-            margin-right: 10px;
 
         }
 
@@ -519,7 +535,7 @@ div {
             display: none;
             background-color: white;
             width: 15%;
-            min-width: 100px;
+            min-width: 200px;
             max-height: 200px;
             z-index: 2;
             padding: 10px;
@@ -534,8 +550,8 @@ div {
 
             .btn-select-all-channels {
                 display: inline-block;
-                padding: 5px;
-                border-radius: 6px;
+                padding: 6px 13px 6px 13px;
+                border-radius: 15px;
                 background-color: white;
                 border: 0.5px solid #dddddd;
                 font-size: 12px;
