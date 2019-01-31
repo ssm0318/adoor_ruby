@@ -10,17 +10,14 @@
     </div>
     <%= render 'questions/tabs', question: @question %>
     
-    <div class = "prism-box">
-        <div class = "prism-box_question">
-            <br>
-            <div>
-                <%= @question.content %>
-                <%= render 'drawers/default', target: @question %>
-            </div>    
-        </div>
+    <div class = "prism-box__question">
         <br>
-    </div> 
-
+        <div class = "question-content">
+            <%= @question.content %>
+            <%= render 'drawers/default', target: @question %>
+        </div>
+        <br>    
+    </div>
     <%= render 'feeds/general_index', feeds: @answers %>
 </div>
 

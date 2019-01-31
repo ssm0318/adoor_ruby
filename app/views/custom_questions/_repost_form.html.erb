@@ -1,0 +1,34 @@
+<div class = "question-box"> 
+    <p class = "question">
+        <%= @custom_question.content %>
+    </p>
+    <%= form_tag(custom_question_repost_form_path(@custom_question.id), {class: 'new_repost'}) do %>
+        <%= text_area_tag :repost_message, @custom_question.repost_message, required: false, class: "new-answer-field", placeholder: "공유 메시지", "data-enable-grammarly": "false", autocomplete: "off" %>
+        <% ancestor_id = @custom_question.ancestor_id == nil ? @custom_question.id : @custom_question.ancestor_id %>
+        <%= hidden_field_tag "id", ancestor_id %>
+        <br><br>
+
+        <div class = "channels channels-answer">
+            <span class="channels-dropdown hover-orange">공개그룹</span>
+            <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
+            <div class="channels-dropdown-content">
+                <span class="btn-select-all-channels">전체선택</span>
+                <% if @custom_question.id != nil %>
+                    <%# edit post의 경우 %>
+                    <% label_id = "custom_question_edit" %>
+                <% else %>
+                    <%# create post의 경우 %>
+                    <% label_id = "custom_question" %>
+                <% end %>
+                <% current_user.channels.each do |channel| %>
+                    <%= check_box_tag "c[]", channel.id, 
+                        @custom_question.channels.count() > 0 ? @custom_question.channels.include?(channel) : !(channel.name=="익명피드" || channel.name=="나"),
+                        id: channel.id.to_s + label_id, class: "channel-el" %>
+                    <%= label_tag channel.id.to_s + label_id, channel.name, class: "channel-el" %>
+                <% end %>
+            </div>
+        </div>
+
+        <%= button_tag "저장", class: "answer-button"%>
+    <% end %>
+</div>

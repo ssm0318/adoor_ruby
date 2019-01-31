@@ -23,6 +23,7 @@
         background-color: #f9f9f9;
         border-radius: 20px;
         margin-bottom: 10px;
+        font-size: 14px;
 
         &:focus {
             outline: none;
@@ -31,7 +32,7 @@
     }
 
     .prism-form__button {
-        visibility: hidden;
+        // visibility: hidden;
         width: 70px;
         height: 30px;
         border-color: #bcbcbc;

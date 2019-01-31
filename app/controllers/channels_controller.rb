@@ -24,7 +24,7 @@ class ChannelsController < ApplicationController
         if current_user.channels.where(name: params[:name]).length > 0
             render json: {
                 successed: false,
-                message: "`#{params[:name]} 채널은 이미 존재하는 채널입니다.`",
+                message: "#{params[:name]} 채널은 이미 존재하는 채널입니다.",
             }
         else
             @channel.name = params[:name] 

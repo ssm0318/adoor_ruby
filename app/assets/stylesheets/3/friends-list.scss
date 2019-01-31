@@ -20,27 +20,26 @@ button {
         margin-left: 10px;
     }
 }
+ 
 
-
-#friend-list{
+#friend-list {
     width: 100%;
     display: inline-block;
     justify-content: space-around;
-    border-top: 1px solid #d7dae0;
-    padding-top: 10px;
-    margin-top: 10px;
     
     #channel-nav-with-create-div {
-        display: inline;
-        font-size: 14px;
-    
+        display: inline-block;
+        margin-bottom: 10px;
+
         #channel-nav-div {
-            display: inline-block;
+            display: inline;
 
             .channel-nav {
+                font-family: 'Nanum Gothic', sans-serif;
+                font-size: 15px;    
                 display: inline-block;
                 margin: 2px;
-                padding: 8px 20px;
+                padding: 9px 20px 9px 20px;
                 background-color: white;
                 border: 0.5px solid #dddddd;
                 border-radius: 20px;
@@ -48,6 +47,7 @@ button {
             }
         
             .channel-nav.active {
+                padding: 9px 20px 9px 20px;
                 background-color: #F48462;
                 color: white;
                 border: none;
@@ -66,6 +66,7 @@ button {
         
         #name-create-form {
             display: none;
+
             input {
                 margin: 2px;
                 padding: 8px 20px;
@@ -74,7 +75,7 @@ button {
                 border-radius: 20px;
                 outline: none;
                 font-size: 14px;
-                width: 42px;
+                padding: 9px 20px 10px 20px;
             }
         }
     }
@@ -106,27 +107,40 @@ button {
     
     #channel-info {
         display: flex;
+        border-top: 0.5px solid #dddddd;
+        padding-top: 20px;
+
         #channel-name-div {
-            
+            font-family: 'Nanum Gothic', sans-serif;
             font-size: 24px;
             margin-right: 5px;
+
     
             #name-edit-form {
                 display: none;
+                font-size: 20px;
 
-                input {
-                    outline: none;
-                    font-size: 24px;
-                    padding: 5px;
-                }
-
-                #name-edit-btn {
-                    padding: 8px 20px;
+                #name-edit-input {
+                    padding: 6px 10px;
+                    font-family: 'Nanum Gothic', sans-serif;
                     background-color: white;
                     border: 0.5px solid #dddddd;
                     border-radius: 20px;
+                    outline: none;
+                    font-size: 20px;
+                }
+
+                #name-edit-btn {
+                    font-family: 'Nanum Gothic', sans-serif;
+                    font-size: 15px;    
+                    display: inline-block;
+                    margin: 2px;
+                    padding: 9px 20px 9px 20px;
+                    background-color: #F48462;
+                    color: white;
+                    border: none;
+                    border-radius: 20px;
                     cursor: pointer;
-                    font-size: 15px;
 
                 }
             }
@@ -157,7 +171,6 @@ button {
                     cursor: pointer;
                     align-items: center;
                     justify-content: center;
-                    margin-right: 5px;
     
                 }
     
@@ -175,16 +188,10 @@ button {
     
                 }
     
-                #btn-channel-delete {
-                    font-family: 'Nanum Gothic', sans-serif;
-                    padding: 8px 20px;
-                    background-color: white;
-                    border: 0.5px solid #dddddd;
-                    border-radius: 20px;
+                .btns-channel-delete {
+                    width: 30px;
+                    height: 30px;
                     cursor: pointer;
-                    text-decoration: none;
-                    font-size: 13px;
-                    color: black;
                     align-items: center;
                     justify-content: center;
                 }
@@ -228,18 +235,21 @@ button {
                 .user-name{
                     font-size: 15px;
                     vertical-align: 12px;
+                    text-decoration: none;
+                    color: black;
                 }
             }
 
             .btn-friend-remove {
                 float: right;
-                margin: 2px;
-                padding: 8px 20px;
                 background-color: white;
                 border: 0.5px solid #dddddd;
                 border-radius: 20px;
                 cursor: pointer;
-                font-size: 10px;
+                font-family: 'Nanum Gothic', sans-serif;
+                font-size: 12px;    
+                margin: 2px;
+                padding: 9px 20px 9px 20px;
             }
         
         }
@@ -253,6 +263,24 @@ button {
             opacity: 0.3;
             filter: grayscale(100%);
             background-color: #e0e0e0;
+        }
+    }
+
+    .friend-box-invitation{
+        display: flex;
+        margin: 5px;
+
+        .btn-invitation {
+            width: 100%;
+            width: 100%;
+            display: inline-block;
+            background-color: white;
+            border-radius: 10px;
+            border: 0.5px solid #F48462;
+            padding: 20px;
+            vertical-align: center;
+            color: #F48462;
+
         }
     }
 }

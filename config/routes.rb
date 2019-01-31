@@ -13,9 +13,11 @@ Rails.application.routes.draw do
 
   # CustomQuestion
   resources :custom_questions, except: [:new]
-  get '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost
-  post '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost_form
-  get '/custom_questions/:id/message' => 'custom_questions#message', as: :custom_question_message
+  # get '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost
+  # get '/custom_questions/:id/message' => 'custom_questions#repost_create', as: :custom_question_repost
+  post '/custom_questions/:id/repost' => 'custom_questions#repost_create', as: :custom_question_repost_form
+  get '/custom_questions/:id/repost' => 'custom_questions#repost_new', as: :custom_question_repost
+  get '/custom_questions/:id/repost/edit' => 'custom_questions#repost_edit', as: :custom_question_repost_edit
 
   # Feed
   root 'feeds#friends'
