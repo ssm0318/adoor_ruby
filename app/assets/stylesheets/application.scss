@@ -148,11 +148,14 @@
     
 
 #prism-container {
+    height: 100%;
+    overflow: auto;
     width: 60%;
     margin: 0 auto;
     margin-bottom: 50px;
     padding-top: 50px;
     position: relative;
+    min-width: 600px;
     .prism-title {
         width: 100%;
         text-align: center;
@@ -190,6 +193,7 @@ body {
     margin: 0px; 
     background-color: #f9f9f9;
     font-family: "Nanum Gothic", serif;
+    height: 100%;
 }
 
 div.background {
@@ -349,8 +353,8 @@ div.background {
 
 #flash-messages {
     position: fixed;
-    left: 20px;
-    top: 100px;
+    right: 20px;
+    top: 60px;
     z-index: 3;
     .flash-message {
         font-size: 14px;

@@ -47,6 +47,7 @@
     <%= javascript_include_tag('repost_edit_modal.js') %>
     <%= javascript_include_tag('exit_modal.js') %>
     <%= javascript_include_tag('flash_message.js') %>
+    <%= javascript_include_tag('show_reactions.js') %>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.2/ScrollMagic.min.js"></script>
     <!-- integrity, crossorigin 이런거 해야하는건감 -->
@@ -60,6 +61,8 @@
     <div id='edit-background'>
       <button id='btn-edit-exit' class="hover-pointer">x</button>
       <div id='edit-box'>
+      </div>
+      <div id='friends-box'>
       </div>
     </div>
     <div id="flash-messages">
