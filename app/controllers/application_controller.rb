@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
     render json: {
       data: current_user.username
     }
+  end
 
   def noties
     if user_signed_in?
