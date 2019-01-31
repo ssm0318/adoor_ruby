@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :posts, except: [:new]
 
   # CustomQuestion
-  resources :custom_questions, except: [:new]
+  resources :custom_questions, only: [:show, :create, :destroy]
   # get '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost
   # get '/custom_questions/:id/message' => 'custom_questions#repost_create', as: :custom_question_repost
   post '/custom_questions/:id/repost' => 'custom_questions#repost_create', as: :custom_question_repost_form

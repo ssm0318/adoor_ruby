@@ -8,8 +8,6 @@
         <%= f.text_area :content, class: "new-answer-field", required: true, autofocus: true, "data-enable-grammarly": "false" %>
         <br><br> 
 
-        <!--tag field-->
-        <%# <%= f.text_area :tag_string %>
         <div class = "channels channels-answer">
             <span class="channels-dropdown hover-orange">공개그룹</span>
             <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
