@@ -4,9 +4,14 @@ class ApplicationController < ActionController::Base
 
   helper_method :noties
 
-  def test
+  def unread
+    arr = []
+    unread_notifications = current_user.notifications.where(read_at: nil)
+    unread_notifications.each do |noti|
+      arr.push(noti.id)
+    end
     render json: {
-      data: current_user.username
+      id: arr
     }
   end
 
