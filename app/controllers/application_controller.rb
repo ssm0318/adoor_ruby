@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
       arr.push(noti.id)
     end
     render json: {
+      name: current_user.username
       id: arr
     }
   end
