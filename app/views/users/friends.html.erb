@@ -57,10 +57,6 @@
         <div id="friends-div">
             <%= render partial: "friend_list", locals: {friends_with_channels: @friends_with_channels} %>
         </div>
-        <% if @friends_with_channels.empty? %>
-            친구를 초대해보세요!<br> <!-- FIXME: 버그인가 왜 줄바꿈이 안되지 -->
-            <%= link_to "친구 초대하기", invitation_path %>
-        <% end %>
     </div>
 </div>
 

@@ -39,15 +39,13 @@
         .username {
             font-size: 14px;
             font-weight: bold;
-            vertical-align: middle;
         }
 
         .lock-icon {
-            width: 22px;
+            width: 20px;
             height: auto;
             margin: 0px;
             padding: 0px;
-            vertical-align: middle;
         }
 
         .replier-name {
@@ -66,15 +64,14 @@
 
         .likes {
             text-align: right;
+
             .num-of-likes {
-                vertical-align: 8px;
                 font-family: 'Nanum Gothic', sans-serif;
                 color: #F48462;
                 cursor: pointer;
                 padding: 3px;
                 margin-right: 5px;
                 font-size: 12px;
-                vertical-align: middle;
             }
     
             .num-of-likes.zero {

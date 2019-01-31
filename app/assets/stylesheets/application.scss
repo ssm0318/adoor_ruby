@@ -13,95 +13,36 @@
  *= require_tree .
  *= require_self
  */
-
-.adoor-header {
-    width: 100%;
-    display: inline-block;
-
-    .logo {
-        float: left;
-        width: 180px;
-        height: auto;
-    }
-
-    .nav-left{
-        padding-top: 25px;
-        float:left;
-
-        .nav-el {
+ ::-webkit-scrollbar { 
+    display: none; 
+ }
+    
+.navbar {
+    .navbar-nav {
+        .nav-link {
             font-family: 'Open Sans', sans-serif;
             font-size: 15px;
             color: #777777;
             padding-left: 25px;
             padding-right: 25px;
-            cursor: pointer;
-
-            // &:hover {
-            //     color: #F48462;
-            // }
+                
         }
 
-        .nav-el.active {
+        .nav-link.active{
             color: #F48462;
         }
+
+
     }
 
-    .nav-right {
-        padding-top: 20px;
-        float: right;
-        display: grid;
-        grid-template-columns: minmax(140px, 25%) minmax(110px, 25%) minmax(50px, 25%) minmax(50px, 25%);
-        
-        .nav-el {
-            grid-column: 2 / 3;
-            text-align: center;
-            font-family: 'Open Sans', sans-serif;
-            font-size: 15px;
-            color: #777777;
-            cursor: pointer;
-            padding-top: 5px;
-
-            a {
-                text-align: center;
-            }
-
-            // &:hover {
-            //     color: #F48462;
-            // }
-        }
-
-        .btn-noti-box {
-            display: flex;
-            justify-content: center; 
-            grid-column: 4 / 5;
-            padding-top: 2px;
-
-            img {
-                width: 20px;
-                height: 22px;
-                
-            }
-        }
-
-        .my-page-btn {
-            grid-column: 3 / 4;
-            justify-content: center; 
-            display: flex;
-
-            img {
-                width: 25px;
-                height: 25px;
-                border-radius:15px;
-
-            }
-        }ㅣ
+    .mr-auto-custom {
+        display: flex;
+        margin-left: auto!important;
 
         .search-form {
-            padding-top: 20px;
-            // display: inline-block;
-            //margin-right: 30px;
-            //position: 
+            padding-top: 12px;
         }
+    
         .search-input {
             width: 0px;
             height: 30px;
@@ -120,20 +61,25 @@
             -ms-transition: width .55s ease;
             -o-transition: width .55s ease;
             transition: width .55s ease;
+    
             &:focus {
                 outline: none;
                 fill: none;
+    
             }
             border: 0.5px solid #dddddd;
+    
         }
-
+    
         .search-input:focus, .search-input:active {
             outline: none;
             width: 120px;
+    
         }
-
+    
         .hover-container:hover .search-input {
             width: 120px;
+    
         }
     
         .search-container {
@@ -143,35 +89,64 @@
             white-space: nowrap;
             position: relative;
             grid-column: 1 / 2;
+    
         }
-
+    
         .search-icon {
             color: #F48462;
             position: absolute;
             right: 7px;
             margin-left: 10px;
-            margin-top: 8px;
+            margin-top: 5px;
             z-index: 1;
-            
+    
         }
 
-    }
-    .nav-right-login {
-        float: right;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 15px;
-        color: #777777;
+        .logout {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 15px;
+            color: #777777;
+            padding-left: 25px;
+            padding-right: 25px;
+            padding-top: 15px;
+        }
+    
+        .my-page-btn {
+            padding: 11px 25px 10px 10px;
 
-        .log-in {
-            margin-right: 20px;
-            grid-column: 4 / 5;
-            color: #F48462;
-
+            img {
+                width: 25px;
+                height: 25px;
+                border-radius:15px;
+    
+            }
+        }
+    
+        .btn-noti-box {
+            padding-top: 10px;
+    
+            img {
+                width: 22px;
+                height: 25px;
+                
+            }
         }
     }
 }
-    
 
+.navbar-active {
+    color: #F48462;
+}
+
+.navbar-toggler:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    top: 17px;
+    right: 0.5em;
+    border: none;    
+}
+    
 
 #prism-container {
     height: 100%;
@@ -209,12 +184,10 @@ a {
 
 .username{
     color: black;
-    vertical-align: 9px;
     cursor: pointer;
-    // &:hover {
-    //     color: #F48462;
-    // }
+    text-decoration: none;
 }
+
 body {
     margin: 0px; 
     background-color: #f9f9f9;

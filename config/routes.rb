@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Application
+  get '/unread' => 'application#unread'
   get '/introduction' => 'application#intro', as: :introduction
 
   # Answer
@@ -56,6 +57,7 @@ Rails.application.routes.draw do
   # Notification
   get '/notifications/read_all' => 'notifications#read_all', as: :notification_read_all
   get '/notifications/:id' => 'notifications#read'
+  get '/notifications/all/index' => 'notifications#index' , as: :notification_index 
 
   # Profile
   get '/profiles/:id' => 'profiles#index', as: :profile
