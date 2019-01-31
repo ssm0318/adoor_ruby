@@ -1,6 +1,11 @@
 // 글상자(?) 기본 형식 통일
 @import 'variable.scss';
 
+
+div {
+    // display: inline-block;
+    word-break: break-all;
+}
 .prism-box {
     background-color: white;
     width: calc(100% - 20px);

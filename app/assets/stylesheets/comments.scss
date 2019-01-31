@@ -55,12 +55,10 @@
         .comment-text {
             line-height: 20px;
 
-            .content {
-                display: inline-block;
-                // word-break: break-word;
-                // white-space: pre-wrap;
-                word-break: break-all;
-            }
+            // .content {
+            //     display: inline-block;
+            //     word-break: break-all;
+            // }
         }
 
         .likes {
