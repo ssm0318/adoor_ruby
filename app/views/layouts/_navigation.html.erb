@@ -1,31 +1,46 @@
-<div class="adoor-header">
-    <%= link_to image_tag("logo/final-long-logo.png", class:"logo"), root_path %>
-    
-        <div class = "nav-left">
-            <%= active_link_to '오늘의 질문', today_questions_path, class: "nav-el" %>
-            <%= active_link_to '질문 둘러보기', questions_path, class: "nav-el", active: :exclusive %>
-            <%= active_link_to '익명 피드', general_feed_path, class: "nav-el" %>
-            <%#= active_link_to '친구 초대', invitation_path, class: "nav-el" %>
-            <%= active_link_to '도움말', introduction_path, class: "nav-el"%>
-            <% if user_signed_in? && (current_user.has_role? :admin) %>
-                <%= active_link_to '공지 관리', announcement_admin_index_path, class: "nav-el"%>
-            <% end %>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href= "<%= root_path %>">
+    <%= image_tag("logo/logo-no-margin.png", style: "width: 130px; height:auto;") %>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="<%=today_questions_path%>">오늘의 질문</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%=questions_path%>">질문 둘러보기</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%=general_feed_path%>">익명 피드</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%=introduction_path%>">도움말</a>
+      </li>
+      <% if user_signed_in? && (current_user.has_role? :admin) %>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= announcement_admin_index_path %>">공지 관리</a>
+      </li>
+      <% end %>
+    </ul>
 
-        <div class = "nav-right">
-            <% if user_signed_in? %>
-            <%= render 'layouts/searchbar' %>
-            <%= link_to '로그아웃', destroy_user_session_path, 
-                    method: :delete, class: "nav-el" %>
-            <%= link_to image_tag(current_user.image.url), profile_path(current_user.id), class: "my-page-btn" %> 
-            <%= render 'layouts/notification', noties: noties %>
-                
-            <% else %>
-        </div>
-        <div class = "nav-right-login">
-            <%= link_to '로그인', user_session_path, class: "log-in" %>
-            <% end %>
-        </div>
-
-    
-</div>
+    <ul class="navbar-nav mr-auto-custom">
+      <% if user_signed_in? %>
+        <%= render 'layouts/searchbar' %>
+        <li class="nav-item">
+            <a class="nav-link logout" href="<%=destroy_user_session_path%>" data-method = "delete">로그아웃</a>
+        </li>
+        <a class="my-page-btn" href="<%=profile_path(current_user.id)%>">
+            <%= image_tag(current_user.image.url) %>
+        </a>
+        <%= render 'layouts/notification', noties: noties %>
+      <% else %>
+        <li class="nav-item">
+            <a class="nav-link" href="<%=user_session_path%>">로그인</a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
