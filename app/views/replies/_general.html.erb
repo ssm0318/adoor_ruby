@@ -4,7 +4,9 @@
         <span class="comment-text">
             <span class= "content"><%= r.content %> </span>
         </span>
-        <%= render 'likes/default', target: r, like_btn_class: "btn-comment-like" %>
+        <span class="likes">
+            <%= render 'likes/default', target: r, like_btn_class: "btn-comment-like" %>
+        </span>
     </div>
 
     <div class = "comment-info">
