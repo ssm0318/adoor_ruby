@@ -3,7 +3,8 @@ function textarea_init (element, back) {
     if(back!=window) {
         resizeTextArea(element, back)
     }
-    element.on('keyup', function() {
+    element.on('keyup', function(e) {
+
         var elem = $(this);
         
         //bind scroll
