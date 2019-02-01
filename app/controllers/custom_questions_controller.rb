@@ -9,7 +9,7 @@ class CustomQuestionsController < ApplicationController
         if !@custom_question.tag_string.nil?
             tag_array = @custom_question.tag_string.gsub("\r\n", '\n').split('\n')
             tag_array.each do |tag|
-                new_tag = Tag.find_or_create_by(author_id: @custom_question.author.id, content: tag, target: @custom_question)
+                new_tag = Tag.create(author_id: @custom_question.author.id, content: tag, target: @custom_question)
                 @custom_question.tags << new_tag
             end
         end
@@ -59,7 +59,8 @@ class CustomQuestionsController < ApplicationController
         ancestor = CustomQuestion.find(params[:ancestor_id])
         @custom_question = CustomQuestion.create(author_id: current_user.id, content: ancestor.content, repost_message: params[:repost_message], ancestor_id: ancestor.id)
         ancestor.tags.each do |t|
-            @custom_question.tags << t
+            new_tag = Tag.create(author_id: current_user.id, content: t.content, target: @custom_question)
+            @custom_question.tags << new_tag
         end
         channels = []   # 선택된 채널들을 갖고 있다.
         channels = Channel.find(params[:c]) if params[:c]
