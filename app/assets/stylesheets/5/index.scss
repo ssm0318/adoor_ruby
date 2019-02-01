@@ -15,7 +15,6 @@
     display: flex; // postcss인가 젬 나중에 깔 것
     justify-content: space-between;
     margin-top: 30px;
-    padding: 0px 10%;
 
     a {
         font-family: 'Nanum Gothic', sans-serif;
@@ -31,6 +30,8 @@
         font-size: 22px;
         grid-column: 1 /2;
         grid-row: 1/1;
+
+
     }
 
     .question-btn {
