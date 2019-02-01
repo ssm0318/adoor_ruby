@@ -160,14 +160,6 @@ $("#btn-channel-add").on('click', function(e) {
     $(this).hide()
     $("#name-create-form").css('display', 'inline')
     $("#name-create-input").focus()
-    $("#name-create-input").keydown(function() {
-
-        if($(this).val().length > 3) {
-            $(this).stop().animate({
-                width: $(this).val().length*15
-            },100)  
-        }
-    });
 })
 
 //채널 이름 수정 완료 or 채널 추가 완료
