@@ -31,7 +31,7 @@ namespace :user_stats do
             replies.push(Reply.where(created_at: bd .. ed).length)
             likes.push(Like.where(created_at: bd .. ed).length)
             drawers.push(Drawer.where(created_at: bd .. ed).length)
-            tags.push(Tag.where(created_at: bd .. ed).length)
+            tags.push(Tag.where(created_at: bd .. ed).where.not(target_type: "Question").length)
             friendships.push(Friendship.where(created_at: bd .. ed).length)
             assignments.push(Assignment.where(created_at: bd .. ed).length)
             queries.push(Query.where(created_at: bd .. ed).length)
@@ -83,7 +83,7 @@ namespace :user_stats do
             replies.push(Reply.where(created_at: bw .. ew).length)
             likes.push(Like.where(created_at: bw .. ew).length)
             drawers.push(Drawer.where(created_at: bw .. ew).length)
-            tags.push(Tag.where(created_at: bw .. ew).length)
+            tags.push(Tag.where(created_at: bw .. ew).where.not(target_type: "Question").length)
             friendships.push(Friendship.where(created_at: bw .. ew).length)
             assignments.push(Assignment.where(created_at: bw .. ew).length)
             queries.push(Query.where(created_at: bw .. ew).length)
@@ -135,7 +135,7 @@ namespace :user_stats do
             replies.push(Reply.where(created_at: bm .. em).length)
             likes.push(Like.where(created_at: bm .. em).length)
             drawers.push(Drawer.where(created_at: bm .. em).length)
-            tags.push(Tag.where(created_at: bm .. em).length)
+            tags.push(Tag.where(created_at: bm .. em).where.not(target_type: "Question").length)
             friendships.push(Friendship.where(created_at: bm .. em).length)
             assignments.push(Assignment.where(created_at: bm .. em).length)
             queries.push(Query.where(created_at: bm .. em).length)
@@ -170,7 +170,7 @@ namespace :user_stats do
                 "Like", "Drawer", "Tag", "Friendship", "Assignment", "Query", "User_Query"] # header
             # 모든 유저의 통계
             csv << ["N/A", "All_Users", Ahoy::Visit.all.length, Answer.all.length, Post.all.length, CustomQuestion.all.length, Channel.all.length, Comment.all.length, Reply.all.length, 
-                Like.all.length, Drawer.all.length, Tag.all.length, Friendship.all.length, Assignment.all.length, Query.all.length, UserQuery.all.length]
+                Like.all.length, Drawer.all.length, Tag.all.where.not(target_type: "Question").length, Friendship.all.length, Assignment.all.length, Query.all.length, UserQuery.all.length]
 
             # 각 유저의 통계
             User.all.each do |user|
@@ -194,15 +194,16 @@ namespace :user_stats do
             csv << ["N/A", "All_Users", Ahoy::Visit.where(started_at: bd .. ed).length, Answer.where(created_at: bd .. ed).length, Post.where(created_at: bd .. ed).length, 
                 CustomQuestion.where(created_at: bd .. ed).length, Channel.where(created_at: bd .. ed).length, Comment.where(created_at: bd .. ed).length, 
                 Reply.where(created_at: bd .. ed).length, Like.where(created_at: bd .. ed).length, Drawer.where(created_at: bd .. ed).length, 
-                Tag.where(created_at: bd .. ed).length, Friendship.where(created_at: bd .. ed).length, Assignment.where(created_at: bd .. ed).length, 
+                Tag.where(created_at: bd .. ed).where.not(target_type: "Question").length, Friendship.where(created_at: bd .. ed).length, Assignment.where(created_at: bd .. ed).length, 
                 Query.where(created_at: bd .. ed).length, UserQuery.where(created_at: bd .. ed).length]
             User.all.each do |user|
                 csv << [user.id, user.username, user.visits.where(started_at: bd .. ed).length, user.answers.where(created_at: bd .. ed).length, 
                     user.custom_questions.where(created_at: bd .. ed).length, user.channels.where(created_at: bd .. ed).length, 
                     user.comments.where(created_at: bd .. ed).length, Reply.where(author_id: user.id, created_at: bd .. ed).length, 
-                    user.likes.where(created_at: bd .. ed).length, user.drawers.where(created_at: bd .. ed).length, user.tags.where(created_at: bd .. ed).length, 
-                    user.friendships.where(created_at: bd .. ed).length, Assignment.where(assigner_id: user.id, created_at: bd .. ed).length, 
-                    user.queries.where(created_at: bd .. ed).length, user.user_queries.where(created_at: bd .. ed).length]
+                    user.likes.where(created_at: bd .. ed).length, user.drawers.where(created_at: bd .. ed).length, 
+                    user.tags.where(created_at: bd .. ed).where.not(target_type: "Question").length, user.friendships.where(created_at: bd .. ed).length, 
+                    Assignment.where(assigner_id: user.id, created_at: bd .. ed).length, user.queries.where(created_at: bd .. ed).length, 
+                    user.user_queries.where(created_at: bd .. ed).length]
             end
         end
 
