@@ -9,25 +9,25 @@
 if Rails.env.development?
     # 1: 백산수, 2: 마틸다, 3:율로몬, 4: 잡동사니, 5: 이룰렁, 6: 누구게, 7: 메롱
     if User.where(email: "prism@snu.com").empty?
-        User.create(email: "prism@snu.com", password: "prism-snu", username: "백산수")
+        User.create(email: "prism@snu.com", password: "prism-snu", username: "sansoo")
     end
     if User.where(email: "a@a.com").empty?
-        User.create(email: "a@a.com", password: "aaaaaa", username: "마틸다")
+        User.create(email: "a@a.com", password: "aaaaaa", username: "matilda")
     end
     if User.where(email: "b@b.com").empty?
-        User.create(email: "b@b.com", password: "bbbbbb", username: "율로몬")
+        User.create(email: "b@b.com", password: "bbbbbb", username: "yulomon")
     end
     if User.where(email: "c@c.com").empty?
-        User.create(email: "c@c.com", password: "cccccc", username: "잡동사니")
+        User.create(email: "c@c.com", password: "cccccc", username: "zapdongsani")
     end
     if User.where(email: "d@d.com").empty?
-        User.create(email: "d@d.com", password: "dddddd", username: "이룰렁")
+        User.create(email: "d@d.com", password: "dddddd", username: "leelooleong")
     end
     if User.where(email: "e@e.com").empty?
-        User.create(email: "e@e.com", password: "eeeeee", username: "누구게")
+        User.create(email: "e@e.com", password: "eeeeee", username: "whod")
     end
     if User.where(email: "f@f.com").empty?
-        User.create(email: "f@f.com", password: "ffffff", username: "메롱")
+        User.create(email: "f@f.com", password: "ffffff", username: "merong")
     end
     # User.find_or_create_by(email: "a@a.com", password: "aaaaaa", username: "마틸다")
     # User.find_or_create_by(email: "b@b.com", password: "bbbbbb", username: "율로몬")
@@ -164,7 +164,7 @@ if Rails.env.development?
     # Reply.find_or_create_by(author_id: 5, comment_id: 10, content: "답변 감사합니당")
 
     # Like 
-    Like.find_or_create_by(user_id: 1, target: Answer.find(1))
+    # Like.find_or_create_by(user_id: 1, target: Answer.find(1))
     Like.find_or_create_by(user_id: 1, target: Answer.find(2))
     Like.find_or_create_by(user_id: 1, target: Answer.find(3))
     Like.find_or_create_by(user_id: 2, target: Answer.find(5))
