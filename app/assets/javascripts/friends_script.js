@@ -31,6 +31,7 @@ function click_friend_reply(element) {
 function submit_on_enter(e) {
   if(e.keyCode == 13 && !e.shiftKey) {        
     $(this).parents("form").submit();
+    $(this).blur();
   } 
 }
 
@@ -49,27 +50,30 @@ $(document).on('turbolinks:load', function()  {
     // TODO : 숨김댓글 체크한채로 보내면 숨김댓글이라고 뜨기!
 
     $(".prism-form-friend").submit( function(e) {
-      console.time("COMMENT")
-      console.time("COMMENT AJAX")
         e.preventDefault();
+        console.time("COMMENT")
+        console.time("COMMENT AJAX")
+
 
         if($(this).find(".prism-form__comment").val().trim() ==''){
            return;
         }
 
         var form = $(this)
+        var form_data = form.serialize()
+        form.find(".prism-form__comment").val('')
+
         $.ajax({
           type: "POST",
           url: form.attr('action'),
-          data: form.serialize(),
+          data: form_data,
           success: function(data) {
             console.timeEnd("COMMENT")
+            form.find(".prism-form__comment").focus()
             let secret = form.find("input[type=checkbox]").is(":checked") ? true : false
             
             if(form.hasClass("comment")) {
               var new_url = "/comments/" + data.id;
-              console.log(new_url);
-              console.log("hey"); 
   
               var html = $(`
                 <div class='comment-replies-form'>
@@ -135,7 +139,6 @@ $(document).on('turbolinks:load', function()  {
                 form.parent().find(".comments").append(html)
               }
 
-              console.log(html.find(".prism-form__comment"))
               textarea_init(html.find(".prism-form__comment"), window)
               btn_show_like.one('click', show_likes)
               like_ajax(btn_like)
@@ -146,16 +149,23 @@ $(document).on('turbolinks:load', function()  {
 
               console.timeEnd("COMMENT AJAX")
               html.find("form").submit( function(event) {
-  
-                var new_form = $(this)
-  
+
                 event.preventDefault();
+                if($(this).find(".prism-form__comment").val().trim() ==''){
+                    return;
+                }
+                var new_form = $(this)
+                var new_form_data = new_form.serialize()
+                new_form.find(".prism-form__comment").val('')
+  
+
                 $.ajax({
                   type: "POST",
                   url: new_form.attr('action'),
-                  data: new_form.serialize(),
+                  data: new_form_data,
                   success: function(data) {
 
+                    new_form.find(".prism-form__comment").focus()
                     var new_html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, 
                         data.content, data.created_at, data.id, secret || new_form.find("#secret").is(":checked"))
                     new_html.find(".comment-info").append("<span class='btn-comment friend hover-orange hover-pointer' data-self='true'>댓글달기</span>")
@@ -171,8 +181,6 @@ $(document).on('turbolinks:load', function()  {
                     like_ajax(new_btn_like)
                     delete_ajax(new_html.find(".btn-comment-delete"))
                     new_html.find("time.timeago").timeago()
-                    new_form.find(".prism-form__comment").val('')
-                    new_form.find(".prism-form__comment").css('height', '17px')
                   },
                   error: function(data) {
                     console.log("error")
@@ -205,9 +213,6 @@ $(document).on('turbolinks:load', function()  {
               delete_ajax(html.find(".btn-comment-delete"))
               html.find("time.timeago").timeago();
             }
-
-            form.find(".prism-form__comment").val('')
-            form.find(".prism-form__comment").css('height', '17px')
           },
           error: function(data) {
               console.log("error")
