@@ -58,6 +58,8 @@
     <%= render 'layouts/navigation' %>
     <div id="prism-container">
     <%= yield %>
+      <%= flash[:notice]%>
+      <%= flash[:alert]%>
     </div>
     <div id='edit-background'>
       <button id='btn-edit-exit' class="hover-pointer">x</button>
@@ -68,11 +70,9 @@
     </div>
     <div id="flash-messages">
     </div>
-    <%= flash[:notice]%>
-    <%= flash[:alert]%>
-    <% flash.each do |name, msg| %>
+    <!--<% flash.each do |name, msg| %>
       <%= content_tag :div, msg, :id => "flash_#{name}"%>
-    <% end %>
+    <% end %>-->
   </body>
   </html>
 
