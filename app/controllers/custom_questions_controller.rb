@@ -47,7 +47,7 @@ class CustomQuestionsController < ApplicationController
         unless ajax_request?
             redirect_to root_url
         else
-            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question }
+            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question, :reposting => true }
             render :json => { 
                 html_content: "#{html_content}",
             }
@@ -56,15 +56,12 @@ class CustomQuestionsController < ApplicationController
 
     # custom question repost create
     def repost_create
-        @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:ancestor_id]).content, repost_message: params[:repost_message], ancestor_id: params[:ancestor_id])
-            # if !@custom_question.tag_string.nil?
-        #     tag_array = @custom_question.tag_string.gsub("\r\n", '\n').split('\n')
-        #     tag_array.each do |tag|
-        #         new_tag = Tag.create(author_id: @custom_question.author.id, content: tag, target: @custom_question)
-        #         @custom_question.tags << new_tag
-        #     end
-        # end
-
+        ancestor = CustomQuestion.find(params[:ancestor_id])
+        @custom_question = CustomQuestion.create(author_id: current_user.id, content: ancestor.content, repost_message: params[:repost_message], ancestor_id: ancestor.id)
+        ancestor.tags.each do |t|
+            new_tag = Tag.create(author_id: current_user.id, content: t.content, target: @custom_question)
+            @custom_question.tags << new_tag
+        end
         channels = []   # 선택된 채널들을 갖고 있다.
         channels = Channel.find(params[:c]) if params[:c]
         channels.each do |c|
@@ -79,7 +76,7 @@ class CustomQuestionsController < ApplicationController
         unless ajax_request?
             redirect_to root_url
         else
-            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question }
+            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question, :reposting => false }
             render :json => { 
                 html_content: "#{html_content}",
             } 
@@ -88,15 +85,6 @@ class CustomQuestionsController < ApplicationController
 
     def update
         if @custom_question.update(custom_question_params)
-            @custom_question.tags.destroy_all
-
-            if !@custom_question.tag_string.nil?
-                tag_array = @custom_question.tag_string.gsub("\r\n", "\n").split("\n") 
-                tag_array.each do |tag|
-                    new_tag = Tag.create(author_id: @custom_question.author.id, content: tag, target: @custom_question)
-                    @custom_question.tags << Tag.find(new_tag.id)
-                end
-            end
 
             original_channels = @custom_question.channels
             selected_channels = []
