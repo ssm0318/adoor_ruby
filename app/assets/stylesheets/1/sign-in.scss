@@ -4,7 +4,6 @@
 }
 
 .sign-title {
-    font-family: 'Nanum Gothic', sans-serif;
     font-size: 30px;
     text-align: center;
     padding-bottom: 10px;
@@ -22,11 +21,9 @@
     list-style: none;
     margin-top: 16px;
     font-size: 20px;
-    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .form-inputs {
-    font-family: 'Nanum Gothic', serif;
     font-size: 20px;
     text-decoration: none;
     text-align: center;
@@ -34,7 +31,6 @@
 }
 
 .form-inputs input[type=email], .form-inputs input[type=password], .form-inputs input[type=text] {
-    font-family:  'Nanum Gothic', sans-serif;
     margin-bottom: 15px;
     width: 250px;
     height: 30px;
@@ -47,7 +43,6 @@
 }
 
 .form-input {
-    font-family:  'Nanum Gothic', sans-serif;
     font-size: 40px;
     margin-bottom: 10px;
     
@@ -78,7 +73,6 @@
     color: grey;
     font-size: 20px;
     text-align: center;
-    font-family: 'Nanum Gothic', serif;
     border: none;
     cursor: pointer;
     &:focus {
