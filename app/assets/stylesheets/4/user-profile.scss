@@ -18,8 +18,10 @@
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
-            }
+            }         
         }
+
+        
 
         #profile__content-div {
             text-align: center;
@@ -49,7 +51,7 @@
 
             #user-message {
                 margin-top: 2px;
-                font-size: 16px;
+                font-size: 13px;
                 font-weight: 100;
                 color: #4f4f4f;
             }
@@ -67,6 +69,57 @@
                 }
             }
         }
+        .image-upload {
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            .image-container {
+                display: inline-block;
+                position: relative;
+                .edit-profile-img {
+                    height:100px; 
+                    width:100px; 
+                    border-radius:50px;
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    z-index: 1;
+                    position: relative;
+                }
+                
+                .camera-icon {
+                    color: white;
+                    cursor: pointer;
+                    visibility: hidden;
+                    font-size: 11px;
+                }
+            }
+            .image-container:hover .edit-profile-img {
+                -webkit-filter: grayscale(20%) contrast(25%);
+                -moz-filter: grayscale(20%) contrast(25%);
+                -o-filter: grayscale(20%) contrast(25%);
+                -ms-filter: grayscale(20%) contrast(25%);
+                filter: grayscale(20%) contrast(25%);
+            }
+            
+            .image-container:hover .camera-icon {
+                visibility: visible;
+            }
+        
+            .image-container > input {
+                display: none;
+            }
+
+            .image-container > label {
+                left: 20px;
+                top: 25px;
+                position: absolute;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                z-index: 2;
+            }
+        }
     }
 
 
@@ -76,7 +129,7 @@
         // justify-content: space-around;
         // border-top: 1px solid #d7dae0;
         // padding-top: 10px;
-        // margin-top: 10px;
+        margin-top: 20px;
 
 
         .user-header__tab-el-left {
@@ -121,3 +174,7 @@
         }
     }
 }
+
+
+
+

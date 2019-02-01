@@ -37,8 +37,8 @@
             <%= render 'comments/general_form', user: feed.author, feed: feed %>
         </div>
 
-     <!-- posting or Answer -->
-     <% else %>
+    <!-- posting or Answer -->
+    <% else %>
         <div class="prism-box <%=feed.id%>">
             <div class="prism-box__header">
                 <%= render partial: "./user_profile_general", locals: {user_id: feed.author.id, feed_id: feed.id}%>

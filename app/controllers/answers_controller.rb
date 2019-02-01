@@ -70,7 +70,7 @@ class AnswersController < ApplicationController
         end
     end
 
-def update
+    def update
         if @answer.update(answer_params)
             @answer.tags.destroy_all
 
@@ -82,16 +82,55 @@ def update
                 end
             end
 
-            Entrance.where(target: @answer).destroy_all
-            channels = []   # 선택된 채널들을 갖고 있다.
-            channels = Channel.find(params[:c]) if params[:c]
-            channels.each do |c|
-                Entrance.create(channel: c, target: @answer)
+            original_channels = @answer.channels
+            selected_channels = []
+            selected_channels = Channel.find(params[:c]) if params[:c]
+            # 안겹치는 애들만 모아다가
+            changed_channels = selected_channels - original_channels
+            changed_channels += original_channels - selected_channels
+            # 바꿔줍니다
+            changed_channels.each do |c|
+                e = Entrance.find_or_initialize_by(channel: c, target: @answer)
+                e.persisted? ? e.destroy : e.save
             end
 
+            ################################## 테스팅 완료
+            # 공개 범위의 변화로 인해 못 보게 된 글 / 댓글에 대한 노티를 모두 삭제한다
+            ## 친구공개였다가 아니게 된 것 : 거기 댓글 / 대댓글 단 친구들에게 간 노티 다 없어짐
+            ## 익명피드 공개였다가 아니게 된 것 : 거기 댓글 / 대댓글 단 사람들한테 간 노티 다 없어짐
+            # visible이고 아니고 다 지우는 걸로 일단 했다
+            ## 즉, 범위를 두 번 바꾼다고 해서 예전 노티가 다시 살아나진 않음
+            comment_join = "INNER JOIN comments ON notifications.origin_id = comments.id AND notifications.origin_type = 'Comment'"
+            reply_join = "INNER JOIN replies ON notifications.origin_id = replies.id AND notifications.origin_type = 'Reply'"
+
+            friend_noties = []
+            friend_noties += Notification.where(target_type: 'Like', action: 'friend_like_comment').joins(comment_join).merge(Comment.where(target: @answer)).distinct
+            friend_noties += Notification.where(target_type: 'Like', action: 'friend_like_reply').joins(reply_join).merge(Reply.joins(:comment).where(comments: {target: @answer})).distinct
+            friend_noties += Notification.where(target_type: 'Reply', action: 'friend_to_comment').joins(comment_join).merge(Comment.where(target: @answer)).distinct
+            friend_noties += Notification.where(target_type: 'Reply', action: 'friend_to_recomment').joins(comment_join).merge(Comment.where(target: @answer)).distinct
+
+            friend_noties.each do |n|
+                if (n.recipient != @answer.author) && (n.recipient.belonging_channels & selected_channels).empty?
+                    n.destroy
+                end
+            end
+            
+            if original_channels.any?{|c| c.name == '익명피드'} && !selected_channels.any?{|c| c.name == '익명피드'}  # 원래 익명피드 공개였는데 바뀐 경우에만
+                anonymous_noties = []
+                anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_comment').joins(comment_join).merge(Comment.where(target: @answer)).distinct
+                anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_reply').joins(reply_join).merge(Reply.joins(:comment).where(comments: {target: @answer})).distinct
+                anonymous_noties += Notification.where(target_type: 'Reply', action: 'anonymous_to_comment').joins(comment_join).merge(Comment.where(target: @answer)).distinct
+                anonymous_noties.each do |n|
+                    if n.recipient != @answer.author
+                        n.destroy
+                    end
+                end
+            end
+            ########################################
+
             channel_names = ""
-            channels.each do |channel|
-                channel_names += channel.name + " "
+            selected_channels.each do |c|
+                channel_names += c.name + " "
             end
             
             render :json => {

@@ -13,12 +13,12 @@ Rails.application.routes.draw do
   resources :posts, except: [:new]
 
   # CustomQuestion
-  resources :custom_questions, only: [:show, :create, :destroy]
+  resources :custom_questions, only: [:show, :create, :destroy, :update, :edit]
   # get '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost
   # get '/custom_questions/:id/message' => 'custom_questions#repost_create', as: :custom_question_repost
   post '/custom_questions/:id/repost' => 'custom_questions#repost_create', as: :custom_question_repost_form
   get '/custom_questions/:id/repost' => 'custom_questions#repost_new', as: :custom_question_repost
-  get '/custom_questions/:id/repost/edit' => 'custom_questions#repost_edit', as: :custom_question_repost_edit
+  # get '/custom_questions/:id/repost/edit' => 'custom_questions#repost_edit', as: :custom_question_repost_edit
 
   # Feed
   root 'feeds#friends'
@@ -70,8 +70,11 @@ Rails.application.routes.draw do
   devise_for :users
   # 아래 코드는 이후에 멀티채널 구성에 맞추어 바뀌어야할수도.
   get '/users/friends' => 'users#friends', as: :friends
+  put '/users/:id/image_upload' => 'users#image_upload', as: :image_upload
+  # put '/users/:id/upload_image' => 'users#update', as: :upload_image
   post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend # get?
   post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request # get?
+  
 
   # Invitation
   get '/invitations' => 'invitations#index', as: :invitation

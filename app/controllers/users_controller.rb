@@ -1,7 +1,10 @@
+require 'mini_magick'
+require 'base64'
+
 class UsersController < ApplicationController
-    before_action :authenticate_user!, except: [:recover_password, :send_temporary_password, :accept_invitation, :introduction]
-    before_action :set_user, only: [:show, :edit, :update, :destroy]
-    before_action :check_user, only: [:edit, :update]
+    before_action :authenticate_user!, except: [:recover_password, :send_temporary_password]
+    before_action :set_user, only: [:show, :edit, :update, :destroy, :image_upload]
+    before_action :check_user, only: [:edit, :update, :destroy]
     
     def recover_password
         render 'recover_password'
@@ -40,6 +43,33 @@ class UsersController < ApplicationController
         else
             redirect_to profile_path(@user.id)
         end
+    end
+
+    def image_upload
+        uploaded_io = params[:image]
+        if uploaded_io.include? "data:image/jpeg;base64,"
+            metadata = "data:image/jpeg;base64,"
+            base64_string = uploaded_io[metadata.size..-1]
+            image_data = Base64.decode64(base64_string)
+            image = MiniMagick::Image.read(image_data)
+            image.write 'image.jpeg'
+            @user.image = MiniMagick::Image.open("image.jpeg")
+            @user.save
+        elsif uploaded_io.include? "data:image/png;base64,"
+            metadata = "data:image/png;base64,"
+            base64_string = uploaded_io[metadata.size..-1]
+            image_data = Base64.decode64(base64_string)
+            image = MiniMagick::Image.read(image_data)
+            image.write 'image.png'
+            @user.image = MiniMagick::Image.open("image.png")
+            @user.save
+        end
+
+        redirect_back fallback_location: profile_path(params[:id])
+    end
+
+    def new_image
+        render 'new_image'
     end
 
     def mypage
@@ -86,6 +116,10 @@ class UsersController < ApplicationController
 
         def user_params
             params.require(:user).permit(:id, :email, :username, :image, :date_of_birth, :profile)
+        end
+
+        def image_params
+            params.require(:user).permit(:image)
         end
 
         def check_user

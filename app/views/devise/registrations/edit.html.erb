@@ -6,7 +6,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true, :label => false %>
+    <%#= f.input :email, required: true, :label => false %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
@@ -16,14 +16,15 @@
                 required: true,
                 input_html: { autocomplete: "current-password" },
                 placeholder: " 현재 비밀번호",
-                :label => false %>
+                :label => false,
+                autofocus: true %>
     <%= f.input :password,
-                required: false,
+                required: true,
                 input_html: { autocomplete: "new-password" },
                 placeholder: " 새로운 비밀번호",
                 :label => false %>
     <%= f.input :password_confirmation,
-                required: false,
+                required: true,
                 input_html: { autocomplete: "new-password" },
                 placeholder: " 비밀번호 확인",
                 :label => false %>

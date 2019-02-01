@@ -1,7 +1,19 @@
 <div class="inner-container">
     <div class = "user-header" >
     <div id = "profile" >
-        <div id = "profile__image"><%= link_to image_tag(current_user.image.url), profile_path(current_user.id)%></div>
+        <% @user = current_user%>
+        <%= form_for @user, url: edit_user_profile_url(@user) do |u| %>
+            <% u.hidden_field :id, :value => current_user.id %>
+            <div class="image-upload">
+                <div class="image-container">
+                    <%= image_tag current_user.image.url, class: "edit-profile-img", id: "edit-profile-img" %>
+                    <%= u.file_field :image, id: "file-input", accept: 'image/png,image/jpeg,image/jpg', "data-url" => image_upload_path(current_user.id) %>
+                    <label for="file-input">
+                        <span class="camera-icon">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-camera fa-3x" aria-hidden="true"></i><br>사진 올리기</span>
+                    </label>
+                </div>
+            </div>                
+        <% end %>
         <div id = "profile__content-div">
             <div id = "profile__username-setting-div">
                 <div id = "username"><%= current_user.username %></div>
@@ -9,7 +21,7 @@
                     <%= link_to image_tag("icons/setting-default-icon.png", id: "profile__setting-btn"), edit_user_profile_path(current_user.id) %>
                 </div>
             </div>
-            <div id = "user-message">상태메시지</div>
+            <div id = "user-message"><%= current_user.profile %></div>
             <div id = "profile__friends-setting">
                 <%= link_to "게시물 / 서랍장", profile_path(current_user.id), id: "profile__friends-setting-btn" %>
             </div>
