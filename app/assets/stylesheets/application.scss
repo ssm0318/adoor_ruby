@@ -372,3 +372,20 @@ div.background {
         margin-bottom: 10px;
     }
 }
+
+@media screen and (min-width: 400px) {
+    .inner-container {
+        width: 100%;
+    }
+
+    #prism-container {
+        width: 95%;
+    }
+
+    html {
+        font-size: 200%;
+    }
+
+
+  }
+  
