@@ -63,7 +63,7 @@ $(document).on('turbolinks:load', function()  {
           url: form.attr('action'),
           data: form.serialize(),
           success: function(data) {
-            console.timeEnd("COMMENT SERVER")
+            console.timeEnd("COMMENT")
             let secret = form.find("input[type=checkbox]").is(":checked") ? true : false
             
             if(form.hasClass("comment")) {
