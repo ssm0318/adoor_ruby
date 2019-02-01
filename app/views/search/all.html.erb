@@ -1,7 +1,44 @@
 <div class="inner-container">
     <!-- FIXME: 다 가져와서 항목별로 보여주는 걸루다가 -->
     <%= render 'header', searchpath: @searchpath, query: @query %>
-    <% @results.reverse_each do |result| %> 
-        
-    <% end%>
+
+    <% if @user_results.count() > 0 %>
+        <div class="results-div">
+            <span class="result-tab">사용자 (<%=@more_user%>건)</span>
+            <%= render 'users/layout', users: @user_results %>
+            <% if @more_user > 5 %>
+                <%= form_tag(search_user_path, method: :get, class: "more") do %>
+                    <%= hidden_field_tag :query, @query %>
+                    <%= button_tag '사용자 더보기', class: "more-button" %>
+                <% end %>
+            <% end %>
+        </div>
+    <% end %>
+
+    <% if @question_results.count() > 0 %>
+        <div class="results-div">
+            <span class="result-tab">질문 (<%=@more_question%>건)</span>
+            <%= render "questions/layout", questions: @question_results %>
+            <% if @more_question > 5 %>
+                <%= form_tag(search_admin_question_path, method: :get, class: "more") do %>
+                    <%= hidden_field_tag :query, @query %>
+                    <%= button_tag '질문 더보기', class: "more-button" %>
+                <% end %>
+            <% end %>
+            <br>
+        </div>
+    <% end %>
+
+    <% if @custom_question_results.count() > 0 %>
+        <div class="results-div">
+            <span class="result-tab">사용자 질문 (<%=@more_custom%>건)</span>
+            <%= render 'custom_questions/layout', custom_questions: @custom_question_results %>
+            <% if @more_custom > 5 %>
+                <%= form_tag(search_custom_question_path, method: :get, class: "more") do %>
+                    <%= hidden_field_tag :query, @query %>
+                    <%= button_tag '사용자 질문 더보기', class: "more-button" %>
+                <% end %>
+            <% end %>
+        </div>
+    <% end %>
 </div>

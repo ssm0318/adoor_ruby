@@ -3,7 +3,13 @@
         <%= f.hidden_field :author_id, :value => current_user.id %>
         <%= f.text_area :content, required: true, class: "new-answer-field", autofocus: true, placeholder: "질문을 작성해보세요", "data-enable-grammarly": "false" %>
         <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
-        <%= f.text_area :tag_string %>
+        <%# f.text_area :tag_string %>
+        <%= f.hidden_field :tag_string, :value => "" %>
+        <div id="tags">
+            <span id="tag-title">태그</span>
+            <input id="tags_input" type="text" value="" />
+        </div>
+        <div id="tags-info-alert">태그를 쉼표로 구분하여 입력해주세요.</div>
         <!-- FIXME: checkbox가 /posts/form과 왜때무네 연동되는 것? -->
         <div class = "channels channels-custom-question">
             <span  class="channels-dropdown hover-orange">공개그룹</span>

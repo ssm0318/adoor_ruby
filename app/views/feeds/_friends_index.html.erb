@@ -18,7 +18,10 @@
                         <div class = "question-content"><%= feed.content %></div>
                         <div class="question-tags">
                             <% feed.tags.each do |tag| %>
-                                <span class="question-tag"><%=tag.content%></span>
+                                <%= form_tag(search_custom_question_path, method: :get, class: "more") do %>
+                                    <%= hidden_field_tag :query, tag.content %>
+                                    <%= button_tag tag.content, class: "question-tag" %>
+                                <% end %>
                             <% end %>
                         </div>
                         <div class = "reposts">
