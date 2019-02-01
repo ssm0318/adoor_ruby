@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
             if !q.tag_string.nil?
                 tag_array = q.tag_string.gsub("\r\n", '\n').split('\n')
                 tag_array.each do |tag|
-                    new_tag = Tag.create(author_id: 1, content: tag, target: q)
+                    new_tag = Tag.find_or_create_by(author_id: 1, content: tag, target: q)
                     q.tags << new_tag
                 end
             end
@@ -54,7 +54,7 @@ class QuestionsController < ApplicationController
             if !q.tag_string.nil?
                 tag_array = q.tag_string.gsub("\r\n", '\n').split('\n')
                 tag_array.each do |tag|
-                    new_tag = Tag.create(author_id: 1, content: tag, target: q)
+                    new_tag = Tag.find_or_create_by(author_id: 1, content: tag, target: q)
                     q.tags << new_tag
                 end
             end
