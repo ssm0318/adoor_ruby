@@ -49,6 +49,8 @@ $(document).on('turbolinks:load', function()  {
     // TODO : 숨김댓글 체크한채로 보내면 숨김댓글이라고 뜨기!
 
     $(".prism-form-friend").submit( function(e) {
+      console.time("COMMENT")
+      console.time("COMMENT AJAX")
         e.preventDefault();
 
         if($(this).find(".prism-form__comment").val().trim() ==''){
@@ -61,7 +63,7 @@ $(document).on('turbolinks:load', function()  {
           url: form.attr('action'),
           data: form.serialize(),
           success: function(data) {
-            
+            console.timeEnd("COMMENT SERVER")
             let secret = form.find("input[type=checkbox]").is(":checked") ? true : false
             
             if(form.hasClass("comment")) {
@@ -141,6 +143,8 @@ $(document).on('turbolinks:load', function()  {
               html.find("time.timeago").timeago();
 
               html.find("textarea").on('keypress', submit_on_enter)
+
+              console.timeEnd("COMMENT AJAX")
               html.find("form").submit( function(event) {
   
                 var new_form = $(this)

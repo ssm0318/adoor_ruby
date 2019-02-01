@@ -1,5 +1,8 @@
 function like_ajax(element) {
     element.on('click', function(e) {
+
+        console.time("LIKE")
+        console.time("LIKE AJAX")
         var like = $(this)
 
         var method
@@ -15,6 +18,7 @@ function like_ajax(element) {
                 type: method,
                 url: like.attr("data-url"),
                 success: function(data) {
+                    console.timeEnd("LIKE")
                     const src = like.attr('src')
                     const url = like.attr('data-url')
                     const changed_src = like.attr('data-changed-src')
@@ -38,6 +42,7 @@ function like_ajax(element) {
                     else {
                         el.removeClass("zero")
                     }
+                    console.timeEnd("LIKE AJAX")
                 },
                 error: function(data) {
                     console.log("error!")
