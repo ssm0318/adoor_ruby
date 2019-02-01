@@ -9,7 +9,6 @@
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 160px;
-    font-family: "Nanum Gothic", serif;
     background-color: #bcbcbc;
     color: white;
     text-align: center;
@@ -56,12 +55,10 @@
 
     input[type="text"] {
         width: 200px;
-        font-family: 'Nanum Gothic', serif;
         font-size: 18px;
     }
 
     .invitation-link-title {
-        font-family: 'Nanum Gothic', serif;
         font-size: 36px;
         text-align: center;
         color: #F48462;
@@ -100,11 +97,9 @@
 .invitation-accept-text {
     margin-top: 50px;
     text-align: center;
-    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .link-generation-box {
-    font-family: "Nanum Gothic", serif;
     margin-top: 30px;
     margin-bottom: 30px;
     line-height: 1.5em;

@@ -17,6 +17,10 @@
     display: none; 
  }
 
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
  .flash {
     margin: auto;
     width: 50%;
@@ -43,7 +47,6 @@
     }
     .navbar-nav {
         .nav-link {
-            font-family: 'Open Sans', sans-serif;
             font-size: 15px;
             color: #777777;
                 
@@ -132,7 +135,6 @@
         }
 
         .logout {
-            font-family: 'Open Sans', sans-serif;
             font-size: 15px;
             color: #777777;
             padding-left: 25px;
@@ -199,7 +201,6 @@
         // &:hover {
         //     color: #F48462;
         //  }
-         font-family: 'Open Sans', sans-serif;
     }
     
 }
@@ -209,7 +210,6 @@ a {
 }
 
 .answer {
-    font-family: "Nanum Gothic", serif;
     white-space: pre-line;
     text-align: left;
     overflow-wrap: break-word;
@@ -224,7 +224,6 @@ a {
 body {
     margin: 0px; 
     background-color: #f9f9f9;
-    font-family: "Nanum Gothic", serif;
     height: 100%;
 }
 
@@ -268,7 +267,6 @@ div.background {
                 font-size: 28px;
                 color: rgb(180, 180, 180);
                 margin-top: 5vh;
-                // font-family: "Nanum Gothic";
             }
 
             div.start-1 {
@@ -287,7 +285,6 @@ div.background {
                     top: 25%;
                     color: slateblue;
                     font-size: 28px;
-                    font-family: "Nanum Gothic";
                 }
             }
 
@@ -298,7 +295,6 @@ div.background {
                     height: 40px;
                     width: 116px;
                     border-radius: 20px;
-                    font-family: "Nanum Gothic";
                     position: relative;
                     top: 50%;
                     padding: 10px 30px;
@@ -335,7 +331,6 @@ div.background {
         
         .question-content{
             position: relative;
-            font-family: 'Nanum Gothic', sans-serif;
             text-decoration: none;
             color: black;
             font-size: 22px;
