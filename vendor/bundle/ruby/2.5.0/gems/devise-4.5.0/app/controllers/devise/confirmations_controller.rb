@@ -15,6 +15,7 @@ class Devise::ConfirmationsController < DeviseController
       flash[:notice] = "alalalalalalalalalaal"
       respond_with({}, location: after_resending_confirmation_instructions_path_for(resource_name))
     else
+      flash[:notice] = "failfailfafilafialafila"
       respond_with(resource)
     end 
   end
