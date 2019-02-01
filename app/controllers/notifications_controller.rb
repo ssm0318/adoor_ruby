@@ -90,7 +90,7 @@ class NotificationsController < ApplicationController
                 when 'Answer'
                     render js: "window.location = '#{answer_path(noti.origin.target_id)}'"
                 when 'CustomQuestion'
-                    render js: "window.location = '#{custom_question_path(noti.origin.target_id)}''"
+                    render js: "window.location = '#{custom_question_path(noti.origin.target_id)}'"
                 when 'Announcement'
                     render js: "window.location = '#{announcement_index_path}'"
                 else
