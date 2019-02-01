@@ -115,7 +115,10 @@ class PostsController < ApplicationController
         end
 
         def check_accessibility
-            if Post.find(params[:id]).author != current_user && !Post.accessible(current_user.id).exists?(params[:id])
+            author = Post.find(params[:id]).author
+            if (author.friends.include? current_user) && author != current_user && !Post.accessible(current_user.id).exists?(params[:id])
+                redirect_to root_url
+            elsif !(author.friends.include? current_user) && author != current_user && !Post.find(params[:id]).channels.any?{|c| c.name == '익명피드'}
                 redirect_to root_url
             end
         end

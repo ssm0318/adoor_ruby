@@ -146,7 +146,10 @@ class AnswersController < ApplicationController
         end
 
         def check_accessibility
-            if Answer.find(params[:id]).author != current_user && !Answer.accessible(current_user.id).exists?(params[:id])
+            author =  Answer.find(params[:id]).author
+            if (author.friends.include? current_user) && author != current_user && !Answer.accessible(current_user.id).exists?(params[:id])
+                redirect_to root_url
+            elsif !(author.friends.include? current_user) && author != current_user && !Answer.find(params[:id]).channels.any?{|c| c.name == '익명피드'}
                 redirect_to root_url
             end
         end
