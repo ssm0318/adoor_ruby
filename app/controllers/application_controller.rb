@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   helper_method :noties
+  helper_method :recent_noties
 
   def unread
     arr = []
@@ -25,7 +26,13 @@ class ApplicationController < ActionController::Base
 
   def noties
     if user_signed_in?
-      @noties = Notification.where(recipient_id: current_user.id).visible.order(updated_at: :desc)
+      Notification.where(recipient_id: current_user.id).visible.order(updated_at: :desc)
+    end
+  end
+
+  def recent_noties
+    if user_signed_in?
+      Notification.where(recipient_id:current_user.id).visible.order(updated_at: :desc).limit(20)
     end
   end
 

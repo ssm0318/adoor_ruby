@@ -1,5 +1,7 @@
 <div class="inner-container search-question">
     <%= render 'header', searchpath: @searchpath, query: @query %>
-    <%= render "questions/layout", questions: @results %>
-
+    <div class="results-div">
+        <span class="result-tab">검색결과 <%=@results.count()%>건</span>
+        <%= render "questions/layout", questions: @results %>
+    </div>
 </div>

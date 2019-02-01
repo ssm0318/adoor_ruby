@@ -18,7 +18,7 @@ function textarea_init (element, back) {
         resizeTextArea($(this), back);
     });
 
-    element.focus()
+    // element.focus()
 }
 
 

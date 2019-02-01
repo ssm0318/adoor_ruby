@@ -1,0 +1,16 @@
+<% custom_questions.each do |custom| %> 
+    <div class = "prism-box-custom-question">
+        <div class = "question-content"><%= custom.content %></div>
+        <div class="question-tags">
+            <% custom.tags.each do |tag| %>
+                <%= form_tag(search_custom_question_path, method: :get, class: "more") do %>
+                    <%= hidden_field_tag :query, tag.content %>
+                    <%= button_tag tag.content, class: "question-tag" %>
+                <% end %>
+            <% end %>
+        </div>
+        <div class = "reposts">
+            <%= render 'custom_questions/repost', custom_question: custom_question %>
+        </div>
+    </div>
+<% end%>

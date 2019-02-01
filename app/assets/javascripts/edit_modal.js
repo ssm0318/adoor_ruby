@@ -18,7 +18,7 @@ function edit_modal(event) {
             textarea_init($(html.find('textarea')), $("#edit-background"))
             
             //편집 완료
-            $(".edit_answer, .edit_post, .edit_custom_question").submit( function(e) {
+            $(".edit_answer, .edit_post, .edit_repost").submit( function(e) {
                 e.preventDefault()
 
                 form = $(this)

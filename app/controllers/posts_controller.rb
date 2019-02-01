@@ -7,14 +7,6 @@ class PostsController < ApplicationController
     def create
         @post = Post.create(post_params)
 
-        if !@post.tag_string.nil?
-            tag_array = @post.tag_string.gsub("\r\n", '\n').split('\n')
-            tag_array.each do |tag|
-                new_tag = Tag.create(author_id: @post.author.id, content: tag, target: @post)
-                @post.tags << new_tag
-            end
-        end
-
         channels = []   # 선택된 채널들을 갖고 있다.
         channels = Channel.find(params[:c]) if params[:c]
         channels.each do |c|
@@ -42,15 +34,6 @@ class PostsController < ApplicationController
 
     def update
         if @post.update(post_params)
-            @post.tags.destroy_all
-
-            if !@post.tag_string.nil?
-                tag_array = @post.tag_string.gsub("\r\n", "\n").split("\n") 
-                tag_array.each do |tag|
-                    new_tag = Tag.create(author_id: @post.author.id, content: tag, target: @post)
-                    @post.tags << Tag.find(new_tag.id)
-                end
-            end
 
             original_channels = @post.channels
             selected_channels = []

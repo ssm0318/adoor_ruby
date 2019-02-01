@@ -22,14 +22,6 @@ class AnswersController < ApplicationController
         @answer = Answer.new(answer_params)
         @answer.save
 
-        if !@answer.tag_string.nil?
-            tag_array = @answer.tag_string.gsub("\r\n", '\n').split('\n')
-            tag_array.each do |tag|
-                new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)
-                @answer.tags << new_tag
-            end
-        end
-
         channels = []   # 선택된 채널들을 갖고 있다.
         channels = Channel.find(params[:c]) if params[:c]
         channels.each do |c|
@@ -73,15 +65,6 @@ class AnswersController < ApplicationController
 
     def update
         if @answer.update(answer_params)
-            @answer.tags.destroy_all
-
-            if !@answer.tag_string.nil?
-                tag_array = @answer.tag_string.gsub("\r\n", "\n").split("\n") 
-                tag_array.each do |tag|
-                    new_tag = Tag.create(author_id: @answer.author.id, content: tag, target: @answer)
-                    @answer.tags << Tag.find(new_tag.id)
-                end
-            end
 
             original_channels = @answer.channels
             selected_channels = []
