@@ -3,10 +3,9 @@
 <%= form_for user, url: edit_user_profile_url(user) do |u| %>
     <div>
         <% u.hidden_field :id, :value => current_user.id %>
-
         <div>
             <%= u.label "닉네임" %>
-            <%= u.text_field :username, :required => true, autocomplete: "off" %>
+            <%= u.text_field :username, :required => true, autocomplete: "off", maxlength: "10"%>
         </div>
 
         <!-- <div> -->
@@ -18,15 +17,14 @@
             <%= u.label "생년월일" %>
             <%= u.date_field :date_of_birth %>
         </div>
-
         <br>
         <div>
-            <%= u.label "프로필 사진 (jpg, jpeg, png, gif)" %><br>
-            <%= image_tag current_user.image.url, :style => "height:40px; width:40px; border-radius:15px;" %>
-            <%= u.file_field :image %>
-        </div>
+            <%= u.label "한 줄 소개" %>
+            <%= u.text_field :profile, id: "edit-profile-message", autocomplete: "off", maxlength: "50" %>
+        </div>        
     <br>
         <%= u.submit "수정하기", class: "profile-button" %>
     </div>
 <% end %>
+<%= link_to "계정 삭제하기", user_registration_path, method: :delete, data: { confirm: '정말 계정을 삭제하시겠습니까? 계정 삭제 후에는 다시 복구할 수 없습니다.' }, class: "account-delete-btn"%>
 </div>

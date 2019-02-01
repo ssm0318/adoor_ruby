@@ -11,6 +11,11 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    &:focus {
+        outline: none;
+        fill: none;
+    }
+    
 }
 
 .mypage-buttons {
@@ -28,6 +33,12 @@
     font-family: 'Nanum Gothic', sans-serif;
     text-align: left;
     font-weight: bold;
+    
+    #edit-profile-message {
+        text-align: left;
+        padding: 10px;
+        height: 50px;
+    }
 }
 
 .profile-content-box input[type=text], .profile-content-box input[type=date] {
@@ -36,23 +47,42 @@
     font-size: 15px;
     margin-bottom: 5px;
     text-align: center;
-}
-
-.profile-content-box input[type=file] {
-    width: 100%;
-    height: 30px;
-    font-size: 15px;
-    margin-bottom: 5px;
-    text-align: center;
-
-    .upload {
-        opacity: 0;       /*input type="file" tag 투명하게 처리*/
-        position: relative;
-
+    &:focus {
+        outline: none;
+        fill: none;
     }
+    border-width: 0.1px;
+    border-style: solid;
+    border-color: rgb(224, 224, 224);
 }
+
+// .profile-content-box input[type=file] {
+//     width: 100%;
+//     height: 30px;
+//     font-size: 15px;
+//     margin-bottom: 5px;
+//     text-align: center;
+
+//     .upload {
+//         opacity: 0;       /*input type="file" tag 투명하게 처리*/
+//         position: relative;
+
+//     }
+// }
 
 .profile-content-box label {
     text-align: left;
     font-size: 13px;
+}
+
+.account-delete-btn {
+    float: right;
+    font-size: 13px;
+    color: gray;
+    font-weight: normal;
+    margin-top: 20px;
+    &:hover {
+        color: #F48462;
+        text-decoration: none;
+    }
 }

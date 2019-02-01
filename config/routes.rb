@@ -70,8 +70,11 @@ Rails.application.routes.draw do
   devise_for :users
   # 아래 코드는 이후에 멀티채널 구성에 맞추어 바뀌어야할수도.
   get '/users/friends' => 'users#friends', as: :friends
+  put '/users/:id/image_upload' => 'users#image_upload', as: :image_upload
+  # put '/users/:id/upload_image' => 'users#update', as: :upload_image
   post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend # get?
   post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request # get?
+  
 
   # Invitation
   get '/invitations' => 'invitations#index', as: :invitation
