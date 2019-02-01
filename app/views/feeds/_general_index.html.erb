@@ -9,6 +9,7 @@
                 <div class = "prism-box-custom-question">
                     <div class = "question-content"><%= feed.content %></div>
                     <div class = "reposts">
+                        <% ancestor_id = feed.ancestor_id == nil ? feed.id : feed.ancestor_id %>
                         <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
                     </div>
                 </div>
@@ -33,9 +34,6 @@
         <div class="prism-box <%=feed.id%>">
             <div class="prism-box__header">
                 <%= render partial: "./user_profile_general", locals: {user_id: feed.author.id, feed_id: feed.id}%>
-                <% if current_user.id == feed.author.id %>
-                    <%= render 'feeds/delete_or_edit', feed: feed %>
-                <% end %>
             </div>
             <div class = "prism-box__content">
                 <% if feed.is_a? Answer %>

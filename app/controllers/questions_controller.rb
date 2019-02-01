@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
     before_action :set_question, only: [:show, :show_friends, :show_general]
     
     def index
-        @questions = Question.where.not(selected_date: nil)
+        @questions = Question.where.not(selected_date: nil).order("selected_date DESC")
     end
 
     def show

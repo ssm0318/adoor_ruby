@@ -10,7 +10,8 @@ class NotificationsController < ApplicationController
             n.read_at = DateTime.now()
             n.save(touch: false)
         end
-        redirect_back fallback_location: root_url
+        # redirect_back(fallback_location: root_path)
+        redirect_to request.referrer
     end
 
     def read

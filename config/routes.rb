@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Application
+  get '/unread' => 'application#unread'
   get '/introduction' => 'application#intro', as: :introduction
 
   # Answer
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
   resources :posts, except: [:new]
 
   # CustomQuestion
-  resources :custom_questions, except: [:new]
+  resources :custom_questions, only: [:show, :create, :destroy]
   # get '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost
   # get '/custom_questions/:id/message' => 'custom_questions#repost_create', as: :custom_question_repost
   post '/custom_questions/:id/repost' => 'custom_questions#repost_create', as: :custom_question_repost_form
@@ -56,6 +57,7 @@ Rails.application.routes.draw do
   # Notification
   get '/notifications/read_all' => 'notifications#read_all', as: :notification_read_all
   get '/notifications/:id' => 'notifications#read'
+  get '/notifications/all/index' => 'notifications#index' , as: :notification_index 
 
   # Profile
   get '/profiles/:id' => 'profiles#index', as: :profile

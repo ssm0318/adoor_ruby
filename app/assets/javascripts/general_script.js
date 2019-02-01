@@ -71,7 +71,7 @@ $(document).on('turbolinks:load', function()  {
       e.preventDefault();
       if($(this).find(".prism-form__comment").val().trim() ==''){
         return;
-     }
+      }
 
       var form = $(this)
       $.ajax({
@@ -119,7 +119,6 @@ $(document).on('turbolinks:load', function()  {
                   <input type="hidden" name="anonymous" value="true">
                   <input type="hidden" name="secret" value="false" id="secret">
                   <textarea type="text" name="content" id="content" required="required" class="prism-form__comment" data-enable-grammarly= "false"></textarea>
-                  <button name="button" type="submit" class="prism-form__button">저장</button>
                   <span class="comment-info-alert">이 댓글은 익명처리되어 공개되는 댓글입니다</span>
                 </form>
               </div>
@@ -137,6 +136,8 @@ $(document).on('turbolinks:load', function()  {
             like_ajax(btn_like)
             delete_ajax(html.find(".btn-comment-delete"))
             html.find("time.timeago").timeago();
+
+            html.find("textarea").on('keypress', submit_on_enter)
             html.find("form").submit( function(event) {
 
               var new_form = $(this)

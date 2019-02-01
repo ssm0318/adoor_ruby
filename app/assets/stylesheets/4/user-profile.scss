@@ -43,7 +43,7 @@
                     #profile__setting-btn{
                         width: 25px;
                         height: 25px;
-                        padding-top: 3px;
+                        margin-top: 5px;
 
                     }
                 }
@@ -75,6 +75,7 @@
             padding: 0;
             .image-container {
                 display: inline-block;
+                position: relative;
                 .edit-profile-img {
                     height:100px; 
                     width:100px; 
@@ -83,17 +84,14 @@
                     margin-left: auto;
                     margin-right: auto;
                     z-index: 1;
+                    position: relative;
                 }
                 
                 .camera-icon {
                     color: white;
                     cursor: pointer;
-                    width: 10px;
-                    height: 10px;
                     visibility: hidden;
                     font-size: 11px;
-                    z-index: 2;
-                    
                 }
             }
             .image-container:hover .edit-profile-img {
@@ -112,18 +110,14 @@
                 display: none;
             }
 
-            .collapse {
-                // line-height: 0px;
-                height: 0px;
-            }
-
-            .collapse > label {
-                left: 22px;
-                top: -70px;
-                position: relative;
+            .image-container > label {
+                left: 20px;
+                top: 25px;
+                position: absolute;
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
+                z-index: 2;
             }
         }
     }

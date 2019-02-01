@@ -31,12 +31,10 @@
         <% end %>
         <br>
     </div>
-    <div class="prism-box__comment">
-        <% if anonymous %>
-            <%= render 'comments/general_form', feed: post %>
-        <% else %>
-            <%= render 'comments/friends_form', feed: post %>
-        <% end %>
-    </div>
+    <% if anonymous %>
+        <%= render 'comments/general_form', feed: post %>
+    <% else %>
+        <%= render 'comments/friends_form', feed: post %>
+    <% end %>
 </div>
 

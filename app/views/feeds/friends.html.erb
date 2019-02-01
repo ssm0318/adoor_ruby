@@ -6,7 +6,7 @@
         <span class = "custom-question"> 질문 </span>
       </div>  
       <%= render 'posts/new'%>
-      <%= render 'custom_questions/new'%>
+      <%= render partial: "custom_questions/new", locals: {custom_question: CustomQuestion.new} %>
     </div>
   </div>
   <%= render partial: 'feeds/friends_index', locals: {feeds: @feeds} %>

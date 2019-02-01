@@ -1,6 +1,6 @@
 function write_modal(event) {
     event.stopImmediatePropagation();
-    console.log("hoho")
+    
     form = $(this)
     $.ajax({
         type: "GET",
