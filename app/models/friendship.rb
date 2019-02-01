@@ -11,6 +11,10 @@ class Friendship < ApplicationRecord
     def create_notifications
         Notification.create(recipient: self.friend, actor: self.user, target: self, origin: self.user, action: "friendship")
     end
+# 친구 끊으면 - assignment 없어짐
+# 친구였던 시절 노티들 없어짐...? ㅠㅠ
+# 친구 되면 - 익명 관련 노티들 없어ㅣㅈ.ㅁ
+    # 친구공개 아니었다가 친구그룹 범위가 추가된 것 : 그걸 봤던 -> 이건 friendship에 해놔야할듯
 
     def destroy_notifications
         Notification.where(target: self).destroy_all
