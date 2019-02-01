@@ -28,7 +28,7 @@
 
     <% else %>
         <%= form_tag(custom_question_repost_form_path(custom_question.id), class: 'new_repost') do %> <!-- repost_create로 -->
-            <%= text_area_tag :repost_message, custom_question.repost_message, required: false, class: "new-answer-field", placeholder: "공유 메시지", "data-enable-grammarly": "false", autocomplete: "off" %>
+            <%= text_area_tag :repost_message, "", required: false, class: "new-answer-field", placeholder: "공유 메시지", "data-enable-grammarly": "false", autocomplete: "off" %>
             <% ancestor_id = custom_question.ancestor_id == nil ? custom_question.id : custom_question.ancestor_id %>
             <%= hidden_field_tag "ancestor_id", ancestor_id %>
             <br><br>

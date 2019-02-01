@@ -1,6 +1,6 @@
 class CustomQuestionsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_custom_question, only: [:show, :destroy, :edit, :update ]
+    before_action :set_custom_question, only: [:show, :destroy, :edit, :update, :repost_new ]
     before_action :check_mine, only: [:destroy, :edit, :update]
 
     def create
