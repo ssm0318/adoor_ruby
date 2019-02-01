@@ -74,14 +74,16 @@ $(document).on('turbolinks:load', function()  {
       }
 
       var form = $(this)
+      var form_data = form.serialize()
+      form.find(".prism-form__comment").val('')
+
       $.ajax({
         type: "POST",
         url: form.attr('action'),
-        data: form.serialize(),
+        data: form_data,
         success: function(data) {
-          
-          let secret = form.find("#secret").val() ? true : false
 
+          form.find(".prism-form__comment").focus()
           if(form.hasClass("comment")) {
             var new_url = "/comments/" + data.id;
             console.log(new_url);
@@ -138,16 +140,25 @@ $(document).on('turbolinks:load', function()  {
             html.find("time.timeago").timeago();
 
             html.find("textarea").on('keypress', submit_on_enter)
+            
             html.find("form").submit( function(event) {
 
-              var new_form = $(this)
-
               event.preventDefault();
+
+              if($(this).find(".prism-form__comment").val().trim() ==''){
+                  return;
+              }
+
+              var new_form = $(this)
+              var new_form_data = new_form.serialize()
+              new_form.find(".prism-form__comment").val('')
+
               $.ajax({
                 type: "POST",
                 url: new_form.attr('action'),
-                data: new_form.serialize(),
+                data: new_form_data,
                 success: function(data) {
+                  new_form.find(".prism-form__comment").focus()
                   var new_html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, false)
                   var new_btn_like = getButtonLike(data.like_url, data.like_changed_url)
                   var new_btn_show_like = getShowLike("Comment", data.id)
@@ -159,8 +170,6 @@ $(document).on('turbolinks:load', function()  {
                   like_ajax(new_btn_like)
                   delete_ajax(new_html.find(".btn-comment-delete"))
                   new_html.find("time.timeago").timeago()
-                  new_form.find(".prism-form__comment").val('')
-                  new_form.find(".prism-form__comment").css('height', '17px')
                 },
                 error: function(data) {
                   console.log("error")
@@ -170,7 +179,6 @@ $(document).on('turbolinks:load', function()  {
 
           }
           else {
-            console.log("here");
             var html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, false)
             var btn_like = getButtonLike(data.like_url, data.like_changed_url)
             var btn_show_like = getShowLike("Comment", data.id)
@@ -183,10 +191,6 @@ $(document).on('turbolinks:load', function()  {
             delete_ajax(html.find(".btn-comment-delete"))
             html.find("time.timeago").timeago();
           }
-
-          console.log(form)
-          form.find(".prism-form__comment").val('')
-          form.find(".prism-form__comment").css('height', '17px')
         },
         error: function(data) {
             console.log("error")

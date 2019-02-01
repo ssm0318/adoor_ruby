@@ -40,6 +40,10 @@ class CustomQuestionsController < ApplicationController
         else
             @custom_question.destroy
         end
+
+        render json: {
+            
+        }
     end
 
     # custom question repost new
