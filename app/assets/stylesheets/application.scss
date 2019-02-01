@@ -26,6 +26,21 @@
  }
     
 .navbar {
+
+    .navbar-brand img {
+        padding-left: 40px; 
+        padding-top: 9px; 
+        width: 180px; 
+        height:auto;
+    }
+
+    .nav-item {
+        padding-left: 40px;
+    }
+
+    .navbar-nav.mr-auto {
+        padding-top: 9px;
+    }
     .navbar-nav {
         .nav-link {
             font-family: 'Open Sans', sans-serif;
@@ -41,10 +56,18 @@
 
     }
 
+    
+
     .mr-auto-custom {
         display: flex;
         margin-left: auto!important;
-
+        cursor: pointer; 
+        z-index: 1; 
+        position: 
+        absolute; 
+        top: 10px; 
+        right: 60px;
+        
         .search-form {
             padding-top: 12px;
         }
@@ -143,7 +166,11 @@
 .navbar-active {
     color: #F48462;
 }
-
+.nav-toggler-icon {
+    color: #F48462; 
+    width: 1.2em; 
+    height: 1.2em;
+}
 .navbar-toggler:not(:disabled):not(.disabled) {
     cursor: pointer;
     z-index: 1;
@@ -374,7 +401,7 @@ div.background {
     }
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (max-width: 1000px) {
     .inner-container {
         width: 100%;
     }
@@ -383,9 +410,120 @@ div.background {
         width: 95%;
     }
 
-    html {
-        font-size: 200%;
+    .prism-box {
+        zoom: 2.3;
+        margin: 10px 0px;
+        .prism-box__content {
+            padding: 0px 20px;
+        }
+
+        .edit-or-delete {
+            width: 100px;
+        }
     }
+
+    .prism-box-new-post {
+        zoom: 2.2;
+        margin: 10px 0px;
+    }
+
+    .navbar {
+        zoom: 1.5;
+        .navbar-brand img {
+            padding-left: 10px;
+        }
+
+        .nav-link {
+            zoom: 1.2;
+        }
+    }
+
+    #edit-box {
+        zoom: 2;
+        width: 80% !important;
+        padding: 6% !important;
+    }
+
+    #friends-box {
+        zoom: 2;
+        width: 80% !important;
+        padding: 6% !important;
+        margin-left: 10% !important;
+    }
+
+    #btn-edit-exit {
+        zoom: 3;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        margin: 0px;
+        margin-right: 0px !important;
+        margin-top: 0px !important;
+    }
+
+    #profile {
+        zoom: 2;
+        margin-top: 20px;
+
+        .edit-profile-img {
+            z-index: 0 !important;
+        }
+    }
+
+    .noti-content {
+        zoom: 1.4;
+    }
+
+    .noti-box {
+        zoom: 2;
+    }
+
+    #noti-index-read-text {
+        zoom: 2;
+    }
+
+    .search-header {
+        zoom: 2;
+    }
+
+    .results-div {
+        .question-el {
+            zoom: 0.55
+        }
+        zoom: 2;
+    }
+
+    #friend-list {
+        zoom: 2;
+    }
+
+    .prism-box__question {
+        zoom: 2.3;
+    }
+
+    .sign-box {
+        zoom: 1.8;
+    }
+
+    .profile-edit-tab {
+        zoom: 2;
+    }
+
+    .question-btn {
+        zoom: 2;
+    }
+
+    .feed-nav {
+        zoom: 2.2;
+    }
+
+    .question-el {
+        padding: 20px;
+        .question-content {
+            zoom: 2;
+        }
+    }
+
 
 
   }
