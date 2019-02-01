@@ -5,7 +5,7 @@
         <% u.hidden_field :id, :value => current_user.id %>
         <div>
             <%= u.label "닉네임" %>
-            <%= u.text_field :username, :required => true, autocomplete: "off" %>
+            <%= u.text_field :username, :required => true, autocomplete: "off", maxlength: "10"%>
         </div>
 
         <!-- <div> -->
@@ -17,9 +17,11 @@
             <%= u.label "생년월일" %>
             <%= u.date_field :date_of_birth %>
         </div>
-
         <br>
-        
+        <div>
+            <%= u.label "한 줄 소개" %>
+            <%= u.text_field :profile, id: "edit-profile-message", autocomplete: "off", maxlength: "50" %>
+        </div>        
     <br>
         <%= u.submit "수정하기", class: "profile-button" %>
     </div>

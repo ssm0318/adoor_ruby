@@ -17,6 +17,10 @@
 
 .profile-edit-tab {
     color: gray;
+    &:hover {
+        text-decoration: none;
+        color: #F48462;
+    }
 }
 
 .profile-edit-tab.active {

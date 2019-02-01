@@ -42,7 +42,7 @@ module SimpleForm
       lookups = []
       lookups << :"#{object_name}"
       lookups << :default_message
-      lookups << "Please review the problems below:"
+      lookups << "아래의 문제를 검토한 후 다시 시도해주세요."
       I18n.t(lookups.shift, scope: :"simple_form.error_notification", default: lookups)
     end
   end

@@ -26,7 +26,7 @@
                     </div>
                 <% end %>
             </div>
-            <div id = "user-message">상태메시지</div>
+            <div id = "user-message"><%= @user.profile %></div>
             <div id = "profile__friends-setting">
                 <% if current_user.id == user.id %>
                     <%= link_to "친구 관리", friends_path(), id: "profile__friends-setting-btn" %>
