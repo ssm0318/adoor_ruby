@@ -81,7 +81,7 @@
 }
 
 .user-box {
-    grid-template-columns: 60px auto 85px;
+    grid-template-columns: 60px auto 120px;
     padding: 10px;
     display: grid;
 
@@ -110,9 +110,8 @@
         padding-top: 16px;
         outline: none;
         text-decoration: none;
-        // border-radius: 9px;
+        text-align: end;
         border: none;
-        padding: 6px 10px 8px 12px;
         color: gray;
         // margin: 16px 0px;
     }
@@ -121,8 +120,7 @@
 .search-question {
     .question-el {
         padding: 0 0;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin: 20px;
     }
     .question-content {
         font-size: 18px;
@@ -150,5 +148,14 @@
             border: none;
             cursor: pointer;
         }
+    }
+
+    .question-el {
+        padding: 0 0;
+        margin: 20px;
+    }
+    .question-content {
+        font-size: 18px;
+        padding: 5px 0;
     }
 }

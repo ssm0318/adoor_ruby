@@ -3,6 +3,7 @@
         <%= link_to image_tag(user.image.url), profile_path(user.id) %>
         <%= link_to user.username, profile_path(user.id), class: "username" %>
         <% if user.id != current_user.id %>
+            <div class="friends-setting-div">
             <% if !user.friends.include? current_user %>
                 <%# view에서 record에 접근하는 게 정상인가.. 이거 어떻게 .recieved_requests이런거 이용해서 안될까! %>
                 <% if FriendRequest.where(requester_id: user.id, requestee_id: current_user.id).exists? %>
@@ -15,6 +16,7 @@
             <% else %>
                 <%= link_to "친구 끊기", add_friend_path(user.id), method: :post, id: "profile__friends-setting-btn" %>
             <% end %>
+            </div>
         <% end %>
     </div>
 <% end%>
