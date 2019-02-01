@@ -8,11 +8,12 @@
     <p>
         안녕하세요, <%= Date.today().strftime("%Y년 %m월 %d일") %> 유저 통계 보고드립니다.<br><br>
 
+        총 Visit 수: <%= Ahoy::Visit.all.length %><br>
         총 User 수: <%= User.all.length %><br>
         총 Answer 수: <%= Answer.all.length %><br>
         총 Post 수: <%= Post.all.length %><br>
         총 Custom Question 수: <%= CustomQuestion.all.length %><br>
-        총 Channel 수: <%= Channel.all.length %><br><br>
+        총 Channel 수: <%= Channel.all.length %> (기본 채널 제외시 <%= Channel.all.length - (User.all.length * 5) %>개 추정)<br><br>
 
         어제의 질문<br>
         <% Question.where(selected_date: Date.yesterday()).each do |question| %>
@@ -24,12 +25,12 @@
           -<%= question.content %><br>
         <% end %><br>
 
-        인기 많은 태그<br>
-        <% Tag.popular_tags(5).each do |tag| %>
+        인기 많은 태그 (관리자 질문 태그 제외)<br>
+        <% Tag.where.not(target_type: "Question").popular_tags(5).each do |tag| %>
           -<%= tag.content %><br>
         <% end %><br>  
 
-        자세한 사항은 아래 첨부 파일을 확인해보세요.<br><br>
+        자세한 사항은 아래 첨부 파일을 확인해보세요. (태그 갯수에서 관리 질문의 태그는 제외하였습니다.)<br><br>
 
         그럼 이만~!
     </p>
