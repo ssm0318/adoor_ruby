@@ -60,6 +60,7 @@ class Reply < ApplicationRecord
             if !Notification.where(noti_hash).empty?
                 Notification.where(noti_hash).each do |n|
                     n.invisible = true
+                    n.read_at = DateTime.now()
                     n.save(touch: false)
                 end
             end
@@ -75,6 +76,7 @@ class Reply < ApplicationRecord
             if !Notification.where(noti_hash).empty?
                 Notification.where(noti_hash).each do |n|
                     n.invisible = true
+                    n.read_at = DateTime.now()
                     n.save(touch: false)
                 end
             end

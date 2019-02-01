@@ -44,6 +44,7 @@ class Like < ApplicationRecord
             if !Notification.where(noti_hash).empty?
                 Notification.where(noti_hash).each do |n|
                     n.invisible = true
+                    n.read_at = DateTime.now()
                     n.save(touch: false)
                 end
             end
