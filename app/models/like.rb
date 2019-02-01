@@ -14,7 +14,6 @@ class Like < ApplicationRecord
             create_noti_hash = {recipient: self.target.author, actor: self.user, target: self, origin: origin}
             # 친구의 좋아요
             if self.target.author.friends.include? self.user
-                # 글에 좋아요
                 case self.target_type
                 when 'Post', 'Answer', 'CustomQuestion'
                     noti_hash[:action] = 'friend_like_article'
@@ -29,7 +28,6 @@ class Like < ApplicationRecord
                 end
             # 익명의 좋아요
             else
-                # 글에 좋아요
                 case self.target_type
                 when 'Post', 'Answer', 'CustomQuestion'
                     noti_hash[:action] = 'anonymous_like_article'
@@ -85,7 +83,7 @@ class Like < ApplicationRecord
                 n = Notification.where(noti_hash)[-2]
                 n.invisible = false
                 if Notification.where(target: self).first.read_at != nil && n.read_at == nil
-                    n.read_at =  Notification.where(target: self).first.read_at
+                    n.read_at = Notification.where(target: self).first.read_at
                 end
                 n.save(touch: false)
             end

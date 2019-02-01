@@ -25,10 +25,10 @@ class Answer < ApplicationRecord
 
     scope :channel_name, -> (name) {joins(:channels).where(channels: {name: name}).distinct}
 
+    # after_update :change_notifications
     after_destroy :destroy_notifications
 
-    private 
-    
+    private
     def destroy_notifications
         Notification.where(target: self).destroy_all
     end
