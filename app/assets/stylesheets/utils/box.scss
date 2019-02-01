@@ -39,7 +39,7 @@ div {
     margin: 20px 0px 20px 20px;
     border: none;
     border-radius: 10px;
-    padding: 20px;
+    padding: 8px 10px 4px 10px;
     font-size: 18px; 
     display: grid;
     grid-template-columns: minmax(calc(10%-50px), 10%) 80% minmax(50px, 10%);
@@ -49,7 +49,7 @@ div {
         font-family: "Nanum Gothic", sans-serif;
         font-size: 18px;
         color: #4f4f4f;
-        padding: 20px 10px 10px 10px;
+        padding: 30px 10px 10px 10px;
         margin: 0 ;
         display: flex;
         align-items: center;
@@ -61,7 +61,9 @@ div {
     .question-tags {
         grid-column: 1/2;
         grid-row: 2/3;
-        padding: 10px;
+        padding: 0px 10px;
+        display: flex;
+        margin: auto;
 
         .question-tag {
             font-size: 12px;
@@ -70,8 +72,10 @@ div {
             border: none;
             border-radius: 10px;
             color: gray;
-            margin: 4px 1.5px;
+            margin: 4px 3px;
             display: inline-block;
+            outline: none;
+            cursor: pointer;
         }
     }
 
@@ -149,6 +153,7 @@ div {
     .question-tags {
         grid-column: 1/2;
         grid-row: 2/3;
+        margin: auto;
 
         .question-tag {
             font-size: 12px;

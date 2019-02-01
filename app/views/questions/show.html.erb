@@ -4,8 +4,10 @@
             data-url='<%=new_answer_path(@question.id)%>'>
             <%= image_tag("icons/write-icon.png", class: "btn-write") %>
         </a>
-        <%= image_tag "icons/assign-icon.png", class: "btn-assign"%>
-        <%= render 'assignments/default', question: @question %>
+        <a class="btn-assign-modal" 
+            data-url='<%=new_assignment_path(@question.id)%>'>
+            <%= image_tag("icons/assign-icon.png", class: "btn-assign") %>
+        </a>
     </div>
     <%= render 'questions/tabs', question: @question %>
     
