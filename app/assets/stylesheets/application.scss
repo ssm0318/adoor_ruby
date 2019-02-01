@@ -401,7 +401,7 @@ div.background {
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media only screen and (max-device-width: 500px) {
     .inner-container {
         width: 100%;
     }
@@ -428,14 +428,21 @@ div.background {
     }
 
     .navbar {
-        zoom: 1.5;
+        zoom: 2;
         .navbar-brand img {
             padding-left: 10px;
+            zoom: 0.5;
         }
 
         .nav-link {
             zoom: 1.2;
         }
+    }
+
+    .mr-auto-custom .logout {
+        padding-left: 0px !important;
+        padding-right: 5px !important;
+        padding-top: 10px !important;
     }
 
     #edit-box {
