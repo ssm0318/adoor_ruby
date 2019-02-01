@@ -67,7 +67,7 @@ Rails.application.routes.draw do
   # User
   get '/users/:id/edit' => 'users#edit', as: :edit_user_profile
   patch '/users/:id/edit' => 'users#update', as: :update_user_profile
-  devise_for :users
+  devise_for :users, :controllers => {:confirmations => 'users/confirmations' }
   # 아래 코드는 이후에 멀티채널 구성에 맞추어 바뀌어야할수도.
   get '/users/friends' => 'users#friends', as: :friends
   put '/users/:id/image_upload' => 'users#image_upload', as: :image_upload

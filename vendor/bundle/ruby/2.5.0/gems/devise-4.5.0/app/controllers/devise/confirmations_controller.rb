@@ -12,10 +12,11 @@ class Devise::ConfirmationsController < DeviseController
     yield resource if block_given?
 
     if successfully_sent?(resource)
+      set_flash_message!(:notice, :confirmed)
       respond_with({}, location: after_resending_confirmation_instructions_path_for(resource_name))
     else
       respond_with(resource)
-    end
+    end 
   end
 
   # GET /resource/confirmation?confirmation_token=abcdef
@@ -49,5 +50,14 @@ class Devise::ConfirmationsController < DeviseController
 
     def translation_scope
       'devise.confirmations'
+    end
+
+    def after_resending_confirmation_instructions_path_for(resource_name)
+      if signed_in?
+        flash[:notice] = "New message here" #this is optional since devise already sets the flash message
+        root_path
+      else
+        new_session_path(resource_name)
+      end
     end
 end
