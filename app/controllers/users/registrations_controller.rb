@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  POST /resource
+  # POST /resource
   def create
     super
     flash[:success] = "Please confirm your email address to continue"
