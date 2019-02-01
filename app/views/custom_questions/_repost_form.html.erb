@@ -4,7 +4,7 @@
         <!-- 수정하고 있는 경우 : 수정당하는 애 / 새로 리포스팅하고 있는 경우: 조상  -->
     </p>
     <% if custom_question.author == current_user %>
-        <%= form_for custom_question, html: {class: 'new_repost'} do |f| %> <!-- update로 -->
+        <%= form_for custom_question, html: {class: 'edit_repost'} do |f| %> <!-- update로 -->
             <%= f.text_area :repost_message, required: false, class: "new-answer-field", placeholder: "공유 메시지", "data-enable-grammarly": "false", autocomplete: "off" %>
             <br><br>
 
