@@ -1,23 +1,23 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href= "<%= root_path %>">
-    <%= image_tag("logo/logo-no-margin.png", style: "width: 130px; height:auto;") %>
+    <%= image_tag("logo/logo-no-margin.png", style: "padding-left: 40px; padding-top: 9px; width: 180px; height:auto;") %>
   </a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
+    <ul class="navbar-nav mr-auto" style = "padding-top: 9px;">
+    <li class="nav-item" style="padding-left: 40px;">
         <%= active_link_to '오늘의 질문', today_questions_path, class: "nav-link" %>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" style="padding-left: 40px;">
         <%= active_link_to '질문 둘러보기', questions_path, class: "nav-link", active: :exclusive %>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" style="padding-left: 40px;">
         <%= active_link_to '익명 피드', general_feed_path, class: "nav-link" %>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" style="padding-left: 40px;">
         <%= active_link_to '도움말', introduction_path, class: "nav-link"%>
     </li>
     <% if user_signed_in? && (current_user.has_role? :admin) %>
-        <li class="nav-item">
+        <li class="nav-item" style="padding-left: 40px;">
             <%= active_link_to '공지 관리', announcement_admin_index_path, class: "nav-link"%>
         </li>
     <% end %>
