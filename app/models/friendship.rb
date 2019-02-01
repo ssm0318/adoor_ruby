@@ -3,7 +3,7 @@ class Friendship < ApplicationRecord
     belongs_to :friend, :class_name => "User"
     has_and_belongs_to_many :channels
     
-    after_create :create_notifications, :delete_request, :create_inverse, :default_channel
+    after_create :create_notifications, :delete_request, :create_inverse, :default_channel, :destroy_anonymous_notifications
     after_destroy :destroy_notifications
 
     private
@@ -16,6 +16,10 @@ class Friendship < ApplicationRecord
 # 친구 되면 - 익명 관련 노티들 없어ㅣㅈ.ㅁ
     # 친구공개 아니었다가 친구그룹 범위가 추가된 것 : 그걸 봤던 -> 이건 friendship에 해놔야할듯
 
+    def destroy_anonymous_notifications
+        
+    end
+    
     def destroy_notifications
         Notification.where(target: self).destroy_all
     end

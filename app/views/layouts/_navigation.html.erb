@@ -30,7 +30,7 @@
         <a class="my-page-btn" href="<%=profile_path(current_user.id)%>">
             <%= image_tag(current_user.image.url) %>
         </a>
-        <%= render 'layouts/notification', noties: noties %>
+        <%= render 'layouts/notification' %>
     <% else %>
         <a class="nav-link" style="color: #F48462;" href="<%=user_session_path%>">로그인</a>
     <% end %>
