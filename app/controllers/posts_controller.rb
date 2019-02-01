@@ -132,7 +132,7 @@ class PostsController < ApplicationController
         end
 
         def check_accessibility
-            if !Post.accessible(current_user.id).any? {|p| p.id == params[:id]}
+            if Post.find(params[:id]).author != current_user && !Post.accessible(current_user.id).exists?(params[:id])
                 redirect_to root_url
             end
         end

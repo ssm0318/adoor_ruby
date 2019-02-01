@@ -163,10 +163,7 @@ class AnswersController < ApplicationController
         end
 
         def check_accessibility
-            if Answer.find(params[:id]).author != current_user && !Answer.accessible(current_user.id).any? {|a| a.id == params[:id]}
-                puts '========================================================'
-                puts Answer.find(params[:id]).author != current_user && !Answer.accessible(current_user.id).any? {|a| a.id == params[:id]}
-                puts '========================================================='
+            if Answer.find(params[:id]).author != current_user && !Answer.accessible(current_user.id).exists?(params[:id])
                 redirect_to root_url
             end
         end

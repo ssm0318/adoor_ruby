@@ -175,7 +175,7 @@ class CustomQuestionsController < ApplicationController
         end
 
         def check_accessibility
-            if !CustomQuestion.accessible(current_user.id).any? {|cq| cq.id == params[:id]}
+            if CustomQuestion.find(params[:id]).author != current_user && !CustomQuestion.accessible(current_user.id).exists?(params[:id])
                 redirect_to root_url
             end
         end
