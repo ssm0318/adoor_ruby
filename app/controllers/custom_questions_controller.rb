@@ -47,7 +47,7 @@ class CustomQuestionsController < ApplicationController
         unless ajax_request?
             redirect_to root_url
         else
-            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question }
+            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question, :reposting => true }
             render :json => { 
                 html_content: "#{html_content}",
             }
@@ -76,7 +76,7 @@ class CustomQuestionsController < ApplicationController
         unless ajax_request?
             redirect_to root_url
         else
-            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question }
+            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question, :reposting => false }
             render :json => { 
                 html_content: "#{html_content}",
             } 

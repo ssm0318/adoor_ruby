@@ -25,11 +25,7 @@
                             <% end %>
                         </div>
                         <div class = "reposts">
-                            <% ancestor_id = feed.ancestor_id == nil ? feed.id : feed.ancestor_id %>
-                            <% if feed.ancestor_id == nil && current_user.id == feed.author.id %>
-                                <span class = "num-of-reposts zero"><%= CustomQuestion.where(ancestor_id: feed.id).count() %></span>
-                            <% end %>
-                            <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
+                            <%= render 'custom_questions/repost', custom_question: feed %>
                         </div>
                     </div>
                     <% if feed.ancestor_id != nil %>

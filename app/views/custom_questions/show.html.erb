@@ -29,8 +29,7 @@
                 <% end %>
             </div>
             <div class = "reposts">
-                <% ancestor_id = custom_question.ancestor_id == nil ? custom_question.id : custom_question.ancestor_id %>
-                <%= render 'custom_questions/repost', ancestor_id: ancestor_id %>
+                <%= render 'custom_questions/repost', custom_question: custom_question %>
             </div>
         </div>
         <div class = "date time"><%= time_tag custom_question.created_at, class: "timeago" %></div>
