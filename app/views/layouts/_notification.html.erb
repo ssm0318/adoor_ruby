@@ -29,11 +29,11 @@
  
                 <div class="noti-image">
                     <% if noti.target_type == 'Drawer' || noti.target_type == 'CustomQuestion' || (noti.action? && noti.action.start_with?("anonymous")) %>
-                        <% color = user.id + noti.target.id %>
-                        <% r = color * color *color % 256 %>
-                        <% g = (r * color) % 256 %>
-                        <% b = (g * color) % 256 %>
-                        <button class="noti-image-anonymous" style="background-color: <%='rgb(' + r.to_s + ',' + g.to_s + ',' + b.to_s + ')' %>; "></button>
+                        <%# color = user.id + noti.target.id %>
+                        <%# r = color * color *color % 256 %>
+                        <%# g = (r * color) % 256 %>
+                        <%# b = (g * color) % 256 %>
+                        <button class="noti-image-anonymous" style="background-color: #072e75; "></button>
                     <% else %>
                         <%= image_tag user.image.url, class: "noti-image-named" %>
                     <% end %>
