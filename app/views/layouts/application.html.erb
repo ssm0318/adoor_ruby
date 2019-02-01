@@ -70,6 +70,9 @@
     </div>
     <%= flash[:notice]%>
     <%= flash[:alert]%>
+    <% flash.each do |name, mag| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}"%>
+    <% end %>
   </body>
   </html>
 
