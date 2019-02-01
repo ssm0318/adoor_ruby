@@ -2,6 +2,7 @@ class PostsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_post, only: [:show, :edit, :update, :destroy]
     before_action :check_mine, only: [:edit, :update, :destroy]
+    before_action :check_accessibility, only: [:show]
     
     def create
         @post = Post.create(post_params)
@@ -129,6 +130,13 @@ class PostsController < ApplicationController
                 redirect_to root_url
             end
         end
+
+        def check_accessibility
+            if !Post.accessible(current_user.id).any? {|p| p.id == params[:id]}
+                redirect_to root_url
+            end
+        end
+
         def ajax_request?
             (defined? request) && request.xhr?
         end

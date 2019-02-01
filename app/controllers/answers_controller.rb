@@ -2,6 +2,7 @@ class AnswersController < ApplicationController
     before_action :authenticate_user!
     before_action :set_answer, only: [:show, :edit, :update, :destroy]
     before_action :check_mine, only: [:edit, :update, :destroy]
+    before_action :check_accessibility, only: [:show]
 
     def new
         unless ajax_request?
@@ -157,6 +158,15 @@ class AnswersController < ApplicationController
 
         def check_mine
             if @answer.author_id != current_user.id
+                redirect_to root_url
+            end
+        end
+
+        def check_accessibility
+            if Answer.find(params[:id]).author != current_user && !Answer.accessible(current_user.id).any? {|a| a.id == params[:id]}
+                puts '========================================================'
+                puts Answer.find(params[:id]).author != current_user && !Answer.accessible(current_user.id).any? {|a| a.id == params[:id]}
+                puts '========================================================='
                 redirect_to root_url
             end
         end
