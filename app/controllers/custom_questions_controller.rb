@@ -1,7 +1,7 @@
 class CustomQuestionsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_custom_question, only: [:show, :destroy ]
-    before_action :check_mine, only: [:destroy]
+    before_action :set_custom_question, only: [:show, :destroy, :edit, :update ]
+    before_action :check_mine, only: [:destroy, :edit, :update]
 
     def create
         @custom_question = CustomQuestion.create(custom_question_params)
@@ -47,19 +47,16 @@ class CustomQuestionsController < ApplicationController
         unless ajax_request?
             redirect_to root_url
         else
-            @custom_question = CustomQuestion.find(params[:id])
-            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :@custom_question => @custom_question }
+            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question }
             render :json => { 
                 html_content: "#{html_content}",
             }
-
         end
-
     end
 
     # custom question repost create
     def repost_create
-        @repost = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:id]).content, repost_message: params[:repost_message], ancestor_id: params[:id])
+        @custom_question = CustomQuestion.create(author_id: current_user.id, content: CustomQuestion.find(params[:ancestor_id]).content, repost_message: params[:repost_message], ancestor_id: params[:ancestor_id])
             # if !@custom_question.tag_string.nil?
         #     tag_array = @custom_question.tag_string.gsub("\r\n", '\n').split('\n')
         #     tag_array.each do |tag|
@@ -71,52 +68,89 @@ class CustomQuestionsController < ApplicationController
         channels = []   # 선택된 채널들을 갖고 있다.
         channels = Channel.find(params[:c]) if params[:c]
         channels.each do |c|
-            Entrance.create(channel: c, target: @repost)
+            Entrance.create(channel: c, target: @custom_question)
         end
 
         redirect_to root_path
     end
 
     # custom question repost message edit
-    def repost_edit
+    def edit
         unless ajax_request?
             redirect_to root_url
         else
-            c = CustomQuestion.find(params[:id])
-            repost_message = c.repost_message
-            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :repost_message => repost_message, :@custom_question => c }
+            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question }
             render :json => { 
                 html_content: "#{html_content}",
             } 
         end
     end
 
-    def repost_update 
-        if @repost.update(repost_params)
-            @repost.tags.destroy_all
+    def update
+        if @custom_question.update(custom_question_params)
+            @custom_question.tags.destroy_all
 
-            if !@repost.tag_string.nil?
-                tag_array = @repost.tag_string.gsub("\r\n", "\n").split("\n") 
+            if !@custom_question.tag_string.nil?
+                tag_array = @custom_question.tag_string.gsub("\r\n", "\n").split("\n") 
                 tag_array.each do |tag|
-                    new_tag = Tag.create(author_id: @repost.author.id, content: tag, target: @repost)
-                    @repost.tags << Tag.find(new_tag.id)
+                    new_tag = Tag.create(author_id: @custom_question.author.id, content: tag, target: @custom_question)
+                    @custom_question.tags << Tag.find(new_tag.id)
                 end
             end
 
-            Entrance.where(target: @repost).destroy_all
-            channels = []   # 선택된 채널들을 갖고 있다.
-            channels = Channel.find(params[:c]) if params[:c]
-            channels.each do |c|
-                Entrance.create(channel: c, target: @repost)
+            original_channels = @custom_question.channels
+            selected_channels = []
+            selected_channels = Channel.find(params[:c]) if params[:c]
+            # 안겹치는 애들만 모아다가
+            changed_channels = selected_channels - original_channels
+            changed_channels += original_channels - selected_channels
+            # 바꿔줍니다
+            changed_channels.each do |c|
+                e = Entrance.find_or_initialize_by(channel: c, target: @custom_question)
+                e.persisted? ? e.destroy : e.save
             end
 
+            ################################## 테스팅 완료
+            # 공개 범위의 변화로 인해 못 보게 된 글 / 댓글에 대한 노티를 모두 삭제한다
+            ## 친구공개였다가 아니게 된 것 : 거기 댓글 / 대댓글 단 친구들에게 간 노티 다 없어짐
+            ## 익명피드 공개였다가 아니게 된 것 : 거기 댓글 / 대댓글 단 사람들한테 간 노티 다 없어짐
+            # visible이고 아니고 다 지우는 걸로 일단 했다
+            ## 즉, 범위를 두 번 바꾼다고 해서 예전 노티가 다시 살아나진 않음
+            comment_join = "INNER JOIN comments ON notifications.origin_id = comments.id AND notifications.origin_type = 'Comment'"
+            reply_join = "INNER JOIN replies ON notifications.origin_id = replies.id AND notifications.origin_type = 'Reply'"
+
+            friend_noties = []
+            friend_noties += Notification.where(target_type: 'Like', action: 'friend_like_comment').joins(comment_join).merge(Comment.where(target: @custom_question)).distinct
+            friend_noties += Notification.where(target_type: 'Like', action: 'friend_like_reply').joins(reply_join).merge(Reply.joins(:comment).where(comments: {target: @custom_question})).distinct
+            friend_noties += Notification.where(target_type: 'Reply', action: 'friend_to_comment').joins(comment_join).merge(Comment.where(target: @custom_question)).distinct
+            friend_noties += Notification.where(target_type: 'Reply', action: 'friend_to_recomment').joins(comment_join).merge(Comment.where(target: @custom_question)).distinct
+
+            friend_noties.each do |n|
+                if (n.recipient != @custom_question.author) && (n.recipient.belonging_channels & selected_channels).empty?
+                    n.destroy
+                end
+            end
+            
+            if original_channels.any?{|c| c.name == '익명피드'} && !selected_channels.any?{|c| c.name == '익명피드'}  # 원래 익명피드 공개였는데 바뀐 경우에만
+                anonymous_noties = []
+                anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_comment').joins(comment_join).merge(Comment.where(target: @custom_question)).distinct
+                anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_reply').joins(reply_join).merge(Reply.joins(:comment).where(comments: {target: @custom_question})).distinct
+                anonymous_noties += Notification.where(target_type: 'Reply', action: 'anonymous_to_comment').joins(comment_join).merge(Comment.where(target: @custom_question)).distinct
+                anonymous_noties.each do |n|
+                    if n.recipient != @custom_question.author
+                        n.destroy
+                    end
+                end
+            end
+            ########################################
+
             channel_names = ""
-            channels.each do |channel|
-                channel_names += channel.name + " "
+            selected_channels.each do |c|
+                channel_names += c.name + " "
             end
             
             render :json => {
-                id: @repost.id,
+                id: @custom_question.id,
                 channels: channel_names
             }
         else
@@ -130,7 +164,7 @@ class CustomQuestionsController < ApplicationController
         end
 
         def custom_question_params
-            params.require(:custom_question).permit(:author_id, :content, :tag_string)
+            params.require(:custom_question).permit(:author_id, :content, :tag_string, :repost_message)
         end 
 
         def check_mine

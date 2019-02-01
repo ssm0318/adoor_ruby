@@ -120,8 +120,6 @@ class AnswersController < ApplicationController
                 anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_comment').joins(comment_join).merge(Comment.where(target: @answer)).distinct
                 anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_reply').joins(reply_join).merge(Reply.joins(:comment).where(comments: {target: @answer})).distinct
                 anonymous_noties += Notification.where(target_type: 'Reply', action: 'anonymous_to_comment').joins(comment_join).merge(Comment.where(target: @answer)).distinct
-                puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-                puts anonymous_noties
                 anonymous_noties.each do |n|
                     if n.recipient != @answer.author
                         n.destroy
