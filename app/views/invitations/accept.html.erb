@@ -30,7 +30,7 @@
         </div>
     <% else %>
         
-        <div class="prism-title"><h1><%= @new_friend.username %>님이 보낸 질문</h1></div>
+        <div class="prism-title"><h3><%= @new_friend.username %>님이 보낸 질문</h3></div>
         <%= render partial: "questions/layout", locals: { questions: @assigned_questions} %><br/>
         <div class="invitation-accept-text">
             <% if !user_signed_in? %>
