@@ -17,17 +17,17 @@
 </div>
 <div id='friend'>
     <h4 class="intro-topic">친구를 만들어보세요!</h3>
-    내 페이지 > 친구 관리 > 친구 초대하기 에서 친구에게 초대 링크를 보내보세요.
+    우측 상단의 프로필 사진(내 페이지) > 친구 관리 > 친구 초대하기 에서 친구에게 초대 링크를 보내보세요.
     <%= image_tag("img/friend_invite.png", class: "intro-img") %>
     <%= image_tag("img/invitation.png", class: "intro-img") %>
     친구가 초대 링크로 접속하면 회원가입을 하거나, 
     이미 로그인한 경우 당신에게 친구요청을 보낼 수 있어요.
 
-    <%= image_tag("img/accept_invitation.png", class: "intro-img") %>
     친구의 사용자명을 아는 경우, 검색창에 검색해서 친구요청을 보낼 수 있어요.
 
     <%= image_tag("img/search_user.png", class: "intro-img-small") %>
 </div>
+<hr>
 <div id='friend-manage'>
     <h4 class="intro-topic">친구 그룹을 설정해 보세요!</h3>
     친구를 맺은 후, 친구 관리 탭에서 그룹을 설정해보세요.
@@ -44,19 +44,16 @@
     '익명피드'를 선택하면 익명 피드에 내 글이 익명으로 올라가요.
 
 </div>
+<hr>
 <div id="assign">
     <h4 class="intro-topic">친구에게 질문을 보내보세요!</h4>
+    <%= image_tag("img/assign_btn.png", class: "intro-img") %>
+
     '오늘의 질문' 또는 '질문 둘러보기' 탭에서 <span id="accent-assign" class="intro-accent">친구에게 질문을 보낼 수 있어요.</span>
 
     <%= image_tag("img/assign.png", class: "intro-img") %>
-    친구에게 질문을 보내면, 알림이 가고
-
-    <%= image_tag("img/assign_noti.png", class: "intro-img-smallest") %>
-    친구가 답변하면 나에게 알림이 와요.
-
-    <%= image_tag("img/answer_noti.png", class: "intro-img-smallest") %>
-
 </div>
+<hr>
 <div id="custom_question">
     <h4 class="intro-topic">질문을 만들어서 올려보세요!</h4>
     메인 페이지에서 '질문' 탭을 눌러 
@@ -71,10 +68,9 @@
 
     <%= image_tag("img/reposting.png", class: "intro-img") %>
     <%= image_tag("img/reposted.png", class: "intro-img") %>
-    관련 태그를 함께 올리면, 태그 검색 결과에 나올 수 있어요.
-    <%= image_tag("img/search_question.png", class: "intro-img") %>
 
 </div>
+<hr>
 <div id="comment">
     <h4 class="intro-topic">댓글을 달아보세요!</h4>
     친구의 글에 댓글과 대댓글을 달며 소통해보세요.
@@ -82,9 +78,6 @@
     <span class="intro-accent" id="accent-comment">귓속말 설정을 하면 댓글이 글쓴이에게만 보여요. </span>
 
     <%= image_tag("img/secret_comment.png", class: "intro-img") %>
-
-    대댓글에서 귓속말 설정을 하면 글쓴이와 댓글 작성자에게만,
-    누군가를 언급한 대댓글에서는 언급된 사용자에게까지 대댓글이 보여요. 
 
     <%#= image_tag("img/writer_view.png", class: "intro-img") %><div class="img-caption"></div>
     <%#= image_tag("img/user1_view.png", class: "intro-img-small img-side") %><%#= image_tag("img/user2_view.png", class: "intro-img-small img-side") %>
@@ -99,6 +92,7 @@
     <%= image_tag("img/anonymous_check.png", class: "intro-img") %>
 
 </div>
+<hr>
 <div id="drawer">
     <h4 class="intro-topic">서랍장에 글을 담아보세요!</h4>
     기억하고 싶은 글은 서랍장 아이콘을 눌러 서랍장에 담아보세요.
@@ -107,22 +101,16 @@
     내 페이지에서 '서랍장'에 들어가면 담아둔 글을 모아 볼 수 있어요.
 
     <%= image_tag("img/my_drawer.png", class: "intro-img") %>
-    글쓴이는 누군가가 자신의 글을 서랍장에 담았다는 알림을 받게 될 거에요.
+    글쓴이는 누가 자신의 글을 서랍장에 담았는지 알 수 없어요.
 
     <%= image_tag("img/drawer_noti.png", class: "intro-img-smallest") %>
 
 </div>
+<hr>
 <div id="like">
     <h4 class="intro-topic">좋아요를 눌러보세요!</h4>
     친구의 글에 좋아요를 눌러보세요.
     <%= image_tag("img/click_like.png", class: "intro-img") %>
-    친구에게 알림이 갈 거에요.
-
-    <%= image_tag("img/like_noti.png", class: "intro-img-smallest") %>
-
-    익명 피드에서는 좋아요를 누르면 글쓴이에게 익명의 알림이 가요.
-
-    <%= image_tag("img/like_noti_anonymous.png", class: "intro-img-smallest") %>
 
     <span class="intro-accent" id="accent-like">내 글의 좋아요와 서랍장 개수, 내 질문의 리포스팅 횟수는 나 자신만 볼 수 있어요.</span>
 
@@ -131,11 +119,8 @@
     <%= image_tag("img/like_friends.png", class: "intro-img") %>
 
 </div>
-<div id="notification">
+<hr><div id="notification">
     <h4 class="intro-topic">알림을 확인하세요!</h4>
-    당신에게 온 친구요청, 질문, 당신의 글에 대한 반응 등 다양한 알림이 실시간으로 전해질 거에요.
-    알림을 눌러 해당 알림의 내용을 확인해보세요.
-
     <%= image_tag("img/notification.png", class: "intro-img-smallest") %>
     
     Chrome 브라우저에서 알림을 실시간으로 확인하고 싶다면, 어도어 크롬 익스텐션을 설치해보세요!
@@ -145,6 +130,7 @@
 
 
 </div>
+<hr>
 <div style="color: grey;">
     어도어는 더 좋은 서비스가 되기 위해 노력하고 있어요.
     질문이나 오류 보고, 투자를 환영합니다.
