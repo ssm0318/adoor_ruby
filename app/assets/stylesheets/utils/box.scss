@@ -46,7 +46,6 @@ div {
     
 
     .question-content {
-        font-family: "Nanum Gothic", sans-serif;
         font-size: 18px;
         color: #4f4f4f;
         padding: 30px 10px 10px 10px;
@@ -105,7 +104,6 @@ div {
 
     .num-of-reposts {
         vertical-align: 2px;
-        font-family: 'Nanum Gothic', sans-serif;
         color: #F48462;
         font-size: 13px;
         padding: 3px;
@@ -126,7 +124,6 @@ div {
     padding: 20px;
 
     .question {
-        font-family: "Nanum Gothic", sans-serif;
         font-size: 18px;
         padding: 0;
         margin: 0 ;
@@ -149,7 +146,6 @@ div {
     grid-template-columns: auto 30px;
 
     .question-content {
-        font-family: "Nanum Gothic", sans-serif;
         font-size: 18px;
         padding: 0;
         margin: 0 ;
@@ -194,7 +190,6 @@ div {
 
     .prism-box__header {
         width: 100%;
-        font-family: 'Nanum Gothic', sans-serif;
         font-size: 14px;
         padding-bottom: 5px;
         z-index: 0;
@@ -207,7 +202,6 @@ div {
         }
 
         a {
-            font-family: 'Nanum Gothic', sans-serif;
             color: black;
             text-decoration: none;
         }
@@ -227,16 +221,12 @@ div {
         a {
             color: black;
             text-decoration: none;
-            font-family: "Nanum Gothic", sans-serif;
-
         }
 
         .answer {
-            font-family: 'Nanum Gothic', sans-serif; 
         }
 
         .date { 
-            font-family: 'Nanum Gothic', sans-serif;
             font-size: 11px;
             color: #888888;
         }
@@ -247,7 +237,6 @@ div {
     }
 
     .prism-box__footer {
-        font-family: 'Nanum Gothic', sans-serif;
         vertical-align: bottom;
         width: 100%;
         font-size: 12px;
@@ -296,7 +285,6 @@ div {
 
         .num-of-likes {
             vertical-align: 0px;
-            font-family: 'Nanum Gothic', sans-serif;
             color: #F48462;
             cursor: pointer;
             padding: 3px;
@@ -309,7 +297,6 @@ div {
 
         .num-of-drawers {
             vertical-align: 8px;
-            font-family: 'Nanum Gothic', sans-serif;
             color: #F48462;
             padding: 3px;
             margin-right: 2px;
@@ -319,7 +306,6 @@ div {
     }
 
     .prism-box__comment {
-        font-family: 'Nanum Gothic', sans-serif;
         vertical-align: bottom;
         width: 100%;
         text-align: left;
@@ -334,7 +320,6 @@ div {
         a {
             color: black;
             text-decoration: none;
-            font-family: 'Nanum Gothic', sans-serif;
             font-size: 12px;
             cursor: pointer;
             // &:hover {
@@ -356,7 +341,6 @@ div {
             padding: 16px;
             text-decoration: none;
             color: black;
-            font-family: "Nanum Gothic", sans-serif;
             font-size: 13px;
         }
     }
@@ -383,7 +367,6 @@ div {
         }
 
         .new-answer-field {
-            font-family: 'Nanum Gothic', sans-serif;
             font-size: 17px;
             width: 100%;
             // height: 60px;
@@ -714,7 +697,6 @@ div {
 .link-generation-btn {
     background-color: #F48462;
     color: white;
-    font-family: 'Nanum Gothic', sans-serif;
     width: 180px;
     height: 50px;
     border: none;

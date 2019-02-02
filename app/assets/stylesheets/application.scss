@@ -16,11 +16,37 @@
  ::-webkit-scrollbar { 
     display: none; 
  }
+
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+ .flash {
+    margin: auto;
+    width: 50%;
+    color: #F48462;
+    text-align: center;
+    margin-top: 15px;
+ }
     
 .navbar {
+
+    .navbar-brand img {
+        padding-left: 40px; 
+        padding-top: 9px; 
+        width: 180px; 
+        height:auto;
+    }
+
+    .nav-item {
+        padding-left: 40px;
+    }
+
+    .navbar-nav.mr-auto {
+        padding-top: 9px;
+    }
     .navbar-nav {
         .nav-link {
-            font-family: 'Open Sans', sans-serif;
             font-size: 15px;
             color: #777777;
                 
@@ -33,10 +59,18 @@
 
     }
 
+    
+
     .mr-auto-custom {
         display: flex;
         margin-left: auto!important;
-
+        cursor: pointer; 
+        z-index: 1; 
+        position: 
+        absolute; 
+        top: 10px; 
+        right: 60px;
+        
         .search-form {
             padding-top: 12px;
         }
@@ -101,7 +135,6 @@
         }
 
         .logout {
-            font-family: 'Open Sans', sans-serif;
             font-size: 15px;
             color: #777777;
             padding-left: 25px;
@@ -135,7 +168,11 @@
 .navbar-active {
     color: #F48462;
 }
-
+.nav-toggler-icon {
+    color: #F48462; 
+    width: 1.2em; 
+    height: 1.2em;
+}
 .navbar-toggler:not(:disabled):not(.disabled) {
     cursor: pointer;
     z-index: 1;
@@ -164,7 +201,6 @@
         // &:hover {
         //     color: #F48462;
         //  }
-         font-family: 'Open Sans', sans-serif;
     }
     
 }
@@ -174,7 +210,6 @@ a {
 }
 
 .answer {
-    font-family: "Nanum Gothic", serif;
     white-space: pre-line;
     text-align: left;
     overflow-wrap: break-word;
@@ -189,7 +224,6 @@ a {
 body {
     margin: 0px; 
     background-color: #f9f9f9;
-    font-family: "Nanum Gothic", serif;
     height: 100%;
 }
 
@@ -233,7 +267,6 @@ div.background {
                 font-size: 28px;
                 color: rgb(180, 180, 180);
                 margin-top: 5vh;
-                // font-family: "Nanum Gothic";
             }
 
             div.start-1 {
@@ -252,7 +285,6 @@ div.background {
                     top: 25%;
                     color: slateblue;
                     font-size: 28px;
-                    font-family: "Nanum Gothic";
                 }
             }
 
@@ -263,7 +295,6 @@ div.background {
                     height: 40px;
                     width: 116px;
                     border-radius: 20px;
-                    font-family: "Nanum Gothic";
                     position: relative;
                     top: 50%;
                     padding: 10px 30px;
@@ -300,7 +331,6 @@ div.background {
         
         .question-content{
             position: relative;
-            font-family: 'Nanum Gothic', sans-serif;
             text-decoration: none;
             color: black;
             font-size: 22px;
@@ -365,3 +395,138 @@ div.background {
         margin-bottom: 10px;
     }
 }
+
+@media only screen and (max-device-width: 500px) {
+    .inner-container {
+        width: 100%;
+    }
+
+    #prism-container {
+        width: 95%;
+    }
+
+    .prism-box {
+        zoom: 2.3;
+        margin: 10px 0px;
+        .prism-box__content {
+            padding: 0px 20px;
+        }
+
+        .edit-or-delete {
+            width: 100px;
+        }
+    }
+
+    .prism-box-new-post {
+        zoom: 2.2;
+        margin: 10px 0px;
+    }
+
+    .navbar {
+        zoom: 2;
+        .navbar-brand img {
+            padding-left: 10px;
+            zoom: 0.5;
+        }
+
+        .nav-link {
+            zoom: 1.2;
+        }
+    }
+
+    .mr-auto-custom .logout {
+        padding-left: 0px !important;
+        padding-right: 5px !important;
+        padding-top: 10px !important;
+    }
+
+    #edit-box {
+        zoom: 2;
+        width: 80% !important;
+        padding: 6% !important;
+    }
+
+    #friends-box {
+        zoom: 2;
+        width: 80% !important;
+        padding: 6% !important;
+        margin-left: 10% !important;
+    }
+
+    #btn-edit-exit {
+        zoom: 3;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        margin: 0px;
+        margin-right: 0px !important;
+        margin-top: 0px !important;
+    }
+
+    #profile {
+        zoom: 2;
+        margin-top: 20px;
+
+        .edit-profile-img {
+            z-index: 0 !important;
+        }
+    }
+
+    .noti-content {
+        zoom: 1.4;
+    }
+
+    .noti-box {
+        zoom: 2;
+    }
+
+    #noti-index-read-text {
+        zoom: 2;
+    }
+
+    .search-header {
+        zoom: 2;
+    }
+
+    .results-div {
+        .question-el {
+            zoom: 0.55
+        }
+        zoom: 2;
+    }
+
+    #friend-list {
+        zoom: 2;
+    }
+
+    .prism-box__question {
+        zoom: 2.3;
+    }
+
+    .sign-box {
+        zoom: 1.8;
+    }
+
+    .profile-edit-tab {
+        zoom: 2;
+    }
+
+    .question-btn {
+        zoom: 2;
+    }
+
+    .feed-nav {
+        zoom: 2.2;
+    }
+
+    .question-el {
+        padding: 20px;
+        .question-content {
+            zoom: 2;
+        }
+    }
+
+
+
+  }
+  
