@@ -11,10 +11,11 @@ class SearchController < ApplicationController
         @question_results += Question.where("content LIKE ? ", "%#{@query}%").reverse
         @question_results = @question_results.uniq
 
-        @custom_question_results = CustomQuestion.accessible(current_user.id).where(ancestor_id = nil).search_tag(@query).reverse
+        @general_results = CustomQuestion.joins(:channels).where(channels: {name: "익명피드"}).where(ancestor_id = nil).search_tag(@query).reverse
+        @friends_results = CustomQuestion.accessible(current_user.id).where(ancestor_id = nil).search_tag(@query).reverse
+        @custom_question_results = @general_results + @friends_results
         @custom_question_results += CustomQuestion.where(ancestor_id = nil).where("content LIKE ? ", "%#{@query}%").reverse
         @custom_question_results = @custom_question_results.uniq
-        
 
         @more_user = @user_results.count()
         @more_question = @question_results.count()
