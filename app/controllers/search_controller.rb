@@ -11,7 +11,7 @@ class SearchController < ApplicationController
         @question_results += Question.where("content LIKE ? ", "%#{@query}%").reverse
         @question_results = @question_results.uniq
 
-        @custom_question_results = CustomQuestion.where(ancestor_id = nil).search_tag(@query).reverse
+        @custom_question_results = CustomQuestion.accessible(current_user.id).where(ancestor_id = nil).search_tag(@query).reverse
         @custom_question_results += CustomQuestion.where(ancestor_id = nil).where("content LIKE ? ", "%#{@query}%").reverse
         @custom_question_results = @custom_question_results.uniq
         
