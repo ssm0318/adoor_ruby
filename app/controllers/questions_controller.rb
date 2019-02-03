@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
     end
 
     def today
-        @questions = Question.where(selected_date: (Date.today))
+        @questions = Question.where(selected_date: (Date.today)).shuffle
     end
 
     def show_friends
