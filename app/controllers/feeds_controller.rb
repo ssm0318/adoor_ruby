@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!, only: [:friends]
     
     def general
         @feeds = Answer.channel_name("익명피드").anonymous(current_user.id) + Post.channel_name("익명피드").anonymous(current_user.id) + CustomQuestion.channel_name("익명피드").anonymous(current_user.id)
