@@ -12,13 +12,13 @@ if (typeof define === 'function' && define.amd) {
 }(function ($) {
 $.timeago = function(timestamp) {
     if (timestamp instanceof Date) {
-    return inWords(timestamp);
+        return inWords(timestamp);
     } else if (typeof timestamp === "string") {
-    return inWords($.timeago.parse(timestamp));
+        return inWords($.timeago.parse(timestamp));
     } else if (typeof timestamp === "number") {
-    return inWords(new Date(timestamp));
+        return inWords(new Date(timestamp));
     } else {
-    return inWords($.timeago.datetime(timestamp));
+        return inWords($.timeago.datetime(timestamp));
     }
 };
 var $t = $.timeago;
@@ -203,8 +203,16 @@ function prepareData(element) {
 }
 
 function inWords(date) {
-    return $t.inWords(distance(date));
+    console.log(distance(date));
+    if(distance(date) < 6.048e+8) {
+        return $t.inWords(distance(date));
+    }
 }
+
+// function distanceFromStartOfYear(date) {
+//     year = new Date().getYear();
+//     return (date.getTime() - new Date(year, 0, 1).getTime());
+// }
 
 function distance(date) {
     return (new Date().getTime() - date.getTime());

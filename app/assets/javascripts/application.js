@@ -15,3 +15,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require ahoy
+//= require i18n
+//= require i18n/translations

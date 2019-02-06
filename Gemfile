@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'rails-i18n'
+gem "i18n-js"
 gem 'awesome_print', '~> 1.8'
 gem 'ahoy_matey', '~> 2.2'
 gem 'jquery-turbolinks'
