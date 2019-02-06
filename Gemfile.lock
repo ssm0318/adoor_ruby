@@ -54,6 +54,7 @@ GEM
       safely_block (>= 0.2.1)
       user_agent_parser
     arel (8.0.0)
+    awesome_print (1.8.0)
     bcrypt (3.1.12)
     bindex (0.5.0)
     browser (2.5.3)
@@ -145,10 +146,10 @@ GEM
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
-    pry (0.11.3)
+    pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    pry-rails (0.3.6)
+    pry-rails (0.3.7)
       pry (>= 0.10.4)
     public_suffix (3.0.3)
     puma (3.12.0)
@@ -275,6 +276,7 @@ PLATFORMS
 DEPENDENCIES
   active_link_to
   ahoy_matey (~> 2.2)
+  awesome_print (~> 1.8)
   byebug
   capybara (~> 2.13)
   carrierwave (~> 1.0)
