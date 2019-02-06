@@ -1,14 +1,13 @@
 class SearchController < ApplicationController
     def all
-        # FIXME: 다 다다
         @query = params[:query]
         Query.create(user: current_user, content: @query)
 
         limit = 5
         @user_results = User.where("username LIKE ? ", "%#{@query}%").order(:username)
 
-        @question_results = Question.all.search_tag(@query).reverse
-        @question_results += Question.where("content LIKE ? ", "%#{@query}%").reverse
+        @question_results = Question.published.search_tag(@query).reverse
+        @question_results += Question.published.where("content LIKE ? ", "%#{@query}%").reverse
         @question_results = @question_results.uniq
 
         @general_results = CustomQuestion.joins(:channels).where(channels: {name: "익명피드"}).search_tag(@query).reverse
@@ -46,10 +45,9 @@ class SearchController < ApplicationController
         @query = params[:query]
         Query.create(user: current_user, content: @query)
         @results = []
-        @results = Question.all.search_tag(@query).reverse
-        @results += Question.where("content LIKE ? ", "%#{@query}%").reverse
+        @results = Question.published.search_tag(@query).reverse
+        @results += Question.published.where("content LIKE ? ", "%#{@query}%").reverse
         @results = @results.uniq
-        # @results = @results.where(author_id: 1)
 
 
  
@@ -63,7 +61,6 @@ class SearchController < ApplicationController
         @results = CustomQuestion.where(ancestor_id = nil).search_tag(@query).reverse
         @results += CustomQuestion.where(ancestor_id = nil).where("content LIKE ? ", "%#{@query}%").reverse
         @results = @results.uniq
-        # @results = @results.where.not(author_id: 1)
 
         render 'custom_question'
     end

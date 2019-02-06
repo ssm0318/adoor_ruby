@@ -4,7 +4,7 @@ class InvitationsController < ApplicationController
     def index
         @questions = []
         if (n = (7 - @questions.length)) > 0
-            @questions = Question.where.not(selected_date: nil).sample(n) # 답변된 질문이 부족하면 공개된 질문 중 랜덤하게 take
+            @questions = Question.published.sample(n) # 답변된 질문이 부족하면 공개된 질문 중 랜덤하게 take
         end
         render 'index' 
     end 
