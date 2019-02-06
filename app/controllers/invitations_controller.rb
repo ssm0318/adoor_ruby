@@ -13,7 +13,7 @@ class InvitationsController < ApplicationController
         assigned_questions = []   # 선택된 question들을 갖고 있다 (최대 3개, 최소 0개)
         assigned_questions = Question.find(params[:q]) if params[:q]
         if Rails.env.production?
-            @link = "adoor.app/invitations/#{current_user.id}"
+            @link = "https://adoor.app/invitations/#{current_user.id}"
         elsif Rails.env.development?
             @link = "localhost:3000/invitations/#{current_user.id}"
         end
