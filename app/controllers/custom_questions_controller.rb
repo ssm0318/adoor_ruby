@@ -52,7 +52,7 @@ class CustomQuestionsController < ApplicationController
         unless ajax_request?
             redirect_to root_url
         else
-            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question, :reposting => true }
+            html_content = render_to_string :partial => 'custom_questions/form', :locals => { :custom_question => CustomQuestion.new, :reposting => true, :ancestor => @custom_question }
             render :json => { 
                 html_content: "#{html_content}",
             }
@@ -73,7 +73,7 @@ class CustomQuestionsController < ApplicationController
             Entrance.create(channel: c, target: @custom_question)
         end
 
-        redirect_to root_path
+        redirect_back fallback_location: root_url
     end
 
     # custom question repost message edit
@@ -81,10 +81,10 @@ class CustomQuestionsController < ApplicationController
         unless ajax_request?
             redirect_to root_url
         else
-            html_content = render_to_string :partial => 'custom_questions/repost_form', :locals => { :custom_question => @custom_question, :reposting => false }
+            html_content = render_to_string :partial => 'custom_questions/form', :locals => { :custom_question => @custom_question, :reposting => false }
             render :json => { 
                 html_content: "#{html_content}",
-            } 
+            }
         end
     end
 

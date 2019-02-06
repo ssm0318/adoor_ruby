@@ -1,0 +1,38 @@
+<!-- posts/_form -->
+<div class = "channels">
+    <span class="channels-dropdown">공개그룹&nbsp;<i class="fas fa-caret-down"></i></span>
+    <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
+    <!-- TODO: 채널이 많아질 경우 style -->
+    <div class="channels-dropdown-content">
+        <span class="btn-select-all-channels">전체선택</span>
+        <% if article.is_a? Post %>
+            <% if article.id != nil %>
+                <% label_id = "post_edit" %>
+            <% else %>
+                <% label_id = "post_create" %>
+            <% end %>
+        <% elsif article.is_a? Answer %>
+            <% if article.id != nil %>
+                <% label_id = "answer_edit"%> <!-- ?? -->
+            <% else %>
+                <% label_id = "answer_create"%>
+            <% end %>
+        <% elsif article.is_a? CustomQuestion %>
+            <% if !reposting %>
+                <% if article.id != nil %>
+                    <% label_id = "custom_question_edit"%>
+                <% else %>
+                    <% label_id = "custom_question_create"%>
+                <% end %>
+            <% else %>
+                <% label_id = "custom_question_repost"%>
+            <% end %>
+        <% end %>
+        <% current_user.channels.each do |channel| %>
+            <%= check_box_tag "c[]", channel.id, 
+                article.channels.count() > 0 ? article.channels.include?(channel) : !(channel.name=="익명피드" || channel.name=="나"),
+                id: channel.id.to_s + label_id, class: "channel-el" %>
+            <%= label_tag channel.id.to_s + label_id, channel.name, class: "channel-el" %>
+        <% end %>
+    </div>
+</div>
