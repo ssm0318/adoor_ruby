@@ -61,6 +61,7 @@ $(document).on('turbolinks:load', function()  {
         var form = $(this)
         var form_data = form.serialize()
         form.find(".prism-form__comment").val('')
+        autosize.update(form.find(".prism-form__comment"))
 
         $.ajax({
           type: "POST",
@@ -157,6 +158,7 @@ $(document).on('turbolinks:load', function()  {
                 var new_form = $(this)
                 var new_form_data = new_form.serialize()
                 new_form.find(".prism-form__comment").val('')
+                autosize.update(new_form.find(".prism-form__comment"))
   
 
                 $.ajax({
