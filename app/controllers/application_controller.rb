@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   helper_method :noties
   helper_method :recent_noties
 
+  HMAC_SECRET = Rails.application.secrets.secret_key_base
+
   # acts_as_token_authentication_handler_for User, fallback: :none # handles header authorization
   # for future reference: https://github.com/gonzalo-bulnes/simple_token_authentication include token in the header
 
@@ -65,7 +67,7 @@ class ApplicationController < ActionController::Base
   end
 
   def payload
-    JWT.decode retrieve_token, Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' }.first
+    JWT.decode retrieve_token, HMAC_SECRET, true, { algorithm: 'HS256' }.first
   end
 end
 
