@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'rack-cors', :require => 'rack/cors'
+gem 'jwt'
 gem 'ahoy_matey', '~> 2.2'
 gem 'jquery-turbolinks'
 gem 'active_link_to'

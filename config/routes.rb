@@ -99,6 +99,9 @@ Rails.application.routes.draw do
   
   namespace 'api' do
     namespace 'v1' do
+      # Sessions
+      resources :session, only: [:create, :destroy]
+
       # Application
       get '/unread' => 'application#unread'
       get '/introduction' => 'application#intro', as: :introduction
