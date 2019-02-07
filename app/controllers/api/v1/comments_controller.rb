@@ -5,26 +5,26 @@ class Api::V1::CommentsController < ApplicationController
              else
                params[:secret]
              end
-    c = Comment.create(content: params[:content], author_id: current_user.id, target_type: params[:target_type], target_id: params[:target_id], anonymous: params[:anonymous], secret: secret)
+    @comment = Comment.create(
+      content: params[:content],
+      author_id: current_user.id,
+      target_type: params[:target_type],
+      target_id: params[:target_id],
+      anonymous: params[:anonymous],
+      secret: secret
+    )
+    @user = current_user
 
-    render json: {
-      id: c.id,
-      content: c.content,
-      created_at: c.created_at,
-      like_url: likes_path(target_id: c.id, target_type: 'Comment'),
-      like_changed_url: like_path(c.id, target_type: 'Comment'),
-      profile_img_url: current_user.image.url,
-      profile_path: profile_path(current_user.id),
-      username: current_user.username
-    }
+    render :create
   end
 
   def destroy
-    c = Comment.find(params[:id])
-    c.destroy
+    @comment = Comment.find(params[:id])
 
-    render json: {
-
-    }
+    if @comment.destroy
+      render json: { status: 'SUCCESS', message: 'Deleted comment' }, status: :ok
+    else
+      render json: { status: 'ERROR', message: 'comment not deleted', data: @comment.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 end

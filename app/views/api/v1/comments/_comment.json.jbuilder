@@ -1,0 +1,10 @@
+json.call(
+  comment,
+  :id,
+  :author_id,
+  :target_id,
+  :target_type,
+  :content,
+  :secret,
+  :anonymous
+)
