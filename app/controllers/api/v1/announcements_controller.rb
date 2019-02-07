@@ -48,7 +48,7 @@ class Api::V1::AnnouncementsController < ApplicationController
 
   def destroy
     if @announcement.destroy
-      render json: {status: 'SUCCESS', message:'Deleted announcement', data: @announcement},status: :ok
+      render json: {status: 'SUCCESS', message:'Deleted announcement'},status: :ok
     else
       render json: {status: 'ERROR', message:'Announcement not deleted', data: @announcement.errors.full_messages}, status: :unprocessable_entity
     end

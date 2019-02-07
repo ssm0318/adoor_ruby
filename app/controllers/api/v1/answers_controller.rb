@@ -5,17 +5,6 @@ class Api::V1::AnswersController < ApplicationController
   before_action :check_accessibility, only: [:show]
 
   def new
-    # if ajax_request?
-    #   @question = Question.find(params[:id])
-    #   @answer = Answer.new
-
-    #   html_content = render_to_string partial: 'answers/form', locals: { :answer => @answer, :@question => @question }
-    #   render json: {
-    #     html_content: html_content.to_s
-    #   }
-    # else
-    #   redirect_to root_url
-    # end
     @question = Question.find(params[:id])
 
     render :new
@@ -43,16 +32,6 @@ class Api::V1::AnswersController < ApplicationController
         Notification.create(recipient: assignment.assigner, actor: @answer.author, target: @answer, origin: @answer, action: 'assignment-answer')
       end
     end
-
-    # if params[:from_feed]
-    #   redirect_to question_path(@answer.question)
-    # elsif params[:from_noti]
-    #   redirect_to answer_path(@answer)
-    # else
-    #   render json: {
-
-    #   }
-    # end
   end
 
   def show
@@ -62,14 +41,6 @@ class Api::V1::AnswersController < ApplicationController
   end
 
   def edit
-    # if ajax_request?
-    #   html_content = render_to_string partial: 'answers/form', locals: { :answer => @answer, :@question => @answer.question }
-    #   render json: {
-    #     html_content: html_content.to_s
-    #   }
-    # else
-    #   redirect_to root_url
-    # end
     @question = @answer.question
 
     render :edit
@@ -127,10 +98,6 @@ class Api::V1::AnswersController < ApplicationController
         @channel_names += c.name + ' '
       end
 
-      # render json: {
-      #   id: @answer.id,
-      #   channels: channel_names
-      # }
       render :update
     else
       render json: {status: 'ERROR', message:'Answer not updated', data: @answer.errors.full_messages}, status: :unprocessable_entity
@@ -139,7 +106,7 @@ class Api::V1::AnswersController < ApplicationController
 
   def destroy
     if @answer.destroy
-      render json: {status: 'SUCCESS', message:'Deleted answer', data: @answer},status: :ok
+      render json: {status: 'SUCCESS', message:'Deleted answer'},status: :ok
     else
       render json: {status: 'ERROR', message:'Answer not deleted', data: @answer.errors.full_messages}, status: :unprocessable_entity
     end

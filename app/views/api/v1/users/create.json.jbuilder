@@ -3,6 +3,7 @@ json.data do
     json.call(
       @user,
       :id,
+      :username,
       :email,
       # :authentication_token, # use jwt instead
       :confirmed_at # check if user email has been confirmed
