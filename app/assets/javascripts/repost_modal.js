@@ -16,8 +16,8 @@ function repost_modal() {
         $("#edit-background").show()
         $("body").css('overflow', 'hidden')
         form.one('click', repost_modal)
-        textarea_init($(html.find('textarea')), $("#edit-background"))
-
+        // textarea_init($(html.find('textarea')), $("#edit-background"))
+        autosize(html.find('textarea'))
     },
     error: function(data) {
         console.log("error!")

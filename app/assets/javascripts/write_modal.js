@@ -20,7 +20,8 @@ function write_modal(event) {
             $("#edit-background").show()
             $("body").css('overflow', 'hidden')
             form.one('click', write_modal)
-            textarea_init($(html.find('textarea')), $("#edit-background"))
+            // textarea_init($(html.find('textarea')), $("#edit-background"))
+            autosize(html.find('textarea'))
             
             //편집 완료
             $(".new_answer").submit( function(e) {

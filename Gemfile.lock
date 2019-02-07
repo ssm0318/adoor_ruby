@@ -54,6 +54,7 @@ GEM
       safely_block (>= 0.2.1)
       user_agent_parser
     arel (8.0.0)
+    autosize (2.4.0.0)
     awesome_print (1.8.0)
     bcrypt (3.1.12)
     bindex (0.5.0)
@@ -281,6 +282,7 @@ PLATFORMS
 DEPENDENCIES
   active_link_to
   ahoy_matey (~> 2.2)
+  autosize
   awesome_print (~> 1.8)
   byebug
   capybara (~> 2.13)

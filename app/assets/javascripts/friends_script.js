@@ -37,7 +37,6 @@ function submit_on_enter(e) {
 
 $(document).on('turbolinks:load', function()  {
 
-    textarea_init($(".prism-form__comment"), window)
     $(".prism-form__comment").on('keypress', submit_on_enter)
     $(".friend-comments, .comments").find(".comment").each(function(index) {
       if($(this).find(".lock-icon").length != 0) {
@@ -139,7 +138,8 @@ $(document).on('turbolinks:load', function()  {
                 form.parent().find(".comments").append(html)
               }
 
-              textarea_init(html.find(".prism-form__comment"), window)
+              // textarea_init(html.find(".prism-form__comment"), window)
+              autosize(html.find(".prism-form__comment"))
               btn_show_like.one('click', show_likes)
               like_ajax(btn_like)
               delete_ajax(html.find(".btn-comment-delete"))

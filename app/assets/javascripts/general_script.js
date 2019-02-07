@@ -134,7 +134,8 @@ $(document).on('turbolinks:load', function()  {
             form.parent().find(".anonymous-comments").append(html)
 
             btn_show_like.one('click', show_likes)
-            textarea_init(html.find(".prism-form__comment"), window)
+            // textarea_init(html.find(".prism-form__comment"), window)
+            autosize(html.find(".prism-form__comment"))
             like_ajax(btn_like)
             delete_ajax(html.find(".btn-comment-delete"))
             html.find("time.timeago").timeago();
