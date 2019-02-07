@@ -5,12 +5,12 @@
         <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
         <%# f.text_area :tag_string %>
         <%= f.hidden_field :tag_string, :value => "" %>
-        <div id="tags">
-            <span id="tag-title">태그</span>
-            <input id="tags_input" type="text" value="" />
-        </div>
-        <div id="tags-info-alert">태그를 쉼표로 구분하여 입력해주세요.</div>
         <%= render partial: "channels/select_channels", locals: {article: custom_question, reposting: false}%>
         <%= f.submit "저장", class: "answer-button"%>
     <% end %>
+    <div id="tags">
+        <span id="tag-title">태그</span>
+        <input id="tags_input" type="text" value=""/>
+    </div>
+    <div id="tags-info-alert">태그를 엔터 또는 쉼표로 구분하여 입력해주세요.</div>
 </div>

@@ -203,7 +203,7 @@ function prepareData(element) {
 }
 
 function inWords(date) {
-    console.log(distance(date));
+    // console.log(distance(date));
     if(distance(date) < 6.048e+8) {
         return $t.inWords(distance(date));
     }
