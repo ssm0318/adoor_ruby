@@ -1,4 +1,4 @@
-json.data do 
+json.data do
   json.array! @published_announcements do |announcement|
     json.partial! 'api/v1/annoucements/annoucement', annoucement: announcement
   end

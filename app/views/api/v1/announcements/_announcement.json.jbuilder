@@ -1,4 +1,3 @@
-
 json.call(
   annoucement,
   :id,

@@ -1,26 +1,33 @@
 class Api::V1::AnswersController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :set_answer, only: %i[show edit update destroy]
   before_action :check_mine, only: %i[edit update destroy]
   before_action :check_accessibility, only: [:show]
 
   def new
-    if ajax_request?
-      @question = Question.find(params[:id])
-      @answer = Answer.new
+    # if ajax_request?
+    #   @question = Question.find(params[:id])
+    #   @answer = Answer.new
 
-      html_content = render_to_string partial: 'answers/form', locals: { :answer => @answer, :@question => @question }
-      render json: {
-        html_content: html_content.to_s
-      }
-    else
-      redirect_to root_url
-      end
+    #   html_content = render_to_string partial: 'answers/form', locals: { :answer => @answer, :@question => @question }
+    #   render json: {
+    #     html_content: html_content.to_s
+    #   }
+    # else
+    #   redirect_to root_url
+    # end
+    @question = Question.find(params[:id])
+
+    render :new
   end
 
   def create
     @answer = Answer.new(answer_params)
-    @answer.save
+    if @answer.save
+      render json: {status: 'SUCCESS', message:'Created answer', data: @answer}, status: :ok
+    else
+      render json: {status: 'ERROR', message:'Answer not saved', data: @answer.errors.full_messages}, status: :unprocessable_entity
+    end
 
     channels = [] # 선택된 채널들을 갖고 있다.
     channels = Channel.find(params[:c]) if params[:c]
@@ -37,30 +44,35 @@ class Api::V1::AnswersController < ApplicationController
       end
     end
 
-    if params[:from_feed]
-      redirect_to question_path(@answer.question)
-    elsif params[:from_noti]
-      redirect_to answer_path(@answer)
-    else
-      render json: {
+    # if params[:from_feed]
+    #   redirect_to question_path(@answer.question)
+    # elsif params[:from_noti]
+    #   redirect_to answer_path(@answer)
+    # else
+    #   render json: {
 
-      }
-    end
+    #   }
+    # end
   end
 
   def show
     @anonymous = @answer.author_id != current_user.id && !(current_user.friends.include? @answer.author)
+
+    render :show
   end
 
   def edit
-    if ajax_request?
-      html_content = render_to_string partial: 'answers/form', locals: { :answer => @answer, :@question => @answer.question }
-      render json: {
-        html_content: html_content.to_s
-      }
-    else
-      redirect_to root_url
-      end
+    # if ajax_request?
+    #   html_content = render_to_string partial: 'answers/form', locals: { :answer => @answer, :@question => @answer.question }
+    #   render json: {
+    #     html_content: html_content.to_s
+    #   }
+    # else
+    #   redirect_to root_url
+    # end
+    @question = @answer.question
+
+    render :edit
   end
 
   def update
@@ -78,7 +90,7 @@ class Api::V1::AnswersController < ApplicationController
         e.persisted? ? e.destroy : e.save
       end
 
-      ################################## 테스팅 완료
+      ################################## 테스팅 완료 - 우와 명석왕님 너무 훌륭합니다...!!
       # 공개 범위의 변화로 인해 못 보게 된 글 / 댓글에 대한 노티를 모두 삭제한다
       ## 친구공개였다가 아니게 된 것 : 거기 댓글 / 대댓글 단 친구들에게 간 노티 다 없어짐
       ## 익명피드 공개였다가 아니게 된 것 : 거기 댓글 / 대댓글 단 사람들한테 간 노티 다 없어짐
@@ -110,25 +122,48 @@ class Api::V1::AnswersController < ApplicationController
       end
       ########################################
 
-      channel_names = ''
+      @channel_names = ''
       selected_channels.each do |c|
-        channel_names += c.name + ' '
+        @channel_names += c.name + ' '
       end
 
-      render json: {
-        id: @answer.id,
-        channels: channel_names
-      }
+      # render json: {
+      #   id: @answer.id,
+      #   channels: channel_names
+      # }
+      render :update
     else
-      redirect_to root_url
+      render json: {status: 'ERROR', message:'Answer not updated', data: @answer.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @answer.destroy
+    if @answer.destroy
+      render json: {status: 'SUCCESS', message:'Deleted answer', data: @answer},status: :ok
+    else
+      render json: {status: 'ERROR', message:'Answer not deleted', data: @answer.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   private
+
+  # def authenticate_user
+  #   user_token = request.headers['X-USER-TOKEN']
+  #   if user_token
+  #     @user = User.find_by_token(user_token)
+  #     #Unauthorize if a user object is not returned
+  #     if @user.nil?
+  #       return unauthorize
+  #     end
+  #   else
+  #     return unauthorize
+  #   end
+  # end
+
+  # def unauthorize
+  #   head status: :unauthorized
+  #   return false
+  # end
 
   def set_answer
     @answer = Answer.find(params[:id])
@@ -139,15 +174,20 @@ class Api::V1::AnswersController < ApplicationController
   end
 
   def check_mine
-    redirect_to root_url if @answer.author_id != current_user.id
+    # redirect_to root_url if @answer.author_id != current_user.id
+    if @answer.author_id != current_user.id
+      render json: {status: 'ERROR', message:'not mine', data: current_user}, status: :unauthorized
+    end
   end
 
   def check_accessibility
     author = Answer.find(params[:id]).author
     if (author.friends.include? current_user) && author != current_user && !Answer.accessible(current_user.id).exists?(params[:id])
-      redirect_to root_url
+      # redirect_to root_url
+      render json: {status: 'ERROR', message:'not accessible', data: current_user}, status: :unauthorized
     elsif !(author.friends.include? current_user) && author != current_user && Answer.find(params[:id]).channels.none? { |c| c.name == '익명피드' }
-      redirect_to root_url
+      # redirect_to root_url
+      render json: {status: 'ERROR', message:'not accessible', data: current_user}, status: :unauthorized
     end
   end
 
