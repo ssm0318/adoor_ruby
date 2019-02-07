@@ -6,15 +6,14 @@ class Api::V1::ChannelsController < ApplicationController
     if !current_user.channels.where(name: params[:name]).empty?
       render json: {
         successed: false,
-        message: "#{params[:name]} 채널은 이미 존재하는 채널입니다."
+        message: "#{params[:name]} 채널은 이미 존재하는 채널입니다.",
+        data: params[:name]
       }
     else
-      c = Channel.create(user_id: current_user.id, name: params[:name])
+      @channel = Channel.create(user_id: current_user.id, name: params[:name])
 
-      render json: {
-        successed: true,
-        channel_id: c.id
-      }
+      # render json: {status: 'SUCCESS', message:'Channel created', data: {channel_id: c.id}}, status: :ok
+      render :channel
     end
   end
 
@@ -22,23 +21,23 @@ class Api::V1::ChannelsController < ApplicationController
     if !current_user.channels.where(name: params[:name]).empty? && Channel.find(params[:id]).name != params[:name]
       render json: {
         successed: false,
-        message: "#{params[:name]} 채널은 이미 존재하는 채널입니다."
+        message: "#{params[:name]} 채널은 이미 존재하는 채널입니다.",
+        data: params[:name]
       }
     else
       @channel.name = params[:name]
       @channel.save
 
-      render json: {
-        successed: true
-      }
+      render :channel
     end
   end
 
   def destroy
-    @channel.destroy
-
-    # 얘는 ajax 안쓰고 걍 새로고침해도 될것같음!
-    redirect_to friends_path
+    if @channel.destroy
+      render json: {status: 'SUCCESS', message:'Deleted channel'},status: :ok
+    else
+      render json: {status: 'ERROR', message:'channel not deleted', data: channel.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   # add friend to a channel
@@ -46,6 +45,8 @@ class Api::V1::ChannelsController < ApplicationController
     friendship_hash = { user_id: current_user.id, friend_id: params[:friend_id] }
     friendship = Friendship.where(friendship_hash).first
     friendship.channels << @channel
+
+    render :channel
   end
 
   # delete friend from a channel
@@ -53,15 +54,11 @@ class Api::V1::ChannelsController < ApplicationController
     friendship_hash = { user_id: current_user.id, friend_id: params[:friend_id] }
     friendship = Friendship.where(friendship_hash).first
     friendship.channels.delete(@channel)
+
+    render :channel
   end
 
   def edit_friendship
-    # channel params[:id]
-    # json [{friend_id:[1,3,4]}]
-    # if friendship.channels.include? channel -> delete. not include-> add
-    puts '========='
-    puts params[:friend_ids]
-
     friends_ids = params[:friend_ids]
 
     friends_ids.each do |friend_id|
@@ -74,8 +71,7 @@ class Api::V1::ChannelsController < ApplicationController
       end
     end
 
-    render json: {
-    }
+    render :channel
   end
 
   # add post to a channel (글의 공개범위 수정할 때만 필요, 처음 post생성 시에는 post create에서 entrance 처리됨)
@@ -83,6 +79,8 @@ class Api::V1::ChannelsController < ApplicationController
     entrance_hash = { target_type: 'Post', target_id: params[:target_id], channel: @channel }
     entrance = Entrance.where(entrance_hash)
     Entrance.create(entrance_hash) if entrance.empty?
+
+    render :channel
   end
 
   # delete post from a channel
@@ -90,18 +88,24 @@ class Api::V1::ChannelsController < ApplicationController
     entrance_hash = { target_type: 'Post', target_id: params[:target_id], channel: @channel }
     entrance = Entrance.where(entrance_hash)
     entrance.destroy_all if entrance.exists?
+
+    render :channel
   end
 
   def add_answer
     entrance_hash = { target_type: 'Answer', target_id: params[:target_id], channel: @channel }
     entrance = Entrance.where(entrance_hash)
     Entrance.create(entrance_hash) if entrance.empty?
+
+    render :channel
   end
 
   def delete_answer
     entrance_hash = { target_type: 'Answer', target_id: params[:target_id], channel: @channel }
     entrance = Entrance.where(entrance_hash)
     entrance.destroy_all if entrance.exists?
+
+    render :channel
   end
 
   private
