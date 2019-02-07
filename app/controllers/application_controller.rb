@@ -8,19 +8,14 @@ class ApplicationController < ActionController::Base
   # acts_as_token_authentication_handler_for User, fallback: :none # handles header authorization
   # for future reference: https://github.com/gonzalo-bulnes/simple_token_authentication include token in the header
 
-  # 하.... 
-  #   def current_user
-  #     # @current_user ||= User.find(payload.first['user_id'])
-  #     # respond_to :json
-  #     # if request.format.json?
-  #   # if request.path_parameters[:format] == 'json'
-  #     if !current_user
-  #       # @current_user ||= User.find(payload['user_id'])
-  #     end
-  #     # end
-  #       # respond_to :json
-  #   # end
-  # end
+  alias_method :devise_current_user, :current_user
+  def current_user
+    if request.path_parameters[:format] == 'json'
+      @current_user ||= User.find(payload['user_id'])
+    else
+      devise_current_user
+    end
+  end
 
   def unread
     arr = []
