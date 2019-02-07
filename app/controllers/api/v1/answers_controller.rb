@@ -1,5 +1,5 @@
 class Api::V1::AnswersController < ApplicationController
-  # before_action :authenticate_user!
+  # before_action :authenticate_user
   before_action :set_answer, only: %i[show edit update destroy]
   before_action :check_mine, only: %i[edit update destroy]
   before_action :check_accessibility, only: [:show]
