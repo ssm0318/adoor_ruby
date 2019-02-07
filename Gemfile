@@ -5,8 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'rubocop', '~> 0.63.1', require: false
 gem 'rack-cors', :require => 'rack/cors'
-gem 'jwt'
+gem 'jwt', '~> 2.1' # jwt.io
 gem 'ahoy_matey', '~> 2.2'
 gem 'jquery-turbolinks'
 gem 'active_link_to'
@@ -20,6 +21,7 @@ gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 gem 'time_difference' 
 gem 'devise'
+gem 'simple_token_authentication', '~> 1.0'
 gem 'pry-rails' 
 gem 'rails_db'
 gem 'rolify' #https://github.com/RolifyCommunity/rolify 
@@ -56,6 +58,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  # gem 'mailcatcher', '~> 0.6.1'
 end
 
 group :development do

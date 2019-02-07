@@ -5,6 +5,23 @@ class ApplicationController < ActionController::Base
   helper_method :noties
   helper_method :recent_noties
 
+  # acts_as_token_authentication_handler_for User, fallback: :none # handles header authorization
+  # for future reference: https://github.com/gonzalo-bulnes/simple_token_authentication include token in the header
+
+  # 하.... 
+  #   def current_user
+  #     # @current_user ||= User.find(payload.first['user_id'])
+  #     # respond_to :json
+  #     # if request.format.json?
+  #   # if request.path_parameters[:format] == 'json'
+  #     if !current_user
+  #       # @current_user ||= User.find(payload['user_id'])
+  #     end
+  #     # end
+  #       # respond_to :json
+  #   # end
+  # end
+
   def unread
     arr = []
     if !current_user.nil?
@@ -44,6 +61,16 @@ class ApplicationController < ActionController::Base
  
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :username])
+  end
+
+  private
+
+  def retrieve_token
+    request.headers['Authorization'].split(' ').last
+  end
+
+  def payload
+    JWT.decode retrieve_token, Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' }.first
   end
 end
 

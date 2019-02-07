@@ -98,9 +98,10 @@ Rails.application.routes.draw do
   get '/announcements/:id/noti' => 'announcements#noti', as: :announcement_noti
   
   namespace 'api' do
-    namespace 'v1' do
+    namespace 'v1', defaults: { format: :json } do
       # Sessions
-      resources :session, only: [:create, :destroy]
+      resource :session, only: [:create, :destroy, :show] # delete request가 실제로 user을 delete하는 것이 아니기 때문에 resources가 아니라 resource로 두는 것이 맞습니다. 고치지 말아주세요!
+      resources :users, only: [:create] 
 
       # Application
       get '/unread' => 'application#unread'
