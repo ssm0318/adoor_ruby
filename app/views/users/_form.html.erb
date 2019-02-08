@@ -4,7 +4,7 @@
     <div>
         <% u.hidden_field :id, :value => current_user.id %>
         <div>
-            <%= u.label "닉네임 (3~20글자)" %>
+            <%= u.label "닉네임 (3~20글자, 영문, 숫자, '_'만 가능)" %>
             <%= u.text_field :username, :required => true, :pattern => '[a-zA-Z0-9._]{3,20}', 
             :oninvalid => "setCustomValidity('사용자 이름에는 알파벳, 숫자, 밑줄(_) 및 마침표(.)만 사용할 수 있습니다.\n첫 글자와 마지막 글자는 마침표(.)가 될 수 없습니다.')", autocomplete: "off" %>
         </div>
