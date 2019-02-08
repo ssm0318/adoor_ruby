@@ -40,33 +40,33 @@
                 <% if noti.origin.likes.size == 1 %>
                     <% case noti.action %>
                     <% when 'friend_like_article' %>
-                        <strong><%=username%></strong>님이 당신의 글을 좋아했습니다: <%= message %>
+                        <p><strong><%=username%></strong>님이 당신의 글을 좋아했습니다: <%= message %></p>
                     <% when 'friend_like_comment' %>
-                        <strong><%=username%></strong>님이 당신의 댓글을 좋아했습니다: <%= message %>
+                        <p><strong><%=username%></strong>님이 당신의 댓글을 좋아했습니다: <%= message %></p>
                     <% when 'friend_like_reply'%>
-                        <strong><%=username%></strong>님이 당신의 대댓글을 좋아했습니다: <%= message %>
+                        <p><strong><%=username%></strong>님이 당신의 대댓글을 좋아했습니다: <%= message %></p>
                     <% when 'anonymous_like_article' %>
-                        누군가가 당신의 글을 좋아했습니다: <%= message %>
+                        <p>누군가가 당신의 글을 좋아했습니다: <%= message %></p>
                     <% when 'anonymous_like_comment' %>
-                        누군가가 당신의 댓글을 좋아했습니다: <%= message %>
+                        <p>누군가가 당신의 댓글을 좋아했습니다: <%= message %></p>
                     <% when 'anonymous_like_reply' %>
-                        누군가가 당신의 대댓글을 좋아했습니다: <%= message %>
+                        <p>누군가가 당신의 대댓글을 좋아했습니다: <%= message %></p>
                     <% else %>
                     <% end %>
                 <% else %>
                     <% case noti.action %>
                     <% when 'friend_like_article' %>
-                        <strong><%=username%></strong>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 글을 좋아했습니다: <%= message %>
+                        <p><strong><%=username%></strong>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 글을 좋아했습니다: <%= message %></p>
                     <% when 'friend_like_comment' %>
-                        <strong><%=username%></strong>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 댓글을 좋아했습니다: <%= message %>
+                        <p><strong><%=username%></strong>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 댓글을 좋아했습니다: <%= message %></p>
                     <% when 'friend_like_reply' %>
-                        <strong><%=username%></strong>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 대댓글을 좋아했습니다: <%= message %>
+                        <p><strong><%=username%></strong>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 대댓글을 좋아했습니다: <%= message %></p>
                     <% when 'anonymous_like_article' %>
-                        <%= noti.origin.likes.size %>명이 당신의 글을 좋아했습니다: <%= message %>
+                        <p><%= noti.origin.likes.size %>명이 당신의 글을 좋아했습니다: <%= message %></p>
                     <% when 'anonymous_like_comment' %>
-                        <%= noti.origin.likes.size %>명이 당신의 댓글을 좋아했습니다: <%= message %>
+                        <p><%= noti.origin.likes.size %>명이 당신의 댓글을 좋아했습니다: <%= message %></p>
                     <% when 'anonymous_like_reply' %>
-                        <%= noti.origin.likes.size %>명이 당신의 대댓글을 좋아했습니다: <%= message %>
+                        <p><%= noti.origin.likes.size %>명이 당신의 대댓글을 좋아했습니다: <%= message %></p>
                     <% else %>
                     <% end %>
                 <% end %>   
@@ -78,9 +78,9 @@
                         <% commenters_cnt -= 1 %>
                     <% end %>
                     <% if commenters_cnt == 1 %>
-                        <strong><%=username%></strong>님이 당신의 글 <%= message %>에 댓글을 남겼습니다.
+                        <p><strong><%=username%></strong>님이 당신의 글 <%= message %>에 댓글을 남겼습니다.</p>
                     <% else %>
-                        <strong><%=username%></strong>님 외 <%= commenters_cnt-1 %>명의 친구가 당신의 글 <%= message %>에 댓글을 남겼습니다. 
+                        <p><p><strong><%=username%></strong>님 외 <%= commenters_cnt-1 %>명의 친구가 당신의 글 <%= message %>에 댓글을 남겼습니다.</p>
                     <% end %>
                 <% elsif noti.action == 'anonymous_comment'%>
                     <% commenters_cnt = noti.origin.comments.anonymous.distinct.count('author_id') %>
@@ -88,9 +88,9 @@
                         <% commenters_cnt -= 1 %>
                     <% end %>
                     <% if commenters_cnt == 1 %>
-                        누군가가 당신의 글 <%= message %>에 익명댓글을 남겼습니다.
+                        <p>누군가가 당신의 글 <%= message %>에 익명댓글을 남겼습니다.</p>
                     <% else %>
-                        <%= commenters_cnt %>명이 당신의 글 <%= message %>에 익명댓글을 남겼습니다.
+                        <p><%= commenters_cnt %>명이 당신의 글 <%= message %>에 익명댓글을 남겼습니다.</p>
                     <% end %>
                 <% end %>
             <% when 'Reply' %>
@@ -102,9 +102,9 @@
                         <% repliers_cnt -= 1 %>
                     <% end %>
                     <% if repliers_cnt == 1 %>
-                        누군가가 당신의 익명댓글 <%= message %>에 대댓글을 남겼습니다.
+                        <p>누군가가 당신의 익명댓글 <%= message %>에 대댓글을 남겼습니다.</p>
                     <% else %>
-                        <%= repliers_cnt %>명이 당신의 익명댓글 <%= message %>에 대댓글을 남겼습니다.
+                        <p><%= repliers_cnt %>명이 당신의 익명댓글 <%= message %>에 대댓글을 남겼습니다.</p>
                     <% end%>
                 <%# when 'anonymous_to_author'%>
                     <%# 누군가가 당신의 글에 대댓글을 남겼습니다. %>
@@ -114,9 +114,9 @@
                         <% repliers_cnt -= 1 %>
                     <% end %>
                     <% if repliers_cnt == 1 %>
-                        <strong><%=username%></strong>님이 당신의 댓글에 대댓글을 남겼습니다.
+                        <p><strong><%=username%></strong>님이 당신의 댓글에 대댓글을 남겼습니다.</p>
                     <% else %>
-                        <strong><%=username%></strong>님 외 <%= repliers_cnt-1 %>명이 당신의 댓글에 대댓글을 남겼습니다. 
+                        <p><strong><%=username%></strong>님 외 <%= repliers_cnt-1 %>명이 당신의 댓글에 대댓글을 남겼습니다.</p>
                     <% end %>
                 <%# when 'friend_to_author' %>
                     <!--<%= username %>님이 당신의 글에 대댓글을 남겼습니다.-->
@@ -126,59 +126,54 @@
                         <% repliers_cnt -= 1 %>
                     <% end %>
                     <% if repliers_cnt == 1 %>
-                        <strong><%=username%></strong>님이 당신의 댓글에 대댓글을 남겼습니다.
+                        <p><strong><%=username%></strong>님이 당신의 댓글에 대댓글을 남겼습니다.</p>
                     <% else %>
-                        <strong><%=username%></strong>님 외 <%= repliers_cnt-1 %>명이 당신의 댓글에 대댓글을 남겼습니다.
+                        <p><strong><%=username%></strong>님 외 <%= repliers_cnt-1 %>명이 당신의 댓글에 대댓글을 남겼습니다.</p>
                     <% end %>
                 <% else %>
                 <% end %>
             <% when 'Drawer' %>
                 <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
                 <% if noti.origin.drawers.size == 1 %>
-                    당신의 글 <%= message %>이 누군가의 서랍장에 담겼습니다.
+                    <p>당신의 글 <%= message %>이 누군가의 서랍장에 담겼습니다.</p>
                 <% else %>
-                    <%= noti.origin.drawers.size %>명이 당신의 글 <%= message %>을 서랍장에 담았습니다.
+                    <p><%= noti.origin.drawers.size %>명이 당신의 글 <%= message %>을 서랍장에 담았습니다.</p>
                 <% end %>
             <% when 'CustomQuestion' %>
                 <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
                 <% if CustomQuestion.where(ancestor_id: noti.origin.id).size == 1 %>
-                    누군가가 당신의 질문 <%= message %>을 리포스팅했습니다.
+                    <p>누군가가 당신의 질문 <%= message %>을 리포스팅했습니다.</p>
                 <% else %>
-                    <%= CustomQuestion.where(ancestor_id: noti.origin.id).size %>명이 당신의 질문 <%= message %>을 리포스팅했습니다.
+                    <p><%= CustomQuestion.where(ancestor_id: noti.origin.id).size %>명이 당신의 질문 <%= message %>을 리포스팅했습니다.</p>
                 <% end %>
             <% when 'Assignment' %>
                 <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
-                <strong><%=username%></strong>님으로부터 새로운 질문이 도착했습니다: <%= message %>
+                <p><strong><%=username%></strong>님으로부터 새로운 질문이 도착했습니다: <%= message %></p>
             <% when 'Answer' %>
                 <% message = "\"" + noti.origin.question.content.truncate(30, separator: /\s/) + "\"" %>
-                <strong><%=username%></strong>님이 당신이 보낸 질문 <%= message %>에 답했습니다.
+                <p><strong><%=username%></strong>님이 당신이 보낸 질문 <%= message %>에 답했습니다.</p>
             <% when 'Friendship' %>
-                <strong><%=username%></strong>님과 친구가 되었습니다.
+                <p><strong><%=username%></strong>님과 친구가 되었습니다.</p>
             <% when 'FriendRequest'%>
-                <strong><%=username%></strong>님이 친구요청을 보냈습니다.
+                <p><strong><%=username%></strong>님이 친구요청을 보냈습니다.</p>
             <% when 'Announcement' %>
                 <% message = "\"" + noti.origin.title.truncate(30, separator: /\s/) + "\"" %>
                 <% case noti.action %>
                 <% when 'announcement'%>
-                    어도어에 새로운 공지가 있습니다: <%= message %>
+                    <p>어도어에 새로운 공지가 있습니다: <%= message %></p>
                 <% when 're_announcement' %>
-                    어도어에 당신의 소중한 의견을 남겨주세요.
+                    <p>어도어에 당신의 소중한 의견을 남겨주세요.</p>
                 <% else %>
                 <% end %>
             <% when 'Highlight' %>
-                <strong><%=username%></strong>님이 당신의 글을 highlight했습니다.
+                <p><strong><%=username%></strong>님이 당신의 글을 highlight했습니다.</p>
             <% else %>  
             <% end %>
-
-                <% if from == "layout" %>
-            <div class = "date time" style="display: block; font-size: 10px; text-align: right; color: #494949;">
-                <% elsif from == "index" %>
-            <div class = "date time">
-                <% end %>
-                
-                <%= time_tag noti.updated_at, class: "timeago" %>
-            </div>
-
         </div>
+
+        <div class = "date time">
+            <%= time_tag noti.updated_at, class: "timeago" %>
+        </div>
+
     </div>
 <% end %>
