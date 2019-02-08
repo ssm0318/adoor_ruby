@@ -417,6 +417,9 @@ div.background {
 //for mobile version
 @media only screen and (max-device-width: 500px) {
 
+    body {
+        -webkit-text-size-adjust:none;
+    }
     .inner-container {
         width: 100%;
     }
