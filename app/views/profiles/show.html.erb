@@ -7,7 +7,7 @@
         <% @feeds.each do |feed| %>
             <!-- custom question feed -->
             <% if feed.is_a? CustomQuestion %>
-                <div class="prism-box <%=feed.id%>">
+                <div class="prism-box custom-feed <%=feed.id%>">
                     <div class="prism-box__header">
                         <%= render partial: "./user_profile", locals: {user: feed.author} %>
                         <% if current_user.id == feed.author.id %>
@@ -56,7 +56,11 @@
 
             <!-- posting or Answer -->
             <% else %>
-                <div class="prism-box <%=feed.id%>">
+                <% if feed.is_a? Answer %>
+                    <div class="prism-box answer-feed <%=feed.id%>">
+                <% else %>
+                    <div class="prism-box post-feed <%=feed.id%>">
+                <% end %>
                     <div class="prism-box__header">
                         <%= render partial: "./user_profile", locals: {user: feed.author} %>
                         <% if current_user.id == feed.author.id %>

@@ -28,7 +28,7 @@
         
  
     <% @question.answers.reverse_each do |answer| %>
-        <div class="prism-box <%=answer.id%>">
+        <div class="prism-box answer-feed <%=answer.id%>">
             <div class="prism-box__header">
                 <% if current_user == answer.author or current_user.friends.include? answer.author %>
                     <%= render partial: "./user_profile", locals: {user: answer.author} %>
