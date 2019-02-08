@@ -2,7 +2,6 @@ class NotificationsController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @notifications = Notification.all
     end
     
     def read_all
@@ -121,7 +120,8 @@ class NotificationsController < ApplicationController
             when 'Answer'
                 render js: "window.location = '#{answer_path(origin_id)}'"
             when 'Friendship'
-                render js: "window.location = '#{profile_path(origin_id)}'"
+                username = User.find(origin_id).username
+                render js: "window.location = '#{profile_path(username)}'"
             # when 'Highlight'
             #     if origin_type == 'Post'
             #         redirect_to post_path(origin_id)
@@ -129,7 +129,8 @@ class NotificationsController < ApplicationController
             #         redirect_to answer_path(origin_id)
             #     end
             when 'FriendRequest'
-                render js: "window.location = '#{profile_path(origin_id)}'"
+                username = User.find(origin_id).username
+                render js: "window.location = '#{profile_path(username)}'"
             when 'Announcement'
                 render js: "window.location = '#{announcement_index_path}'"
             else

@@ -51,7 +51,7 @@ class UsersController < ApplicationController
             @error = @user.errors.full_messages[0]
             render 'edit'
         else
-            redirect_to profile_path(@user.id)
+            redirect_to profile_path(@user.username)
         end
     end
 
@@ -91,7 +91,7 @@ class UsersController < ApplicationController
         friendship = Friendship.where(friendship_hash)
         if friendship.empty?
             Friendship.create(friendship_hash)
-            redirect_to profile_path(params[:id])
+            redirect_back fallback_location: profile_path(params[:id])
         else
             friendship.destroy_all
             Friendship.where({user_id: params[:id], friend_id: current_user.id}).destroy_all
@@ -103,25 +103,12 @@ class UsersController < ApplicationController
             else
                 redirect_back fallback_location: profile_path(params[:id])
             end
-            
         end
-    end
-
-    def friend_request
-        friend_request_hash = {requester_id: current_user.id, requestee_id: params[:id]}
-
-        friend_request = FriendRequest.where(friend_request_hash)
-        if friend_request.empty?
-            FriendRequest.create(friend_request_hash)
-        else
-            friend_request.destroy_all
-        end
-        redirect_back fallback_location: profile_path(params[:id])
     end
 
     private
         def set_user
-            @user = User.find(params[:id])
+            @user = User.friendly.find(params[:id])
         end
 
         def user_params
@@ -134,7 +121,7 @@ class UsersController < ApplicationController
 
         def check_user
             if @user != current_user
-                redirect_to edit_user_profile_url(current_user.id)
+                redirect_to edit_user_profile_url(current_user.username)
             end
         end
 end

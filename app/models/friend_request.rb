@@ -5,6 +5,8 @@ class FriendRequest < ApplicationRecord
     after_create :create_notifications
     after_destroy :destroy_notifications
 
+    scope :visible, -> { where(invisible: false) }
+
     private
 
     # 친추 보내면 친추 받은 사람에게 보내지는 노티 생성

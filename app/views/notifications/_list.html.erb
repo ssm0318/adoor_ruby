@@ -1,0 +1,179 @@
+<% notifications.each do |noti| %>
+    <% user = User.find(noti.actor_id)%>
+    <% username = user.username %>
+
+            <% if from == "layout" %>
+        <% if noti.read_at != nil %>
+    <div class="noti-el" data-url="/notifications/<%=noti.id%>">
+        <% else %>
+    <div class="noti-el unread" data-url="/notifications/<%=noti.id%>">
+        <% end %>
+            <% elsif from == "index" %>
+        <% if noti.read_at != nil %>
+    <div class="noti-box" data-url="/notifications/<%=noti.id%>">
+        <% else %>
+    <div class="noti-box unread" data-url="/notifications/<%=noti.id%>">
+        <% end %>
+            <% end %>
+
+        <div class="noti-image">
+            <% if noti.target_type == 'Drawer' || noti.target_type == 'CustomQuestion' || (noti.action? && noti.action.start_with?("anonymous")) %>
+                <%# color = user.id + noti.target.id %>
+                <%# r = color * color *color % 256 %>
+                <%# g = (r * color) % 256 %>
+                <%# b = (g * color) % 256 %>
+                <button class="noti-image-anonymous" style="background-color: #072e75; "></button>
+            <% else %>
+                <%= image_tag user.image.url, class: "noti-image-named" %>
+            <% end %>
+        </div>
+
+            <% if from == "layout" %>
+        <div class="noti-text">
+            <% elsif from == "index" %>
+        <div class="noti-box-text">
+            <% end %>
+
+            <% case noti.target_type%>
+            <% when 'Like' %>
+                <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
+                <% if noti.origin.likes.size == 1 %>
+                    <% case noti.action %>
+                    <% when 'friend_like_article' %>
+                        <p><strong><%=username%></strong>님이 당신의 글을 좋아했습니다: <%= message %></p>
+                    <% when 'friend_like_comment' %>
+                        <p><strong><%=username%></strong>님이 당신의 댓글을 좋아했습니다: <%= message %></p>
+                    <% when 'friend_like_reply'%>
+                        <p><strong><%=username%></strong>님이 당신의 대댓글을 좋아했습니다: <%= message %></p>
+                    <% when 'anonymous_like_article' %>
+                        <p>누군가가 당신의 글을 좋아했습니다: <%= message %></p>
+                    <% when 'anonymous_like_comment' %>
+                        <p>누군가가 당신의 댓글을 좋아했습니다: <%= message %></p>
+                    <% when 'anonymous_like_reply' %>
+                        <p>누군가가 당신의 대댓글을 좋아했습니다: <%= message %></p>
+                    <% else %>
+                    <% end %>
+                <% else %>
+                    <% case noti.action %>
+                    <% when 'friend_like_article' %>
+                        <p><strong><%=username%></strong>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 글을 좋아했습니다: <%= message %></p>
+                    <% when 'friend_like_comment' %>
+                        <p><strong><%=username%></strong>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 댓글을 좋아했습니다: <%= message %></p>
+                    <% when 'friend_like_reply' %>
+                        <p><strong><%=username%></strong>님 외 <%= noti.origin.likes.size-1 %>명이 당신의 대댓글을 좋아했습니다: <%= message %></p>
+                    <% when 'anonymous_like_article' %>
+                        <p><%= noti.origin.likes.size %>명이 당신의 글을 좋아했습니다: <%= message %></p>
+                    <% when 'anonymous_like_comment' %>
+                        <p><%= noti.origin.likes.size %>명이 당신의 댓글을 좋아했습니다: <%= message %></p>
+                    <% when 'anonymous_like_reply' %>
+                        <p><%= noti.origin.likes.size %>명이 당신의 대댓글을 좋아했습니다: <%= message %></p>
+                    <% else %>
+                    <% end %>
+                <% end %>   
+            <% when 'Comment' %>
+                <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
+                <% if noti.action == 'friend_comment' %>
+                    <% commenters_cnt = noti.origin.comments.named.distinct.count('author_id') %>
+                    <% if !noti.origin.comments.named.where(author: current_user).empty? %>
+                        <% commenters_cnt -= 1 %>
+                    <% end %>
+                    <% if commenters_cnt == 1 %>
+                        <p><strong><%=username%></strong>님이 당신의 글 <%= message %>에 댓글을 남겼습니다.</p>
+                    <% else %>
+                        <p><p><strong><%=username%></strong>님 외 <%= commenters_cnt-1 %>명의 친구가 당신의 글 <%= message %>에 댓글을 남겼습니다.</p>
+                    <% end %>
+                <% elsif noti.action == 'anonymous_comment'%>
+                    <% commenters_cnt = noti.origin.comments.anonymous.distinct.count('author_id') %>
+                    <% if !noti.origin.comments.anonymous.where(author: current_user).empty? %>
+                        <% commenters_cnt -= 1 %>
+                    <% end %>
+                    <% if commenters_cnt == 1 %>
+                        <p>누군가가 당신의 글 <%= message %>에 익명댓글을 남겼습니다.</p>
+                    <% else %>
+                        <p><%= commenters_cnt %>명이 당신의 글 <%= message %>에 익명댓글을 남겼습니다.</p>
+                    <% end %>
+                <% end %>
+            <% when 'Reply' %>
+                <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
+                <% case noti.action %>
+                <% when 'anonymous_to_comment'%>
+                    <% repliers_cnt = noti.origin.replies.anonymous.distinct.count('author_id') %>
+                    <% if !noti.origin.replies.anonymous.where(author: current_user).empty? %>
+                        <% repliers_cnt -= 1 %>
+                    <% end %>
+                    <% if repliers_cnt == 1 %>
+                        <p>누군가가 당신의 익명댓글 <%= message %>에 대댓글을 남겼습니다.</p>
+                    <% else %>
+                        <p><%= repliers_cnt %>명이 당신의 익명댓글 <%= message %>에 대댓글을 남겼습니다.</p>
+                    <% end%>
+                <%# when 'anonymous_to_author'%>
+                    <%# 누군가가 당신의 글에 대댓글을 남겼습니다. %>
+                <% when 'friend_to_comment' %>
+                    <% repliers_cnt = noti.origin.replies.named.distinct.count('author_id') %>
+                    <% if !noti.origin.replies.named.where(author: current_user).empty? %>
+                        <% repliers_cnt -= 1 %>
+                    <% end %>
+                    <% if repliers_cnt == 1 %>
+                        <p><strong><%=username%></strong>님이 당신의 댓글에 대댓글을 남겼습니다.</p>
+                    <% else %>
+                        <p><strong><%=username%></strong>님 외 <%= repliers_cnt-1 %>명이 당신의 댓글에 대댓글을 남겼습니다.</p>
+                    <% end %>
+                <%# when 'friend_to_author' %>
+                    <!--<%= username %>님이 당신의 글에 대댓글을 남겼습니다.-->
+                <% when 'friend_to_recomment' %>
+                    <% repliers_cnt = noti.origin.replies.where(target_author: current_user).distinct.count('author_id') %>
+                    <% if !noti.origin.replies.where(target_author: current_user).where(author: current_user).empty? %>
+                        <% repliers_cnt -= 1 %>
+                    <% end %>
+                    <% if repliers_cnt == 1 %>
+                        <p><strong><%=username%></strong>님이 당신의 댓글에 대댓글을 남겼습니다.</p>
+                    <% else %>
+                        <p><strong><%=username%></strong>님 외 <%= repliers_cnt-1 %>명이 당신의 댓글에 대댓글을 남겼습니다.</p>
+                    <% end %>
+                <% else %>
+                <% end %>
+            <% when 'Drawer' %>
+                <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
+                <% if noti.origin.drawers.size == 1 %>
+                    <p>당신의 글 <%= message %>이 누군가의 서랍장에 담겼습니다.</p>
+                <% else %>
+                    <p><%= noti.origin.drawers.size %>명이 당신의 글 <%= message %>을 서랍장에 담았습니다.</p>
+                <% end %>
+            <% when 'CustomQuestion' %>
+                <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
+                <% if CustomQuestion.where(ancestor_id: noti.origin.id).size == 1 %>
+                    <p>누군가가 당신의 질문 <%= message %>을 리포스팅했습니다.</p>
+                <% else %>
+                    <p><%= CustomQuestion.where(ancestor_id: noti.origin.id).size %>명이 당신의 질문 <%= message %>을 리포스팅했습니다.</p>
+                <% end %>
+            <% when 'Assignment' %>
+                <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
+                <p><strong><%=username%></strong>님으로부터 새로운 질문이 도착했습니다: <%= message %></p>
+            <% when 'Answer' %>
+                <% message = "\"" + noti.origin.question.content.truncate(30, separator: /\s/) + "\"" %>
+                <p><strong><%=username%></strong>님이 당신이 보낸 질문 <%= message %>에 답했습니다.</p>
+            <% when 'Friendship' %>
+                <p><strong><%=username%></strong>님과 친구가 되었습니다.</p>
+            <% when 'FriendRequest'%>
+                <p><strong><%=username%></strong>님이 친구요청을 보냈습니다.</p>
+            <% when 'Announcement' %>
+                <% message = "\"" + noti.origin.title.truncate(30, separator: /\s/) + "\"" %>
+                <% case noti.action %>
+                <% when 'announcement'%>
+                    <p>어도어에 새로운 공지가 있습니다: <%= message %></p>
+                <% when 're_announcement' %>
+                    <p>어도어에 당신의 소중한 의견을 남겨주세요.</p>
+                <% else %>
+                <% end %>
+            <% when 'Highlight' %>
+                <p><strong><%=username%></strong>님이 당신의 글을 highlight했습니다.</p>
+            <% else %>  
+            <% end %>
+        </div>
+
+        <div class = "date time">
+            <%= time_tag noti.updated_at, class: "timeago" %>
+        </div>
+
+    </div>
+<% end %>

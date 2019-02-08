@@ -1,0 +1,2 @@
+$('#infinite-feeds').append('<%= j render partial: 'feeds/general_index', locals: {feeds: @feeds} %>');
+$('.pagination').replaceWith('<%= j will_paginate(@feeds) %>');

@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
             like_url: likes_path(target_id: c.id, target_type: 'Comment'), 
             like_changed_url: like_path(c.id, target_type: 'Comment'),
             profile_img_url: current_user.image.url,
-            profile_path: profile_path(current_user.id),
+            profile_path: profile_path(current_user.username),
             username: current_user.username
         }
         

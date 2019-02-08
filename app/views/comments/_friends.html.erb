@@ -1,8 +1,8 @@
 <div class="comment">
      <div class = "comment-content">
-            <%= link_to image_tag(c.author.image.url, class: "user-profile"), profile_path(c.author.id) %>
+            <%= link_to image_tag(c.author.image.url, class: "user-profile"), profile_path(c.author.username) %>
             <span class="comment-text">
-                <%= link_to c.author.username, profile_path(c.author.id), class: "username" %>
+                <%= link_to c.author.username, profile_path(c.author.username), class: "username" %>
                 <% if c.secret %>
                     <%= image_tag("icons/lock-icon.png", class: "lock-icon")%>
                 <% end %>

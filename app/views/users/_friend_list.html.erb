@@ -1,13 +1,13 @@
 <div class = "friend-box-invitation">
-    <%= link_to "+ 친구 초대하기", invitation_path, class: "btn-invitation" %>
+    <%= link_to "+ 친구 초대하기", invitations_path, class: "btn-invitation" %>
 </div>
 <% friends_with_channels.each do |friend_with_channels| %>
     <% friend = friend_with_channels[:friend] %>
     <div class="friend-box-with-edit"> 
         <div class="friend-box <%=friend.id%>">
             <div class="friend-box-userprofile">
-                <%= link_to image_tag(friend.image.url, class:"friend-box-image"), profile_path(friend.id) %>
-                <%= link_to friend.username, profile_path(friend.id), class: "user-name" %>
+                <%= link_to image_tag(friend.image.url, class:"friend-box-image"), profile_path(friend.username) %>
+                <%= link_to friend.username, profile_path(friend.username), class: "user-name" %>
             </div>
             <button data-url="<%=add_friend_path(friend.id)%>" class="btn-friend-remove" >친구 끊기</button>
             <%friend_with_channels[:channels].each do |channel| %>
