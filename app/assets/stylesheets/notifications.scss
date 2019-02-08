@@ -101,6 +101,19 @@
     }
 }
 
+.noti-link {
+    color: gray;
+    &:hover {
+        color: #5e5e5e;
+        text-decoration: none;
+    }
+}
+
+.noti-link.active {
+    color: #4f4f4f;
+    font-weight: bold;
+}
+
 .noti-box {
     background-color: white;
     width: 100%;

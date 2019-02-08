@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   get '/likes/:target_type/:target_id' => 'likes#likes_info'
 
   # Assignment
+  get '/assignments' => 'assignments#index', as: :assignments
   get '/assignments/:question_id' => 'assignments#new', as: :new_assignment
   post '/assignments/:assignee_id/:question_id' => 'assignments#create', as: :create_assignment # get?
   delete '/assignments/:assignee_id/:question_id' => 'assignments#destroy', as: :destroy_assignment
@@ -53,8 +54,8 @@ Rails.application.routes.draw do
   resources :highlights, only: [:create, :destroy]
 
   # Notification
+  get '/notifications' => 'notifications#index' , as: :notifications
   get '/notifications/read_all' => 'notifications#read_all', as: :notification_read_all
-  get '/notifications/index' => 'notifications#index' , as: :notification_index 
   get '/notifications/:id' => 'notifications#read'
 
   # Profile
@@ -71,11 +72,16 @@ Rails.application.routes.draw do
   put '/users/:id/image_upload' => 'users#image_upload', as: :image_upload
   # put '/users/:id/upload_image' => 'users#update', as: :upload_image
   post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend # get?
-  post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request # get?
+  # post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request_send # get?
   
+  # FriendRequest
+  resources :friend_requests, only: [:destroy]
+  get '/friend_requests' => 'friend_requests#index', as: :friend_requests
+  post '/friend_requests/:id' => 'friend_requests#create', as: :friend_request_create
+  put '/friend_requests/:id/deny' => 'friend_requests#deny', as: :friend_request_deny
 
   # Invitation
-  get '/invitations' => 'invitations#index', as: :invitation
+  get '/invitations' => 'invitations#index', as: :invitations
   get '/invitations/link' => 'invitations#link', as: :invitation_link
   get '/invitations/:id(/:question_id1(/:question_id2(/:question_id3)))' => 'invitations#accept', as: :invitation_accept
 

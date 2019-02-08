@@ -11,7 +11,7 @@
     <div class="noti-header">
         <% if recent_noties.size > 0 %>
             <%= link_to "모두 읽음 표시", notification_read_all_path, class: "noti-read-text hover-orange" %>
-            <%= link_to "알림 모두 보기", notification_index_path, class: "noti-index-link hover-orange" %>
+            <%= link_to "알림 모두 보기", notifications_path, class: "noti-index-link hover-orange" %>
         <% else %>
             알림이 없습니다.
         <% end %>

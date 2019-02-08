@@ -1,5 +1,5 @@
 <div class = "inner-container">
-    <div class="prism-title" style = "margin-bottom: 20px"><h1>나의 알림</h1></div>
+    <%= render partial: "header" %>
     <% if noties.size > 0 %>
         <%= link_to "모두 읽음 표시", notification_read_all_path, id: "noti-index-read-text" %>
     <% end%>
