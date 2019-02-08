@@ -36,7 +36,7 @@
     border: none;
     border-radius: 10px;
     padding-bottom: 25px;
-    font-size: 18px;
+    font-size: 15px;
     
 }
 
@@ -67,14 +67,14 @@
     line-height: 30px;
     text-align: center;
     margin-top: -50px;
-    font-size: 15px;
+    font-size: 16px;
     width: 70%;
 
 }
 
 .intro-topic {
     font-weight: 500;
-    font-size: 28px;
+    font-size: 25px;
     color: #F48462;
 
 }
@@ -90,14 +90,14 @@
 .intro-accent {
     //font-weight: bold;
     //color: rgb(245, 154, 126);
-    font-size: 18px;
+    font-size: 16px;
     text-decoration: none;
     border-bottom: 1px solid #F48462;
     padding-bottom: 2px;
 }
 
 .intro-link {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     color: black;
     &:hover {
@@ -106,7 +106,7 @@
 }
 
 .contact-link {
-    font-size: 20px;
+    font-size: 18px;
     color:#F48462;
     &:hover {
         text-decoration: none;
@@ -127,7 +127,7 @@
     .intro-container {
         width: 95%;
         font-size: 25px;
-        margin-top: 550px;
+        margin-top: 50px;
         height: 50%;
         overflow: scroll;
     }
@@ -136,17 +136,17 @@
         //display: none;
         position: absolute;
         top: 155px;
-        width: 90%;
-        left: 50%;
+        width: 95%;
+        left: 47.5%;
         margin-left: -45%;
     }
 
     #intro-tc-title {
-        font-size: 50px;
+        font-size: 36px;
     }
 
     .intro-tc-el {
-        font-size: 35px;
+        font-size: 28px;
         line-height: 50px;
     }
 
