@@ -30,8 +30,8 @@ function edit_modal(event) {
                     data: form.serialize(),
                     success: function(data) {
                     console.log("successed")
-                        $(`.prism-box.${data.id}`).find(".answer").html(form.find(".new-answer-field").val())
-                        $(`.prism-box.${data.id}`).find(".feed-channels").html("공개그룹: " + data.channels)
+                        $(`.prism-box.${data.type}.${data.id}`).find(".answer").html(form.find(".new-answer-field").val())
+                        $(`.prism-box.${data.type}.${data.id}`).find(".feed-channels").html('<strong style = "padding-right: 10px; color: #4f4f4f;">공개그룹</strong>' + data.channels)
                         html.remove()
                         $("#edit-background").hide()
                         $("body").css('overflow', 'auto')
