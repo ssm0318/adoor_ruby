@@ -155,6 +155,12 @@
             padding-right: 25px;
             padding-top: 5px;
         }
+
+        .login {
+            color: white; 
+            font-size: 15px; 
+            padding-top: 10px;
+        }
     
         .my-page-btn {
             padding: 6px 25px 10px 0px;
@@ -459,12 +465,17 @@ div.background {
             zoom: 1.2;
         }
 
-        .nav-link .login {
-            font-size: 15px;
-        }
-
         .mr-auto-custom {
             top: 15px !important;
+
+            .logout {
+                display: none;
+            }
+
+            .login {
+                font-size: 20px;
+                padding-top: 5px;
+            }
 
             .search-input {
                 height: 32px;
