@@ -1,5 +1,5 @@
 class Api::V1::NotificationsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     @notifications = Notification.all
@@ -25,6 +25,26 @@ class Api::V1::NotificationsController < ApplicationController
         noti.save(touch: false) # updated_at을 update하지 않기 위해!!
       end
 
-      render :read
+      render :read, { notification: noti }
   end
+
+  # private
+
+  # def authenticate_user
+  #   user_token = request.headers['X-USER-TOKEN']
+  #   if user_token
+  #     @user = User.find_by_token(user_token)
+  #     #Unauthorize if a user object is not returned
+  #     if @user.nil?
+  #       return unauthorize
+  #     end
+  #   else
+  #     return unauthorize
+  #   end
+  # end
+
+  # def unauthorize
+  #   head status: :unauthorized
+  #   return false
+  # end
 end
