@@ -30,7 +30,8 @@ $(document).on('turbolinks:load', function()  {
                     toggle_channels_dropdown(html.find(".channels-dropdown"))
                     $("#edit-background").show()
                     $("body").css('overflow', 'hidden')
-                    textarea_init($(html.find('textarea')), $("#edit-background"))
+                    // textarea_init($(html.find('textarea')), $("#edit-background"))
+                    autosize(html.find('textarea'))
                     
                     //편집 완료
                     $(".new_answer").submit( function(e) {
@@ -78,7 +79,8 @@ $(document).on('turbolinks:load', function()  {
                     toggle_channels_dropdown(html.find(".channels-dropdown"))
                     $("#edit-background").show()
                     $("body").css('overflow', 'hidden')
-                    textarea_init($(html.find('textarea')), $("#edit-background"))
+                    // textarea_init($(html.find('textarea')), $("#edit-background"))
+                    autosize(html.find('textarea'))
                     
                     //편집 완료
                     $(".new_answer").submit( function(e) {

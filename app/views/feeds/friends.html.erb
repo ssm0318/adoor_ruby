@@ -14,8 +14,7 @@
 
 <script>
   check_channels($(".answer-button"))
-  textarea_init($('#new-post-form').find("textarea"), window)
-  textarea_init($('#new-custom-question-form').find("textarea"), window)
+  autosize($("textarea"))
   toggle_channels_dropdown($(".channels-dropdown"))
 
   $(".posting").on('click', function () {
@@ -39,7 +38,6 @@
   })
 </script>
 <script>
-  var ENTERKEY = false;
 
   $("#tags input").on({
     focusout : function() {
@@ -55,35 +53,23 @@
       }
 
       this.value = "";
-      // $(this).focus()
     },
     keyup : function(e) {
       // if: comma|enter (delimit more keyCodes with | pipe)
-      if(/(188)/.test(e.which)) $(this).focusout(); 
+      if(/(188|13)/.test(e.which)) $(this).focusout(); 
     }
   });
-  // $('#tags').on('click', '.tag', function() {
-  //   $(this).remove(); 
-  // });
-
-  $(".new_custom_question").on('keypress', function(e) {
-    ENTERKEY = e.keyCode == 13
-  })
 
   $(".new_custom_question").submit(function(e) {
-    // console.log("say hi")
     e.preventDefault();
-    if(ENTERKEY) return;
     form = $(this)
 
     var tag_string = ""
     $("#tags").find(".tag").each(function() {
-      console.log($(this).text())
       tag_string += $(this).text() + '\r\n'
     })
 
     form.find("#custom_question_tag_string").val(tag_string)
-    console.log(form.find("#custom_question_tag_string").val())
 
     $.ajax({
         type: "POST",
@@ -96,7 +82,6 @@
             console.log("error!")
         }
     })
-    console.log(tag_string)
   })
 </script>
 

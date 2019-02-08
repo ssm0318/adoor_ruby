@@ -6,6 +6,7 @@ class Question < ApplicationRecord
 
     scope :search_tag, -> (tag) { joins(:tags).where("tags.content LIKE ? ", "%#{tag}%").distinct }
     scope :popular_questions, -> { joins(:answers).group("answers.question_id").order("count(answers.question_id) desc").take(7) }
+    scope :published, -> { where.not(selected_date: nil) }
 
     # after_create :create_notifications
 

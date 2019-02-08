@@ -1,0 +1,33 @@
+<div class = "question-box"> 
+    <% if !reposting %>
+        <% if custom_question.ancestor_id == nil %>
+            <!-- 공개그룹만 수정 가능 -->
+            <%= form_for custom_question, html: {class: 'edit_repost'} do |f| %> <!-- update로 -->
+                <%= render partial: "channels/select_channels", locals: {article: custom_question, reposting: reposting} %>
+                <%= f.submit "저장", class: "answer-button"%>
+            <% end %>
+        <% else %>
+            <p class = "question">
+                <%= custom_question.content %>
+            </p>
+            <%= form_for custom_question, html: {class: 'edit_repost'} do |f| %> <!-- update로 -->
+                <%= f.text_area :repost_message, required: false, class: "new-answer-field", placeholder: "공유 메세지", "data-enable-grammarly": "false", autocomplete: "off" %>
+                <br><br>
+                <%= render partial: "channels/select_channels", locals: {article: custom_question, reposting: reposting} %>
+                <%= f.submit "저장", class: "answer-button"%>
+            <% end %>
+        <% end %>
+
+    <% else %>
+        <p class = "question">
+            <%= ancestor.content %>
+        </p>
+        <%= form_for custom_question, url: custom_question_repost_url(ancestor), html: {class: 'new_repost'} do |f| %> <!-- repost_create로 -->
+            <%= text_area_tag :repost_message, "", required: false, class: "new-answer-field", placeholder: "공유 메세지", "data-enable-grammarly": "false", autocomplete: "off" %>
+            <%= hidden_field_tag "ancestor_id", ancestor.id %>
+            <br><br>
+            <%= render partial: "channels/select_channels", locals: {article: custom_question, reposting: reposting} %>
+            <%= f.submit "저장", class: "answer-button"%>
+        <% end %>
+    <% end %>
+</div>

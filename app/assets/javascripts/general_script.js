@@ -76,7 +76,8 @@ $(document).on('turbolinks:load', function()  {
       var form = $(this)
       var form_data = form.serialize()
       form.find(".prism-form__comment").val('')
-
+      autosize.update(form.find(".prism-form__comment"))
+      
       $.ajax({
         type: "POST",
         url: form.attr('action'),
@@ -134,7 +135,8 @@ $(document).on('turbolinks:load', function()  {
             form.parent().find(".anonymous-comments").append(html)
 
             btn_show_like.one('click', show_likes)
-            textarea_init(html.find(".prism-form__comment"), window)
+            // textarea_init(html.find(".prism-form__comment"), window)
+            autosize(html.find(".prism-form__comment"))
             like_ajax(btn_like)
             delete_ajax(html.find(".btn-comment-delete"))
             html.find("time.timeago").timeago();
@@ -152,6 +154,7 @@ $(document).on('turbolinks:load', function()  {
               var new_form = $(this)
               var new_form_data = new_form.serialize()
               new_form.find(".prism-form__comment").val('')
+              autosize.update(new_form.find(".prism-form__comment"))
 
               $.ajax({
                 type: "POST",

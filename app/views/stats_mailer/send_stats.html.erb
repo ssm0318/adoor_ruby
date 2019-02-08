@@ -22,7 +22,7 @@
 
         인기 많은 질문<br>
         <% Question.popular_questions.each do |question| %>
-          -<%= question.content %><br>
+          -"<%= question.content %>": <%= question.answers.size %>개 답변<br>
         <% end %><br>
 
         인기 많은 태그 (관리자 질문 태그 제외)<br>

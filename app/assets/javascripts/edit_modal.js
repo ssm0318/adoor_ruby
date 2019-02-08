@@ -15,7 +15,8 @@ function edit_modal(event) {
             $("#edit-background").show()
             $("body").css('overflow', 'hidden')
             form.one('click', edit_modal)
-            textarea_init($(html.find('textarea')), $("#edit-background"))
+            // textarea_init($(html.find('textarea')), $("#edit-background"))
+            autosize(html.find('textarea'))
             
             //편집 완료
             $(".edit_answer, .edit_post, .edit_repost").submit( function(e) {

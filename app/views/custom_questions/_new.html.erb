@@ -5,27 +5,12 @@
         <!-- FIXME: answer쓰는 form에도 이거 넣어주기 -->
         <%# f.text_area :tag_string %>
         <%= f.hidden_field :tag_string, :value => "" %>
-        <div id="tags">
-            <span id="tag-title">태그</span>
-            <input id="tags_input" type="text" value="" />
-        </div>
-        <div id="tags-info-alert">태그를 쉼표로 구분하여 입력해주세요.</div>
-        <!-- FIXME: checkbox가 /posts/form과 왜때무네 연동되는 것? -->
-        <div class = "channels channels-custom-question">
-            <span  class="channels-dropdown hover-orange">공개그룹</span>
-            <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
-            <!-- TODO: 채널이 많아질 경우 style -->
-            <div class="channels-dropdown-content">
-                <span class="btn-select-all-channels">전체선택</span>
-                <% label_id = "custom_question" %>
-                <% current_user.channels.each do |channel| %>
-                    <%= check_box_tag "c[]", channel.id, 
-                        !(channel.name=="익명피드" || channel.name=="나"),
-                        id: channel.id.to_s + label_id, class: "channel-el" %>
-                    <%= label_tag channel.id.to_s + label_id, channel.name, class: "channel-el" %>
-                <% end %>
-            </div>
-        </div>
+        <%= render partial: "channels/select_channels", locals: {article: custom_question, reposting: false}%>
         <%= f.submit "저장", class: "answer-button"%>
     <% end %>
+    <div id="tags">
+        <span id="tag-title">태그</span>
+        <input id="tags_input" type="text" value=""/>
+    </div>
+    <div id="tags-info-alert">태그를 엔터 또는 쉼표로 구분하여 입력해주세요.</div>
 </div>
