@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+    before_action :check_query
+
     def all
         @query = params[:query]
         Query.create(user: current_user, content: @query)
@@ -112,5 +114,13 @@ class SearchController < ApplicationController
         @results = User.where("username LIKE ? ", "%#{@query}%").order(:username)
 
         render 'user'
+    end
+
+    private
+
+    def check_query
+        if params[:query] == ""
+            redirect_back fallback_location: root_url
+        end
     end
 end
