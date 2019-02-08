@@ -1,0 +1,6 @@
+<div class="prism-title" style = "margin-bottom: 20px"><h1>나의 알림</h1></div>
+<div>
+    <%= active_link_to '전체', notifications_path, class: "noti-link", active: :exclusive %>&nbsp; |&nbsp; 
+    <%= active_link_to '친구 요청', friend_requests_path, class: "noti-link" %>&nbsp; |&nbsp; 
+    <%= active_link_to '받은 질문', assignments_path, class: "noti-link", active: :exclusive %><br><br>
+</div>

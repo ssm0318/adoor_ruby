@@ -1,0 +1,19 @@
+<div class = "inner-container">
+    <%= render partial: "notifications/header" %>
+    <% if @friend_requests.empty? %>
+        친구 요청이 없습니다.
+    <% end %>
+    <% @friend_requests.each do |f| %>
+        <% requester = f.requester%>
+        <div class="fr-box">
+            <div class="requester">
+                <%= link_to image_tag(requester.image.url, class: "fr-image"), profile_path(requester.id) %>
+                <%= link_to requester.username, profile_path(requester.id), class: "fr-username" %>
+            </div>
+            <div class="buttons">
+                <%= link_to "수락", add_friend_path(requester.id), method: :post, class: "fr-btn" %>
+                <%= link_to "삭제", friend_request_deny_path(f.id), method: :put, class: "fr-btn"%>
+            </div>
+        </div>
+    <% end %>
+</div>
