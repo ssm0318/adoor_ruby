@@ -36,7 +36,6 @@
             <div id = "profile__friends-setting">
                 <% if current_user.id == user.id %>
                     <%= link_to "친구 관리", friends_path(), id: "profile__friends-setting-btn" %>
-                <!-- 이 부분 나중에 친구 리스트로 옮기고 싶다 -->
                 <% else %>
                     <% if !user.friends.include? current_user %>
                         <% if FriendRequest.where(requester_id: user.id, requestee_id: current_user.id).exists? %>

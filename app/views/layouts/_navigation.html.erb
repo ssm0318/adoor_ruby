@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-orange">
   <a class="navbar-brand" href= "<%= root_path %>">
-    <%= image_tag("logo/logo-no-margin.png") %>
+    <%= image_tag("logo/light-version-logo.png") %>
   </a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
@@ -21,13 +21,18 @@
             <%= active_link_to '공지 관리', announcement_admin_index_path, class: "nav-link"%>
         </li>
     <% end %>
+    <% if user_signed_in? %>
+        <li class="nav-item logout-toggle">
+            <%= link_to '로그아웃', destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>
+    <% end %>
     </ul>
   </div>
   <div class ="mr-auto-custom">
     <% if user_signed_in? %>
         <%= render 'layouts/searchbar' %>
-        <div class="nav-item"><a class="nav-link logout" href="<%=destroy_user_session_path%>" data-method = "delete">로그아웃</a></div>
-        <a class="my-page-btn" href="<%=profile_path(current_user.username)%>">
+        <div class="nav-item logout"><a class="nav-link logout" href="<%=destroy_user_session_path%>" data-method = "delete">로그아웃</a></div>
+        <a class="my-page-btn" href="<%=profile_path(current_user.id)%>">
             <%= image_tag(current_user.image.url) %>
         </a>
         <%= render 'layouts/notification' %>
