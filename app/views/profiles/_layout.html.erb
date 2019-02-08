@@ -43,9 +43,10 @@
                         <% if FriendRequest.where(requester_id: user.id, requestee_id: current_user.id).exists? %>
                             <%= link_to "친구수락", add_friend_path(user.id), method: :post, id: "profile__friends-setting-btn" %>
                         <% elsif FriendRequest.where(requester_id: current_user.id, requestee_id: user.id).exists? %>
-                            <%= link_to "친구요청 취소", friend_request_path(user.id), method: :post, id: "profile__friends-setting-btn" %>
+                            <% fr_id = FriendRequest.where(requester_id: current_user.id, requestee_id: user.id).first.id %>
+                            <%= link_to "친구요청 취소", friend_request_path(fr_id), method: :delete, id: "profile__friends-setting-btn" %>
                         <% else %>
-                            <%= link_to "친구요청", friend_request_path(user.id), method: :post, id: "profile__friends-setting-btn" %>
+                            <%= link_to "친구요청", friend_request_create_path(user.id), method: :post, id: "profile__friends-setting-btn" %>
                         <% end %>
                     <% else %>
                         <%= link_to "친구 끊기", add_friend_path(user.id), method: :post, id: "profile__friends-setting-btn" %>

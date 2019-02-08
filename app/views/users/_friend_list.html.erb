@@ -1,5 +1,5 @@
 <div class = "friend-box-invitation">
-    <%= link_to "+ 친구 초대하기", invitation_path, class: "btn-invitation" %>
+    <%= link_to "+ 친구 초대하기", invitations_path, class: "btn-invitation" %>
 </div>
 <% friends_with_channels.each do |friend_with_channels| %>
     <% friend = friend_with_channels[:friend] %>

@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20190208042055) do
+=======
+ActiveRecord::Schema.define(version: 20190208035026) do
+>>>>>>> 71fbb1757b06bc4c1947bdadf18076342a9e90fa
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
@@ -155,6 +159,7 @@ ActiveRecord::Schema.define(version: 20190208042055) do
     t.integer "requestee_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "invisible", default: false
     t.index ["requestee_id"], name: "index_friend_requests_on_requestee_id"
     t.index ["requester_id"], name: "index_friend_requests_on_requester_id"
   end
