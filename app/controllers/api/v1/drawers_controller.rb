@@ -4,14 +4,14 @@ class Api::V1::DrawersController < ApplicationController
   def create
     @drawer = Drawer.create(user_id: current_user.id, target_id: params[:id], target_type: params[:target_type])
 
-    render :create
+    render :create, locals: { drawer: @drawer }
   end
 
   def user_drawers
     @user = User.find(params[:id])
     @drawers = @user.drawers
 
-    render :user_drawers
+    render :user_drawers, locals: { user: @user, drawers: @drawers }
   end
 
   def destroy
@@ -39,7 +39,7 @@ class Api::V1::DrawersController < ApplicationController
 
     @anonymous_count = drawers.count - friends_count
 
-    render :drawers_info
+    render :drawers_info, locals: { users: @users, friends_count: @friends_count, anonymous_count: @anonymous_count }
   end
 
   # private

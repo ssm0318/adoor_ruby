@@ -5,7 +5,7 @@ class Api::V1::FeedsController < ApplicationController
     @feeds = Answer.channel_name('익명피드').anonymous(current_user.id) + Post.channel_name('익명피드').anonymous(current_user.id) + CustomQuestion.channel_name('익명피드').anonymous(current_user.id)
     @feeds = @feeds.sort_by(&:updated_at).reverse!
 
-    render :feeds
+    render :feeds, locals: { feeds: @feeds }
   end
 
   def friends
@@ -15,7 +15,7 @@ class Api::V1::FeedsController < ApplicationController
     @feeds = answers + posts + custom_questions
     @feeds = @feeds.sort_by(&:updated_at).reverse!
 
-    render :feeds
+    render :feeds, locals: { feeds: @feeds }
   end
 
   # private

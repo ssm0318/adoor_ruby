@@ -21,13 +21,13 @@ class Api::V1::CustomQuestionsController < ApplicationController
       Entrance.create(channel: c, target: @custom_question)
     end
 
-    render :custom_question
+    render :custom_question, locals: { custom_question: @custom_question }
   end
 
   def show
     @anonymous = @custom_question.author_id != current_user.id && !(current_user.friends.include? @custom_question.author)
 
-    render :show
+    render :show, locals: { anonymous: @anonymous, custom_question: @custom_question }
   end
 
   def destroy
@@ -38,7 +38,7 @@ class Api::V1::CustomQuestionsController < ApplicationController
       @custom_question.author_id = 1
       @custom_question.save
 
-      render :custom_question
+      render :custom_question, locals: { custom_question: @custom_question }
     # 창조자이지만 repost한 사람이 없거나, 창조자가 아닌 경우
     else
       if @custom_question.destroy
@@ -71,14 +71,14 @@ class Api::V1::CustomQuestionsController < ApplicationController
       Entrance.create(channel: c, target: @custom_question)
     end
 
-    render :custom_question
+    render :custom_question, locals: { custom_question: @custom_question }
   end
 
   # custom question repost message edit
   def edit
     @reposting = false
     
-    render :repost
+    render :repost, locals: { custom_question: @custom_question, reposting: @reposting }
   end
 
   def update
@@ -133,7 +133,7 @@ class Api::V1::CustomQuestionsController < ApplicationController
         channel_names += c.name + ' '
       end
 
-      render :custom_question
+      render :custom_question, locals: { custom_question: @custom_question }
     else
       render json: {
         status: 'ERROR',

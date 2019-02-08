@@ -4,7 +4,7 @@ class Api::V1::AssignmentsController < ApplicationController
   def new
     @question = Question.find(params[:question_id])
 
-    render :new
+    render :new, locals: { question: @question }
   end
 
   def create
@@ -12,7 +12,7 @@ class Api::V1::AssignmentsController < ApplicationController
     @assigned_user = User.find(params[:assignee_id])
     @question = Question.find(params[:question_id])
 
-    render :create
+    render :create, locals: { question: @question, assigned_user: @assigned_user }
   end
 
   def destroy

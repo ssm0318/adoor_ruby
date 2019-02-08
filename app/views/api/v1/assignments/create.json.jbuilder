@@ -1,4 +1,8 @@
 json.data do
-  json.partial! 'api/v1/questions/question', question: @question
-  json.partial! 'api/v1/users/user', user: @user
+  json.question do
+    json.partial! 'api/v1/questions/question', question: question
+  end
+  json.user do
+    json.partial! 'api/v1/users/user', user: user
+  end
 end

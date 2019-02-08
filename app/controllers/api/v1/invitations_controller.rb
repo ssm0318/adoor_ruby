@@ -6,7 +6,8 @@ class Api::V1::InvitationsController < ApplicationController
     if (n = (7 - @questions.length)) > 0
       @questions = Question.published.sample(n) # 답변된 질문이 부족하면 공개된 질문 중 랜덤하게 take
     end
-    render 'index'
+
+    render :index, locals: { questions: @questions }
   end
 
   def link
@@ -22,7 +23,9 @@ class Api::V1::InvitationsController < ApplicationController
     end
     @link += '/' + 'empty' if assigned_questions.empty?
     # now the link looks like ".../invitations/:user_id/:qid1/:qid2/:qid3" (qid's are optional)
-    render 'link'
+    
+    # render :link
+    render json: {status: 'SUCCESS', message:'Created invitation link', data: @link}, status: :ok
   end
 
   def accept
@@ -48,6 +51,7 @@ class Api::V1::InvitationsController < ApplicationController
         end
       end
     end
-    render 'accept'
+
+    render :accept, locals: { new_friend: @new_friend, assigned_questions: @assigned_questions }
   end
 end

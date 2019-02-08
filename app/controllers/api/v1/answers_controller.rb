@@ -7,7 +7,7 @@ class Api::V1::AnswersController < ApplicationController
   def new
     @question = Question.find(params[:id])
 
-    render :new
+    render :new, locals: { question: @question }
   end
 
   def create
@@ -37,13 +37,13 @@ class Api::V1::AnswersController < ApplicationController
   def show
     @anonymous = @answer.author_id != current_user.id && !(current_user.friends.include? @answer.author)
 
-    render :show
+    render :show, locals: { anonymous: @anonymous, answer: @answer }
   end
 
   def edit
     @question = @answer.question
 
-    render :edit
+    render :edit, locals: { question: @question, answer: @answer }
   end
 
   def update
@@ -98,7 +98,7 @@ class Api::V1::AnswersController < ApplicationController
         @channel_names += c.name + ' '
       end
 
-      render :update
+      render :update, locals: { channel_names: @channel_names, answer: @answer }
     else
       render json: {status: 'ERROR', message:'Answer not updated', data: @answer.errors.full_messages}, status: :unprocessable_entity
     end

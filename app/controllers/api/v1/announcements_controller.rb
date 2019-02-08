@@ -5,14 +5,15 @@ class Api::V1::AnnouncementsController < ApplicationController
 
   def index
     @published_announcements = Announcement.published.sort_by(&:published_at).reverse!
-    render :index
+
+    render :index, locals: { published_announcements: @published_announcements }
   end
 
   def admin_index
     @published_announcements = Announcement.published.sort_by(&:published_at).reverse!
     @unpublished_announcements = Announcement.unpublished.sort_by(&:created_at).reverse!
 
-    render :admin_index
+    render :admin_index, locals: { published_announcements: @published_announcements, unpublished_announcements: @unpublished_announcements }
   end
 
   def create
@@ -34,7 +35,7 @@ class Api::V1::AnnouncementsController < ApplicationController
       Notification.create(recipient: u, actor: User.find(1), target: @announcement, origin: @announcement, action: 'announcement')
     end
 
-    render :publish
+    render :publish, locals: { announcement: @announcement }
     # redirect_to api_v1_announcement_admin_index_path
   end
 
