@@ -13,7 +13,7 @@ class Notification < ApplicationRecord
   # 예: 그 노티를 눌렀을 때 answer_path(:id)로 가야하면 그 id를 가진 answer이 origin임!
   # noti의 target이 answer, highlight, drawer, comment인 경우 answer이고
   # noti의 target이 friendship, friendrequest인 경우 noti의 actor인 user이고
-  # noti의 target이 assignment인 경우 해당 assignment의 question이다
+  # noti의 target이 assignment인 경우 해당 assignment의 question / custom_question이다
   # noti의 target이 announcement인 경우 announcement자체이다
   # noti의 target이 custom question인 경우 그 custom question의 ancestor인 custom question이다
   ##### 예외: noti의 target이 reply의 origin은 그 reply가 달린 댓글이다.
