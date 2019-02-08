@@ -139,12 +139,17 @@ class CustomQuestionsController < ApplicationController
 
             channel_names = ""
             selected_channels.each do |c|
-                channel_names += c.name + " "
+                if c.id != selected_channels.last.id
+                    channel_names += c.name + " | "
+                else
+                    channel_names += c.name
+                end
             end
             
             render :json => {
                 id: @custom_question.id,
-                channels: channel_names
+                channels: channel_names,
+                type: "custom-feed"
             }
         else
             redirect_to root_url

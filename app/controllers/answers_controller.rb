@@ -114,12 +114,17 @@ class AnswersController < ApplicationController
 
             channel_names = ""
             selected_channels.each do |c|
-                channel_names += c.name + " "
+                if c.id != selected_channels.last.id
+                    channel_names += c.name + " | "
+                else
+                    channel_names += c.name
+                end
             end
             
             render :json => {
                 id: @answer.id,
-                channels: channel_names
+                channels: channel_names,
+                type: "answer-feed"
             }
         else
             redirect_to root_url
