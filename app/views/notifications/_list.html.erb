@@ -147,8 +147,15 @@
                     <p><%= CustomQuestion.where(ancestor_id: noti.origin.id).size %>명이 당신의 질문 <%= message %>을 리포스팅했습니다.</p>
                 <% end %>
             <% when 'Assignment' %>
-                <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
-                <p><strong><%=username%></strong>님으로부터 새로운 질문이 도착했습니다: <%= message %></p>
+                <% case noti.action %>
+                <% when 'assignment'%>
+                    <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
+                    <p><strong><%=username%></strong>님으로부터 새로운 질문이 도착했습니다: <%= message %></p>
+                <% when 'custom-assignment'%>
+                    <% message = "\"" + noti.origin.content.truncate(30, separator: /\s/) + "\"" %>
+                    <p><strong><%=username%></strong>님으로부터 새로운 사용자 질문이 도착했습니다: <%= message %></p>
+                <% else %>
+                <% end %>
             <% when 'Answer' %>
                 <% message = "\"" + noti.origin.question.content.truncate(30, separator: /\s/) + "\"" %>
                 <p><strong><%=username%></strong>님이 당신이 보낸 질문 <%= message %>에 답했습니다.</p>

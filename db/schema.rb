@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190208042055) do
+ActiveRecord::Schema.define(version: 20190208070036) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
@@ -78,14 +78,14 @@ ActiveRecord::Schema.define(version: 20190208042055) do
   end
 
   create_table "assignments", force: :cascade do |t|
-    t.integer "question_id", null: false
+    t.integer "target_id", null: false
     t.integer "assigner_id", null: false
     t.integer "assignee_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "target_type"
     t.index ["assignee_id"], name: "index_assignments_on_assignee_id"
     t.index ["assigner_id"], name: "index_assignments_on_assigner_id"
-    t.index ["question_id"], name: "index_assignments_on_question_id"
   end
 
   create_table "channels", force: :cascade do |t|
