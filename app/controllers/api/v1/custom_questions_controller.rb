@@ -1,5 +1,5 @@
 class Api::V1::CustomQuestionsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user
   before_action :set_custom_question, only: %i[show destroy edit update repost_new]
   before_action :check_mine, only: %i[destroy edit update]
   before_action :check_accessibility, only: [:show]
@@ -21,11 +21,13 @@ class Api::V1::CustomQuestionsController < ApplicationController
       Entrance.create(channel: c, target: @custom_question)
     end
 
-    redirect_to root_path
+    render :custom_question
   end
 
   def show
     @anonymous = @custom_question.author_id != current_user.id && !(current_user.friends.include? @custom_question.author)
+
+    render :show
   end
 
   def destroy
@@ -35,27 +37,24 @@ class Api::V1::CustomQuestionsController < ApplicationController
       # 실제로는 삭제되지 않고 author가 admin으로 바뀐다. (얘네를 repost한 애들이 있다면 ancestor_id를 그대로 유지해야 하기 때문)
       @custom_question.author_id = 1
       @custom_question.save
+
+      render :custom_question
     # 창조자이지만 repost한 사람이 없거나, 창조자가 아닌 경우
     else
-      @custom_question.destroy
+      if @custom_question.destroy
+        render json: {status: 'SUCCESS', message:'Deleted custom question'},status: :ok
+      else
+        render json: {status: 'ERROR', message:'custom question not deleted', data: @custom_question.errors.full_messages}, status: :unprocessable_entity
+      end
     end
-
-    render json: {
-
-    }
   end
 
   # custom question repost new
   # custom question을 repost했을 때 새로운 custom_question 만들기
   def repost_new
-    if ajax_request?
-      html_content = render_to_string partial: 'custom_questions/form', locals: { custom_question: CustomQuestion.new, reposting: true, ancestor: @custom_question }
-      render json: {
-        html_content: html_content.to_s
-      }
-    else
-      redirect_to root_url
-      end
+    @reposting = true
+
+    render :repost
   end
 
   # custom question repost create
@@ -72,19 +71,14 @@ class Api::V1::CustomQuestionsController < ApplicationController
       Entrance.create(channel: c, target: @custom_question)
     end
 
-    redirect_back fallback_location: root_url
+    render :custom_question
   end
 
   # custom question repost message edit
   def edit
-    if ajax_request?
-      html_content = render_to_string partial: 'custom_questions/form', locals: { custom_question: @custom_question, reposting: false }
-      render json: {
-        html_content: html_content.to_s
-      }
-    else
-      redirect_to root_url
-      end
+    @reposting = false
+    
+    render :repost
   end
 
   def update
@@ -139,16 +133,35 @@ class Api::V1::CustomQuestionsController < ApplicationController
         channel_names += c.name + ' '
       end
 
-      render json: {
-        id: @custom_question.id,
-        channels: channel_names
-      }
+      render :custom_question
     else
-      redirect_to root_url
+      render json: {
+        status: 'ERROR',
+        message: 'custom question not updated',
+        data: @custom_question.errors.full_messages
+      }, status: :unprocessable_entity
     end
   end
 
   private
+
+  # def authenticate_user
+  #   user_token = request.headers['X-USER-TOKEN']
+  #   if user_token
+  #     @user = User.find_by_token(user_token)
+  #     #Unauthorize if a user object is not returned
+  #     if @user.nil?
+  #       return unauthorize
+  #     end
+  #   else
+  #     return unauthorize
+  #   end
+  # end
+
+  # def unauthorize
+  #   head status: :unauthorized
+  #   return false
+  # end
 
   def set_custom_question
     @custom_question = CustomQuestion.find(params[:id])
@@ -159,15 +172,20 @@ class Api::V1::CustomQuestionsController < ApplicationController
   end
 
   def check_mine
-    redirect_to root_url if @custom_question.author_id != current_user.id
+    # redirect_to root_url if @answer.author_id != current_user.id
+    if @custom_question.author_id != current_user.id
+      render json: {status: 'ERROR', message:'not mine', data: current_user}, status: :unauthorized
+    end
   end
 
   def check_accessibility
     author = CustomQuestion.find(params[:id]).author
     if (author.friends.include? current_user) && author != current_user && !CustomQuestion.accessible(current_user.id).exists?(params[:id])
-      redirect_to root_url
+      # redirect_to root_url
+      render json: {status: 'ERROR', message:'not accessible', data: current_user}, status: :unauthorized
     elsif !(author.friends.include? current_user) && author != current_user && CustomQuestion.find(params[:id]).channels.none? { |c| c.name == '익명피드' }
-      redirect_to root_url
+      # redirect_to root_url
+      render json: {status: 'ERROR', message:'not accessible', data: current_user}, status: :unauthorized
     end
   end
 
