@@ -127,21 +127,63 @@
     .intro-container {
         width: 95%;
         font-size: 25px;
+        margin-top: 550px;
+        height: 50%;
+        overflow: scroll;
     }
 
     .intro-tc {
-        display: none;
-        // position: fixed;
-        // top: 85px;
-        // width: 90%;
-        // left: 50%;
-        // margin-left: -45%;
+        //display: none;
+        position: absolute;
+        top: 155px;
+        width: 90%;
+        left: 50%;
+        margin-left: -45%;
+    }
+
+    #intro-tc-title {
+        font-size: 50px;
+    }
+
+    .intro-tc-el {
+        font-size: 35px;
+        line-height: 50px;
     }
 
     .intro-topic {
         font-size: 40px;
     }
+
+    .intro-content {
+        font-size: 25px
+    }
+
     .intro-accent {
         font-size: 25px
+    }
+
+    .intro-link {
+        font-size: 27px;
+    }
+
+    .intro-img {
+        width: 95%;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
+    
+    .intro-img-small {
+        width: 85%;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
+    
+    .intro-img-smallest {
+        width: 75%;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
     }
 }
