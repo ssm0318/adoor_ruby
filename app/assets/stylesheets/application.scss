@@ -26,7 +26,6 @@
 
 * {
     font-family: 'Open Sans', sans-serif;
-    text-rendering: optimizeLegibility;
 }
 
  .flash {
@@ -41,8 +40,7 @@
     background-color: #F48462;
  }
 .navbar {
-
-    padding: .1rem 1rem;
+    padding: .3rem 1rem;
 
     .navbar-brand img {
         padding-left: 40px;
@@ -56,13 +54,13 @@
     .nav-item {
         padding-left: 15px;
         padding-right: 15px;
-        display: flex;
-        align-items: center;
+        // display: flex;
+        // align-items: center;
     }
 
     .logout-toggle {
         visibility: hidden;
-        margin-bottom: 20px;
+
     }
 
     // .navbar-nav.mr-auto {
@@ -91,7 +89,7 @@
         right: 60px;
         
         .search-form {
-            padding-top: 7px;
+            padding-top: 6px;
             padding-right: 5px;
         }
     
@@ -160,7 +158,7 @@
             color: white;
             padding-left: 25px;
             padding-right: 25px;
-            padding-top: 6px;
+            padding-top: 5px;
         }
 
         .login {
@@ -461,18 +459,19 @@ div.background {
 
         .logout-toggle {
             visibility: visible;
+            padding-bottom: 20px;
         }
 
         .mr-auto-custom {
-            top: 15px !important;
+            top: 13px !important;
 
             .logout {
                 display: none !important;
             }
 
             .login {
-                font-size: 20px;
-                padding-top: 5px;
+                font-size: 15px;
+                padding-top: 4px;
             }
 
             .search-input {
@@ -524,7 +523,7 @@ div.background {
         cursor: pointer;
         z-index: 1;
         position: absolute;
-        top: 18px;
+        top: 15px;
         right: 0.5em;
         border: none;  
     }
@@ -593,10 +592,6 @@ div.background {
 
     .prism-box__question {
         zoom: 2.3;
-    }
-
-    .sign-box {
-        zoom: 1.8;
     }
 
     .profile-edit-tab {
