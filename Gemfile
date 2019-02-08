@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'friendly_id', '~> 5.2.4' # https://github.com/norman/friendly_id url을 예쁘게 (유저들이 자신의 ID를 볼 수 있는게 이상해서.)
+# gem 'rails_autolink', '~> 1.1', '>= 1.1.6' skip for now
 gem 'autosize'
 gem 'rails-i18n'
 gem "i18n-js"

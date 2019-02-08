@@ -53,7 +53,7 @@ class UsersController < ApplicationController
             @error = @user.errors.full_messages[0]
             render 'edit'
         else
-            redirect_to profile_path(@user.id)
+            redirect_to profile_path(@user.username)
         end
     end
 
@@ -123,7 +123,7 @@ class UsersController < ApplicationController
 
     private
         def set_user
-            @user = User.find(params[:id])
+            @user = User.friendly.find(params[:id])
         end
 
         def user_params
@@ -136,7 +136,7 @@ class UsersController < ApplicationController
 
         def check_user
             if @user != current_user
-                redirect_to edit_user_profile_url(current_user.id)
+                redirect_to edit_user_profile_url(current_user.username)
             end
         end
 end

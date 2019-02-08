@@ -25,7 +25,7 @@
                 <% end %>
             <% else %>
                 <%= @new_friend.username %>님과 이미 친구입니다.<br><br>
-                <%= link_to "친구 페이지 가기", profile_path(@new_friend.id), method: :get, id: "friends-btn" %>
+                <%= link_to "친구 페이지 가기", profile_path(@new_friend.username), method: :get, id: "friends-btn" %>
             <% end%>
         </div>
     <% else %>
@@ -51,7 +51,7 @@
                 <% end %>
             <% else %>
                 <%= @new_friend.username %>님과 이미 친구입니다.<br><br>
-                <%= link_to "친구 페이지 가기", profile_path(@new_friend.id), method: :get, id: "friends-btn" %>
+                <%= link_to "친구 페이지 가기", profile_path(@new_friend.username), method: :get, id: "friends-btn" %>
             <% end %>
         </div>
     <% end %>
