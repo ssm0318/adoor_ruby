@@ -41,6 +41,8 @@
  }
 .navbar {
 
+    padding: .3rem 1rem;
+
     .navbar-brand img {
         padding-left: 40px;
         width: 180px;
@@ -65,12 +67,13 @@
     .navbar-nav {
         .nav-link {
             font-size: 15px;
-            color: #f9f8f7;
+            color: #fcdbc5;
                 
         }
 
         .nav-link.active{
-            color: #fad4bc;
+            color: white;
+            //#f9f8f7
         }
     }
 
@@ -79,7 +82,7 @@
         margin-left: auto!important;
         cursor: pointer; 
         z-index: 1; 
-        top: 10px;
+        top: 8px;
         position: absolute; 
         right: 60px;
         
@@ -418,6 +421,7 @@ div.background {
     }
 
     #prism-container {
+        padding-top: 170px;
         width: 95%;
     }
 
