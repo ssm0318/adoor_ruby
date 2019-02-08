@@ -1,6 +1,9 @@
 <div class = "inner-container">
     <%= render partial: "notifications/header" %>
 
+    <% if @question_assignments.empty? && @custom_assignments.empty? %>
+        받은 질문이 없습니다.
+    <% end %>
     <% questions = @question_assignments.pluck(:target_id).uniq %>
     <% questions.each do |q| %>
         <% question = Question.find(q) %>
