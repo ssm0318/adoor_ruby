@@ -2,7 +2,8 @@ class AssignmentsController < ApplicationController
     before_action :authenticate_user!
     
     def index
-        @assignments = current_user.recieved_assignments.where.not(assigner_id: 1)
+        @question_assignments = current_user.received_assignments.where(target_type: 'Question').where.not(assigner_id: 1)
+        @custom_assignments = current_user.received_assignments.where(target_type: 'CustomQuestion')
     end
 
     def new
