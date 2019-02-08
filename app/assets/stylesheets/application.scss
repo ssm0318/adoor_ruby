@@ -388,11 +388,11 @@ div.background {
 
 }
 
-// .hover-orange {
-//     &:hover {
-//         color: #F48462;
-//     }
-// }
+.hover-orange {
+    &:hover {
+        color: #F48462;
+    }
+}
 
 .hover-pointer {
     cursor: pointer;
@@ -414,8 +414,12 @@ div.background {
     }
 }
 
+//for mobile version
 @media only screen and (max-device-width: 500px) {
 
+    body {
+        -webkit-text-size-adjust:none;
+    }
     .inner-container {
         width: 100%;
     }
@@ -423,6 +427,15 @@ div.background {
     #prism-container {
         padding-top: 170px;
         width: 95%;
+    }
+
+    #top-btn {
+        padding: 20px 25px !important;
+        border-radius: 40px !important;
+    }
+
+    .fa-arrow-up {
+        font-size: 40px;
     }
 
     .prism-box {
