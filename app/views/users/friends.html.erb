@@ -2,7 +2,7 @@
     <div class = "user-header" >
     <div id = "profile" >
         <% @user = current_user%>
-        <%= form_for @user, url: edit_user_profile_url(@user) do |u| %>
+        <%= form_for @user, url: edit_user_profile_url(@user.username) do |u| %>
             <% u.hidden_field :id, :value => current_user.id %>
             <div class="image-upload">
                 <div class="image-container">
@@ -18,7 +18,7 @@
             <div id = "profile__username-setting-div">
                 <div id = "username"><%= current_user.username %></div>
                 <div id ="profile__setting">
-                    <%= link_to image_tag("icons/setting-default-icon.png", id: "profile__setting-btn"), edit_user_profile_path(current_user.id) %>
+                    <%= link_to image_tag("icons/setting-default-icon.png", id: "profile__setting-btn"), edit_user_profile_path(current_user.username) %>
                 </div>
             </div>
             <div id = "user-message">
@@ -29,7 +29,7 @@
                 <% end %>
             </div>
             <div id = "profile__friends-setting">
-                <%= link_to "게시물 / 서랍장", profile_path(current_user.id), id: "profile__friends-setting-btn" %>
+                <%= link_to "게시물 / 서랍장", profile_path(current_user.username), id: "profile__friends-setting-btn" %>
             </div>
         </div>
     </div>

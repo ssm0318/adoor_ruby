@@ -3,7 +3,7 @@
         <% if current_user.id != user.id %>
             <div id = "profile__image"><%= image_tag(@user.image.url) %></div>
         <% else %>
-            <%= form_for @user, url: edit_user_profile_url(@user) do |u| %>
+            <%= form_for @user, url: edit_user_profile_url(@user.username) do |u| %>
                 <% u.hidden_field :id, :value => current_user.id %>
                 <div class="image-upload">
                     <div class="image-container">
@@ -22,7 +22,7 @@
                 <div id = "username"><%= @user.username %></div>
                 <% if current_user.id == user.id %>
                     <div id ="profile__setting">
-                        <%= link_to image_tag("icons/setting-default-icon.png", id: "profile__setting-btn"), edit_user_profile_path(user.id) %>
+                        <%= link_to image_tag("icons/setting-default-icon.png", id: "profile__setting-btn"), edit_user_profile_path(user.username) %>
                     </div>
                 <% end %>
             </div>
@@ -57,12 +57,12 @@
     
     <div class="user-header__tab">
         <div class = "user-header__tab-el-left">
-            <%= active_link_to "게시물", profile_path(user.id), :active => :exclusive %>
+            <%= active_link_to "게시물", profile_path(user.username), :active => :exclusive %>
         </div>
         <div class = "user-header__tab-el-right">
             <% if current_user.id == user.id %>
                 <%# active_link_to "형광펜", user_highlights_path(user.id) %>
-                <%= active_link_to "서랍장", profile_drawers_path(user.id) %>
+                <%= active_link_to "서랍장", profile_drawers_path(user.username) %>
             <% end %>
         </div>
     </div>

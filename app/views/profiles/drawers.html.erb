@@ -14,7 +14,7 @@
             </div>
         <!-- custom question -->
         <% elsif d.target_type == "CustomQuestion" %>
-            <div class="prism-box <%=d.target.id%>">
+            <div class="prism-box custom-feed <%=d.target.id%>">
                 <div class="prism-box__header">
                     <% if current_user == d.target.author or current_user.friends.include? d.target.author %>
                         <%= render partial: "./user_profile", locals: {user: d.target.author} %>
@@ -66,7 +66,11 @@
 
         <!-- posting or Answer -->
         <% else %>
-            <div class="prism-box <%= d.target.id %>">
+            <% if d.target.is_a? Answer %>
+                <div class="prism-box answer-feed <%=d.target.id%>">
+            <% else %>
+                <div class="prism-box post-feed <%=d.target.id%>">
+            <% end %>
                 <div class="prism-box__header">
                     <% if current_user == d.target.author or current_user.friends.include? d.target.author %>
                         <%= render partial: "./user_profile", locals: {user: d.target.author} %>

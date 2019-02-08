@@ -63,10 +63,10 @@ if Rails.env.development?
     Friendship.find_or_create_by(user_id: 3, friend_id: 5)
     Friendship.find_or_create_by(user_id: 4, friend_id: 5)
 
-    Assignment.find_or_create_by(question_id: 2, assigner_id: 1, assignee_id: 4)
-    Assignment.find_or_create_by(question_id: 2, assigner_id: 2, assignee_id: 4)
-    Assignment.find_or_create_by(question_id: 2, assigner_id: 1, assignee_id: 2)
-    Assignment.find_or_create_by(question_id: 1, assigner_id: 2, assignee_id: 3)
+    Assignment.find_or_create_by(target: Question.find(2), assigner_id: 1, assignee_id: 4)
+    Assignment.find_or_create_by(target: Question.find(2), assigner_id: 2, assignee_id: 4)
+    Assignment.find_or_create_by(target: Question.find(2), assigner_id: 1, assignee_id: 2)
+    Assignment.find_or_create_by(target: Question.find(1), assigner_id: 2, assignee_id: 3)
 
     a1 = Answer.find_or_create_by(author_id: 5, question_id: 1, content: "내가 제일 못하는거!!!!!!!!!!!!!!!!\n
         항상 뭐 시작하는건 되게 잘하는데 꾸준한게 없어서 끝을 마무리를 잘 못 짓는다.\n

@@ -109,18 +109,32 @@ class NotificationsController < ApplicationController
             when 'CustomQuestion'
                 render js: "window.location = '#{custom_question_path(origin_id)}'"
             when 'Assignment'
-                @question = Question.find(origin_id)
-                @answer = Answer.new
+                case origin_type
+                when 'Question'
+                    @question = Question.find(origin_id)
+                    @answer = Answer.new
 
-                html_content = render_to_string :partial => 'answers/form', :locals => { :answer => @answer, :@question => @question }
-                render :json => { 
-                    html_content: "#{html_content}",
-                }
+                    html_content = render_to_string :partial => 'answers/form', :locals => { :answer => @answer, :@question => @question }
+                    render :json => { 
+                        html_content: "#{html_content}",
+                    }
+                when 'CustomQuestion'
+                    # FIXME: 수정아 사랑해 
+                    custom_question = CustomQuestion.find(origin_id)
+                    @ancestor = CustomQuestion.find(custom_question.ancestor_id)
+
+                    html_content = render_to_string :partial => 'custom_questions/form', :locals => { :custom_question => CustomQuestion.new, :reposting => true, :ancestor => @ancestor }
+                    render :json => { 
+                        html_content: "#{html_content}",
+                    }
+                else
+                end
 
             when 'Answer'
                 render js: "window.location = '#{answer_path(origin_id)}'"
             when 'Friendship'
-                render js: "window.location = '#{profile_path(origin_id)}'"
+                username = User.find(origin_id).username
+                render js: "window.location = '#{profile_path(username)}'"
             # when 'Highlight'
             #     if origin_type == 'Post'
             #         redirect_to post_path(origin_id)
@@ -128,7 +142,8 @@ class NotificationsController < ApplicationController
             #         redirect_to answer_path(origin_id)
             #     end
             when 'FriendRequest'
-                render js: "window.location = '#{profile_path(origin_id)}'"
+                username = User.find(origin_id).username
+                render js: "window.location = '#{profile_path(username)}'"
             when 'Announcement'
                 render js: "window.location = '#{announcement_index_path}'"
             else

@@ -8,10 +8,10 @@
         <div class="edit-or-delete-el btn-feed-delete hover-pointer" data-url="<%=post_path(feed.id)%>">삭제</div>
     <% else %>
         <% if feed.ancestor_id == nil && current_user.id == feed.author.id %>
-            <div class="edit-or-delete-el feed-edit post-edit hover-pointer" data-url="<%= edit_custom_question_path(feed.id) %>">공개그룹</div>
+            <div class="edit-or-delete-el feed-edit hover-pointer" data-url="<%= edit_custom_question_path(feed.id) %>">공개그룹</div>
             <div class="edit-or-delete-el btn-feed-delete hover-pointer" data-url="<%=custom_question_path(feed.id)%>">삭제</div>
         <% else %>
-            <div class="edit-or-delete-el feed-edit post-edit hover-pointer" data-url='<%=edit_custom_question_path(feed.id)%>'>수정</div>
+            <div class="edit-or-delete-el feed-edit hover-pointer" data-url='<%=edit_custom_question_path(feed.id)%>'>수정</div>
             <div class="edit-or-delete-el btn-feed-delete hover-pointer" data-url="<%=custom_question_path(feed.id)%>">삭제</div>
         <% end %>
     <% end %>

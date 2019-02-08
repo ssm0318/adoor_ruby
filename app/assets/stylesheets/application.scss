@@ -13,6 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+ .pagination {
+    .previous_page, .next_page, a, .current {
+        display: none;
+    }
+ }
+
  ::-webkit-scrollbar { 
     display: none; 
  }

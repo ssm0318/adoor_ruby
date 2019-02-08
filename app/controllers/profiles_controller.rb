@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
     def index
-        @user = User.find(params[:id])
+        @user = User.friendly.find(params[:id])
 
         if current_user == @user
             answers = Answer.where(author: current_user)
@@ -19,7 +19,7 @@ class ProfilesController < ApplicationController
     end
 
     def drawers
-        @user = User.find(params[:id])
+        @user = User.friendly.find(params[:id])
         @drawers = @user.drawers
     end
 end 
