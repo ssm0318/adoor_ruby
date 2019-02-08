@@ -29,7 +29,7 @@ class AnswersController < ApplicationController
         end
 
         # assign 당한 유저C가 해당 질문에 대해 답하면 그 질문에 대해 유저C를 assign한 모든 유저들에게 보내지는 노티 생성.
-        assignment_hash = { question_id: @answer.question_id, assignee_id: @answer.author_id }
+        assignment_hash = { target: @answer.question, assignee_id: @answer.author_id }
         Assignment.where(assignment_hash).find_each do |assignment|
             # 답변의 공개그룹에 assigner가 포함되어있는 경우에만 노티가 감.
             if !(channels & assignment.assigner.belonging_channels).empty?
