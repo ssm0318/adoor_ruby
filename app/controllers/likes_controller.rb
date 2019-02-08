@@ -2,7 +2,7 @@ class LikesController < ApplicationController
     before_action :authenticate_user!
 
     def create
-        l = Like.create(user_id: current_user.id, target_id: params[:target_id], target_type: params[:target_type])
+        l = Like.find_or_create_by(user_id: current_user.id, target_id: params[:target_id], target_type: params[:target_type])
 
         render json: {
 
