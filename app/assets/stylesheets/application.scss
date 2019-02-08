@@ -52,13 +52,11 @@
          
     }
 
-    .mr-auto {
-        align-items: center;
-    }
-
     .nav-item {
         padding-left: 15px;
         padding-right: 15px;
+        display: flex;
+        align-items: center;
     }
 
     .logout-toggle {
