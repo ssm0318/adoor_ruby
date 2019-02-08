@@ -54,8 +54,8 @@ Rails.application.routes.draw do
 
   # Notification
   get '/notifications/read_all' => 'notifications#read_all', as: :notification_read_all
+  get '/notifications/index' => 'notifications#index' , as: :notification_index 
   get '/notifications/:id' => 'notifications#read'
-  get '/notifications/all/index' => 'notifications#index' , as: :notification_index 
 
   # Profile
   get '/profiles/:id' => 'profiles#index', as: :profile

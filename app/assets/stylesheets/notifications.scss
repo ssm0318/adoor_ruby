@@ -69,18 +69,15 @@
     }
 }
 .noti-text {
-    grid-column-start: 2;
-    grid-column-end: 3;
+    grid-column: 2 / 3;
 }
 .noti-image {
-    grid-column-start: 1;
-    grid-column-end: 2;
+    grid-column: 1 / 2;
 }
 .noti-image-named {
     height: 30px;
     width: 30px;
     border-radius: 15px;
-    
 }
 
 .noti-image-anonymous {
@@ -142,6 +139,9 @@
         display: flex;
         justify-self: flex-start;
         align-items: center;
+        .username {
+            display: inline;
+        }
 
     }
 
