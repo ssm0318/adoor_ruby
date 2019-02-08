@@ -41,7 +41,7 @@
  }
 .navbar {
 
-    padding: .3rem 1rem;
+    padding: .1rem 1rem;
 
     .navbar-brand img {
         padding-left: 40px;
@@ -50,6 +50,10 @@
         padding-top: 2px;
         padding-bottom: 2px;
          
+    }
+
+    .mr-auto {
+        align-items: center;
     }
 
     .nav-item {
@@ -88,7 +92,7 @@
         right: 60px;
         
         .search-form {
-            padding-top: 6px;
+            padding-top: 7px;
             padding-right: 5px;
         }
     
@@ -157,7 +161,7 @@
             color: white;
             padding-left: 25px;
             padding-right: 25px;
-            padding-top: 5px;
+            padding-top: 6px;
         }
 
         .login {
