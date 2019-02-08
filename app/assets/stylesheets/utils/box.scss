@@ -473,7 +473,7 @@ div {
         }
     }
 }
-
+ 
 .time {
     visibility: hidden;
 }
@@ -640,5 +640,25 @@ div {
             transform: rotate(45deg);
             -webkit-transform: rotate(45deg);
         }
+    }
+}
+//for mobile version
+@media only screen and (max-device-width: 500px) {
+    .prism-box {
+        zoom: 2.3;
+        margin: 10px 0px;
+    
+        .prism-box__content {
+            padding: 0px 20px;
+        }
+    
+        .edit-or-delete {
+            width: 100px;
+        }
+    }
+
+    .prism-box-new-post {
+        zoom: 2.2;
+        margin: 10px 0px;
     }
 }
