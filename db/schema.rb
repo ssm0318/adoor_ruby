@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20190208042055) do
-=======
-ActiveRecord::Schema.define(version: 20190208035026) do
->>>>>>> 71fbb1757b06bc4c1947bdadf18076342a9e90fa
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
@@ -318,9 +314,7 @@ ActiveRecord::Schema.define(version: 20190208035026) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "authentication_token", limit: 30
     t.string "slug"
-    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

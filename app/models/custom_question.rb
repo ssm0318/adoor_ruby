@@ -4,7 +4,7 @@ class CustomQuestion < ApplicationRecord
     has_many     :comments, dependent: :destroy, as: :target
     has_many   :likes, dependent: :destroy, as: :target
     has_many   :entrances, as: :target, dependent: :destroy
-    has_many   :channels, through: :entrances
+    has_many   :channels, -> { order(id: :asc) }, through: :entrances
     has_many   :drawers, dependent: :destroy, as: :target
     has_and_belongs_to_many :tags, dependent: :destroy, as: :target
 
