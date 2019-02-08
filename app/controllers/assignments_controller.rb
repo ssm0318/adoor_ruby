@@ -1,6 +1,10 @@
 class AssignmentsController < ApplicationController
     before_action :authenticate_user!
     
+    def index
+        @assignments = Assignment.where(assignee: current_user).where.not(assigner_id: 1)
+    end
+
     def new
         html_content = render_to_string :partial => 'assignments/default', 
             :locals => { :question => Question.find(params[:question_id]) }
@@ -9,6 +13,7 @@ class AssignmentsController < ApplicationController
             html_content: html_content,
         }
     end
+
     def create
         Assignment.create(question_id: params[:question_id], assigner_id: current_user.id, assignee_id: params[:assignee_id])
 
