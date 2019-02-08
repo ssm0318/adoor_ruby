@@ -198,7 +198,7 @@
     width: 60%;
     margin: 0 auto;
     margin-bottom: 50px;
-    padding-top: 50px;
+    padding-top: 80px;
     position: relative;
     min-width: 600px;
     .prism-title {
@@ -461,10 +461,6 @@ div.background {
 
         .mr-auto-custom {
             top: 15px !important;
-
-            .logout {
-                display: none;
-            }
 
             .search-input {
                 height: 32px;
