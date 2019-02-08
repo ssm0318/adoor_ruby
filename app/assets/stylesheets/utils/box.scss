@@ -662,3 +662,19 @@ div {
         margin: 10px 0px;
     }
 }
+
+//for ios safari
+@supports (-webkit-overflow-scrolling: touch) {
+    /* CSS specific to iOS devices */ 
+    .prism-box {
+        .prism-box__content {
+            .answer {
+                font-size: 40px;
+            }
+
+            .date { 
+                font-size: 35px;
+            }
+        }
+    }
+  }
