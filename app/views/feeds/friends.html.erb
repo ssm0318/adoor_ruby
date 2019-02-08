@@ -9,7 +9,11 @@
       <%= render partial: "custom_questions/new", locals: {custom_question: CustomQuestion.new} %>
     </div>
   </div>
-  <%= render partial: 'feeds/friends_index', locals: {feeds: @feeds} %>
+  <div id='infinite-feeds'>
+    <%= render partial: 'feeds/friends_index', locals: {feeds: @feeds} %>
+
+    <%= will_paginate @feeds %>
+  </div>
 </div>
 
 <script>
