@@ -58,7 +58,8 @@
     }
 
     .logout-toggle {
-        display: none;
+        visibility: hidden;
+        margin-bottom: 20px;
     }
 
     // .navbar-nav.mr-auto {
@@ -468,25 +469,21 @@ div.background {
             padding-bottom: 30px;
         }
 
-        .show {
-            padding-bottom: 20px;
-
-            .logout-toggle {
-                display: block;
-            }
-        }
-
         .nav-link {
             padding-left: 25px;
             font-size: 50px;
             zoom: 1.2;
         }
 
+        .logout-toggle {
+            visibility: visible;
+        }
+
         .mr-auto-custom {
             top: 15px !important;
 
             .logout {
-                display: none;
+                display: none !important;
             }
 
             .login {
