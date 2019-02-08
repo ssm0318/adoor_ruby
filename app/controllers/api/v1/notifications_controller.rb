@@ -26,6 +26,7 @@ class Api::V1::NotificationsController < ApplicationController
       end
 
       render :read, { notification: noti }
+    end
   end
 
   # private
