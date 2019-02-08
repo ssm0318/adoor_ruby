@@ -1,14 +1,23 @@
+#intro-tc-title {
+    font-weight: bold; 
+    color: #F48462;
+    font-size: 25px; 
+    text-align: center; 
+    line-height: 0;
+}
 .intro-tc-el {
-    font-size: 14px;
-    color: black;
+    font-size: 16px;
+    color: #000000;
+    line-height: 10px;
+    text-decoration: none;
     &:hover {
+        text-decoration: none;
         color: #F48462;
-     }
-     line-height: 10px;
+    }
 }
 
 .intro-tc-container {
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(255, 241, 235);
     border-radius: 10px;
     text-align: left;
     padding: 20px;
@@ -22,9 +31,13 @@
     top: 130px;
 }
 
-.intro-title {
-    text-align: center;
-    color: grey;
+.intro-content {
+    background-color: rgb(241, 241, 241);
+    border: none;
+    border-radius: 10px;
+    padding-bottom: 25px;
+    font-size: 18px;
+    
 }
 
 .intro-img {
@@ -55,10 +68,13 @@
     text-align: center;
     margin-top: -50px;
     font-size: 15px;
+    width: 70%;
 
 }
 
 .intro-topic {
+    font-weight: bold;
+    font-size: 28px;
     color: #F48462;
 
 }
@@ -74,20 +90,58 @@
 .intro-accent {
     //font-weight: bold;
     //color: rgb(245, 154, 126);
-    font-size: 16px;
+    font-size: 18px;
     text-decoration: none;
     border-bottom: 1px solid #F48462;
     padding-bottom: 2px;
 }
 
 .intro-link {
+    font-size: 20px;
     font-weight: bold;
+    color: black;
     &:hover {
-        color: #F48462;
-     }
-     color: black;
+        text-decoration: none;
+    }
+}
+
+.contact-link {
+    font-size: 20px;
+    color:#F48462;
+    &:hover {
+        text-decoration: none;
+    }
 }
 
 .intro-change-color {
     color: #F48462;
+}
+
+.intro-ending-message {
+    color: gray;
+    font-size: 16px;
+}
+
+//for mobile version
+@media only screen and (max-device-width: 500px) {
+    .intro-container {
+        width: 95%;
+        font-size: 25px;
+    }
+
+    .intro-tc {
+        display: none;
+        // position: fixed;
+        // top: 85px;
+        // width: 90%;
+        // left: 50%;
+        // margin-left: -45%;
+    }
+
+    .intro-topic {
+        font-size: 40px;
+    }
+    .intro-accent {
+        font-size: 25px
+    }
 }

@@ -388,11 +388,11 @@ div.background {
 
 }
 
-// .hover-orange {
-//     &:hover {
-//         color: #F48462;
-//     }
-// }
+.hover-orange {
+    &:hover {
+        color: #F48462;
+    }
+}
 
 .hover-pointer {
     cursor: pointer;
@@ -414,6 +414,7 @@ div.background {
     }
 }
 
+//for mobile version
 @media only screen and (max-device-width: 500px) {
 
     .inner-container {
