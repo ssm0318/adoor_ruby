@@ -58,7 +58,7 @@ class UsersController < ApplicationController
     end
 
     def image_upload
-        uploaded_io = params[:image]
+        uploaded_io = params[:image] 
         if uploaded_io.include? "data:image/jpeg;base64,"
             metadata = "data:image/jpeg;base64,"
             base64_string = uploaded_io[metadata.size..-1]
@@ -110,7 +110,7 @@ class UsersController < ApplicationController
 
     private
         def set_user
-            @user = User.friendly.find(params[:id])
+            @user = User.find_by(slug: params[:id])
         end
 
         def user_params
@@ -123,7 +123,7 @@ class UsersController < ApplicationController
 
         def check_user
             if @user != current_user
-                redirect_to edit_user_profile_url(current_user.username)
+                redirect_to edit_user_profile_url(current_user.slug)
             end
         end
 end

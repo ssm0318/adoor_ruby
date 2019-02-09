@@ -7,7 +7,7 @@
             <div class="image-upload">
                 <div class="image-container">
                     <%= image_tag current_user.image.url, class: "edit-profile-img", id: "edit-profile-img" %>
-                    <%= u.file_field :image, id: "file-input", accept: 'image/png,image/jpeg,image/jpg', "data-url" => image_upload_path(current_user.id) %>
+                    <%= u.file_field :image, id: "file-input", accept: 'image/png,image/jpeg,image/jpg', "data-url" => image_upload_path(current_user.slug) %>
                     <label for="file-input">
                         <span class="camera-icon">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-camera fa-3x" aria-hidden="true"></i><br>사진 올리기</span>
                     </label>

@@ -1,6 +1,6 @@
 <div class="profile-content-box">
 <%= error %>
-<%= form_for user, url: edit_user_profile_url(user.username) do |u| %>
+<%= form_for user, url: edit_user_profile_url(user.slug) do |u| %>
     <div>
         <% u.hidden_field :id, :value => current_user.id %>
         <div>
