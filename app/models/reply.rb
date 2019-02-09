@@ -22,6 +22,7 @@ class Reply < ApplicationRecord
         noti_hash = {recipient_id: self.comment.author_id, origin: origin}
         create_noti_hash = {recipient_id: self.comment.author_id, actor: self.author, target: self, origin: origin}
         if self.author != self.comment.author
+            create = true
             # 익명 대댓글인 경우
             if self.anonymous
                 # 댓글 주인에게 노티
@@ -42,29 +43,36 @@ class Reply < ApplicationRecord
             # 친구 대댓글인 경우
             else
                 # 댓글 주인에게 노티
-                noti_hash[:action] = 'friend_to_comment'
-                create_noti_hash[:action] = 'friend_to_comment'
-                # if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
-                #     # 글 주인에게 노티
-                #     noti_hash = {recipient: self.comment.target.author, action: 'friend_to_author', origin: origin}
-                #     if Notification.where(noti_hash).unread.empty?
-                #         Notification.create(recipient: self.comment.target.author, actor: self.author, target: self, action: 'friend_to_author', origin: origin)
-                #     else
-                #         n = Notification.where(noti_hash).first
-                #         n.target = self
-                #         n.actor = self.author
-                #         n.read_at = nil
-                #     end
-                # end
-            end
-            if !Notification.where(noti_hash).empty?
-                Notification.where(noti_hash).each do |n|
-                    n.invisible = true
-                    n.read_at = DateTime.now()
-                    n.save(touch: false)
+                # 공개범위에 더 이상 포함이 안된다면 노티가 안 가야 한다! ( 친구가 끊어졌다거나, 그룹이 이동됐다거나, ... )
+                if !(origin.target.channels & self.comment.author_id.belonging_channels).empty?
+                    noti_hash[:action] = 'friend_to_comment'
+                    create_noti_hash[:action] = 'friend_to_comment'
+                    # if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
+                    #     # 글 주인에게 노티
+                    #     noti_hash = {recipient: self.comment.target.author, action: 'friend_to_author', origin: origin}
+                    #     if Notification.where(noti_hash).unread.empty?
+                    #         Notification.create(recipient: self.comment.target.author, actor: self.author, target: self, action: 'friend_to_author', origin: origin)
+                    #     else
+                    #         n = Notification.where(noti_hash).first
+                    #         n.target = self
+                    #         n.actor = self.author
+                    #         n.read_at = nil
+                    #     end
+                    # end
+                else
+                    create = false
                 end
             end
-            Notification.create(create_noti_hash)
+            if create
+                if !Notification.where(noti_hash).empty?
+                    Notification.where(noti_hash).each do |n|
+                        n.invisible = true
+                        n.read_at = DateTime.now()
+                        n.save(touch: false)
+                    end
+                end
+                Notification.create(create_noti_hash)
+            end
         end
 
         if self.target_author != nil && self.author != self.target_author && self.comment.author != self.target_author
