@@ -342,8 +342,8 @@ div {
         // border-bottom: 1px dashed $prism-box-gray;
 
         padding: 0px 40px;
-        line-height: 140%;
         text-align: center;
+        font-size: 1rem;
 
 
         a {
@@ -352,6 +352,7 @@ div {
         }
 
         .answer {
+            line-height: 140%;
         }
 
         .date { 
