@@ -85,19 +85,22 @@
 }
 
 // accept page
-#friends-btn {
+#friends-btn { 
     text-decoration: none;
-    border-radius: 6px;
-    border: 0.75px solid #bcbcbc;
-    padding: 6px 12px 6px 12px;
-    color: gray;
-    font-size: 14px;
-    margin-top: 10px;
+    border-radius: 20px;
+    border: none;
+    padding: 8px 20px 10px 22px;
+    color: white;
+    background-color: #F48462;
+    font-size: .9rem;
+    margin-top: 20px;
 }
 
 .invitation-accept-text {
-    margin-top: 50px;
+    margin: 30px 0;
     text-align: center;
+    font-size: 1rem;
+    line-height: 100%;
 }
 
 .link-generation-box {
