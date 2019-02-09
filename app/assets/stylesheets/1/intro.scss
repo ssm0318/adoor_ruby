@@ -1,11 +1,11 @@
 #intro-tc-title {
     color: #F48462;
-    font-size: 25px; 
+    font-size: 1.5rem; 
     text-align: center; 
     line-height: 0;
 }
 .intro-tc-el {
-    font-size: 16px;
+    font-size: 1rem;
     color: #000000;
     line-height: 10px;
     text-decoration: none;
@@ -35,7 +35,7 @@
     border: none;
     border-radius: 10px;
     padding-bottom: 25px;
-    font-size: 15px;
+    font-size: 1rem;
     
 }
 
@@ -66,13 +66,13 @@
     line-height: 30px;
     text-align: center;
     margin-top: -50px;
-    font-size: 16px;
+    font-size: 1rem;
     width: 70%;
 
 }
 
 .intro-topic {
-    font-size: 25px;
+    font-size: 1.5rem;
     color: #F48462;
 
 }
@@ -87,14 +87,14 @@
 
 .intro-accent {
     //color: rgb(245, 154, 126);
-    font-size: 16px;
+    font-size: 1.2rem;
     text-decoration: none;
     border-bottom: 1px solid #F48462;
     padding-bottom: 2px;
 }
 
 .intro-link {
-    font-size: 18px;
+    font-size: 1.2rem;
     font-weight: 400;
     color: black;
     &:hover {
@@ -103,7 +103,7 @@
 }
 
 .contact-link {
-    font-size: 18px;
+    font-size: 1.2rem;
     color:#F48462;
     &:hover {
         text-decoration: none;
@@ -116,15 +116,15 @@
 
 .intro-ending-message {
     color: gray;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 //for mobile version
 @media only screen and (max-device-width: 500px) {
     .intro-container {
         width: 95%;
-        font-size: 25px;
-        margin-top: 50px;
+        font-size: 1.5rem;
+        margin-top: 450px;
         height: 50%;
         overflow: scroll;
     }
@@ -139,28 +139,28 @@
     }
 
     #intro-tc-title {
-        font-size: 36px;
+        font-size: 2.3rem;
     }
 
     .intro-tc-el {
-        font-size: 20px;
-        line-height: 50px;
+        font-size: 1.5rem;
+        line-height: 3rem;
     }
 
     .intro-topic {
-        font-size: 40px;
+        font-size: 2.3rem;
     }
 
     .intro-content {
-        font-size: 25px
+        font-size: 1.5rem;
     }
 
     .intro-accent {
-        font-size: 25px
+        font-size: 1.8rem;
     }
 
     .intro-link {
-        font-size: 27px;
+        font-size: 1.8rem;
     }
 
     .intro-img {
