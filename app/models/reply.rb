@@ -44,7 +44,7 @@ class Reply < ApplicationRecord
             else
                 # 댓글 주인에게 노티
                 # 공개범위에 더 이상 포함이 안된다면 노티가 안 가야 한다! ( 친구가 끊어졌다거나, 그룹이 이동됐다거나, ... )
-                if !(origin.target.channels & self.comment.author_id.belonging_channels).empty?
+                if !(origin.target.channels & self.comment.author.belonging_channels).empty?
                     noti_hash[:action] = 'friend_to_comment'
                     create_noti_hash[:action] = 'friend_to_comment'
                     # if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
