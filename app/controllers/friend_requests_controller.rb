@@ -14,7 +14,7 @@ class FriendRequestsController < ApplicationController
         # else
         #     friend_request.destroy_all
         end
-        redirect_back fallback_location: profile_path(params[:id])
+        redirect_back fallback_location: profile_path(User.find(params[:id].slug))
     end
 
     def destroy

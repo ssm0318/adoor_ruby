@@ -22,7 +22,7 @@
                 <div id = "username"><%= @user.username %></div>
                 <% if current_user.id == user.id %>
                     <div id ="profile__setting">
-                        <%= link_to image_tag("icons/setting-default-icon.png", id: "profile__setting-btn"), edit_user_profile_path(user.username) %>
+                        <%= link_to image_tag("icons/setting-default-icon.png", id: "profile__setting-btn"), edit_user_profile_path(user.slug) %>
                     </div>
                 <% end %>
             </div>
@@ -56,7 +56,7 @@
     
     <div class="user-header__tab">
         <div class = "user-header__tab-el-left">
-            <%= active_link_to "게시물", profile_path(user.username), :active => :exclusive %>
+            <%= active_link_to "게시물", profile_path(user.slug), :active => :exclusive %>
         </div>
         <div class = "user-header__tab-el-right">
             <% if current_user.id == user.id %>

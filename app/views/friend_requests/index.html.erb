@@ -8,8 +8,8 @@
         <% requester = f.requester%>
         <div class="fr-box">
             <div class="requester">
-                <%= link_to image_tag(requester.image.url, class: "fr-image"), profile_path(requester.id) %>
-                <%= link_to requester.username, profile_path(requester.id), class: "fr-username" %>
+                <%= link_to image_tag(requester.image.url, class: "fr-image"), profile_path(requester.slug) %>
+                <%= link_to requester.username, profile_path(requester.slug), class: "fr-username" %>
             </div>
             <div class="buttons">
                 <%= link_to "수락", add_friend_path(requester.id), method: :post, class: "fr-btn" %>

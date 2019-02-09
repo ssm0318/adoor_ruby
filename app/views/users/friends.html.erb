@@ -18,7 +18,7 @@
             <div id = "profile__username-setting-div">
                 <div id = "username"><%= current_user.username %></div>
                 <div id ="profile__setting">
-                    <%= link_to image_tag("icons/setting-default-icon.png", id: "profile__setting-btn"), edit_user_profile_path(current_user.username) %>
+                    <%= link_to image_tag("icons/setting-default-icon.png", id: "profile__setting-btn"), edit_user_profile_path(current_user.slug) %>
                 </div>
             </div>
             <div id = "user-message">
@@ -29,7 +29,7 @@
                 <% end %>
             </div>
             <div id = "profile__friends-setting">
-                <%= link_to "게시물 / 서랍장", profile_path(current_user.username), id: "profile__friends-setting-btn" %>
+                <%= link_to "게시물 / 서랍장", profile_path(current_user.slug), id: "profile__friends-setting-btn" %>
             </div>
         </div>
     </div>

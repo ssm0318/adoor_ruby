@@ -53,7 +53,7 @@ class UsersController < ApplicationController
             @error = @user.errors.full_messages[0]
             render 'edit'
         else
-            redirect_to profile_path(@user.username)
+            redirect_to profile_path(@user.slug)
         end
     end
 
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
             @user.save
         end
 
-        redirect_back fallback_location: profile_path(params[:id])
+        redirect_back fallback_location: profile_path(User.friendly.find(params[:id]))
     end
 
     def new_image
@@ -93,7 +93,7 @@ class UsersController < ApplicationController
         friendship = Friendship.where(friendship_hash)
         if friendship.empty?
             Friendship.create(friendship_hash)
-            redirect_back fallback_location: profile_path(params[:id])
+            redirect_back fallback_location: profile_path(User.friendly.find(params[:id]))
         else
             friendship.destroy_all
             Friendship.where({user_id: params[:id], friend_id: current_user.id}).destroy_all
@@ -103,7 +103,7 @@ class UsersController < ApplicationController
 
                 }
             else
-                redirect_back fallback_location: profile_path(params[:id])
+                redirect_back fallback_location: profile_path(User.friendly.find(params[:id]))
             end
         end
     end

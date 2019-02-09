@@ -9,8 +9,8 @@
         <% else %>
             <% current_user.friends.each do |friend| %>
                 <div class="assignment-content-el">
-                    <%= link_to image_tag(friend.image.url, class: "assignee-profile"), profile_path(friend) %>
-                    <%= link_to friend.username, profile_path(friend), class: "assignee-name" %>
+                    <%= link_to image_tag(friend.image.url, class: "assignee-profile"), profile_path(friend.slug) %>
+                    <%= link_to friend.username, profile_path(friend.slug), class: "assignee-name" %>
                     
                     <% assign = Assignment.find_by(target: custom_question, assigner_id: current_user.id, assignee_id: friend.id) %>
                     <%if assign.nil? %>

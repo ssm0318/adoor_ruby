@@ -35,7 +35,7 @@ class DrawersController < ApplicationController
         drawers.each do |drawer|
             user = drawer.user
             if user.id == current_user.id || (current_user.friends.include? user)
-                users.push({ image_url: user.image.url, profile_path: profile_path(user), username: user.username})
+                users.push({ image_url: user.image.url, profile_path: profile_path(user.slug), username: user.username})
                 friends_count += 1
             end
         end
