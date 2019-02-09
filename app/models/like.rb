@@ -19,11 +19,21 @@ class Like < ApplicationRecord
                     noti_hash[:action] = 'friend_like_article'
                     create_noti_hash[:action] = 'friend_like_article'
                 when 'Comment'
-                    noti_hash[:action] =  'friend_like_comment'
-                    create_noti_hash[:action] = 'friend_like_comment'
+                    if self.target.anonymous
+                        noti_hash[:action] = 'anonymous_like_comment'
+                        create_noti_hash[:action] = 'anonymous_like_comment'
+                    else
+                        noti_hash[:action] =  'friend_like_comment'
+                        create_noti_hash[:action] = 'friend_like_comment'
+                    end
                 when 'Reply'
-                    noti_hash[:action] =  'friend_like_reply'
-                    create_noti_hash[:action] = 'friend_like_reply'
+                    if self.target.anonymous
+                        noti_hash[:action] = 'anonymous_like_reply'
+                        create_noti_hash[:action] = 'anonymous_like_reply'
+                    else
+                        noti_hash[:action] =  'friend_like_reply'
+                        create_noti_hash[:action] = 'friend_like_reply'
+                    end
                 else
                 end
             # 익명의 좋아요

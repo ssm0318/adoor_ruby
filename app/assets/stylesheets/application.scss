@@ -28,6 +28,10 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+html {
+    font-size: 15px;
+}
+
  .flash {
     margin: auto;
     width: 50%;
@@ -40,7 +44,6 @@
     background-color: #F48462;
  }
 .navbar {
-
     padding: .3rem 1rem;
 
     .navbar-brand img {
@@ -55,10 +58,13 @@
     .nav-item {
         padding-left: 15px;
         padding-right: 15px;
+        // display: flex;
+        // align-items: center;
     }
 
     .logout-toggle {
-        display: none;
+        visibility: hidden;
+
     }
 
     // .navbar-nav.mr-auto {
@@ -210,6 +216,7 @@
     padding-top: 80px;
     position: relative;
     min-width: 600px;
+
     .prism-title {
         width: 100%;
         text-align: center;
@@ -388,11 +395,11 @@ div.background {
 
 }
 
-// .hover-orange {
-//     &:hover {
-//         color: #F48462;
-//     }
-// }
+.hover-orange {
+    &:hover {
+        color: #F48462;
+    }
+}
 
 .hover-pointer {
     cursor: pointer;
@@ -414,8 +421,9 @@ div.background {
     }
 }
 
+//for mobile version
 @media only screen and (max-device-width: 500px) {
-
+    
     .inner-container {
         width: 100%;
     }
@@ -425,22 +433,14 @@ div.background {
         width: 95%;
     }
 
-    .prism-box {
-        zoom: 2.3;
-        margin: 10px 0px;
-
-        .prism-box__content {
-            padding: 0px 20px;
-        }
-
-        .edit-or-delete {
-            width: 100px;
-        }
+    #top-btn {
+        padding: 20px 25px !important;
+        border-radius: 40px !important;
+        background-color: #F48462 !important;
     }
 
-    .prism-box-new-post {
-        zoom: 2.2;
-        margin: 10px 0px;
+    .fa-arrow-up {
+        font-size: 40px;
     }
 
     .navbar {
@@ -455,30 +455,27 @@ div.background {
             padding-bottom: 30px;
         }
 
-        .show {
-            padding-bottom: 20px;
-
-            .logout-toggle {
-                display: block;
-            }
-        }
-
         .nav-link {
             padding-left: 25px;
             font-size: 50px;
             zoom: 1.2;
         }
 
+        .logout-toggle {
+            visibility: visible;
+            padding-bottom: 20px;
+        }
+
         .mr-auto-custom {
-            top: 15px !important;
+            top: 13px !important;
 
             .logout {
-                display: none;
+                display: none !important;
             }
 
             .login {
-                font-size: 20px;
-                padding-top: 5px;
+                font-size: 15px;
+                padding-top: 4px;
             }
 
             .search-input {
@@ -530,7 +527,7 @@ div.background {
         cursor: pointer;
         z-index: 1;
         position: absolute;
-        top: 18px;
+        top: 15px;
         right: 0.5em;
         border: none;  
     }
@@ -598,11 +595,7 @@ div.background {
     }
 
     .prism-box__question {
-        zoom: 2.3;
-    }
-
-    .sign-box {
-        zoom: 1.8;
+        zoom: 2.3; 
     }
 
     .profile-edit-tab {

@@ -1,10 +1,5 @@
 .error_notification {
-    text-align: center;
-    font-size: 14px;
-    text-decoration: none;
-    color: #F48462;
-    padding-bottom: 10px;
-    font-weight: normal;
+    display: none;
 }
 
 .error {
@@ -13,5 +8,6 @@
     text-decoration: none;
     color:  #F48462;
     font-weight: normal;
+    margin-bottom: 10px;
 
 }
