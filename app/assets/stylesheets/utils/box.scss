@@ -625,7 +625,7 @@ div {
 //for mobile version
 @media only screen and (max-device-width: 500px) {
     .prism-box {
-        zoom: 2.3;
+        // zoom: 2.3;
         margin: 10px 0px;
 
         .prism-box__header {
@@ -643,7 +643,7 @@ div {
     }
 
     .prism-box-new-post {
-        zoom: 1.5;
+        // zoom: 1.5;
         margin: 10px 0px;
     }
 
