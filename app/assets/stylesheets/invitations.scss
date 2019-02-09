@@ -106,9 +106,8 @@
     line-height: 1.5em;
     padding-left: 20px;
     padding-right: 20px;
-    .link-generation-text {
-        line-height: 2em;
-    }
+
+    
     .invitation-form {
         text-align: left;
         margin-top: 50px;
@@ -123,7 +122,7 @@
         label {
             position: relative;
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-bottom: 0.6rem;
         }
         input[type="checkbox"] + label:before {
             content:'';
@@ -154,6 +153,25 @@
             border-width: 0 1px 1px 0;
             transform: rotate(45deg);
             -webkit-transform: rotate(45deg);
+        }
+        .link-generation-btn {
+            background-color: #F48462;
+            color: white;
+            width: 180px;
+            height: 50px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            cursor: pointer;
+            &:focus {
+                outline: none;
+                fill: none;
+            }
+        
         }
 
     }
