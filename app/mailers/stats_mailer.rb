@@ -8,5 +8,9 @@ class StatsMailer < ApplicationMailer
         attachments["total_user_stats.csv"] = File.read("lib/user_stats/total_user_stats.csv")
         attachments["recent_user_stats.csv"] = File.read("lib/user_stats/recent_user_stats.csv")
         mail(to: "adoor.team@gmail.com", subject: "#{Date.today().strftime("%b. %d, %Y")} 유저 통계입니다.")
+        mail(to: "sjlee739@gmail.com", subject: "#{Date.today().strftime("%b. %d, %Y")} 유저 통계입니다.")
+        mail(to: "gjinsun96@gmail.com", subject: "#{Date.today().strftime("%b. %d, %Y")} 유저 통계입니다.")
+        mail(to: "njs03332@gmail.com", subject: "#{Date.today().strftime("%b. %d, %Y")} 유저 통계입니다.")
+        mail(to: "kleenex0318@gmail.com", subject: "#{Date.today().strftime("%b. %d, %Y")} 유저 통계입니다.")
     end
 end

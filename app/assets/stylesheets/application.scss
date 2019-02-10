@@ -15,9 +15,13 @@
  */
 
  .pagination {
-    .previous_page, .next_page, a, .current {
+    .previous_page, .next_page, a, .current, .page_gap {
         display: none;
     }
+ }
+
+ .pagination-message {
+     display: none;
  }
 
  ::-webkit-scrollbar { 
@@ -44,6 +48,7 @@ html {
     background-color: #F48462;
  }
 .navbar {
+    z-index: 1;
     padding: .3rem 1rem;
 
     .navbar-brand img {
