@@ -92,6 +92,7 @@ class AnswersController < ApplicationController
             friend_noties += Notification.where(target_type: 'Like', action: 'friend_like_reply').joins(reply_join).merge(Reply.joins(:comment).where(comments: {target: @answer})).distinct
             friend_noties += Notification.where(target_type: 'Reply', action: 'friend_to_comment').joins(comment_join).merge(Comment.where(target: @answer)).distinct
             friend_noties += Notification.where(target_type: 'Reply', action: 'friend_to_recomment').joins(comment_join).merge(Comment.where(target: @answer)).distinct
+            friend_noties += Notification.where(target: @answer, action: 'assignment-answer')
 
             friend_noties.each do |n|
                 if (n.recipient != @answer.author) && (n.recipient.belonging_channels & selected_channels).empty?
