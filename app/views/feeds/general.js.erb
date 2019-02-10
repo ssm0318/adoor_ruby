@@ -1,3 +1,9 @@
 
-$('#infinite-feeds').append('<%= escape_javascript render partial: 'feeds/general_index', locals: {feeds: @feeds} %>');
+let new_general_box = $('<%= escape_javascript render partial: 'feeds/general_index', locals: {feeds: @feeds} %>')
+
+$('#infinite-feeds').append(new_general_box);
 $('.pagination').replaceWith('<%= escape_javascript will_paginate(@feeds) %>');
+
+autosize(new_general_box.find('textarea'))
+
+

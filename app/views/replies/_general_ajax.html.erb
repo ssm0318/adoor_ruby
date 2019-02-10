@@ -1,0 +1,20 @@
+<div class="reply">
+    <div class="comment-content">
+            <%= link_to image_tag(r.author.image.url, class: "user-profile"), profile_path(r.author.username) %>
+            <span class="comment-text">
+                <%= link_to r.author.username, profile_path(r.author.username), class: "username" %>
+                <span class = "content">
+                    <%= r.content %>
+                </span>
+            </span>
+            <div class="likes">
+                <%= render 'likes/num_of_likes', target: r %>
+                <%= render 'likes/default', target: r, like_btn_class: "btn-comment-like" %>
+            </div>
+    </div>
+
+    <div class = "comment-info">
+        <span class="time"><%= time_tag r.created_at, class: "timeago" %></span>
+        <span> <%= render 'replies/my_replies_menu', r: r %></span>
+    </div>
+</div> 
