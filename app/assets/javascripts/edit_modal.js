@@ -11,12 +11,12 @@ function edit_modal(event) {
 
             $("#edit-background").find("#edit-box").append(html)
             check_channels(html.find(".answer-button"))
-            toggle_channels_dropdown(html.find(".channels-dropdown"))
             $("#edit-background").show()
             $("body").css('overflow', 'hidden')
-            form.one('click', edit_modal)
+            $(document).one('click', '.feed-edit', edit_modal)
             // textarea_init($(html.find('textarea')), $("#edit-background"))
             autosize(html.find('textarea'))
+            $('body').trigger('click'); 
             
             //편집 완료
             $(".edit_answer, .edit_post, .edit_repost").submit( function(e) {
@@ -47,6 +47,6 @@ function edit_modal(event) {
         }
     })
 }
-$(document).on('turbolinks:load', function()  {
-    $(".feed-edit").one('click', edit_modal)
-})
+
+
+$(document).one('click', '.feed-edit', edit_modal)

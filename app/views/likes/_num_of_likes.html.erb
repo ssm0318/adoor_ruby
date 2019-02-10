@@ -1,3 +1,4 @@
+
 <% if current_user.id == target.author_id %>
     <span class="num-of-likes zero" data-url="/likes/<%=target.class.to_s%>/<%=target.id%>"><%= target.likes.count() %></span>
 <% end %>

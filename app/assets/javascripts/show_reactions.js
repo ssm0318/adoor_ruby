@@ -1,5 +1,5 @@
-function show_likes() {
-    console.log("wh")
+function show_likes(event) {
+    event.stopImmediatePropagation();
     form = $(this)
     $.ajax({
         type: "GET",
@@ -13,7 +13,7 @@ function show_likes() {
             $("#edit-background").find("#friends-box").append(html)
             $("#edit-background").show()
             $("body").css('overflow', 'hidden')
-            form.one('click', show_likes)
+            $(document).one('click', ".num-of-likes", show_likes)
         },
         error: function(data) {
             console.log("error!")
@@ -21,7 +21,8 @@ function show_likes() {
     })
 }
 
-$(document).on('turbolinks:load', function()  {
+
+$(document).on('click', function()  {
     $(".num-of-likes").filter(function(index) {
         return $(this).text() != '0'
     }).removeClass("zero")
@@ -34,6 +35,6 @@ $(document).on('turbolinks:load', function()  {
         return $(this).text() != '0'
     }).removeClass("zero")
 
-    $(".num-of-likes").one('click', show_likes)
-    // $(".num-of-drawers").one('click', show_likes)
+    $(document).one('click', ".num-of-likes", show_likes)
+
 })
