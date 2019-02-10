@@ -32,14 +32,15 @@ $(document).on('submit', '.prism-form-general', function(e) {
 
         form.parent().find(".anonymous-comments").append(html)
         autosize(html.find(".prism-form__comment"))
-        $('body').trigger('click'); 
         html.find("time.timeago").timeago();
+        $('body').trigger('click'); 
 
       }
       else {
         
         form.parent().find(".comment-replies").append(html)
         html.find("time.timeago").timeago();
+        $('body').trigger('click'); 
       }
     },
     error: function(data) {

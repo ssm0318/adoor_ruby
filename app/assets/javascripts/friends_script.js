@@ -65,12 +65,13 @@ $(document).on('submit', '.prism-form-friend', function(e) {
           form.parent().find(".comments").append(html)
         }
         autosize(html.find(".prism-form__comment"))
-        $('body').trigger('click'); 
         html.find(".timeago").timeago();
+        $('body').trigger('click'); 
 
       }
       else {
         form.parent().find(".comment-replies").append(html)
+        $('body').trigger('click'); 
         html.find(".timeago").timeago();
       }
 
