@@ -15,9 +15,9 @@
  */
 
  .pagination {
-    .previous_page, .next_page, a, .current, .page_gap {
+    .previous_page, .next_page, a, .current, .gap, .last_page, .first_page {
         display: none;
-    }
+    } 
  }
 
  .pagination-message {
