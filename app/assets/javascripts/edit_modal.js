@@ -11,10 +11,9 @@ function edit_modal(event) {
 
             $("#edit-background").find("#edit-box").append(html)
             check_channels(html.find(".answer-button"))
-            toggle_channels_dropdown(html.find(".channels-dropdown"))
             $("#edit-background").show()
             $("body").css('overflow', 'hidden')
-            form.one('click', edit_modal)
+            $(document).one('click', '.feed-edit', edit_modal)
             // textarea_init($(html.find('textarea')), $("#edit-background"))
             autosize(html.find('textarea'))
             
@@ -30,8 +29,8 @@ function edit_modal(event) {
                     data: form.serialize(),
                     success: function(data) {
                     console.log("successed")
-                        $(`.prism-box.${data.id}`).find(".answer").html(form.find(".new-answer-field").val())
-                        $(`.prism-box.${data.id}`).find(".feed-channels").html("공개그룹: " + data.channels)
+                        $(`.prism-box.${data.type}.${data.id}`).find(".answer").html(form.find(".new-answer-field").val())
+                        $(`.prism-box.${data.type}.${data.id}`).find(".feed-channels").html('<strong style = "padding-right: 10px; color: #4f4f4f;">공개그룹</strong>' + data.channels)
                         html.remove()
                         $("#edit-background").hide()
                         $("body").css('overflow', 'auto')
@@ -47,6 +46,6 @@ function edit_modal(event) {
         }
     })
 }
-$(document).on('turbolinks:load', function()  {
-    $(".feed-edit").one('click', edit_modal)
-})
+
+
+$(document).one('click', '.feed-edit', edit_modal)

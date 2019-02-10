@@ -16,10 +16,9 @@ function write_modal(event) {
                 html.find(".new_answer").prepend(`<input value="true" type="hidden" name="from_feed">`)
             }
             check_channels($(".answer-button"))
-            toggle_channels_dropdown(html.find(".channels-dropdown"))
             $("#edit-background").show()
             $("body").css('overflow', 'hidden')
-            form.one('click', write_modal)
+            $(document).one('click', '.btn-write-modal', write_modal)
             // textarea_init($(html.find('textarea')), $("#edit-background"))
             autosize(html.find('textarea'))
             
@@ -51,6 +50,4 @@ function write_modal(event) {
     })
 }
 
-$(document).on('turbolinks:load', function()  {
-    $(".btn-write-modal").one('click', write_modal)
-})
+$(document).one('click', '.btn-write-modal', write_modal)

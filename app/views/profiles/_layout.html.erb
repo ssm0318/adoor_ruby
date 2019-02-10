@@ -36,10 +36,8 @@
             <div id = "profile__friends-setting">
                 <% if current_user.id == user.id %>
                     <%= link_to "친구 관리", friends_path(), id: "profile__friends-setting-btn" %>
-                <!-- 이 부분 나중에 친구 리스트로 옮기고 싶다 -->
                 <% else %>
                     <% if !user.friends.include? current_user %>
-                        <%# view에서 record에 접근하는 게 정상인가.. 이거 어떻게 .recieved_requests이런거 이용해서 안될까! %>
                         <% if FriendRequest.where(requester_id: user.id, requestee_id: current_user.id).exists? %>
                             <%= link_to "친구수락", add_friend_path(user.id), method: :post, id: "profile__friends-setting-btn" %>
                         <% elsif FriendRequest.where(requester_id: current_user.id, requestee_id: user.id).exists? %>
