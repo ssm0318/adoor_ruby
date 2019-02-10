@@ -1,6 +1,11 @@
 function show_likes(event) {
     event.stopImmediatePropagation();
     form = $(this)
+
+    if(form.parents(".anonymous-comments").length > 0) {
+        $(document).one('click', ".num-of-likes", show_likes)
+        return false;
+    }
     $.ajax({
         type: "GET",
         url: form.attr('data-url'),

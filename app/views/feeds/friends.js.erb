@@ -1,8 +1,2 @@
-
-let new_box = $('<%= escape_javascript render partial: 'feeds/friends_index', locals: {feeds: @feeds} %>')
-
-$('#infinite-feeds').append(new_box);
+$('#infinite-feeds').append('<%= escape_javascript render partial: 'feeds/friends_index', locals: {feeds: @feeds} %>');
 $('.pagination').replaceWith('<%= escape_javascript will_paginate(@feeds) %>');
-
-autosize(new_box.find('textarea'))
-new_box.find('time.timeago').timeago()
