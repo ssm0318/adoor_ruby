@@ -8,7 +8,7 @@
             data-url='<%=new_assignment_path(@question.id)%>'>
             <%= image_tag("icons/assign-icon.png", class: "btn-assign") %>
         </a>
-    </div>
+    </div> 
     <%= render 'questions/tabs', question: @question %>
     
     <div class = "prism-box__question">
@@ -61,3 +61,7 @@
         </div>
     <% end %>
 </div>
+
+<script>
+  $('body').trigger('click');
+</script>
