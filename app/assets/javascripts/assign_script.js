@@ -1,4 +1,6 @@
-function assign_modal() {
+function assign_modal(event) {
+
+    event.stopImmediatePropagation();
     console.log("assign_modal")
     form = $(this)
 
@@ -17,7 +19,7 @@ function assign_modal() {
             $("#friends-box").show()
             $("#edit-background").show()
             $("body").css('overflow', 'hidden')
-            form.one('click', assign_modal)
+            $(document).one('click', '.btn-assign-modal', assign_modal)
 
             $(".btn-do-assign").on('click', function() {
                 var thisButton = $(this);
@@ -64,8 +66,5 @@ function assign_modal() {
         }
     })
 }
-$(document).on('turbolinks:load', function() {
 
-    $(".btn-assign-modal").one('click', assign_modal)
-
-})
+$(document).one('click', '.btn-assign-modal', assign_modal)

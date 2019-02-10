@@ -18,7 +18,7 @@ function write_modal(event) {
             check_channels($(".answer-button"))
             $("#edit-background").show()
             $("body").css('overflow', 'hidden')
-            form.one('click', write_modal)
+            $(document).one('click', '.btn-write-modal', write_modal)
             // textarea_init($(html.find('textarea')), $("#edit-background"))
             autosize(html.find('textarea'))
             
