@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   get '/assignments/:question_id' => 'assignments#new', as: :new_assignment
   post '/assignments/:assignee_id/:question_id' => 'assignments#create', as: :create_assignment # get?
   delete '/assignments/:assignee_id/:question_id' => 'assignments#destroy', as: :destroy_assignment
+  post '/assignments/:assignee_id/custom_question/:custom_question_id' => 'assignments#create_custom', as: :create_custom_assignment # get?
+  delete '/assignments/:assignee_id/custom_question/:custom_uestion_id' => 'assignments#destroy_custom', as: :destroy_custom_assignment
+  get '/assignments/custom_question/:custom_question_id' => 'assignments#new_custom', as: :new_custom_assignment
 
   # Drawer
   resources :drawers, only: [:create, :destroy]

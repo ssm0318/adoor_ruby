@@ -164,7 +164,7 @@ $(document).on('turbolinks:load', function()  {
                   new_form.find(".prism-form__comment").focus()
                   var new_html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, false)
                   var new_btn_like = getButtonLike(data.like_url, data.like_changed_url)
-                  var new_btn_show_like = getShowLike("Comment", data.id)
+                  var new_btn_show_like = getShowLike("Reply", data.id)
                   new_html.find(".likes").append(new_btn_show_like)
                   new_html.find(".likes").append(new_btn_like)
                   new_form.parent().find(".comment-replies").append(new_html);
@@ -184,7 +184,7 @@ $(document).on('turbolinks:load', function()  {
           else {
             var html = getReplyHtml(data.profile_path, data.profile_img_url, data.username, data.content, data.created_at, data.id, false)
             var btn_like = getButtonLike(data.like_url, data.like_changed_url)
-            var btn_show_like = getShowLike("Comment", data.id)
+            var btn_show_like = getShowLike("Reply", data.id)
             html.find(".likes").append(btn_show_like)
             html.find(".likes").append(btn_like)
             form.parent().find(".comment-replies").append(html)

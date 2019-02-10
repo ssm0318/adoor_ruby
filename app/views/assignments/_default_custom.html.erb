@@ -1,6 +1,7 @@
+<!-- FIXME: 수정아 사랑해 -->
 <div class="assignment-content">
     <div class="prism-box-question" style="text-align: center;">
-        <%=link_to question.content, question_path(question), class: "question"%>
+        <%=link_to custom_question.content, custom_question_path(custom_question), class: "question"%>
     </div>
     <% if user_signed_in? %>
         <% if !current_user.friends.exists? %>
@@ -11,18 +12,18 @@
                     <%= link_to image_tag(friend.image.url, class: "assignee-profile"), profile_path(friend) %>
                     <%= link_to friend.username, profile_path(friend), class: "assignee-name" %>
                     
-                    <% assign = Assignment.find_by(target: question, assigner_id: current_user.id, assignee_id: friend.id) %>
+                    <% assign = Assignment.find_by(target: custom_question, assigner_id: current_user.id, assignee_id: friend.id) %>
                     <%if assign.nil? %>
                         <a  class="btn-do-assign" 
                             data-assign-id="-1"
                             data-friend-id="<%=friend.id%>" 
-                            data-question-id="<%=question.id%>"
+                            data-custom_question-id="<%=custom_question.id%>"
                             style="background-color: #F48462; color: white;">질문하기</a>
                     <% else %>
                         <a  class="btn-do-assign" 
                             data-assign-id="<%=assign.id%>"
                             data-friend-id="<%=friend.id%>" 
-                            data-question-id="<%=question.id%>">질문취소</a>
+                            data-custom_question-id="<%=custom_question.id%>">질문취소</a>
                     <% end %>
                 </div>
             <% end %>

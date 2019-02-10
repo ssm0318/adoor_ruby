@@ -5,7 +5,7 @@ class FeedsController < ApplicationController
         @feeds = Answer.channel_name("익명피드").anonymous(current_user.id) + Post.channel_name("익명피드").anonymous(current_user.id) + CustomQuestion.channel_name("익명피드").anonymous(current_user.id)
         @feeds = @feeds.sort_by(&:created_at).reverse!
 
-        @feeds = @feeds.paginate(:page => params[:page], :per_page => 10)
+        # @feeds = @feeds.paginate(:page => params[:page], :per_page => 10)
         
         render 'general'
     end
@@ -17,7 +17,7 @@ class FeedsController < ApplicationController
         @feeds = answers + posts + custom_questions
         @feeds = @feeds.sort_by(&:created_at).reverse!
 
-        @feeds = @feeds.paginate(:page => params[:page], :per_page => 10)
+        # @feeds = @feeds.paginate(:page => params[:page], :per_page => 10)
 
         render 'friends'
     end
