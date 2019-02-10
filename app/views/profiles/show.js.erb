@@ -1,0 +1,5 @@
+
+$('#infinite-feeds').append('<%= escape_javascript render partial: 'profiles/my_feeds', locals: {feeds: @feeds} %>');
+$('.pagination').replaceWith('<%= escape_javascript will_paginate(@feeds) %>');
+$('body').trigger('click'); 
+
