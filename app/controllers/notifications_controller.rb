@@ -133,7 +133,7 @@ class NotificationsController < ApplicationController
             when 'Answer'
                 render js: "window.location = '#{answer_path(origin_id)}'"
             when 'Friendship'
-                username = User.find(origin_id).username
+                username = User.find(origin_id).slug
                 render js: "window.location = '#{profile_path(username)}'"
             # when 'Highlight'
             #     if origin_type == 'Post'
@@ -142,7 +142,7 @@ class NotificationsController < ApplicationController
             #         redirect_to answer_path(origin_id)
             #     end
             when 'FriendRequest'
-                username = User.find(origin_id).username
+                username = User.find(origin_id).slug
                 render js: "window.location = '#{profile_path(username)}'"
             when 'Announcement'
                 render js: "window.location = '#{announcement_index_path}'"

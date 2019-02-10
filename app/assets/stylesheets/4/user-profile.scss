@@ -62,11 +62,12 @@
 
                 #profile__friends-setting-btn {
                     text-decoration: none;
-                    border-radius: 9px;
-                    border: 0.75px solid #F48462;
-                    padding: 6px 10px 8px 12px;
-                    color: #F48462;
-                    font-size: 12px;
+                    border-radius: 20px;
+                    border: none;
+                    padding: 8px 20px 10px 22px;
+                    color: white;
+                    background-color: #F48462;
+                    font-size: .9rem;
                 }
             }
         }
@@ -130,13 +131,14 @@
         // justify-content: space-around;
         // border-top: 1px solid #d7dae0;
         // padding-top: 10px;
-        margin-top: 20px;
+        margin-top: 30px;
 
 
         .user-header__tab-el-left {
+            font-size: 1rem;
             background-color: white;
             width: 50%;
-            height: 40px;
+            padding: 10px 0;
             border: 0.5px solid #dddddd;
             border-top-left-radius: 10px;
             border-bottom-left-radius: 10px;
@@ -148,9 +150,10 @@
         }
 
         .user-header__tab-el-right {
+            font-size: 1rem;
+            padding: 10px 0;
             background-color: white;
             width: 50%;
-            height: 40px;
             border: 0.5px solid #dddddd;
             border-top-right-radius:10px;
             border-bottom-right-radius:10px;

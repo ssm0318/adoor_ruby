@@ -1,14 +1,14 @@
 <div class="reply">
     <div class="comment-content">
-            <%= link_to image_tag(r.author.image.url, class: "user-profile"), profile_path(r.author.username) %>
+            <%= link_to image_tag(r.author.image.url, class: "user-profile"), profile_path(r.author.slug) %>
             <span class="comment-text">
-                <%= link_to r.author.username, profile_path(r.author.username), class: "username" %>
+                <%= link_to r.author.username, profile_path(r.author.slug), class: "username" %>
                 <% if r.secret %>
                     <%= image_tag("icons/lock-icon.png", class: "lock-icon")%>
                 <% end %>
                 <!-- author처럼 target_author 자체를 가져와서 굳이 query 안날려도 되면 좋겠다!!!-->
                 <% if r.target_author %>
-                    <%=link_to r.target_author.username, profile_path(r.target_author.username), class: "replier-name" %>
+                    <%=link_to r.target_author.username, profile_path(r.target_author.slug), class: "replier-name" %>
                 <% end %>
                 <span class = "content">
                     <%= r.content %>

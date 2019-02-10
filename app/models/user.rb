@@ -2,6 +2,10 @@ class User < ApplicationRecord
   rolify
   extend FriendlyId
   friendly_id :username, use: :slugged
+
+  def should_generate_new_friendly_id?
+    slug.blank? || username_changed?
+  end
   
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, :trackable and :omniauthable

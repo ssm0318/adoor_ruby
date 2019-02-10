@@ -2,7 +2,7 @@ class DrawersController < ApplicationController
     before_action :authenticate_user!
 
     def create
-        Drawer.create(user_id: current_user.id, target_id: params[:id], target_type: params[:target_type])
+        Drawer.find_or_create_by(user_id: current_user.id, target_id: params[:id], target_type: params[:target_type])
 
         # fallback_location은 그냥 임시
         # redirect_back fallback_location: user_drawers_path(current_user.id)
@@ -35,7 +35,7 @@ class DrawersController < ApplicationController
         drawers.each do |drawer|
             user = drawer.user
             if user.id == current_user.id || (current_user.friends.include? user)
-                users.push({ image_url: user.image.url, profile_path: profile_path(user), username: user.username})
+                users.push({ image_url: user.image.url, profile_path: profile_path(user.slug), username: user.username})
                 friends_count += 1
             end
         end

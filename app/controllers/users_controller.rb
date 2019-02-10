@@ -53,12 +53,12 @@ class UsersController < ApplicationController
             @error = @user.errors.full_messages[0]
             render 'edit'
         else
-            redirect_to profile_path(@user.username)
+            redirect_to profile_path(@user.slug)
         end
     end
 
     def image_upload
-        uploaded_io = params[:image]
+        uploaded_io = params[:image] 
         if uploaded_io.include? "data:image/jpeg;base64,"
             metadata = "data:image/jpeg;base64,"
             base64_string = uploaded_io[metadata.size..-1]
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
             @user.save
         end
 
-        redirect_back fallback_location: profile_path(params[:id])
+        redirect_back fallback_location: profile_path(User.find(params[:id]).slug)
     end
 
     def new_image
@@ -93,7 +93,7 @@ class UsersController < ApplicationController
         friendship = Friendship.where(friendship_hash)
         if friendship.empty?
             Friendship.create(friendship_hash)
-            redirect_back fallback_location: profile_path(params[:id])
+            redirect_back fallback_location: profile_path(User.find(params[:id]).slug)
         else
             friendship.destroy_all
             Friendship.where({user_id: params[:id], friend_id: current_user.id}).destroy_all
@@ -103,14 +103,14 @@ class UsersController < ApplicationController
 
                 }
             else
-                redirect_back fallback_location: profile_path(params[:id])
+                redirect_back fallback_location: profile_path(User.find(params[:id]).slug)
             end
         end
     end
 
     private
         def set_user
-            @user = User.friendly.find(params[:id])
+            @user = User.find_by(slug: params[:id])
         end
 
         def user_params
@@ -123,7 +123,7 @@ class UsersController < ApplicationController
 
         def check_user
             if @user != current_user
-                redirect_to edit_user_profile_url(current_user.username)
+                redirect_to edit_user_profile_url(current_user.slug)
             end
         end
 end

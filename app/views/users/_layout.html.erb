@@ -1,7 +1,7 @@
 <% users.each do |user| %> 
     <div class="user-box">
-        <%= link_to image_tag(user.image.url), profile_path(user.username) %>
-        <%= link_to user.username, profile_path(user.username), class: "username" %>
+        <%= link_to image_tag(user.image.url), profile_path(user.slug) %>
+        <%= link_to user.username, profile_path(user.slug), class: "username" %>
         <% if user.id != current_user.id %>
             <div class="friends-setting-div">
             <% if !user.friends.include? current_user %>

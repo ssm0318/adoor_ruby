@@ -1,2 +1,2 @@
-<%= active_link_to '프로필 수정', edit_user_profile_path(current_user.username), class: "profile-edit-tab", active: :exact %> &nbsp | &nbsp
+<%= active_link_to '프로필 수정', edit_user_profile_path(current_user.slug), class: "profile-edit-tab", active: :exact %> &nbsp | &nbsp
 <%= active_link_to '비밀번호 변경', edit_user_registration_path(), class: "profile-edit-tab" %>  

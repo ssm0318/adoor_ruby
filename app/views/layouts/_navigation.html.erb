@@ -32,7 +32,7 @@
     <% if user_signed_in? %>
         <%= render 'layouts/searchbar' %>
         <div class="nav-item logout"><a class="nav-link logout" href="<%=destroy_user_session_path%>" data-method = "delete">로그아웃</a></div>
-        <a class="my-page-btn" href="<%=profile_path(current_user.id)%>">
+        <a class="my-page-btn" href="<%=profile_path(current_user.slug)%>">
             <%= image_tag(current_user.image.url) %>
         </a>
         <%= render 'layouts/notification' %>

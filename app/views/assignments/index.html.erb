@@ -1,19 +1,17 @@
 <div class = "inner-container">
     <%= render partial: "notifications/header" %>
 
-    <% if @question_assignments.empty? && @custom_assignments.empty? %>
+    <% if @question_ids.empty? && @custom_question_ids.empty? %>
         받은 질문이 없습니다.
     <% end %>
-    <% questions = @question_assignments.pluck(:target_id).uniq %>
-    <% questions.each do |q| %>
-        <% question = Question.find(q) %>
+    <% @waiting_questions.each do |question| %>
         <% assigners = Assignment.where(assignee: current_user, target: question).pluck(:assigner_id).uniq %>
         <div class="assignment-box">
             <div class="assigners">
                 <% assigners.each do |a| %>
                     <% assigner = User.find(a) %>
-                    <%= link_to image_tag(assigner.image.url, class: "user-image"), profile_path(assigner.username) %>
-                    <%= link_to assigner.username, profile_path(assigner.username), class: "username" %>
+                    <%= link_to image_tag(assigner.image.url, class: "user-image"), profile_path(assigner.slug) %>
+                    <%= link_to assigner.username, profile_path(assigner.slug), class: "username" %>
                 <% end %>
             </div>
             <div class="content">
@@ -27,11 +25,34 @@
             </div>
         </div>
     <% end %>
-    <% custom_questions = @custom_assignments.pluck(:target_id).uniq %>
+    <% if !@answered_questions.empty? %>
+        답한 질문
+    <% end %>
+    <% @answered_questions.each do |question| %>
+        <% assigners = Assignment.where(assignee: current_user, target: question).pluck(:assigner_id).uniq %>
+        <div class="assignment-box answered">
+            <div class="assigners">
+                <% assigners.each do |a| %>
+                    <% assigner = User.find(a) %>
+                    <%= link_to image_tag(assigner.image.url, class: "user-image"), profile_path(assigner.slug) %>
+                    <%= link_to assigner.username, profile_path(assigner.slug), class: "username" %>
+                <% end %>
+            </div>
+            <div class="content">
+                <%= question.content %>
+            </div>
+            <div class="write-btn">
+                <a class="btn-write-modal" 
+                    data-url='<%=new_answer_path(question.id)%>'>
+                    <%= image_tag("icons/write-icon.png", class: "btn-write") %>
+                </a>
+            </div>
+        </div>
+    <% end %>
     <!-- FIXME: 수정아 사랑해 -->
     <!-- 프론트 구현 다하고 더해주면 되는 부분스~~ -->
-    <% custom_questions.each do |c| %>
-        <% custom_question = CustomQuestion.find(c) %>
+    <% @custom_question_ids.each do |c_id| %>
+        <% custom_question = CustomQuestion.find(c_id) %>
         <div class="assignment-box">
             <%= custom_question.content %>
         </div>

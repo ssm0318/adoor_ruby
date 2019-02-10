@@ -2,7 +2,7 @@ class LikesController < ApplicationController
     before_action :authenticate_user!
 
     def create
-        l = Like.create(user_id: current_user.id, target_id: params[:target_id], target_type: params[:target_type])
+        l = Like.find_or_create_by(user_id: current_user.id, target_id: params[:target_id], target_type: params[:target_type])
 
         render json: {
 
@@ -30,7 +30,7 @@ class LikesController < ApplicationController
         likes.each do |like|
             user = like.user
             if user.id == current_user.id || (current_user.friends.include? user)
-                users.push({ image_url: user.image.url, profile_path: profile_path(user), username: user.username})
+                users.push({ image_url: user.image.url, profile_path: profile_path(user.slug), username: user.username})
                 friends_count += 1
             end
         end
