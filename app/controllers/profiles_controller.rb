@@ -15,6 +15,8 @@ class ProfilesController < ApplicationController
         @feeds = answers + posts + custom_questions
         @feeds = @feeds.sort_by(&:created_at).reverse!
 
+        
+
         render 'show'
     end
 

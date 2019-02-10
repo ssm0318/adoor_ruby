@@ -22,7 +22,7 @@ function show_likes(event) {
 }
 
 
-$(document).on('turbolinks:load', function()  {
+$(document).on('click', function()  {
     $(".num-of-likes").filter(function(index) {
         return $(this).text() != '0'
     }).removeClass("zero")

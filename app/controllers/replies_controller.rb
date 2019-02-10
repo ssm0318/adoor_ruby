@@ -5,17 +5,15 @@ class RepliesController < ApplicationController
         secret = params[:secret].nil? ? false : params[:secret]
         r = Reply.create(content: params[:content], author_id: current_user.id, comment_id: params[:id], secret: secret, anonymous: params[:anonymous], target_author_id: params[:target_author_id])
 
-        target_author = params[:target_author_id] ? User.find(params[:target_author_id]).username : nil
- 
+
+        if r.anonymous
+            html_content = render_to_string :partial => 'replies/general_ajax', :locals => { :r => r, :comment_available => false}
+        else
+            html_content = render_to_string :partial => 'replies/friends', :locals => { :r => r, :comment_available => true}
+        end
+
         render json: {
-            id: r.id,
-            content: r.content,
-            created_at: r.created_at,
-            like_url: likes_path(target_id: r.id, target_type: 'Reply'), 
-            like_changed_url: like_path(r.id, target_type: 'Reply'),
-            profile_img_url: current_user.image.url,
-            profile_path: profile_path(current_user.username),
-            username: current_user.username,
+            html_content: html_content
         }
     end
 

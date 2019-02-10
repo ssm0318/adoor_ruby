@@ -17,6 +17,7 @@ function repost_modal() {
         $(document).on('click', '.btn-repost-modal', repost_modal)
         // textarea_init($(html.find('textarea')), $("#edit-background"))
         autosize(html.find('textarea'))
+        $('body').trigger('click'); 
     },
     error: function(data) {
         console.log("error!")

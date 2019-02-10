@@ -2,3 +2,5 @@
 $('#infinite-feeds').append('<%= escape_javascript render partial: 'feeds/general_index', locals: {feeds: @feeds} %>');
 $('.pagination').replaceWith('<%= escape_javascript will_paginate(@feeds) %>');
 $('body').trigger('click'); 
+
+

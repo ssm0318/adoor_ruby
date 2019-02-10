@@ -21,6 +21,7 @@ function write_modal(event) {
             $(document).one('click', '.btn-write-modal', write_modal)
             // textarea_init($(html.find('textarea')), $("#edit-background"))
             autosize(html.find('textarea'))
+            $('body').trigger('click')
             
             //편집 완료
             $(".new_answer").submit( function(e) {

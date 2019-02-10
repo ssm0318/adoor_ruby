@@ -31,6 +31,7 @@ function noti_click(e) {
                 $("body").css('overflow', 'hidden')
                 // textarea_init($(html.find('textarea')), $("#edit-background"))
                 autosize(html.find('textarea'))
+                $('body').trigger('click'); 
                 
                 //편집 완료
                 $(".new_answer").submit( function(e) {
