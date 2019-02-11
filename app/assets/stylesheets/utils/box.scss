@@ -42,7 +42,6 @@ div {
 .nav-tabs .nav-link {
     color: #F48462;
 }
-
 .tab-content {
     background-color: white;
     width: 100%;
@@ -57,7 +56,7 @@ div {
 
     .new-answer-field {
         width: 100%;
-        // height: 60px;
+        font-size: 1.1rem;
         overflow: hidden;
         border: none;
         outline: none;
@@ -87,40 +86,14 @@ div {
         cursor: pointer;
         font-size: 1rem;
 
-        .new-answer-field {
-            width: 100%;
-            font-size: 1.1rem;
-            // height: 60px;
-            overflow: hidden;
-            border: none;
-            outline: none;
-            line-height: 30px;
-            padding : 0px;
-            // border-bottom: 1px solid #C08BEF;
-            resize: none;
-            box-sizing: border-box;
-            margin-top: 30px; 
-            margin-bottom: 0px;
+        .selected {
+            color: #F48462;
         }
 
-        .answer-button {
-            position: absolute;
-            right: 15px;
-            bottom: 10px;
-            width: 70px;
-            height: 30px;
-            border-radius: 20px;
-            background-color: #F48462;
-            border: none;
-            font-size: .9rem;
-            color: white;
-        }
+    }
+    #tags {
 
-        .posting-or-custom-question {
-            position: absolute;
-            top: 10px;
-            cursor: pointer;
-            font-size: 1.1rem;
+        padding-top: 20px;
 
         #tag-title {
             color: #F48462;;
@@ -143,41 +116,18 @@ div {
                 cursor: pointer;
             }
         }
-        #tags {
-            padding-top: 20px;
 
-            #tag-title {
-                color: gray;
-                font-size: 1rem;
-            }
-            .tag {
-                font-size: .9rem;
-                padding: 6px 10px;
-                background-color: white;
-                border: none;
-                border-radius: 10px;
-                color: gray;
-                margin: 4px;
-                display: inline-block;
-                
-                .tag-close {
-                    width: 18px;
-                    height: auto;
-                    margin-left: 5px;
-                }
-            }
-
-            #tags_input {
-                font-size: .9rem;
-                width: auto;
-                padding: 6px 10px;
-                background-color: rgba(255,255,255,0.5);
-                margin: 4px;
-                outline: none;
-                border: 0.5px solid #dddddd;
-                border-radius: 10px;
-                box-shadow:none ;
-            }
+        #tags_input {
+            font-size: .9rem;
+            padding: 6px 10px;
+            background-color: #eaeaea5f;
+            border: none;
+            border-radius: 10px;
+            box-shadow:none;
+            outline: none;
+            width: auto;
+            margin: 4px;
+            outline: none;
         }
 
     }
@@ -699,10 +649,18 @@ div {
             width: 100px;
         }
     }
-
-    .prism-box-new-post {
+    
+    //new post form in frineds feed
+    .nav {
         zoom: 2.3;
-        margin: 10px 0px;
+    }
+    
+    .tab-content {
+        zoom: 2.3;
+    }
+
+    .nav-link {
+        padding: 5px 20px;
     }
 
     .link-generation-btn {

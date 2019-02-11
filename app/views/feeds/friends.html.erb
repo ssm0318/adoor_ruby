@@ -8,10 +8,10 @@
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-pane show active" role="tabpanel" aria-labelledby="home-tab">
       <%= render 'posts/new'%>
     </div>
-    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="tab-pane" role="tabpanel" aria-labelledby="profile-tab">
       <%= render partial: "custom_questions/new", locals: {custom_question: CustomQuestion.new} %>
     </div>
   </div>
