@@ -7,15 +7,14 @@ class CommentsController < ApplicationController
         end
         c = Comment.create(content: params[:content], author_id: current_user.id, target_type: params[:target_type], target_id: params[:target_id], anonymous: params[:anonymous], secret: secret)
 
+        if c.anonymous
+            html_content = render_to_string :partial => 'comments/general_ajax', :locals => { :feed => @answer, :c => c }
+        else
+            html_content = render_to_string :partial => 'comments/friends_ajax', :locals => { :feed => @answer, :c => c }
+        end
+
         render json: {
-            id: c.id,
-            content: c.content,
-            created_at: c.created_at,
-            like_url: likes_path(target_id: c.id, target_type: 'Comment'), 
-            like_changed_url: like_path(c.id, target_type: 'Comment'),
-            profile_img_url: current_user.image.url,
-            profile_path: profile_path(current_user.username),
-            username: current_user.username
+            html_content: html_content
         }
         
     end

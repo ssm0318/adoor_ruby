@@ -12,7 +12,6 @@ class PostsController < ApplicationController
         channels.each do |c|
             Entrance.create(channel: c, target: @post)
         end
-
        
         redirect_to root_path
     end

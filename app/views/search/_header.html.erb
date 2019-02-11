@@ -45,18 +45,7 @@
 
 <script>
     $(document).ready(function() {
-        // $(".searchtab").on('click', function() {
-        //     $.ajax({
-        //         type: "GET",
-        //         dataType: "JSON",
-        //         data: {query: '삽질왕 김삽질'},
-        //         url: '/search/json',
-        //         success: function(data) {
-        //             console.log(data);
-        //         }
-        //     })
-        // })
-        // console.log(window.location)
+
         window.location.toString().match(/(search\/.*?\?)/);
         var result = (/search\/(.*?)\?/g).exec(window.location.toString())
         
@@ -64,4 +53,4 @@
         $("#search-tabs").find("." + result[1]).addClass("selected")
     })
 </script>
-
+ 

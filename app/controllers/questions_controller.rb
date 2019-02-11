@@ -8,6 +8,10 @@ class QuestionsController < ApplicationController
     end
 
     def show
+        @answers = @question.answers.accessible(current_user.id)
+        @answers += @question.answers.where(author: current_user)
+        @answers += @question.answers.channel_name("익명피드").anonymous(current_user.id)
+        @answers = @answers.sort_by(&:created_at).reverse!
     end
 
     def today
@@ -15,12 +19,14 @@ class QuestionsController < ApplicationController
     end
 
     def show_friends
-        @answers = @question.answers.named(current_user.id).sort_by(&:created_at).reverse!
+        @answers = @question.answers.accessible(current_user.id)
+        @answers += @question.answers.where(author: current_user)
+        @answers = @answers.sort_by(&:created_at).reverse!
         render 'show_friends'
     end
 
     def show_general
-        @answers = @question.answers.anonymous(current_user.id).sort_by(&:created_at).reverse!
+        @answers = @question.answers.channel_name("익명피드").anonymous(current_user.id).sort_by(&:created_at).reverse!
         render 'show_general'
     end
     

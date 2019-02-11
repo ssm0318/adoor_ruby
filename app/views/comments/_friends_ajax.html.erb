@@ -1,0 +1,22 @@
+<div class="comment-replies-form">
+    <div class="comment-replies">
+        <%= render partial: "comments/friends", locals: {feed: feed, c: c} %>
+    </div>
+    <%= form_tag replies_path, class: "prism-form-friend reply" do %>
+        <%= hidden_field_tag "id", c.id %>
+        <%= hidden_field_tag "anonymous", "false" %>
+        <div class="form-text">
+            <%= text_area_tag "content", nil, required: true, class: "prism-form__comment", autocomplete: "off", "data-enable-grammarly": "false" %>
+            <% if c.secret %>
+                <%= hidden_field_tag "secret", "true" %>
+            <% else %>
+                    <%= check_box_tag "secret", "true", false, id: "reply_"+c.id.to_s %>
+                <label for="reply_<%=c.id%>">
+                    귓속말
+                </label>
+            <% end %>
+        </div>
+        <%# button_tag "저장", class: "prism-form__button" %>
+        <span class="comment-info-alert">귓속말 설정을 하면 댓글 작성자에게만 댓글이 보입니다.</span>
+    <% end %>
+</div>
