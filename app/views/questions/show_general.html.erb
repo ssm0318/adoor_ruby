@@ -26,6 +26,11 @@
         </div>
         <%= render 'drawers/default', target: @question %> 
     </div>
-    <%= render 'feeds/general_index', feeds: @answers %>
+    <div id='infinite-feeds'>
+      <%= render partial: 'feeds/general_index', locals: {feeds: @feeds} %>
+    </div>
 </div>
 
+<script>
+  $('body').trigger('click');
+</script> 
