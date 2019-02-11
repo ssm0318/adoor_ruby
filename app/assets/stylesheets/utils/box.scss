@@ -143,7 +143,6 @@ div {
                 cursor: pointer;
             }
         }
-<<<<<<< HEAD
         #tags {
             padding-top: 20px;
 
@@ -170,28 +169,18 @@ div {
 
             #tags_input {
                 font-size: .9rem;
-                border: none;
                 width: auto;
                 padding: 6px 10px;
                 background-color: rgba(255,255,255,0.5);
                 margin: 4px;
                 outline: none;
+                border: 0.5px solid #dddddd;
+                border-radius: 10px;
+                box-shadow:none ;
             }
-=======
-
-        #tags_input {
-            border: 0.5px solid #dddddd;
-            border-radius: 10px;
-            box-shadow:none ;
-            outline: none;
-            width: auto;
-            padding: 6px 10px;
-            margin: 4px;
-            outline: none;
         }
 
     }
->>>>>>> b8daf56d5b2be4df890d670158c97275ecf1fe61
 
     #tags-info-alert {
         color: gray;
