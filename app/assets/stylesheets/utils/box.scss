@@ -47,6 +47,7 @@ div {
 
         .new-answer-field {
             width: 100%;
+            font-size: 1.1rem;
             // height: 60px;
             overflow: hidden;
             border: none;
@@ -69,7 +70,7 @@ div {
             border-radius: 20px;
             background-color: #F48462;
             border: none;
-            font-size: .8rem;
+            font-size: .9rem;
             color: white;
         }
 
@@ -77,7 +78,7 @@ div {
             position: absolute;
             top: 10px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
 
             .selected {
                 color: #F48462;
@@ -85,14 +86,14 @@ div {
 
         }
         #tags {
-
             padding-top: 20px;
+
             #tag-title {
                 color: gray;
                 font-size: 1rem;
             }
             .tag {
-                font-size: 1rem;
+                font-size: .9rem;
                 padding: 6px 10px;
                 background-color: white;
                 border: none;
@@ -109,6 +110,7 @@ div {
             }
 
             #tags_input {
+                font-size: .9rem;
                 border: none;
                 width: auto;
                 padding: 6px 10px;
@@ -169,13 +171,13 @@ div {
     border: none;
     border-radius: 10px;
     padding: 8px 10px 4px 10px;
-    font-size: 18px; 
+    font-size: 1.1rem; 
     display: grid;
     grid-template-columns: minmax(calc(10%-50px), 10%) 80% minmax(50px, 10%);
     
 
     .question-content {
-        font-size: 18px;
+        font-size: 1.1rem;
         color: #4f4f4f;
         padding: 30px 10px 10px 10px;
         margin: 0 ;
@@ -194,7 +196,7 @@ div {
         margin: auto;
 
         .question-tag {
-            font-size: 12px;
+            font-size: 0.9rem;
             padding: 2px 10px;
             background-color: white;
             border: none;
@@ -253,6 +255,7 @@ div {
     padding: 20px;
 
     .question {
+        font-size: 1.1rem;
         padding: 0;
         margin: 0 ;
         color: #4f4f4f;
@@ -274,7 +277,7 @@ div {
     grid-template-columns: auto 30px;
 
     .question-content {
-        font-size: 18px;
+        font-size: 1.1rem;
         padding: 0;
         margin: 0 ;
         color: #4f4f4f;
@@ -290,7 +293,7 @@ div {
         margin: auto;
 
         .question-tag {
-            font-size: 12px;
+            font-size: 0.9rem;
             padding: 2px 10px;
             background-color: white;
             border: none;
@@ -318,7 +321,7 @@ div {
 
     .prism-box__header {
         width: 100%;
-        font-size: 14px;
+        font-size: .9rem;
         padding-bottom: 5px;
         z-index: 0;
 
@@ -330,7 +333,9 @@ div {
         }
 
         a {
+            font-weight: bold;
             color: black;
+            font-size: .9rem;
             text-decoration: none;
         }
 
@@ -356,7 +361,7 @@ div {
         }
 
         .date { 
-            font-size: 11px;
+            font-size: .8rem;
             color: #888888;
         }
 
@@ -368,7 +373,7 @@ div {
     .prism-box__footer {
         vertical-align: bottom;
         width: 100%;
-        font-size: 12px;
+        font-size: .9rem;
         position: relative;
         display: grid;
         grid-template-columns:  70% 30%;
@@ -438,9 +443,9 @@ div {
         vertical-align: bottom;
         width: 100%;
         text-align: left;
-        font-size: 12px;
         padding-top: 10px;
         padding-bottom: 5px;
+        font-size: .9rem;
         position: relative;
         margin-top: 5px; 
         border-top: 1px solid #d7dae0;
@@ -449,7 +454,7 @@ div {
         a {
             color: black;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 1rem;
             cursor: pointer;
             // &:hover {
             // color: #F48462;
@@ -470,7 +475,7 @@ div {
             padding: 16px;
             text-decoration: none;
             color: black;
-            font-size: 13px;
+            font-size: .9rem;
         }
     }
 }
@@ -497,7 +502,7 @@ div {
         border-radius: 20px;
         background-color: #F48462;
         border: none;
-        font-size: 12px;
+        font-size: .9rem;
         color: white;
     }
 
@@ -562,7 +567,7 @@ div {
             display: inline-block;
             background-color: white;
             border: 0.5px solid #dddddd;
-            font-size: 12px;
+            font-size: .9rem;
             color: gray;
             margin-bottom: 10px;
             cursor: pointer;
@@ -645,6 +650,6 @@ div {
     }
 
     .link-generation-btn {
-        font-size: 20px;
+        font-size: 1rem;
     }
 }
