@@ -1,6 +1,6 @@
 <!-- posts/_form -->
 <div class = "channels">
-    <span class="channels-dropdown">공개그룹&nbsp;<i class="fas fa-caret-down"></i></span>
+    <span class="channels-dropdown">공개그룹&nbsp;&nbsp;<i class="fas fa-caret-down" style="font-size:1.2rem;"></i></span>
     <%= link_to image_tag("icons/setting-default-icon.png", class: "channel-setting-icon"), friends_path()%>
     <!-- TODO: 채널이 많아질 경우 style -->
     <div class="channels-dropdown-content">
@@ -35,4 +35,4 @@
             <%= label_tag channel.id.to_s + label_id, channel.name, class: "channel-el" %>
         <% end %>
     </div>
-</div>
+</div> 

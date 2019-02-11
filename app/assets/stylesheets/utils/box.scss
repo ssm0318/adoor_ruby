@@ -25,25 +25,67 @@ div {
 }
 
 //피드의 posting, custom question form
-.prism-box-new-post {
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #4f4f4f;
+    border-color: #dddddd #dddddd white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    border-color: #dddddd #dddddd white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.nav-tabs .nav-link {
+    color: #F48462;
+}
+
+.tab-content {
     background-color: white;
     width: 100%;
-    margin: 20px 0px;
+    margin-bottom: 20px;
     border: 0.5px solid #dddddd;
-    border-radius: 10px;
+    border-top: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     padding: 10px 15px 50px 15px;
     box-sizing: border-box;
     position: relative;
 
-    .prism-box__content {
+    .new-answer-field {
+        width: 100%;
+        // height: 60px;
+        overflow: hidden;
+        border: none;
+        outline: none;
+        line-height: 30px;
+        padding : 0px;
+        resize: none;
+        box-sizing: border-box;
+        margin-bottom: 0px;
+    }
 
-        #new-custom-question-form {
-            // display: none;
-        }
+    .answer-button {
+        position: absolute;
+        right: 15px;
+        bottom: 10px;
+        width: 70px;
+        height: 30px;
+        border-radius: 20px;
+        background-color: #F48462;
+        border: none;
+        font-size: .8rem;
+        color: white;
+    }
 
-        #new-custom-question-form {
-            display: none;
-        }
+    .posting-or-custom-question {
+        position: absolute;
+        top: 10px;
+        cursor: pointer;
+        font-size: 1rem;
 
         .new-answer-field {
             width: 100%;
@@ -80,11 +122,28 @@ div {
             cursor: pointer;
             font-size: 1.1rem;
 
-            .selected {
-                color: #F48462;
-            }
-
+        #tag-title {
+            color: #F48462;;
+            font-size: 1rem;
+            margin-right: 10px;
         }
+        .tag {
+            font-size: .9rem;
+            padding: 6px 10px;
+            border-radius: 10px;
+            background-color: #eaeaea5f;
+            color: gray;
+            margin: 3px;
+            display: inline-block;
+            
+            .tag-close {
+                width: 18px;
+                height: auto;
+                margin-left: 5px;
+                cursor: pointer;
+            }
+        }
+<<<<<<< HEAD
         #tags {
             padding-top: 20px;
 
@@ -118,38 +177,49 @@ div {
                 margin: 4px;
                 outline: none;
             }
+=======
 
+        #tags_input {
+            border: 0.5px solid #dddddd;
+            border-radius: 10px;
+            box-shadow:none ;
+            outline: none;
+            width: auto;
+            padding: 6px 10px;
+            margin: 4px;
+            outline: none;
         }
 
-        #tags-info-alert {
-            color: gray;
-            font-size: .8rem;
-        }
+    }
+>>>>>>> b8daf56d5b2be4df890d670158c97275ecf1fe61
 
-        
-        .channels {
-            position: absolute;
-            bottom: 16px;
+    #tags-info-alert {
+        color: gray;
+        font-size: .8rem;
+    }
 
-            .channels-dropdown-content {
-                width: 30%;
-                min-width: 100px;
-                max-height: 240px;
-                z-index: 1;
-                position: absolute;
-                top: 30px;
-
-                .btn-select-all-channels {
-                    padding: 5px;
-                    border-radius: 6px;
-                    margin-bottom: 10px
-                }
     
-                label {
-                    margin-bottom: 12px;
-                }
+    .channels {
+        position: absolute;
+        bottom: 16px;
+
+        .channels-dropdown-content {
+            width: 30%;
+            min-width: 100px;
+            max-height: 240px;
+            z-index: 1;
+            position: absolute;
+            top: 30px;
+
+            .btn-select-all-channels {
+                padding: 5px;
+                border-radius: 6px;
+                margin-bottom: 10px
             }
 
+            label {
+                margin-bottom: 12px;
+            }
         }
     }
 }
@@ -342,10 +412,7 @@ div {
     }
 
     .prism-box__content {
-        // text-align: center;
-        // border-top: 1px dashed $prism-box-gray;
-        // border-bottom: 1px dashed $prism-box-gray;
-
+        
         padding: 0px 40px;
         text-align: center;
         font-size: 1rem;
