@@ -1,6 +1,6 @@
 <div class="inner-container">
     <div class = "user-header" >
-    <div id = "profile" >
+    <div id = "user-profile" >
         <% @user = current_user%>
         <%= form_for @user, url: edit_user_profile_url(@user.username) do |u| %>
             <% u.hidden_field :id, :value => current_user.id %>
