@@ -649,13 +649,20 @@ div {
             width: 100px;
         }
     }
-    
     //new post form in frineds feed
     .nav {
         zoom: 2.3;
     }
     
     .tab-content {
+        zoom: 2.3;
+    }
+
+    .nav-link {
+        padding: 5px 20px;
+    }
+
+    .prism-box-new-post {
         zoom: 2.3;
     }
 
