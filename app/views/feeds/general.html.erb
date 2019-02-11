@@ -3,7 +3,6 @@
     <div id='infinite-feeds'>
       <%= render partial: 'feeds/general_index', locals: {feeds: @feeds} %>
 
-      <%= will_paginate @feeds %>
     </div>
   <% else %>
     <div>아직 공유된 게시물이 없습니다.</div>

@@ -61,7 +61,7 @@
         <div class = "user-header__tab-el-right">
             <% if current_user.id == user.id %>
                 <%# active_link_to "형광펜", user_highlights_path(user.id) %>
-                <%= active_link_to "서랍장", profile_drawers_path(user.username) %>
+                <%= active_link_to "서랍장", profile_drawers_path(user.slug) %>
             <% end %>
         </div>
     </div>

@@ -1,0 +1,5 @@
+
+$('#infinite-drawers').append('<%= escape_javascript render partial: 'profiles/my_drawers', locals: {drawers: @drawers} %>');
+$('.pagination').replaceWith('<%= escape_javascript will_paginate(@drawers) %>');
+$('body').trigger('click'); 
+
