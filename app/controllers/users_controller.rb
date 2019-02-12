@@ -2,8 +2,7 @@ require 'mini_magick'
 require 'base64'
 
 class UsersController < ApplicationController
-    # before_action :authenticate_user!, except: [:recover_password, :send_temporary_password]
-    before_action :authenticate_user!, only: [:friends, :create, :edit, :update, :image_upload, :new_image, :mypage, :add_friend]
+    before_action :authenticate_user!, except: [:recover_password, :send_temporary_password]
     before_action :set_user, only: [:show, :edit, :update, :destroy, :image_upload]
     before_action :check_user, only: [:edit, :update, :destroy]
     
