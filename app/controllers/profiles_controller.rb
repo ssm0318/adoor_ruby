@@ -22,7 +22,7 @@ class ProfilesController < ApplicationController
 
     def drawers
         @user = User.friendly.find(params[:id])
-        @drawers = @user.drawers.sort_by(&:created_at).reverse!
+        @drawers = @user.drawers.sort_by(&:created_at)
 
         @drawers = @drawers.paginate(:page => params[:page], :per_page => 7)
     end 
