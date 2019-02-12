@@ -6,7 +6,8 @@ ko:
       send_instructions: "이메일로 이메일 주소 인증 지침이 전송되었습니다."
       send_paranoid_instructions: "이메일 주소가 이미 등록되어 있으며, 이메일 주소 인증 지침 메일을 잠시 후 받을 수 있습니다."
     failure:
-      already_authenticated: "이미 로그인되어 있습니다."
+      # already_authenticated: "이미 로그인되어 있습니다."
+      already_authenticated: ""
       inactive: "계정이 아직 활성화되지 않았습니다."
       invalid: "이메일 혹은 비밀번호가 틀립니다."
       last_attempt: "이번 로그인 시도를 실패하면 계정이 잠깁니다."
