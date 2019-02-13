@@ -19,8 +19,8 @@ class Like < ApplicationRecord
                     noti_hash[:action] = 'friend_like_article'
                     create_noti_hash[:action] = 'friend_like_article'
                 else
-                    noti_hash[:action] = 'anonymous_like_reply'
-                    create_noti_hash[:action] = 'anonymous_like_reply'
+                    noti_hash[:action] = 'anonymous_like_article'
+                    create_noti_hash[:action] = 'anonymous_like_article'
                 end
             when 'Comment'
                 if self.target.anonymous

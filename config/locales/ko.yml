@@ -201,6 +201,6 @@ ko:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
       # long: "%Y년 %m월 %d일, %H시 %M분 %S초 %Z"
-      long: "%m월 %d일, %Y, %H:%M"
+      long: "%m월 %d일, %Y"
       short: "%y/%m/%d %H:%M"
     pm: 오후

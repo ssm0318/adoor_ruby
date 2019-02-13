@@ -9,7 +9,7 @@
             data-url='<%=new_assignment_path(@question.id)%>'>
             <%= image_tag("icons/assign-icon.png", class: "btn-assign") %>
         </a>
-    </div>
+    </div> 
     <%= render 'questions/tabs', question: @question %>
 
     <div class = "prism-box__question">
@@ -27,10 +27,11 @@
         <%= render 'drawers/default', target: @question %> 
     </div>
 
-
-    <%= render 'feeds/friends_index', feeds: @answers %>
+    <div id='infinite-feeds'>
+      <%= render partial: 'feeds/friends_index', locals: {feeds: @feeds} %>
+    </div>
 </div>
 
 <script>
   $('body').trigger('click');
-</script>
+</script> 

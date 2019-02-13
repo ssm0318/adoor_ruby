@@ -1,5 +1,5 @@
 <div class = "user-header" >
-    <div id = "profile" >
+    <div id = "user-profile" >
         <% if current_user.id != user.id %>
             <div id = "profile__image"><%= image_tag(@user.image.url) %></div>
         <% else %>

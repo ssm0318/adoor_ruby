@@ -1,4 +1,4 @@
-<div id = "new-post-form">
+<div id = "new-post-form"> 
     <%= form_for post do |f| %>
         <%= f.hidden_field :author_id, :value => current_user.id %>
         <%= f.text_area :content, class: "new-answer-field", required: true, autofocus: true, placeholder: "나는 지금", "data-enable-grammarly": "false" %>
