@@ -18,7 +18,7 @@ class Api::V1::FeedsController < ApplicationController
     render :feeds, locals: { feeds: @feeds }
   end
 
-  # private
+  # private 
 
   # def authenticate_user
   #   user_token = request.headers['X-USER-TOKEN']

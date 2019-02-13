@@ -1,24 +1,112 @@
-# README
+API Backend Configuration
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Adoor
+Social media of the future!
 
-Things you may want to cover:
+## Backend
 
-* Ruby version 2.4.3
+### Running the Application
+This is a Rails API-only application. Most responses require parameters to be passed either in the form of json or in the URL. Thus, it is recommended that the code be tested on Postman.
 
-* System dependencies
+### Main Functionalities
+Viewing the responses using a Json parser may be helpful. ```http://json.parser.online.fr/```
 
-* Configuration
+#### Announcements
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
 
-* Database creation
+#### Answers
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
 
-* Database initialization
+#### Assignments
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
 
-* How to run the test suite
+#### Channels
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
 
-* Services (job queues, cache servers, search engines, etc.)
+#### Comments
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
 
-* Deployment instructions
+#### Custom Questions
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
 
-* ...
+#### Devise
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Drawers
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Feeds
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Friend Requests
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Invitations
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Layouts
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Likes
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Notifications
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Posts
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Profiles
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Questions
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Replies
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Search
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
+
+#### Users
+Number | URL | Parameters | Method | Response
+--- | --- | --- | --- | ---
+1 | /api/v1/profiles | N/A | GET | profiles of all users
