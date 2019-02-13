@@ -32,13 +32,13 @@
 
 .form-inputs input[type=email], .form-inputs input[type=password], .form-inputs input[type=text] {
     margin-bottom: 15px;
-    width: 250px;
-    height: 30px;
+    width: 350px;
+    padding: 10px;
     border: none;
     border-radius: 0;
     -webkit-appearance: none;
     outline: none;
-    font-size: 16px;
+    font-size: 14px;
     color: #313131;
 }
 
@@ -52,7 +52,7 @@
     background-color: #F48462;
     border-style: none;
     border-radius: 30px;
-    width: 200px;
+    width: 300px;
     height: 50px;
     color: white;
     font-size: 20px;
@@ -68,14 +68,62 @@
 .white-btn {
     background-color: white;
     border-radius: 30px;
-    width: 200px;
+    border: 0.5px solid #dddddd;
+    width: 300px;
     height: 50px;
     color: grey;
     font-size: 20px;
     text-align: center;
-    border: none;
     cursor: pointer;
     &:focus {
         outline: none;
+    }
+}
+
+//for mobile version
+@media only screen and (max-device-width: 500px) {
+
+    .sign-title {
+        font-size: 50px;
+    }
+
+    .error_notification {
+        display: none;
+    }
+    .form-inputs {
+        font-size: 40px;
+        text-decoration: none;
+        text-align: center;
+        color: black;
+
+        .error {
+            font-size: 40px;
+        }
+    }
+    
+    .form-inputs input[type=email], .form-inputs input[type=password], .form-inputs input[type=text] {
+        margin-bottom: 30px;
+        width: 95%;
+        height: auto;
+        padding: 40px 20px;
+        border: none;
+        border-radius: 0;
+        -webkit-appearance: none;
+        outline: none;
+        font-size: 40px;
+        color: #313131;
+    }
+
+    .orange-btn, .white-btn {
+        width: 95%;
+        height: auto;
+        font-size: 40px;
+        padding: 40px 0;
+        border-radius: 70px;
+        margin-bottom: 30px;
+    }
+
+    .password-change-title {
+        font-size: 40px;
     }
 }

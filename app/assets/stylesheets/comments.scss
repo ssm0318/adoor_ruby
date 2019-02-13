@@ -8,7 +8,7 @@
 }
 
 .comment {
-    font-size: 14px; 
+    font-size: .9rem; 
     padding-top: 5px;
     padding-bottom: 5px;   
 }
@@ -17,7 +17,7 @@
     padding-left: 27px;
     padding-top: 5px;
     padding-bottom: 5px;   
-    font-size: 14px;    
+    font-size: .9rem;    
 }
 
 .comment, .comment-indent, .reply {
@@ -37,7 +37,7 @@
         }
         
         .username {
-            font-size: 14px;
+            font-size: .9rem;
             font-weight: bold;
         }
 
@@ -70,7 +70,7 @@
                 cursor: pointer;
                 padding: 3px;
                 margin-right: 5px;
-                font-size: 12px;
+                font-size: .9rem;
             }
     
             .num-of-likes.zero {
@@ -90,7 +90,7 @@
     
     .comment-info {
         padding-left: 27px;
-        font-size: 10px;
+        font-size: .8rem;
         color: #777777;
         display: inline-block;
 

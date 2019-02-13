@@ -15,12 +15,15 @@ class ProfilesController < ApplicationController
         @feeds = answers + posts + custom_questions
         @feeds = @feeds.sort_by(&:created_at).reverse!
 
+        @feeds = @feeds.paginate(:page => params[:page], :per_page => 7)
+
         render 'show'
     end
 
     def drawers
         @user = User.friendly.find(params[:id])
-        @drawers = @user.drawers
-    end
+        @drawers = @user.drawers.sort_by(&:created_at)
+
+        @drawers = @drawers.paginate(:page => params[:page], :per_page => 7)
+    end 
 end 
- 

@@ -1,11 +1,17 @@
 <div class="inner-container">
-  <div class="prism-box-new-post">
-    <div class="prism-box__content">
-      <div class = "posting-or-custom-question">
-        <span class = "posting selected"> 포스팅 </span>
-        <span class = "custom-question"> 질문 </span>
-      </div>  
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">포스트</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">질문</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <%= render 'posts/new'%>
+    </div>
+    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <%= render partial: "custom_questions/new", locals: {custom_question: CustomQuestion.new} %>
     </div>
   </div>
@@ -15,29 +21,28 @@
 </div>
 
 <script>
+  $('body').trigger('click');
   check_channels($(".answer-button"))
-  autosize($("textarea"))
-  toggle_channels_dropdown($(".channels-dropdown"))
 
-  $(".posting").on('click', function () {
-    var selected = $(this);
-    $(this).addClass("selected");
-    $('.custom-question').removeClass("selected");
-    $(this).parent().parent().parent().removeClass("custom-question-form");
-    $(this).parent().parent().removeClass("custom-question-form");
-    $('#new-post-form').show();
-    $('#new-custom-question-form').hide();
-  })
+  // $(".posting").on('click', function () {
+  //   var selected = $(this);
+  //   $(this).addClass("selected");
+  //   $('.custom-question').removeClass("selected");
+  //   $(this).parent().parent().parent().removeClass("custom-question-form");
+  //   $(this).parent().parent().removeClass("custom-question-form");
+  //   $('#new-post-form').show();
+  //   $('#new-custom-question-form').hide();
+  // })
 
-  $(".custom-question").on('click', function () {
-    var selected = $(this);
-    $(this).addClass("selected");
-    $(this).parent().parent().parent().addClass("custom-question-form");
-    $(this).parent().parent().addClass("custom-question-form");
-    $('.posting').removeClass("selected");
-    $('#new-custom-question-form').show();
-    $('#new-post-form').hide();
-  })
+  // $(".custom-question").on('click', function () {
+  //   var selected = $(this);
+  //   $(this).addClass("selected");
+  //   $(this).parent().parent().parent().addClass("custom-question-form");
+  //   $(this).parent().parent().addClass("custom-question-form");
+  //   $('.posting').removeClass("selected");
+  //   $('#new-custom-question-form').show();
+  //   $('#new-post-form').hide();
+  // })
 </script>
 <script>
 

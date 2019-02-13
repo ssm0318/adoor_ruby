@@ -1,14 +1,22 @@
+#intro-tc-title {
+    color: #F48462;
+    font-size: 1.5rem; 
+    text-align: center; 
+    line-height: 0;
+}
 .intro-tc-el {
-    font-size: 14px;
-    color: black;
+    font-size: 1rem;
+    color: #000000;
+    line-height: 10px;
+    text-decoration: none;
     &:hover {
+        text-decoration: none;
         color: #F48462;
-     }
-     line-height: 10px;
+    }
 }
 
 .intro-tc-container {
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(255, 241, 235);
     border-radius: 10px;
     text-align: left;
     padding: 20px;
@@ -22,9 +30,13 @@
     top: 130px;
 }
 
-.intro-title {
-    text-align: center;
-    color: grey;
+.intro-content {
+    background-color: rgb(241, 241, 241);
+    border: none;
+    border-radius: 10px;
+    padding-bottom: 25px;
+    font-size: 1rem;
+    
 }
 
 .intro-img {
@@ -54,11 +66,13 @@
     line-height: 30px;
     text-align: center;
     margin-top: -50px;
-    font-size: 15px;
+    font-size: 1rem;
+    width: 70%;
 
 }
 
 .intro-topic {
+    font-size: 1.5rem;
     color: #F48462;
 
 }
@@ -72,22 +86,101 @@
 }
 
 .intro-accent {
-    //font-weight: bold;
     //color: rgb(245, 154, 126);
-    font-size: 16px;
+    font-size: 1.2rem;
     text-decoration: none;
     border-bottom: 1px solid #F48462;
     padding-bottom: 2px;
 }
 
 .intro-link {
-    font-weight: bold;
+    font-size: 1.2rem;
+    color: black;
+
     &:hover {
-        color: #F48462;
-     }
-     color: black;
+        text-decoration: none;
+    }
+}
+
+.contact-link {
+    font-size: 1.2rem;
+    color:#F48462;
+    &:hover {
+        text-decoration: none;
+    }
 }
 
 .intro-change-color {
     color: #F48462;
+}
+
+.intro-ending-message {
+    color: gray;
+    font-size: 1rem;
+}
+
+//for mobile version
+@media only screen and (max-device-width: 500px) {
+    .intro-container {
+        width: 95%;
+        font-size: 1.5rem;
+        margin-top: 450px;
+        height: 50%;
+        overflow: scroll;
+    }
+
+    .intro-tc {
+        //display: none;
+        position: absolute;
+        top: 155px;
+        width: 95%;
+        left: 47.5%;
+        margin-left: -45%;
+    }
+
+    #intro-tc-title {
+        font-size: 2.3rem;
+    }
+
+    .intro-tc-el {
+        font-size: 1.5rem;
+        line-height: 3rem;
+    }
+
+    .intro-topic {
+        font-size: 2.3rem;
+    }
+
+    .intro-content {
+        font-size: 1.5rem;
+    }
+
+    .intro-accent {
+        font-size: 1.8rem;
+    }
+
+    .intro-link {
+        font-size: 1.8rem;
+    }
+
+    .intro-img {
+        width: 95%;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
+    
+    .intro-img-small {
+        width: 85%;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
+    
+    .intro-img-smallest {
+        width: 75%;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
 }

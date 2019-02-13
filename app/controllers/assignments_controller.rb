@@ -2,8 +2,19 @@ class AssignmentsController < ApplicationController
     before_action :authenticate_user!
     
     def index
-        @question_assignments = current_user.received_assignments.where(target_type: 'Question').where.not(assigner_id: 1)
-        @custom_assignments = current_user.received_assignments.where(target_type: 'CustomQuestion')
+        question_assignments = current_user.received_assignments.where(target_type: 'Question').where.not(assigner_id: 1).order(created_at: :desc)
+        @question_ids = question_assignments.pluck(:target_id).uniq
+        @waiting_questions = []
+        @answered_questions = []
+        @question_ids.each do |q_id|
+            if Answer.where(author: current_user, question: Question.find(q_id)).empty?
+                @waiting_questions.push(Question.find(q_id))
+            else
+                @answered_questions.push(Question.find(q_id))
+            end
+        end
+        custom_assignments = current_user.received_assignments.where(target_type: 'CustomQuestion').order(created_at: :desc)
+        @custom_question_ids = custom_assignments.pluck(:target_id).uniq
     end
 
     def new

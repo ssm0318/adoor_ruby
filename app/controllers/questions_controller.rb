@@ -8,6 +8,12 @@ class QuestionsController < ApplicationController
     end
 
     def show
+        @feeds = @question.answers.accessible(current_user.id)
+        @feeds += @question.answers.where(author: current_user)
+        @feeds += @question.answers.channel_name("익명피드").anonymous(current_user.id)
+        @feeds = @feeds.sort_by(&:created_at).reverse! 
+
+        @feeds = @feeds.paginate(:page => params[:page], :per_page => 7)
     end
 
     def today
@@ -15,12 +21,20 @@ class QuestionsController < ApplicationController
     end
 
     def show_friends
-        @answers = @question.answers.named(current_user.id).sort_by(&:created_at).reverse!
+        @feeds = @question.answers.accessible(current_user.id)
+        @feeds += @question.answers.where(author: current_user)
+        @feeds = @feeds.sort_by(&:created_at).reverse!
+
+        @feeds = @feeds.paginate(:page => params[:page], :per_page => 7)
+        
         render 'show_friends'
     end
 
     def show_general
-        @answers = @question.answers.anonymous(current_user.id).sort_by(&:created_at).reverse!
+        @feeds = @question.answers.channel_name("익명피드").anonymous(current_user.id).sort_by(&:created_at).reverse!
+
+        @feeds = @feeds.paginate(:page => params[:page], :per_page => 7)
+        
         render 'show_general'
     end
     

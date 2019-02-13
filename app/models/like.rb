@@ -12,43 +12,53 @@ class Like < ApplicationRecord
         if self.target.author != self.user
             noti_hash = {recipient: self.target.author, origin: origin}
             create_noti_hash = {recipient: self.target.author, actor: self.user, target: self, origin: origin}
-            # 친구의 좋아요
-            if self.target.author.friends.include? self.user
-                case self.target_type
-                when 'Post', 'Answer', 'CustomQuestion'
+            create = true
+            case self.target_type
+            when 'Post', 'Answer', 'CustomQuestion'
+                if self.target.author.friends.include? self.user
                     noti_hash[:action] = 'friend_like_article'
                     create_noti_hash[:action] = 'friend_like_article'
-                when 'Comment'
-                    noti_hash[:action] =  'friend_like_comment'
-                    create_noti_hash[:action] = 'friend_like_comment'
-                when 'Reply'
-                    noti_hash[:action] =  'friend_like_reply'
-                    create_noti_hash[:action] = 'friend_like_reply'
                 else
-                end
-            # 익명의 좋아요
-            else
-                case self.target_type
-                when 'Post', 'Answer', 'CustomQuestion'
                     noti_hash[:action] = 'anonymous_like_article'
                     create_noti_hash[:action] = 'anonymous_like_article'
-                when 'Comment'
+                end
+            when 'Comment'
+                if self.target.anonymous
                     noti_hash[:action] = 'anonymous_like_comment'
                     create_noti_hash[:action] = 'anonymous_like_comment'
-                when 'Reply'
+                else
+                    # 더 이상 볼 수 없는 경우 노티 안간다
+                    if (self.target.target.channels & self.target.author.belonging_channels).empty?
+                        create = false
+                    else
+                        noti_hash[:action] =  'friend_like_comment'
+                        create_noti_hash[:action] = 'friend_like_comment'
+                    end
+                end
+            when 'Reply'
+                if self.target.anonymous
                     noti_hash[:action] = 'anonymous_like_reply'
                     create_noti_hash[:action] = 'anonymous_like_reply'
                 else
+                    if (self.target.comment.target.channels & self.target.author.belonging_channels).empty?
+                        create = false
+                    else
+                        noti_hash[:action] = 'friend_like_reply'
+                        create_noti_hash[:action] = 'friend_like_reply'
+                    end
                 end
+            else
             end
-            if !Notification.where(noti_hash).empty?
-                Notification.where(noti_hash).each do |n|
-                    n.invisible = true
-                    n.read_at = DateTime.now()
-                    n.save(touch: false)
+            if create
+                if !Notification.where(noti_hash).empty?
+                    Notification.where(noti_hash).each do |n|
+                        n.invisible = true
+                        n.read_at = DateTime.now()
+                        n.save(touch: false)
+                    end
                 end
+                Notification.create(create_noti_hash)
             end
-            Notification.create(create_noti_hash)
         end 
     end
     
@@ -56,39 +66,47 @@ class Like < ApplicationRecord
         origin = self.target
         if self.target.author != self.user
             noti_hash = {recipient: self.target.author, origin: origin}
-            # 친구의 좋아요
-            if self.target.author.friends.include? self.user
-                case self.target_type
-                when 'Post', 'Answer', 'CustomQuestion'
+            destroy = true
+            case self.target_type
+            when 'Post', 'Answer', 'CustomQuestion'
+                if self.target.author.friends.include? self.user
                     noti_hash[:action] = 'friend_like_article'
-                when 'Comment'
-                    noti_hash[:action] = 'friend_like_comment'
-                when 'Reply'
-                    noti_hash[:action] = 'friend_like_reply'
                 else
+                    noti_hash[:action] = 'anonymous_like_reply'
                 end
-            # 익명의 좋아요
-            else
-                # 글에 좋아요
-                case self.target_type
-                when 'Post', 'Answer', 'CustomQuestion'
-                    noti_hash[:action] = 'anonymous_like_article'
-                when 'Comment'
+            when 'Comment'
+                if self.target.anonymous
                     noti_hash[:action] = 'anonymous_like_comment'
-                when 'Reply'
+                else
+                    if (self.target.target.channels & self.target.author.belonging_channels).empty?
+                        destroy = false
+                    else
+                        noti_hash[:action] =  'friend_like_comment'
+                    end
+                end
+            when 'Reply'
+                if self.target.anonymous
                     noti_hash[:action] = 'anonymous_like_reply'
                 else
-                end 
-            end
-            if Notification.where(noti_hash).size > 1
-                n = Notification.where(noti_hash)[-2]
-                n.invisible = false
-                if Notification.where(target: self).first.read_at != nil && n.read_at == nil
-                    n.read_at = Notification.where(target: self).first.read_at
+                    if (self.target.comment.target.channels & self.target.author.belonging_channels).empty?
+                        destroy = false
+                    else
+                        noti_hash[:action] = 'friend_like_reply'
+                    end
                 end
-                n.save(touch: false)
+            else
+            end
+            if destroy
+                if Notification.where(noti_hash).size > 1
+                    n = Notification.where(noti_hash)[-2]
+                    n.invisible = false
+                    if Notification.where(target: self).first.read_at != nil && n.read_at == nil
+                        n.read_at = Notification.where(target: self).first.read_at
+                    end
+                    n.save(touch: false)
+                end
+                Notification.where(target: self).destroy_all
             end
         end
-        Notification.where(target: self).destroy_all
     end
 end

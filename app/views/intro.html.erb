@@ -2,140 +2,169 @@
 
 <%# <h1 class="intro-title">어도어 사용법</h1> %>
 <div class="intro-container" style="white-space: pre-line;">
-<div class="intro-tc"> 
-    <div style="color: #F48462; font-size: 20px; text-align: center; line-height: 0;">목차</div>
-    <div class="intro-tc-container"><a href="#friend" class="intro-tc-el tc-1">1. 친구 초대 / 검색</a>
-        <a href="#friend-manage" class="intro-tc-el tc-2">2. 그룹 / 공개그룹 관리*</a>
-        <a href="#assign" class="intro-tc-el tc-3">3. 질문 보내기</a>
-        <a href="#custom_question" class="intro-tc-el tc-4">4. 질문 작성 / 리포스팅*</a>
-        <a href="#comment" class="intro-tc-el tc-5">5. 댓글 / 귓속말*</a>
-        <a href="#drawer" class="intro-tc-el tc-6">6. 서랍장에 글 담기</a>
-        <a href="#like" class="intro-tc-el tc-7">7. 좋아요 / 좋아요 확인</a>
-        <a href="#notification" class="intro-tc-el tc-8">8. 실시간 알림받기**</a>
-        <%# <div style="color: #F48462; font-size: 15px; text-align: center; font-weight: bold;">핵심만 보기</div><a href="#accent-assign" class="intro-tc-el">핵심1</a>  <a href="#accent-comment" class="intro-tc-el">핵심2</a>  <a href="#accent-like" class="intro-tc-el">핵심3</a> %>
+    <div class="intro-tc"> 
+        <div class="intro-tc-container">
+            <div id="intro-tc-title">목차</div>
+            <a href="#friend" class="intro-tc-el tc-1">1. 친구 초대 / 검색</a>
+            <a href="#friend-manage" class="intro-tc-el tc-2">2. 그룹 / 공개그룹 관리*</a>
+            <a href="#assign" class="intro-tc-el tc-3">3. 질문 보내기</a>
+            <a href="#custom_question" class="intro-tc-el tc-4">4. 질문 작성 / 리포스팅*</a>
+            <a href="#comment" class="intro-tc-el tc-5">5. 댓글 / 귓속말*</a>
+            <a href="#drawer" class="intro-tc-el tc-6">6. 서랍장에 글 담기</a>
+            <a href="#like" class="intro-tc-el tc-7">7. 좋아요 / 좋아요 확인</a>
+            <a href="#notification" class="intro-tc-el tc-8">8. 실시간 알림받기**</a>
+            <%# <div style="color: #F48462; font-size: 15px; text-align: center; font-weight: bold;">핵심만 보기</div><a href="#accent-assign" class="intro-tc-el">핵심1</a>  <a href="#accent-comment" class="intro-tc-el">핵심2</a>  <a href="#accent-like" class="intro-tc-el">핵심3</a> %>
+        </div>
     </div>
-</div>
-<div id='friend'>
-    <h4 class="intro-topic">친구를 만들어보세요!</h3>
-    우측 상단의 프로필 사진(내 페이지) > 친구 관리 > 친구 초대하기 에서 친구에게 초대 링크를 보내보세요.
-    <%= image_tag("img/friend_invite.png", class: "intro-img") %>
-    <%= image_tag("img/invitation.png", class: "intro-img") %>
-    친구가 초대 링크로 접속하면 회원가입을 하거나, 
-    이미 로그인한 경우 당신에게 친구요청을 보낼 수 있어요.
+    <div id='friend'>
+        <div class="intro-topic">친구를 만들어보세요!</div>
+        <div class="intro-content">
+            <%= link_to '내 페이지 > 친구 관리', 'https://adoor.app/users/friends', class: "intro-link hover-orange"%>에서 <span class="intro-link">친구 초대하기</span>를 클릭해
+            <span class="intro-accent">친구에게 <%= link_to '초대장', 'https://adoor.app/invitations', class: "intro-link hover-orange"%>을 보내보세요.</span>
+            <%#= image_tag("img/friend_invite.png", class: "intro-img") %>
+            <%#= image_tag("img/invitation.png", class: "intro-img") %>
+            <br>
+            친구의 사용자명을 아는 경우, 우측 상단의 <span class="intro-link">검색창</span>에 검색해 보세요.
+        </div>
+            <%= image_tag("img/search_user.png", class: "intro-img-small") %>
+    </div>
+    <hr>
+    <div id='friend-manage'>
+        <div class="intro-topic">친구 그룹을 설정해 보세요!</div>
+        <div class="intro-content">
+            <%= link_to '내 페이지 > 친구 관리', 'https://adoor.app/users/friends', class: "intro-link hover-orange"%>에서 그룹을 설정해보세요.
+            원하는 그룹을 추가하고,
+        </div>
+            <%= image_tag("img/friends.png", class: "intro-img") %>
+        <div class="intro-content">
+            <span class="intro-link">그룹 편집 아이콘</span>을 클릭하면 그룹 별로 친구들을 추가, 삭제할 수 있어요.
+        </div>
+        <%= image_tag("img/friends2.png", class: "intro-img") %>
+        <div class="intro-content">
+            <span class="intro-accent">글을 쓸 때 공개할 그룹을 선택할 수 있어요.</span>    
+        </div>
+        <%= image_tag("img/friends3.png", class: "intro-img") %>
+        <div class="intro-content">
+            공개 그룹 중에 '나'만 선택하면 나에게만 글이 보이고,
+            '익명피드'를 선택하면 익명 피드에 내 글이 <span class="intro-accent">익명으로 올라가요.</span>
+        </div>
 
-    친구의 사용자명을 아는 경우, 검색창에 검색해서 친구요청을 보낼 수 있어요.
+    </div>
+    <hr>
+    <div id="assign">
+        <div class="intro-topic">친구에게 질문을 보내보세요!</div>
+        <div class="intro-content">
+            <%= link_to '오늘의 질문', 'https://adoor.app/questions/today', class: "intro-link hover-orange"%> 또는 <%= link_to '질문 둘러보기', 'https://adoor.app/questions', class: "intro-link hover-orange"%> 탭에서 
+            <span class="intro-link">종이비행기 아이콘</span>을 클릭하면, <span class="intro-accent">친구에게 질문을 보낼 수 있어요.</span>
+        </div>
+        <%= image_tag("img/assign_btn.png", class: "intro-img") %>  
+        <%= image_tag("img/assign.png", class: "intro-img") %>
+    </div>
+    <hr>
+    <div id="custom_question">
+        <div class="intro-topic">나만의 질문을 만들어 보세요!</div>
+        <div class="intro-content">
+            <%= link_to '메인 페이지', 'https://adoor.app', class: "intro-link hover-orange"%>에서 <span class="intro-link">'질문'</span> 탭을 눌러 
+            <span class="intro-accent">친구 혹은 익명의 사용자들에게 하고 싶은 질문을 올려보세요.</span>
+        </div>
+        <%= image_tag("img/custom_question.png", class: "intro-img") %>
+        <div class="intro-content">
+            친구들이 <span class="intro-link">댓글</span>로 답을 달 수도 있고, 
+        </div>
+        <%= image_tag("img/custom_question_view.png", class: "intro-img") %>
+        <div class="intro-content">
+            <span class="intro-link">공유 아이콘</span>을 클릭하면
+        </div>
+        <%= image_tag("img/click_repost.png", class: "intro-img") %>
+        <div class="intro-content">
+            <span class="intro-link">공유 메세지</span>와 함께 질문을 공유할 수도 있어요.
+        </div>
+        <%= image_tag("img/reposting.png", class: "intro-img") %>
+        <%= image_tag("img/reposted.png", class: "intro-img") %>
 
-    <%= image_tag("img/search_user.png", class: "intro-img-small") %>
-</div>
-<hr>
-<div id='friend-manage'>
-    <h4 class="intro-topic">친구 그룹을 설정해 보세요!</h3>
-    친구를 맺은 후, 친구 관리 탭에서 그룹을 설정해보세요.
-    원하는 그룹을 추가하고,
+        <div class="intro-content">
+            질문이 <span class="intro-link">공유된 횟수</span>는 <span class="intro-accent">처음 질문을 올린 글쓴이만</span> 볼 수 있어요.
+        </div>
 
-    <%= image_tag("img/friends.png", class: "intro-img") %>
-    그룹 편집 아이콘을 누르면 그룹 별로 친구들을 추가, 삭제할 수 있어요.
+    </div>
+    <hr>
+    <div id="comment">
+        <div class="intro-topic">댓글을 달아보세요!</div>
+        <div class="intro-content">
+            친구의 글에 <span class="intro-link">댓글</span>과 <span class="intro-link">대댓글</span>을 달며 소통해보세요.
+        </div>
+        <%= image_tag("img/friend_comment.png", class: "intro-img") %>
+        <div class="intro-content">
+            <span class="intro-link">귓속말 설정</span>을 하면 <span class="intro-accent">댓글이 글쓴이에게만 보여요. </span>
+        </div>
+        <%= image_tag("img/secret_comment.png", class: "intro-img") %>
+        <%#= image_tag("img/writer_view.png", class: "intro-img") %>
+        <%#= image_tag("img/user1_view.png", class: "intro-img-small img-side") %><%#= image_tag("img/user2_view.png", class: "intro-img-small img-side") %>
+        <div class="intro-content">
+            <%= link_to '익명피드', 'https://adoor.app/feeds/general', class: "intro-link hover-orange"%>탭에 들어가면 <span class="intro-accent">친구가 아닌 익명의 글을 볼 수 있어요.</span>
+            댓글로 많은 사람과 소통해보세요.
 
-    <%= image_tag("img/friends2.png", class: "intro-img") %>
-    <span class="intro-accent">글을 쓸 때 공개할 그룹을 선택할 수 있어요.</span>
+            익명의 사용자들이 색으로 구분되어 보이고,
+            댓글을 남길 경우, 나에게만 나의 프로필이 보여요.
+        </div>
+        <%= image_tag("img/anonymous_view.png", class: "intro-img") %>
+        <div class="intro-content">
+            내 글의 공개그룹에 '익명피드'를 포함시키면, 
+            내 글이 <span class="intro-accent">친구가 아닌 사람들에게만</span> 익명으로 보여져요. 
+        </div>
+        <%= image_tag("img/anonymous_check.png", class: "intro-img") %>
 
-    <%= image_tag("img/friends3.png", class: "intro-img") %>
-    공개 그룹 중에 '나'만 선택하면 나에게만 글이 보여요.
-    '익명피드'를 선택하면 익명 피드에 내 글이 익명으로 올라가요.
+    </div>
+    <hr>
+    <div id="drawer">
+        <div class="intro-topic">서랍장에 글을 담아보세요!</div>
+        <div class="intro-content">
+            기억하고 싶은 글은 <span class="intro-link">서랍장 아이콘</span>을 눌러 서랍장에 담아보세요.
+        </div>
+        <%= image_tag("img/click_drawer.png", class: "intro-img") %>
+        <div class="intro-content">
+            <span class="intro-link">내 페이지 > 서랍장</span>에 들어가면 담아둔 글을 모아볼 수 있어요.
+        </div>
+        <%= image_tag("img/my_drawer.png", class: "intro-img") %>
+        <div class="intro-content">
+            글쓴이는 누가 자신의 글을 서랍장에 담았는지 알 수 없고,
+        </div>
+        <%= image_tag("img/drawer_noti.png", class: "intro-img-smallest") %>
+        <div class="intro-content">
+            내 글이 <span class="intro-link">서랍장에 담긴 횟수</span>는 나 자신만 볼 수 있어요.
+        </div>
+    </div>
+    <hr>
+    <div id="like">
+        <div class="intro-topic">좋아요를 눌러보세요!</div>
+        <div class="intro-content">
+            친구의 글에 <span class="intro-link">좋아요</span>를 눌러보세요.
+        </div>
+        <%= image_tag("img/click_like.png", class: "intro-img") %>
+        <div class="intro-content">
+            내 글의 <span class="intro-link">좋아요 갯수</span>는 <span class="intro-accent" id="accent-like">나 자신만 볼 수 있어요.</span>
+            내 글의 <span class="intro-link">좋아요 개수</span>를 클릭하면, 좋아요를 누른 친구들을 확인할 수 있어요.
+        </div>
+        <%= image_tag("img/like_friends.png", class: "intro-img") %>
 
-</div>
-<hr>
-<div id="assign">
-    <h4 class="intro-topic">친구에게 질문을 보내보세요!</h4>
-    <%= image_tag("img/assign_btn.png", class: "intro-img") %>
-
-    '오늘의 질문' 또는 '질문 둘러보기' 탭에서 <span id="accent-assign" class="intro-accent">친구에게 질문을 보낼 수 있어요.</span>
-
-    <%= image_tag("img/assign.png", class: "intro-img") %>
-</div>
-<hr>
-<div id="custom_question">
-    <h4 class="intro-topic">질문을 만들어서 올려보세요!</h4>
-    메인 페이지에서 '질문' 탭을 눌러 
-    <span class="intro-accent">친구 혹은 익명의 사용자들에게 하고 싶은 질문을 올려보세요.</span>
-
-    <%= image_tag("img/custom_question.png", class: "intro-img") %>
-    친구들이 댓글로 답을 달고, 
-    <%= image_tag("img/custom_question_view.png", class: "intro-img") %>
-    리포스팅 아이콘을 누르면
-    <%= image_tag("img/click_repost.png", class: "intro-img") %>
-    공유 메세지와 함께 질문을 공유할 수도 있어요.
-
-    <%= image_tag("img/reposting.png", class: "intro-img") %>
-    <%= image_tag("img/reposted.png", class: "intro-img") %>
-
-</div>
-<hr>
-<div id="comment">
-    <h4 class="intro-topic">댓글을 달아보세요!</h4>
-    친구의 글에 댓글과 대댓글을 달며 소통해보세요.
-    <%= image_tag("img/friend_comment.png", class: "intro-img") %>
-    <span class="intro-accent" id="accent-comment">귓속말 설정을 하면 댓글이 글쓴이에게만 보여요. </span>
-
-    <%= image_tag("img/secret_comment.png", class: "intro-img") %>
-
-    <%#= image_tag("img/writer_view.png", class: "intro-img") %><div class="img-caption"></div>
-    <%#= image_tag("img/user1_view.png", class: "intro-img-small img-side") %><%#= image_tag("img/user2_view.png", class: "intro-img-small img-side") %>
-    '익명 피드' 탭에 들어가면 친구가 아닌 익명의 사람들의 글을 볼 수 있어요.
-    댓글로 많은 사람과 소통해보세요.
-
-    <%= image_tag("img/anonymous_view.png", class: "intro-img") %>
-    익명의 사용자들이 색으로 구분되어 보이고,
-    내가 쓴 댓글만 나에게 구분되어 보여요.
-
-    내 글의 공개그룹에 '익명피드'를 포함시키면, 내 글이 친구가 아닌 사용자들의 익명피드에 보일 수 있어요. 
-    <%= image_tag("img/anonymous_check.png", class: "intro-img") %>
-
-</div>
-<hr>
-<div id="drawer">
-    <h4 class="intro-topic">서랍장에 글을 담아보세요!</h4>
-    기억하고 싶은 글은 서랍장 아이콘을 눌러 서랍장에 담아보세요.
-
-    <%= image_tag("img/click_drawer.png", class: "intro-img") %>
-    내 페이지에서 '서랍장'에 들어가면 담아둔 글을 모아 볼 수 있어요.
-
-    <%= image_tag("img/my_drawer.png", class: "intro-img") %>
-    글쓴이는 누가 자신의 글을 서랍장에 담았는지 알 수 없어요.
-
-    <%= image_tag("img/drawer_noti.png", class: "intro-img-smallest") %>
-
-</div>
-<hr>
-<div id="like">
-    <h4 class="intro-topic">좋아요를 눌러보세요!</h4>
-    친구의 글에 좋아요를 눌러보세요.
-    <%= image_tag("img/click_like.png", class: "intro-img") %>
-
-    <span class="intro-accent" id="accent-like">내 글의 좋아요와 서랍장 개수, 내 질문의 리포스팅 횟수는 나 자신만 볼 수 있어요.</span>
-
-    내 글의 좋아요 개수를 누르면, 좋아요를 누른 친구들을 확인할 수 있어요.
-    
-    <%= image_tag("img/like_friends.png", class: "intro-img") %>
-
-</div>
-<hr><div id="notification">
-    <h4 class="intro-topic">알림을 확인하세요!</h4>
-    <%= image_tag("img/notification.png", class: "intro-img-smallest") %>
-    
-    Chrome 브라우저에서 알림을 실시간으로 확인하고 싶다면, 어도어 크롬 익스텐션을 설치해보세요!
-    <%= link_to '어도어 크롬 익스텐션 바로가기', 'https://chrome.google.com/webstore/detail/adoor%EC%96%B4%EB%8F%84%EC%96%B4-notification-che/bcoklkbjihalcbbimebobnfpakbkcjdh/related?authuser=1', class: "intro-link"%>
-
-    <%= image_tag("img/extension.png", class: "intro-img") %>
-
-
-</div>
-<hr>
-<div style="color: grey;">
-    어도어는 더 좋은 서비스가 되기 위해 노력하고 있어요.
-    질문이나 오류 보고, 투자를 환영합니다.
-    <%= link_to '이메일', 'mailto:adoor.team@gmail.com', class: "intro-link"%> &nbsp &nbsp<%= link_to '페이스북', 'https://www.facebook.com/adoor.team', class: "intro-link" %> &nbsp &nbsp<%= link_to '인스타그램', 'https://www.instagram.com/adoor.official',class: "intro-link" %>
-</div>
+    </div>
+    <hr>
+    <div id="notification">
+        <div class="intro-topic">실시간으로 알림을 확인하세요!</div>
+        <%#= image_tag("img/notification.png", class: "intro-img-smallest") %>
+        <div class="intro-content">
+            Chrome 브라우저에서 알림을 <span class="intro-link">실시간으로 확인하고 싶다면,</span> 
+            <span class="intro-accent"> <%= link_to '어도어 크롬 익스텐션', 'https://chrome.google.com/webstore/detail/adoor%EC%96%B4%EB%8F%84%EC%96%B4-notification-che/bcoklkbjihalcbbimebobnfpakbkcjdh/related?authuser=1', class: "intro-link hover-orange"%>을 설치해보세요!</span>
+        </div>
+        <%#= image_tag("img/extension.png", class: "intro-img") %>
+    </div>
+    <hr>
+    <div class="intro-ending-message">
+        어도어는 더 좋은 서비스가 되기 위해 노력하고 있어요.
+        질문이나 오류 보고, 투자를 환영합니다.
+    </div>
+        <%= link_to '이메일', 'mailto:adoor.team@gmail.com', class: "contact-link"%> &nbsp &nbsp<%= link_to '페이스북', 'https://www.facebook.com/adoor.team', class: "contact-link" %> &nbsp &nbsp<%= link_to '인스타그램', 'https://www.instagram.com/adoor.official',class: "contact-link" %>
+    </div>
 </div>
 
 <script>

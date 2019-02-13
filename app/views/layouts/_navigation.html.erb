@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-orange">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-orange">
   <a class="navbar-brand" href= "<%= root_path %>">
     <%= image_tag("logo/light-version-logo.png") %>
   </a>
@@ -32,12 +32,12 @@
     <% if user_signed_in? %>
         <%= render 'layouts/searchbar' %>
         <div class="nav-item logout"><a class="nav-link logout" href="<%=destroy_user_session_path%>" data-method = "delete">로그아웃</a></div>
-        <a class="my-page-btn" href="<%=profile_path(current_user.id)%>">
+        <a class="my-page-btn" href="<%=profile_path(current_user.slug)%>">
             <%= image_tag(current_user.image.url) %>
         </a>
         <%= render 'layouts/notification' %>
     <% else %>
-        <a class="nav-link" style="color: #F48462;" href="<%=user_session_path%>">로그인</a>
+        <a class="nav-link login" href="<%=user_session_path%>">로그인</a>
     <% end %>
   </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

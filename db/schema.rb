@@ -289,14 +289,6 @@ ActiveRecord::Schema.define(version: 20190208070036) do
     t.index ["author_id"], name: "index_tags_on_author_id"
   end
 
-  create_table "tmis", force: :cascade do |t|
-    t.integer "author_id", null: false
-    t.text "content", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_tmis_on_author_id"
-  end
-
   create_table "user_queries", force: :cascade do |t|
     t.integer "user_id"
     t.string "content"
@@ -322,7 +314,9 @@ ActiveRecord::Schema.define(version: 20190208070036) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string "authentication_token", limit: 30
     t.string "slug"
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

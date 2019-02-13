@@ -33,7 +33,7 @@ every :day, at: '0 am' do
     rake "today_question:update"
 end
 
-every :day, at: '9 pm' do
+every :day, at: '6 am' do
 # every 10.minutes do  
     rake "user_stats:update"
 end

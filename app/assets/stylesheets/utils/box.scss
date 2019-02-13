@@ -7,9 +7,9 @@ div {
     word-break: break-all;
 }
 
+//친구 목록에서 +친구 추가 box
 #friend-box-invitation {
-    .btn-invitation {
-        width: 100%;
+    .btn-invitation { 
         width: 100%;
         display: inline-block;
         background-color: white;
@@ -20,10 +20,149 @@ div {
         color: #F48462;
         text-decoration: none;
         margin-bottom: 500px;
+        font-size: 1rem;
+    }
+}
+
+//피드의 posting, custom question form
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #4f4f4f;
+    border-color: #dddddd #dddddd white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    border-color: #dddddd #dddddd white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.nav-tabs .nav-link {
+    color: #F48462;
+}
+.tab-content {
+    background-color: white;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 0.5px solid #dddddd;
+    border-top: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px 15px 50px 15px;
+    box-sizing: border-box;
+    position: relative;
+
+    .new-answer-field {
+        width: 100%;
+        font-size: 1.1rem;
+        overflow: hidden;
+        border: none;
+        outline: none;
+        line-height: 30px;
+        padding : 0px;
+        resize: none;
+        box-sizing: border-box;
+        margin-bottom: 0px;
+    }
+
+    .answer-button {
+        position: absolute;
+        right: 15px;
+        bottom: 10px;
+        width: 70px;
+        height: 30px;
+        border-radius: 20px;
+        background-color: #F48462;
+        border: none;
+        font-size: .8rem;
+        color: white;
+    }
+
+    .posting-or-custom-question {
+        position: absolute;
+        top: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+
+        .selected {
+            color: #F48462;
+        }
+
+    }
+    #tags {
+
+        padding-top: 20px;
+
+        #tag-title {
+            color: #F48462;;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+        .tag {
+            font-size: .9rem;
+            padding: 6px 10px;
+            border-radius: 10px;
+            background-color: #eaeaea5f;
+            color: gray;
+            margin: 3px;
+            display: inline-block;
+            
+            .tag-close {
+                width: 18px;
+                height: auto;
+                margin-left: 5px;
+                cursor: pointer;
+            }
+        }
+
+        #tags_input {
+            font-size: .9rem;
+            padding: 6px 10px;
+            background-color: #eaeaea5f;
+            border: none;
+            border-radius: 10px;
+            box-shadow:none;
+            outline: none;
+            width: auto;
+            margin: 4px;
+            outline: none;
+        }
 
     }
 
+    #tags-info-alert {
+        color: gray;
+        font-size: .8rem;
+    }
+
+    
+    .channels {
+        position: absolute;
+        bottom: 16px;
+
+        .channels-dropdown-content {
+            width: 30%;
+            min-width: 100px;
+            max-height: 240px;
+            z-index: 1;
+            position: absolute;
+            top: 30px;
+
+            .btn-select-all-channels {
+                padding: 5px;
+                border-radius: 6px;
+                margin-bottom: 10px
+            }
+
+            label {
+                margin-bottom: 12px;
+            }
+        }
+    }
 }
+
 .prism-box {
     background-color: white;
     width: 100%;
@@ -41,13 +180,13 @@ div {
     border: none;
     border-radius: 10px;
     padding: 8px 10px 4px 10px;
-    font-size: 18px; 
+    font-size: 1.1rem; 
     display: grid;
     grid-template-columns: minmax(calc(10%-50px), 10%) 80% minmax(50px, 10%);
     
 
     .question-content {
-        font-size: 18px;
+        font-size: 1.1rem;
         color: #4f4f4f;
         padding: 30px 10px 10px 10px;
         margin: 0 ;
@@ -56,6 +195,7 @@ div {
         justify-content: center;
         grid-column: 1 /2;
         grid-row: 1/2;
+        white-space: pre-line;
     }
 
     .question-tags {
@@ -66,7 +206,7 @@ div {
         margin: auto;
 
         .question-tag {
-            font-size: 12px;
+            font-size: 0.9rem;
             padding: 2px 10px;
             background-color: white;
             border: none;
@@ -125,7 +265,7 @@ div {
     padding: 20px;
 
     .question {
-        font-size: 18px;
+        font-size: 1.1rem;
         padding: 0;
         margin: 0 ;
         color: #4f4f4f;
@@ -147,7 +287,7 @@ div {
     grid-template-columns: auto 30px;
 
     .question-content {
-        font-size: 18px;
+        font-size: 1.1rem;
         padding: 0;
         margin: 0 ;
         color: #4f4f4f;
@@ -163,7 +303,7 @@ div {
         margin: auto;
 
         .question-tag {
-            font-size: 12px;
+            font-size: 0.9rem;
             padding: 2px 10px;
             background-color: white;
             border: none;
@@ -191,7 +331,7 @@ div {
 
     .prism-box__header {
         width: 100%;
-        font-size: 14px;
+        font-size: .9rem;
         padding-bottom: 5px;
         z-index: 0;
 
@@ -203,20 +343,19 @@ div {
         }
 
         a {
+            font-weight: bold;
             color: black;
+            font-size: .9rem;
             text-decoration: none;
         }
 
     }
 
     .prism-box__content {
-        // text-align: center;
-        // border-top: 1px dashed $prism-box-gray;
-        // border-bottom: 1px dashed $prism-box-gray;
-
+        
         padding: 0px 40px;
-        line-height: 140%;
         text-align: center;
+        font-size: 1rem;
 
 
         a {
@@ -225,10 +364,11 @@ div {
         }
 
         .answer {
+            line-height: 140%;
         }
 
         .date { 
-            font-size: 11px;
+            font-size: .8rem;
             color: #888888;
         }
 
@@ -240,7 +380,7 @@ div {
     .prism-box__footer {
         vertical-align: bottom;
         width: 100%;
-        font-size: 12px;
+        font-size: .9rem;
         position: relative;
         display: grid;
         grid-template-columns:  70% 30%;
@@ -310,9 +450,9 @@ div {
         vertical-align: bottom;
         width: 100%;
         text-align: left;
-        font-size: 12px;
         padding-top: 10px;
         padding-bottom: 5px;
+        font-size: .9rem;
         position: relative;
         margin-top: 5px; 
         border-top: 1px solid #d7dae0;
@@ -321,7 +461,7 @@ div {
         a {
             color: black;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 1rem;
             cursor: pointer;
             // &:hover {
             // color: #F48462;
@@ -342,134 +482,7 @@ div {
             padding: 16px;
             text-decoration: none;
             color: black;
-            font-size: 13px;
-        }
-    }
-}
-
-.prism-box-new-post {
-    background-color: white;
-    width: 100%;
-    margin: 20px 0px;
-    border: 0.5px solid #dddddd;
-    border-radius: 10px;
-    padding: 10px 15px 50px 15px;
-    box-sizing: border-box;
-    position: relative;
-
-    .prism-box__content {
-
-        #new-custom-question-form {
-            // display: none;
-        }
-
-        #new-custom-question-form {
-            display: none;
-        }
-
-        .new-answer-field {
-            font-size: 17px;
-            width: 100%;
-            // height: 60px;
-            overflow: hidden;
-            border: none;
-            outline: none;
-            line-height: 30px;
-            padding : 0px;
-            // border-bottom: 1px solid #C08BEF;
-            resize: none;
-            box-sizing: border-box;
-            margin-top: 30px; 
-            margin-bottom: 0px;
-        }
-
-        .answer-button {
-            position: absolute;
-            right: 15px;
-            bottom: 10px;
-            width: 70px;
-            height: 30px;
-            border-radius: 20px;
-            background-color: #F48462;
-            border: none;
-            font-size: 12px;
-            color: white;
-        }
-        .posting-or-custom-question {
-            position: absolute;
-            top: 10px;
-            font-size: 15px;
-            cursor: pointer;
-
-            .selected {
-                color: #F48462;
-            }
-
-        }
-        #tags {
-
-            padding-top: 20px;
-            #tag-title {
-                color: gray;
-                font-size: 14px;
-            }
-            .tag {
-                font-size: 12px;
-                padding: 6px 10px;
-                background-color: white;
-                border: none;
-                border-radius: 10px;
-                color: gray;
-                margin: 4px;
-                display: inline-block;
-                
-                .tag-close {
-                    width: 8px;
-                    height: auto;
-                    margin-left: 5px;
-                }
-            }
-
-            #tags_input {
-                border: none;
-                width: auto;
-                padding: 6px 10px;
-                background-color: rgba(255,255,255,0.5);
-                margin: 4px;
-                outline: none;
-            }
-
-        }
-
-        #tags-info-alert {
-            color: gray;
-            font-size: 12px;
-        }
-
-        
-        .channels {
-            position: absolute;
-            bottom: 16px;
-
-            .channels-dropdown-content {
-                width: 30%;
-                min-width: 100px;
-                max-height: 240px;
-                z-index: 1;
-                position: absolute;
-                top: 30px;
-
-                .btn-select-all-channels {
-                    padding: 5px;
-                    border-radius: 6px;
-                    margin-bottom: 10px
-                }
-    
-                label {
-                    margin-bottom: 12px;
-                }
-            }
-
+            font-size: .9rem;
         }
     }
 }
@@ -496,7 +509,7 @@ div {
         border-radius: 20px;
         background-color: #F48462;
         border: none;
-        font-size: 12px;
+        font-size: .9rem;
         color: white;
     }
 
@@ -523,28 +536,8 @@ div {
     }
 }
 
-.link-generation-btn {
-    background-color: #F48462;
-    color: white;
-    width: 180px;
-    height: 50px;
-    border: none;
-    border-radius: 30px;
-    font-size: 15px;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    cursor: pointer;
-    &:focus {
-        outline: none;
-        fill: none;
-    }
-
-}
-
 .channels {
-    font-size: 15px;
+    
     width: calc(100% - 100px);
 
     span {
@@ -581,7 +574,7 @@ div {
             display: inline-block;
             background-color: white;
             border: 0.5px solid #dddddd;
-            font-size: 12px;
+            font-size: .9rem;
             color: gray;
             margin-bottom: 10px;
             cursor: pointer;
@@ -640,5 +633,45 @@ div {
             transform: rotate(45deg);
             -webkit-transform: rotate(45deg);
         }
+    }
+}
+//for mobile version
+@media only screen and (max-device-width: 500px) {
+    .prism-box {
+        zoom: 2.3;
+        margin: 10px 0px;
+    
+        .prism-box__content {
+            padding: 0px 20px;
+
+        }
+    
+        .edit-or-delete {
+            width: 100px;
+        }
+    }
+    //new post form in frineds feed
+    .nav {
+        zoom: 2.3;
+    }
+    
+    .tab-content {
+        zoom: 2.3;
+    }
+
+    .nav-link {
+        padding: 5px 20px;
+    }
+
+    .prism-box-new-post {
+        zoom: 2.3;
+    }
+
+    .nav-link {
+        padding: 5px 20px;
+    }
+
+    .link-generation-btn {
+        font-size: 1rem;
     }
 }

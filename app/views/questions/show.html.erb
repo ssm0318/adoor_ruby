@@ -8,7 +8,7 @@
             data-url='<%=new_assignment_path(@question.id)%>'>
             <%= image_tag("icons/assign-icon.png", class: "btn-assign") %>
         </a>
-    </div>
+    </div> 
     <%= render 'questions/tabs', question: @question %>
     
     <div class = "prism-box__question">
@@ -26,38 +26,11 @@
         <%= render 'drawers/default', target: @question %> 
     </div>
         
- 
-    <% @question.answers.reverse_each do |answer| %>
-        <div class="prism-box answer-feed <%=answer.id%>">
-            <div class="prism-box__header">
-                <% if current_user == answer.author or current_user.friends.include? answer.author %>
-                    <%= render partial: "./user_profile", locals: {user: answer.author} %>
-                    <% if current_user.id == answer.author.id %>
-                        <%= render 'feeds/delete_or_edit', feed: answer %>
-                    <% end %>
-                <% else %>
-                    <%= render partial: "./user_profile_general", locals: {user_id: answer.author_id, feed_id: answer.id }%>
-                <% end %>
-            </div>
-            <div class = "prism-box__content">
-                <div class = "prism-box-question">
-                    <%= link_to answer.question.content, question_path(answer.question.id), class: "question"%>
-                </div>
-                <div class="answer"><%= answer.content %></div><br>
-                <div class = "date time"><%= time_tag answer.created_at, class: "timeago" %></div>
-            </div>
-            <div class="prism-box__footer">
-                <% if current_user.id == answer.author.id %>
-                    <%= render 'feeds/my_feed_footer', target: answer %>
-                <% else %>
-                    <%= render 'feeds/feed_footer', target: answer %>
-                <% end %>
-            </div>
-                <% if  answer.author_id != current_user.id && !(current_user.friends.include? answer.author) %>
-                    <%= render 'comments/general_form', feed: answer %>
-                <% else %>
-                    <%= render 'comments/friends_form', feed: answer %>
-                <% end %>
-        </div>
-    <% end %>
+    <div id="infinite-feeds">
+        <%= render partial: 'questions/all', locals: {feeds: @feeds} %>
+    </div>
 </div>
+
+<script>
+  $('body').trigger('click');
+</script> 
