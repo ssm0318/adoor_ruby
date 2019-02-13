@@ -11,6 +11,8 @@ This is a Rails API-only application. Most responses require parameters to be pa
 ### Main Functionalities
 Viewing the responses using a Json parser may be helpful. ```http://json.parser.online.fr/```
 
+Default URL: http://localhost:3000/api/v1/
+
 #### Announcements
 Number | URL | Parameters | Method | Response
 --- | --- | --- | --- | ---

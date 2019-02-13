@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'omniauth'
+
+gem 'omniauth-kakao', :git => 'git://github.com/hcn1519/omniauth-kakao'
 gem 'rubocop', '~> 0.63.1', require: false
 gem 'rack-cors', :require => 'rack/cors'
 gem 'jwt', '~> 2.1' # jwt.io
