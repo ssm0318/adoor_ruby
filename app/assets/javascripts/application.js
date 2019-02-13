@@ -25,12 +25,10 @@ $(document).on('click', function() {
       var url = $('.pagination .next_page').attr('href');
       if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
         console.log('scrolling');
-        // $('.pagination').text("로딩 중...");
-        $('.pagination').html('<div class="loading-gif"><img src="/assets/icons/loading-9059385ab0380d6cf557878923f4068a8f4a9d171349b72a0956866ec12f6950.gif"></div>');
+        $('.pagination').html('<div class="d-flex loading-gif"><div class="spinner-border text-secondary" role="status"><span class="sr-only">Loading...</span></div></div>');
         $.getScript(url);
-        // $('.pagination').replaceWith('');
       }
-    });
+    }); 
     return $(window).scroll();
   }
 });
