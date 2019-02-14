@@ -1,5 +1,5 @@
 class Api::V1::CustomQuestionsController < ApplicationController
-  # before_action :authenticate_user
+  before_action :authenticate_user!
   before_action :set_custom_question, only: %i[show destroy edit update repost_new]
   before_action :check_mine, only: %i[destroy edit update]
   before_action :check_accessibility, only: [:show]

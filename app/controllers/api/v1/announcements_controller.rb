@@ -1,5 +1,5 @@
 class Api::V1::AnnouncementsController < ApplicationController
-  # before_action :authenticate_user
+  before_action :authenticate_user!
   before_action :check_admin, except: [:index]
   before_action :set_announcement, only: %i[publish unpublish noti destroy]
 

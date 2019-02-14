@@ -1,5 +1,5 @@
 class Api::V1::ChannelsController < ApplicationController
-  # before_action :authenticate_user
+  before_action :authenticate_user!
   before_action :set_channel, except: [:create]
 
   def create

@@ -29,7 +29,7 @@ module Devise
         # end
         
         def get_token
-            auth_header.present? && auth_header.split(' ').first
+            auth_header.present? && auth_header.split(' ').last
         end
         
         def auth_header

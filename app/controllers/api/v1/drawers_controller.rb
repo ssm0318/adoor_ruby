@@ -1,5 +1,5 @@
 class Api::V1::DrawersController < ApplicationController
-  # before_action :authenticate_user
+  before_action :authenticate_user!
 
   def create
     @drawer = Drawer.create(user_id: current_user.id, target_id: params[:id], target_type: params[:target_type])

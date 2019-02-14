@@ -1,8 +1,10 @@
 class Api::V1::NotificationsController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
     @notifications = Notification.all
+
+    render :index, { notifications: @notifications }
   end
 
   def read_all
@@ -25,7 +27,7 @@ class Api::V1::NotificationsController < ApplicationController
         noti.save(touch: false) # updated_at을 update하지 않기 위해!!
       end
 
-      render :read, { notification: noti }
+      render :noti, { notification: noti }
     end
   end
 

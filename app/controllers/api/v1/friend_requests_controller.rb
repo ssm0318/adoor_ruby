@@ -1,5 +1,5 @@
 class Api::V1::FriendRequestsController < ApplicationController
-#   before_action :authenticate_user
+  before_action :authenticate_user!
 
   def index
     @friend_requests = FriendRequest.where(requestee: current_user).visible

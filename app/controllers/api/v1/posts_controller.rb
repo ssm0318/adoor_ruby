@@ -3,7 +3,7 @@ class Api::V1::PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
   before_action :check_mine, only: %i[edit update destroy]
   before_action :check_accessibility, only: [:show]
-
+ 
   def create
     @post = Post.create(post_params)
 
@@ -28,7 +28,7 @@ class Api::V1::PostsController < ApplicationController
       }
     else
       redirect_to root_url
-      end
+      end 
   end
 
   def update

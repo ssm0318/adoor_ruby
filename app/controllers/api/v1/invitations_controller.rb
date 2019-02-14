@@ -1,5 +1,5 @@
 class Api::V1::InvitationsController < ApplicationController
-  # before_action :authenticate_user, except: [:accept]
+  before_action :authenticate_user!, except: [:accept]
 
   def index
     @questions = []

@@ -1,5 +1,5 @@
 class Api::V1::AssignmentsController < ApplicationController
-  # before_action :authenticate_user
+  before_action :authenticate_user!
 
   def new
     @question = Question.find(params[:question_id])
