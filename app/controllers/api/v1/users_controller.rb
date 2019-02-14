@@ -2,7 +2,7 @@ require 'mini_magick'
 require 'base64'
 
 class Api::V1::UsersController < ApplicationController
-  before_action :authenticate_user!, except: %i[recover_password send_temporary_password]
+  # before_action :authenticate_user!, except: %i[recover_password send_temporary_password]
   before_action :set_user, only: %i[show edit update destroy image_upload]
   before_action :check_user, only: %i[edit update destroy]
 

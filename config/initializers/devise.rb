@@ -14,8 +14,8 @@ Devise.setup do |config|
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
 
-  config.omniauth :google_oauth2, ENV["Google_Key"], ENV["Google_Secret"]
-  config.omniauth :kakao, ENV["Kakao_Key"], :redirect_path => "/users/auth/kakao/callback"
+  # config.omniauth :google_oauth2, ENV["Google_Key"], ENV["Google_Secret"]
+  # config.omniauth :kakao, ENV["Kakao_Key"], :redirect_path => "/users/auth/kakao/callback"
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -265,13 +265,13 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   
-  config.warden do |manager|
-    manager.intercept_401 = false
-    manager.default_strategies(scope: :user).unshift :some_external_strategy
-  end
+  # config.warden do |manager|
+  #   manager.intercept_401 = false
+  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
+  # end
 
   config.warden do |manager|
-    manager.strategies.add(:jwt, Devise::Strategies::JWTAuthentication)
+    manager.strategies.add(:jwt, Devise::Strategies::JWTAuthenticatable)
     
     manager.default_strategies(scope: :user).unshift :jwt
   end

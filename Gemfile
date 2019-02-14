@@ -5,13 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'omniauth'
-
-gem 'omniauth-kakao', :git => 'git://github.com/hcn1519/omniauth-kakao'
+# gem 'omniauth'
+# gem 'omniauth-kakao', :git => 'git://github.com/hcn1519/omniauth-kakao'
+# gem 'omniauth-google-oauth2', '~> 0.4.1'
 gem 'rubocop', '~> 0.63.1', require: false
 gem 'rack-cors', :require => 'rack/cors'
 gem 'jwt', '~> 2.1' # jwt.io
-gem 'bootstrap', '~> 4.2.1'
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 gem 'friendly_id', '~> 5.2.4' # https://github.com/norman/friendly_id url을 예쁘게 (유저들이 자신의 ID를 볼 수 있는게 이상해서.)
 # gem 'rails_autolink', '~> 1.1', '>= 1.1.6' skip for now

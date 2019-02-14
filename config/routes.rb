@@ -107,7 +107,7 @@ Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v1', defaults: { format: :json } do
       # Sessions
-      resource :session, only: [:create, :destroy, :show] # delete request가 실제로 user을 delete하는 것이 아니기 때문에 resources가 아니라 resource로 두는 것이 맞습니다. 고치지 말아주세요!
+      resource :sessions, only: [:create, :destroy, :show] # delete request가 실제로 user을 delete하는 것이 아니기 때문에 resources가 아니라 resource로 두는 것이 맞습니다. 고치지 말아주세요!
       resources :users, only: [:create] 
 
       # Application
@@ -175,7 +175,8 @@ Rails.application.routes.draw do
       # User
       get '/users/:id/edit' => 'users#edit', as: :edit_user_profile
       patch '/users/:id/edit' => 'users#update', as: :update_user_profile
-      devise_for :users, :controllers => {:confirmations => 'users/confirmations', omniauth_callbacks: 'user/omniauth_callbacks' }
+      # devise_for :users, :controllers => {:confirmations => 'users/confirmations', omniauth_callbacks: 'user/omniauth_callbacks' }
+      devise_for :users, :controllers => {:confirmations => 'users/confirmations' }
       # 아래 코드는 이후에 멀티채널 구성에 맞추어 바뀌어야할수도.
       get '/users/friends' => 'users#friends', as: :friends
       put '/users/:id/image_upload' => 'users#image_upload', as: :image_upload
