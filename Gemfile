@@ -5,6 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# gem 'omniauth'
+# gem 'omniauth-kakao', :git => 'git://github.com/hcn1519/omniauth-kakao'
+# gem 'omniauth-google-oauth2', '~> 0.4.1'
+gem 'rubocop', '~> 0.63.1', require: false
+gem 'rack-cors', :require => 'rack/cors'
+gem 'jwt', '~> 2.1' # jwt.io
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 gem 'friendly_id', '~> 5.2.4' # https://github.com/norman/friendly_id url을 예쁘게 (유저들이 자신의 ID를 볼 수 있는게 이상해서.)
 # gem 'rails_autolink', '~> 1.1', '>= 1.1.6' skip for now
@@ -25,12 +31,14 @@ gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 gem 'time_difference' 
 gem 'devise'
+gem 'simple_token_authentication', '~> 1.0'
+gem 'pry-rails' 
 gem 'rails_db'
 gem 'rolify' #https://github.com/RolifyCommunity/rolify 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', "~> 1.3.6"
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -56,11 +64,11 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'pry-rails' 
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  # gem 'mailcatcher', '~> 0.6.1'
 end
 
 group :development do

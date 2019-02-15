@@ -15,8 +15,10 @@ class SearchController < ApplicationController
         @general_results = CustomQuestion.joins(:channels).where(channels: {name: "익명피드"}).search_tag(@query).reverse
         @friends_results = CustomQuestion.accessible(current_user.id).search_tag(@query).reverse
         @custom_question_results = @general_results + @friends_results
+        @custom_question_results += CustomQuestion.where(author_id: current_user.id).search_tag(@query).reverse
         @custom_question_results += CustomQuestion.joins(:channels).where(channels: {name: "익명피드"}).where("content LIKE ? ", "%#{@query}%").reverse
         @custom_question_results += CustomQuestion.accessible(current_user.id).where("content LIKE ? ", "%#{@query}%").reverse
+        @custom_question_results += CustomQuestion.where(author_id: current_user.id).where("content LIKE ? ", "%#{@query}%").reverse
         @custom_question_results = @custom_question_results.uniq(&:content)
 
         @more_user = @user_results.count()

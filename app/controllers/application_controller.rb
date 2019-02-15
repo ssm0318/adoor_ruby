@@ -1,9 +1,23 @@
 class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :configure_permitted_parameters, if: :devise_controller?
 
   helper_method :noties
   helper_method :recent_noties
+
+  HMAC_SECRET = Rails.application.secrets.secret_key_base
+
+  # acts_as_token_authentication_handler_for User, fallback: :none # handles header authorization
+  # for future reference: https://github.com/gonzalo-bulnes/simple_token_authentication include token in the header
+
+  # alias_method :devise_current_user, :current_user
+  # def current_user
+  #   if request.path_parameters[:format] == 'json'
+  #     @current_user ||= User.find(payload['user_id'])
+  #   else
+  #     devise_current_user
+  #   end
+  # end
 
   def unread
     arr = []
@@ -40,10 +54,20 @@ class ApplicationController < ActionController::Base
     render './intro'
   end
  
-  protected
+  # protected
  
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :username])
-  end
+  # def configure_permitted_parameters
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :username])
+  # end
+
+  # private
+
+  # def retrieve_token
+  #   request.headers['Authorization'].split(' ').last
+  # end
+
+  # def payload
+  #   JWT.decode retrieve_token, HMAC_SECRET, true, { algorithm: 'HS256' }.first
+  # end
 end
 

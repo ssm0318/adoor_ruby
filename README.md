@@ -1,24 +1,16 @@
-# README
+API Backend Configuration
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Adoor
+Social media of the future!
 
-Things you may want to cover:
+## Backend
 
-* Ruby version 2.4.3
+### Running the Application
+This is a Rails API-only application. Most responses require parameters to be passed either in the form of json or in the URL. Thus, it is recommended that the code be tested on Postman (https://www.getpostman.com/downloads/)
 
-* System dependencies
+To check out token values: https://jwt.io/ 
 
-* Configuration
+### Main Functionalities
+Viewing the responses using a Json parser may be helpful. ```http://json.parser.online.fr/```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Default URL: http://localhost:3000/api/v1/
