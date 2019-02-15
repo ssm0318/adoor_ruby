@@ -182,9 +182,9 @@ class CustomQuestionsController < ApplicationController
 
         def check_accessibility
             author =  CustomQuestion.find(params[:id]).author
-            if (author.friends.include? current_user) && author != current_user && !CustomQuestion.accessible(current_user.id).exists?(params[:id])
+            if (author != current_user) && !CustomQuestion.accessible(current_user.id).exists?(params[:id])
                 redirect_to root_url
-            elsif !(author.friends.include? current_user) && author != current_user && !CustomQuestion.find(params[:id]).channels.any?{|c| c.name == '익명피드'}
+            elsif (author != current_user) && !CustomQuestion.find(params[:id]).channels.any?{|c| c.name == '익명피드'}
                 redirect_to root_url
             end
         end
