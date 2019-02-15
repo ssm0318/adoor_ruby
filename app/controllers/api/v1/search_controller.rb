@@ -10,11 +10,13 @@ class Api::V1::SearchController < ApplicationController
     @question_results += Question.published.where('content LIKE ? ', "%#{@query}%").reverse
     @question_results = @question_results.uniq
 
-    @general_results = CustomQuestion.joins(:channels).where(channels: { name: '익명피드' }).search_tag(@query).reverse
+    @general_results = CustomQuestion.joins(:channels).where(channels: {name: "익명피드"}).search_tag(@query).reverse
     @friends_results = CustomQuestion.accessible(current_user.id).search_tag(@query).reverse
     @custom_question_results = @general_results + @friends_results
-    @custom_question_results += CustomQuestion.joins(:channels).where(channels: { name: '익명피드' }).where('content LIKE ? ', "%#{@query}%").reverse
-    @custom_question_results += CustomQuestion.accessible(current_user.id).where('content LIKE ? ', "%#{@query}%").reverse
+    @custom_question_results += CustomQuestion.where(author_id: current_user.id).search_tag(@query).reverse
+    @custom_question_results += CustomQuestion.joins(:channels).where(channels: {name: "익명피드"}).where("content LIKE ? ", "%#{@query}%").reverse
+    @custom_question_results += CustomQuestion.accessible(current_user.id).where("content LIKE ? ", "%#{@query}%").reverse
+    @custom_question_results += CustomQuestion.where(author_id: current_user.id).where("content LIKE ? ", "%#{@query}%").reverse
     @custom_question_results = @custom_question_results.uniq(&:content)
 
     @more_user = @user_results.count
@@ -27,18 +29,16 @@ class Api::V1::SearchController < ApplicationController
 
     @searchpath = search_all_path
 
-    render 'all'
-  end
-
-  def json
-    # @query = params[:query]
-    # Query.create(content: @query)
-    # @results = []
-    # @results = Answer.all.search_tag(@query) | Question.all.search_tag(@query)
-
-    # render json: {
-    #     result: @results,
-    # }
+    render :results_all, locals: { 
+      query: @query, 
+      user_results: @user_results, 
+      question_results: @question_results,
+      custom_question_results: @custom_question_results,
+      more_user: @more_user,
+      more_question: @more_question,
+      more_custom: @more_custom,
+      searchpath: @searchpath 
+    }
   end
 
   def admin_question
@@ -49,7 +49,7 @@ class Api::V1::SearchController < ApplicationController
     @results += Question.published.where('content LIKE ? ', "%#{@query}%").reverse
     @results = @results.uniq
 
-    render 'admin_question'
+    render :results_question, locals: { query: @query, results: @results }
   end
 
   def custom_question
@@ -60,48 +60,7 @@ class Api::V1::SearchController < ApplicationController
     @results += CustomQuestion.where(ancestor_id = nil).where('content LIKE ? ', "%#{@query}%").reverse
     @results = @results.uniq
 
-    render 'custom_question'
-  end
-
-  # def friend_answer
-  #     @query = params[:query]
-  #     Query.create(user: current_user, content: @query)
-  #     @results = []
-  #     post_results = []
-  #     @results = Answer.all.search_tag(@query)
-  #     @results = @results.where(author: current_user.friends) | @results.where(author: current_user)
-  #     post_results = Post.all.search_tag(@query)
-  #     post_results = post_results.where(author: current_user.friends) | post_results.where(author: current_user)
-  #     @results += post_results
-  #     @results.sort_by(&:created_at).reverse!
-
-  #     render 'friend_answer'
-  # end
-
-  # def anonymous_answer
-  #     @query = params[:query]
-  #     Query.create(user: current_user, content: @query)
-  #     @results = []
-  #     @results = Answer.all.search_tag(@query)
-  #     @results = @results.anonymous(current_user.id)
-  #     post_results = Post.all.search_tag(@query)
-  #     post_results = post_results.anonymous(current_user.id)
-  #     @results += post_results
-  #     @results.sort_by(&:created_at).reverse!
-
-  #     render 'anonymous_answer'
-  # end
-
-  def popular_tags
-    @results = Tag.all.popular_tags(params[:num])
-
-    render 'popular_tags'
-  end
-
-  def popular_search
-    @results = Query.all.popular_search(params[:num])
-
-    render 'popular_search'
+    render :results_custom_question, locals: { query: @query, results: @results }
   end
 
   def user
@@ -109,6 +68,6 @@ class Api::V1::SearchController < ApplicationController
     UserQuery.create(user: current_user, content: @query)
     @results = User.where('username LIKE ? ', "%#{@query}%").order(:username)
 
-    render 'user'
+    render :results_user, locals: { query: @query, results: @results }
   end
 end
