@@ -11,10 +11,10 @@ class DrawersController < ApplicationController
         }
     end
 
-    def user_drawers
-        @user = User.find(params[:id]) 
-        @drawers = @user.drawers
-    end
+    # def user_drawers
+    #     @user = User.find(params[:id]) 
+    #     @drawers = @user.drawers
+    # end
 
     def destroy
         drawer = Drawer.where(target_type: params[:target_type], target_id: params[:id], user_id: current_user.id)

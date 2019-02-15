@@ -7,12 +7,12 @@ class Api::V1::DrawersController < ApplicationController
     render :create, locals: { drawer: @drawer }
   end
 
-  def user_drawers
-    @user = User.find(params[:id])
-    @drawers = @user.drawers
+  # def user_drawers
+  #   @user = User.find(params[:id])
+  #   @drawers = @user.drawers
 
-    render :user_drawers, locals: { user: @user, drawers: @drawers }
-  end
+  #   render :user_drawers, locals: { user: @user, drawers: @drawers }
+  # end
 
   def destroy
     drawer = Drawer.where(target_type: params[:target_type], target_id: params[:id], user_id: current_user.id)

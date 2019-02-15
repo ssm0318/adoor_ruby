@@ -1,5 +1,5 @@
 json.call(
-  annoucement,
+  announcement,
   :id,
   :title, 
   :content,

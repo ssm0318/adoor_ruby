@@ -12,15 +12,13 @@ class Api::V1::AnnouncementsController < ApplicationController
   def admin_index
     @published_announcements = Announcement.published.sort_by(&:published_at).reverse!
     @unpublished_announcements = Announcement.unpublished.sort_by(&:created_at).reverse!
-
-    render :admin_index, locals: { published_announcements: @published_announcements, unpublished_announcements: @unpublished_announcements }
   end
 
   def create
     if @announcement = Announcement.create(content: params[:content], title: params[:title])
       render json: {status: 'SUCCESS', message:'Created announcement', data: @announcement}, status: :ok
     else
-      render json: {status: 'ERROR', message:'Announcement not saved', data: @announcement.errors.full_messages}, status: :unprocessable_entity
+      render json: {status: 'ERROR', message:'Announcement not created', data: @announcement.errors.full_messages}, status: :unprocessable_entity
     end
     # redirect_to api_v1_announcement_admin_index_path
   end
