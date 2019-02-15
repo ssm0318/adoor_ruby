@@ -21,7 +21,7 @@ class Api::V1::SessionsController < ApplicationController
       render :create, status: :created, locals: { token: jwt }
     else
       # head(:unauthorized)
-      render json: { error: 'invalid_credentials' }, status: :unauthorized
+      render json: { status: 'invalid_credentials', message: 'Sign in unsuccessful', data: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

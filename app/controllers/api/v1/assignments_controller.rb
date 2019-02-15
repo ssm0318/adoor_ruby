@@ -4,6 +4,14 @@ class Api::V1::AssignmentsController < ApplicationController
   def index
     question_assignments = current_user.received_assignments.where(target_type: 'Question').where.not(assigner_id: 1).order(created_at: :desc)
     @question_ids = question_assignments.pluck(:target_id).uniq
+    puts '================================================================'
+    puts @question_ids
+    puts current_user.id
+    puts '==============================================================='
+    @questions = []
+    @question_ids.each do |id|
+      @questions.push(Question.find(id).content)
+    end
     @waiting_questions = []
     @answered_questions = []
     @question_ids.each do |q_id|
@@ -15,6 +23,10 @@ class Api::V1::AssignmentsController < ApplicationController
     end
     custom_assignments = current_user.received_assignments.where(target_type: 'CustomQuestion').order(created_at: :desc)
     @custom_question_ids = custom_assignments.pluck(:target_id).uniq
+    @custom_questions = []
+    @custom_question_ids.each do |id|
+      @custom_questions.push(CustomQuestion.find(id).content)
+    end
 
     render :index, locals: { questions: @questions, custom_questions: @custom_questions, waiting_questions: @waiting_questions, answered_questions: @answered_questions }
   end

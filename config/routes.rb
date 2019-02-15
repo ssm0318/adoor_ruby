@@ -148,9 +148,15 @@ Rails.application.routes.draw do
       get '/likes/:target_type/:target_id' => 'likes#likes_info'
 
       # Assignment
-      get '/assignments/:question_id' => 'assignments#new', as: :new_assignment
+      get '/assignments' => 'assignments#index', as: :assignments
+
+      get '/assignments/:question_id' => 'assignments#new', as: :new_assignment 
       post '/assignments/:assignee_id/:question_id' => 'assignments#create', as: :create_assignment # get?
       delete '/assignments/:assignee_id/:question_id' => 'assignments#destroy', as: :destroy_assignment
+      
+      post '/assignments/:assignee_id/custom_question/:custom_question_id' => 'assignments#create_custom', as: :create_custom_assignment # get?
+      delete '/assignments/:assignee_id/custom_question/:custom_uestion_id' => 'assignments#destroy_custom', as: :destroy_custom_assignment
+      get '/assignments/custom_question/:custom_question_id' => 'assignments#new_custom', as: :new_custom_assignment  
 
       # Drawer
       resources :drawers, only: [:create, :destroy]
@@ -204,4 +210,4 @@ Rails.application.routes.draw do
       get '/announcements/:id/noti' => 'announcements#noti', as: :announcement_noti
     end
   end
-end
+end 
