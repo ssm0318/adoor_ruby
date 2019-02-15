@@ -146,7 +146,7 @@ div {
             width: 30%;
             min-width: 100px;
             max-height: 240px;
-            z-index: 1;
+            z-index: 0;
             position: absolute;
             top: 30px;
 
@@ -562,12 +562,12 @@ div {
 
         display: none;
         background-color: white;
-        z-index: 2;
+        z-index: 1;
         padding: 10px;
         padding-top: 15px;
-        border: 0.5px solid #dddddd;
+        border: none;
         border-radius: 5px;
-        box-shadow: 2px 2px 30px #cccccc;
+        box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
         overflow-y: scroll;
 
         .btn-select-all-channels {

@@ -85,7 +85,7 @@
                     display: block;
                     margin-left: auto;
                     margin-right: auto;
-                    z-index: 1;
+                    z-index: 0;
                     position: relative;
                 }
                 
@@ -119,7 +119,7 @@
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
-                z-index: 2;
+                z-index: 0;
             }
         }
     }
