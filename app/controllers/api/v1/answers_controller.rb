@@ -12,11 +12,7 @@ class Api::V1::AnswersController < ApplicationController
 
   def create
     @answer = Answer.new(answer_params)
-    if @answer.save
-      render json: {status: 'SUCCESS', message:'Created answer', data: @answer}, status: :ok
-    else
-      render json: {status: 'ERROR', message:'Answer not saved', data: @answer.errors.full_messages}, status: :unprocessable_entity
-    end
+    @answer.save
 
     channels = [] # 선택된 채널들을 갖고 있다.
     channels = Channel.find(params[:c]) if params[:c]
@@ -25,12 +21,24 @@ class Api::V1::AnswersController < ApplicationController
     end
 
     # assign 당한 유저C가 해당 질문에 대해 답하면 그 질문에 대해 유저C를 assign한 모든 유저들에게 보내지는 노티 생성.
-    assignment_hash = { question_id: @answer.question_id, assignee_id: @answer.author_id }
+    assignment_hash = { target: @answer, assignee_id: @answer.author_id }
     Assignment.where(assignment_hash).find_each do |assignment|
       # 답변의 공개그룹에 assigner가 포함되어있는 경우에만 노티가 감.
       unless (channels & assignment.assigner.belonging_channels).empty?
         Notification.create(recipient: assignment.assigner, actor: @answer.author, target: @answer, origin: @answer, action: 'assignment-answer')
       end
+    end
+
+    @channel_names = []
+    channels.each do |c|
+      @channel_names.push(c.name)
+    end
+
+    if @answer
+      render :answer, locals: { channel_names: @channel_names, answer: @answer }
+      # render json: {status: 'SUCCESS', message:'Created answer', data: @answer}, status: :ok
+    else
+      render json: {status: 'ERROR', message:'Answer not saved', data: @answer.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -93,12 +101,12 @@ class Api::V1::AnswersController < ApplicationController
       end
       ########################################
 
-      @channel_names = ''
+      @channel_names = []
       selected_channels.each do |c|
-        @channel_names += c.name + ' '
+        @channel_names.push(c.name)
       end
 
-      render :update, locals: { channel_names: @channel_names, answer: @answer }
+      render :answer, locals: { channel_names: @channel_names, answer: @answer }
     else
       render json: {status: 'ERROR', message:'Answer not updated', data: @answer.errors.full_messages}, status: :unprocessable_entity
     end

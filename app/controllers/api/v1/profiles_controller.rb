@@ -15,11 +15,13 @@ class Api::V1::ProfilesController < ApplicationController
     @feeds = answers + posts + custom_questions
     @feeds = @feeds.sort_by(&:created_at).reverse!
 
-    render 'show'
+    render ender feeds/feeds, locals: { feeds: @feeds }
   end
 
   def drawers
     @user = User.find(params[:id])
     @drawers = @user.drawers
+
+    render 
   end
 end
