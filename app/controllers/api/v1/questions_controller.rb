@@ -5,60 +5,37 @@ class Api::V1::QuestionsController < ApplicationController
 
   def index
     @questions = Question.published.order('selected_date DESC')
+
+    render :questions, locals: { questions: @questions }
   end
 
-  def show; end
+  def show
+    @feeds = @question.answers.accessible(current_user.id)
+    @feeds += @question.answers.where(author: current_user)
+    @feeds += @question.answers.channel_name("익명피드").anonymous(current_user.id)
+    @feeds = @feeds.sort_by(&:created_at).reverse! 
+
+    render :show, locals: { question: @question, feeds: @feeds }
+  end
 
   def today
     @questions = Question.where(selected_date: Date.today).shuffle
+
+    render :questions, locals: { questions: @questions }
   end
 
   def show_friends
-    @answers = @question.answers.named(current_user.id).sort_by(&:created_at).reverse!
-    render 'show_friends'
+    @feeds = @question.answers.accessible(current_user.id)
+    @feeds += @question.answers.where(author: current_user)
+    @feeds = @feeds.sort_by(&:created_at).reverse!
+
+    render :show, locals: { question: @question, feeds: @feeds }
   end
 
   def show_general
-    @answers = @question.answers.anonymous(current_user.id).sort_by(&:created_at).reverse!
-    render 'show_general'
-  end
+    @feeds = @question.answers.channel_name("익명피드").anonymous(current_user.id).sort_by(&:created_at).reverse!
 
-  def import_all
-    csv = Roo::CSV.new('./lib/assets/questions.csv')
-    select = (1..csv.last_row).to_a.sample 5
-    (1..csv.last_row).each do |i|
-      q = Question.create(content: csv.cell(i, 1), tag_string: csv.cell(i, 6))
-      unless q.tag_string.nil?
-        tag_array = q.tag_string.gsub("\r\n", '\n').split('\n')
-        tag_array.each do |tag|
-          new_tag = Tag.create(author_id: 1, content: tag, target: q)
-          q.tags << new_tag
-        end
-      end
-      if select.include? i
-        q.selected_date = Date.today
-        q.save
-      end
-    end
-    redirect_to action: 'today'
-  end
-
-  def import_new
-    @questions = Question.where(selected_date: Date.today)
-    csv = Roo::CSV.new('./lib/assets/questions.csv')
-    start_idx = Question.last.id
-
-    (start_idx..csv.last_row).each do |i|
-      q = Question.create(content: csv.cell(i, 1), tag_string: csv.cell(i, 2))
-      next if q.tag_string.nil?
-
-      tag_array = q.tag_string.gsub("\r\n", '\n').split('\n')
-      tag_array.each do |tag|
-        new_tag = Tag.create(author_id: 1, content: tag, target: q)
-        q.tags << new_tag
-      end
-    end
-    redirect_to action: 'today'
+    render :show, locals: { question: @question, feeds: @feeds }
   end
 
   private
