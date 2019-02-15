@@ -1,5 +1,5 @@
 json.call(
-  @user,
+  user,
   :id,
   :username,
   :email,
