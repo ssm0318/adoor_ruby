@@ -24,8 +24,13 @@ class Like < ApplicationRecord
                 end
             when 'Comment'
                 if self.target.anonymous
-                    noti_hash[:action] = 'anonymous_like_comment'
-                    create_noti_hash[:action] = 'anonymous_like_comment'
+                    # 공개범위에서 익명피드를 제거한 후 글쓴이가 익명댓글을 좋아한 경우 노티 안간다
+                    if !self.target.target.channels.any?{|c| c.name == '익명피드'}
+                        create = false
+                    else
+                        noti_hash[:action] = 'anonymous_like_comment'
+                        create_noti_hash[:action] = 'anonymous_like_comment'
+                    end
                 else
                     # 더 이상 볼 수 없는 경우 노티 안간다
                     if (self.target.target.channels & self.target.author.belonging_channels).empty?
@@ -37,8 +42,12 @@ class Like < ApplicationRecord
                 end
             when 'Reply'
                 if self.target.anonymous
-                    noti_hash[:action] = 'anonymous_like_reply'
-                    create_noti_hash[:action] = 'anonymous_like_reply'
+                    if !self.target.comment.target.channels.any?{|c| c.name == '익명피드'}
+                        create = false
+                    else
+                        noti_hash[:action] = 'anonymous_like_reply'
+                        create_noti_hash[:action] = 'anonymous_like_reply'
+                    end
                 else
                     if (self.target.comment.target.channels & self.target.author.belonging_channels).empty?
                         create = false

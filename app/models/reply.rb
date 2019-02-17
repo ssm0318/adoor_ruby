@@ -26,8 +26,12 @@ class Reply < ApplicationRecord
             # 익명 대댓글인 경우
             if self.anonymous
                 # 댓글 주인에게 노티
-                noti_hash[:action] = 'anonymous_to_comment'
-                create_noti_hash[:action] = 'anonymous_to_comment'
+                if !self.comment.target.channels.any?{|c| c.name == '익명피드'}
+                    create = false
+                else 
+                    noti_hash[:action] = 'anonymous_to_comment'
+                    create_noti_hash[:action] = 'anonymous_to_comment'
+                end
             # if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
             #     # 글 주인에게 노티
             #     noti_hash = {recipient: self.comment.target.author, action: 'anonymous_to_author', origin: origin}
@@ -77,18 +81,20 @@ class Reply < ApplicationRecord
 
         if self.target_author != nil && self.author != self.target_author && self.comment.author != self.target_author
             # target 대댓글 주인에게 노티
-            noti_hash[:action] = 'friend_to_recomment'
-            noti_hash[:recipient_id] = self.target_author_id
-            create_noti_hash[:action] = 'friend_to_recomment'
-            create_noti_hash[:recipient_id] = self.target_author_id
-            if !Notification.where(noti_hash).empty?
-                Notification.where(noti_hash).each do |n|
-                    n.invisible = true
-                    n.read_at = DateTime.now()
-                    n.save(touch: false)
+            if !(origin.target.channels & self.comment.author.belonging_channels).empty?
+                noti_hash[:action] = 'friend_to_recomment'
+                noti_hash[:recipient_id] = self.target_author_id
+                create_noti_hash[:action] = 'friend_to_recomment'
+                create_noti_hash[:recipient_id] = self.target_author_id
+                if !Notification.where(noti_hash).empty?
+                    Notification.where(noti_hash).each do |n|
+                        n.invisible = true
+                        n.read_at = DateTime.now()
+                        n.save(touch: false)
+                    end
                 end
+                Notification.create(create_noti_hash)
             end
-            Notification.create(create_noti_hash)
         end
     end
 
