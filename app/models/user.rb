@@ -88,6 +88,7 @@ class User < ApplicationRecord
   
   # 카카오 로그인
   def self.find_for_oauth(auth, signed_in_resource = nil)
+    # user하고 identity가 nil이 아닐 경우
     identity = Identity.find_for_oauth(auth)
     user = signed_in_resource ? signed_in_resource : identity.user
 
@@ -95,14 +96,15 @@ class User < ApplicationRecord
       email = auth.info.email
       user = User.where(:email => email).first
 
+      # 이미 존재하는 이메일이 아니라면
       unless self.where(email: auth.info.email).exists?
         if user.nil?
           if auth.provider == "kakao"
-            user = User.create(password: Devise.friendly_token[0,20])
-            profile = Profile.find(user.id)
-            profile.profile_pic = auth.info.image.to_s
-            profile.isVerified = true
-            profile.save
+            # https://github.com/shaynekang/omniauth-kakao 참고
+            user = User.create(email: auth.info.email, password: Devise.friendly_token[0,20], username: auth.info.name)
+            puts '============================================================='
+            puts user.errors.full_messsages
+            puts '============================================================='
           end
         end
       end
@@ -116,7 +118,8 @@ class User < ApplicationRecord
   end
 
   def email_required?
-    false
+    # false
+    true
   end
   
   protected
