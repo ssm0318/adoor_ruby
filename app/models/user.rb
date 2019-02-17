@@ -11,10 +11,8 @@ class User < ApplicationRecord
     slug.blank? || username_changed?
   end
   
-  # Include default devise modules. Others available are:
-  # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, :confirmable, :trackable, :omniauthable
 
   validates_presence_of :username
   validates_uniqueness_of :username, :case_sensitive => false
@@ -88,7 +86,38 @@ class User < ApplicationRecord
 
   # reference: http://railscasts.com/episodes/163-self-referential-association
   
-  # BETA: email confirmation 잠깐 해지해놓음!! 베타 이전에 이 부분 다시 주석처리해야 email confirmation 제대로 됨
+  # 카카오 로그인
+  def self.find_for_oauth(auth, signed_in_resource = nil)
+    identity = Identity.find_for_oauth(auth)
+    user = signed_in_resource ? signed_in_resource : identity.user
+
+    if user.nil?
+      email = auth.info.email
+      user = User.where(:email => email).first
+
+      unless self.where(email: auth.info.email).exists?
+        if user.nil?
+          if auth.provider == "kakao"
+            user = User.create(password: Devise.friendly_token[0,20])
+            profile = Profile.find(user.id)
+            profile.profile_pic = auth.info.image.to_s
+            profile.isVerified = true
+            profile.save
+          end
+        end
+      end
+    end
+
+    if identity.user != user
+      identity.user = user
+      identity.save!
+    end
+    user
+  end
+
+  def email_required?
+    false
+  end
   
   protected
   def confirmation_required?
