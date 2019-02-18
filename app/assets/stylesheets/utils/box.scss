@@ -142,6 +142,10 @@ div {
         position: absolute;
         bottom: 16px;
 
+        .drop-down-icon {
+            font-size: 1rem;
+        }
+
         .channels-dropdown-content {
             width: 30%;
             min-width: 100px;
@@ -637,20 +641,46 @@ div {
 }
 //for mobile version
 @media only screen and (max-device-width: 500px) {
+
+    //new post form in frineds feed
+    .tab-content {
+        .new-answer-field {
+            font-size: 1.5rem
+        }
+    }
+
+    .drop-down-icon {
+        font-size: 1.5rem;
+    }
+
+
     .prism-box {
-        zoom: 2.3;
+        zoom: 2;
         margin: 10px 0px;
     
         .prism-box__content {
             padding: 0px 20px;
 
+            .prism-box-custom-question {
+                .question-content {
+                    font-size: 1.8rem;
+                }
+            }
+
+            .answer {
+                font-size: 1.5rem;
+            }
+
+            .date{
+                font-size: 1.3rem;
+            }
         }
     
         .edit-or-delete {
             width: 100px;
         }
     }
-    //new post form in frineds feed
+
     .nav {
         zoom: 2.3;
     }
