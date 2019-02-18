@@ -663,16 +663,26 @@ div {
 
             .prism-box-custom-question {
                 .question-content {
-                    font-size: 1.8rem;
+                    font-size: 2rem;
                 }
             }
 
+            .prism-box-question {
+                .question {
+                    font-size: 2rem;
+                }
+            }
+
+            .prism-box__comment {
+                font-size: 1.8rem;
+            }
+
             .answer {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
 
             .date{
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
         }
     
