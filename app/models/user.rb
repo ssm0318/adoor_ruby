@@ -12,7 +12,7 @@ class User < ApplicationRecord
   end
   
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable, :trackable, :omniauthable
+         :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
 
   validates_presence_of :username
   validates_uniqueness_of :username, :case_sensitive => false
@@ -101,9 +101,9 @@ class User < ApplicationRecord
         if user.nil?
           if auth.provider == "kakao"
             # https://github.com/shaynekang/omniauth-kakao 참고
-            user = User.create(email: auth.info.email, password: Devise.friendly_token[0,20], username: auth.info.name)
+            user = User.create(email: auth.info.email, password: Devise.friendly_token[0,20])
             puts '============================================================='
-            puts user.errors.full_messsages
+            puts user.errors.full_messages
             puts '============================================================='
           end
         end
@@ -118,8 +118,8 @@ class User < ApplicationRecord
   end
 
   def email_required?
-    # false
-    true
+    false
+    # true
   end
   
   protected

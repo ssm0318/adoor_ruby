@@ -21,7 +21,7 @@
           <!--<%= f.input :remember_me, as: :boolean if devise_mapping.rememberable?%>-->
       </div>
       <a href="/users/password/new" class="recover-link">비밀번호를 잊어버리셨나요?</a>
-      <br/>
+      <br/> 
       <br/>
       <div class="form-actions">
         <%= f.button :submit, "로그인", class: "orange-btn" %>
@@ -31,6 +31,7 @@
         <button class = "white-btn">회원가입</button>
       </a>
   </div>
+  <%= render "devise/shared/links" %>
 </div>
 
 
