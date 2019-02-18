@@ -178,6 +178,49 @@
     }
 }
 
+//for mobile version
+@media only screen and (max-device-width: 500px) {
 
+    .user-header #user-profile .image-upload .image-container .edit-profile-img {
+        width: 150px;
+        height: auto;
+        border-radius: 75px;
+    }
+
+    .user-header #user-profile .image-upload .image-container > label {
+        left: 28px;
+        top: 34px;
+    }
+    .user-header #user-profile .image-upload .image-container .camera-icon {
+        font-size: 1.2rem;
+    }
+
+    .user-header #user-profile #profile__content-div {
+        #profile__username-setting-div {
+            #username {
+                font-size: 1.5rem;
+            }
+    
+            #profile__setting #profile__setting-btn {
+                zoom: 1.3;
+            }
+        }
+        
+        #user-message {
+            font-size: 1.3rem;
+        }
+
+        #profile__friends-setting #profile__friends-setting-btn {
+            font-size: 1.3rem;
+        }
+    }
+
+    .user-header .user-header__tab .user-header__tab-el-left,
+    .user-header .user-header__tab .user-header__tab-el-right {
+        a{
+            font-size: 1.3rem;
+        }
+    }
+}
 
 

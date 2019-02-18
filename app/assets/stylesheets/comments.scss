@@ -105,3 +105,57 @@
     }
 
 }
+
+
+//for mobile version
+@media only screen and (max-device-width: 500px) { 
+
+    .friend-comments-nav, .anonymous-comments-nav {
+        font-size: 1.1rem;
+    
+    }
+    .comment, .comment-indent, .reply {
+
+        font-size: 1.3rem; 
+    
+        .comment-content {
+            grid-template-columns: 30px auto 50px;
+    
+            .user-profile {
+                zoom: 1.2;
+                
+            }
+    
+            .lock-icon {
+                width: 20px;
+                height: auto;
+    
+            }
+    
+            .username {
+                font-size: 1.3rem;
+    
+            }
+
+            .likes {
+                .num-of-likes {
+                    font-size: 1.1rem;
+                    padding-top: 3px;
+
+                }
+
+                .btn-comment-like {
+                    zoom: 1.3;
+                    padding-top: 2px;
+                
+                }
+            }
+        }
+    
+        .comment-info {
+            font-size: 1rem;
+            margin-left: 4px;
+        }
+
+    }
+}
