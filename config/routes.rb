@@ -74,6 +74,7 @@ Rails.application.routes.draw do
   put '/users/:id/image_upload' => 'users#image_upload', as: :image_upload
   # put '/users/:id/upload_image' => 'users#update', as: :upload_image
   post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend # get?
+  post '/users/:id/delete_friend' => 'users#delete_friend', as: :delete_friend
   # post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request_send # get?
   
   # FriendRequest

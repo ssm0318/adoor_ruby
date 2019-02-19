@@ -47,7 +47,7 @@
                             <%= link_to "친구요청", friend_request_create_path(user.id), method: :post, id: "profile__friends-setting-btn" %>
                         <% end %>
                     <% else %>
-                        <%= link_to "친구 끊기", add_friend_path(user.id), method: :post, id: "profile__friends-setting-btn" %>
+                        <%= link_to "친구 끊기", delete_friend_path(user.id), method: :post, data: { confirm: '정말 친구를 끊으시겠습니까?' }, id: "profile__friends-setting-btn" %>
                     <% end %>
                 <% end %>
             </div>
