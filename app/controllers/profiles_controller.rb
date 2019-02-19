@@ -26,7 +26,7 @@ class ProfilesController < ApplicationController
 
         @drawers = []
         drawers.each do |drawer|
-            if drawer.is_a? Question
+            if drawer.target.is_a? Question
                 @drawers.push(drawer)
             else
                 author = drawer.target.author
