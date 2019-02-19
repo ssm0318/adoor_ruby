@@ -14,14 +14,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
 
-  validates_presence_of :username
-  validates_uniqueness_of :username, :case_sensitive => false
+  # validates_presence_of :username
+  # validates_uniqueness_of :username, :case_sensitive => false
 
-  validates :username, format: { 
-    with: /\A[^.][a-zA-Z0-9._\s].*[^.]$\z/i, 
-    message: "사용자 이름에는 알파벳, 숫자, 밑줄(_) 및 마침표(.)만 사용할 수 있습니다.\n첫 글자와 마지막 글자는 마침표(.)가 될 수 없습니다." }, 
-    length: { in: 3..20 
-  }
+  # validates :username, format: { 
+  #   with: /\A[^.][a-zA-Z0-9._\s].*[^.]$\z/i, 
+  #   message: "사용자 이름에는 알파벳, 숫자, 밑줄(_) 및 마침표(.)만 사용할 수 있습니다.\n첫 글자와 마지막 글자는 마침표(.)가 될 수 없습니다." }, 
+  #   length: { in: 3..20 
+  # }
 
   after_create :add_default_role, :add_default_image, :add_default_channels
 
@@ -101,14 +101,15 @@ class User < ApplicationRecord
         if user.nil?
           if auth.provider == "kakao"
             # https://github.com/shaynekang/omniauth-kakao 참고
-            user = User.create(email: auth.info.email, password: Devise.friendly_token[0,20])
-            puts '============================================================='
+            # user = User.create(email: auth.info.email, password: Devise.friendly_token[0,20])
+            user = User.create(password: Devise.friendly_token[0,20])
+            puts '====================================================='
             puts user.errors.full_messages
-            puts '============================================================='
+            puts '====================================================='
           end
         end
       end
-    end
+    end 
 
     if identity.user != user
       identity.user = user

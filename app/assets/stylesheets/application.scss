@@ -14,6 +14,16 @@
  *= require_self
  */
 
+.modal {
+    margin-top: 90px;
+}
+
+.modal-body {
+    padding: 25px;
+    text-align: left;
+    font-size: 14px;
+}
+
 .flash.alert:empty {
     display: none;
 }
@@ -44,6 +54,7 @@
 
 html {
     font-size: 16px;
+    // height: 100%;
 }
 
  .flash {

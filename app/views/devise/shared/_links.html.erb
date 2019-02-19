@@ -5,7 +5,7 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "#{OmniAuth::Utils.camelize(provider)} 계정으로 로그인", omniauth_authorize_path(resource_name, provider) %><br />
+    <%= link_to image_tag("icons/kakao.png"), omniauth_authorize_path(resource_name, provider) %><br />
   <% end -%>
 <% end -%>
 
