@@ -114,6 +114,10 @@
         font-size: 1.1rem;
     
     }
+
+    .comment .comment-content .comment-text, .comment-indent .comment-content .comment-text, .reply .comment-content .comment-text {
+        line-height: 4rem;
+    }
     .comment, .comment-indent, .reply {
 
         font-size: 1.3rem; 
