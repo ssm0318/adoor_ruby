@@ -26,8 +26,10 @@ class Reply < ApplicationRecord
             # 익명 대댓글인 경우
             if self.anonymous
                 # 댓글 주인에게 노티
-                if !self.comment.target.channels.any?{|c| c.name == '익명피드'}
-                    create = false
+                if !self.comment.target.is_a? Announcement
+                    if !self.comment.target.channels.any?{|c| c.name == '익명피드'}
+                        create = false
+                    end
                 else 
                     noti_hash[:action] = 'anonymous_to_comment'
                     create_noti_hash[:action] = 'anonymous_to_comment'
