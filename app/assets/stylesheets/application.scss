@@ -14,6 +14,18 @@
  *= require_self
  */
 
+.agreement-container {
+    width: 90%;
+
+    h3 {
+        font-size: 60px;
+    }
+
+    p {
+        font-size: 30px;
+    }
+}
+
 .modal {
     margin-top: 90px;
 }
@@ -22,6 +34,10 @@
     padding: 25px;
     text-align: left;
     font-size: 14px;
+
+    p {
+        font-size: 35px;
+    }
 }
 
 .flash.alert:empty {
@@ -456,6 +472,13 @@ div.background {
     
     .inner-container {
         width: 100%;
+
+        .prism-title {
+            h1 {
+                font-size: 65px;
+                font-weight: bold;
+            }
+        }
     }
 
     #prism-container {
@@ -650,13 +673,3 @@ div.background {
         }
     }
   }
-  
-@media only screen and (max-device-width: 500px) {
-    p {
-        font-size: 35px;
-    }
-
-    h3 {
-        font-size: 60px;
-    }
-}

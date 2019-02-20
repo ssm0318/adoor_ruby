@@ -119,6 +119,29 @@
         .username-help {
             font-size: 25px;
         }
+
+        .form-inputs {
+            font-size: 40px;
+            text-decoration: none;
+            text-align: center;
+            color: black; 
+    
+            .error {
+                font-size: 40px;
+            }
+        }
+    
+        .form-inputs input[type=date], .form-inputs input[type=text] {
+            margin-bottom: 30px;
+            height: auto;
+            border: 2px solid #dddddd;
+            border-radius: 10px;
+            -webkit-appearance: none;
+            outline: none;
+            font-size: 40px;
+            color: #313131;
+            padding: 0;
+        } 
     }
 
     .profile-content-box label {
@@ -127,28 +150,6 @@
 
     .error_notification {
         display: none;
-    }
-    .form-inputs {
-        font-size: 40px;
-        text-decoration: none;
-        text-align: center;
-        color: black; 
-
-        .error {
-            font-size: 40px;
-        }
-    }
-
-    .form-inputs input[type=date], .form-inputs input[type=text] {
-        margin-bottom: 30px;
-        height: auto;
-        border: 2px solid #dddddd;
-        border-radius: 10px;
-        -webkit-appearance: none;
-        outline: none;
-        font-size: 40px;
-        color: #313131;
-        padding: 0;
     }
 
     .profile-button {
