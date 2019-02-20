@@ -1,5 +1,6 @@
 class RepliesController < ApplicationController
     before_action :set_reply, only: [:destroy]
+    before_action :check_confirmation, only: [:create]
 
     def create
         secret = params[:secret].nil? ? false : params[:secret]
@@ -28,5 +29,11 @@ class RepliesController < ApplicationController
     private
         def set_reply
             @reply = Reply.find(params[:id])
+        end
+
+        def check_confirmation
+            if current_user.confirmed_at.nil? && Identity.where(user_id: current_user.id).empty?
+                redirect_to require_confirmation_url
+            end
         end
 end

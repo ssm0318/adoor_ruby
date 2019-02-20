@@ -1,47 +1,57 @@
 <div class="profile-content-box">
-
+ 
 <%= error %>
+
 <%= form_for user, url: edit_user_profile_url(user.slug) do |u| %>
-    <div>
-        <% u.hidden_field :id, :value => current_user.id %>
-        <%= u.label "프로필 사진 변경" %><br>
-        <p class="username-help">사진을 클릭해보세요.</p>
-        <div class = "user-header" >
-            <div id = "user-profile" >  
-                <div class="image-upload">
-                    <div class="image-container">
-                        <%= image_tag current_user.image.url, class: "edit-profile-img", id: "edit-profile-img" %>
-                        <%= u.file_field :image, id: "file-input", accept: 'image/png,image/jpeg,image/jpg', "data-url" => image_upload_path(current_user.slug) %>
-                        <label for="file-input">
-                            <span class="camera-icon">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-camera fa-3x" aria-hidden="true"></i><br>사진 올리기</span>
-                        </label>
-                    </div>
-                </div>    
-            </div>
+    <% u.hidden_field :id, :value => current_user.id %>
+    <%= u.label "프로필 사진 변경" %><br>
+    <p class="username-help">사진을 클릭해보세요.</p>
+    <div class = "user-header" >
+        <div id = "user-profile" >  
+            <div class="image-upload">
+                <div class="image-container"> 
+                    <%= image_tag current_user.image.url, class: "edit-profile-img", id: "edit-profile-img" %>
+                    <%= u.file_field :image, id: "file-input", accept: 'image/png,image/jpeg,image/jpg', "data-url" => image_upload_path(current_user.slug) %>
+                    <label for="file-input">
+                        <span class="camera-icon">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-camera fa-3x" aria-hidden="true"></i><br>사진 올리기</span>
+                    </label>
+                </div>
+            </div>    
         </div>
-        <div>
-            <%= u.label "사용자명 (3~20글자)*" %><br>
-            <p class="username-help">사용자 이름에는 알파벳, 숫자, 밑줄(_) 및 마침표(.)만 사용할 수 있습니다.<br>
-            첫 글자와 마지막 글자는 마침표(.)가 될 수 없습니다.</p>
+    </div>
+    <div class="mobile-spacing">
+        <br>
+    </div>
+    <div> 
+        <%= u.label "사용자명 (3~20글자)*" %><br>
+        <p class="username-help">사용자 이름에는 알파벳, 숫자, 밑줄(_) 및 마침표(.)만 사용할 수 있습니다.<br>
+        첫 글자와 마지막 글자는 마침표(.)가 될 수 없습니다.</p>
+        <div class="form-inputs">
             <%= u.text_field :username, :required => true, :pattern => '[a-zA-Z0-9._]{3,20}', 
             :oninvalid => "setCustomValidity('사용자 이름에는 알파벳, 숫자, 밑줄(_) 및 마침표(.)만 사용할 수 있습니다.\n첫 글자와 마지막 글자는 마침표(.)가 될 수 없습니다.')", autocomplete: "off" %>
         </div>
-        <div>
-            <%= u.label "이메일*" %>
+    </div>
+    <div>
+        <%= u.label "이메일*" %>
+        <div class="form-inputs">
             <%= u.text_field :email, :required => true %>
         </div>
-        <div>
-            <%= u.label "생년월일" %>
+    </div>
+    <div>
+        <%= u.label "생년월일" %>
+        <div class="form-inputs">
             <%= u.date_field :date_of_birth %>
         </div>
-        <div>
-            <%= u.label "한 줄 소개" %> 
-            <p class="username-help">친구가 아닌 사용자들에게도 공개됩니다.</p>
-            <%= u.text_field :profile, autocomplete: "off", maxlength: "50" %>
-        </div>        
-    <br>
-        <%= u.submit "수정하기", class: "profile-button" %>
     </div>
+    <div>
+        <%= u.label "한 줄 소개" %> 
+        <p class="username-help">친구가 아닌 사용자들에게도 공개됩니다.</p>
+        <div class="form-inputs">
+            <%= u.text_field :profile, autocomplete: "off", maxlength: "50" %>
+        </div>
+    </div>        
+    <br>
+    <%= u.submit "수정하기", class: "profile-button" %>
 <% end %>
 
 <br>
@@ -50,6 +60,9 @@
     target: ".bd-example-modal-lg"
 }, class: :"account-delete-btn" %>
 <br>
+<div class="mobile-spacing">
+    <br>
+</div>
 <%= link_to "계정 삭제하기", user_registration_path, method: :delete, data: { confirm: '정말 계정을 삭제하시겠습니까? 계정 삭제 후에는 다시 복구할 수 없습니다.' }, class: :"account-delete-btn" %>
 
 <%= render 'layouts/privacy_agreement' %>   <br>

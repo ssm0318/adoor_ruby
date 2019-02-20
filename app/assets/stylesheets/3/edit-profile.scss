@@ -106,3 +106,86 @@
         text-decoration: none;
     }
 }
+
+.mobile-spacing {
+    display: none;       
+}
+
+//for mobile version
+@media only screen and (max-device-width: 500px) {
+    .profile-content-box {
+        width: 90%;
+
+        .username-help {
+            font-size: 25px;
+        }
+    }
+
+    .profile-content-box label {
+        font-size: 35px;
+    }
+
+    .error_notification {
+        display: none;
+    }
+    .form-inputs {
+        font-size: 40px;
+        text-decoration: none;
+        text-align: center;
+        color: black; 
+
+        .error {
+            font-size: 40px;
+        }
+    }
+
+    .form-inputs input[type=date], .form-inputs input[type=text] {
+        margin-bottom: 30px;
+        height: auto;
+        border: 2px solid #dddddd;
+        border-radius: 10px;
+        -webkit-appearance: none;
+        outline: none;
+        font-size: 40px;
+        color: #313131;
+        padding: 0;
+    }
+
+    .profile-button {
+        width: 95%;
+        height: auto;
+        font-size: 40px;
+        padding: 40px 0;
+        border-radius: 70px;
+        margin-bottom: 30px;
+    }
+
+    .privacy-agreement-btn {
+        float: right;
+        font-size: 30px;
+        color: gray;
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+        &:hover {
+            color: #F48462;
+            text-decoration: none;
+        }
+    }
+
+    .account-delete-btn {
+        float: right;
+        font-size: 30px;
+        color: gray;
+        font-weight: normal;
+        // margin-top: 50px;
+        &:hover {
+            color: #F48462;
+            text-decoration: none;
+        }
+    }
+
+    .mobile-spacing {
+        display: block;
+    }
+}

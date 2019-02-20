@@ -651,3 +651,12 @@ div.background {
     }
   }
   
+@media only screen and (max-device-width: 500px) {
+    p {
+        font-size: 35px;
+    }
+
+    h3 {
+        font-size: 60px;
+    }
+}

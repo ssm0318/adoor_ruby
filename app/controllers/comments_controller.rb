@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+    before_action :check_confirmation, only: [:create]
+
     def create
         if params[:secret].nil?
             secret = false
@@ -27,4 +29,12 @@ class CommentsController < ApplicationController
             
         }
     end
+
+    private
+
+        def check_confirmation
+            if current_user.confirmed_at.nil? && Identity.where(user_id: current_user.id).empty?
+                redirect_to require_confirmation_url
+            end
+        end
 end
