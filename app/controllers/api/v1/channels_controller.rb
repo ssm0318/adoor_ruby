@@ -12,8 +12,7 @@ class Api::V1::ChannelsController < ApplicationController
     else
       @channel = Channel.create(user_id: current_user.id, name: params[:name])
 
-      # render json: {status: 'SUCCESS', message:'Channel created', data: {channel_id: c.id}}, status: :ok
-      render :channel, locals: { channel: @channel }
+      render :channel, locals: { channel: @channel } 
     end
   end
 
