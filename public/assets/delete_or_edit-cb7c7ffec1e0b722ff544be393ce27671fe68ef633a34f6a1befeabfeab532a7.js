@@ -1,0 +1,1 @@
+$("html").on("click",function(e){var t=$(e.target);t.hasClass("btn-read-more")||t.hasClass("edit-or-delete")||t.hasClass("edit-or-delete-el")||$(".edit-or-delete").hide()}),$(document).on("click",".btn-read-more",function(){$(this).siblings(".edit-or-delete").is(":visible")?$(".edit-or-delete").hide():($(".edit-or-delete").hide(),$(this).siblings(".edit-or-delete").show())});

@@ -1,0 +1,1 @@
+function check_channels(c){console.log("hihi"),c.click(function(){if(checked=$(this).siblings(".channels").find("input[type=checkbox]:checked").length,!checked)return alert("\uacf5\uac1c\uadf8\ub8f9\uc740 \ud558\ub098 \uc774\uc0c1 \uc120\ud0dd\ud574\uc57c \ud569\ub2c8\ub2e4!."),!1})}

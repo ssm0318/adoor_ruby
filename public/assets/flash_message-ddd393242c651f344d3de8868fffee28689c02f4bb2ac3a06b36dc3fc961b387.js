@@ -1,0 +1,1 @@
+function flash_message(e){console.log(e);var s=$(`<div class="flash-message">${e}</div>`);$("#flash-messages").append(s),setTimeout(function(){s.fadeOut(400)},1e3),setTimeout(function(){s.remove()},2e3)}
