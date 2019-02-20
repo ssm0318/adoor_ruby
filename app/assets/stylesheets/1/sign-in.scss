@@ -1,6 +1,7 @@
 .sign-box {
-    margin-top: 100px;
+    margin-top: 30px;
     width: 100%;
+    margin-bottom: 40px;
 }
 
 .sign-title {
@@ -14,7 +15,7 @@
     font-size: 25px;
     text-align: center;
     padding-bottom: 10px;
-    color: #F48462;
+    color: #F48462; 
 }
 
 .sign-content-box {
@@ -34,8 +35,9 @@
     margin-bottom: 15px;
     width: 350px;
     padding: 10px;
-    border: none;
-    border-radius: 0;
+    // border: none;
+    border: 0.5px solid #dddddd;
+    border-radius: 10px;
     -webkit-appearance: none;
     outline: none;
     font-size: 14px;
@@ -45,7 +47,6 @@
 .form-input {
     font-size: 40px;
     margin-bottom: 10px;
-    
 }
 
 .orange-btn {
@@ -57,15 +58,16 @@
     color: white;
     font-size: 20px;
     text-align: center;
-    margin-bottom: 10px;
     border: none;
     cursor: pointer;
+    display: table-cell;
     &:focus {
         outline: none;
     }
 }
 
 .white-btn {
+    margin-bottom: 10px;    
     background-color: white;
     border-radius: 30px;
     border: 0.5px solid #dddddd;
@@ -78,6 +80,22 @@
     &:focus {
         outline: none;
     }
+}
+
+.kakao-btn {
+    margin: 12px 0px 30px 0px;
+    // background-color: #FFEB00;
+    // border-radius: 30px;
+    // border: 0.5px solid #dddddd;
+    // width: 300px;
+    // height: 50px;
+    // color: #3C1E1E
+    // font-size: 20px;
+    // text-align: center;
+    // cursor: pointer;
+    // &:focus {
+    //     outline: none;
+    // }
 }
 
 //for mobile version

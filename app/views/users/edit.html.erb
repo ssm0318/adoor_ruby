@@ -3,4 +3,15 @@
 <h1 class="sign-title">내 정보 수정하기</h1>
  
 <%= render 'form', user: @user, error: @error %>
+
+<br>
+<%= link_to "계정 삭제하기", user_registration_path, method: :delete, data: { confirm: '정말 계정을 삭제하시겠습니까? 계정 삭제 후에는 다시 복구할 수 없습니다.' }, class: :"account-delete-btn" %>
+<br>
+<%= link_to "개인정보처리방침", '/', data: { 
+    toggle: "modal",
+    target: ".bd-example-modal-lg"
+}, class: :"account-delete-btn" %>
+
+<%= render 'layouts/privacy_agreement' %>    
 </div>
+

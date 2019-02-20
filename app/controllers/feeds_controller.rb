@@ -1,5 +1,6 @@
 class FeedsController < ApplicationController
     before_action :authenticate_user!
+    before_action :check_username
     
     def general
         @feeds = Answer.channel_name("익명피드").anonymous(current_user.id) + Post.channel_name("익명피드").anonymous(current_user.id) + CustomQuestion.channel_name("익명피드").anonymous(current_user.id)
@@ -20,6 +21,13 @@ class FeedsController < ApplicationController
         @feeds = @feeds.paginate(:page => params[:page], :per_page => 7)
 
         render 'friends'
+    end
+
+    private
+    def check_username
+        if current_user.username.nil?
+            redirect_to edit_user_profile_path(current_user)
+        end
     end
 end
   

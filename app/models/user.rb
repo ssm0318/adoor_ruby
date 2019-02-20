@@ -11,19 +11,17 @@ class User < ApplicationRecord
     slug.blank? || username_changed?
   end
   
-  # Include default devise modules. Others available are:
-  # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
 
-  validates_presence_of :username
-  validates_uniqueness_of :username, :case_sensitive => false
+  # validates_presence_of :username
+  # validates_uniqueness_of :username, :case_sensitive => false
 
-  validates :username, format: { 
-    with: /\A[^.][a-zA-Z0-9._\s].*[^.]$\z/i, 
-    message: "사용자 이름에는 알파벳, 숫자, 밑줄(_) 및 마침표(.)만 사용할 수 있습니다.\n첫 글자와 마지막 글자는 마침표(.)가 될 수 없습니다." }, 
-    length: { in: 3..20 
-  }
+  # validates :username, format: { 
+  #   with: /\A[^.][a-zA-Z0-9._\s].*[^.]$\z/i, 
+  #   message: "사용자 이름에는 알파벳, 숫자, 밑줄(_) 및 마침표(.)만 사용할 수 있습니다.\n첫 글자와 마지막 글자는 마침표(.)가 될 수 없습니다." }, 
+  #   length: { in: 3..20 
+  # }
 
   after_create :add_default_role, :add_default_image, :add_default_channels
 
@@ -88,7 +86,42 @@ class User < ApplicationRecord
 
   # reference: http://railscasts.com/episodes/163-self-referential-association
   
-  # BETA: email confirmation 잠깐 해지해놓음!! 베타 이전에 이 부분 다시 주석처리해야 email confirmation 제대로 됨
+  # 카카오 로그인
+  def self.find_for_oauth(auth, signed_in_resource = nil)
+    # user하고 identity가 nil이 아닐 경우
+    identity = Identity.find_for_oauth(auth)
+    user = signed_in_resource ? signed_in_resource : identity.user
+
+    if user.nil?
+      email = auth.info.email
+      user = User.where(:email => email).first
+
+      # 이미 존재하는 이메일이 아니라면
+      unless self.where(email: auth.info.email).exists?
+        if user.nil?
+          if auth.provider == "kakao"
+            # https://github.com/shaynekang/omniauth-kakao 참고
+            # user = User.create(email: auth.info.email, password: Devise.friendly_token[0,20])
+            user = User.create(password: Devise.friendly_token[0,20])
+            puts '====================================================='
+            puts user.errors.full_messages
+            puts '====================================================='
+          end
+        end
+      end
+    end 
+
+    if identity.user != user
+      identity.user = user
+      identity.save!
+    end
+    user
+  end
+
+  def email_required?
+    false
+    # true
+  end
   
   protected
   def confirmation_required?
