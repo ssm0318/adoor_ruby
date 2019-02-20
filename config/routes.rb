@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # Application
   get '/unread' => 'application#unread'
   get '/introduction' => 'application#intro', as: :introduction
+  get '/require_confirmation' => 'application#require_confirmation', as: :require_confirmation
 
   # Answer
   resources :answers, except: [:new]

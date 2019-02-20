@@ -128,7 +128,8 @@ class User < ApplicationRecord
     if Rails.env.development?
       false
     elsif Rails.env.production?
-      true
+      # true
+      false
     end
   end
 

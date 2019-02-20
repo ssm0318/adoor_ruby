@@ -3,6 +3,7 @@ class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
     before_action :check_mine, only: [:edit, :update, :destroy]
     before_action :check_accessibility, only: [:show]
+    before_action :check_confirmation, only: [:create]
     
     def create
         @post = Post.create(post_params)
@@ -127,5 +128,11 @@ class PostsController < ApplicationController
 
         def ajax_request?
             (defined? request) && request.xhr?
+        end
+
+        def check_confirmation
+            if current_user.confirmed_at.nil? && Identity.where(user_id: current_user.id).empty?
+                redirect_to require_confirmation_url
+            end
         end
 end
