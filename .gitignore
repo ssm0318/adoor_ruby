@@ -32,4 +32,4 @@
 # Ignore application configuration
 /config/application.yml
 
-/yarn.lock
+yarn.lock
