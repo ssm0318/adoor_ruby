@@ -4,5 +4,6 @@ json.call(
   :author_id,
   :question_id,
   :content,
-  :tag_string
+  :tag_string,
+  :created_at
 )

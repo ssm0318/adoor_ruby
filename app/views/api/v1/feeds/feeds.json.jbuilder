@@ -3,3 +3,4 @@ json.data do
     json.partial! 'api/v1/feeds/feed', feed: feed
   end
 end
+ 

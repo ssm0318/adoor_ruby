@@ -36,12 +36,10 @@
 
           <div class="form-actions">
             <%= f.button :submit, "회원가입", class: "orange-btn" %>
-          </div>
+          </div><br>
           <%- resource_class.omniauth_providers.each do |provider| %>
-            <div class="kakao-btn">
-              <%= link_to image_tag("icons/kakao.png"), omniauth_authorize_path(resource_name, provider) %><br>
-            </div>
-          <% end -%>
+            <%= link_to image_tag("icons/kakao.png", class: "kakao-btn"), omniauth_authorize_path(resource_name, provider) %>
+          <% end -%><br>
         <% end %>
         </div>
       </div>
@@ -77,14 +75,16 @@
       <div class="form-actions">
         <%= f.button :submit, "로그인", class: "white-btn" %>
       </div>
+      <div class="form-actions">
+        <input type="button" value="회원가입" class="orange-btn" data-toggle="modal" data-target="#modalRegisterForm"><br>
+      </div>
     <% end %>
-      <a href="" class="orange-btn btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm">회원가입</a><br>
       <%= link_to "비밀번호를 잊어버리셨나요?", new_password_path(resource_name), class: "recover-link" %><br>
       <%= link_to "이메일 인증 메일을 받지 못하셨나요?", new_confirmation_path(resource_name), class: "recover-link" %><br><br>
 
       <%- resource_class.omniauth_providers.each do |provider| %>
-        <%= link_to image_tag("icons/kakao.png"), omniauth_authorize_path(resource_name, provider), class: "kakao-btn" %><br />
-      <% end -%>
+          <%= link_to image_tag("icons/kakao.png", class: "kakao-btn"), omniauth_authorize_path(resource_name, provider) %>
+      <% end -%><br>
       <a href='' data-toggle="modal" data-target=".bd-example-modal-lg" class="recover-link">
         개인정보처리방침
       </a>

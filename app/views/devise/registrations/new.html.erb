@@ -27,15 +27,13 @@
       <%= f.button :submit, "회원가입", class: "orange-btn" %>
     </div>
     <%- resource_class.omniauth_providers.each do |provider| %>
-      <div class="kakao-btn">
-        <%= link_to image_tag("icons/kakao.png"), omniauth_authorize_path(resource_name, provider) %><br>
-      </div>
+      <%= link_to image_tag("icons/kakao.png", class: "kakao-btn"), omniauth_authorize_path(resource_name, provider) %>
+    <% end -%><br>
 
-      <a href='' data-toggle="modal" data-target=".bd-example-modal-lg" class="recover-link">
-        개인정보처리방침
-      </a>
-      <%= render 'layouts/privacy_agreement' %>
-    <% end -%>
+    <a href='' data-toggle="modal" data-target=".bd-example-modal-lg" class="recover-link">
+      개인정보처리방침
+    </a>
+    <%= render 'layouts/privacy_agreement' %>
   <% end %>
   </div>
 </div>

@@ -37,7 +37,7 @@
         <div>
             <%= u.label "한 줄 소개" %> 
             <p class="username-help">친구가 아닌 사용자들에게도 공개됩니다.</p>
-            <%= u.text_field :profile, id: "edit-profile-message", autocomplete: "off", maxlength: "50" %>
+            <%= u.text_field :profile, autocomplete: "off", maxlength: "50" %>
         </div>        
     <br>
         <%= u.submit "수정하기", class: "profile-button" %>
