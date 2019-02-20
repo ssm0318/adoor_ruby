@@ -94,3 +94,15 @@
         text-decoration: none;
     }
 }
+
+.privacy-agreement-btn {
+    float: left;
+    font-size: 13px;
+    color: gray;
+    font-weight: normal;
+    // margin-top: 20px;
+    &:hover {
+        color: #F48462;
+        text-decoration: none;
+    }
+}
