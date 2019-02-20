@@ -60,6 +60,7 @@
     text-align: center;
     border: none;
     cursor: pointer;
+    display: table-cell;
     &:focus {
         outline: none;
     }

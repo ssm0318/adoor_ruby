@@ -78,9 +78,7 @@
         <%= f.button :submit, "로그인", class: "white-btn" %>
       </div>
     <% end %>
-      <div class="text-center">
-        <a href="" class="orange-btn btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm">회원가입</a>
-      </div>
+      <a href="" class="orange-btn btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm">회원가입</a><br>
       <%= link_to "비밀번호를 잊어버리셨나요?", new_password_path(resource_name), class: "recover-link" %><br>
       <%= link_to "이메일 인증 메일을 받지 못하셨나요?", new_confirmation_path(resource_name), class: "recover-link" %><br><br>
 
