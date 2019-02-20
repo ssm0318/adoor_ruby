@@ -1,48 +1,40 @@
 <div class="sign-box">
-<h1 class="sign-title">회원가입</h1>
+  <h1 class="sign-title">회원가입</h1>
+  <div class="sign-content-box" align="center">
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+    <div class="recover-link" style ="color: #F48462;
+      padding-bottom: 10px;">
+      회원가입 후 이메일 인증이 진행됩니다.
+      </div>
+    <div class="form-inputs">
+      <%= f.input :email,
+                  required: true,
+                  autofocus: true ,
+                  input_html: { autocomplete: "email" },
+                  class: "form-input",
+                  placeholder: " 이메일",
+                  :label => false%>
+      <%= f.input :password,
+                  required: true,
+                  input_html: { autocomplete: "new-password" },
+                  class: "form-input",
+                  placeholder: " 비밀번호",
+                  :label => false %>
+    </div><br>
 
-<div class="sign-content-box" align="center">
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
-  <div class="recover-link" style ="color: #F48462;
-    padding-bottom: 10px;">
-    회원가입 후 기입하신 메일로 가입 인증 메일이 보내집니다<br>
-    자주 사용하는 메일을 기입해주세요
+    <div class="form-actions">
+      <%= f.button :submit, "회원가입", class: "orange-btn" %>
     </div>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true ,
-                input_html: { autocomplete: "email" },
-                class: "form-input",
-                placeholder: " 이메일",
-                :label => false%>
-    <%= f.input :password,
-                required: true,
-                input_html: { autocomplete: "new-password" },
-                class: "form-input",
-                placeholder: " 비밀번호",
-                :label => false %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" },
-                class: "form-input",
-                placeholder: " 비밀번호 확인",
-                :label => false %>
-    <%= f.input :username,
-                required: true,
-                # :pattern => '[a-zA-Z0-9._]{3,20}', 
-                :pattern => ' /\A[^.][a-zA-Z0-9._\s].*[^.]$\z/i',
-                :oninvalid => "setCustomValidity('사용자 이름에는 알파벳, 숫자, 밑줄(_) 및 마침표(.)만 사용할 수 있습니다.\n \n 첫 글자와 마지막 글자는 마침표(.)가 될 수 없습니다.')", 
-                autofocus: true,
-                class: "form-input", 
-                placeholder: " 사용자명 (3~20자, 알파벳, 숫자, 밑줄(_), 마침표(.)만 사용)", 
-                :label => false, 
-                maxlength: "20" %>
-  </div>
-  <br/>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <%= link_to image_tag("icons/kakao.png", class: "kakao-btn"), omniauth_authorize_path(resource_name, provider) %>
+    <% end -%><br>
 
-  <div class="form-actions">
-    <%= f.button :submit, "회원가입", class: "orange-btn" %>
+    <a href='' data-toggle="modal" data-target=".bd-example-modal-lg" class="recover-link">
+      개인정보처리방침
+    </a>
+    <%= render 'layouts/privacy_agreement' %>
+  <% end %>
   </div>
-<% end %>
+</div>
+

@@ -1,8 +1,8 @@
 <div>
-    친구 <%=friends_count%>명 / 익명 <%=anonymous_count %>명이 좋아요를 눌렀어요.
+    익명 <%=anonymous_count%>명 외 <%=friends_count%>명이 좋아요를 눌렀어요.
     <hr>
     <% users.each do |user| %>
-        <div>
+        <div style="margin-bottom: 10px;">
             <%= link_to image_tag(user[:image_url], :style => "height:40px; width:40px; border-radius:20px; margin-right: 5px;"), user[:profile_path] %>
             <%= link_to user[:username], user[:profile_path], class: "username" %>
         </div>    

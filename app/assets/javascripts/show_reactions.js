@@ -1,6 +1,13 @@
 function show_likes(event) {
     event.stopImmediatePropagation();
     form = $(this)
+
+    //익명이면 보이지 않게 하기
+    if(form.parents(".anonymous-comments").length > 0) {
+        $(document).one('click', ".num-of-likes", show_likes)
+        return;
+    }
+
     $.ajax({
         type: "GET",
         url: form.attr('data-url'),

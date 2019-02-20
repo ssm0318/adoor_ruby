@@ -15,7 +15,7 @@ Devise.setup do |config|
   # config.parent_controller = 'DeviseController'
 
   # config.omniauth :google_oauth2, ENV["Google_Key"], ENV["Google_Secret"]
-  # config.omniauth :kakao, ENV["Kakao_Key"], :redirect_path => "/users/auth/kakao/callback"
+  config.omniauth :kakao, ENV["Kakao_Key"], :redirect_path => "/users/auth/kakao/callback" 
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -288,7 +288,7 @@ Devise.setup do |config|
   #
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
-  # config.omniauth_path_prefix = '/my_engine/users/auth'
+  config.omniauth_path_prefix = '/users/auth'
 
   # ==> Turbolinks configuration
   # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make redirection work correctly:

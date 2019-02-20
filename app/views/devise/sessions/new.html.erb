@@ -1,8 +1,59 @@
-<div class="sign-box">
-  <h1 class="sign-title">로그인</h1>
 
+
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="sign-box">
+        <h1 class="sign-title">회원가입</h1>
+        <div class="sign-content-box" align="center">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
+          <div class="recover-link" style ="color: #F48462;
+            padding-bottom: 10px;">
+            회원가입 후 이메일 인증이 진행됩니다.
+            </div>
+          <div class="form-inputs">
+            <%= f.input :email,
+                        required: true,
+                        autofocus: true ,
+                        input_html: { autocomplete: "email" },
+                        class: "form-input",
+                        placeholder: " 이메일",
+                        :label => false%>
+            <%= f.input :password,
+                        required: true,
+                        input_html: { autocomplete: "new-password" },
+                        class: "form-input",
+                        placeholder: " 비밀번호",
+                        :label => false %>
+          </div><br>
+
+          <div class="form-actions">
+            <%= f.button :submit, "회원가입", class: "orange-btn" %>
+          </div><br>
+          <%- resource_class.omniauth_providers.each do |provider| %>
+            <%= link_to image_tag("icons/kakao.png", class: "kakao-btn"), omniauth_authorize_path(resource_name, provider) %>
+          <% end -%><br>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="sign-box">
+<br>
+  <h1 class="sign-title">로그인</h1>
   <div class="sign-content-box" align="center">
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
       <div class="form-inputs">
           <%= f.input :email,
                       required: false,
@@ -20,16 +71,24 @@
           <!--remember me. 디자인 적용을 못해서 뺌-->
           <!--<%= f.input :remember_me, as: :boolean if devise_mapping.rememberable?%>-->
       </div>
-      <a href="/users/password/new" class="recover-link">비밀번호를 잊어버리셨나요?</a>
-      <br/>
-      <br/>
+      
       <div class="form-actions">
-        <%= f.button :submit, "로그인", class: "orange-btn" %>
+        <%= f.button :submit, "로그인", class: "white-btn" %>
+      </div>
+      <div class="form-actions">
+        <input type="button" value="회원가입" class="orange-btn" data-toggle="modal" data-target="#modalRegisterForm"><br>
       </div>
     <% end %>
-      <a href="/users/sign_up">
-        <button class = "white-btn">회원가입</button>
+      <%= link_to "비밀번호를 잊어버리셨나요?", new_password_path(resource_name), class: "recover-link" %><br>
+      <%= link_to "이메일 인증 메일을 받지 못하셨나요?", new_confirmation_path(resource_name), class: "recover-link" %><br><br>
+
+      <%- resource_class.omniauth_providers.each do |provider| %>
+          <%= link_to image_tag("icons/kakao.png", class: "kakao-btn"), omniauth_authorize_path(resource_name, provider) %>
+      <% end -%><br>
+      <a href='' data-toggle="modal" data-target=".bd-example-modal-lg" class="recover-link">
+        개인정보처리방침
       </a>
+      <%= render 'layouts/privacy_agreement' %>
   </div>
 </div>
 

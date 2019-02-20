@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+  get 'register/info'
+
+  get 'visitor/main'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Application
   get '/unread' => 'application#unread'
   get '/introduction' => 'application#intro', as: :introduction
+  get '/require_confirmation' => 'application#require_confirmation', as: :require_confirmation
 
   # Answer
   resources :answers, except: [:new]
@@ -68,12 +73,13 @@ Rails.application.routes.draw do
   # User
   get '/users/:id/edit' => 'users#edit', as: :edit_user_profile
   patch '/users/:id/edit' => 'users#update', as: :update_user_profile
-  devise_for :users, :controllers => {:confirmations => 'users/confirmations', :passwords => 'users/passwords' }
+  devise_for :users, :controllers => { omniauth_callbacks: 'users/omniauth_callbacks', :confirmations => 'users/confirmations', :passwords => 'users/passwords', :sessions => 'users/sessions' }
   # 아래 코드는 이후에 멀티채널 구성에 맞추어 바뀌어야할수도.
   get '/users/friends' => 'users#friends', as: :friends
   put '/users/:id/image_upload' => 'users#image_upload', as: :image_upload
   # put '/users/:id/upload_image' => 'users#update', as: :upload_image
   post '/users/:id/add_friend' => 'users#add_friend', as: :add_friend # get?
+  post '/users/:id/delete_friend' => 'users#delete_friend', as: :delete_friend
   # post '/users/:id/friend_request' => 'users#friend_request', as: :friend_request_send # get?
   
   # FriendRequest

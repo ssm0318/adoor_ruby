@@ -3,6 +3,7 @@ class AnswersController < ApplicationController
     before_action :set_answer, only: [:show, :edit, :update, :destroy]
     before_action :check_mine, only: [:edit, :update, :destroy]
     before_action :check_accessibility, only: [:show]
+    before_action :check_confirmation, only: [:create]
 
     def new
         unless ajax_request?
@@ -153,12 +154,18 @@ class AnswersController < ApplicationController
 
         def check_accessibility
             author =  Answer.find(params[:id]).author
-            if (author != current_user) && !Answer.accessible(current_user.id).exists?(params[:id]) && !Answer.find(params[:id]).channels.any?{|c| c.name == '익명피드'}
+            if (author != current_user) && (!Answer.accessible(current_user.id).exists?(params[:id])) && (!Answer.find(params[:id]).channels.any?{|c| c.name == '익명피드'})
                 redirect_to root_url
             end
         end
 
         def ajax_request?
             (defined? request) && request.xhr?
+        end
+
+        def check_confirmation
+            if current_user.confirmed_at.nil? && Identity.where(user_id: current_user.id).empty?
+                redirect_to require_confirmation_url
+            end
         end
 end

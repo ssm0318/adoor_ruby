@@ -14,6 +14,20 @@
  *= require_self
  */
 
+.modal {
+    margin-top: 90px;
+}
+
+.modal-body {
+    padding: 25px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.flash.alert:empty {
+    display: none;
+}
+
 .loading-gif {
     display: block;
     margin-left: auto;
@@ -40,6 +54,7 @@
 
 html {
     font-size: 16px;
+    // height: 100%;
 }
 
  .flash {
@@ -47,12 +62,14 @@ html {
     width: 50%;
     color: #F48462;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 22px;
+    font-weight: bold;
  }
 
 .bg-orange {
     background-color: #F48462;
  }
+
 .navbar {
     z-index: 1;
     padding: .3rem 1rem;
@@ -158,7 +175,7 @@ html {
         }
     
         .search-icon {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #F48462;
             position: absolute;
             right: 7px;
@@ -542,6 +559,10 @@ div.background {
         top: 15px;
         right: 0.5em;
         border: none;  
+    }
+
+    .loading-gif {
+        zoom: 2;
     }
 
     #edit-box {

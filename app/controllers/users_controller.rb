@@ -32,11 +32,14 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params)    
+      @user = User.new(user_params)    
       if @user.save
         UserMailer.registration_confirmation(@user).deliver
         redirect_to root_url
       else
+        puts '-========================================================'
+        puts @user.errors.full_messages
+        puts '=============================================================='
         render 'new'
       end
     end
@@ -92,7 +95,14 @@ class UsersController < ApplicationController
         if friendship.empty?
             Friendship.create(friendship_hash)
             redirect_back fallback_location: profile_path(User.find(params[:id]).slug)
-        else
+        end
+    end
+
+    def delete_friend
+        friendship_hash = {user_id: current_user.id, friend_id: params[:id]}
+
+        friendship = Friendship.where(friendship_hash)
+        if !friendship.empty?
             friendship.destroy_all
             Friendship.where({user_id: params[:id], friend_id: current_user.id}).destroy_all
 

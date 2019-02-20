@@ -142,11 +142,15 @@ div {
         position: absolute;
         bottom: 16px;
 
+        .drop-down-icon {
+            font-size: 1rem;
+        }
+
         .channels-dropdown-content {
             width: 30%;
             min-width: 100px;
             max-height: 240px;
-            z-index: 1;
+            z-index: 0;
             position: absolute;
             top: 30px;
 
@@ -562,12 +566,12 @@ div {
 
         display: none;
         background-color: white;
-        z-index: 2;
+        z-index: 1;
         padding: 10px;
         padding-top: 15px;
-        border: 0.5px solid #dddddd;
+        border: none;
         border-radius: 5px;
-        box-shadow: 2px 2px 30px #cccccc;
+        box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
         overflow-y: scroll;
 
         .btn-select-all-channels {
@@ -635,31 +639,37 @@ div {
         }
     }
 }
+
 //for mobile version
 @media only screen and (max-device-width: 500px) {
-    .prism-box {
-        zoom: 2.3;
-        margin: 10px 0px;
-    
-        .prism-box__content {
-            padding: 0px 20px;
 
-        }
-    
-        .edit-or-delete {
-            width: 100px;
+    //new post form in frineds feed
+    .tab-content {
+        .new-answer-field {
+            font-size: 1.5rem;
+            padding: 10px 0;
         }
     }
-    //new post form in frineds feed
+
+    .drop-down-icon {
+        font-size: 1.5rem;
+    }
+
     .nav {
         zoom: 2.3;
     }
     
     .tab-content {
         zoom: 2.3;
+
+        .answer-button {
+            zoom: 1.2;
+            font-size: 1rem;
+        }
     }
 
     .nav-link {
+        font-size: 1.3rem;
         padding: 5px 20px;
     }
 
@@ -669,6 +679,85 @@ div {
 
     .nav-link {
         padding: 5px 20px;
+    }
+
+    .channels .channels-dropdown {
+        font-size: 1.3rem;
+
+    }
+    .channels .channel-setting-icon {
+        zoom: 1.2;
+    }
+
+
+    .prism-box {
+        zoom: 2.3;
+        margin: 10px 0px;
+        
+        .prism-box__header{
+
+            .btn-read-more {
+                zoom: 1.3;
+            }
+
+            a {
+                font-size: 1.3rem;
+
+            }
+        }    
+
+        .prism-box__content {
+            padding: 0px 20px;
+
+            .prism-box-custom-question {
+                .question-content {
+                    font-size: 1.5rem;
+                }
+            }
+
+            .prism-box-question {
+                .question {
+                    font-size: 1.5rem;
+                }
+            }
+
+            .answer {
+                font-size: 1.3rem;
+            }
+
+            .date{
+                font-size: 1.1rem;
+            }
+
+        }
+    
+        .edit-or-delete {
+            width: 120px;
+            left: 70%;
+
+            .edit-or-delete-el {
+                font-size: 1.3rem;
+            }
+        }
+
+        .prism-box__footer {
+            margin-top: 10px;
+            grid-template-rows: 40px 40px;
+            font-size: 1.1rem;
+
+            .btn-drawer {
+                zoom: 1.2;
+    
+            }
+            
+            .btn-feed-like {
+                zoom: 1.2;
+            }
+    
+            .num-of-likes, .num-of-drawers {
+                font-size: 1.2rem;
+            }
+        }
     }
 
     .link-generation-btn {

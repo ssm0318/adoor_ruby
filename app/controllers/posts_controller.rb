@@ -3,6 +3,7 @@ class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
     before_action :check_mine, only: [:edit, :update, :destroy]
     before_action :check_accessibility, only: [:show]
+    before_action :check_confirmation, only: [:create]
     
     def create
         @post = Post.create(post_params)
@@ -120,14 +121,18 @@ class PostsController < ApplicationController
 
         def check_accessibility
             author = Post.find(params[:id]).author
-            if (author != current_user) && !Post.accessible(current_user.id).exists?(params[:id])
-                redirect_to root_url
-            elsif (author != current_user) && !Post.find(params[:id]).channels.any?{|c| c.name == '익명피드'}
+            if (author != current_user) && (!Post.accessible(current_user.id).exists?(params[:id])) && (!Post.find(params[:id]).channels.any?{|c| c.name == '익명피드'})
                 redirect_to root_url
             end
         end
 
         def ajax_request?
             (defined? request) && request.xhr?
+        end
+
+        def check_confirmation
+            if current_user.confirmed_at.nil? && Identity.where(user_id: current_user.id).empty?
+                redirect_to require_confirmation_url
+            end
         end
 end

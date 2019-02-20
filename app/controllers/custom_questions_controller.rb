@@ -3,6 +3,7 @@ class CustomQuestionsController < ApplicationController
     before_action :set_custom_question, only: [:show, :destroy, :edit, :update, :repost_new ]
     before_action :check_mine, only: [:destroy, :edit, :update]
     before_action :check_accessibility, only: [:show]
+    before_action :check_confirmation, only: [:create]
 
     def create
         @custom_question = CustomQuestion.create(custom_question_params)
@@ -181,16 +182,20 @@ class CustomQuestionsController < ApplicationController
         end
 
         def check_accessibility
-            author =  CustomQuestion.find(params[:id]).author
-            if (author != current_user) && !CustomQuestion.accessible(current_user.id).exists?(params[:id])
-                redirect_to root_url
-            elsif (author != current_user) && !CustomQuestion.find(params[:id]).channels.any?{|c| c.name == '익명피드'}
+            author = CustomQuestion.find(params[:id]).author
+            if (author != current_user) && (!CustomQuestion.accessible(current_user.id).exists?(params[:id])) && (!CustomQuestion.find(params[:id]).channels.any?{|c| c.name == '익명피드'})
                 redirect_to root_url
             end
         end
 
         def ajax_request?
             (defined? request) && request.xhr?
+        end
+
+        def check_confirmation
+            if current_user.confirmed_at.nil? && Identity.where(user_id: current_user.id).empty?
+                redirect_to require_confirmation_url
+            end
         end
     
 end

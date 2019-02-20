@@ -132,3 +132,35 @@
     }
 
 }
+
+//for mobile version
+@media only screen and (max-device-width: 500px) { 
+    .prism-form-friend {
+
+        .prism-form__comment {
+            width: calc(100% - 100px); 
+        
+        }
+
+        label{
+            font-size: 1.1rem;
+        }
+
+        input[type="checkbox"] + label:before {
+            zoom: 1.3;
+        }
+        input[type="checkbox"]:checked + label:before {
+            zoom: 1.3;
+        }
+    }
+
+    .prism-form-friend .prism-form__comment, 
+    .prism-form-general .prism-form__comment {
+        font-size: 1.3rem;
+    }
+
+    .prism-form-friend .comment-info-alert, 
+    .prism-form-general .comment-info-alert {
+        font-size: 1rem;
+    }
+}
