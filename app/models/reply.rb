@@ -19,7 +19,7 @@ class Reply < ApplicationRecord
 
     def create_notifications
         origin = self.comment
-        noti_hash = {recipient_id: self.comment.author_id, origin: origin}
+        noti_hash = {recipient_id: self.comment.author_id, origin: origin} 
         create_noti_hash = {recipient_id: self.comment.author_id, actor: self.author, target: self, origin: origin}
         if self.author != self.comment.author
             create = true
@@ -29,10 +29,13 @@ class Reply < ApplicationRecord
                 if !self.comment.target.is_a? Announcement
                     if !self.comment.target.channels.any?{|c| c.name == '익명피드'}
                         create = false
+                    else
+                        noti_hash[:action] = 'anonymous_to_comment'
+                        create_noti_hash[:action] = 'anonymous_to_comment'
                     end
-                else 
-                    noti_hash[:action] = 'anonymous_to_comment'
-                    create_noti_hash[:action] = 'anonymous_to_comment'
+                # else 
+                    # noti_hash[:action] = 'anonymous_to_comment'
+                    # create_noti_hash[:action] = 'anonymous_to_comment'
                 end
             # if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
             #     # 글 주인에게 노티
@@ -44,7 +47,7 @@ class Reply < ApplicationRecord
             #         n.target = self
             #         n.actor = self.author
             #         n.read_at = nil
-            #     end
+            #     end 
             # end
             # 친구 대댓글인 경우
             else
