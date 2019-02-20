@@ -1,1 +1,0 @@
-$(document).on("click",function(){autosize($("textarea"))});

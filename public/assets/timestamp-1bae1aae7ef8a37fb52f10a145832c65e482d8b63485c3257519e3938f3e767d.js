@@ -1,1 +1,0 @@
-$(document).on("click",function(){$("time.timeago").timeago(),$(".time").css("visibility","visible")});
