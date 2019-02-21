@@ -28,6 +28,9 @@ class Like < ApplicationRecord
                     if !self.target.target.is_a? Announcement 
                         if !self.target.target.channels.any?{|c| c.name == '익명피드'}
                             create = false
+                        else
+                            noti_hash[:action] = 'anonymous_like_comment'
+                            create_noti_hash[:action] = 'anonymous_like_comment'
                         end
                     else
                         noti_hash[:action] = 'anonymous_like_comment'
@@ -47,6 +50,9 @@ class Like < ApplicationRecord
                     if !self.target.comment.target.is_a? Announcement
                         if !self.target.comment.target.channels.any?{|c| c.name == '익명피드'}
                             create = false
+                        else
+                            noti_hash[:action] = 'anonymous_like_reply'
+                            create_noti_hash[:action] = 'anonymous_like_reply'
                         end
                     else
                         noti_hash[:action] = 'anonymous_like_reply'

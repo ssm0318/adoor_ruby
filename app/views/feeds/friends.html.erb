@@ -17,7 +17,7 @@
     </div>
     <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <%= render partial: "custom_questions/new", locals: {custom_question: CustomQuestion.new} %>
-    </div>
+    </div> 
   </div>
   <div id='infinite-feeds'>
     <%= render partial: 'feeds/friends_index', locals: {feeds: @feeds} %>

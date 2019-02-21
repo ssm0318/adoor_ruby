@@ -102,12 +102,13 @@
 @media only screen and (max-device-width: 500px) {
 
     .sign-title {
-        font-size: 50px;
+        font-size: 60px;
     }
 
     .error_notification {
         display: none;
     }
+
     .form-inputs {
         font-size: 40px;
         text-decoration: none;
@@ -124,7 +125,7 @@
         width: 95%;
         height: auto;
         padding: 40px 20px;
-        border: 0.5px solid #dddddd;
+        border: 2px solid #dddddd;
         border-radius: 10px;
         -webkit-appearance: none;
         outline: none;
