@@ -15,7 +15,9 @@ class Api::V1::FeedsController < ApplicationController
     @feeds = answers + posts + custom_questions
     @feeds = @feeds.sort_by(&:updated_at).reverse!
 
-    render :feeds, locals: { feeds: @feeds }
+    paginate json: @feeds.by_date, per_page: 10
+
+    # render :feeds, locals: { feeds: @feeds }
   end
 
   # private 

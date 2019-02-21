@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'active_model_serializers'
+gem 'api-pagination'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-kakao', :git => 'git://github.com/hcn1519/omniauth-kakao'

@@ -35,6 +35,11 @@ GEM
     active_link_to (1.0.5)
       actionpack
       addressable
+    active_model_serializers (0.10.9)
+      actionpack (>= 4.1, < 6)
+      activemodel (>= 4.1, < 6)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (5.1.6.1)
       activesupport (= 5.1.6.1)
       globalid (>= 0.3.6)
@@ -61,6 +66,7 @@ GEM
       request_store
       safely_block (>= 0.2.1)
       user_agent_parser
+    api-pagination (4.8.2)
     arel (8.0.0)
     ast (2.4.0)
     autosize (2.4.0.0)
@@ -81,6 +87,8 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    case_transform (0.2)
+      activesupport
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
@@ -132,6 +140,7 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
+    jsonapi-renderer (0.2.0)
     jwt (2.1.0)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
@@ -334,7 +343,9 @@ PLATFORMS
 
 DEPENDENCIES
   active_link_to
+  active_model_serializers
   ahoy_matey (~> 2.2)
+  api-pagination
   autosize
   awesome_print (~> 1.8)
   byebug
