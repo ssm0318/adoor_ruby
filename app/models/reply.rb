@@ -27,15 +27,15 @@ class Reply < ApplicationRecord
             if self.anonymous
                 # 댓글 주인에게 노티
                 if !self.comment.target.is_a? Announcement
-                    if !self.comment.target.channels.any?{|c| c.name == '익명피드'}
+                    if !self.comment.target.channels.any?{|c| c.name == '익명피드'} && !self.comment.target.is_a? Announcement
                         create = false
                     else
                         noti_hash[:action] = 'anonymous_to_comment'
                         create_noti_hash[:action] = 'anonymous_to_comment'
                     end
-                # else 
-                    # noti_hash[:action] = 'anonymous_to_comment'
-                    # create_noti_hash[:action] = 'anonymous_to_comment'
+                else 
+                    noti_hash[:action] = 'anonymous_to_comment'
+                    create_noti_hash[:action] = 'anonymous_to_comment'
                 end
             # if self.author != self.comment.target.author && self.comment.target.author != self.comment.author   # && 뒤는 댓글과 글의 작성자가 같은 경우 노티가 두번 가는 거 방지하기 위해
             #     # 글 주인에게 노티
