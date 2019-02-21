@@ -1,5 +1,5 @@
 
-<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+<%- if devise_mapping.confirmable? && (controller_name != 'confirmations') %>
   <%= link_to "이메일 인증 메일을 받지 못하셨나요?", new_confirmation_path(resource_name) %><br />
 <% end -%>
 

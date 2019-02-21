@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div id = "user-message">
-                <% if @user.profile && @user.profile != "" %>
+                <% if @user.profile && (@user.profile != "") %>
                     <%= @user.profile %>
                 <% else %>
                     설정 아이콘을 눌러 한 줄 소개를 작성해보세요.

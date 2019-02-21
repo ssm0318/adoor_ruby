@@ -21,7 +21,7 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def show
-    @anonymous = @post.author_id != current_user.id && !(current_user.friends.include? @post.author)
+    @anonymous = (@post.author_id != current_user.id) && !(current_user.friends.include? @post.author)
 
     render :show, locals: { anonymous: @anonymous, answer: @post }
   end
@@ -66,7 +66,7 @@ class Api::V1::PostsController < ApplicationController
         end
       end
 
-      if original_channels.any? { |c| c.name == '익명피드' } && selected_channels.none? { |c| c.name == '익명피드' } # 원래 익명피드 공개였는데 바뀐 경우에만
+      if (original_channels.any? { |c| c.name == '익명피드' }) && (selected_channels.none? { |c| c.name == '익명피드' }) # 원래 익명피드 공개였는데 바뀐 경우에만
         anonymous_noties = []
         anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_comment').joins(comment_join).merge(Comment.where(target: @post)).distinct
         anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_reply').joins(reply_join).merge(Reply.joins(:comment).where(comments: { target: @post })).distinct
@@ -108,9 +108,9 @@ class Api::V1::PostsController < ApplicationController
 
   def check_accessibility
     author = Post.find(params[:id]).author
-    if (author.friends.include? current_user) && author != current_user && !Post.accessible(current_user.id).exists?(params[:id])
+    if (author.friends.include? current_user) && (author != current_user) && (!Post.accessible(current_user.id).exists?(params[:id]))
       redirect_to root_url
-    elsif !(author.friends.include? current_user) && author != current_user && Post.find(params[:id]).channels.none? { |c| c.name == '익명피드' }
+    elsif !(author.friends.include? current_user) && (author != current_user) && (Post.find(params[:id]).channels.none? { |c| c.name == '익명피드' })
       redirect_to root_url
     end
   end

@@ -119,7 +119,7 @@ class Like < ApplicationRecord
                 if Notification.where(noti_hash).size > 1
                     n = Notification.where(noti_hash)[-2]
                     n.invisible = false
-                    if Notification.where(target: self).first.read_at != nil && n.read_at == nil
+                    if (Notification.where(target: self).first.read_at != nil) && (n.read_at == nil)
                         n.read_at = Notification.where(target: self).first.read_at
                     end
                     n.save(touch: false)
