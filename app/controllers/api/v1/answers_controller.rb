@@ -43,7 +43,7 @@ class Api::V1::AnswersController < ApplicationController
   end
 
   def show
-    @anonymous = @answer.author_id != current_user.id && !(current_user.friends.include? @answer.author)
+    @anonymous = (@answer.author_id != current_user.id) && !(current_user.friends.include? @answer.author)
 
     render :show, locals: { anonymous: @anonymous, answer: @answer }
   end
@@ -157,10 +157,10 @@ class Api::V1::AnswersController < ApplicationController
 
   def check_accessibility
     author = Answer.find(params[:id]).author
-    if (author.friends.include? current_user) && author != current_user && !Answer.accessible(current_user.id).exists?(params[:id])
+    if (author.friends.include? current_user) && (author != current_user) && (!Answer.accessible(current_user.id).exists?(params[:id]))
       # redirect_to root_url
       render json: {status: 'ERROR', message:'not accessible', data: current_user}, status: :unauthorized
-    elsif !(author.friends.include? current_user) && author != current_user && Answer.find(params[:id]).channels.none? { |c| c.name == '익명피드' }
+    elsif !(author.friends.include? current_user) && (author != current_user) && (Answer.find(params[:id]).channels.none? { |c| c.name == '익명피드' })
       # redirect_to root_url
       render json: {status: 'ERROR', message:'not accessible', data: current_user}, status: :unauthorized
     end

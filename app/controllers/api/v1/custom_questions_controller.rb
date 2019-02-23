@@ -25,7 +25,7 @@ class Api::V1::CustomQuestionsController < ApplicationController
   end
 
   def show
-    @anonymous = @custom_question.author_id != current_user.id && !(current_user.friends.include? @custom_question.author)
+    @anonymous = (@custom_question.author_id != current_user.id) && !(current_user.friends.include? @custom_question.author)
 
     render :show, locals: { anonymous: @anonymous, custom_question: @custom_question }
   end
@@ -117,7 +117,7 @@ class Api::V1::CustomQuestionsController < ApplicationController
         end
       end
 
-      if original_channels.any? { |c| c.name == '익명피드' } && selected_channels.none? { |c| c.name == '익명피드' } # 원래 익명피드 공개였는데 바뀐 경우에만
+      if (original_channels.any? { |c| c.name == '익명피드' }) && (selected_channels.none? { |c| c.name == '익명피드' }) # 원래 익명피드 공개였는데 바뀐 경우에만
         anonymous_noties = []
         anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_comment').joins(comment_join).merge(Comment.where(target: @custom_question)).distinct
         anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_reply').joins(reply_join).merge(Reply.joins(:comment).where(comments: { target: @custom_question })).distinct
@@ -180,10 +180,10 @@ class Api::V1::CustomQuestionsController < ApplicationController
 
   def check_accessibility
     author = CustomQuestion.find(params[:id]).author
-    if (author.friends.include? current_user) && author != current_user && !CustomQuestion.accessible(current_user.id).exists?(params[:id])
+    if (author.friends.include? current_user) && (author != current_user) && (!CustomQuestion.accessible(current_user.id).exists?(params[:id]))
       # redirect_to root_url
       render json: {status: 'ERROR', message:'not accessible', data: current_user}, status: :unauthorized
-    elsif !(author.friends.include? current_user) && author != current_user && CustomQuestion.find(params[:id]).channels.none? { |c| c.name == '익명피드' }
+    elsif !(author.friends.include? current_user) && (author != current_user) && (CustomQuestion.find(params[:id]).channels.none? { |c| c.name == '익명피드' })
       # redirect_to root_url
       render json: {status: 'ERROR', message:'not accessible', data: current_user}, status: :unauthorized
     end

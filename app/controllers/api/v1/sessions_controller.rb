@@ -27,8 +27,8 @@ class Api::V1::SessionsController < ApplicationController
 
   def destroy
     # 현재 session에서의 token을 더 이상 사용할 수 없게 함.
-    current_user && current_user.authentication_token = nil
-    if current_user&.save
+    current_user && (current_user.authentication_token = nil)
+    if current_user && current_user.save
       render json: { status: 'SUCCESS', message: 'Successfully signed out' }, status: :ok
     else
       render json: { status: 'ERROR', message: 'Sign out unsuccessful', data: current_user.errors.full_messages }, status: :unprocessable_entity

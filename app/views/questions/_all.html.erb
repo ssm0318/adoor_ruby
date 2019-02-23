@@ -24,7 +24,7 @@
                 <%= render 'feeds/feed_footer', target: answer %>
             <% end %>
         </div>
-        <% if  answer.author_id != current_user.id && !(current_user.friends.include? answer.author) %>
+        <% if (answer.author_id != current_user.id) && !(current_user.friends.include? answer.author) %>
             <%= render 'comments/general_form', feed: answer %>
         <% else %>
             <%= render 'comments/friends_form', feed: answer %>

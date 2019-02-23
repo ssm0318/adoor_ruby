@@ -12,7 +12,7 @@
         </div>
     <!-- custom question -->
     <% elsif d.target_type == "CustomQuestion" %>
-        <% anonymous = d.target.author_id != current_user.id && !(current_user.friends.include? d.target.author) %>
+        <% anonymous = (d.target.author_id != current_user.id) && (!(current_user.friends.include? d.target.author)) %>
         <div class="prism-box custom-feed <%=d.target.id%>">
             <div class="prism-box__header">
                 <% if current_user == d.target.author or current_user.friends.include? d.target.author %>
@@ -65,7 +65,7 @@
 
     <!-- posting or Answer -->
     <% else %>
-        <% anonymous = d.target.author_id != current_user.id && !(current_user.friends.include? d.target.author) %>
+        <% anonymous = (d.target.author_id != current_user.id) && (!(current_user.friends.include? d.target.author)) %>
         <% if d.target.is_a? Answer %>
             <div class="prism-box answer-feed <%=d.target.id%>">
         <% else %>

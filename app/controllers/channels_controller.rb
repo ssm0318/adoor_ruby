@@ -21,7 +21,7 @@ class ChannelsController < ApplicationController
 
     def update
 
-        if current_user.channels.where(name: params[:name]).length > 0 && Channel.find(params[:id]).name != params[:name]
+        if (current_user.channels.where(name: params[:name]).length > 0) && (Channel.find(params[:id]).name != params[:name])
             render json: {
                 successed: false,
                 message: "#{params[:name]} 채널은 이미 존재하는 채널입니다.",

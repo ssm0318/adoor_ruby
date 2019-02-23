@@ -17,7 +17,7 @@ class Api::V1::ChannelsController < ApplicationController
   end
 
   def update
-    if !current_user.channels.where(name: params[:name]).empty? && Channel.find(params[:id]).name != params[:name]
+    if !current_user.channels.where(name: params[:name]).empty? && (Channel.find(params[:id]).name != params[:name])
       render json: {
         successed: false,
         message: "#{params[:name]} 채널은 이미 존재하는 채널입니다.",

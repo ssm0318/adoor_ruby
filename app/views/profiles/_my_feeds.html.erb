@@ -1,5 +1,5 @@
 <% @feeds.each do |feed| %>
-    <% anonymous = feed.author_id != current_user.id && !(current_user.friends.include? feed.author) %>
+    <% anonymous = (feed.author_id != current_user.id) && !(current_user.friends.include? feed.author) %>
     <!-- custom question feed -->
     <% if feed.is_a? CustomQuestion %>
         <div class="prism-box custom-feed <%=feed.id%>">
