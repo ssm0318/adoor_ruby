@@ -39,7 +39,7 @@ class AnswerShowSerializer < ActiveModel::Serializer
   end
 
   def comments
-    if instance_options[:comments].nil?
+    if instance_options[:comments].nil? # for create
       nil
     else
       instance_options[:comments].map do |comment|

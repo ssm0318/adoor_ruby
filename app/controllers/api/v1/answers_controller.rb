@@ -8,7 +8,7 @@ class Api::V1::AnswersController < ApplicationController
     @question = Question.find(params[:id])
 
     # render :new, locals: { question: @question }
-    render json: Answer.new, question: @question, serializer: AnswerNewSerializer
+    render json: Answer.new, question: @question, serializer: AnswerFormSerializer
   end
 
   def create
@@ -62,8 +62,13 @@ class Api::V1::AnswersController < ApplicationController
   def edit
     @question = @answer.question
 
+    @channel_names = []
+    @answer.channels.each do |c|
+      @channel_names.push(c.name)
+    end
+
     # render :edit, locals: { question: @question, answer: @answer }
-    render json: @answer, question: @question, serializer: AnswerNewSerializer
+    render json: @answer, question: @question, channels: @channel_names, serializer: AnswerFormSerializer
   end
 
   def update
@@ -116,9 +121,13 @@ class Api::V1::AnswersController < ApplicationController
       @channel_names = []
       selected_channels.each do |c|
         @channel_names.push(c.name)
-      end
+      end 
 
-      render json: @answer, channels: @channel_names, serializer: AnswerShowSerializer
+      @comments = @answer.comments.where(anonymous: false).sort_by(&:created_at)
+      
+      @comments = @comments.paginate(:page => params[:page], :per_page => 5, :param_name => :comment_page)
+
+      render json: @answer, channels: @channel_names, comments: @comments, serializer: AnswerShowSerializer
       # render :answer, locals: { channel_names: @channel_names, answer: @answer }
     else
       render json: {status: 'ERROR', message:'Answer not updated', data: @answer.errors.full_messages}, status: :unprocessable_entity

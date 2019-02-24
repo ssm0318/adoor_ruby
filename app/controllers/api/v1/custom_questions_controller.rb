@@ -21,6 +21,8 @@ class Api::V1::CustomQuestionsController < ApplicationController
       Entrance.create(channel: c, target: @custom_question)
     end
 
+    render json: @custom_question, channels: channels, serializer: CustomQuestionShowSerializer
+
     # render :custom_question, locals: { custom_question: @custom_question }
   end
 
@@ -61,14 +63,13 @@ class Api::V1::CustomQuestionsController < ApplicationController
   # custom question repost new
   # custom question을 repost했을 때 새로운 custom_question 만들기
   def repost_new
-    @reposting = true
-
-    render :repost
+    # render :repost
+    render json: @custom_question, serializer: CustomQuestionFormSerializer
   end
 
   # custom question repost create
   def repost_create
-    ancestor = CustomQuestion.find(params[:ancestor_id])
+    ancestor = CustomQuestion.find(params[:id])
     @custom_question = CustomQuestion.create(author_id: current_user.id, content: ancestor.content, repost_message: params[:repost_message], ancestor_id: ancestor.id)
     ancestor.tags.each do |t|
       new_tag = Tag.create(author_id: current_user.id, content: t.content, target: @custom_question)
@@ -80,12 +81,29 @@ class Api::V1::CustomQuestionsController < ApplicationController
       Entrance.create(channel: c, target: @custom_question)
     end
 
+    # assign 당한 유저C가 해당 질문에 대해 답하면 그 질문에 대해 유저C를 assign한 모든 유저들에게 보내지는 노티 생성.
+    assignment_hash = { target: ancestor, assignee_id: current_user }
+    Assignment.where(assignment_hash).find_each do |assignment|
+        # 답변의 공개그룹에 assigner가 포함되어있는 경우에만 노티가 감.
+        if !(channels & assignment.assigner.belonging_channels).empty?
+            Notification.create(recipient: assignment.assigner, actor: current_user, target: @custom_question, origin: @custom_question, action: 'custom-assignment-answer')
+        end
+    end
+
+    render json: @custom_question, channels: channels, serializer: CustomQuestionShowSerializer
     # render :custom_question, locals: { custom_question: @custom_question }
   end
 
   # custom question repost message edit
   def edit
     @reposting = false
+
+    @channel_names = []
+    @custom_question.channels.each do |c|
+      @channel_names.push(c.name)
+    end
+
+    render json: @custom_question, reposting: @reposting, channels: @channel_names, serializer: CustomQuestionFormSerializer
     
     # render :repost, locals: { custom_question: @custom_question, reposting: @reposting }
   end
@@ -138,10 +156,15 @@ class Api::V1::CustomQuestionsController < ApplicationController
       ########################################
 
       channel_names = ''
-      selected_channels.each do |c|
+      selected_channels.each do |c| 
         channel_names += c.name + ' '
       end
 
+      @comments = @custom_question.comments.where(anonymous: false).sort_by(&:created_at)
+      
+      @comments = @comments.paginate(:page => params[:page], :per_page => 5, :param_name => :comment_page)
+
+      render json: @custom_question, channels: channel_names, comments: @comments, serializer: CustomQuestionShowSerializer
       # render :custom_question, locals: { custom_question: @custom_question }
     else
       render json: {

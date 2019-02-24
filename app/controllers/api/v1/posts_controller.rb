@@ -6,19 +6,16 @@ class Api::V1::PostsController < ApplicationController
  
   def create
     # @post = Post.create(post_params)
-    @post = Post.new(post_params)
-    if @post.save
-      render json: {status: 'SUCCESS', message:'Created post', data: @post}, status: :ok
-    else
-      render json: {status: 'ERROR', message:'Post not saved', data: @post.errors.full_messages}, status: :unprocessable_entity
-    end
+    @post = Post.create(post_params)
 
     channels = [] # 선택된 채널들을 갖고 있다.
     channels = Channel.find(params[:c]) if params[:c]
     channels.each do |c|
       Entrance.create(channel: c, target: @post)
-    end 
-  end
+    end
+
+    render json: @post, channels: channels, serializer: PostShowSerializer
+  end 
 
   def show
     @anonymous = (@post.author_id != current_user.id) && !(current_user.friends.include? @post.author)
@@ -37,6 +34,8 @@ class Api::V1::PostsController < ApplicationController
 
   def edit
     # render :edit, locals: { post: @post }
+
+    render json: @post, serializer: PostFormSerializer
   end
 
   def update
@@ -91,6 +90,7 @@ class Api::V1::PostsController < ApplicationController
         channel_names += c.name + ' '
       end
 
+      render json: @post, channels: channel_names, serializer: PostShowSerializer
       # render :update, locals: { channel_names: @channel_names, post: @post }
     else
       redirect_to root_url
@@ -98,7 +98,11 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def destroy
-    render json: {status: 'ERROR', message:'Post not updated', data: @post.errors.full_messages}, status: :unprocessable_entity
+    if @post.destroy
+      render json: {status: 'SUCCESS', message:'Deleted post'},status: :ok
+    else
+      render json: {status: 'ERROR', message:'post not deleted', data: @post.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def friend_comments

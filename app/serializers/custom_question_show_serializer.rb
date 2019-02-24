@@ -37,16 +37,20 @@ class CustomQuestionShowSerializer < ActiveModel::Serializer
   end
 
   def tags
-    if object.tag_string.nil?
-      nil
-    else
-      object.tag_string.gsub("\r\n", '\n').split('\n')
+    arr = []
+    object.tags.each do |tag|
+      arr.push(tag.content)
     end
+    arr
   end
 
   def comments
-    instance_options[:comments].map do |comment|
-      ::CommentSerializer.new(comment).attributes
+    if instance_options[:comments].nil? # for create
+      nil
+    else
+      instance_options[:comments].map do |comment|
+        ::CommentSerializer.new(comment).attributes
+      end
     end
   end
 end
