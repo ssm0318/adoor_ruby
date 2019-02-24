@@ -13,7 +13,7 @@ class Api::V1::QuestionsController < ApplicationController
     @feeds = @question.answers.accessible(current_user.id)
     @feeds += @question.answers.where(author: current_user)
     @feeds += @question.answers.channel_name("익명피드").anonymous(current_user.id)
-    @feeds = @feeds.sort_by(&:created_at).reverse! 
+    @feeds = @feeds.sort_by(&:created_at).reverse!
 
     # render :show, locals: { question: @question, feeds: @feeds }
   end
