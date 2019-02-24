@@ -15,7 +15,7 @@ class Api::V1::LikesController < ApplicationController
     else
       render json: { status: 'ERROR', message: 'like not deleted', data: like.errors.full_messages }, status: :unprocessable_entity
     end
-  end 
+  end
 
   def likes_info
     likes = Like.where(target_type: params[:target_type], target_id: params[:target_id])

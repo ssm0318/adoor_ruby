@@ -18,11 +18,11 @@
     width: 90%;
 
     h3 {
-        font-size: 60px;
+        font-size: 20px;
     }
 
     p {
-        font-size: 30px;
+        font-size: 14px;
     }
 }
 
@@ -33,10 +33,10 @@
 .modal-body {
     padding: 25px;
     text-align: left;
-    font-size: 14px;
+    font-size: 16px;
 
     p {
-        font-size: 35px;
+        font-size: 16px;
     }
 }
 
@@ -470,6 +470,23 @@ div.background {
 
 //for mobile version
 @media only screen and (max-device-width: 500px) {
+    .modal-body {
+        p {
+            font-size: 35px;
+        }
+    }
+
+    .agreement-container {
+        width: 90%;
+    
+        h3 {
+            font-size: 60px;
+        }
+    
+        p {
+            font-size: 30px;
+        }
+    }
     
     .inner-container {
         width: 100%;
