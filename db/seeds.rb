@@ -6,11 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Faker gem을 사용하기 때문에 create가 제대로 먹히지 않아요. db:drop을 한 후에 db:seed를 해야합니다.
 if Rails.env.development?
   # User
   # 1: 백산수, 2: 마틸다, 3:율로몬, 4: 잡동사니, 5: 이룰렁, 6: 누구게, 7: 메롱
   if User.where(email: 'prism@snu.com').empty?
-    User.create(email: 'prism@snu.com', password: 'prism-snu', username: 'sansoo')
+    User.create(email: 'prism@snu.com', password: 'prism-snu', username: 'sansoo', confirmed_at: Time.now)
   end
   if User.where(email: 'a@a.com').empty?
     User.create(email: 'a@a.com', password: 'aaaaaa', username: 'matilda')
@@ -28,146 +29,171 @@ if Rails.env.development?
     User.create(email: 'e@e.com', password: 'eeeeee', username: 'whod')
   end
   if User.where(email: 'f@f.com').empty?
-    User.create(email: 'f@f.com', password: 'ffffff', username: 'merong')
+    User.create(email: 'f@f.com', password: 'ffffff', username: 'merong', confirmed_at: Time.now)
   end
 
   # Question
-  (1..8).each do |i|
-    q = Question.find_or_create_by(content: Faker::TvShows::Simpsons.quote)
+  (1..10).each do |i|
+    q = Question.create(content: Faker::TvShows::Simpsons.quote)
     if i <= 5
       q.selected_date = Time.now
     end
   end
 
   # Friend Request
-  FriendRequest.find_or_create_by(requester_id: 1, requestee_id: 6)
-  FriendRequest.find_or_create_by(requester_id: 3, requestee_id: 6)
-  FriendRequest.find_or_create_by(requester_id: 4, requestee_id: 7)
+  FriendRequest.create(requester_id: 1, requestee_id: 6)
+  FriendRequest.create(requester_id: 3, requestee_id: 6)
+  FriendRequest.create(requester_id: 4, requestee_id: 7)
 
   # Friendship
-  Friendship.find_or_create_by(user_id: 1, friend_id: 2)
-  Friendship.find_or_create_by(user_id: 1, friend_id: 3)
-  Friendship.find_or_create_by(user_id: 1, friend_id: 4)
-  Friendship.find_or_create_by(user_id: 1, friend_id: 5)
-  Friendship.find_or_create_by(user_id: 2, friend_id: 3)
-  Friendship.find_or_create_by(user_id: 2, friend_id: 4)
-  Friendship.find_or_create_by(user_id: 2, friend_id: 5)
-  Friendship.find_or_create_by(user_id: 3, friend_id: 4)
-  Friendship.find_or_create_by(user_id: 3, friend_id: 5)
-  Friendship.find_or_create_by(user_id: 4, friend_id: 5)
+  Friendship.create(user_id: 1, friend_id: 2)
+  Friendship.create(user_id: 1, friend_id: 3)
+  Friendship.create(user_id: 1, friend_id: 4)
+  Friendship.create(user_id: 1, friend_id: 5)
+  Friendship.create(user_id: 2, friend_id: 3)
+  Friendship.create(user_id: 2, friend_id: 4)
+  Friendship.create(user_id: 2, friend_id: 5)
+  Friendship.create(user_id: 3, friend_id: 4)
+  Friendship.create(user_id: 3, friend_id: 5)
+  Friendship.create(user_id: 4, friend_id: 5)
 
   # Assignment
-  Assignment.find_or_create_by(target: Question.find(2), assigner_id: 1, assignee_id: 4)
-  Assignment.find_or_create_by(target: Question.find(2), assigner_id: 2, assignee_id: 4)
-  Assignment.find_or_create_by(target: Question.find(2), assigner_id: 1, assignee_id: 2)
-  Assignment.find_or_create_by(target: Question.find(1), assigner_id: 2, assignee_id: 3)
+  Assignment.create(target: Question.find(2), assigner_id: 1, assignee_id: 4)
+  Assignment.create(target: Question.find(2), assigner_id: 2, assignee_id: 4)
+  Assignment.create(target: Question.find(2), assigner_id: 1, assignee_id: 2)
+  Assignment.create(target: Question.find(1), assigner_id: 2, assignee_id: 3)
 
   # Answer
   (1..20).each do |i|
     author_id = rand(7) + 1
-    question_id = rand(8) + 1
-    Answer.find_or_create_by(author_id: author_id, question_id: question_id, content: Faker::Quote.most_interesting_man_in_the_world)
-  end
-
-  (1..20).each do |i|
-    answer = Answer.find(i)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: answer.author, name: '일촌').first, target: answer)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: answer.author, name: '이촌').first, target: answer)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: answer.author, name: '삼촌').first, target: answer)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: answer.author, name: '익명피드').first, target: answer)
+    question_id = rand(5) + 1
+    a = Answer.create(author_id: author_id, question_id: question_id, content: Faker::Quote.most_interesting_man_in_the_world)
+    puts a.errors.full_messages
   end
 
   # Post
   (1..20).each do |i|
     author_id = rand(7) + 1
-    Post.find_or_create_by(author_id: author_id, content: Faker::TvShows::SiliconValley.quote)
-  end
-
-  (1..20).each do |i|
-    post = Post.find(i)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: post.author, name: '일촌').first, target: post)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: post.author, name: '이촌').first, target: post)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: post.author, name: '삼촌').first, target: post)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: post.author, name: '익명피드').first, target: post)
+    Post.create(author_id: author_id, content: Faker::TvShows::SiliconValley.quote)
   end
 
   # Custom Question
   (1..20).each do |i|
     author_id = rand(7) + 1
-    CustomQuestion.find_or_create_by(author_id: author_id, content: Faker::Quotes::Shakespeare.romeo_and_juliet_quote)
-  end
-
-  (1..20).each do |i|
-    custom_question = CustomQuestion.find(i)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: custom_question.author, name: '일촌').first, target: custom_question)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: custom_question.author, name: '이촌').first, target: custom_question)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: custom_question.author, name: '삼촌').first, target: custom_question)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: custom_question.author, name: '익명피드').first, target: custom_question)
+    CustomQuestion.create(author_id: author_id, content: Faker::Quotes::Shakespeare.romeo_and_juliet_quote)
   end
 
   # Repost
   (1..10).each do |i|
     author_id = rand(7) + 1
     ancestor_id = rand(20) + 1
-    CustomQuestion.find_or_create_by(author_id: author_id, content: CustomQuestion.find(ancestor_id).content, repost_message: Faker::TvShows::Friends.quote, ancestor_id: ancestor_id)
-  end
-
-  (21..30).each do |i|
-    custom_question = CustomQuestion.find(i)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: custom_question.author, name: '일촌').first, target: custom_question)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: custom_question.author, name: '이촌').first, target: custom_question)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: custom_question.author, name: '삼촌').first, target: custom_question)
-    Entrance.find_or_create_by(channel: Channel.where(user_id: custom_question.author, name: '익명피드').first, target: custom_question)
+    CustomQuestion.create(author_id: author_id, content: CustomQuestion.find(ancestor_id).content, repost_message: Faker::TvShows::Friends.quote, ancestor_id: ancestor_id)
   end
 
   # Comment
-  (1..120).each do |i|
+  (1..60).each do |i|
     author_id = rand(7) + 1
-    Comment.find_or_create_by(author_id: author_id, content: Faker::Movies::HarryPotter.quote)
+    target_id = rand(20) + 1
+    if Answer.find(target_id).author.friends.include? User.find(author_id)
+      anonymous = false
+    else
+      anonymous = true
+    end
+    c = Comment.create(author_id: author_id, content: Faker::Movies::HarryPotter.quote, target: Answer.find(target_id), anonymous: anonymous)
+    if i % 5 == 0
+      c.secret = true
+    end
+    c.save
+  end
+
+  (1..60).each do |i|
+    author_id = rand(7) + 1
+    target_id = rand(20) + 1
+    if Post.find(target_id).author.friends.include? User.find(author_id)
+      anonymous = false
+    else
+      anonymous = true
+    end
+    c = Comment.create(author_id: author_id, content: Faker::Movies::HarryPotter.quote, target: Post.find(target_id), anonymous: anonymous)
+    if i % 5 == 0
+      c.secret = true
+    end
+    c.save
+  end
+
+  (1..60).each do |i|
+    author_id = rand(7) + 1
+    target_id = rand(20) + 1
+    if CustomQuestion.find(target_id).author.friends.include? User.find(author_id)
+      anonymous = false
+    else
+      anonymous = true
+    end
+    c = Comment.create(author_id: author_id, content: Faker::Movies::HarryPotter.quote, target: CustomQuestion.find(target_id), anonymous: anonymous)
+    if i % 5 == 0
+      c.secret = true
+    end
+    c.save
   end
 
   # Reply
-  (1..60).each do |i|
+  (1..100).each do |i|
     author_id = rand(7) + 1
-    Reply.find_or_create_by(author_id: author_id, content: Faker::TvShows::HowIMetYourMother.catch_phrase)
+    comment_id = rand(150) + 1
+    if Comment.find(comment_id).anonymous?
+      anonymous = true
+    else
+      anonymous = false
+    end
+
+    r = Reply.create(author_id: author_id, comment_id: comment_id, content: Faker::TvShows::HowIMetYourMother.catch_phrase, anonymous: anonymous)
+    if i % 5 == 0
+      r.secret = true
+    end
+    if i % 4 == 0
+      if author_id != r.comment.author_id
+        r.target_author_id = r.comment.author_id
+      end
+    end
+    r.save
   end
 
   # Like
   (1..100).each do |i|
     user_id = rand(7) + 1
     target_id = rand(20) + 1
-    Like.find_or_create_by(user_id: user_id, target: Answer.find(target_id))
+    Like.create(user_id: user_id, target: Answer.find(target_id))
   end
 
   (1..100).each do |i|
     user_id = rand(7) + 1
     target_id = rand(20) + 1
-    Like.find_or_create_by(user_id: user_id, target: Post.find(target_id))
+    Like.create(user_id: user_id, target: Post.find(target_id))
   end
 
   (1..100).each do |i|
     user_id = rand(7) + 1
-    target_id = rand(20) + 1
-    Like.find_or_create_by(user_id: user_id, target: CustomQuestion.find(target_id))
+    target_id = rand(30) + 1
+    Like.create(user_id: user_id, target: CustomQuestion.find(target_id))
   end
 
   # Drawer
   (1..100).each do |i|
     user_id = rand(7) + 1
     target_id = rand(20) + 1
-    Drawer.find_or_create_by(user_id: user_id, target: Answer.find(target_id))
+    Drawer.create(user_id: user_id, target: Answer.find(target_id))
   end
 
   (1..100).each do |i|
     user_id = rand(7) + 1
     target_id = rand(20) + 1
-    Drawer.find_or_create_by(user_id: user_id, target: Post.find(target_id))
+    Drawer.create(user_id: user_id, target: Post.find(target_id))
   end
 
   (1..100).each do |i|
     user_id = rand(7) + 1
-    target_id = rand(20) + 1
-    Drawer.find_or_create_by(user_id: user_id, target: CustomQuestion.find(target_id))
+    target_id = rand(30) + 1
+    Drawer.create(user_id: user_id, target: CustomQuestion.find(target_id))
   end
 
   # 어드민 질문 태그 검색 테스트용
@@ -205,6 +231,31 @@ if Rails.env.development?
   a.tags << Tag.create(author_id: 6, content: '나는 태그다', target: a)
   a.tags << Tag.create(author_id: 6, content: '너는 태그냐', target: a)
   a.tags << Tag.create(author_id: 6, content: '와썹맨', target: a)
+
+  # Entrance
+  (1..20).each do |i|
+    answer = Answer.find(i)
+    Entrance.create(channel: Channel.where(user_id: answer.author, name: '일촌').first, target: answer)
+    Entrance.create(channel: Channel.where(user_id: answer.author, name: '이촌').first, target: answer)
+    Entrance.create(channel: Channel.where(user_id: answer.author, name: '삼촌').first, target: answer)
+    Entrance.create(channel: Channel.where(user_id: answer.author, name: '익명피드').first, target: answer)
+  end
+
+  (1..20).each do |i|
+    post = Post.find(i)
+    Entrance.create(channel: Channel.where(user_id: post.author, name: '일촌').first, target: post)
+    Entrance.create(channel: Channel.where(user_id: post.author, name: '이촌').first, target: post)
+    Entrance.create(channel: Channel.where(user_id: post.author, name: '삼촌').first, target: post)
+    Entrance.create(channel: Channel.where(user_id: post.author, name: '익명피드').first, target: post)
+  end
+  
+  (1..30).each do |i|
+    custom_question = CustomQuestion.find(i)
+    Entrance.create(channel: Channel.where(user_id: custom_question.author, name: '일촌').first, target: custom_question)
+    Entrance.create(channel: Channel.where(user_id: custom_question.author, name: '이촌').first, target: custom_question)
+    Entrance.create(channel: Channel.where(user_id: custom_question.author, name: '삼촌').first, target: custom_question)
+    Entrance.create(channel: Channel.where(user_id: custom_question.author, name: '익명피드').first, target: custom_question)
+  end
 
 elsif Rails.env.production?
 
