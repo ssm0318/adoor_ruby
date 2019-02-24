@@ -1,5 +1,7 @@
 ActiveModelSerializers.config.adapter = :json_api
 
+ActiveModelSerializers.config.key_transform = :unaltered
+
 # ActiveModel::ArraySerializer.root = false
 
 # api_mime_types = %W(

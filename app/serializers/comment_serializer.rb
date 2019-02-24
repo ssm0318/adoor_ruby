@@ -1,7 +1,13 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :author_id, :content
+  attributes :id, :author, :content, :secret, :created_at, :replies
 
-  belongs_to :answer
-  belongs_to :post
-  belongs_to :custom_question
+  def replies
+    object.replies.map do |reply|
+      ::ReplySerializer.new(reply).attributes
+    end
+  end
+
+  def author
+    ::UserShortSerializer.new(object.author).attributes
+  end
 end

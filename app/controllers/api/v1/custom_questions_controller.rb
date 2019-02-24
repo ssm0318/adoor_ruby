@@ -1,6 +1,6 @@
 class Api::V1::CustomQuestionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_custom_question, only: %i[show destroy edit update repost_new]
+  before_action :set_custom_question, only: %i[show destroy edit update repost_new friend_comments general_comments likes]
   before_action :check_mine, only: %i[destroy edit update]
   before_action :check_accessibility, only: [:show]
 
@@ -141,6 +141,24 @@ class Api::V1::CustomQuestionsController < ApplicationController
         data: @custom_question.errors.full_messages
       }, status: :unprocessable_entity
     end
+  end
+
+  def friend_comments
+    @comments = @custom_question.comments.where(anonymous: false).sort_by(&:created_at)
+    @comments = @comments.paginate(:page => params[:page], :per_page => 10)
+ 
+    render json: @comments, adapter: :json_api, each_serializer: CommentSerializer
+  end
+
+  def general_comments
+    @comments = @custom_question.comments.where(anonymous: true).sort_by(&:created_at)
+    @comments = @comments.paginate(:page => params[:page], :per_page => 10)
+
+    render json: @comments, adapter: :json_api, each_serializer: CommentSerializer
+  end
+
+  def likes
+    render json: @custom_question.likes, each_serializer: LikeSerializer
   end
 
   private

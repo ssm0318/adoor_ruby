@@ -119,17 +119,23 @@ Rails.application.routes.draw do
       # Answer
       resources :answers, except: [:new]
       get '/answers/:id/new' => 'answers#new', as: :new_answer
+      get '/answers/:id/friend_comments' => 'answers#friend_comments'
+      get '/answers/:id/general_comments' => 'answers#general_comments'
+      get '/answers/:id/likes' => 'answers#likes'
 
       # Post
       resources :posts, except: [:new]
+      get '/posts/:id/friend_comments' => 'posts#friend_comments'
+      get '/posts/:id/general_comments' => 'posts#general_comments'
+      get '/posts/:id/likes' => 'posts#likes'
 
       # CustomQuestion
       resources :custom_questions, only: [:show, :create, :destroy, :update, :edit]
-      # get '/custom_questions/:id/repost' => 'custom_questions#repost', as: :custom_question_repost
-      # get '/custom_questions/:id/message' => 'custom_questions#repost_create', as: :custom_question_repost
       post '/custom_questions/:id/repost' => 'custom_questions#repost_create', as: :custom_question_repost_form
       get '/custom_questions/:id/repost' => 'custom_questions#repost_new', as: :custom_question_repost
-      # get '/custom_questions/:id/repost/edit' => 'custom_questions#repost_edit', as: :custom_question_repost_edit
+      get '/custom_questions/:id/friend_comments' => 'custom_questions#friend_comments'
+      get '/custom_questions/:id/general_comments' => 'custom_questions#general_comments'
+      get '/custom_questions/:id/likes' => 'custom_questions#likes'
 
       # Feed
       root 'feeds#friends'

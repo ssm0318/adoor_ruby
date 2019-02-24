@@ -1,6 +1,6 @@
 class Api::V1::AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_answer, only: %i[show edit update destroy]
+  before_action :set_answer, only: %i[show edit update destroy friend_comments general_comments likes]
   before_action :check_mine, only: %i[edit update destroy]
   before_action :check_accessibility, only: [:show]
 
@@ -119,6 +119,24 @@ class Api::V1::AnswersController < ApplicationController
     else
       render json: {status: 'ERROR', message:'Answer not deleted', data: @answer.errors.full_messages}, status: :unprocessable_entity
     end
+  end
+
+  def friend_comments
+    @comments = @answer.comments.where(anonymous: false).sort_by(&:created_at)
+    @comments = @comments.paginate(:page => params[:page], :per_page => 10)
+ 
+    render json: @comments, adapter: :json_api, each_serializer: CommentSerializer
+  end
+
+  def general_comments
+    @comments = @answer.comments.where(anonymous: true).sort_by(&:created_at)
+    @comments = @comments.paginate(:page => params[:page], :per_page => 10)
+
+    render json: @comments, adapter: :json_api, each_serializer: CommentSerializer
+  end
+
+  def likes
+    render json: @answer.likes, each_serializer: LikeSerializer
   end
 
   private
