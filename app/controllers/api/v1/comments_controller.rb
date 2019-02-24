@@ -15,7 +15,7 @@ class Api::V1::CommentsController < ApplicationController
     )
     @user = current_user 
 
-    render :create, locals: { comment: @comment, user: @user }
+    # render :create, locals: { comment: @comment, user: @user }
   end
 
   def destroy

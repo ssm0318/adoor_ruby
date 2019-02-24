@@ -23,11 +23,20 @@ class Api::V1::PostsController < ApplicationController
   def show
     @anonymous = (@post.author_id != current_user.id) && !(current_user.friends.include? @post.author)
 
-    render :show, locals: { anonymous: @anonymous, answer: @post }
+    # render :show, locals: { anonymous: @anonymous, answer: @post }
+    if @anonymous
+      @comments = @post.comments.where(anonymous: true).sort_by(&:created_at)
+    else
+      @comments = @post.comments.where(anonymous: false).sort_by(&:created_at)
+    end
+    
+    @comments = @comments.paginate(:page => params[:page], :per_page => 5, :param_name => :comment_page)
+ 
+    render json: @post, anonymous: @anonymous, comments: @comments, serializer: PostShowSerializer
   end
 
   def edit
-    render :edit, locals: { post: @post }
+    # render :edit, locals: { post: @post }
   end
 
   def update
@@ -82,7 +91,7 @@ class Api::V1::PostsController < ApplicationController
         channel_names += c.name + ' '
       end
 
-      render :update, locals: { channel_names: @channel_names, post: @post }
+      # render :update, locals: { channel_names: @channel_names, post: @post }
     else
       redirect_to root_url
     end

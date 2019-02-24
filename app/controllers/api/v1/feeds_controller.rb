@@ -19,10 +19,9 @@ class Api::V1::FeedsController < ApplicationController
     @feeds = answers + posts + custom_questions
     @feeds = @feeds.sort_by(&:created_at).reverse!
 
-    @feeds = @feeds.paginate(:page => params[:page], :per_page => 7) 
+    @feeds = @feeds.paginate(:page => params[:page], :per_page => 7)
+
     render json: @feeds, adapter: :json_api
-    # respond_with(@feeds)
-    # render json: @feeds.serialized_json
 
     # render :feeds, locals: { feeds: @feeds }
   end
