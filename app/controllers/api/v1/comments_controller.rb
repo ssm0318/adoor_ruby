@@ -13,7 +13,7 @@ class Api::V1::CommentsController < ApplicationController
       anonymous: params[:anonymous],
       secret: secret
     )
-    @user = current_user
+    @user = current_user 
 
     render :create, locals: { comment: @comment, user: @user }
   end

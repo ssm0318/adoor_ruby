@@ -45,7 +45,8 @@ class Api::V1::AnswersController < ApplicationController
   def show
     @anonymous = (@answer.author_id != current_user.id) && !(current_user.friends.include? @answer.author)
 
-    render :show, locals: { anonymous: @anonymous, answer: @answer }
+    # render :show, locals: { anonymous: @anonymous, answer: @answer }
+    render json: @answer
   end
 
   def edit
