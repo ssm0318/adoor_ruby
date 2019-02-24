@@ -28,13 +28,13 @@ class Api::V1::AssignmentsController < ApplicationController
       @custom_questions.push(CustomQuestion.find(id).content)
     end
 
-    render :index, locals: { questions: @questions, custom_questions: @custom_questions, waiting_questions: @waiting_questions, answered_questions: @answered_questions }
+    # render :index, locals: { questions: @questions, custom_questions: @custom_questions, waiting_questions: @waiting_questions, answered_questions: @answered_questions }
   end
 
   def new
     @question = Question.find(params[:question_id])
 
-    render :new, locals: { question: @question }
+    # render :new, locals: { question: @question }
   end 
  
   def create
@@ -42,7 +42,7 @@ class Api::V1::AssignmentsController < ApplicationController
     @assigned_user = User.find(params[:assignee_id])
     @question = Question.find(params[:question_id])
 
-    render :create, locals: { question: @question, assigned_user: @assigned_user }
+    # render :create, locals: { question: @question, assigned_user: @assigned_user }
   end 
 
   def destroy

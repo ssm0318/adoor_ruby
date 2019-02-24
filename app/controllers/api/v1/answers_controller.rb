@@ -1,13 +1,14 @@
 class Api::V1::AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_answer, only: %i[show edit update destroy]
+  before_action :set_answer, only: %i[show edit update destroy friend_comments general_comments likes]
   before_action :check_mine, only: %i[edit update destroy]
   before_action :check_accessibility, only: [:show]
 
   def new
     @question = Question.find(params[:id])
 
-    render :new, locals: { question: @question }
+    # render :new, locals: { question: @question }
+    render json: Answer.new, question: @question, serializer: AnswerFormSerializer
   end
 
   def create
@@ -35,8 +36,8 @@ class Api::V1::AnswersController < ApplicationController
     end
 
     if @answer
-      render :answer, locals: { channel_names: @channel_names, answer: @answer }
-      # render json: {status: 'SUCCESS', message:'Created answer', data: @answer}, status: :ok
+      render json: @answer, channels: @channel_names, serializer: AnswerShowSerializer
+      # render :answer, locals: { channel_names: @channel_names, answer: @answer }
     else
       render json: {status: 'ERROR', message:'Answer not saved', data: @answer.errors.full_messages}, status: :unprocessable_entity
     end
@@ -45,13 +46,29 @@ class Api::V1::AnswersController < ApplicationController
   def show
     @anonymous = (@answer.author_id != current_user.id) && !(current_user.friends.include? @answer.author)
 
-    render :show, locals: { anonymous: @anonymous, answer: @answer }
+    if @anonymous
+      @comments = @answer.comments.where(anonymous: true).sort_by(&:created_at)
+    else
+      @comments = @answer.comments.where(anonymous: false).sort_by(&:created_at)
+    end
+    
+    @comments = @comments.paginate(:page => params[:page], :per_page => 5, :param_name => :comment_page)
+ 
+    # render :show, locals: { anonymous: @anonymous, answer: @answer }
+    # render json: @answer
+    render json: @answer, anonymous: @anonymous, comments: @comments, serializer: AnswerShowSerializer
   end
 
   def edit
     @question = @answer.question
 
-    render :edit, locals: { question: @question, answer: @answer }
+    @channel_names = []
+    @answer.channels.each do |c|
+      @channel_names.push(c.name)
+    end
+
+    # render :edit, locals: { question: @question, answer: @answer }
+    render json: @answer, question: @question, channels: @channel_names, serializer: AnswerFormSerializer
   end
 
   def update
@@ -104,9 +121,14 @@ class Api::V1::AnswersController < ApplicationController
       @channel_names = []
       selected_channels.each do |c|
         @channel_names.push(c.name)
-      end
+      end 
 
-      render :answer, locals: { channel_names: @channel_names, answer: @answer }
+      @comments = @answer.comments.where(anonymous: false).sort_by(&:created_at)
+      
+      @comments = @comments.paginate(:page => params[:page], :per_page => 5, :param_name => :comment_page)
+
+      render json: @answer, channels: @channel_names, comments: @comments, serializer: AnswerShowSerializer
+      # render :answer, locals: { channel_names: @channel_names, answer: @answer }
     else
       render json: {status: 'ERROR', message:'Answer not updated', data: @answer.errors.full_messages}, status: :unprocessable_entity
     end
@@ -118,6 +140,24 @@ class Api::V1::AnswersController < ApplicationController
     else
       render json: {status: 'ERROR', message:'Answer not deleted', data: @answer.errors.full_messages}, status: :unprocessable_entity
     end
+  end
+
+  def friend_comments
+    @comments = @answer.comments.where(anonymous: false).sort_by(&:created_at)
+    @comments = @comments.paginate(:page => params[:page], :per_page => 10)
+ 
+    render json: @comments, adapter: :json_api, each_serializer: CommentSerializer
+  end
+
+  def general_comments
+    @comments = @answer.comments.where(anonymous: true).sort_by(&:created_at)
+    @comments = @comments.paginate(:page => params[:page], :per_page => 10)
+
+    render json: @comments, adapter: :json_api, each_serializer: CommentSerializer
+  end
+
+  def likes
+    render json: @answer.likes, each_serializer: LikeSerializer
   end
 
   private

@@ -29,16 +29,16 @@ class Api::V1::SearchController < ApplicationController
 
     @searchpath = search_all_path
 
-    render :results_all, locals: { 
-      query: @query, 
-      user_results: @user_results, 
-      question_results: @question_results,
-      custom_question_results: @custom_question_results,
-      more_user: @more_user,
-      more_question: @more_question,
-      more_custom: @more_custom,
-      searchpath: @searchpath 
-    }
+    # render :results_all, locals: { 
+    #   query: @query, 
+    #   user_results: @user_results, 
+    #   question_results: @question_results,
+    #   custom_question_results: @custom_question_results,
+    #   more_user: @more_user,
+    #   more_question: @more_question,
+    #   more_custom: @more_custom,
+    #   searchpath: @searchpath 
+    # }
   end
 
   def admin_question
@@ -49,7 +49,7 @@ class Api::V1::SearchController < ApplicationController
     @results += Question.published.where('content LIKE ? ', "%#{@query}%").reverse
     @results = @results.uniq
 
-    render :results_question, locals: { query: @query, results: @results }
+    # render :results_question, locals: { query: @query, results: @results }
   end
 
   def custom_question
@@ -60,7 +60,7 @@ class Api::V1::SearchController < ApplicationController
     @results += CustomQuestion.where(ancestor_id = nil).where('content LIKE ? ', "%#{@query}%").reverse
     @results = @results.uniq
 
-    render :results_custom_question, locals: { query: @query, results: @results }
+    # render :results_custom_question, locals: { query: @query, results: @results }
   end
 
   def user
@@ -68,6 +68,6 @@ class Api::V1::SearchController < ApplicationController
     UserQuery.create(user: current_user, content: @query)
     @results = User.where('username LIKE ? ', "%#{@query}%").order(:username)
 
-    render :results_user, locals: { query: @query, results: @results }
+    # render :results_user, locals: { query: @query, results: @results }
   end
 end

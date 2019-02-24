@@ -4,7 +4,7 @@ class Api::V1::LikesController < ApplicationController
   def create
     like = Like.create(user_id: current_user.id, target_id: params[:target_id], target_type: params[:target_type])
 
-    render :create, locals: { like: like }
+    # render :create, locals: { like: like }
   end
 
   def destroy
@@ -32,7 +32,7 @@ class Api::V1::LikesController < ApplicationController
 
     @anonymous_count = likes.count() - friends_count
 
-    render :likes_info, locals: { users: @users, friends_count: @friends_count, anonymous_count: @anonymous_count }
+    # render :likes_info, locals: { users: @users, friends_count: @friends_count, anonymous_count: @anonymous_count }
   end
 
   # private

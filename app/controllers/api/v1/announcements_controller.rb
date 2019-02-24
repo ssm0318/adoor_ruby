@@ -6,7 +6,7 @@ class Api::V1::AnnouncementsController < ApplicationController
   def index
     @published_announcements = Announcement.published.sort_by(&:published_at).reverse!
 
-    render :index, locals: { published_announcements: @published_announcements }
+    # render :index, locals: { published_announcements: @published_announcements }
   end
 
   def admin_index
@@ -33,7 +33,7 @@ class Api::V1::AnnouncementsController < ApplicationController
       Notification.create(recipient: u, actor: User.find(1), target: @announcement, origin: @announcement, action: 'announcement')
     end
 
-    render :publish, locals: { announcement: @announcement }
+    # render :publish, locals: { announcement: @announcement }
     # redirect_to api_v1_announcement_admin_index_path
   end
 
@@ -79,8 +79,6 @@ class Api::V1::AnnouncementsController < ApplicationController
     # redirect_to root_url unless current_user.has_role? :admin
     if !current_user.has_role? :admin
       render json: {status: 'ERROR', message:'user not admin', data: current_user}, status: :unauthorized
-    # else
-    #   render json: {status: 'SUCCESS', message:'user is admin', data: current_user}, status: :ok
     end
   end
 

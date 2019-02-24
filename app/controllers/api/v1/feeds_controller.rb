@@ -1,11 +1,15 @@
 class Api::V1::FeedsController < ApplicationController
   before_action :authenticate_user!
 
+  respond_to :json
+
   def general
     @feeds = Answer.channel_name('익명피드').anonymous(current_user.id) + Post.channel_name('익명피드').anonymous(current_user.id) + CustomQuestion.channel_name('익명피드').anonymous(current_user.id)
-    @feeds = @feeds.sort_by(&:updated_at).reverse!
+    @feeds = @feeds.sort_by(&:created_at).reverse!
 
-    render :feeds, locals: { feeds: @feeds }
+    # render :feeds, locals: { feeds: @feeds }
+    @feeds = @feeds.paginate(:page => params[:page], :per_page => 7)
+    render json: @feeds
   end
 
   def friends
@@ -13,12 +17,11 @@ class Api::V1::FeedsController < ApplicationController
     posts = Post.accessible(current_user.id) + Post.where(author: current_user)
     custom_questions = CustomQuestion.accessible(current_user.id) + CustomQuestion.where(author: current_user)
     @feeds = answers + posts + custom_questions
-    @feeds = @feeds.sort_by(&:updated_at).reverse!
+    @feeds = @feeds.sort_by(&:created_at).reverse!
 
-    # paginate json: @feeds, per_page: 10 
     @feeds = @feeds.paginate(:page => params[:page], :per_page => 7)
-    render json: @feeds, adapter: :json
-    # json_response(@feeds)
+
+    render json: @feeds, adapter: :json_api
 
     # render :feeds, locals: { feeds: @feeds }
   end

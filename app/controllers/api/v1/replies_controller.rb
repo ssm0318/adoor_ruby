@@ -7,7 +7,7 @@ class Api::V1::RepliesController < ApplicationController
 
     target_author = params[:target_author_id] ? User.find(params[:target_author_id]).username : nil
 
-    render :create, locals: { secret: secret, target_author: target_author, user: current_user, reply: r }
+    # render :create, locals: { secret: secret, target_author: target_author, user: current_user, reply: r }
   end
 
   def destroy

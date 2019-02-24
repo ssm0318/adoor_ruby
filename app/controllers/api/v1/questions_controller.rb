@@ -6,22 +6,22 @@ class Api::V1::QuestionsController < ApplicationController
   def index
     @questions = Question.published.order('selected_date DESC')
 
-    render :questions, locals: { questions: @questions }
+    # render :questions, locals: { questions: @questions }
   end
 
   def show
     @feeds = @question.answers.accessible(current_user.id)
     @feeds += @question.answers.where(author: current_user)
     @feeds += @question.answers.channel_name("익명피드").anonymous(current_user.id)
-    @feeds = @feeds.sort_by(&:created_at).reverse! 
+    @feeds = @feeds.sort_by(&:created_at).reverse!
 
-    render :show, locals: { question: @question, feeds: @feeds }
+    # render :show, locals: { question: @question, feeds: @feeds }
   end
 
   def today
     @questions = Question.where(selected_date: Date.today).shuffle
 
-    render :questions, locals: { questions: @questions }
+    # render :questions, locals: { questions: @questions }
   end
 
   def show_friends
@@ -29,13 +29,13 @@ class Api::V1::QuestionsController < ApplicationController
     @feeds += @question.answers.where(author: current_user)
     @feeds = @feeds.sort_by(&:created_at).reverse!
 
-    render :show, locals: { question: @question, feeds: @feeds }
+    # render :show, locals: { question: @question, feeds: @feeds }
   end
 
   def show_general
     @feeds = @question.answers.channel_name("익명피드").anonymous(current_user.id).sort_by(&:created_at).reverse!
 
-    render :show, locals: { question: @question, feeds: @feeds }
+    # render :show, locals: { question: @question, feeds: @feeds }
   end
 
   private
