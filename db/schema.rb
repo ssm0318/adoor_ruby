@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190220052836) do
+ActiveRecord::Schema.define(version: 20190224233034) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
@@ -148,6 +148,48 @@ ActiveRecord::Schema.define(version: 20190220052836) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["channel_id"], name: "index_entrances_on_channel_id"
+  end
+
+  create_table "error_occurrences", force: :cascade do |t|
+    t.integer "error_id"
+    t.string "experiencer_type"
+    t.integer "experiencer_id"
+    t.string "ip"
+    t.text "user_agent"
+    t.string "referer"
+    t.text "query_string"
+    t.text "form_values"
+    t.text "param_values"
+    t.text "cookie_values"
+    t.text "header_values"
+    t.integer "ocurrence_count", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["error_id"], name: "index_error_occurrences_on_error_id"
+    t.index ["experiencer_id"], name: "index_error_occurrences_on_experiencer_id"
+    t.index ["experiencer_type"], name: "index_error_occurrences_on_experiencer_type"
+  end
+
+  create_table "errors", force: :cascade do |t|
+    t.text "exception_class_name"
+    t.text "exception_message"
+    t.string "http_method"
+    t.text "host_name"
+    t.text "url"
+    t.text "backtrace"
+    t.string "backtrace_hash"
+    t.integer "occurrence_count", default: 0
+    t.datetime "last_occurred_at"
+    t.string "last_experiencer_type"
+    t.integer "last_experiencer_id"
+    t.integer "status", default: 0
+    t.string "importance", default: "error"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["backtrace_hash"], name: "index_errors_on_backtrace_hash", unique: true
+    t.index ["importance"], name: "index_errors_on_importance"
+    t.index ["last_experiencer_id"], name: "index_errors_on_last_experiencer_id"
+    t.index ["last_experiencer_type"], name: "index_errors_on_last_experiencer_type"
   end
 
   create_table "friend_requests", force: :cascade do |t|
