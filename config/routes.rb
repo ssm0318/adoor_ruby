@@ -43,7 +43,6 @@ Rails.application.routes.draw do
 
   # Like
   resources :likes, only: [:create, :destroy]
-  get '/likes/:target_type/:target_id' => 'likes#likes_info'
 
   # Assignment
   get '/assignments' => 'assignments#index', as: :assignments
@@ -142,7 +141,7 @@ Rails.application.routes.draw do
       root 'feeds#friends'
       get '/feeds/general' => 'feeds#general', as: :general_feed
 
-      # Question 
+      # Question
       get '/questions/today' => 'questions#today', as: :today_questions
       get '/questions/:id/friends' => 'questions#show_friends', as: :question_friends
       get '/questions/:id/general' => 'questions#show_general', as: :question_general

@@ -120,7 +120,20 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def likes
-    render json: @post.likes, each_serializer: LikeSerializer
+    @users = []
+    @friends_count = 0
+
+    @post.likes.each do |like|
+      user = like.user
+      if user.id == current_user.id || (current_user.friends.include? user)
+        @users.push(image_url: user.image.url, profile_path: profile_path(user), username: user.username)
+        @friends_count += 1
+      end
+    end
+
+    @anonymous_count = @post.likes.count() - @friends_count
+
+    render json: @post.likes, each_serializer: LikeSerializer, meta: {anonymous_count: @anonymous_count, friends_count: @friends_count}
   end
 
   private
