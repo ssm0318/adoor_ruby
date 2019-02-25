@@ -18,7 +18,8 @@ class Api::V1::SessionsController < ApplicationController
       # render :create, locals: { token: jwt }, status: :created # refer to views/api/v1/sessions/create.json.jbuilder
 
       jwt = WebToken.encode(@user)
-      render :create, status: :created, locals: { token: jwt }
+      # render :create, status: :created, locals: { token: jwt } 
+      render json: @user, serializer: UserSerializer, meta: {token: jwt}
     else
       # head(:unauthorized)
       render json: { status: 'invalid_credentials', message: 'Sign in unsuccessful', data: @user.errors.full_messages }, status: :unprocessable_entity

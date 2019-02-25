@@ -14,3 +14,7 @@ To check out token values: https://jwt.io/
 Viewing the responses using a Json parser may be helpful. ```http://json.parser.online.fr/```
 
 Default URL: http://localhost:3000/api/v1/
+
+### Tips
+-erase the cookies after sign out
+-try changing the id of answers/posts/etc in case of 500 errors
