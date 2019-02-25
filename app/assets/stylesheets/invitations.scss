@@ -179,3 +179,32 @@
 
     }
 }
+
+.mobile-question {
+    display: none;
+}
+
+.desktop-question {
+    display: block;
+}
+
+@media only screen and (max-device-width: 500px) {
+    .mobile-question {
+        display: block;
+    }
+
+    .desktop-question {
+        display: none;
+    }
+
+    .invitation-form-btn {
+        .orange-btn, .white-btn {
+            font-size: 20px;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+        }
+        margin: none;
+        padding: none;
+    }
+}

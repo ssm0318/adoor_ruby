@@ -37,6 +37,7 @@ if Rails.env.development?
     q = Question.create(content: Faker::TvShows::Simpsons.quote)
     if i <= 5
       q.selected_date = Time.now
+      q.save
     end
   end
 
