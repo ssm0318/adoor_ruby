@@ -1,6 +1,6 @@
 class AnswerShowSerializer < ActiveModel::Serializer
   attributes :id, :author, :question, :content, :likes_count, :comments_count,
-    :drawers_count, :channels_count, :channels, :comments
+    :drawers_count, :channels_count, :channels, :comments, :created_at
 
   def question
     ::QuestionShortSerializer.new(object.question).attributes

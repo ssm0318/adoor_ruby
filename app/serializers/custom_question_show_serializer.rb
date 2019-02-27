@@ -1,6 +1,6 @@
 class CustomQuestionShowSerializer < ActiveModel::Serializer
   attributes :id, :author, :content, :likes_count, :comments_count, :drawers_count,
-    :channels_count, :channels, :repost_message, :ancestor_id, :tags, :comments
+    :channels_count, :channels, :repost_message, :ancestor_id, :tags, :comments, :created_at
 
   def likes_count
     object.likes.length

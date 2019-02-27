@@ -1,6 +1,6 @@
 class PostSerializer < ActiveModel::Serializer  
   attributes :id, :author, :content, :likes_count, :comments_count, :drawers_count,
-    :comments_sample, :channels_count, :channels
+    :comments_sample, :channels_count, :channels, :created_at
 
   def likes_count
     object.likes.length
