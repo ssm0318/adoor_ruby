@@ -1,0 +1,31 @@
+
+<div class="charts">
+    <br>
+    <h3>유저 통계 그래프</h3>
+    <br>
+
+     어제의 질문<br>
+    <% Question.where(selected_date: Date.yesterday()).each do |question| %>
+        -"<%= question.content %>": <%= question.answers.size %>개 답변<br>
+    <% end %><br>
+
+    인기 많은 질문<br>
+    <% Question.popular_questions.each do |question| %>
+        -"<%= question.content %>": <%= question.answers.size %>개 답변<br>
+    <% end %><br>
+
+    <p>Users</p>
+    <%= line_chart User.group_by_day(:created_at, time_zone: false).count, width: "800px" %>
+
+    <p>Answers</p>
+    <%= line_chart Answer.group_by_day(:created_at, time_zone: false).count, width: "800px" %>
+
+    <p>Visits</p>
+    <%= line_chart Ahoy::Visit.group_by_day(:started_at, time_zone: false).count, width: "800px" %>
+
+    <p>Posts</p>
+    <%= line_chart Post.group_by_day(:created_at, time_zone: false).count, width: "800px" %>
+
+    <p>Custom Questions</p>
+    <%= line_chart CustomQuestion.group_by_day(:created_at, time_zone: false).count, width: "800px" %>
+</div>

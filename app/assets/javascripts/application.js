@@ -18,6 +18,8 @@
 //= require i18n
 //= require i18n/translations
 //= require autosize
+//= require Chart.bundle
+//= require chartkick
 
 $(document).on('click', function() {
   if ($('.pagination').length) {

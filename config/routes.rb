@@ -108,6 +108,10 @@ Rails.application.routes.draw do
   get '/announcements/admin'  => 'announcements#admin_index', as: :announcement_admin_index
   get '/announcements/:id/publish' => 'announcements#publish', as: :announcement_publish
   get '/announcements/:id/noti' => 'announcements#noti', as: :announcement_noti
+
+  # User Stats
+  get '/stats/daily' => 'stats#daily', as: :daily_stats
+  get '/stats/monthly' => 'stats#monthly', as: :monthly_stats
   
   namespace 'api' do
     namespace 'v1', defaults: { format: :json } do

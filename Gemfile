@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'groupdate', '~> 4.1', '>= 4.1.1'
+gem 'chartkick', '~> 3.0', '>= 3.0.2'
 # gem 'errdo'
 # gem 'log_analyzer'
 gem 'active_model_serializers'
