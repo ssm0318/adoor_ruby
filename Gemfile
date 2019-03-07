@@ -20,7 +20,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'jwt', '~> 2.1' # jwt.io
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 gem 'friendly_id', '~> 5.2.4' # https://github.com/norman/friendly_id url을 예쁘게 (유저들이 자신의 ID를 볼 수 있는게 이상해서.)
-# gem 'rails_autolink', '~> 1.1', '>= 1.1.6' skip for now
+gem 'rails_autolink', '~> 1.1', '>= 1.1.6'
 gem 'autosize'
 gem 'rails-i18n'
 gem "i18n-js"
