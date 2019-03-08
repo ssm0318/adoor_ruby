@@ -18,7 +18,7 @@
     </div> 
     <div class="prism-box__content">
         <br>
-        <div class="answer"><%= post.content %></div>
+        <div class="answer autolink"><%= auto_link(post.content) %></div>
 
         <div class = "date time"><%= time_tag post.created_at, class: "timeago" %></div>
         <br>

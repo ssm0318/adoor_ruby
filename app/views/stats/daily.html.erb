@@ -1,10 +1,17 @@
 
 <div class="charts">
     <br>
-    <h3>유저 통계 그래프</h3>
+    <h3>유저 통계</h3>
     <br>
 
-     어제의 질문<br>
+    총 Visit 수: <%= Ahoy::Visit.all.length %><br>
+    총 User 수: <%= User.all.length %><br>
+    총 Answer 수: <%= Answer.all.length %><br>
+    총 Post 수: <%= Post.all.length %><br>
+    총 Custom Question 수: <%= CustomQuestion.all.length %><br>
+    총 Channel 수: <%= Channel.all.length %> (디폴트 채널 제외시 <%= Channel.all.length - (User.all.length * 5) %>개 추정)<br><br>
+
+    어제의 질문<br>
     <% Question.where(selected_date: Date.yesterday()).each do |question| %>
         -"<%= question.content %>": <%= question.answers.size %>개 답변<br>
     <% end %><br>
@@ -15,17 +22,17 @@
     <% end %><br>
 
     <p>Users</p>
-    <%= line_chart User.group_by_day(:created_at, time_zone: false).count, width: "800px" %>
+    <%= line_chart User.group_by_day(:created_at, time_zone: false).count, width: "800px" %><br>
 
     <p>Answers</p>
-    <%= line_chart Answer.group_by_day(:created_at, time_zone: false).count, width: "800px" %>
+    <%= line_chart Answer.group_by_day(:created_at, time_zone: false).count, width: "800px" %><br>
 
     <p>Visits</p>
-    <%= line_chart Ahoy::Visit.group_by_day(:started_at, time_zone: false).count, width: "800px" %>
+    <%= line_chart Ahoy::Visit.group_by_day(:started_at, time_zone: false).count, width: "800px" %><br>
 
     <p>Posts</p>
-    <%= line_chart Post.group_by_day(:created_at, time_zone: false).count, width: "800px" %>
+    <%= line_chart Post.group_by_day(:created_at, time_zone: false).count, width: "800px" %><br>
 
     <p>Custom Questions</p>
-    <%= line_chart CustomQuestion.group_by_day(:created_at, time_zone: false).count, width: "800px" %>
+    <%= line_chart CustomQuestion.group_by_day(:created_at, time_zone: false).count, width: "800px" %><br>
 </div>

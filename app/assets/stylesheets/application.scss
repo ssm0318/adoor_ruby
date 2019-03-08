@@ -14,6 +14,12 @@
  *= require_self
  */
 
+.autolink {
+    a {
+        color: #007bff !important;
+    }
+}
+
 .agreement-container {
     width: 90%;
 

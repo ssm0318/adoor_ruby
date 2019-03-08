@@ -14,7 +14,7 @@
             <div class = "prism-box-question">
                 <%= link_to answer.question.content, question_path(answer.question.id), class: "question"%>
             </div>
-            <div class="answer"><%= answer.content %></div><br>
+            <div class="answer autolink"><%= auto_link(answer.content) %></div><br>
             <div class = "date time"><%= time_tag answer.created_at, class: "timeago" %></div>
         </div>
         <div class="prism-box__footer">

@@ -21,7 +21,7 @@
             </div>
             <div class="prism-box__content">
                 <div class="announcement-title"><%= a.title %></div>
-                <div class="answer"><%= a.content %></div><br><br>
+                <div class="answer autolink"><p><%= auto_link(a.content) %></p></div><br><br>
                 <div class = "date time">작성: <%= time_tag a.created_at %></div>
                 <div class = "date time">발행: <%= time_tag a.published_at %></div>                </div><br><br>
             <% unread_users = [] %>
@@ -53,7 +53,7 @@
             </div>
             <div class="prism-box__content">
                 <div class="announcement-title"><%= a.title %></div>
-                <div class="answer"><%= a.content %></div><br><br>
+                <div class="answer autolink"><p><%= auto_link(a.content) %></p></div><br><br>
                 <div class = "date time">작성: <%= time_tag a.created_at %></div>
             </div><br><br>
         </div>
