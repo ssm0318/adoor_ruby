@@ -4,7 +4,7 @@
         <div class="prism-box">
             <div class="prism-box__content"><br>
                 <div class="announcement-title"><%= a.title %></div>
-                <div class="answer"><%= a.content %></div><br><br>
+                <div class="answer autolink"><p><%= auto_link(a.content) %></p></div><br><br>
                 <div class = "date time"><%= time_tag a.published_at %></div>
             </div>
             <%= render 'comments/general_form', user: current_user, feed: a %>

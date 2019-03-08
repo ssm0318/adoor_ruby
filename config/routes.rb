@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
   # Like
   resources :likes, only: [:create, :destroy]
+  get '/likes/:target_type/:target_id' => 'likes#likes_info'
 
   # Assignment
   get '/assignments' => 'assignments#index', as: :assignments

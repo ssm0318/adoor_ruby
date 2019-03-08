@@ -19,7 +19,7 @@
     <div class="prism-box__content">
         <br>
         <div class = "prism-box-custom-question">
-            <div class = "question-content"><%= custom_question.content %></div>
+            <div class = "question-content autolink"><p><%= auto_link(custom_question.content) %></p></div>
             <div class="question-tags">
                 <% custom_question.tags.each do |tag| %>
                     <%= form_tag(search_custom_question_path, method: :get, class: "more") do %>
