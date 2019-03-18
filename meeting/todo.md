@@ -52,6 +52,7 @@ rails action cable 적용 | MIGHT | - | X
 어플리케이션 + 연락처 동기화 개발 | MUST | - | X
 노티 새로운 창에서 열 수 있도록 | MUST | - | X
 이전 포스트들에 대한 공개범위 수정을 쉽게할 수 있도록 | MUST | - | X
+새로 도입을 결심한 기획들 | MUST | - | X
 |||
 assign되어 답변한 것임을 표시 | MIGHT | - | X
 에러 페이지 customization | MIGHT | - | X
