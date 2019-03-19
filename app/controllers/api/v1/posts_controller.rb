@@ -1,33 +1,41 @@
 class Api::V1::PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy friend_comments general_comments likes]
   before_action :check_mine, only: %i[edit update destroy]
   before_action :check_accessibility, only: [:show]
  
   def create
     # @post = Post.create(post_params)
-    @post = Post.new(post_params)
-    if @post.save
-      render json: {status: 'SUCCESS', message:'Created post', data: @post}, status: :ok
-    else
-      render json: {status: 'ERROR', message:'Post not saved', data: @post.errors.full_messages}, status: :unprocessable_entity
-    end
+    @post = Post.create(post_params)
 
     channels = [] # 선택된 채널들을 갖고 있다.
     channels = Channel.find(params[:c]) if params[:c]
     channels.each do |c|
       Entrance.create(channel: c, target: @post)
-    end 
-  end
+    end
+
+    render json: @post, channels: channels, serializer: PostShowSerializer
+  end 
 
   def show
-    @anonymous = @post.author_id != current_user.id && !(current_user.friends.include? @post.author)
+    @anonymous = (@post.author_id != current_user.id) && !(current_user.friends.include? @post.author)
 
-    render :show, locals: { anonymous: @anonymous, answer: @post }
+    # render :show, locals: { anonymous: @anonymous, answer: @post }
+    if @anonymous
+      @comments = @post.comments.where(anonymous: true).sort_by(&:created_at)
+    else
+      @comments = @post.comments.where(anonymous: false).sort_by(&:created_at)
+    end
+    
+    @comments = @comments.paginate(:page => params[:page], :per_page => 5, :param_name => :comment_page)
+ 
+    render json: @post, anonymous: @anonymous, comments: @comments, serializer: PostShowSerializer
   end
 
   def edit
-    render :edit, locals: { post: @post }
+    # render :edit, locals: { post: @post }
+
+    render json: @post, serializer: PostFormSerializer
   end
 
   def update
@@ -66,7 +74,7 @@ class Api::V1::PostsController < ApplicationController
         end
       end
 
-      if original_channels.any? { |c| c.name == '익명피드' } && selected_channels.none? { |c| c.name == '익명피드' } # 원래 익명피드 공개였는데 바뀐 경우에만
+      if (original_channels.any? { |c| c.name == '익명피드' }) && (selected_channels.none? { |c| c.name == '익명피드' }) # 원래 익명피드 공개였는데 바뀐 경우에만
         anonymous_noties = []
         anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_comment').joins(comment_join).merge(Comment.where(target: @post)).distinct
         anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_reply').joins(reply_join).merge(Reply.joins(:comment).where(comments: { target: @post })).distinct
@@ -82,14 +90,50 @@ class Api::V1::PostsController < ApplicationController
         channel_names += c.name + ' '
       end
 
-      render :update, locals: { channel_names: @channel_names, post: @post }
+      render json: @post, channels: channel_names, serializer: PostShowSerializer
+      # render :update, locals: { channel_names: @channel_names, post: @post }
     else
       redirect_to root_url
     end
   end
 
   def destroy
-    render json: {status: 'ERROR', message:'Post not updated', data: @post.errors.full_messages}, status: :unprocessable_entity
+    if @post.destroy
+      render json: {status: 'SUCCESS', message:'Deleted post'},status: :ok
+    else
+      render json: {status: 'ERROR', message:'post not deleted', data: @post.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  def friend_comments
+    @comments = @post.comments.where(anonymous: false).sort_by(&:created_at)
+    @comments = @comments.paginate(:page => params[:page], :per_page => 10)
+ 
+    render json: @comments, adapter: :json_api, each_serializer: CommentSerializer
+  end
+
+  def general_comments
+    @comments = @post.comments.where(anonymous: true).sort_by(&:created_at)
+    @comments = @comments.paginate(:page => params[:page], :per_page => 10)
+
+    render json: @comments, adapter: :json_api, each_serializer: CommentSerializer
+  end
+
+  def likes
+    @users = []
+    @friends_count = 0
+
+    @post.likes.each do |like|
+      user = like.user
+      if user.id == current_user.id || (current_user.friends.include? user)
+        @users.push(image_url: user.image.url, profile_path: profile_path(user), username: user.username)
+        @friends_count += 1
+      end
+    end
+
+    @anonymous_count = @post.likes.count() - @friends_count
+
+    render json: @post.likes, each_serializer: LikeSerializer, meta: {anonymous_count: @anonymous_count, friends_count: @friends_count}
   end
 
   private
@@ -103,15 +147,19 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def check_mine
-    redirect_to root_url if @post.author_id != current_user.id
+    if @post.author_id != current_user.id
+      render json: {status: 'ERROR', message:'not mine', data: current_user}, status: :unauthorized
+    end
   end
 
   def check_accessibility
     author = Post.find(params[:id]).author
-    if (author.friends.include? current_user) && author != current_user && !Post.accessible(current_user.id).exists?(params[:id])
-      redirect_to root_url
-    elsif !(author.friends.include? current_user) && author != current_user && Post.find(params[:id]).channels.none? { |c| c.name == '익명피드' }
-      redirect_to root_url
+    if (author.friends.include? current_user) && (author != current_user) && (!Post.accessible(current_user.id).exists?(params[:id]))
+      # redirect_to root_url
+      render json: {status: 'ERROR', message:'not accessible', data: current_user}, status: :unauthorized
+    elsif !(author.friends.include? current_user) && (author != current_user) && (Post.find(params[:id]).channels.none? { |c| c.name == '익명피드' })
+      # redirect_to root_url
+      render json: {status: 'ERROR', message:'not accessible', data: current_user}, status: :unauthorized
     end
   end
 

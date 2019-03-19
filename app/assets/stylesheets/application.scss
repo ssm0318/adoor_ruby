@@ -14,6 +14,42 @@
  *= require_self
  */
 
+.autolink {
+    a {
+        color: #007bff !important;
+    }
+}
+
+.agreement-container {
+    width: 90%;
+
+    h3 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
+
+.modal {
+    margin-top: 90px;
+}
+
+.modal-body {
+    padding: 25px;
+    text-align: left;
+    font-size: 16px;
+
+    p {
+        font-size: 16px;
+    }
+}
+
+.flash.alert:empty {
+    display: none;
+}
+
 .loading-gif {
     display: block;
     margin-left: auto;
@@ -40,6 +76,7 @@
 
 html {
     font-size: 16px;
+    // height: 100%;
 }
 
  .flash {
@@ -163,7 +200,8 @@ html {
             font-size: 1.2rem;
             color: #F48462;
             position: absolute;
-            right: 7px;
+            right: 5px;
+            bottom: 1px;
             margin-left: 10px;
             margin-top: 3px;
             z-index: 1;
@@ -438,9 +476,33 @@ div.background {
 
 //for mobile version
 @media only screen and (max-device-width: 500px) {
+    .modal-body {
+        p {
+            font-size: 35px;
+        }
+    }
+
+    .agreement-container {
+        width: 90%;
+    
+        h3 {
+            font-size: 60px;
+        }
+    
+        p {
+            font-size: 30px;
+        }
+    }
     
     .inner-container {
         width: 100%;
+
+        .prism-title {
+            h1 {
+                font-size: 65px;
+                font-weight: bold;
+            }
+        }
     }
 
     #prism-container {
@@ -498,7 +560,8 @@ div.background {
 
             .search-icon {
                 font-size: 18px;
-                margin-top: 3px;
+                margin-top: 5px;
+                margin-right: 1px;
             }
 
             .search-form {
@@ -635,4 +698,3 @@ div.background {
         }
     }
   }
-  

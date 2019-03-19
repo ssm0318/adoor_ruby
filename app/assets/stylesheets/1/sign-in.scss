@@ -1,6 +1,7 @@
 .sign-box {
-    margin-top: 100px;
+    margin-top: 30px;
     width: 100%;
+    margin-bottom: 40px;
 }
 
 .sign-title {
@@ -14,7 +15,7 @@
     font-size: 25px;
     text-align: center;
     padding-bottom: 10px;
-    color: #F48462;
+    color: #F48462; 
 }
 
 .sign-content-box {
@@ -34,8 +35,9 @@
     margin-bottom: 15px;
     width: 350px;
     padding: 10px;
-    border: none;
-    border-radius: 0;
+    // border: none;
+    border: 0.5px solid #dddddd;
+    border-radius: 10px;
     -webkit-appearance: none;
     outline: none;
     font-size: 14px;
@@ -45,7 +47,6 @@
 .form-input {
     font-size: 40px;
     margin-bottom: 10px;
-    
 }
 
 .orange-btn {
@@ -57,15 +58,16 @@
     color: white;
     font-size: 20px;
     text-align: center;
-    margin-bottom: 10px;
     border: none;
     cursor: pointer;
+    display: table-cell;
     &:focus {
         outline: none;
     }
 }
 
 .white-btn {
+    margin-bottom: 10px;    
     background-color: white;
     border-radius: 30px;
     border: 0.5px solid #dddddd;
@@ -80,21 +82,38 @@
     }
 }
 
+.kakao-btn {
+    margin: 12px 0px 35px 0px;
+    // background-color: #FFEB00;
+    // border-radius: 30px;
+    // border: 0.5px solid #dddddd;
+    // width: 300px;
+    // height: 50px;
+    // color: #3C1E1E
+    // font-size: 20px;
+    // text-align: center;
+    // cursor: pointer;
+    // &:focus {
+    //     outline: none;
+    // }
+}
+
 //for mobile version
 @media only screen and (max-device-width: 500px) {
 
     .sign-title {
-        font-size: 50px;
+        font-size: 60px;
     }
 
     .error_notification {
         display: none;
     }
+
     .form-inputs {
         font-size: 40px;
         text-decoration: none;
         text-align: center;
-        color: black;
+        color: black; 
 
         .error {
             font-size: 40px;
@@ -106,12 +125,13 @@
         width: 95%;
         height: auto;
         padding: 40px 20px;
-        border: none;
-        border-radius: 0;
+        border: 2px solid #dddddd;
+        border-radius: 10px;
         -webkit-appearance: none;
         outline: none;
         font-size: 40px;
         color: #313131;
+
     }
 
     .orange-btn, .white-btn {
@@ -123,7 +143,19 @@
         margin-bottom: 30px;
     }
 
+
+    .kakao-btn {
+        width: 60%;
+        height: auto;
+        margin-bottom: 30px;
+    }
+
+
     .password-change-title {
         font-size: 40px;
+    }
+
+    .modal-dialog {
+        max-width: 90%;
     }
 }

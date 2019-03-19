@@ -5,15 +5,22 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-# gem 'omniauth'
-# gem 'omniauth-kakao', :git => 'git://github.com/hcn1519/omniauth-kakao'
+gem 'groupdate', '~> 4.1', '>= 4.1.1'
+gem 'chartkick', '~> 3.0', '>= 3.0.2'
+# gem 'errdo'
+# gem 'log_analyzer'
+gem 'active_model_serializers'
+gem 'api-pagination'
+gem 'figaro', '~> 1.1', '>= 1.1.1'
+gem 'omniauth', '~> 1.9'
+gem 'omniauth-kakao', :git => 'git://github.com/hcn1519/omniauth-kakao'
 # gem 'omniauth-google-oauth2', '~> 0.4.1'
 gem 'rubocop', '~> 0.63.1', require: false
 gem 'rack-cors', :require => 'rack/cors'
 gem 'jwt', '~> 2.1' # jwt.io
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 gem 'friendly_id', '~> 5.2.4' # https://github.com/norman/friendly_id url을 예쁘게 (유저들이 자신의 ID를 볼 수 있는게 이상해서.)
-# gem 'rails_autolink', '~> 1.1', '>= 1.1.6' skip for now
+gem 'rails_autolink', '~> 1.1', '>= 1.1.6'
 gem 'autosize'
 gem 'rails-i18n'
 gem "i18n-js"
@@ -53,11 +60,12 @@ gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+# gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'rb-readline', '~> 0.5.3'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -69,6 +77,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   # gem 'mailcatcher', '~> 0.6.1'
+  gem 'faker', '~> 1.9', '>= 1.9.3'
 end
 
 group :development do

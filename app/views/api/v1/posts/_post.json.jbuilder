@@ -3,5 +3,6 @@ json.call(
   :id,
   :author_id,
   :content,
-  :tag_string
+  :tag_string,
+  :created_at
 )

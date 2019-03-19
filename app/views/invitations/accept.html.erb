@@ -12,8 +12,10 @@
                             <%= @new_friend.username %>님이 당신을 어도어에 초대했어요!<br>
                             로그인 또는 회원가입 후 <%= @new_friend.username %>님과 친구가 되어보세요.<br><br><br>
                     </div>
-                        <button class="orange-btn"><%= link_to '로그인', new_user_session_path, style: "color: white;"%></button><br>
-                        <button class="white-btn"><%= link_to '회원가입', new_user_registration_path, style: "color: gray;"%></button><br><br>
+                        <div class="desktop-question">
+                            <button class="orange-btn"><%= link_to '로그인', new_user_session_path, style: "color: white;"%></button>
+                            <button class="white-btn"><%= link_to '회원가입', new_user_registration_path, style: "color: gray;"%></button><br>
+                        </div>
                         <% elsif !current_user.friends.include? @new_friend %>
                             <% if user_signed_in? && (!current_user.friends.include? @new_friend) %>
                                 <% if FriendRequest.where(requester_id: @new_friend.id, requestee_id: current_user.id).exists? %>
@@ -33,7 +35,7 @@
                             <%= link_to "친구 페이지 가기", profile_path(@new_friend.slug), method: :get, id: "friends-btn" %>
                         <% end%>
                     </div>
-                <% else %>
+                <% else %> 
                     
                     <div class="prism-title" style="padding-top: 10px;"><h3><%= @new_friend.username %>님이 보낸 질문</h3></div>
 
@@ -42,8 +44,10 @@
                             <%= @new_friend.username %>님이 당신을 어도어에 초대했어요!<br><br>
                             로그인 또는 회원가입 후 <%= @new_friend.username %>님과 친구가 되어보세요.<br><br><br>
                     </div>
-                            <button class="orange-btn"><%= link_to '로그인', new_user_session_path, style: "color: white;"%></button><br>
+                        <div class="desktop-question">
+                            <button class="orange-btn"><%= link_to '로그인', new_user_session_path, style: "color: white;"%></button>
                             <button class="white-btn"><%= link_to '회원가입', new_user_registration_path, style: "color: gray;"%></button><br>
+                        </div>
                         <% elsif !current_user.friends.include? @new_friend %>
                             <% if FriendRequest.where(requester_id: @new_friend.id, requestee_id: current_user.id).exists? %>
                                 <div class="invitation-accept-text"><%= @new_friend.username %>님이 친구요청을 보냈어요.</div>
@@ -60,10 +64,22 @@
                             <div class="invitation-accept-text"><%= @new_friend.username %>님과 이미 친구입니다.</div>
                             <%= link_to "친구 페이지 가기", profile_path(@new_friend.slug), method: :get, id: "friends-btn" %><br><br>
                         <% end %>
-                    <hr>
-                    <%= render partial: "questions/layout", locals: { questions: @assigned_questions} %><br/>
+                    <div class="desktop-question">
+                        <hr>
+                    </div>
                 <% end %>
             <% end %>
         </div>
+        <div class="desktop-question">
+            <%= render partial: "questions/layout", locals: { questions: @assigned_questions} %><br/>
+        </div>
     </div>
+</div>
+<div class="mobile-question">
+    <% if !user_signed_in? %>
+        <button class="orange-btn"><%= link_to '로그인', new_user_session_path, style: "color: white;"%></button>
+        <button class="white-btn"><%= link_to '회원가입', new_user_registration_path, style: "color: gray;"%></button><br>
+    <% end %>
+    
+    <%= render partial: "questions/layout", locals: { questions: @assigned_questions} %><br/>
 </div>

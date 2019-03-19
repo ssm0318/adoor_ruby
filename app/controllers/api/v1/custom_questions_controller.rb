@@ -1,6 +1,6 @@
 class Api::V1::CustomQuestionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_custom_question, only: %i[show destroy edit update repost_new]
+  before_action :set_custom_question, only: %i[show destroy edit update repost_new friend_comments general_comments likes]
   before_action :check_mine, only: %i[destroy edit update]
   before_action :check_accessibility, only: [:show]
 
@@ -21,13 +21,24 @@ class Api::V1::CustomQuestionsController < ApplicationController
       Entrance.create(channel: c, target: @custom_question)
     end
 
-    render :custom_question, locals: { custom_question: @custom_question }
+    render json: @custom_question, channels: channels, serializer: CustomQuestionShowSerializer
+
+    # render :custom_question, locals: { custom_question: @custom_question }
   end
 
   def show
-    @anonymous = @custom_question.author_id != current_user.id && !(current_user.friends.include? @custom_question.author)
+    @anonymous = (@custom_question.author_id != current_user.id) && !(current_user.friends.include? @custom_question.author)
 
-    render :show, locals: { anonymous: @anonymous, custom_question: @custom_question }
+    # render :show, locals: { anonymous: @anonymous, custom_question: @custom_question }
+    if @anonymous
+      @comments = @custom_question.comments.where(anonymous: true).sort_by(&:created_at)
+    else
+      @comments = @custom_question.comments.where(anonymous: false).sort_by(&:created_at)
+    end
+    
+    @comments = @comments.paginate(:page => params[:page], :per_page => 5, :param_name => :comment_page)
+ 
+    render json: @custom_question, anonymous: @anonymous, comments: @comments, serializer: CustomQuestionShowSerializer
   end
 
   def destroy
@@ -38,7 +49,7 @@ class Api::V1::CustomQuestionsController < ApplicationController
       @custom_question.author_id = 1
       @custom_question.save
 
-      render :custom_question, locals: { custom_question: @custom_question }
+      # render :custom_question, locals: { custom_question: @custom_question }
     # 창조자이지만 repost한 사람이 없거나, 창조자가 아닌 경우
     else
       if @custom_question.destroy
@@ -52,14 +63,13 @@ class Api::V1::CustomQuestionsController < ApplicationController
   # custom question repost new
   # custom question을 repost했을 때 새로운 custom_question 만들기
   def repost_new
-    @reposting = true
-
-    render :repost
+    # render :repost
+    render json: @custom_question, serializer: CustomQuestionFormSerializer
   end
 
   # custom question repost create
   def repost_create
-    ancestor = CustomQuestion.find(params[:ancestor_id])
+    ancestor = CustomQuestion.find(params[:id])
     @custom_question = CustomQuestion.create(author_id: current_user.id, content: ancestor.content, repost_message: params[:repost_message], ancestor_id: ancestor.id)
     ancestor.tags.each do |t|
       new_tag = Tag.create(author_id: current_user.id, content: t.content, target: @custom_question)
@@ -71,14 +81,31 @@ class Api::V1::CustomQuestionsController < ApplicationController
       Entrance.create(channel: c, target: @custom_question)
     end
 
-    render :custom_question, locals: { custom_question: @custom_question }
+    # assign 당한 유저C가 해당 질문에 대해 답하면 그 질문에 대해 유저C를 assign한 모든 유저들에게 보내지는 노티 생성.
+    assignment_hash = { target: ancestor, assignee_id: current_user }
+    Assignment.where(assignment_hash).find_each do |assignment|
+        # 답변의 공개그룹에 assigner가 포함되어있는 경우에만 노티가 감.
+        if !(channels & assignment.assigner.belonging_channels).empty?
+            Notification.create(recipient: assignment.assigner, actor: current_user, target: @custom_question, origin: @custom_question, action: 'custom-assignment-answer')
+        end
+    end
+
+    render json: @custom_question, channels: channels, serializer: CustomQuestionShowSerializer
+    # render :custom_question, locals: { custom_question: @custom_question }
   end
 
   # custom question repost message edit
   def edit
     @reposting = false
+
+    @channel_names = []
+    @custom_question.channels.each do |c|
+      @channel_names.push(c.name)
+    end
+
+    render json: @custom_question, reposting: @reposting, channels: @channel_names, serializer: CustomQuestionFormSerializer
     
-    render :repost, locals: { custom_question: @custom_question, reposting: @reposting }
+    # render :repost, locals: { custom_question: @custom_question, reposting: @reposting }
   end
 
   def update
@@ -117,7 +144,7 @@ class Api::V1::CustomQuestionsController < ApplicationController
         end
       end
 
-      if original_channels.any? { |c| c.name == '익명피드' } && selected_channels.none? { |c| c.name == '익명피드' } # 원래 익명피드 공개였는데 바뀐 경우에만
+      if (original_channels.any? { |c| c.name == '익명피드' }) && (selected_channels.none? { |c| c.name == '익명피드' }) # 원래 익명피드 공개였는데 바뀐 경우에만
         anonymous_noties = []
         anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_comment').joins(comment_join).merge(Comment.where(target: @custom_question)).distinct
         anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_reply').joins(reply_join).merge(Reply.joins(:comment).where(comments: { target: @custom_question })).distinct
@@ -129,11 +156,16 @@ class Api::V1::CustomQuestionsController < ApplicationController
       ########################################
 
       channel_names = ''
-      selected_channels.each do |c|
+      selected_channels.each do |c| 
         channel_names += c.name + ' '
       end
 
-      render :custom_question, locals: { custom_question: @custom_question }
+      @comments = @custom_question.comments.where(anonymous: false).sort_by(&:created_at)
+      
+      @comments = @comments.paginate(:page => params[:page], :per_page => 5, :param_name => :comment_page)
+
+      render json: @custom_question, channels: channel_names, comments: @comments, serializer: CustomQuestionShowSerializer
+      # render :custom_question, locals: { custom_question: @custom_question }
     else
       render json: {
         status: 'ERROR',
@@ -141,6 +173,37 @@ class Api::V1::CustomQuestionsController < ApplicationController
         data: @custom_question.errors.full_messages
       }, status: :unprocessable_entity
     end
+  end
+
+  def friend_comments
+    @comments = @custom_question.comments.where(anonymous: false).sort_by(&:created_at)
+    @comments = @comments.paginate(:page => params[:page], :per_page => 10)
+ 
+    render json: @comments, adapter: :json_api, each_serializer: CommentSerializer
+  end
+
+  def general_comments
+    @comments = @custom_question.comments.where(anonymous: true).sort_by(&:created_at)
+    @comments = @comments.paginate(:page => params[:page], :per_page => 10)
+
+    render json: @comments, adapter: :json_api, each_serializer: CommentSerializer
+  end
+
+  def likes
+    @users = []
+    @friends_count = 0
+
+    @custom_question.likes.each do |like|
+      user = like.user
+      if user.id == current_user.id || (current_user.friends.include? user)
+        @users.push(image_url: user.image.url, profile_path: profile_path(user), username: user.username)
+        @friends_count += 1
+      end
+    end
+
+    @anonymous_count = @custom_question.likes.count() - @friends_count
+
+    render json: @custom_question.likes, each_serializer: LikeSerializer, meta: {anonymous_count: @anonymous_count, friends_count: @friends_count}
   end
 
   private
@@ -180,10 +243,10 @@ class Api::V1::CustomQuestionsController < ApplicationController
 
   def check_accessibility
     author = CustomQuestion.find(params[:id]).author
-    if (author.friends.include? current_user) && author != current_user && !CustomQuestion.accessible(current_user.id).exists?(params[:id])
+    if (author.friends.include? current_user) && (author != current_user) && (!CustomQuestion.accessible(current_user.id).exists?(params[:id]))
       # redirect_to root_url
       render json: {status: 'ERROR', message:'not accessible', data: current_user}, status: :unauthorized
-    elsif !(author.friends.include? current_user) && author != current_user && CustomQuestion.find(params[:id]).channels.none? { |c| c.name == '익명피드' }
+    elsif !(author.friends.include? current_user) && (author != current_user) && (CustomQuestion.find(params[:id]).channels.none? { |c| c.name == '익명피드' })
       # redirect_to root_url
       render json: {status: 'ERROR', message:'not accessible', data: current_user}, status: :unauthorized
     end

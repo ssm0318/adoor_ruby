@@ -1,6 +1,7 @@
 <!-- 질문을 추가하기 위한 (어드민들만을 위한) 버튼입니다. 지우지 말아주세요. -->
+
 <div class="inner-container">
-    <% if !current_user.nil? && current_user.id == 1 %>
+    <% if !current_user.nil? && (current_user.id == 1) %>
         <%= link_to "Import All Questions", import_all_questions_path %><br>
         <%= link_to "Import New Questions", import_new_questions_path %><br><br>
     <% end %>

@@ -13,11 +13,6 @@ class Api::V1::UsersController < ApplicationController
   def send_temporary_password
     user_email = params[:email]
     UserMailer.send_temporary_password(user_email).deliver_now
-    puts '======================'
-    puts user_email
-    # redirect_to action: 'recover_password_confirm'
-    render 'recover_password_confirm'
-    # 아 redirect_to 써야겠구나.... 새로고침하면 도로 recover_password 페이지로 돌아감 ㅠ
   end
 
   def friends
@@ -33,8 +28,9 @@ class Api::V1::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if @user.save
-      render :create
+    if @user.save 
+      # render :create
+      render json: @user, serializer: UserSerializer
     else
       head(:unprocessible_entity)
     end
@@ -48,9 +44,9 @@ class Api::V1::UsersController < ApplicationController
 
     if !@user.errors.full_messages.empty?
       @error = @user.errors.full_messages[0]
-      render 'edit'
+      # render 'edit'
     else
-      redirect_to profile_path(@user.id)
+      # redirect_to profile_path(@user.id)
     end
   end
 
@@ -74,7 +70,7 @@ class Api::V1::UsersController < ApplicationController
       @user.save
     end
 
-    redirect_back fallback_location: profile_path(params[:id])
+    # redirect_back fallback_location: profile_path(params[:id])
   end
 
   def new_image
@@ -90,7 +86,7 @@ class Api::V1::UsersController < ApplicationController
     friendship = Friendship.where(friendship_hash)
     if friendship.empty?
       Friendship.create(friendship_hash)
-      redirect_to profile_path(params[:id])
+      # redirect_to profile_path(params[:id])
     else
       friendship.destroy_all
       Friendship.where(user_id: params[:id], friend_id: current_user.id).destroy_all
@@ -100,7 +96,7 @@ class Api::V1::UsersController < ApplicationController
 
         }
       else
-        redirect_back fallback_location: profile_path(params[:id])
+        # redirect_back fallback_location: profile_path(params[:id])
       end
 
     end
@@ -115,7 +111,7 @@ class Api::V1::UsersController < ApplicationController
     else
       friend_request.destroy_all
     end
-    redirect_back fallback_location: profile_path(params[:id])
+    # redirect_back fallback_location: profile_path(params[:id])
   end
 
   private
@@ -133,6 +129,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def check_user
-    redirect_to edit_user_profile_url(current_user.id) if @user != current_user
+    # redirect_to edit_user_profile_url(current_user.id) if @user != current_user
   end
 end

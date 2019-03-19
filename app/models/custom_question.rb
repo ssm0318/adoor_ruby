@@ -29,7 +29,7 @@ class CustomQuestion < ApplicationRecord
     def create_notifications
         if self.ancestor_id != nil
             ancestor_author_id = CustomQuestion.find(self.ancestor_id).author_id
-            if self.author_id != ancestor_author_id && ancestor_author_id != 1
+            if (self.author_id != ancestor_author_id) && (ancestor_author_id != 1)
                 noti_hash = {recipient_id: ancestor_author_id, origin: CustomQuestion.find(ancestor_id), action: "repost"}
                 if !Notification.where(noti_hash).empty?
                     Notification.where(noti_hash).each do |n|
@@ -46,12 +46,12 @@ class CustomQuestion < ApplicationRecord
     def destroy_notifications
         if self.ancestor_id != nil
             ancestor_author_id = CustomQuestion.find(self.ancestor_id).author_id
-            if self.author_id != ancestor_author_id && ancestor_author_id != 1
+            if (self.author_id != ancestor_author_id) && (ancestor_author_id != 1)
                 noti_hash = {recipient_id: ancestor_author_id, origin: CustomQuestion.find(ancestor_id), action: "repost"}
                 if Notification.where(noti_hash).size > 1
                     n = Notification.where(noti_hash)[-2]
                     n.invisible = false
-                    if Notification.where(target: self).first.read_at != nil && n.read_at == nil
+                    if (Notification.where(target: self).first.read_at != nil) && (n.read_at == nil)
                         n.read_at =  Notification.where(target: self).first.read_at
                     end
                     n.save(touch: false)

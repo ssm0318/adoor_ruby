@@ -5,5 +5,6 @@ json.call(
   :content,
   :tag_string,
   :repost_message,
-  :ancestor_id
+  :ancestor_id,
+  :created_at
 )

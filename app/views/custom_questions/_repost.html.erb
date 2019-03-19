@@ -1,7 +1,7 @@
-<% if custom_question.ancestor_id == nil && custom_question.author == current_user %>
+<% if (custom_question.ancestor_id == nil) && (custom_question.author == current_user) %>
     <span class = "num-of-reposts zero"><%= CustomQuestion.where(ancestor_id: custom_question.id).count() %></span>
     <%= image_tag("icons/repost-icon", class: "btn-repost-disabled") %>
-<% elsif custom_question.ancestor_id && CustomQuestion.find(custom_question.ancestor_id).author == current_user %>
+<% elsif custom_question.ancestor_id && (CustomQuestion.find(custom_question.ancestor_id).author == current_user) %>
     <br>
 <% elsif custom_question.author == current_user %>
     <br>

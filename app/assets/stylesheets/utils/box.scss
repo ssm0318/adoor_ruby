@@ -56,6 +56,7 @@ div {
 
     .new-answer-field {
         width: 100%;
+        height: auto;
         font-size: 1.1rem;
         overflow: hidden;
         border: none;
@@ -729,6 +730,11 @@ div {
                 font-size: 1.1rem;
             }
 
+            .announcement-title {
+                font-size: 22px;
+                font-weight: normal;
+            }
+
         }
     
         .edit-or-delete {
@@ -762,5 +768,9 @@ div {
 
     .link-generation-btn {
         font-size: 1rem;
+    }
+
+    .tab-content .channels .channels-dropdown-content {
+        width: 50%;
     }
 }

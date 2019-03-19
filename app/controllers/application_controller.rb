@@ -53,6 +53,10 @@ class ApplicationController < ActionController::Base
   def intro
     render './intro'
   end
+
+  def require_confirmation
+    render 'layouts/require_confirmation'
+  end
  
   protected
  

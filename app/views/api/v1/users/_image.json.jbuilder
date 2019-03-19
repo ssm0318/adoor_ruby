@@ -1,0 +1,4 @@
+json.call(
+  image,
+  :url
+)

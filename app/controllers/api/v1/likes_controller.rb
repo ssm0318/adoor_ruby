@@ -4,7 +4,8 @@ class Api::V1::LikesController < ApplicationController
   def create
     like = Like.create(user_id: current_user.id, target_id: params[:target_id], target_type: params[:target_type])
 
-    render :create, locals: { like: like }
+    # render :create, locals: { like: like }
+    render json: like
   end
 
   def destroy
@@ -15,24 +16,6 @@ class Api::V1::LikesController < ApplicationController
     else
       render json: { status: 'ERROR', message: 'like not deleted', data: like.errors.full_messages }, status: :unprocessable_entity
     end
-  end 
-
-  def likes_info
-    likes = Like.where(target_type: params[:target_type], target_id: params[:target_id])
-    @users = []
-    @friends_count = 0
-
-    likes.each do |like|
-      user = like.user
-      if user.id == current_user.id || (current_user.friends.include? user)
-        @users.push(image_url: user.image.url, profile_path: profile_path(user), username: user.username)
-        @friends_count += 1
-      end
-    end
-
-    @anonymous_count = likes.count() - friends_count
-
-    render :likes_info, locals: { users: @users, friends_count: @friends_count, anonymous_count: @anonymous_count }
   end
 
   # private

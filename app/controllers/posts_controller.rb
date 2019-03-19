@@ -3,6 +3,7 @@ class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
     before_action :check_mine, only: [:edit, :update, :destroy]
     before_action :check_accessibility, only: [:show]
+    before_action :check_confirmation, only: [:create]
     
     def create
         @post = Post.create(post_params)
@@ -17,7 +18,7 @@ class PostsController < ApplicationController
     end
 
     def show
-        @anonymous = @post.author_id != current_user.id && !(current_user.friends.include? @post.author)
+        @anonymous = (@post.author_id != current_user.id) && !(current_user.friends.include? @post.author)
     end
 
     def edit
@@ -67,7 +68,7 @@ class PostsController < ApplicationController
                 end
             end
             
-            if original_channels.any?{|c| c.name == '익명피드'} && !selected_channels.any?{|c| c.name == '익명피드'}  # 원래 익명피드 공개였는데 바뀐 경우에만
+            if (original_channels.any?{|c| c.name == '익명피드'}) && (!selected_channels.any?{|c| c.name == '익명피드'})  # 원래 익명피드 공개였는데 바뀐 경우에만
                 anonymous_noties = []
                 anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_comment').joins(comment_join).merge(Comment.where(target: @post)).distinct
                 anonymous_noties += Notification.where(target_type: 'Like', action: 'anonymous_like_reply').joins(reply_join).merge(Reply.joins(:comment).where(comments: {target: @post})).distinct
@@ -127,5 +128,11 @@ class PostsController < ApplicationController
 
         def ajax_request?
             (defined? request) && request.xhr?
+        end
+
+        def check_confirmation
+            if current_user.confirmed_at.nil? && Identity.where(user_id: current_user.id).empty?
+                redirect_to require_confirmation_url
+            end
         end
 end

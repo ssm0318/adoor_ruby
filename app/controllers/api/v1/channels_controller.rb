@@ -12,13 +12,12 @@ class Api::V1::ChannelsController < ApplicationController
     else
       @channel = Channel.create(user_id: current_user.id, name: params[:name])
 
-      # render json: {status: 'SUCCESS', message:'Channel created', data: {channel_id: c.id}}, status: :ok
-      render :channel, locals: { channel: @channel }
+      # render :channel, locals: { channel: @channel } 
     end
   end
 
   def update
-    if !current_user.channels.where(name: params[:name]).empty? && Channel.find(params[:id]).name != params[:name]
+    if !current_user.channels.where(name: params[:name]).empty? && (Channel.find(params[:id]).name != params[:name])
       render json: {
         successed: false,
         message: "#{params[:name]} 채널은 이미 존재하는 채널입니다.",
@@ -28,7 +27,7 @@ class Api::V1::ChannelsController < ApplicationController
       @channel.name = params[:name]
       @channel.save
 
-      render :channel, locals: { channel: @channel }
+      # render :channel, locals: { channel: @channel }
     end
   end
 
@@ -46,7 +45,7 @@ class Api::V1::ChannelsController < ApplicationController
     friendship = Friendship.where(friendship_hash).first
     friendship.channels << @channel
 
-    render :channel, locals: { channel: @channel }
+    # render :channel, locals: { channel: @channel }
   end
 
   # delete friend from a channel
@@ -55,7 +54,7 @@ class Api::V1::ChannelsController < ApplicationController
     friendship = Friendship.where(friendship_hash).first
     friendship.channels.delete(@channel)
 
-    render :channel, locals: { channel: @channel }
+    # render :channel, locals: { channel: @channel }
   end
 
   def edit_friendship
@@ -71,7 +70,7 @@ class Api::V1::ChannelsController < ApplicationController
       end
     end
 
-    render :channel, locals: { channel: @channel }
+    # render :channel, locals: { channel: @channel }
   end
 
   # add post to a channel (글의 공개범위 수정할 때만 필요, 처음 post생성 시에는 post create에서 entrance 처리됨)
@@ -80,7 +79,7 @@ class Api::V1::ChannelsController < ApplicationController
     entrance = Entrance.where(entrance_hash)
     Entrance.create(entrance_hash) if entrance.empty?
 
-    render :channel, locals: { channel: @channel }
+    # render :channel, locals: { channel: @channel }
   end
 
   # delete post from a channel
@@ -89,7 +88,7 @@ class Api::V1::ChannelsController < ApplicationController
     entrance = Entrance.where(entrance_hash)
     entrance.destroy_all if entrance.exists?
 
-    render :channel, locals: { channel: @channel }
+    # render :channel, locals: { channel: @channel }
   end
 
   def add_answer
@@ -97,7 +96,7 @@ class Api::V1::ChannelsController < ApplicationController
     entrance = Entrance.where(entrance_hash)
     Entrance.create(entrance_hash) if entrance.empty?
 
-    render :channel, locals: { channel: @channel }
+    # render :channel, locals: { channel: @channel }
   end
 
   def delete_answer
@@ -105,7 +104,7 @@ class Api::V1::ChannelsController < ApplicationController
     entrance = Entrance.where(entrance_hash)
     entrance.destroy_all if entrance.exists?
 
-    render :channel, locals: { channel: @channel }
+    # render :channel, locals: { channel: @channel }
   end
 
   private

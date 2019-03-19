@@ -7,7 +7,7 @@ class Api::V1::InvitationsController < ApplicationController
       @questions = Question.published.sample(n) # 답변된 질문이 부족하면 공개된 질문 중 랜덤하게 take
     end
 
-    render :index, locals: { questions: @questions }
+    # render :index, locals: { questions: @questions }
   end
 
   def link
@@ -52,7 +52,7 @@ class Api::V1::InvitationsController < ApplicationController
       end
     end
 
-    render :accept, locals: { new_friend: @new_friend, assigned_questions: @assigned_questions }
+    # render :accept, locals: { new_friend: @new_friend, assigned_questions: @assigned_questions }
 
     # private
 

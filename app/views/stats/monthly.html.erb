@@ -1,0 +1,21 @@
+
+<div class="charts">
+    <br>
+    <h3>유저 통계 그래프</h3>
+    <br>
+
+    <p>Users</p>
+    <%= line_chart User.group_by_month(:created_at, time_zone: false).count, width: "800px" %>
+
+    <p>Answers</p>
+    <%= line_chart Answer.group_by_month(:created_at, time_zone: false).count, width: "800px" %>
+
+    <p>Visits</p>
+    <%= line_chart Ahoy::Visit.group_by_month(:started_at, time_zone: false).count, width: "800px" %>
+
+    <p>Posts</p>
+    <%= line_chart Post.group_by_month(:created_at, time_zone: false).count, width: "800px" %>
+
+    <p>Custom Questions</p>
+    <%= line_chart CustomQuestion.group_by_month(:created_at, time_zone: false).count, width: "800px" %>
+</div>

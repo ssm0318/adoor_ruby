@@ -19,15 +19,20 @@ class Reply < ApplicationRecord
 
     def create_notifications
         origin = self.comment
-        noti_hash = {recipient_id: self.comment.author_id, origin: origin}
+        noti_hash = {recipient_id: self.comment.author_id, origin: origin} 
         create_noti_hash = {recipient_id: self.comment.author_id, actor: self.author, target: self, origin: origin}
         if self.author != self.comment.author
             create = true
             # 익명 대댓글인 경우
             if self.anonymous
                 # 댓글 주인에게 노티
-                if !self.comment.target.channels.any?{|c| c.name == '익명피드'}
-                    create = false
+                if !self.comment.target.is_a? Announcement
+                    if (!self.comment.target.channels.any?{|c| c.name == '익명피드'}) && (!self.comment.target.is_a? Announcement)
+                        create = false
+                    else
+                        noti_hash[:action] = 'anonymous_to_comment'
+                        create_noti_hash[:action] = 'anonymous_to_comment'
+                    end
                 else 
                     noti_hash[:action] = 'anonymous_to_comment'
                     create_noti_hash[:action] = 'anonymous_to_comment'
@@ -42,7 +47,7 @@ class Reply < ApplicationRecord
             #         n.target = self
             #         n.actor = self.author
             #         n.read_at = nil
-            #     end
+            #     end 
             # end
             # 친구 대댓글인 경우
             else
@@ -79,7 +84,7 @@ class Reply < ApplicationRecord
             end
         end
 
-        if self.target_author != nil && self.author != self.target_author && self.comment.author != self.target_author
+        if (self.target_author != nil) && (self.author != self.target_author) && (self.comment.author != self.target_author)
             # target 대댓글 주인에게 노티
             if !(origin.target.channels & self.comment.author.belonging_channels).empty?
                 noti_hash[:action] = 'friend_to_recomment'
@@ -114,20 +119,20 @@ class Reply < ApplicationRecord
             if Notification.where(noti_hash).size > 1
                 n = Notification.where(noti_hash)[-2]
                 n.invisible = false
-                if Notification.where(target:self).first.read_at != nil && n.read_at == nil
+                if (Notification.where(target:self).first.read_at != nil) && (n.read_at == nil)
                     n.read_at =  Notification.where(target: self).first.read_at
                 end
                 n.save(touch: false)
             end
         end
-        if self.target_author != nil && self.author != self.target_author && self.comment.author != self.target_author
+        if (self.target_author != nil) && (self.author != self.target_author) && (self.comment.author != self.target_author)
             # target 대댓글 주인에게 노티
             noti_hash[:action] = 'friend_to_recomment'
             noti_hash[:recipient_id] = self.target_author_id
             if Notification.where(noti_hash).size > 1
                 n = Notification.where(noti_hash)[-2]
                 n.invisible = false
-                if Notification.where(target:self).first.read_at != nil && n.read_at == nil
+                if (Notification.where(target:self).first.read_at != nil) && (n.read_at == nil)
                     n.read_at = Notification.where(target: self).first.read_at
                 end
                 n.save(touch: false)
