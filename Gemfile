@@ -65,6 +65,7 @@ gem 'turbolinks', '~> 5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'rb-readline', '~> 0.5.3'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
