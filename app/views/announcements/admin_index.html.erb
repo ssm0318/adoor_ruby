@@ -30,7 +30,7 @@
             <% end %>
             <p>첫 공지 도달률</P>
             <div>도달한 사용자: <%= User.all.ids - unread_users %></div>
-            <div>도달률: <%= (User.all.count-unread_users.count)*100/(Notification.where(target: a, action: 're_announcement').count) %>%</div>
+            <div>도달률: <%= (User.all.count-unread_users.count)*100/(Notification.where(target: a, action: 'announcement').count) %>%</div>
             <% if !Notification.where(target: a, action: 're_announcement').empty? %>
                 <% unread_users2 = [] %>
                 <% Notification.where(target: a, action: 're_announcement').unread.each do |n| %>
