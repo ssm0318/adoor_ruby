@@ -33,7 +33,7 @@
             <div>도달한 사용자: <%= User.all.ids - unread_users %></div>
             <div>도달률: <%= (n-unread_users.count)*100/(n) %>% (<%= unread_users.count %>명)</div>
             <% if !Notification.where(target: a, action: 're_announcement').empty? %>
-                <%= rn = Notification.where(target: a, action: 're_announcement') %>
+                <%= rn = Notification.where(target: a, action: 're_announcement').count %>
                 <% unread_users2 = [] %>
                 <% Notification.where(target: a, action: 're_announcement').unread.each do |n| %>
                     <% unread_users2.push(n.recipient_id) %>
