@@ -71,7 +71,7 @@
             <div id="channel-default-btns">
                 <div class ="channel-btns-div">
                     <%= image_tag("icons/setting-default-icon.png", id: "btn-channel-edit") %>
-                    <%= link_to image_tag("icons/delete-icon", class: "btns-channel-delete"), '/channels/-1', method: :delete, data: { confirm: '정말 이 그룹을 삭제하시겠습니까?' }, id: "btn-channel-delete" %>
+                    <%= link_to image_tag("icons/delete-icon", class: "btns-channel-delete"), '/channels/-1', method: :delete, data: { confirm: "정말 이 그룹을 삭제하시겠습니까?\n그룹을 삭제한 뒤에는 이 그룹에 공개되었던 글들이\n더이상 이 그룹에 공개되지 않습니다" }, id: "btn-channel-delete" %>
                 </div>
             </div>
             <!--button id="btn-channel-edit-complete">완료</button-->
