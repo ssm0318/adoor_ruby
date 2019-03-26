@@ -32,8 +32,8 @@ class UsersController < ApplicationController
     end
 
     def create
-      @user = User.new(user_params)    
-      if @user.save
+      @user = User.new(user_params)
+      if @user.save!
         UserMailer.registration_confirmation(@user).deliver
         redirect_to root_url
       else
@@ -49,6 +49,7 @@ class UsersController < ApplicationController
 
     def update
         @user.update(user_params)
+        puts @user.errors.full_messages
 
         if !@user.errors.full_messages.empty?
             @error = @user.errors.full_messages[0]

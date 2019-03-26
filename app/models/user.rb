@@ -4,13 +4,20 @@ class User < ApplicationRecord
   acts_as_token_authenticatable
 
   rolify
+  
   extend FriendlyId
   friendly_id :username, use: :slugged
+
+  def slug=(value)
+    if value.present?
+      write_attribute(:slug, value)
+    end
+  end
 
   def should_generate_new_friendly_id?
     slug.blank? || username_changed?
   end
-  
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
 
@@ -28,7 +35,7 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   # visit
-  has_many :visits, class_name: "Ahoy::Visit"
+  has_many :visits, dependent: :destroy, class_name: "Ahoy::Visit"
   
   # answer
   has_many :answers, dependent: :destroy, :foreign_key => "author_id"
@@ -82,7 +89,9 @@ class User < ApplicationRecord
   # channel
   has_many :channels, dependent: :destroy
   has_many :passive_friendships, :class_name => "Friendship", :foreign_key => "friend_id", dependent: :destroy
-  has_many :belonging_channels, through: :passive_friendships, :source => :channels
+  has_many :belonging_channels, through: :passive_friendships, :source => :channels, dependent: :destroy
+
+  has_many :identities, dependent: :destroy
 
   # reference: http://railscasts.com/episodes/163-self-referential-association
   
