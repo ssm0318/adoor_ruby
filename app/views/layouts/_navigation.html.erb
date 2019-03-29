@@ -16,11 +16,9 @@
     <li class="nav-item">
         <%= active_link_to '도움말', introduction_path, class: "nav-link"%>
     </li>
-    <% if user_signed_in? && (current_user.has_role? :admin) %>
-        <li class="nav-item">
-            <%= active_link_to '공지 관리', announcement_admin_index_path, class: "nav-link"%>
-        </li>
-    <% end %>
+    <li class="nav-item">
+        <%= active_link_to '라운지', announcement_index_path, class: "nav-link" %>
+    </li>
     <% if user_signed_in? %>
         <li class="nav-item logout-toggle">
             <%= link_to '로그아웃', destroy_user_session_path, method: :delete, class: "nav-link" %>
