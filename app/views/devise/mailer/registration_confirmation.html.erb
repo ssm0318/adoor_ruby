@@ -1,0 +1,5 @@
+<p><%= @email %>님, 어도어 가입을 축하드려요!</p>
+
+<p>아래 링크를 클릭하면 이메일 인증이 완료됩니다.</p>
+
+<p><%= link_to '계정 인증하기', confirmation_url(@resource, confirmation_token: @token) %></p>
