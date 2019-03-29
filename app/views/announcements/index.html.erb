@@ -1,5 +1,9 @@
+
 <div class="inner-container">
-    <div class="prism-title"><h1>공지사항</h1></div>
+    <% if user_signed_in? && (current_user.has_role? :admin) %>
+        <%= link_to '공지 관리', announcement_admin_index_path %>
+    <% end %>
+
     <% @published_announcements.each do |a| %>
         <div class="prism-box">
             <div class="prism-box__content"><br>
