@@ -137,8 +137,8 @@ class User < ApplicationRecord
     if Rails.env.development?
       false
     elsif Rails.env.production?
-      # true
-      false
+      true
+      # false
     end
   end
 
