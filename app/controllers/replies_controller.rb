@@ -1,6 +1,6 @@
 class RepliesController < ApplicationController
     before_action :set_reply, only: [:destroy]
-    before_action :check_confirmation, only: [:create]
+    # before_action :check_confirmation, only: [:create]
 
     def create
         secret = params[:secret].nil? ? false : params[:secret]

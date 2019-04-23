@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-    before_action :check_confirmation, only: [:create]
+    # before_action :check_confirmation, only: [:create]
 
     def create
         if params[:secret].nil?

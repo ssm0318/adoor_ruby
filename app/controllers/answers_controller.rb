@@ -3,7 +3,7 @@ class AnswersController < ApplicationController
     before_action :set_answer, only: [:show, :edit, :update, :destroy]
     before_action :check_mine, only: [:edit, :update, :destroy]
     before_action :check_accessibility, only: [:show]
-    before_action :check_confirmation, only: [:create]
+    # before_action :check_confirmation, only: [:create]
 
     def new
         unless ajax_request?

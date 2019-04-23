@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
     before_action :check_mine, only: [:edit, :update, :destroy]
     before_action :check_accessibility, only: [:show]
-    before_action :check_confirmation, only: [:create]
+    # before_action :check_confirmation, only: [:create]
     
     def create
         @post = Post.create(post_params)

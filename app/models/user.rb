@@ -135,11 +135,11 @@ class User < ApplicationRecord
   protected
   def confirmation_required?
     if Rails.env.development?
-      # false
-      true
+      false
+      # true
     elsif Rails.env.production?
-      true
-      # false
+      # true
+      false
     end
   end
 
