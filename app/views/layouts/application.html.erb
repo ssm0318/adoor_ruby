@@ -57,8 +57,10 @@
   <body>
     <%= render 'layouts/navigation' %>
     <div id="prism-container">
-    <%= yield %>
-    
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}", :class => "flash" %>
+      <% end %>
+      <%= yield %>
     </div>
     <div id='edit-background'>
       <%= image_tag("icons/close-icon.png", id:'btn-edit-exit', class: "hover-pointer") %>
